@@ -1,0 +1,210 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1462825096483765958
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1699668387882340008}
+  - component: {fileID: 5812585290326431415}
+  - component: {fileID: 1236266281928214}
+  - component: {fileID: 6000256534418143250}
+  - component: {fileID: 7102796435762658038}
+  - component: {fileID: 1158435356940562528}
+  - component: {fileID: -7189630599346850354}
+  - component: {fileID: -6134995695267456365}
+  m_Layer: 4
+  m_Name: SharedRegularPrefab
+  m_TagString: Respawn
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1699668387882340008
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462825096483765958}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5812585290326431415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462825096483765958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efa29613563ceee459db7f101eafb96a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useAlternativeMessage: 0
+  message: Peace, Love & Ducks
+  alternativeMessage: Peace, Love & Yuumi Zeus
+  instanceInScene: {fileID: 0}
+  instanceInPrefab: {fileID: 0}
+  regular: {fileID: 0}
+  variant: {fileID: 0}
+  prefabInstance: {fileID: 0}
+  prefabAsset: {fileID: 0}
+  prefabInstanceAndNonPrefabInstance: {fileID: 0}
+--- !u!114 &1236266281928214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462825096483765958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfbf24dae2154380ba6ac52283c2d8ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instanceInScene: Instances of prefabs in scenes
+  instanceInPrefab: Instances of prefabs nested inside other prefabs
+  regular: Regular prefab assets
+  variant: Prefab variant assets
+  prefabInstance: Instances of regular prefabs, and prefab variants in scenes or
+    nested in other prefabs
+  prefabAsset: Prefab assets and prefab variant assets
+  prefabInstanceAndNonPrefabInstance: Prefab Instances, as well as non-prefab instances
+--- !u!114 &6000256534418143250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462825096483765958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86edb6fdb58343cbb53452703fb3fa66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instanceInScene: Instances of prefabs in scenes
+  instanceInPrefab: Instances of prefabs nested inside other prefabs
+  regular: Regular prefab assets
+  variant: Prefab variant assets
+  prefabInstance: Instances of regular prefabs, and prefab variants in scenes or
+    nested in other prefabs
+  prefabAsset: Prefab assets and prefab variant assets
+  prefabInstanceAndNonPrefabInstance: Prefab Instances, as well as non-prefab instances
+--- !u!114 &7102796435762658038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462825096483765958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fec80f3d49e34eb3ab81faccab2d6edf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  info1: "\u8BE5\u7269\u4F53\u662F\u573A\u666F\u4E2D\u7684\u9884\u5236\u4F53\u65F6\uFF0C\u65E0\u6CD5\u770B\u5230
+    instanceInScene \u5B57\u6BB5"
+  instanceInScene: Instances of prefabs in scenes
+  info2: "\u8BE5\u7269\u4F53\u662F\u573A\u666F\u4E2D\u7684\u5D4C\u5957\u9884\u5236\u4F53\u65F6\uFF0C\u65E0\u6CD5\u770B\u5230
+    instanceInPrefab \u5B57\u6BB5"
+  instanceInPrefab: Instances of prefabs nested inside other prefabs
+  info3: "\u8BE5\u7269\u4F53\u662F\u5E38\u89C4\u9884\u5236\u4F53\u8D44\u4EA7\uFF0C\u4E0D\u662F\u573A\u666F\u4E2D\u7684\u7269\u4F53\u65F6\uFF0C\u65E0\u6CD5\u770B\u5230
+    regular \u5B57\u6BB5"
+  regular: Regular prefab assets
+  info4: "\u8BE5\u7269\u4F53\u662F\u9884\u5236\u4F53\u53D8\u4F53\u8D44\u4EA7\uFF0C\u4E0D\u662F\u573A\u666F\u4E2D\u7684\u7269\u4F53\u65F6\uFF0C\u65E0\u6CD5\u770B\u5230
+    variant \u5B57\u6BB5"
+  variant: Prefab variant assets
+  info5: "\u8BE5\u7269\u4F53\u662F\u573A\u666F\u4E2D\u7684\u9884\u5236\u4F53\u6216\u8005\u5D4C\u5957\u9884\u5236\u4F53\u65F6\uFF0C\u65E0\u6CD5\u770B\u5230
+    prefabInstance \u5B57\u6BB5"
+  prefabInstance: Instances of regular prefabs, and prefab variants in scenes or
+    nested in other prefabs
+  info6: "\u8BE5\u7269\u4F53\u662F\u9884\u5236\u4F53\u8D44\u4EA7\uFF0C\u4E0D\u662F\u573A\u666F\u4E2D\u7684\u7269\u4F53\u65F6\uFF0C\u65E0\u6CD5\u770B\u5230
+    prefabAsset \u5B57\u6BB5"
+  prefabAsset: Prefab assets and prefab variant assets
+  info7: "\u8BE5\u7269\u4F53\u662F\u573A\u666F\u4E2D\u7684\u9884\u5236\u4F53\u6216\u8005\u5D4C\u5957\u9884\u5236\u4F53\u6216\u8005\u975E\u9884\u5236\u4F53\u65F6\uFF0C\u65E0\u6CD5\u770B\u5230
+    prefabInstanceAndNonPrefabInstance \u5B57\u6BB5"
+  prefabInstanceAndNonPrefabInstance: Prefab Instances, as well as non-prefab instances
+--- !u!114 &1158435356940562528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462825096483765958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627cce365dd740e781c7db58acc491af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  info1: "\u8BE5\u7269\u4F53\u662F\u573A\u666F\u4E2D\u7684\u9884\u5236\u4F53\u65F6\uFF0C\u624D\u80FD\u770B\u5230
+    instanceInScene \u5B57\u6BB5"
+  instanceInScene: Instances of prefabs in scenes
+  info2: "\u8BE5\u7269\u4F53\u662F\u573A\u666F\u4E2D\u7684\u5D4C\u5957\u9884\u5236\u4F53\u65F6\uFF0C\u624D\u80FD\u770B\u5230
+    instanceInPrefab \u5B57\u6BB5"
+  instanceInPrefab: Instances of prefabs nested inside other prefabs
+  info3: "\u8BE5\u7269\u4F53\u662F\u5E38\u89C4\u9884\u5236\u4F53\u8D44\u4EA7\uFF0C\u4E0D\u662F\u573A\u666F\u4E2D\u7684\u7269\u4F53\u65F6\uFF0C\u624D\u80FD\u770B\u5230
+    regular \u5B57\u6BB5"
+  regular: Regular prefab assets
+  info4: "\u8BE5\u7269\u4F53\u662F\u9884\u5236\u4F53\u53D8\u4F53\u8D44\u4EA7\uFF0C\u4E0D\u662F\u573A\u666F\u4E2D\u7684\u7269\u4F53\u65F6\uFF0C\u624D\u80FD\u770B\u5230
+    variant \u5B57\u6BB5"
+  variant: Prefab variant assets
+  info5: "\u8BE5\u7269\u4F53\u662F\u573A\u666F\u4E2D\u7684\u9884\u5236\u4F53\u6216\u8005\u5D4C\u5957\u9884\u5236\u4F53\u65F6\uFF0C\u624D\u80FD\u770B\u5230
+    prefabInstance \u5B57\u6BB5"
+  prefabInstance: Instances of regular prefabs, and prefab variants in scenes or
+    nested in other prefabs
+  info6: "\u8BE5\u7269\u4F53\u662F\u9884\u5236\u4F53\u8D44\u4EA7\uFF0C\u4E0D\u662F\u573A\u666F\u4E2D\u7684\u7269\u4F53\u65F6\uFF0C\u624D\u80FD\u770B\u5230
+    prefabAsset \u5B57\u6BB5"
+  prefabAsset: Prefab assets and prefab variant assets
+  info7: "\u8BE5\u7269\u4F53\u662F\u573A\u666F\u4E2D\u7684\u9884\u5236\u4F53\u6216\u8005\u5D4C\u5957\u9884\u5236\u4F53\u6216\u8005\u975E\u9884\u5236\u4F53\u65F6\uFF0C\u624D\u80FD\u770B\u5230
+    prefabInstanceAndNonPrefabInstance \u5B57\u6BB5"
+  prefabInstanceAndNonPrefabInstance: Prefab Instances, as well as non-prefab instances
+--- !u!114 &-7189630599346850354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462825096483765958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73be47e5030d4be3b82f947bedca4da0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instanceInScene: Instances of prefabs in scenes
+  instanceInPrefab: Instances of prefabs nested inside other prefabs
+  regular: Regular prefab assets
+  variant: Prefab variant assets
+  prefabInstance: Instances of regular prefabs, and prefab variants in scenes or
+    nested in other prefabs
+  prefabAsset: Prefab assets and prefab variant assets
+  prefabInstanceAndNonPrefabInstance: Prefab Instances, as well as non-prefab instances
+--- !u!114 &-6134995695267456365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462825096483765958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 056e813e82504284ba3bc635dec239d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  list: 
+  list2: 
+  list3: 
+  list4: 
+  list5: 
+  list6: 
+  list7: 
+  list8: 
