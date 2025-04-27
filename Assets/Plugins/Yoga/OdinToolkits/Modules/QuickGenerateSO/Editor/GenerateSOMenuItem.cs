@@ -45,50 +45,60 @@ namespace Yoga.OdinToolkits.Modules.QuickGenerateSO.Editor
         {
             if (Selection.objects.Length == 1)
             {
-                if (Selection.activeObject is not MonoScript script)
-                {
-                    return;
-                }
-
-                var instance = ScriptableObject.CreateInstance(script.GetClass());
-                ProjectWindowUtil.CreateAsset(instance, $"{script.name}.asset");
-                Selection.activeObject = instance;
+                SingleSelectCreateSO();
             }
             else
             {
-                foreach (var guid in Selection.assetGUIDs)
+                MultiSelectCreateSO();
+            }
+        }
+
+        private static void SingleSelectCreateSO()
+        {
+            if (Selection.activeObject is not MonoScript script)
+            {
+                return;
+            }
+
+            var instance = ScriptableObject.CreateInstance(script.GetClass());
+            ProjectWindowUtil.CreateAsset(instance, $"{script.name}.asset");
+            Selection.activeObject = instance;
+        }
+
+        private static void MultiSelectCreateSO()
+        {
+            foreach (var guid in Selection.assetGUIDs)
+            {
+                var objAssetPath = AssetDatabase.GUIDToAssetPath(guid);
+                var obj = AssetDatabase.LoadAssetAtPath<Object>(objAssetPath);
+                if (obj is not MonoScript script)
                 {
-                    var objAssetPath = AssetDatabase.GUIDToAssetPath(guid);
-                    var obj = AssetDatabase.LoadAssetAtPath<Object>(objAssetPath);
-                    if (obj is not MonoScript script)
-                    {
-                        continue;
-                    }
-
-                    var scriptClass = script.GetClass();
-                    if (scriptClass == null)
-                    {
-                        continue;
-                    }
-
-                    if (!scriptClass.IsSubclassOf(typeof(ScriptableObject)) || scriptClass.IsAbstract)
-                    {
-                        continue;
-                    }
-
-                    if (Path.GetExtension(objAssetPath) != "")
-                    {
-                        objAssetPath = Path.GetDirectoryName(objAssetPath);
-                    }
-
-                    var assetPath = AssetDatabase.GenerateUniqueAssetPath($"{objAssetPath}/{script.name}.asset");
-                    AssetDatabase.CreateAsset(ScriptableObject.CreateInstance(scriptClass), assetPath);
-                    AssetDatabase.SaveAssets();
-                    Debug.Log("生成一个 SO 资源，路径为: " + assetPath);
+                    continue;
                 }
 
-                AssetDatabase.Refresh();
+                var scriptClass = script.GetClass();
+                if (scriptClass == null)
+                {
+                    continue;
+                }
+
+                if (!scriptClass.IsSubclassOf(typeof(ScriptableObject)) || scriptClass.IsAbstract)
+                {
+                    continue;
+                }
+
+                if (Path.GetExtension(objAssetPath) != "")
+                {
+                    objAssetPath = Path.GetDirectoryName(objAssetPath);
+                }
+
+                var assetPath = AssetDatabase.GenerateUniqueAssetPath($"{objAssetPath}/{script.name}.asset");
+                AssetDatabase.CreateAsset(ScriptableObject.CreateInstance(scriptClass), assetPath);
+                AssetDatabase.SaveAssets();
+                Debug.Log("生成一个 SO 资源，路径为: " + assetPath);
             }
+
+            AssetDatabase.Refresh();
         }
     }
 }
