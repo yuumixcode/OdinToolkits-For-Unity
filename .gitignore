@@ -89,3 +89,5 @@ UserSettings/
 # 排除 Sirenix 公司付费插件
 Assets/Plugins/Sirenix
 Assets/Plugins/Sirenix.meta
+Assets/UniversalRenderPipelineGlobalSettings.asset
+Assets/UniversalRenderPipelineGlobalSettings.asset.meta
