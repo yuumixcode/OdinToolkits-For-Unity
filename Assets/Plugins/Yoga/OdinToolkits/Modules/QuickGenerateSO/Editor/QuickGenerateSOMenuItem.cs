@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Yoga.OdinToolkits.Modules.QuickGenerateSO.Editor
 {
-    public static class GenerateSOMenuItem
+    public static class QuickGenerateSOMenuItem
     {
         private const string MenuName = "Assets/Create SO Asset From Selected";
 
