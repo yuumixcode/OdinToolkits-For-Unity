@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78f66f2005304ed091c826eb8d725ee5, type: 3}
+  m_Name: DetailedInfoBoxExample
+  m_EditorClassIdentifier: 
+  message: "YOGA \u6846\u67B6 ..."
+  messageAttributeExpressionExample: 
+  messageFieldNameExample: 
+  messageMethodNameExample: 
+  messagePropertyNameExample: 
+  details: "YOGA \u6846\u67B6 == Yuumi Odin Graphic Architecture"
+  detailsAttributeExpressionExample: 
+  detailsFieldNameExample: 
+  detailsMethodNameExample: 
+  detailsPropertyNameExample: 
+  isVisible: 1
+  visibleIfAttributeExpressionExample: 
+  visibleIfFieldNameExample: 
+  visibleIfMethodNameExample: 
+  visibleIfPropertyNameExample: 
+  infoMessageTypeDetailedInfoBox1: 
+  infoMessageTypeDetailedInfoBox2: 
+  infoMessageTypeDetailedInfoBox3: 
+  infoMessageTypeDetailedInfoBox4: 

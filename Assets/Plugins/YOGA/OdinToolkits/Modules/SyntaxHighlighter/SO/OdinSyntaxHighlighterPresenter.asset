@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 148b565d40af47a38460f6a54212d84c, type: 3}
+  m_Name: OdinSyntaxHighlighterPresenter
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  one: "1. \u9700\u8981\u5904\u7406\u7684\u6E90\u4EE3\u7801\u4E2D\uFF0C\u4E0D\u80FD\u5305\u542B\u6709\u547D\u540D\u7A7A\u95F4"
+  two: "2. \u9700\u8981\u5904\u7406\u7684\u6E90\u4EE3\u7801\u4E2D\uFF0C\u4E0D\u80FD\u5305\u542B\u6709
+    $ \u5185\u63D2\u5B57\u7B26\u4E32"
+  customColorGroups:
+  - backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+    textColor: {r: 0, g: 0, b: 0, a: 0}
+    keywordColor: {r: 0, g: 0, b: 0, a: 0}
+    identifierColor: {r: 0, g: 0, b: 0, a: 0}
+    commentColor: {r: 0, g: 0, b: 0, a: 0}
+    literalColor: {r: 0, g: 0, b: 0, a: 0}
+    stringLiteralColor: {r: 0, g: 0, b: 0, a: 0}

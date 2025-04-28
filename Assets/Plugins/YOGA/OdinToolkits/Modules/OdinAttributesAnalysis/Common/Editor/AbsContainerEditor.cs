@@ -1,0 +1,424 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Sirenix.OdinInspector.Editor;
+using Sirenix.Utilities;
+using Sirenix.Utilities.Editor;
+using UnityEditor;
+using UnityEngine;
+using Yoga.OdinToolkits.Modules.SyntaxHighlighter.Editor;
+
+namespace YOGA.OdinToolkits.AnalysisManual.OdinAttributes.Editor
+{
+    [CustomEditor(typeof(AbsContainer), true)]
+    public class AbsContainerEditor : OdinEditor
+    {
+        private const int Padding = 12;
+        private const int ContainerContentPadding = 10;
+        private const int CodeDefaultHeight = 400;
+        private const int CodeDefaultWidth = 600;
+        private readonly List<GUITable> _resolvedParamGUITables = new();
+        private GUIStyle _codeTextStyle;
+        private AbsContainer _container;
+        private GUIStyle _containerContentStyle;
+        private GUIStyle _containerTitleStyle;
+        private Color _darkLineColor;
+        private Color _lightLineColor;
+        private GUITable _paramValueGUITable;
+        private Vector2 _scrollPosition;
+        private GUIStyle _tableCellTextStyle;
+        private GUITable _tipGUITable;
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            _container = target as AbsContainer;
+            if (_container != null)
+            {
+                _container.hideFlags = HideFlags.None;
+
+                if (_container)
+                {
+                    CreateTipGUITable();
+                    CreateParamGUITable();
+                    CreateResolvedParamGUITables();
+                }
+            }
+
+            _darkLineColor = EditorGUIUtility.isProSkin
+                ? SirenixGUIStyles.BorderColor
+                : new Color(0f, 0f, 0f, 0.2f);
+            _lightLineColor = EditorGUIUtility.isProSkin
+                ? new Color(1f, 1f, 1f, 0.1f)
+                : new Color(1f, 1f, 1f, 1f);
+            var property = Tree.RootProperty.FindChild(p => p.Name == "example", false);
+            var property2 = Tree.RootProperty.FindChild(p => p.Name == "exampleOdin", false);
+            property.Children
+                .Recurse()
+                .ForEach(child => child.State.Expanded = false);
+            property2.Children
+                .Recurse()
+                .ForEach(child => child.State.Expanded = false);
+            ChineseAttributeEditorWindow.OnWindowResized = CalculateAllTableSize;
+            EditorApplication.delayCall += CalculateAllTableSize;
+        }
+
+        private void OnDestroy()
+        {
+            EditorApplication.delayCall -= CalculateAllTableSize;
+        }
+
+        private void CreateResolvedParamGUITables()
+        {
+            foreach (var resolvedParam in _container.ResolvedParams)
+                _resolvedParamGUITables.Add(resolvedParam.CreateGUITable());
+        }
+
+        public override void OnInspectorGUI()
+        {
+            EnsureGUIStyles();
+            DrawHeaderAndBrief();
+            DrawGUITable(_tipGUITable, _container.UseTips, "经验法则", out var rect2);
+            DrawGUITable(_paramValueGUITable, _container.ParamValues, "特性参数", out var rect3);
+            DrawResolvedParams();
+            DrawExample();
+            DrawSeparator();
+            DrawCode();
+            if (!(EditorApplication.timeSinceStartup % 0.5f <= 0.01f)) return;
+
+            CalculateAllTableSize();
+        }
+
+        private void EnsureGUIStyles()
+        {
+            _tableCellTextStyle ??= new GUIStyle(SirenixGUIStyles.MultiLineCenteredLabel)
+            {
+                clipping = TextClipping.Overflow,
+                richText = true
+            };
+
+            _containerContentStyle ??= new GUIStyle(SirenixGUIStyles.ToolbarBackground)
+            {
+                stretchHeight = false,
+                padding = new RectOffset(
+                    ContainerContentPadding,
+                    ContainerContentPadding,
+                    ContainerContentPadding,
+                    ContainerContentPadding)
+            };
+            _containerTitleStyle ??= new GUIStyle(SirenixGUIStyles.TitleCentered)
+            {
+                fontSize = 15
+            };
+            _codeTextStyle ??= new GUIStyle(SirenixGUIStyles.MultiLineLabel)
+            {
+                normal = new GUIStyleState
+                {
+                    textColor = OdinSyntaxHighlighterPresenter.TextColor
+                },
+                active = new GUIStyleState
+                {
+                    textColor = OdinSyntaxHighlighterPresenter.TextColor
+                },
+                focused = new GUIStyleState
+                {
+                    textColor = OdinSyntaxHighlighterPresenter.TextColor
+                },
+                wordWrap = false,
+                fontSize = 13
+            };
+        }
+
+        private void CreateTipGUITable()
+        {
+            _tipGUITable = GUITable.Create(_container.UseTips, null,
+                new GUITableColumn
+                {
+                    ColumnTitle = "序号",
+                    Width = 50,
+                    Resizable = false,
+                    OnGUI = (rect, i) => { DrawTableCell(rect, (i + 1).ToString()); }
+                },
+                new GUITableColumn
+                {
+                    ColumnTitle = "提示",
+                    MinWidth = 100,
+                    OnGUI = (rect, i) => { DrawTableCell(rect, _container.UseTips[i]); }
+                }
+            );
+        }
+
+        private void CreateParamGUITable()
+        {
+            _paramValueGUITable = GUITable.Create(_container.ParamValues, null, new GUITableColumn
+                {
+                    ColumnTitle = "序号",
+                    Width = 40,
+                    Resizable = false,
+                    OnGUI = (rect, i) => { EditorGUI.LabelField(rect, (i + 1).ToString(), _tableCellTextStyle); }
+                },
+                new GUITableColumn
+                {
+                    ColumnTitle = "返回值类型",
+                    Width = 150,
+                    OnGUI = (rect, i) => { DrawTableCell(rect, _container.ParamValues[i].returnType); }
+                },
+                new GUITableColumn
+                {
+                    ColumnTitle = "参数名",
+                    Width = 200,
+                    OnGUI = (rect, i) => { DrawTableCell(rect, _container.ParamValues[i].paramName); }
+                },
+                new GUITableColumn
+                {
+                    ColumnTitle = "参数描述",
+                    MinWidth = 220,
+                    OnGUI = (rect, i) => { DrawTableCell(rect, _container.ParamValues[i].paramDescription); }
+                });
+        }
+
+        private void DrawTableCell(Rect rect, string text, GUIStyle style = null)
+        {
+            EditorGUI.LabelField(rect, text, style ?? _tableCellTextStyle);
+        }
+
+        private void DrawResolvedParams()
+        {
+            if (_resolvedParamGUITables.Count <= 0) return;
+
+            // 需要容器
+            DrawContainer("特性解析字符串的方法签名", DrawInternal);
+            DrawSeparator();
+            return;
+
+            void DrawInternal()
+            {
+                EditorGUILayout.BeginVertical();
+                for (var i = 0; i < _resolvedParamGUITables.Count; i++)
+                {
+                    var style = new GUIStyle(SirenixGUIStyles.TitleCentered)
+                    {
+                        fontSize = 14
+                    };
+                    SirenixEditorGUI.BeginBoxHeader();
+                    var rect = GUILayoutUtility.GetRect(GUIHelper.TempContent(_container.ResolvedParams[i].ParamName)
+                        , style).AlignCenter(600);
+                    EditorGUI.LabelField(rect.Split(0, 2), "特性参数: " + _container.ResolvedParams[i].ParamName, style);
+                    var rect3 = rect.Split(1, 2);
+                    if (_container.ResolvedParams[i].ReturnType == typeof(void).Name)
+                        EditorGUI.LabelField(rect3, "方法无返回值 void", style);
+                    else
+                        EditorGUI.LabelField(rect3, "方法返回值类型为：" + _container.ResolvedParams[i].ReturnType, style);
+
+                    SirenixEditorGUI.EndBoxHeader();
+                    _resolvedParamGUITables[i].DrawTable();
+                    if (i == _resolvedParamGUITables.Count - 1) continue;
+
+                    GUILayout.Space(10f);
+                    SirenixEditorGUI.HorizontalLineSeparator(_lightLineColor, 2);
+                    GUILayout.Space(15f);
+                }
+
+                EditorGUILayout.EndVertical();
+            }
+        }
+
+        private void DrawExample()
+        {
+            // 原生绘制 Example
+            var rect = DrawContainer("使用案例预览", base.OnInspectorGUI);
+            Type exampleType = null;
+            if (_container.example is not null) exampleType = _container.example.GetType();
+
+            if (_container.exampleOdin is not null) exampleType = _container.exampleOdin.GetType();
+
+            if (exampleType is null) return;
+
+            var attribute = TypeCache
+                .GetTypesWithAttribute<IsChineseAttributeExampleAttribute>()
+                .Where(type => type == exampleType)
+                .Select(type => type.GetAttribute<IsChineseAttributeExampleAttribute>())
+                .SingleOrDefault();
+            // Debug.Log("attribute: " + attribute);
+            var path = attribute?.FilePath;
+            // Debug.Log("绝对路径: " + path);
+            // Debug.Log("项目路径: " + Application.dataPath);
+            // 绝对路径转相对路径
+            var relative = "Assets/" + PathUtilities.MakeRelative(Application.dataPath, path);
+            // Debug.Log("相对路径: " + relative);
+            if (string.IsNullOrEmpty(relative)) return;
+
+            // Assets/OdinToolkits/ChineseGuide/ChineseAttributesOverview/Editor/PreviewExamples/Scripts/CustomValueDrawerExample.cs
+            var script = AssetDatabase.LoadAssetAtPath<MonoScript>(relative);
+            // Debug.Log("script: " + script);
+            var rect0 = rect.AlignCenterY(rect.height).AlignRight(200);
+            var rect1 = rect0.Split(0, 2);
+            if (GUI.Button(rect1, GUIHelper.TempContent("跳转到脚本文件"),
+                    SirenixGUIStyles.ToolbarButton))
+                EditorGUIUtility.PingObject(script);
+
+            var rect2 = rect0.Split(1, 2);
+            if (GUI.Button(rect2, GUIHelper.TempContent("重置案例"),
+                    SirenixGUIStyles.ToolbarButton))
+            {
+                if (_container.example != null) _container.example.SetDefaultValue();
+
+                if (_container.exampleOdin != null) _container.exampleOdin.SetDefaultValue();
+
+                // Debug.Log("重置");
+            }
+            // SirenixEditorGUI.DrawBorders(rect, 1, Color.green);
+        }
+
+        private Rect DrawContainer(string title, Action drawContent, GUIStyle titleStyle = null)
+        {
+            titleStyle ??= _containerTitleStyle;
+            var headerRect = SirenixEditorGUI.BeginHorizontalToolbar(30f);
+            var titleWidth = titleStyle.CalcSize(GUIHelper.TempContent(title)).x;
+            var titleRect = headerRect.AlignCenter(titleWidth);
+            EditorGUI.LabelField(titleRect, title, titleStyle);
+            // SirenixEditorGUI.DrawBorders(titleRect, 1, Color.green);
+            GUILayout.FlexibleSpace();
+            SirenixEditorGUI.EndHorizontalToolbar();
+            GUILayout.Space(-2);
+            var contentRect = EditorGUILayout.BeginVertical(_containerContentStyle);
+            drawContent();
+            EditorGUILayout.EndVertical();
+            SirenixEditorGUI.DrawBorders(contentRect, 1);
+            return headerRect;
+        }
+
+        private void DrawCode()
+        {
+            var headerRect = DrawContainer("代码预览", CodePreview);
+            if (GUI.Button(headerRect.AlignCenterY(headerRect.height).AlignRight(80), GUIHelper.TempContent("拷贝代码"),
+                    SirenixGUIStyles.ToolbarButton))
+                Clipboard.Copy(_container.OriginalCode);
+        }
+
+        private void CodePreview()
+        {
+            var rect = SirenixEditorGUI.BeginBox();
+            GUILayoutUtility.GetRect(GUIHelper.TempContent("宽度卡位"), GUIStyle.none, GUILayout.Width(CodeDefaultWidth),
+                GUILayout.Height(5));
+            SirenixEditorGUI.DrawSolidRect(rect, OdinSyntaxHighlighterPresenter.BackgroundColor);
+            var highlighterCode = OdinSyntaxHighlighterPresenter.ApplyCodeHighlighting(_container.OriginalCode);
+            var calcHeight = _codeTextStyle.CalcHeight(GUIHelper.TempContent(highlighterCode), CodeDefaultWidth);
+            GUILayout.BeginVertical();
+            _scrollPosition = GUILayout.BeginScrollView(_scrollPosition, false, false,
+                GUILayout.Height(calcHeight + 30), GUILayout.MaxHeight(CodeDefaultHeight));
+            EditorGUI.SelectableLabel(GUILayoutUtility.GetRect(CodeDefaultWidth + 50f, calcHeight + 10).AddXMin(4f),
+                highlighterCode, _codeTextStyle);
+            GUILayout.EndScrollView();
+            GUILayout.EndVertical();
+            SirenixEditorGUI.EndBox();
+            // GUILayout.Label(GUIHelper.TempContent(rect.ToString()));
+        }
+
+        private void DrawGUITable(GUITable table, IList dataList, string containerTitle, out Rect rect)
+        {
+            rect = EditorGUILayout.BeginVertical();
+            if (table != null && dataList.Count > 0)
+            {
+                DrawContainer(containerTitle, table.DrawTable);
+                DrawSeparator();
+            }
+
+            EditorGUILayout.EndVertical();
+        }
+
+        private void CalculateAllTableSize()
+        {
+            CalculateTipTableSize();
+            CalculateParamValueTableSize();
+            CalculateAllResolvedParamTableSize();
+            // Debug.Log("重新计算表格大小");
+        }
+
+        private void CalculateAllResolvedParamTableSize()
+        {
+            for (var i = 0; i < _resolvedParamGUITables.Count; i++)
+            {
+                var table = _resolvedParamGUITables[i];
+                for (var row = 1; row < table.RowCount; row++)
+                {
+                    var returnTypeCellHeight =
+                        CalculateHeight(_container.ResolvedParams[i].ParamValues[row - 1].returnType, table, 1, row);
+                    var paramNameCellHeight =
+                        CalculateHeight(_container.ResolvedParams[i].ParamValues[row - 1].paramName, table, 2, row);
+                    var paramDescriptionCellHeight =
+                        CalculateHeight(_container.ResolvedParams[i].ParamValues[row - 1].paramDescription, table, 3,
+                            row);
+                    table[1, row].Height =
+                        Mathf.Max(returnTypeCellHeight, paramNameCellHeight, paramDescriptionCellHeight) + 15f;
+                }
+
+                table.ReCalculateSizes();
+            }
+        }
+
+        private void CalculateTipTableSize()
+        {
+            var table = _tipGUITable;
+            for (var row = 1; row < table.RowCount; row++)
+                table[1, row].Height = CalculateHeight(_container.UseTips[row - 1], table, 1, row) + 15f;
+
+            table.ReCalculateSizes();
+        }
+
+        private void CalculateParamValueTableSize()
+        {
+            var table = _paramValueGUITable;
+            for (var row = 1; row < table.RowCount; row++)
+            {
+                var returnTypeCellHeight =
+                    CalculateHeight(_container.ParamValues[row - 1].returnType, table, 1, row);
+                var paramNameCellHeight =
+                    CalculateHeight(_container.ParamValues[row - 1].paramName, table, 2, row);
+                var paramDescriptionCellHeight =
+                    CalculateHeight(_container.ParamValues[row - 1].paramDescription, table, 3, row);
+                table[1, row].Height =
+                    Mathf.Max(returnTypeCellHeight, paramNameCellHeight, paramDescriptionCellHeight) + 15f;
+            }
+
+            table.ReCalculateSizes();
+        }
+
+        private float CalculateHeight(string content, GUITable table, int col, int row)
+        {
+            _tableCellTextStyle ??= new GUIStyle(SirenixGUIStyles.MultiLineCenteredLabel)
+            {
+                clipping = TextClipping.Overflow,
+                richText = true
+            };
+
+            return _tableCellTextStyle.CalcHeight(
+                GUIHelper.TempContent(content),
+                table[col, row].Rect.width);
+        }
+
+        private void DrawHeaderAndBrief()
+        {
+            EditorGUILayout.BeginVertical();
+            GUILayout.Label(_container.SectionHeader, new GUIStyle(SirenixGUIStyles.TitleCentered)
+            {
+                fontSize = 24
+            });
+            DrawSeparator();
+            GUILayout.Label(_container.Brief, SirenixGUIStyles.MultiLineCenteredLabel);
+            DrawSeparator();
+            EditorGUILayout.EndVertical();
+        }
+
+        private void DrawSeparator(float spaceBefore = Padding, float spaceAfter = Padding)
+        {
+            EditorGUILayout.BeginVertical();
+            GUILayout.Space(spaceBefore);
+            SirenixEditorGUI.HorizontalLineSeparator(_darkLineColor);
+            SirenixEditorGUI.HorizontalLineSeparator(_lightLineColor);
+            GUILayout.Space(spaceAfter);
+            EditorGUILayout.EndVertical();
+        }
+    }
+}

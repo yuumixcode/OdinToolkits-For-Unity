@@ -1,0 +1,784 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc2d5accec3db4310b8ba354ce3334ad, type: 3}
+  m_Name: AttributeChineseDatabase
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: da4d72b0f86f047a1bc51063c0a903e2, type: 2}
+    - {fileID: 11400000, guid: e71503b7a6bdd4c71a8bbdbda34ef0d6, type: 2}
+    - {fileID: 11400000, guid: c5a6280a803d947e6a20ae803bd42928, type: 2}
+    - {fileID: 11400000, guid: 2da50e0e5535849d4aef74f667261b1b, type: 2}
+    - {fileID: 11400000, guid: 4a5c861ae63a54c88893455315acbf91, type: 2}
+    - {fileID: 11400000, guid: 974272a1176884422874a2a875834e0e, type: 2}
+    - {fileID: 11400000, guid: 841894fdbb79248bd8b72fffaecce305, type: 2}
+    - {fileID: 11400000, guid: 268cc050256ca4a5fac19cdaf2456857, type: 2}
+    - {fileID: 11400000, guid: 59ff136266a484ffa88a61afa41785f2, type: 2}
+    - {fileID: 11400000, guid: a44c1185391b54f939a4cc8831169540, type: 2}
+    - {fileID: 11400000, guid: 957c7415071974fbba1773ce0dc35e89, type: 2}
+    - {fileID: 11400000, guid: fba8f4dd96f94457a9cb31cfeed74ef6, type: 2}
+    - {fileID: 11400000, guid: 2fe75b51caf90496b90e6842657fea0c, type: 2}
+    - {fileID: 11400000, guid: c3d29f8f7f0bf497d8aa4b7b9a2be133, type: 2}
+    - {fileID: 11400000, guid: febec221388ba4f27a4d68d1c39b2824, type: 2}
+    - {fileID: 11400000, guid: 0138abe4c958a4f68a34ff58ff870fb9, type: 2}
+    - {fileID: 11400000, guid: b63787ec2ec5a4fbd9ccb8b76e2f160e, type: 2}
+    - {fileID: 11400000, guid: f26519a34df494ecfb83de8661c71294, type: 2}
+    - {fileID: 11400000, guid: 140728a15dda4451495a89975e3f853d, type: 2}
+    - {fileID: 11400000, guid: a8e35432e1688408ab86cd74783004af, type: 2}
+    - {fileID: 11400000, guid: 2059d8f9bdbf944839c5436f9b4fedaa, type: 2}
+    - {fileID: 11400000, guid: 1596dee0aa46a4e35a3b3ce2a143ebe7, type: 2}
+    - {fileID: 11400000, guid: f75d5f96bb5f44d9abc8decdc2545509, type: 2}
+    - {fileID: 11400000, guid: 1c4e79a075b6d4379bebcb52f3c123b7, type: 2}
+    - {fileID: 11400000, guid: ae0a04b24fcf54238a244608c05386d2, type: 2}
+    - {fileID: 11400000, guid: 8d2046fd4d08440a293a58f3c7dccb4f, type: 2}
+    - {fileID: 11400000, guid: 678dac984cb1841fcb73d6d7b7faf572, type: 2}
+    - {fileID: 11400000, guid: 9f7ad7b60c46a425fa5a6aa138ec383e, type: 2}
+    - {fileID: 11400000, guid: 58025c95f69964855ba48a65392316f6, type: 2}
+    - {fileID: 11400000, guid: 93efd99b1f98541659dd1231aae8f7a2, type: 2}
+    - {fileID: 11400000, guid: 130961131a0a64d2f812461e33633beb, type: 2}
+    - {fileID: 11400000, guid: 06f8462f627c54814b412df24de359a3, type: 2}
+    - {fileID: 11400000, guid: d51b25b15deed4aeaa381fa950ddc64f, type: 2}
+    - {fileID: 11400000, guid: 2301720fb58464bac8681a42ce6ff525, type: 2}
+    - {fileID: 11400000, guid: d596561669ca544319dd7433e903ccd4, type: 2}
+    - {fileID: 11400000, guid: 797daf73fa62f4efabcc651821076dc2, type: 2}
+    - {fileID: 11400000, guid: 5f7694aa4229c44ea98cb4dc3108b0cf, type: 2}
+    - {fileID: 11400000, guid: 7d95e33a0908440dca0beaf7d580a42d, type: 2}
+    - {fileID: 11400000, guid: f197bcffb0b7b45bfb68a5b2900840be, type: 2}
+    - {fileID: 11400000, guid: b4418e029c8c4425c8a46ed426ce8101, type: 2}
+    - {fileID: 11400000, guid: 48c17d14ea4314325bc406c1f75a666a, type: 2}
+    - {fileID: 11400000, guid: 05938a47e39524f80b843ccd2518b98c, type: 2}
+    - {fileID: 11400000, guid: 25ac6d9e3e1e8499f90f089bc42567f2, type: 2}
+    - {fileID: 11400000, guid: 5d9f55839650b4512a760a42243450de, type: 2}
+    - {fileID: 11400000, guid: 98bdb2fb7eba04ab4a1696980c321979, type: 2}
+    - {fileID: 11400000, guid: 936078bb005ed4443bc053b38c392c2b, type: 2}
+    - {fileID: 11400000, guid: a54c50869f693432588070ef8d798c11, type: 2}
+    - {fileID: 11400000, guid: 2c08eaec352c741988e9ee19b952f739, type: 2}
+    - {fileID: 11400000, guid: 48d441ed8b1b14006b0535b276899218, type: 2}
+    - {fileID: 11400000, guid: ae3a4e5d271a8428894f01b512217763, type: 2}
+    - {fileID: 11400000, guid: 156cfb633107c4acaa8bf32df75907ee, type: 2}
+    - {fileID: 11400000, guid: 8fc125341d55d4e6f9b7441c9d99d066, type: 2}
+    - {fileID: 11400000, guid: 3962933d887af467ab340b8f72556957, type: 2}
+    - {fileID: 11400000, guid: 23acace2122b2483498c7a900be50ad4, type: 2}
+    - {fileID: 11400000, guid: 3d470e2239daf494ab795f9ff8c9c6ec, type: 2}
+    - {fileID: 11400000, guid: 2849d2d08f4074f1aaad143c81b9c3e0, type: 2}
+    - {fileID: 11400000, guid: 52360e91a955949ffa243a3f185b7c48, type: 2}
+    - {fileID: 11400000, guid: 1ab1d79c4c11c41e9bd27c6d62f9d63c, type: 2}
+    - {fileID: 11400000, guid: f786991de69c74ef49761be7ceb4f191, type: 2}
+    - {fileID: 11400000, guid: 2aa3303f6d3524d4b9ba162f6e7d1df6, type: 2}
+    - {fileID: 11400000, guid: 51f91f762004e42498a60524e2672852, type: 2}
+    - {fileID: 11400000, guid: f7b32bd23aaac4033a1051d3d9cc287e, type: 2}
+    - {fileID: 11400000, guid: 31a9d6ae5ad314635830422ee0a682f7, type: 2}
+    - {fileID: 11400000, guid: e698a922286cb49c9b5052cadd68cb64, type: 2}
+    - {fileID: 11400000, guid: 135e0e5a8f59f4f87823f3db7bee662e, type: 2}
+    - {fileID: 11400000, guid: 612a0f0efd44140e28fb42aef1e2c800, type: 2}
+    - {fileID: 11400000, guid: 0630148d34c724553aaec752cf580eba, type: 2}
+    - {fileID: 11400000, guid: 67b84ee4b84734e2f8173271cc1a0b3f, type: 2}
+    - {fileID: 11400000, guid: 85a45c384464b438986987dac4fefdd6, type: 2}
+    - {fileID: 11400000, guid: 18de58c4d552e4d94a4abb651c5df678, type: 2}
+    - {fileID: 11400000, guid: d25158bba82014ce58e02f2b6d6f84b1, type: 2}
+    - {fileID: 11400000, guid: 4ccfe41ababde4589b30d192e982a1ef, type: 2}
+    - {fileID: 11400000, guid: def6b97ba54ee45408aa8d0aa65e841e, type: 2}
+    - {fileID: 11400000, guid: cb004d5efab2c44e397550cafe2a0dcb, type: 2}
+    - {fileID: 11400000, guid: 5ccdb9c7fd8a64305b1c455f3605ae6a, type: 2}
+    - {fileID: 11400000, guid: 71ea06aa7210e4eacbd05053f372c9aa, type: 2}
+    - {fileID: 11400000, guid: b57065219305a4791914c23be8f65a6c, type: 2}
+    - {fileID: 11400000, guid: 529daf50a11754af5973774757109e12, type: 2}
+    - {fileID: 11400000, guid: e191fd675fa72433fa17b9479e32428c, type: 2}
+    - {fileID: 11400000, guid: 0713a331de3a1487bb8a39c9332d14cf, type: 2}
+    - {fileID: 11400000, guid: e4db1e6018d6d4c5695ed0d946cb97de, type: 2}
+    - {fileID: 11400000, guid: 3d2835b2611233442aecfe8352bdc6cd, type: 2}
+    - {fileID: 11400000, guid: e029e109e37717e4c90957e2ffc3f305, type: 2}
+    - {fileID: 11400000, guid: e645b9c9776129a4d818f31e5e7783e1, type: 2}
+    - {fileID: 11400000, guid: 9ca4360daa972eb41b9afafc475edeca, type: 2}
+    - {fileID: 11400000, guid: 67dfb6d3dd7c9ed459a11374680ce643, type: 2}
+    - {fileID: 11400000, guid: 1820f557d8d3b45f5a2a42a8bd2b08bd, type: 2}
+    - {fileID: 11400000, guid: 7c8fc874abfcd4a44b19bd40e7ef6d22, type: 2}
+    - {fileID: 11400000, guid: 70e878f088cddd948917748a071f8ee8, type: 2}
+    - {fileID: 11400000, guid: 815929dc40dc23346861c1714364fa25, type: 2}
+    - {fileID: 11400000, guid: a25d5a7b46a883b4b9d261fc5e272670, type: 2}
+    - {fileID: 11400000, guid: 62ede562c578a754a8c31202d988aac0, type: 2}
+    - {fileID: 11400000, guid: c3969cf169b4380458c79f3505be9ffe, type: 2}
+    - {fileID: 11400000, guid: a63659af9b55c0d4d812f526b203478d, type: 2}
+    - {fileID: 11400000, guid: a499c12bbe8534548be70f4a87ea57d7, type: 2}
+    - {fileID: 11400000, guid: fa4d3f86524eb9b448b8160091381f2a, type: 2}
+    - {fileID: 11400000, guid: 680aa4dff38c9254a92ea3b4b63c99af, type: 2}
+    - {fileID: 11400000, guid: ffcf587bc0399e349a8db5c3f59409b3, type: 2}
+    - {fileID: 11400000, guid: 05dd5d1fd8eaf9045a0514e929cf3be7, type: 2}
+    - {fileID: 11400000, guid: 513dda9439ec95f44bc878754fd94dad, type: 2}
+    - {fileID: 11400000, guid: c25cd6ef22f3bfd45bdaa5cdba9f8a95, type: 2}
+    - {fileID: 11400000, guid: 3b9c1b9f4413a92418cb1f25fa769b29, type: 2}
+    - {fileID: 11400000, guid: a35ba153ed46c534481e7c71513c7a30, type: 2}
+    - {fileID: 11400000, guid: cdc0910021492914bae852d8bbe3796a, type: 2}
+    - {fileID: 11400000, guid: 2d3f6e1a9716f3c49aa8f834cb6180e3, type: 2}
+    - {fileID: 11400000, guid: be575de7f4bcfc14baafad518f5f82fc, type: 2}
+    - {fileID: 11400000, guid: 1f686e2138aedb84ba1ebd1f23c45d5e, type: 2}
+    - {fileID: 11400000, guid: a536af5634c0c2d4b80853fdd13077df, type: 2}
+    - {fileID: 11400000, guid: 70afead0f0c326d488c3fb929c9df6b1, type: 2}
+    - {fileID: 11400000, guid: d6d08b25ad8b11f46ae8ca0c51367a9f, type: 2}
+    - {fileID: 11400000, guid: 363dadad0b6faf544b0d2ee75b507900, type: 2}
+    - {fileID: 11400000, guid: 505f679a3c2ed634692f3bd5f6366e4b, type: 2}
+    - {fileID: 11400000, guid: 9fc2a38ec26e0b84cb4792c2b58a9927, type: 2}
+    - {fileID: 11400000, guid: 603df39560336da4b80018b54a0709b5, type: 2}
+    - {fileID: 11400000, guid: 9ec56f354d3b942499d14dd868d6a01d, type: 2}
+    - {fileID: 11400000, guid: d32b7dc8a411adf4a8339ea56c8d7e1d, type: 2}
+    - {fileID: 11400000, guid: 0c5fce266feeb4d4f8ebda38090c7565, type: 2}
+    - {fileID: 11400000, guid: eaee934b568ae9a44a99bfc277b42053, type: 2}
+    - {fileID: 11400000, guid: 274c138bb3d4c1e45a5fefad86294c2b, type: 2}
+    - {fileID: 11400000, guid: e04632ea05391374abb6dcc87a18bf2f, type: 2}
+    - {fileID: 11400000, guid: 5cdac8a726e8e7d448d6c1086f010b73, type: 2}
+    - {fileID: 11400000, guid: ed58b21407897284187daa1120a5f9a3, type: 2}
+    - {fileID: 11400000, guid: b1674ab397b39784fb07e2f7329455ff, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: ContainerMaps
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[OdinToolkits.ChineseManual.Editor.AttributeType,
+        Assembly-CSharp-Editor-firstpass],[System.Collections.Generic.List`1[[OdinToolkits.ChineseManual.Editor.Common.AbsContainer,
+        Assembly-CSharp-Editor-firstpass]], mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[OdinToolkits.ChineseManual.Editor.AttributeType,
+        Assembly-CSharp-Editor-firstpass]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 11
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 0
+    - Name: $v
+      Entry: 7
+      Data: 2|System.Collections.Generic.List`1[[OdinToolkits.ChineseManual.Editor.Common.AbsContainer,
+        Assembly-CSharp-Editor-firstpass]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 19
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 10
+      Data: 4
+    - Name: 
+      Entry: 10
+      Data: 5
+    - Name: 
+      Entry: 10
+      Data: 6
+    - Name: 
+      Entry: 10
+      Data: 7
+    - Name: 
+      Entry: 10
+      Data: 8
+    - Name: 
+      Entry: 10
+      Data: 9
+    - Name: 
+      Entry: 10
+      Data: 10
+    - Name: 
+      Entry: 10
+      Data: 11
+    - Name: 
+      Entry: 10
+      Data: 12
+    - Name: 
+      Entry: 10
+      Data: 13
+    - Name: 
+      Entry: 10
+      Data: 14
+    - Name: 
+      Entry: 10
+      Data: 15
+    - Name: 
+      Entry: 10
+      Data: 16
+    - Name: 
+      Entry: 10
+      Data: 17
+    - Name: 
+      Entry: 10
+      Data: 18
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
+      Entry: 7
+      Data: 3|System.Collections.Generic.List`1[[OdinToolkits.ChineseManual.Editor.Common.AbsContainer,
+        Assembly-CSharp-Editor-firstpass]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 6
+    - Name: 
+      Entry: 10
+      Data: 19
+    - Name: 
+      Entry: 10
+      Data: 20
+    - Name: 
+      Entry: 10
+      Data: 21
+    - Name: 
+      Entry: 10
+      Data: 22
+    - Name: 
+      Entry: 10
+      Data: 23
+    - Name: 
+      Entry: 10
+      Data: 24
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 4
+    - Name: $v
+      Entry: 7
+      Data: 4|System.Collections.Generic.List`1[[OdinToolkits.ChineseManual.Editor.Common.AbsContainer,
+        Assembly-CSharp-Editor-firstpass]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 6
+    - Name: 
+      Entry: 10
+      Data: 25
+    - Name: 
+      Entry: 10
+      Data: 26
+    - Name: 
+      Entry: 10
+      Data: 27
+    - Name: 
+      Entry: 10
+      Data: 28
+    - Name: 
+      Entry: 10
+      Data: 29
+    - Name: 
+      Entry: 10
+      Data: 30
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 8
+    - Name: $v
+      Entry: 7
+      Data: 5|System.Collections.Generic.List`1[[OdinToolkits.ChineseManual.Editor.Common.AbsContainer,
+        Assembly-CSharp-Editor-firstpass]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 15
+    - Name: 
+      Entry: 10
+      Data: 31
+    - Name: 
+      Entry: 10
+      Data: 32
+    - Name: 
+      Entry: 10
+      Data: 33
+    - Name: 
+      Entry: 10
+      Data: 34
+    - Name: 
+      Entry: 10
+      Data: 35
+    - Name: 
+      Entry: 10
+      Data: 36
+    - Name: 
+      Entry: 10
+      Data: 37
+    - Name: 
+      Entry: 10
+      Data: 38
+    - Name: 
+      Entry: 10
+      Data: 39
+    - Name: 
+      Entry: 10
+      Data: 40
+    - Name: 
+      Entry: 10
+      Data: 41
+    - Name: 
+      Entry: 10
+      Data: 42
+    - Name: 
+      Entry: 10
+      Data: 43
+    - Name: 
+      Entry: 10
+      Data: 44
+    - Name: 
+      Entry: 10
+      Data: 45
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 16
+    - Name: $v
+      Entry: 7
+      Data: 6|System.Collections.Generic.List`1[[OdinToolkits.ChineseManual.Editor.Common.AbsContainer,
+        Assembly-CSharp-Editor-firstpass]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 11
+    - Name: 
+      Entry: 10
+      Data: 46
+    - Name: 
+      Entry: 10
+      Data: 47
+    - Name: 
+      Entry: 10
+      Data: 48
+    - Name: 
+      Entry: 10
+      Data: 49
+    - Name: 
+      Entry: 10
+      Data: 50
+    - Name: 
+      Entry: 10
+      Data: 51
+    - Name: 
+      Entry: 10
+      Data: 52
+    - Name: 
+      Entry: 10
+      Data: 53
+    - Name: 
+      Entry: 10
+      Data: 54
+    - Name: 
+      Entry: 10
+      Data: 55
+    - Name: 
+      Entry: 10
+      Data: 56
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 32
+    - Name: $v
+      Entry: 7
+      Data: 7|System.Collections.Generic.List`1[[OdinToolkits.ChineseManual.Editor.Common.AbsContainer,
+        Assembly-CSharp-Editor-firstpass]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 7
+    - Name: 
+      Entry: 10
+      Data: 57
+    - Name: 
+      Entry: 10
+      Data: 58
+    - Name: 
+      Entry: 10
+      Data: 59
+    - Name: 
+      Entry: 10
+      Data: 60
+    - Name: 
+      Entry: 10
+      Data: 61
+    - Name: 
+      Entry: 10
+      Data: 62
+    - Name: 
+      Entry: 10
+      Data: 63
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 64
+    - Name: $v
+      Entry: 7
+      Data: 8|System.Collections.Generic.List`1[[OdinToolkits.ChineseManual.Editor.Common.AbsContainer,
+        Assembly-CSharp-Editor-firstpass]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 23
+    - Name: 
+      Entry: 10
+      Data: 64
+    - Name: 
+      Entry: 10
+      Data: 65
+    - Name: 
+      Entry: 10
+      Data: 66
+    - Name: 
+      Entry: 10
+      Data: 67
+    - Name: 
+      Entry: 10
+      Data: 68
+    - Name: 
+      Entry: 10
+      Data: 69
+    - Name: 
+      Entry: 10
+      Data: 70
+    - Name: 
+      Entry: 10
+      Data: 71
+    - Name: 
+      Entry: 10
+      Data: 72
+    - Name: 
+      Entry: 10
+      Data: 73
+    - Name: 
+      Entry: 10
+      Data: 74
+    - Name: 
+      Entry: 10
+      Data: 75
+    - Name: 
+      Entry: 10
+      Data: 76
+    - Name: 
+      Entry: 10
+      Data: 77
+    - Name: 
+      Entry: 10
+      Data: 78
+    - Name: 
+      Entry: 10
+      Data: 79
+    - Name: 
+      Entry: 10
+      Data: 80
+    - Name: 
+      Entry: 10
+      Data: 81
+    - Name: 
+      Entry: 10
+      Data: 82
+    - Name: 
+      Entry: 10
+      Data: 83
+    - Name: 
+      Entry: 10
+      Data: 84
+    - Name: 
+      Entry: 10
+      Data: 85
+    - Name: 
+      Entry: 10
+      Data: 86
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 128
+    - Name: $v
+      Entry: 7
+      Data: 9|System.Collections.Generic.List`1[[OdinToolkits.ChineseManual.Editor.Common.AbsContainer,
+        Assembly-CSharp-Editor-firstpass]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 14
+    - Name: 
+      Entry: 10
+      Data: 87
+    - Name: 
+      Entry: 10
+      Data: 88
+    - Name: 
+      Entry: 10
+      Data: 89
+    - Name: 
+      Entry: 10
+      Data: 90
+    - Name: 
+      Entry: 10
+      Data: 91
+    - Name: 
+      Entry: 10
+      Data: 92
+    - Name: 
+      Entry: 10
+      Data: 93
+    - Name: 
+      Entry: 10
+      Data: 94
+    - Name: 
+      Entry: 10
+      Data: 95
+    - Name: 
+      Entry: 10
+      Data: 96
+    - Name: 
+      Entry: 10
+      Data: 97
+    - Name: 
+      Entry: 10
+      Data: 98
+    - Name: 
+      Entry: 10
+      Data: 99
+    - Name: 
+      Entry: 10
+      Data: 100
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 256
+    - Name: $v
+      Entry: 7
+      Data: 10|System.Collections.Generic.List`1[[OdinToolkits.ChineseManual.Editor.Common.AbsContainer,
+        Assembly-CSharp-Editor-firstpass]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 19
+    - Name: 
+      Entry: 10
+      Data: 101
+    - Name: 
+      Entry: 10
+      Data: 102
+    - Name: 
+      Entry: 10
+      Data: 103
+    - Name: 
+      Entry: 10
+      Data: 104
+    - Name: 
+      Entry: 10
+      Data: 105
+    - Name: 
+      Entry: 10
+      Data: 106
+    - Name: 
+      Entry: 10
+      Data: 107
+    - Name: 
+      Entry: 10
+      Data: 108
+    - Name: 
+      Entry: 10
+      Data: 109
+    - Name: 
+      Entry: 10
+      Data: 110
+    - Name: 
+      Entry: 10
+      Data: 111
+    - Name: 
+      Entry: 10
+      Data: 112
+    - Name: 
+      Entry: 10
+      Data: 113
+    - Name: 
+      Entry: 10
+      Data: 114
+    - Name: 
+      Entry: 10
+      Data: 115
+    - Name: 
+      Entry: 10
+      Data: 116
+    - Name: 
+      Entry: 10
+      Data: 117
+    - Name: 
+      Entry: 10
+      Data: 118
+    - Name: 
+      Entry: 10
+      Data: 119
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 512
+    - Name: $v
+      Entry: 7
+      Data: 11|System.Collections.Generic.List`1[[OdinToolkits.ChineseManual.Editor.Common.AbsContainer,
+        Assembly-CSharp-Editor-firstpass]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 120
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2048
+    - Name: $v
+      Entry: 7
+      Data: 12|System.Collections.Generic.List`1[[OdinToolkits.ChineseManual.Editor.Common.AbsContainer,
+        Assembly-CSharp-Editor-firstpass]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 10
+      Data: 121
+    - Name: 
+      Entry: 10
+      Data: 122
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
