@@ -3,7 +3,7 @@ using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEngine;
 
-namespace YOGA.Modules.OdinToolkits.Editor
+namespace Plugins.YOGA.OdinToolkits.Editor
 {
     public class OdinMenuEditorWindowStyleExample : OdinMenuEditorWindow
     {

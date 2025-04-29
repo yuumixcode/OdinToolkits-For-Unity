@@ -1,8 +1,9 @@
-using System;
+using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 
-namespace YOGA.OdinToolkits.AnalysisManual.OdinAttributes.Editor
+namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class ButtonGroupExample : ExampleScriptableObject

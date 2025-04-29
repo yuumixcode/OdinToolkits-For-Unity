@@ -1,12 +1,13 @@
-using System;
+using Plugins.YOGA.OdinToolkits.Editor;
+using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Database;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
+using System;
 using UnityEditor;
 using UnityEngine;
-using YOGA.OdinToolkits.Config.Editor;
 
-namespace YOGA.OdinToolkits.AnalysisManual.OdinAttributes.Editor
+namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Window
 {
     public class ChineseAttributeEditorWindow : OdinMenuEditorWindow
     {

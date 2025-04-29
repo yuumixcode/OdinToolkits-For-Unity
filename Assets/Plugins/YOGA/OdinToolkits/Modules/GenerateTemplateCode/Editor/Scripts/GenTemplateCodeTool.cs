@@ -1,13 +1,12 @@
+using Plugins.YOGA.Common.Utility.YuumiEditor;
+using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.IO;
-using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 using YOGA.OdinToolkits.Common.Runtime;
-using Yoga.Shared.Utility;
-using Yoga.Shared.Utility.YuumiEditor;
 
-namespace YOGA.Modules.OdinToolkits.Editor.GenerateTemplateCode.Scripts
+namespace Plugins.YOGA.OdinToolkits.Modules.GenerateTemplateCode.Editor.Scripts
 {
     public class GenTemplateCodeTool : ScriptableObject
     {

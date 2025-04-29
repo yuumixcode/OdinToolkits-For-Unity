@@ -1,9 +1,9 @@
-﻿using Sirenix.OdinInspector;
+﻿using Plugins.YOGA.Common.Utility.YuumiEditor;
+using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
-using Yoga.Shared.Utility.YuumiEditor;
 
-namespace Yoga.OdinToolkits.Modules.ComponentBinder.Runtime
+namespace Plugins.YOGA.OdinToolkits.Modules.ComponentBinder.Runtime
 {
     [Serializable]
     public class BinderUnit

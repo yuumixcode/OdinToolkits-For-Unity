@@ -1,9 +1,10 @@
-using System.Collections.Generic;
+using Plugins.YOGA.OdinToolkits.Editor;
+using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
-using YOGA.OdinToolkits.Editor;
+using System.Collections.Generic;
 
-namespace YOGA.OdinToolkits.AnalysisManual.OdinAttributes.Editor
+namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class OnStateUpdateExample : ExampleScriptableObject

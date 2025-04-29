@@ -1,13 +1,13 @@
+using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Sirenix.OdinInspector;
-using Sirenix.Utilities;
 using UnityEditor;
 using YOGA.OdinToolkits.Common.Runtime;
 
-namespace YOGA.OdinToolkits.AnalysisManual.OdinAttributes.Editor
+namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
 {
     public abstract class AbsContainer : SerializedScriptableObject
     {

@@ -1,13 +1,14 @@
+using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace YOGA.OdinToolkits.AnalysisManual.OdinAttributes.Editor
+namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class ValueDropdownExample : ExampleScriptableObject

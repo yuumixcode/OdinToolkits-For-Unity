@@ -1,8 +1,8 @@
-using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace YOGA.OdinToolkits.AnalysisManual.OdinAttributes.RuntimeExamples.ChildGameObjectOnly.Scripts
+namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.RuntimeExamples.ChildGameObjectOnly.Scripts
 {
     public class ChildGameObjectOnlyComponent : MonoBehaviour
     {

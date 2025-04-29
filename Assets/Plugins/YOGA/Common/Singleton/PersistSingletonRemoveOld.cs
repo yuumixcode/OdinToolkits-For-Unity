@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Yoga.Shared.Singleton
+namespace Plugins.YOGA.Common.Singleton
 {
     /// <summary>
     /// 继承了 Mono 的单例抽象类，持久化单例，强制生成新的实例可以销毁旧的实例

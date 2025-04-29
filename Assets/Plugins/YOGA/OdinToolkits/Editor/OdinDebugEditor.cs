@@ -4,7 +4,7 @@ using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
 
-namespace YOGA.OdinToolkits.Editor
+namespace Plugins.YOGA.OdinToolkits.Editor
 {
     public static class OdinDebugEditor
     {

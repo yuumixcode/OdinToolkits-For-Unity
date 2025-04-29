@@ -1,9 +1,10 @@
+using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
+using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Scripts;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor.Examples;
 using UnityEngine;
-using YOGA.OdinToolkits.AnalysisManual.OdinAttributes.Common.Scripts;
 
-namespace YOGA.OdinToolkits.AnalysisManual.OdinAttributes.Editor
+namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class InlineEditorExample : ExampleScriptableObject

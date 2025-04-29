@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Yoga.OdinToolkits.Modules.ComponentBinder.Runtime
+namespace Plugins.YOGA.OdinToolkits.Modules.ComponentBinder.Runtime
 {
     /// <summary>
     /// 用于标记 BinderAssistant 可以选择的基类

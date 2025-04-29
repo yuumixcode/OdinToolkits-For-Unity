@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
-#if UNITY_EDITOR
 using UnityEditor.Search;
-#endif
+using UnityEngine;
 
-namespace Yoga.Shared.Utility.YuumiEditor
+namespace Plugins.YOGA.Common.Utility.YuumiEditor
 {
     /// <summary>
     /// 关于场景层级的工具类，不包括预制体的 Stage 场景

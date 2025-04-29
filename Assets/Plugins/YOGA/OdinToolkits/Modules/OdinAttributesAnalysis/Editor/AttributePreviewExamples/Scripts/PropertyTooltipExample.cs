@@ -1,6 +1,7 @@
+using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 
-namespace YOGA.OdinToolkits.AnalysisManual.OdinAttributes.Editor
+namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class PropertyTooltipExample : ExampleScriptableObject

@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace YOGA.OdinToolkits.AnalysisManual.OdinAttributes.Common.Scripts
+namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Scripts
 {
     public class CommonInlineObject : ScriptableObject
     {

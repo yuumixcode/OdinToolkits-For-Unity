@@ -1,7 +1,7 @@
+using Plugins.YOGA.OdinToolkits.Editor;
 using System.Collections.Generic;
-using YOGA.OdinToolkits.Config.Editor;
 
-namespace YOGA.Modules.OdinToolkits.Editor.GenerateTemplateCode.Scripts
+namespace Plugins.YOGA.OdinToolkits.Modules.GenerateTemplateCode.Editor.Scripts
 {
     public static class TemplateFilePath
     {

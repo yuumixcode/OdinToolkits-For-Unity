@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace YOGA.OdinToolkits.AnalysisManual.OdinAttributes.RuntimeExamples.EnableIn.Scripts
+namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.RuntimeExamples.EnableIn.Scripts
 {
     public class EnableInPrefabComponent : MonoBehaviour
     {

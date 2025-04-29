@@ -1,10 +1,10 @@
-using System.Collections.Generic;
+using Plugins.YOGA.Common.Utility.YuumiEditor;
+using Plugins.YOGA.OdinToolkits.Editor;
+using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
-using YOGA.OdinToolkits.Editor;
-using Yoga.Shared.Utility;
-using Yoga.Shared.Utility.YuumiEditor;
+using System.Collections.Generic;
 
-namespace YOGA.OdinToolkits.AnalysisManual.OdinAttributes.Editor
+namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Database
 {
     public class AttributeChineseDatabase : AbsOdinDatabase<AttributeChineseDatabase>
     {

@@ -1,9 +1,8 @@
-﻿using Sirenix.OdinInspector;
+﻿using Plugins.YOGA.Common.Utility.YuumiEditor;
+using Sirenix.OdinInspector;
 using UnityEditor;
-using Yoga.Shared.Utility;
-using Yoga.Shared.Utility.YuumiEditor;
 
-namespace YOGA.OdinToolkits.Editor
+namespace Plugins.YOGA.OdinToolkits.Editor
 {
     public abstract class AbsOdinDatabase<T> : SerializedScriptableObject where T : AbsOdinDatabase<T>
     {

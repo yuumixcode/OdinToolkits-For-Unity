@@ -1,10 +1,9 @@
+using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
-using UnityEngine;
-#if UNITY_EDITOR
 using Sirenix.OdinInspector.Editor;
-#endif
+using UnityEngine;
 
-namespace YOGA.OdinToolkits.AnalysisManual.OdinAttributes.Editor
+namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class RequiredExample : ExampleScriptableObject

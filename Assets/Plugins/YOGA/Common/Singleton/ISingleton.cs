@@ -1,4 +1,4 @@
-namespace Yoga.Shared.Singleton
+namespace Plugins.YOGA.Common.Singleton
 {
     /// <summary>
     /// 定义了一个单例模式的接口。

@@ -1,14 +1,13 @@
+using Plugins.YOGA.Common.Utility.YuumiEditor;
+using Plugins.YOGA.OdinToolkits.Modules.GenerateTemplateCode.Editor.Scripts;
+using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.IO;
-using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
-using YOGA.Modules.OdinToolkits.Editor.GenerateTemplateCode.Scripts;
 using YOGA.OdinToolkits.Common.Runtime;
-using Yoga.Shared.Utility;
-using Yoga.Shared.Utility.YuumiEditor;
 
-namespace YOGA.Modules.OdinToolkits.Editor.GenerateTemplateCode.Specific.AttributeAnalysisGenCode
+namespace Plugins.YOGA.OdinToolkits.Modules.GenerateTemplateCode.Editor.Specific.AttributeAnalysisGenCode
 {
     public class AttributeAnalysisGenCodeTool : ScriptableObject
     {

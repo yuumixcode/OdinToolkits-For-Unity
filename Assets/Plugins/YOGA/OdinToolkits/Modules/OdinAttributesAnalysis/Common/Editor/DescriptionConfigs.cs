@@ -1,4 +1,4 @@
-namespace YOGA.OdinToolkits.AnalysisManual.OdinAttributes.Editor
+namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
 {
     public static class DescriptionConfigs
     {

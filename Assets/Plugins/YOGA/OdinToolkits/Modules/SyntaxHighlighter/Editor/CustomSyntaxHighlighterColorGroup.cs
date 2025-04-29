@@ -1,8 +1,8 @@
-using System;
 using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 
-namespace Yoga.OdinToolkits.Modules.SyntaxHighlighter.Editor
+namespace Plugins.YOGA.OdinToolkits.Modules.SyntaxHighlighter.Editor
 {
     [Serializable]
     public class CustomSyntaxHighlighterColorGroup

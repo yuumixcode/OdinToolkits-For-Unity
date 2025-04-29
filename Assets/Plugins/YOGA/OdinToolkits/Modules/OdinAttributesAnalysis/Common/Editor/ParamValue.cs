@@ -1,6 +1,6 @@
 using System;
 
-namespace YOGA.OdinToolkits.AnalysisManual.OdinAttributes.Editor
+namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
 {
     [Serializable]
     public class ParamValue

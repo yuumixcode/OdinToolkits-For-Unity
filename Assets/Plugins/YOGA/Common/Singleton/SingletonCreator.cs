@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace Yoga.Shared.Singleton
+namespace Plugins.YOGA.Common.Singleton
 {
     /// <summary>
     /// 单例创建器的静态类，用于创建指定类型的单例实例。

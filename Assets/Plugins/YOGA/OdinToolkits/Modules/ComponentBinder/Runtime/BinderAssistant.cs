@@ -1,16 +1,14 @@
+using Plugins.YOGA.Common.Utility.YuumiEditor;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using UnityEngine;
-using Debug = UnityEngine.Debug;
-#if UNITY_EDITOR
-using Yoga.Shared.Utility.YuumiEditor;
 using UnityEditor;
 using UnityEditor.Callbacks;
-#endif
+using UnityEngine;
+using Debug = UnityEngine.Debug;
 
-namespace Yoga.OdinToolkits.Modules.ComponentBinder.Runtime
+namespace Plugins.YOGA.OdinToolkits.Modules.ComponentBinder.Runtime
 {
     [DisallowMultipleComponent]
     public class BinderAssistant :

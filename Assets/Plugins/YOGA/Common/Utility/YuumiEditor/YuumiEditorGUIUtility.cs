@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Yoga.Shared.Utility.YuumiEditor
+namespace Plugins.YOGA.Common.Utility.YuumiEditor
 {
     public enum InnerRectType
     {

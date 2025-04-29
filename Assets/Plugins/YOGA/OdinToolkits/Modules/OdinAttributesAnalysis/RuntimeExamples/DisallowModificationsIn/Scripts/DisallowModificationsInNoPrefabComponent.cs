@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace YOGA.OdinToolkits.AnalysisManual.OdinAttributes.RuntimeExamples.DisallowModificationsIn.Scripts
+namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.RuntimeExamples.DisallowModificationsIn.Scripts
 {
     public class DisallowModificationsInNoPrefabComponent : MonoBehaviour
     {

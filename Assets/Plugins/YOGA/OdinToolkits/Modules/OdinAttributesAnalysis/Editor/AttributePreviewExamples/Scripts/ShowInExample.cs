@@ -1,9 +1,9 @@
+using Plugins.YOGA.Common.Utility.YuumiEditor;
+using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using YOGA.OdinToolkits.Common.Runtime;
-using Yoga.Shared.Utility;
-using Yoga.Shared.Utility.YuumiEditor;
 
-namespace YOGA.OdinToolkits.AnalysisManual.OdinAttributes.Editor
+namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class ShowInExample : ExampleScriptableObject

@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace YOGA.OdinToolkits.AnalysisManual.OdinAttributes.RuntimeExamples.ShowInInspector.Scripts
+namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.RuntimeExamples.ShowInInspector.Scripts
 {
     public class ShowInInspectorComponent : MonoBehaviour
     {

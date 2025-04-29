@@ -7,12 +7,12 @@
 // * https://github.com/Yuumi-Zeus
 // ------------------------------------------------------------------
 
+using Plugins.YOGA.OdinToolkits.Editor;
 using System;
 using System.Linq;
 using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using UnityEngine;
-using YOGA.OdinToolkits.Config.Editor;
 
 namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Window
 {

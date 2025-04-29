@@ -1,4 +1,4 @@
-﻿namespace Yoga.OdinToolkits.Modules.ComponentBinder.Runtime
+﻿namespace Plugins.YOGA.OdinToolkits.Modules.ComponentBinder.Runtime
 {
     public interface IBindReferences
     {

@@ -1,6 +1,6 @@
 using Sirenix.OdinInspector;
 
-namespace YOGA.OdinToolkits.AnalysisManual.OdinAttributes.Editor
+namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
 {
     /// <summary>
     ///     使用 Odin 序列化的 ExampleScriptableObject

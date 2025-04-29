@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Yoga.Shared.Utility
+namespace Plugins.YOGA.Common.Utility.Runtime
 {
     public static class RegexUtility
     {

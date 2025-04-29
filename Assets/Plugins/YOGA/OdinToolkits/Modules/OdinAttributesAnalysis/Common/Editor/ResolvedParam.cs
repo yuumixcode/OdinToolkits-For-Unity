@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using Sirenix.Utilities.Editor;
+﻿using Sirenix.Utilities.Editor;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace YOGA.OdinToolkits.AnalysisManual.OdinAttributes.Editor
+namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
 {
     public enum ResolverType
     {

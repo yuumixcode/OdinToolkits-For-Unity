@@ -1,11 +1,12 @@
-using System;
-using System.Collections.Generic;
+using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities.Editor;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using ObjectFieldAlignment = Sirenix.OdinInspector.ObjectFieldAlignment;
 
-namespace YOGA.OdinToolkits.AnalysisManual.OdinAttributes.Editor
+namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class ListDrawerSettingsExample : ExampleScriptableObject

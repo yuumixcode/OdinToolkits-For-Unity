@@ -1,15 +1,16 @@
+using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Window;
+using Plugins.YOGA.OdinToolkits.Modules.SyntaxHighlighter.Editor;
+using Sirenix.OdinInspector.Editor;
+using Sirenix.Utilities;
+using Sirenix.Utilities.Editor;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Sirenix.OdinInspector.Editor;
-using Sirenix.Utilities;
-using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
-using Yoga.OdinToolkits.Modules.SyntaxHighlighter.Editor;
 
-namespace YOGA.OdinToolkits.AnalysisManual.OdinAttributes.Editor
+namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
 {
     [CustomEditor(typeof(AbsContainer), true)]
     public class AbsContainerEditor : OdinEditor

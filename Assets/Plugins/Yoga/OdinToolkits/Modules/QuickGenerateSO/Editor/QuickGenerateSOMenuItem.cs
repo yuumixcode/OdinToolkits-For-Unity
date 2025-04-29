@@ -2,7 +2,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-namespace Yoga.OdinToolkits.Modules.QuickGenerateSO.Editor
+namespace Plugins.YOGA.OdinToolkits.Modules.QuickGenerateSO.Editor
 {
     public static class QuickGenerateSOMenuItem
     {

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Plugins.YOGA.OdinToolkits.Modules.CustomExtension.Runtime.Attributes.Custom;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using YOGA.OdinToolkits.CustomExtension.Attributes;
 
-namespace YOGA.Modules.OdinToolkits.AttributeProcessors.Editor
+namespace Plugins.YOGA.OdinToolkits.Modules.CustomExtension.Editor.AttributeProcessors
 {
     public class StringClassAttributeProcessor : OdinAttributeProcessor<string>
     {

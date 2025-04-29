@@ -1,7 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Yoga.Shared.Singleton
+namespace Plugins.YOGA.Common.Singleton
 {
     /// <summary>
     /// 继承了 SerializedMonoBehaviour 的单例抽象类，非持久化单例，默认删除后生成的实例

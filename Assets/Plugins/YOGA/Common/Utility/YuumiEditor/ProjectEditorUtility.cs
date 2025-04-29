@@ -8,7 +8,7 @@ using UnityEngine;
 using YOGA.OdinToolkits.Common.Runtime;
 using Object = UnityEngine.Object;
 
-namespace Yoga.Shared.Utility.YuumiEditor
+namespace Plugins.YOGA.Common.Utility.YuumiEditor
 {
     /// <summary>
     /// ProjectEditorUtility 仅限编辑器使用

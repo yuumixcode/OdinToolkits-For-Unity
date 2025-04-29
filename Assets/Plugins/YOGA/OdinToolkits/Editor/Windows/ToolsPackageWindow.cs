@@ -1,15 +1,13 @@
+using Plugins.YOGA.Common.Utility.YuumiEditor;
+using Plugins.YOGA.OdinToolkits.Modules.GenerateTemplateCode.Editor.Scripts;
+using Plugins.YOGA.OdinToolkits.Modules.GenerateTemplateCode.Editor.Specific.AttributeAnalysisGenCode;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
-using YOGA.Modules.OdinToolkits.Editor.GenerateTemplateCode.Scripts;
-using YOGA.Modules.OdinToolkits.Editor.GenerateTemplateCode.Specific.AttributeAnalysisGenCode;
-using YOGA.OdinToolkits.Config.Editor;
-using Yoga.Shared.Utility;
-using Yoga.Shared.Utility.YuumiEditor;
 
-namespace YOGA.Modules.OdinToolkits.Editor.Window
+namespace Plugins.YOGA.OdinToolkits.Editor.Windows
 {
     public class ToolsPackageWindow : OdinMenuEditorWindow
     {

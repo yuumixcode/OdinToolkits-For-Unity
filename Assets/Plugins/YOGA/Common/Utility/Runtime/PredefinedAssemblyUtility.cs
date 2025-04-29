@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Yoga.Shared.Utility
+namespace Plugins.YOGA.Common.Utility.Runtime
 {
     public static class PredefinedAssemblyUtility
     {

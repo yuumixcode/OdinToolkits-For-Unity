@@ -1,4 +1,4 @@
-﻿namespace YOGA.OdinToolkits.Config.Editor
+﻿namespace Plugins.YOGA.OdinToolkits.Editor
 {
     public static class OdinToolkitsMenuPaths
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Yoga.Shared.Singleton
+namespace Plugins.YOGA.Common.Singleton
 {
     /// <summary>
     /// 继承了 MonoBehaviour 的单例抽象类，提供非持久化单例模式。提供一个强制生成新的实例的方法

@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace YOGA.OdinToolkits.AnalysisManual.OdinAttributes.RuntimeExamples.RequiredListLength.Scripts
+namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.RuntimeExamples.RequiredListLength.Scripts
 {
     public class RequiredListLengthPrefabComponent : MonoBehaviour
     {

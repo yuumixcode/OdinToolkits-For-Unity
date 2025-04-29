@@ -2,7 +2,7 @@
 using UnityEngine;
 using YOGA.OdinToolkits.Common.Runtime;
 
-namespace YOGA.OdinToolkits.Config.Editor
+namespace Plugins.YOGA.OdinToolkits.Editor
 {
     public static class OdinToolkitsPaths
     {
