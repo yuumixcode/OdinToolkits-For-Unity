@@ -3,7 +3,7 @@ using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
-using Yuumix.OdinToolkits.Modules.Tools.GenerateTemplateCode.Editor.Scripts;
+using Yuumix.OdinToolkits.Modules.Tools.GenerateTemplateCode.Editor;
 using Yuumix.OdinToolkits.Modules.Tools.GenerateTemplateCode.Editor.Specific.AttributeAnalysisGenCode;
 using Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor;
 

@@ -142,7 +142,6 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor
             }
 
 #if UNITY_EDITOR
-
             /// <summary>
             /// 递归创建 Assets 下的文件夹路径
             /// </summary>
@@ -168,6 +167,48 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor
                 AssetDatabase.Refresh();
             }
 #endif
+            /// <summary>
+            /// 获取路径中以目标字符串结尾的子路径，且层级最深的路径
+            /// </summary>
+            /// <param name="fullPath">相对于 Assets 的完整路径（如：Assets/Plugins/.../OdinToolkitsMarker.asset）</param>
+            /// <param name="target">目标结尾字符串（如："OdinToolkits"）</param>
+            /// <returns>如：Assets/.../OdinToolkits</returns>
+            public static string GetSubPathByEndsWith(string fullPath, string target)
+            {
+                if (string.IsNullOrEmpty(fullPath) || string.IsNullOrEmpty(target))
+                {
+                    Debug.LogError("路径或目标字符串不能为空！");
+                    return null;
+                }
+
+                if (!fullPath.StartsWith("Assets"))
+                {
+                    Debug.LogError("完整路径不是以 Assets 开头的，需要使用相对路径。");
+                    return null;
+                }
+
+                // 分割路径
+                var parts = fullPath.Split('/');
+                var lastIndex = -1;
+
+                // 遍历查找最后一个匹配的索引
+                for (var i = 0; i < parts.Length; i++)
+                {
+                    if (parts[i] == target)
+                    {
+                        lastIndex = i;
+                    }
+                }
+
+                // 未找到匹配项
+                if (lastIndex != -1)
+                {
+                    return string.Join("/", parts, 0, lastIndex + 1);
+                }
+
+                Debug.LogWarning("路径中未找到以 " + target + " 结尾的部分: " + fullPath);
+                return null;
+            }
         }
 #if UNITY_EDITOR
         /// <summary>

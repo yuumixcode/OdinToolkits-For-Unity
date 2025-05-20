@@ -16,7 +16,7 @@
         public const string AttributeManualWindowName = "Odin Attributes 解析总览";
 
         // 小工具合集包
-        public const string ToolsPackagePath = OdinToolkitsMenuItemPath + "/工具合集包";
+        public const string ToolsPackagePath = OdinToolkitsMenuItemPath + "/工具箱";
         public const int ToolsPackagePriority = 150;
 
         private const string ThirdPartyMenuItemPath = OdinToolkitsMenuItemPath + "/第三方引用";

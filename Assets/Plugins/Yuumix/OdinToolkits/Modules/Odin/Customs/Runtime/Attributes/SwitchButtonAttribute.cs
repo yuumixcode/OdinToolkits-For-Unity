@@ -1,6 +1,6 @@
 using System;
 
-namespace YOGA.OdinToolkits.Modules.CustomExtensions.Runtime.Attributes
+namespace Yuumix.OdinToolkits.Modules.Odin.Customs.Runtime.Attributes
 {
     public enum SwitchAlignment
     {
@@ -9,41 +9,29 @@ namespace YOGA.OdinToolkits.Modules.CustomExtensions.Runtime.Attributes
         Center
     }
 
-    public class SwitchAttribute : Attribute
+    public class SwitchButtonAttribute : Attribute
     {
         private const string DefaultBackgroundColorOn = "@new Color(0.498f, 0.843f, 0.992f)";
         private const string DefaultBackgroundColorOff = "@new Color(0.165f, 0.165f, 0.165f)";
         private const string DefaultSwitchColorOn = DefaultBackgroundColorOff;
         private const string DefaultSwitchColorOff = DefaultBackgroundColorOn;
+        private const int DefaultSwitchWidth = 28;
         public SwitchAlignment Alignment;
-        public string BackgroundColorOff;
-
-        public string BackgroundColorOn;
         public bool Rounded;
+        public string BackgroundColorOff;
+        public string BackgroundColorOn;
         public string SwitchColorOff;
         public string SwitchColorOn;
 
-        public SwitchAttribute(
-            SwitchAlignment alignment,
+        public SwitchButtonAttribute(
+            SwitchAlignment alignment = SwitchAlignment.Left,
+            bool rounded = true,
             string backgroundColorOn = null,
             string backgroundColorOff = null,
             string switchColorOn = null,
-            string switchColorOff = null,
-            bool rounded = true)
+            string switchColorOff = null)
         {
             Alignment = alignment;
-            Rounded = rounded;
-            SetColors(backgroundColorOn, backgroundColorOff, switchColorOn, switchColorOff);
-        }
-
-        public SwitchAttribute(
-            string backgroundColorOn = null,
-            string backgroundColorOff = null,
-            string switchColorOn = null,
-            string switchColorOff = null,
-            bool rounded = true)
-        {
-            Alignment = SwitchAlignment.Left;
             Rounded = rounded;
             SetColors(backgroundColorOn, backgroundColorOff, switchColorOn, switchColorOff);
         }

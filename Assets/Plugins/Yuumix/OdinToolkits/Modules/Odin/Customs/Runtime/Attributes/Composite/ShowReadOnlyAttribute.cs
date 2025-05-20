@@ -1,7 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using System;
 
-namespace YOGA.OdinToolkits.Modules.CustomExtensions.Runtime.Attributes.Composite
+namespace Yuumix.OdinToolkits.Modules.Odin.Customs.Runtime.Attributes.Composite
 {
     /// <summary>
     ///     [ShowInInspector] [EnableGUI] [ReadOnly] 组合而成。

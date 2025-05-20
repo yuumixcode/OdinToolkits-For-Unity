@@ -1,6 +1,7 @@
 using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using Yuumix.OdinToolkits.Common.Editor;
+using Yuumix.OdinToolkits.Common.Editor.Locator;
 using Yuumix.OdinToolkits.Common.Runtime;
 using Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor;
 

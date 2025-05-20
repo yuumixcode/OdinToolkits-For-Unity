@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace YOGA.OdinToolkits.Modules.CustomExtensions.Runtime.Attributes
+namespace Yuumix.OdinToolkits.Modules.Odin.Customs.Runtime.Attributes
 {
     [AttributeUsage(AttributeTargets.All)]
     public class ShowGUIBorderAttribute : Attribute

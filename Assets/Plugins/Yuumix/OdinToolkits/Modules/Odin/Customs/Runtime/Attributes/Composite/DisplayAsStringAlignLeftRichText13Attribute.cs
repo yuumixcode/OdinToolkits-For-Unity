@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-namespace YOGA.OdinToolkits.Modules.CustomExtensions.Runtime.Attributes.Composite
+namespace Yuumix.OdinToolkits.Modules.Odin.Customs.Runtime.Attributes.Composite
 {
  /// <summary>
  ///     由 [PropertySpace] [HideLabel] [ShowInInspector] [EnableGUI]

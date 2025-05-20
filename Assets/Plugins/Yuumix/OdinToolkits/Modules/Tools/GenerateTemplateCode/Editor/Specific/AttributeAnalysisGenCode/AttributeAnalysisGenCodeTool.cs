@@ -4,18 +4,20 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Common.Runtime;
-using Yuumix.OdinToolkits.Modules.Tools.GenerateTemplateCode.Editor.Scripts;
 using Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor;
 
 namespace Yuumix.OdinToolkits.Modules.Tools.GenerateTemplateCode.Editor.Specific.AttributeAnalysisGenCode
 {
     public class AttributeAnalysisGenCodeTool : ScriptableObject
     {
-        [LabelText("Example 脚本命名空间: ")] public string exampleCodeNamespace;
+        [LabelText("Example 脚本命名空间: ")]
+        public string exampleCodeNamespace;
 
-        [LabelText("Container 脚本命名空间: ")] public string containerCodeNamespace;
+        [LabelText("Container 脚本命名空间: ")]
+        public string containerCodeNamespace;
 
-        [LabelText("特性名称:")] public string attributeName;
+        [LabelText("特性名称:")]
+        public string attributeName;
 
         [TitleGroup("目标文件夹路径", "最终生成脚本文件的位置")]
         [BoxGroup("目标文件夹路径/Example 脚本所在文件夹")]
@@ -28,7 +30,9 @@ namespace Yuumix.OdinToolkits.Modules.Tools.GenerateTemplateCode.Editor.Specific
         [HideLabel]
         public string containerCodeTargetPath;
 
-        [FolderPath] [LabelText("预存文件夹路径: ")] public List<string> preSavePaths;
+        [FolderPath]
+        [LabelText("预存文件夹路径: ")]
+        public List<string> preSavePaths;
 
         [PropertyOrder(10)]
         [TitleGroup("脚本信息预览")]
@@ -52,10 +56,7 @@ namespace Yuumix.OdinToolkits.Modules.Tools.GenerateTemplateCode.Editor.Specific
             set => attributeName = value;
         }
 
-        public List<string> TryGetPath()
-        {
-            return preSavePaths;
-        }
+        public List<string> TryGetPath() => preSavePaths;
 
         [Button("生成代码")]
         public void Generate()
@@ -89,9 +90,13 @@ namespace Yuumix.OdinToolkits.Modules.Tools.GenerateTemplateCode.Editor.Specific
             var codeAbsolutePath = Path.GetFullPath(codeRelativePath);
             // Debug.Log("目标文件的绝对路径为: " + codeAbsolutePath);
             if (File.Exists(codeAbsolutePath))
+            {
                 if (!EditorUtility.DisplayDialog("生成脚本冲突", "目标文件夹内已经存在相同名称的脚本，此操作无法撤回，是否确定覆盖原脚本?",
                         "确认覆盖", "取消"))
+                {
                     return;
+                }
+            }
 
             File.WriteAllText(codeAbsolutePath, templateContent);
             AssetDatabase.ImportAsset(codeRelativePath);

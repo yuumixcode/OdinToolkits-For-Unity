@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using YOGA.OdinToolkits.Modules.CustomExtensions.Runtime.Attributes;
+using Yuumix.OdinToolkits.Modules.Odin.Customs.Runtime.Attributes;
 
-namespace YOGA.OdinToolkits.Modules.CustomExtensions.Editor.AttributeProcessors
+namespace Yuumix.OdinToolkits.Modules.Odin.Customs.Editor.AttributeProcessors
 {
     public class StringClassAttributeProcessor : OdinAttributeProcessor<string>
     {
