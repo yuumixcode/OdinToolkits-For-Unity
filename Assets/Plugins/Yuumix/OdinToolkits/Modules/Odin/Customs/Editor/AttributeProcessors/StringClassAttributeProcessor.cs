@@ -15,11 +15,11 @@ namespace Yuumix.OdinToolkits.Modules.Odin.Customs.Editor.AttributeProcessors
             var fontsize = 12;
             var hasDisplayAsStringAlignLeftRichTextAttribute = false;
             foreach (var attribute in attributes.Where(attribute =>
-                         attribute.GetType() == typeof(ForStringDisplayAsStringAlignLeftRichTextAttribute)))
+                         attribute.GetType() == typeof(ForStringDisplayAsStringLeftRichAttribute)))
             {
                 hasDisplayAsStringAlignLeftRichTextAttribute = true;
                 var displayAsStringAlignLeftRichTextAttribute =
-                    (ForStringDisplayAsStringAlignLeftRichTextAttribute)attribute;
+                    (ForStringDisplayAsStringLeftRichAttribute)attribute;
                 fontsize = displayAsStringAlignLeftRichTextAttribute.FontSize;
                 // if (property.Info.GetMemberInfo().MemberType == MemberTypes.Property)
                 // {

@@ -76,7 +76,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
 
                 if (exampleAttribute == null)
                 {
-                    OdinLog.Error(
+                    OdinEditorLog.Error(
                         $"{exampleType.Name} 没有标注 IsChineseAttributeExampleAttribute");
                     return "";
                 }
@@ -135,18 +135,18 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
                 }
                 catch (FileNotFoundException)
                 {
-                    OdinLog.Error($"文件未找到: {exampleAttribute.FilePath}");
+                    OdinEditorLog.Error($"文件未找到: {exampleAttribute.FilePath}");
                     return "";
                 }
                 catch (IOException ex)
                 {
-                    OdinLog.Error($"读取文件时发生IO异常: {ex.Message}");
+                    OdinEditorLog.Error($"读取文件时发生IO异常: {ex.Message}");
                     return "";
                 }
             }
             catch (InvalidOperationException ex)
             {
-                OdinLog.Error($"处理类型属性时发生异常: {ex.Message}");
+                OdinEditorLog.Error($"处理类型属性时发生异常: {ex.Message}");
                 return "";
             }
         }

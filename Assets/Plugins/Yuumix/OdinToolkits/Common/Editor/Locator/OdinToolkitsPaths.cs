@@ -32,9 +32,9 @@ namespace Yuumix.OdinToolkits.Common.Editor.Locator
         private static void SetFolderPath()
         {
             _markerSOPath = ProjectEditorUtility.SO.GetScriptableObjectAssetPath<OdinToolkitsLookup>();
-            Debug.Log("MarkerSOPath:" + _markerSOPath);
+            // Debug.Log("MarkerSOPath:" + _markerSOPath);
             _odinToolkitsFolderPath = ProjectEditorUtility.Paths.GetSubPathByEndsWith(_markerSOPath, RootFolderName);
-            Debug.Log("FolderPath:" + _odinToolkitsFolderPath);
+            // Debug.Log("FolderPath:" + _odinToolkitsFolderPath);
         }
     }
 }

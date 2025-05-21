@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
+using Yuumix.OdinToolkits.Common.Runtime;
 
 namespace Yuumix.OdinToolkits.Modules.Tools.SyntaxHighlighter.Editor
 {
@@ -40,7 +41,7 @@ namespace Yuumix.OdinToolkits.Modules.Tools.SyntaxHighlighter.Editor
         [ShowInInspector]
         public static Color StringLiteralColor = new Color(0.839f, 0.616f, 0.522f, 1f);
 
-        public static Type 语法高亮处理器类型 = Type.GetType(
+        public static Type SyntaxHighlighterType = Type.GetType(
             "Sirenix.OdinInspector.Editor.Examples.SyntaxHighlighter," +
             "Sirenix.OdinInspector.Editor," +
             "Version=1.0.0.0," +
@@ -48,35 +49,44 @@ namespace Yuumix.OdinToolkits.Modules.Tools.SyntaxHighlighter.Editor
             "PublicKeyToken=null");
 
         public static readonly MethodInfo ParseMethod =
-            语法高亮处理器类型.GetMethod("Parse", BindingFlags.Static | BindingFlags.Public);
+            SyntaxHighlighterType.GetMethod("Parse", BindingFlags.Static | BindingFlags.Public);
 
+        [PropertyOrder(-5)]
         [DisplayAsString(TextAlignment.Left, FontSize = 14)]
         [HideLabel]
         public string one = "1. 需要处理的源代码中，不能包含有命名空间";
 
+        [PropertyOrder(-5)]
         [DisplayAsString(TextAlignment.Left, FontSize = 14)]
         [HideLabel]
         public string two = "2. 需要处理的源代码中，不能包含有 $ 内插字符串";
 
+        [HideInInspector]
         public List<CustomSyntaxHighlighterColorGroup> customColorGroups = new List<CustomSyntaxHighlighterColorGroup>();
 
         [PropertyOrder(-10)]
-        [Title("使用须知", "Odin 的语法高亮处理有一定局限性", TitleAlignments.Centered)]
+        [Title("使用须知", "Odin 的语法高亮处理有一定局限性，目前仅发现以下要点", TitleAlignments.Centered)]
         [OnInspectorGUI]
         private void OnGUI1() { }
 
+        /// <summary>
+        /// 使用富文本标记进行脚本语法高亮
+        /// </summary>
+        /// <param name="code">包含换行符的代码文本</param>
+        /// <returns>包含了富文本的代码文本</returns>
         public static string ApplyCodeHighlighting(string code)
         {
-            if (ParseMethod == null)
+            if (ParseMethod != null)
             {
-                Debug.LogError("无法获取 SyntaxHighlighter.Parse 方法");
-                return string.Empty;
+                return ParseMethod.Invoke(null, new object[] { code }) as string;
             }
 
-            return ParseMethod.Invoke(null, new object[] { code }) as string;
+            OdinEditorLog.Error("无法获取 SyntaxHighlighter.Parse 方法");
+            return string.Empty;
         }
 
-        [Button(ButtonSizes.Gigantic)]
+        [PropertySpace(10)]
+        [Button(ButtonSizes.Large)]
         public void 测试语法高亮()
         {
             const string code = @"
@@ -97,7 +107,7 @@ public class Example : ScriptableObject
     public List<int> ExampleList;
     public Dictionary<string, int> ExampleDictionary;       
 }";
-            Debug.Log(ApplyCodeHighlighting(code));
+            OdinEditorLog.Log(ApplyCodeHighlighting(code));
         }
     }
 }

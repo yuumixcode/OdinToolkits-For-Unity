@@ -9,8 +9,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
     public class DisableInExample : ExampleScriptableObject
     {
         private static string Path =>
-            ProjectEditorUtility
-                .GetTargetFolderPath("RuntimeExamples",
+            ProjectEditorUtility.Paths.GetTargetFolderPath("RuntimeExamples",
                     "OdinToolkits") + "/DisableIn";
 
         [DisplayAsString(fontSize: 12, overflow: false)]
@@ -28,7 +27,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [Button("跳转到 Example 文件夹", ButtonSizes.Large)]
         public void SelectionFolder()
         {
-            OdinLog.Log("DisableIn Runtime Example 文件夹路径为: " + Path);
+            OdinEditorLog.Log("DisableIn Runtime Example 文件夹路径为: " + Path);
             ProjectEditorUtility.PingAndSelectAsset(Path);
         }
     }

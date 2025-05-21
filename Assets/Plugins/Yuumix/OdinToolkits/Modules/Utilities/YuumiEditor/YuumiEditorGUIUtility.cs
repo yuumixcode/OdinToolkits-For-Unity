@@ -1,6 +1,8 @@
 ﻿using System;
-using UnityEditor;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor
 {
@@ -34,7 +36,7 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor
                     rect.height + distanceToBorder * 2),
                 Color.clear, outlineColor);
         }
-
+#endif
         /// <summary>
         /// 从一个 Rect 中获取一个内部 Rect
         /// </summary>
@@ -84,6 +86,5 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor
             finalRect.y += outerRect.y;
             return finalRect;
         }
-#endif
     }
 }

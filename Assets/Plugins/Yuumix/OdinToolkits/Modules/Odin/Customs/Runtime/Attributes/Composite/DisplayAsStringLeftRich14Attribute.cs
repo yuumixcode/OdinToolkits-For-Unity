@@ -4,43 +4,35 @@ using UnityEngine;
 
 namespace Yuumix.OdinToolkits.Modules.Odin.Customs.Runtime.Attributes.Composite
 {
- /// <summary>
- ///     由 [PropertySpace] [HideLabel] [ShowInInspector] [EnableGUI]
- ///     [DisplayAsString(false, TextAlignment.Left, EnableRichText = true, FontSize = 14)] 组合而成。
- /// </summary>
- [IncludeMyAttributes]
+    /// <summary>
+    ///     由 [PropertySpace] [HideLabel] [ShowInInspector] [EnableGUI]
+    ///     [DisplayAsString(false, TextAlignment.Left, EnableRichText = true, FontSize = 14)] 组合而成。
+    /// </summary>
+    [IncludeMyAttributes]
     [HideLabel]
     [ShowInInspector]
     [EnableGUI]
     [DisplayAsString(false, TextAlignment.Left, EnableRichText = true, FontSize = 14)]
-    public class DisplayAsStringAlignLeftRichText14Attribute : Attribute
-    {
-    }
+    public class DisplayAsStringLeftRich14Attribute : Attribute { }
 
     [IncludeMyAttributes]
     [HideLabel]
     [ShowInInspector]
     [EnableGUI]
     [DisplayAsString(false, TextAlignment.Left, EnableRichText = true, FontSize = 28)]
-    public class DisplayAsStringAlignLeftRichText28Attribute : Attribute
-    {
-    }
+    public class DisplayAsStringLeftRich28Attribute : Attribute { }
 
     [IncludeMyAttributes]
     [HideLabel]
     [ShowInInspector]
     [EnableGUI]
     [DisplayAsString(false, TextAlignment.Left, EnableRichText = true, FontSize = 36)]
-    public class DisplayAsStringAlignLeftRichText36Attribute : Attribute
-    {
-    }
+    public class DisplayAsStringLeftRich36Attribute : Attribute { }
 
     [IncludeMyAttributes]
     [HideLabel]
     [ShowInInspector]
     [EnableGUI]
     [DisplayAsString(false, TextAlignment.Left, EnableRichText = true, FontSize = 50)]
-    public class DisplayAsStringAlignLeftRichText50Attribute : Attribute
-    {
-    }
+    public class DisplayAsStringLeftRich50Attribute : Attribute { }
 }

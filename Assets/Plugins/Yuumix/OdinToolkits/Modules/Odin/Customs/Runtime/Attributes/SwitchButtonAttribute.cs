@@ -16,8 +16,8 @@ namespace Yuumix.OdinToolkits.Modules.Odin.Customs.Runtime.Attributes
         private const string DefaultSwitchColorOn = DefaultBackgroundColorOff;
         private const string DefaultSwitchColorOff = DefaultBackgroundColorOn;
         private const int DefaultSwitchWidth = 28;
-        public SwitchAlignment Alignment;
-        public bool Rounded;
+        public readonly SwitchAlignment Alignment;
+        public readonly bool Rounded;
         public string BackgroundColorOff;
         public string BackgroundColorOn;
         public string SwitchColorOff;

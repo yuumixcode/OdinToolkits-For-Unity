@@ -29,7 +29,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [Button("跳转到 Example 文件夹", ButtonSizes.Large)]
         public void SelectionFolder()
         {
-            OdinLog.Log("HideIn Runtime Example 文件夹路径为: " + Path);
+            OdinEditorLog.Log("HideIn Runtime Example 文件夹路径为: " + Path);
             ProjectEditorUtility.PingAndSelectAsset(Path);
         }
     }

@@ -3,7 +3,7 @@ using Debug = UnityEngine.Debug;
 
 namespace Yuumix.OdinToolkits.Common.Runtime
 {
-    public static class OdinLog
+    public static class OdinEditorLog
     {
         [Conditional("UNITY_EDITOR")]
         public static void Log(string message)

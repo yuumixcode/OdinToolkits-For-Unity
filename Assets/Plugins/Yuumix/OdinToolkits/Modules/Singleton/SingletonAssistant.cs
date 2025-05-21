@@ -11,7 +11,7 @@ namespace Yuumix.OdinToolkits.Modules.Singleton
     public sealed class SingletonAssistant<T> where T : class, ISingleton
     {
         // 使用Lazy<T>确保单例实例在第一次访问时且只在第一次访问时被创建。
-        private static readonly Lazy<T> Instance = new(SingletonCreator.AssistantCreateSingleton<T>());
+        private static readonly Lazy<T> Instance = new Lazy<T>(SingletonCreator.AssistantCreateSingleton<T>());
 
         // 私有构造函数，防止外部实例化。
         private SingletonAssistant()

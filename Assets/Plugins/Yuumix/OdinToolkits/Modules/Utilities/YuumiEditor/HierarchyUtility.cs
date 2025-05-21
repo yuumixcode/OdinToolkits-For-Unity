@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Search;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor.Search;
+#endif
 
 namespace Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor
 {
