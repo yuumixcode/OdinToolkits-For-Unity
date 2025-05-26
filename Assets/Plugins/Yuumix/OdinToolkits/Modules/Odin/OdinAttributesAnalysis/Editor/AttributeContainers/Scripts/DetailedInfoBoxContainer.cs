@@ -1,49 +1,40 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts;
 using Sirenix.OdinInspector.Editor;
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributeContainers.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributeContainers.Scripts
 {
     public class DetailedInfoBoxContainer : AbsContainer
     {
-        protected override string SetHeader()
-        {
-            return "DetailedInfoBox";
-        }
+        protected override string SetHeader() => "DetailedInfoBox";
 
-        protected override string SetBrief()
-        {
-            return "可以折叠的信息框";
-        }
+        protected override string SetBrief() => "可以折叠的信息框";
 
-        protected override List<string> SetTip()
-        {
-            return new List<string>
+        protected override List<string> SetTip() =>
+            new List<string>
             {
                 "可以作用于任何 Property，包括字段，属性，标记绘制的方法",
                 "和 InfoBox 类似，但是可以折叠，并分别设置显示的值"
             };
-        }
 
-        public override List<ResolvedParam> SetResolvedParams()
-        {
-            return new List<ResolvedParam>
+        public override List<ResolvedParam> SetResolvedParams() =>
+            new List<ResolvedParam>
             {
-                new()
+                new ResolvedParam
                 {
                     ParamName = "Message",
                     ReturnType = "string",
                     ResolverType = ResolverType.ValueResolver,
                     ParamValues = new List<ParamValue>
                     {
-                        new()
+                        new ParamValue
                         {
                             returnType = typeof(InspectorProperty).FullName,
                             paramName = "$property",
                             paramDescription = DescriptionConfigs.InspectorPropertyDesc
                         },
-                        new()
+                        new ParamValue
                         {
                             returnType = "T 泛型",
                             paramName = "$value",
@@ -51,20 +42,20 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
                         }
                     }
                 },
-                new()
+                new ResolvedParam
                 {
                     ParamName = "Details",
                     ReturnType = "string",
                     ResolverType = ResolverType.ValueResolver,
                     ParamValues = new List<ParamValue>
                     {
-                        new()
+                        new ParamValue
                         {
                             returnType = typeof(InspectorProperty).FullName,
                             paramName = "$property",
                             paramDescription = DescriptionConfigs.InspectorPropertyDesc
                         },
-                        new()
+                        new ParamValue
                         {
                             returnType = "T 泛型",
                             paramName = "$value",
@@ -72,20 +63,20 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
                         }
                     }
                 },
-                new()
+                new ResolvedParam
                 {
                     ParamName = "VisibleIf",
                     ReturnType = "bool",
                     ResolverType = ResolverType.ValueResolver,
                     ParamValues = new List<ParamValue>
                     {
-                        new()
+                        new ParamValue
                         {
                             returnType = typeof(InspectorProperty).FullName,
                             paramName = "$property",
                             paramDescription = DescriptionConfigs.InspectorPropertyDesc
                         },
-                        new()
+                        new ParamValue
                         {
                             returnType = "T 泛型",
                             paramName = "$value",
@@ -94,31 +85,29 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
                     }
                 }
             };
-        }
 
-        protected override List<ParamValue> SetParamValues()
-        {
-            return new List<ParamValue>
+        protected override List<ParamValue> SetParamValues() =>
+            new List<ParamValue>
             {
-                new()
+                new ParamValue
                 {
                     returnType = "string",
                     paramName = "message",
                     paramDescription = "折叠状态下显示的文本，" + DescriptionConfigs.SupportAllResolver
                 },
-                new()
+                new ParamValue
                 {
                     returnType = "string",
                     paramName = "details",
                     paramDescription = "展开状态下显示的完整文本，" + DescriptionConfigs.SupportAllResolver
                 },
-                new()
+                new ParamValue
                 {
                     returnType = "InfoMessageType",
                     paramName = "infoMessageType",
                     paramDescription = "消息的类型枚举，绘制一个图标在左侧，有 None，Info，Warning，Error"
                 },
-                new()
+                new ParamValue
                 {
                     returnType = "bool",
                     paramName = "visibleIf",
@@ -126,11 +115,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
                                        DescriptionConfigs.SupportAllResolver
                 }
             };
-        }
 
-        protected override string SetOriginalCode()
-        {
-            return ReadCodeWithoutNamespace(typeof(DetailedInfoBoxExample));
-        }
+        protected override string SetOriginalCode() => ReadCodeWithoutNamespace(typeof(DetailedInfoBoxExample));
     }
 }

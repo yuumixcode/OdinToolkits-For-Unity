@@ -1,7 +1,7 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class ToggleGroupExample : ExampleScriptableObject
@@ -9,9 +9,11 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [ToggleGroup(nameof(toggle1), "toggleMemberName 参数")]
         public bool toggle1;
 
-        [ToggleGroup(nameof(toggle1))] public int toggleGroup1;
+        [ToggleGroup(nameof(toggle1))]
+        public int toggleGroup1;
 
-        [ToggleGroup(nameof(toggle1))] public int toggleGroup2;
+        [ToggleGroup(nameof(toggle1))]
+        public int toggleGroup2;
 
         [FoldoutGroup("order", GroupName = "order 参数")]
         [ToggleGroup("order/" + nameof(toggle2), groupTitle: "order 参数", order: 10)]
@@ -29,6 +31,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [ToggleGroup(nameof(toggle4), "CollapseOthersOnExpand 参数", CollapseOthersOnExpand = true)]
         public bool toggle4;
 
-        [ToggleGroup(nameof(toggle4))] public int toggleGroup5;
+        [ToggleGroup(nameof(toggle4))]
+        public int toggleGroup5;
     }
 }

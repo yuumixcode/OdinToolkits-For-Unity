@@ -5,8 +5,8 @@ using UnityEngine;
 namespace Yuumix.OdinToolkits.Modules.Odin.Customs.Runtime.Attributes.Composite
 {
     /// <summary>
-    ///     由 [PropertySpace] [HideLabel] [ShowInInspector] [EnableGUI]
-    ///     [DisplayAsString(false, TextAlignment.Left, EnableRichText = true, FontSize = 14)] 组合而成。
+    /// 由 [PropertySpace] [HideLabel] [ShowInInspector] [EnableGUI]
+    /// [DisplayAsString(false, TextAlignment.Left, EnableRichText = true, FontSize = 14)] 组合而成。
     /// </summary>
     [IncludeMyAttributes]
     [HideLabel]

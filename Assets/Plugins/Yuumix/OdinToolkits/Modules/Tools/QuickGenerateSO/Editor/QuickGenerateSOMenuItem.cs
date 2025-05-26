@@ -6,10 +6,10 @@ namespace Yuumix.OdinToolkits.Modules.Tools.QuickGenerateSO.Editor
 {
     public static class QuickGenerateSOMenuItem
     {
-        private const string MenuName = "Assets/Create SO Asset From Selected";
+        const string MenuName = "Assets/Create SO Asset From Selected";
 
         [MenuItem(MenuName, true)]
-        private static bool CanCreateScriptableObjectFromSelected()
+        static bool CanCreateScriptableObjectFromSelected()
         {
             var selectedObject = Selection.activeObject;
             if (selectedObject == null)
@@ -41,7 +41,7 @@ namespace Yuumix.OdinToolkits.Modules.Tools.QuickGenerateSO.Editor
         }
 
         [MenuItem(MenuName)]
-        private static void CreateScriptableObjectFromSelected()
+        static void CreateScriptableObjectFromSelected()
         {
             if (Selection.objects.Length == 1)
             {
@@ -53,7 +53,7 @@ namespace Yuumix.OdinToolkits.Modules.Tools.QuickGenerateSO.Editor
             }
         }
 
-        private static void SingleSelectCreateSO()
+        static void SingleSelectCreateSO()
         {
             if (Selection.activeObject is not MonoScript script)
             {
@@ -65,7 +65,7 @@ namespace Yuumix.OdinToolkits.Modules.Tools.QuickGenerateSO.Editor
             Selection.activeObject = instance;
         }
 
-        private static void MultiSelectCreateSO()
+        static void MultiSelectCreateSO()
         {
             foreach (var guid in Selection.assetGUIDs)
             {

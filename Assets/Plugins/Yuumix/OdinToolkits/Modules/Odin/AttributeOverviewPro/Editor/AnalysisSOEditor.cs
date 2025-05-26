@@ -7,7 +7,7 @@ namespace Yuumix.OdinToolkits.Modules.Odin.AttributeOverviewPro.Editor
     [CustomEditor(typeof(AnalysisSO), true)]
     public class AnalysisSOEditor : OdinEditor
     {
-        private AnalysisSO _analysisSO;
+        AnalysisSO _analysisSO;
 
         protected override void OnEnable()
         {

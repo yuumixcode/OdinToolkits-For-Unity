@@ -1,11 +1,11 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using Sirenix.Utilities;
 using System;
 using UnityEngine;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class PolymorphicDrawerSettingsExample : ExampleOdinScriptableObject
@@ -14,7 +14,8 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [PolymorphicDrawerSettings(CreateInstanceFunction = nameof(CreateExampleInstance))]
         public IVector2<int> CreateCustomInstance;
 
-        [FoldoutGroup("Odin 默认的多态样式，不参与序列化")] public IDemo<int> Default;
+        [FoldoutGroup("Odin 默认的多态样式，不参与序列化")]
+        public IDemo<int> Default;
 
         [FoldoutGroup("NonDefaultConstructorPreference")]
         [LabelText("Construct Ideal")]
@@ -47,17 +48,24 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [PolymorphicDrawerSettings(ReadOnlyIfNotNullReference = true)]
         public IDemo<int> ReadOnlyIfNotNullReference_On;
 
-        [FoldoutGroup("ShowBaseType")] [LabelText("Off")] [PolymorphicDrawerSettings(ShowBaseType = false)]
+        [FoldoutGroup("ShowBaseType")]
+        [LabelText("Off")]
+        [PolymorphicDrawerSettings(ShowBaseType = false)]
         public IDemo<int> ShowBaseType_Off;
 
-        [FoldoutGroup("ShowBaseType")] [LabelText("On")] [PolymorphicDrawerSettings(ShowBaseType = true)]
+        [FoldoutGroup("ShowBaseType")]
+        [LabelText("On")]
+        [PolymorphicDrawerSettings(ShowBaseType = true)]
         public IDemo<int> ShowBaseType_On;
 
-        private IVector2<int> CreateExampleInstance(Type type)
+        IVector2<int> CreateExampleInstance(Type type)
         {
             Debug.Log("Constructor called for " + type + '.');
 
-            if (typeof(SomeNonDefaultCtorClass) == type) return new SomeNonDefaultCtorClass(485);
+            if (typeof(SomeNonDefaultCtorClass) == type)
+            {
+                return new SomeNonDefaultCtorClass(485);
+            }
 
             return type.InstantiateDefault(false) as IVector2<int>;
         }
@@ -120,9 +128,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
             [OdinSerialize] public int Value { get; set; }
         }
 
-        public class DemoInt32 : Demo<int>
-        {
-        }
+        public class DemoInt32 : Demo<int> { }
 
         public struct DemoStructInt32 : IDemo<int>
         {

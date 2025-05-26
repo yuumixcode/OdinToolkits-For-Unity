@@ -2,17 +2,10 @@ using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
 
-namespace Yuumix.OdinToolkits.Common.Editor.Locator
+namespace Yuumix.OdinToolkits.Common.Runtime.Locator
 {
     public sealed class OdinToolkitsLookup : ScriptableObject
     {
-        [IncludeMyAttributes]
-        [PropertySpace(10)]
-        [HideLabel]
-        [ShowInInspector]
-        [EnableGUI]
-        public class TempComposite : Attribute { }
-
         [DisplayAsString(FontSize = 22, Overflow = false)]
         [TempComposite]
         public string WarningCn1
@@ -33,5 +26,12 @@ namespace Yuumix.OdinToolkits.Common.Editor.Locator
         public string WarningEn2
             => "This resource file is used to locate the path of the OdinToolkits folder to prevent errors " +
                "when moving the OdinToolkits folder as a whole.";
+
+        [IncludeMyAttributes]
+        [PropertySpace(10)]
+        [HideLabel]
+        [ShowInInspector]
+        [EnableGUI]
+        public class TempComposite : Attribute { }
     }
 }

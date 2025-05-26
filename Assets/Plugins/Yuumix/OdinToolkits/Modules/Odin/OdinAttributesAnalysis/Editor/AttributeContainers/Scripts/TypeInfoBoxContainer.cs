@@ -1,45 +1,32 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts;
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributeContainers.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributeContainers.Scripts
 {
     public class TypeInfoBoxContainer : AbsContainer
     {
-        protected override string SetHeader()
-        {
-            return "TypeInfoBox";
-        }
+        protected override string SetHeader() => "TypeInfoBox";
 
-        protected override string SetBrief()
-        {
-            return "在类的内部的最上方绘制一个 InfoBox";
-        }
+        protected override string SetBrief() => "在类的内部的最上方绘制一个 InfoBox";
 
-        protected override List<string> SetTip()
-        {
-            return new List<string>
+        protected override List<string> SetTip() =>
+            new List<string>
             {
                 "快速绘制一个顶部的 InfoBox，不需要使用 PropertyOrder 和 OnInspectorGUI 特性"
             };
-        }
 
-        protected override List<ParamValue> SetParamValues()
-        {
-            return new List<ParamValue>
+        protected override List<ParamValue> SetParamValues() =>
+            new List<ParamValue>
             {
-                new()
+                new ParamValue
                 {
                     returnType = "string",
                     paramName = "message",
                     paramDescription = "顶部 InfoBox 的消息内容"
                 }
             };
-        }
 
-        protected override string SetOriginalCode()
-        {
-            return ReadCodeWithoutNamespace(typeof(TypeInfoBoxExample));
-        }
+        protected override string SetOriginalCode() => ReadCodeWithoutNamespace(typeof(TypeInfoBoxExample));
     }
 }

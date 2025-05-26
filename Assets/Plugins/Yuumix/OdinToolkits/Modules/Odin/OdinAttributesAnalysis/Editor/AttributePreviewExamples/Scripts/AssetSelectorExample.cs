@@ -1,18 +1,20 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class AssetSelectorExample : ExampleScriptableObject
     {
-        [FoldoutGroup("无参数使用")] [AssetSelector]
+        [FoldoutGroup("无参数使用")]
+        [AssetSelector]
         public ExampleScriptableObject example;
 
-        [FoldoutGroup("FlattenTreeView")] [AssetSelector(FlattenTreeView = true)]
+        [FoldoutGroup("FlattenTreeView")]
+        [AssetSelector(FlattenTreeView = true)]
         public ExampleScriptableObject example2;
 
         [FoldoutGroup("Path")]
@@ -20,19 +22,24 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [AssetSelector(Paths = "Assets/Plugins/OdinToolkits/ChineseManual/ChineseAttributesOverview/RuntimeExamples")]
         public GameObject gameObject;
 
-        [FoldoutGroup("IsUniqueList == false")] [AssetSelector(IsUniqueList = false)]
+        [FoldoutGroup("IsUniqueList == false")]
+        [AssetSelector(IsUniqueList = false)]
         public List<GameObject> gameObjects;
 
-        [FoldoutGroup("DrawDropdownForListElements == false")] [AssetSelector(DrawDropdownForListElements = false)]
+        [FoldoutGroup("DrawDropdownForListElements == false")]
+        [AssetSelector(DrawDropdownForListElements = false)]
         public List<GameObject> gameObjects2;
 
-        [FoldoutGroup("DisableListAddButtonBehaviour == true")] [AssetSelector(DisableListAddButtonBehaviour = true)]
+        [FoldoutGroup("DisableListAddButtonBehaviour == true")]
+        [AssetSelector(DisableListAddButtonBehaviour = true)]
         public List<GameObject> gameObjects3;
 
-        [FoldoutGroup("ExcludeExistingValuesInList == true")] [AssetSelector(ExcludeExistingValuesInList = true)]
+        [FoldoutGroup("ExcludeExistingValuesInList == true")]
+        [AssetSelector(ExcludeExistingValuesInList = true)]
         public List<GameObject> gameObjects4;
 
-        [FoldoutGroup("ExpandAllMenuItems == false")] [AssetSelector(ExpandAllMenuItems = false)]
+        [FoldoutGroup("ExpandAllMenuItems == false")]
+        [AssetSelector(ExpandAllMenuItems = false)]
         public List<GameObject> gameObjects5;
 
         [FoldoutGroup("DropdownSettings")]
@@ -57,7 +64,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [FoldoutGroup("AssetDatabase")]
         [TitleGroup("AssetDatabase/Button")]
         [Button("跳转到 AssetDatabase.FindAssets 文档", ButtonSizes.Large)]
-        private void Browse()
+        void Browse()
         {
             Help.BrowseURL(
                 "https://docs.unity3d.com/6000.0/Documentation/ScriptReference/AssetDatabase.FindAssets.html");

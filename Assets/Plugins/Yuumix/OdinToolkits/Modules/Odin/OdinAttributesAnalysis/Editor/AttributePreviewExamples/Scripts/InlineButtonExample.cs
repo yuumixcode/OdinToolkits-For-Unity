@@ -1,15 +1,18 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class InlineButtonExample : ExampleScriptableObject
     {
         #region Example
 
-        [PropertyOrder(1)] [FoldoutGroup("InlineButton 基础使用")] [InfoBox("第一个参数是方法名，会自动生成按钮")] [InlineButton("A")]
+        [PropertyOrder(1)]
+        [FoldoutGroup("InlineButton 基础使用")]
+        [InfoBox("第一个参数是方法名，会自动生成按钮")]
+        [InlineButton("A")]
         public int inlineButton;
 
         [PropertyOrder(10)]
@@ -25,7 +28,8 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [InlineButton("C", SdfIconType.Dice6Fill, "Random")]
         public int iconButton;
 
-        [PropertyOrder(30)] [FoldoutGroup("InlineButton 进阶使用")]
+        [PropertyOrder(30)]
+        [FoldoutGroup("InlineButton 进阶使用")]
         public bool showIf;
 
         [PropertyOrder(40)]
@@ -34,10 +38,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [InlineButton("C", SdfIconType.Apple, "Show", ShowIf = "ShowIf")]
         public int showIfButton;
 
-        public bool ShowIf()
-        {
-            return showIf;
-        }
+        public bool ShowIf() => showIf;
 
         [PropertyOrder(50)]
         [FoldoutGroup("InlineButton 进阶使用")]
@@ -46,17 +47,17 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
             TextColor = "darkcyan")]
         public int colorButton;
 
-        private void A()
+        void A()
         {
             Debug.Log("A");
         }
 
-        private void B()
+        void B()
         {
             Debug.Log("B");
         }
 
-        private void C()
+        void C()
         {
             Debug.Log("C");
         }

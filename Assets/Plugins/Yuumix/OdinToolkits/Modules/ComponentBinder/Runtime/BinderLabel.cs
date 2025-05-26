@@ -20,7 +20,7 @@ namespace Yuumix.OdinToolkits.Modules.ComponentBinder.Runtime
     {
         [SerializeField]
         [HideInInspector]
-        private int componentNumber;
+        int componentNumber;
 
         [ShowInInspector]
         [LabelText("绑定组件数量: ")]
@@ -31,7 +31,7 @@ namespace Yuumix.OdinToolkits.Modules.ComponentBinder.Runtime
             set => componentNumber = value;
         }
 
-        private double MaxComponentNumber() => Types.Count();
+        double MaxComponentNumber() => Types.Count();
 
         public GameObject SelfObj => gameObject;
 

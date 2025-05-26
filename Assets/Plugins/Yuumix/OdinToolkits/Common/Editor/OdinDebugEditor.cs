@@ -1,4 +1,4 @@
-﻿ using Sirenix.OdinInspector.Editor;
+﻿using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
@@ -27,18 +27,26 @@ namespace Yuumix.OdinToolkits.Common.Editor
         public static void DoPropertyLabel(string name, string text, bool border = false)
         {
             EditorGUILayout.SelectableLabel(name + ": " + text, GUILayoutOptions.Height(20));
-            if (border) SirenixEditorGUI.DrawBorders(GUILayoutUtility.GetLastRect(), 1, Color.green);
+            if (border)
+            {
+                SirenixEditorGUI.DrawBorders(GUILayoutUtility.GetLastRect(), 1, Color.green);
+            }
         }
 
         public static void DoAttributes(InspectorProperty property, bool border = false)
         {
             var rect = SirenixEditorGUI.BeginLegendBox(GUIHelper.TempContent(property.Label.text + " 特性列表"));
             for (var i = 0; i < property.Attributes.Count; i++)
+            {
                 EditorGUILayout.SelectableLabel(i + ": " + property.Attributes[i].GetType().Name,
                     GUILayoutOptions.Height(20));
+            }
 
             SirenixEditorGUI.EndLegendBox();
-            if (border) SirenixEditorGUI.DrawBorders(rect.Padding(-1), 1, Color.green);
+            if (border)
+            {
+                SirenixEditorGUI.DrawBorders(rect.Padding(-1), 1, Color.green);
+            }
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Yuumix.OdinToolkits.Modules.Singleton
         /// <summary>
         /// 单例实例的静态存储字段。
         /// </summary>
-        private static T _instance;
+        static T _instance;
 
         /// <summary>
         /// 单例的访问器，确保全局唯一实例的获取。
@@ -88,17 +88,12 @@ namespace Yuumix.OdinToolkits.Modules.Singleton
         /// 重写该方法以设置自定义名称。
         /// </summary>
         /// <returns>返回设置的自定义名称，如果不需要则返回空字符串。</returns>
-        protected virtual string SetCustomName()
-        {
-            return string.Empty;
-        }
+        protected virtual string SetCustomName() => string.Empty;
 
         /// <summary>
         /// Awake 函数最后调用的方法，可用于添加自定义行为。
         /// </summary>
-        protected virtual void CustomBehaviour()
-        {
-        }
+        protected virtual void CustomBehaviour() { }
 
         /// <summary>
         /// 强制创建新的实例的方法，可用于销毁当前实例并生成新的实例。

@@ -7,7 +7,7 @@ namespace Yuumix.OdinToolkits.Common.Editor
 {
     public class OdinMenuEditorWindowStyleExample : OdinMenuEditorWindow
     {
-        private static void ShowWindow()
+        static void ShowWindow()
         {
             var window = GetWindow<OdinMenuEditorWindowStyleExample>();
             window.titleContent = new GUIContent("#CLASSNAME#");
@@ -42,10 +42,10 @@ namespace Yuumix.OdinToolkits.Common.Editor
         }
 
         /// <summary>
-        ///     可以自定义菜单样式
+        /// 可以自定义菜单样式
         /// </summary>
         /// <returns></returns>
-        private static OdinMenuStyle CustomMenuStyle()
+        static OdinMenuStyle CustomMenuStyle()
         {
             // OdinMenuStyle Default Properties
             var customMenuStyle = new OdinMenuStyle
@@ -82,9 +82,9 @@ namespace Yuumix.OdinToolkits.Common.Editor
         }
 
         /// <summary>
-        ///     和 UnityProjectWindow 比较相似的 OdinMenuStyle 样式
+        /// 和 UnityProjectWindow 比较相似的 OdinMenuStyle 样式
         /// </summary>
-        private static OdinMenuStyle UnityTreeViewStyle()
+        static OdinMenuStyle UnityTreeViewStyle()
         {
             var customMenuStyle = new OdinMenuStyle
             {

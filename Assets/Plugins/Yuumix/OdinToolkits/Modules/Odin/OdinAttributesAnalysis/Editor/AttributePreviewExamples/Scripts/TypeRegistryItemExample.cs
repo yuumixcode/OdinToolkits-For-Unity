@@ -1,17 +1,20 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class TypeRegistryItemExample : ExampleScriptableObject
     {
-        private const string CATEGORY_PATH = "Sirenix.TypeSelector.Demo";
-        private const string BASE_ITEM_NAME = "Painting Tools";
-        private const string PATH = CATEGORY_PATH + "/" + BASE_ITEM_NAME;
+        const string CATEGORY_PATH = "Sirenix.TypeSelector.Demo";
+        const string BASE_ITEM_NAME = "Painting Tools";
+        const string PATH = CATEGORY_PATH + "/" + BASE_ITEM_NAME;
 
-        [FoldoutGroup("默认样式")] [ShowInInspector] [InfoBox("此时并没有序列化")] [PolymorphicDrawerSettings(ShowBaseType = true)]
+        [FoldoutGroup("默认样式")]
+        [ShowInInspector]
+        [InfoBox("此时并没有序列化")]
+        [PolymorphicDrawerSettings(ShowBaseType = true)]
         public BasicClass BasicItem;
 
         [FoldoutGroup("使用 TypeRegistryItem 特性自定义样式")]
@@ -22,9 +25,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
 
         #region 声明定义
 
-        public abstract class BasicClass
-        {
-        }
+        public abstract class BasicClass { }
 
         public class MyClassA : BasicClass
         {
@@ -43,9 +44,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
 
         [TypeRegistryItem(Name = BASE_ITEM_NAME, Icon = SdfIconType.Tools, CategoryPath = CATEGORY_PATH,
             Priority = int.MinValue)]
-        public abstract class Base
-        {
-        }
+        public abstract class Base { }
 
         [TypeRegistryItem(darkIconColorR: 0.8f, darkIconColorG: 0.3f,
             lightIconColorR: 0.3f, lightIconColorG: 0.1f,
@@ -72,10 +71,8 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         {
             public ColorPaletteItem[] Colors =
             {
-                new(Color.blue, 0.8f),
-                new(Color.red, 0.5f),
-                new(Color.green, 1.0f),
-                new(Color.white, 0.6f)
+                new ColorPaletteItem(Color.blue, 0.8f), new ColorPaletteItem(Color.red, 0.5f),
+                new ColorPaletteItem(Color.green, 1.0f), new ColorPaletteItem(Color.white, 0.6f)
             };
         }
 

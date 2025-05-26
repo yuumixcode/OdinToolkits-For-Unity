@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor
 {
     public enum ResolverType
     {
@@ -13,7 +13,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
 
     public class ResolvedParam
     {
-        private GUIStyle _tableCellTextStyle;
+        GUIStyle _tableCellTextStyle;
         public string ParamName;
         public List<ParamValue> ParamValues;
         public ResolverType ResolverType;
@@ -54,7 +54,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
             return guiTable;
         }
 
-        private void DrawTableCell(Rect rect, string text, GUIStyle style = null)
+        void DrawTableCell(Rect rect, string text, GUIStyle style = null)
         {
             EditorGUI.LabelField(rect, text, style ?? _tableCellTextStyle);
         }

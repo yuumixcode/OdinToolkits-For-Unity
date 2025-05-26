@@ -1,15 +1,15 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class OnInspectorGUIExample : ExampleScriptableObject
     {
         [OnInspectorInit("@texture = Sirenix.Utilities.Editor.EditorIcons.OdinInspectorLogo")]
-        [OnInspectorGUI("DrawPreview", true)]
+        [OnInspectorGUI("DrawPreview")]
         public Texture2D texture;
 
         [PropertySpace(30)]
@@ -17,9 +17,12 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [OnInspectorGUI(nameof(DrawPreview), nameof(DrawPreview))]
         public Texture2D texture2D;
 
-        private void DrawPreview()
+        void DrawPreview()
         {
-            if (texture == null) return;
+            if (texture == null)
+            {
+                return;
+            }
 
             GUILayout.BeginVertical(GUI.skin.box);
             GUILayout.Label(texture);
@@ -27,7 +30,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         }
 
         [OnInspectorGUI]
-        private void OnInspectorGUI()
+        void OnInspectorGUI()
         {
             EditorGUILayout.HelpBox("OnInspectorGUI 能够使用在方法也可以使用在字段",
                 MessageType.Info);

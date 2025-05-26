@@ -1,40 +1,56 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
 using Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor;
+#endif
 
-namespace Yuumix.OdinToolkits.Common.Editor.Locator
+namespace Yuumix.OdinToolkits.Common.Runtime.Locator
 {
     public static class OdinToolkitsPaths
     {
-        [Tooltip("根节点文件夹名称")]
-        private const string RootFolderName = "OdinToolkits";
+        const string RootFolderName = "OdinToolkits";
+        const string OdinToolkitsRootPathKey = "OdinToolkitsRootPath";
 
         /// <summary>
         /// OdinToolkits 相对路径，"Assets/.../OdinToolkits"
         /// </summary>
-        private static string _odinToolkitsFolderPath;
+        static string _odinToolkitsFolderPath;
 
-        private static string _markerSOPath;
+        static string _markerSOPath;
 
         static OdinToolkitsPaths()
         {
+#if UNITY_EDITOR
             SetFolderPath();
             EditorApplication.projectChanged -= SetFolderPath;
             EditorApplication.projectChanged += SetFolderPath;
+#endif
         }
 
         public static string GetRootPath()
         {
-            SetFolderPath();
-            return _odinToolkitsFolderPath;
-        }
+            var path = PlayerPrefs.GetString(OdinToolkitsRootPathKey);
+#if UNITY_EDITOR
+            if (AssetDatabase.IsValidFolder(path))
+            {
+                return path;
+            }
 
-        private static void SetFolderPath()
+            SetFolderPath();
+            path = PlayerPrefs.GetString(OdinToolkitsRootPathKey);
+#endif
+            return path;
+        }
+#if UNITY_EDITOR
+        static void SetFolderPath()
         {
             _markerSOPath = ProjectEditorUtility.SO.GetScriptableObjectAssetPath<OdinToolkitsLookup>();
             // Debug.Log("MarkerSOPath:" + _markerSOPath);
             _odinToolkitsFolderPath = ProjectEditorUtility.Paths.GetSubPathByEndsWith(_markerSOPath, RootFolderName);
             // Debug.Log("FolderPath:" + _odinToolkitsFolderPath);
+            PlayerPrefs.SetString(OdinToolkitsRootPathKey, _odinToolkitsFolderPath);
+            PlayerPrefs.Save();
         }
+#endif
     }
 }

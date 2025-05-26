@@ -7,16 +7,18 @@ using System.Linq;
 using UnityEditor;
 using Yuumix.OdinToolkits.Common.Runtime;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor
 {
     public abstract class AbsContainer : SerializedScriptableObject
     {
-        private static DateTime _lastUpdate = new(2022, 2, 1);
+        static DateTime _lastUpdate = new DateTime(2022, 2, 1);
 
-        [HideIf("HasOdinExample")] [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
+        [HideIf("HasOdinExample")]
+        [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
         public ExampleScriptableObject example;
 
-        [HideIf("HasExample")] [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
+        [HideIf("HasExample")]
+        [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
         public ExampleOdinScriptableObject exampleOdin;
 
         public List<ResolvedParam> ResolvedParams => SetResolvedParams();
@@ -33,20 +35,11 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
 
         public DateTime LastUpdate => SetLastUpdateTime();
 
-        public virtual List<ResolvedParam> SetResolvedParams()
-        {
-            return new List<ResolvedParam>();
-        }
+        public virtual List<ResolvedParam> SetResolvedParams() => new List<ResolvedParam>();
 
-        protected virtual DateTime SetLastUpdateTime()
-        {
-            return _lastUpdate;
-        }
+        protected virtual DateTime SetLastUpdateTime() => _lastUpdate;
 
-        protected virtual List<ParamValue> SetParamValues()
-        {
-            return new List<ParamValue>();
-        }
+        protected virtual List<ParamValue> SetParamValues() => new List<ParamValue>();
 
         protected abstract string SetHeader();
         protected abstract string SetBrief();
@@ -54,15 +47,9 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
 
         protected abstract string SetOriginalCode();
 
-        private bool HasExample()
-        {
-            return example != null && exampleOdin == null;
-        }
+        bool HasExample() => example != null && exampleOdin == null;
 
-        private bool HasOdinExample()
-        {
-            return exampleOdin != null && example == null;
-        }
+        bool HasOdinExample() => exampleOdin != null && example == null;
 
         protected static string ReadCodeWithoutNamespace(Type exampleType)
         {
@@ -108,11 +95,16 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
 
                         if (line.TrimStart()
                             .StartsWith("[IsChineseAttributeExample]"))
+                        {
                             continue;
+                        }
 
                         if (isInNamespace)
                         {
-                            if (line.StartsWith("{")) continue;
+                            if (line.StartsWith("{"))
+                            {
+                                continue;
+                            }
 
                             if (line.StartsWith("}"))
                             {
@@ -121,9 +113,13 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
                             }
 
                             if (line.Length > 4)
+                            {
                                 final.Add(line[4..]);
+                            }
                             else
+                            {
                                 final.Add(line);
+                            }
                         }
                         else
                         {

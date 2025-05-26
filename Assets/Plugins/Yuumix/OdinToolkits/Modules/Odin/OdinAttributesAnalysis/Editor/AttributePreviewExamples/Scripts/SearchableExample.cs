@@ -1,11 +1,11 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor.Examples;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     [Searchable]
@@ -40,16 +40,16 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [TabGroup("SearchableGroup", "Searchable 普通参数", TextColor = "lightpurple")]
         [Title("默认不特殊设置参数", "默认开启模糊搜索，开启递归搜索，筛选条件为 All")]
         [Searchable]
-        public List<Perk> perks = new()
+        public List<Perk> perks = new List<Perk>
         {
             new Perk
             {
                 Name = "Old Sage",
                 effects = new List<Effect>
                 {
-                    new() { Skill = Skill.Wisdom, Value = 2 },
-                    new() { Skill = Skill.Intelligence, Value = 1 },
-                    new() { Skill = Skill.Strength, Value = -2 }
+                    new Effect { Skill = Skill.Wisdom, Value = 2 },
+                    new Effect { Skill = Skill.Intelligence, Value = 1 },
+                    new Effect { Skill = Skill.Strength, Value = -2 }
                 }
             },
             new Perk
@@ -57,9 +57,9 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
                 Name = "Hardened Criminal",
                 effects = new List<Effect>
                 {
-                    new() { Skill = Skill.Dexterity, Value = 2 },
-                    new() { Skill = Skill.Strength, Value = 1 },
-                    new() { Skill = Skill.Charisma, Value = -2 }
+                    new Effect { Skill = Skill.Dexterity, Value = 2 },
+                    new Effect { Skill = Skill.Strength, Value = 1 },
+                    new Effect { Skill = Skill.Charisma, Value = -2 }
                 }
             },
             new Perk
@@ -67,8 +67,8 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
                 Name = "Born Leader",
                 effects = new List<Effect>
                 {
-                    new() { Skill = Skill.Charisma, Value = 2 },
-                    new() { Skill = Skill.Intelligence, Value = -3 }
+                    new Effect { Skill = Skill.Charisma, Value = 2 },
+                    new Effect { Skill = Skill.Intelligence, Value = -3 }
                 }
             },
             new Perk
@@ -76,10 +76,10 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
                 Name = "Village Idiot",
                 effects = new List<Effect>
                 {
-                    new() { Skill = Skill.Charisma, Value = 4 },
-                    new() { Skill = Skill.Constitution, Value = 2 },
-                    new() { Skill = Skill.Intelligence, Value = -3 },
-                    new() { Skill = Skill.Wisdom, Value = -3 }
+                    new Effect { Skill = Skill.Charisma, Value = 4 },
+                    new Effect { Skill = Skill.Constitution, Value = 2 },
+                    new Effect { Skill = Skill.Intelligence, Value = -3 },
+                    new Effect { Skill = Skill.Wisdom, Value = -3 }
                 }
             }
         };
@@ -87,15 +87,15 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [TabGroup("SearchableGroup", "Searchable 普通参数")]
         [Title("FuzzySearch 参数，关闭模糊搜索，大小写必须准确", "Old Sage 可以成功匹配，但是 old 无法匹配")]
         [Searchable(FuzzySearch = false)]
-        public List<Perk> perks2 = new()
+        public List<Perk> perks2 = new List<Perk>
         {
             new Perk
             {
                 Name = "Old Sage",
                 effects = new List<Effect>
                 {
-                    new() { Skill = Skill.Wisdom, Value = 2 },
-                    new() { Skill = Skill.Intelligence, Value = 1 }
+                    new Effect { Skill = Skill.Wisdom, Value = 2 },
+                    new Effect { Skill = Skill.Intelligence, Value = 1 }
                 }
             }
         };
@@ -103,14 +103,14 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [TabGroup("SearchableGroup", "Searchable 普通参数")]
         [Title("Recursive 参数，取消递归搜索", "可以搜索 Perk 类中的字段 Name -> Old Sage，但是无法递归搜索 Effects 中的 Wisdom")]
         [Searchable(Recursive = false)]
-        public List<Perk> perks3 = new()
+        public List<Perk> perks3 = new List<Perk>
         {
             new Perk
             {
                 Name = "Old Sage",
                 effects = new List<Effect>
                 {
-                    new() { Skill = Skill.Wisdom, Value = 2 }
+                    new Effect { Skill = Skill.Wisdom, Value = 2 }
                 }
             }
         };
@@ -120,7 +120,8 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         {
             public string Name;
 
-            [TableList] public List<Effect> effects;
+            [TableList]
+            public List<Effect> effects;
         }
 
         [Serializable]
@@ -147,15 +148,15 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [TabGroup("SearchableGroup", "Searchable 枚举参数", TextColor = "orange")]
         [Title("FilterOptions = SearchFilterOptions.PropertyName", "筛选 Name，effects 这样的字段名，通常用于类搜索字段，列表中的元素都是一样的")]
         [Searchable(FilterOptions = SearchFilterOptions.PropertyName)]
-        public List<Perk> perks5 = new()
+        public List<Perk> perks5 = new List<Perk>
         {
             new Perk
             {
                 Name = "Old Sage",
                 effects = new List<Effect>
                 {
-                    new() { Skill = Skill.Wisdom, Value = 2 },
-                    new() { Skill = Skill.Intelligence, Value = 1 }
+                    new Effect { Skill = Skill.Wisdom, Value = 2 },
+                    new Effect { Skill = Skill.Intelligence, Value = 1 }
                 }
             },
             new Perk
@@ -163,8 +164,8 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
                 Name = "Hardened Criminal",
                 effects = new List<Effect>
                 {
-                    new() { Skill = Skill.Dexterity, Value = 2 },
-                    new() { Skill = Skill.Charisma, Value = -2 }
+                    new Effect { Skill = Skill.Dexterity, Value = 2 },
+                    new Effect { Skill = Skill.Charisma, Value = -2 }
                 }
             },
             new Perk
@@ -172,8 +173,8 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
                 Name = "Born Leader",
                 effects = new List<Effect>
                 {
-                    new() { Skill = Skill.Charisma, Value = 2 },
-                    new() { Skill = Skill.Intelligence, Value = -3 }
+                    new Effect { Skill = Skill.Charisma, Value = 2 },
+                    new Effect { Skill = Skill.Intelligence, Value = -3 }
                 }
             }
         };
@@ -182,15 +183,15 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [Title("FilterOptions = SearchFilterOptions.PropertyNiceName",
             "筛选 Name，Effects 的 NiceName 字段名，通常用于类搜索字段，列表中的元素都是一样的")]
         [Searchable(FilterOptions = SearchFilterOptions.PropertyNiceName)]
-        public List<Perk> perks6 = new()
+        public List<Perk> perks6 = new List<Perk>
         {
             new Perk
             {
                 Name = "Old Sage",
                 effects = new List<Effect>
                 {
-                    new() { Skill = Skill.Wisdom, Value = 2 },
-                    new() { Skill = Skill.Intelligence, Value = 1 }
+                    new Effect { Skill = Skill.Wisdom, Value = 2 },
+                    new Effect { Skill = Skill.Intelligence, Value = 1 }
                 }
             },
             new Perk
@@ -198,8 +199,8 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
                 Name = "Hardened Criminal",
                 effects = new List<Effect>
                 {
-                    new() { Skill = Skill.Dexterity, Value = 2 },
-                    new() { Skill = Skill.Charisma, Value = -2 }
+                    new Effect { Skill = Skill.Dexterity, Value = 2 },
+                    new Effect { Skill = Skill.Charisma, Value = -2 }
                 }
             },
             new Perk
@@ -207,8 +208,8 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
                 Name = "Born Leader",
                 effects = new List<Effect>
                 {
-                    new() { Skill = Skill.Charisma, Value = 2 },
-                    new() { Skill = Skill.Intelligence, Value = -3 }
+                    new Effect { Skill = Skill.Charisma, Value = 2 },
+                    new Effect { Skill = Skill.Intelligence, Value = -3 }
                 }
             }
         };
@@ -216,15 +217,15 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [TabGroup("SearchableGroup", "Searchable 枚举参数")]
         [Title("FilterOptions = SearchFilterOptions.TypeOfValue", "匹配元素值的类型，比如 Name 字段类型为 string")]
         [Searchable(FilterOptions = SearchFilterOptions.TypeOfValue)]
-        public List<Perk> perks7 = new()
+        public List<Perk> perks7 = new List<Perk>
         {
             new Perk
             {
                 Name = "Old Sage",
                 effects = new List<Effect>
                 {
-                    new() { Skill = Skill.Wisdom, Value = 2 },
-                    new() { Skill = Skill.Intelligence, Value = 1 }
+                    new Effect { Skill = Skill.Wisdom, Value = 2 },
+                    new Effect { Skill = Skill.Intelligence, Value = 1 }
                 }
             },
             new Perk
@@ -232,8 +233,8 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
                 Name = "Hardened Criminal",
                 effects = new List<Effect>
                 {
-                    new() { Skill = Skill.Dexterity, Value = 2 },
-                    new() { Skill = Skill.Charisma, Value = -2 }
+                    new Effect { Skill = Skill.Dexterity, Value = 2 },
+                    new Effect { Skill = Skill.Charisma, Value = -2 }
                 }
             },
             new Perk
@@ -241,8 +242,8 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
                 Name = "Born Leader",
                 effects = new List<Effect>
                 {
-                    new() { Skill = Skill.Charisma, Value = 2 },
-                    new() { Skill = Skill.Intelligence, Value = -3 }
+                    new Effect { Skill = Skill.Charisma, Value = 2 },
+                    new Effect { Skill = Skill.Intelligence, Value = -3 }
                 }
             }
         };
@@ -250,15 +251,15 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [TabGroup("SearchableGroup", "Searchable 枚举参数")]
         [Title("FilterOptions = SearchFilterOptions.ValueToString", "匹配元素值执行 ToString 的结果，通常就是显示在面板上的值")]
         [Searchable(FilterOptions = SearchFilterOptions.ValueToString)]
-        public List<Perk> perks8 = new()
+        public List<Perk> perks8 = new List<Perk>
         {
             new Perk
             {
                 Name = "Old Sage",
                 effects = new List<Effect>
                 {
-                    new() { Skill = Skill.Wisdom, Value = 2 },
-                    new() { Skill = Skill.Intelligence, Value = 1 }
+                    new Effect { Skill = Skill.Wisdom, Value = 2 },
+                    new Effect { Skill = Skill.Intelligence, Value = 1 }
                 }
             },
             new Perk
@@ -266,8 +267,8 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
                 Name = "Hardened Criminal",
                 effects = new List<Effect>
                 {
-                    new() { Skill = Skill.Dexterity, Value = 2 },
-                    new() { Skill = Skill.Charisma, Value = -2 }
+                    new Effect { Skill = Skill.Dexterity, Value = 2 },
+                    new Effect { Skill = Skill.Charisma, Value = -2 }
                 }
             },
             new Perk
@@ -275,8 +276,8 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
                 Name = "Born Leader",
                 effects = new List<Effect>
                 {
-                    new() { Skill = Skill.Charisma, Value = 2 },
-                    new() { Skill = Skill.Intelligence, Value = -3 }
+                    new Effect { Skill = Skill.Charisma, Value = 2 },
+                    new Effect { Skill = Skill.Intelligence, Value = -3 }
                 }
             }
         };
@@ -286,7 +287,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [Title("FilterOptions = SearchFilterOptions.ISearchFilterableInterface",
             "列表元素实现 ISearchFilterable 接口，自定义筛选条件，匹配 Square 平方值")]
         public List<FilterableBySquareStruct> customFiltering =
-            new(Enumerable.Range(1, 10).Select(i => new FilterableBySquareStruct(i)));
+            new List<FilterableBySquareStruct>(Enumerable.Range(1, 10).Select(i => new FilterableBySquareStruct(i)));
 
         #endregion
 
@@ -296,7 +297,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [Searchable]
         [Title("自定义类使用 [Searchable]")]
         [InfoBox("作用等同于对 SO 或者 MonoBehaviour 脚本，也可以直接在声明类的地方添加 [Searchable]，那么就不需要每次都添加")]
-        public ExampleClass searchableClass = new();
+        public ExampleClass searchableClass = new ExampleClass();
 
         [Serializable]
         public class ExampleClass
@@ -304,7 +305,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
             public string someString = "Saehrimnir is a tasty delicacy";
             public int someInt = 13579;
 
-            public DataContainer dataContainerOne = new() { Name = "Example Data Set One" };
+            public DataContainer dataContainerOne = new DataContainer { Name = "Example Data Set One" };
         }
 
         [Serializable]
@@ -312,7 +313,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         public class DataContainer
         {
             public string Name;
-            public List<ExampleStruct> data = new(Enumerable.Range(1, 10).Select(i => new ExampleStruct(i)));
+            public List<ExampleStruct> data = new List<ExampleStruct>(Enumerable.Range(1, 10).Select(i => new ExampleStruct(i)));
         }
 
         [Serializable]
@@ -325,15 +326,9 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
             [EnableGUI]
             public int Square => number * number;
 
-            public FilterableBySquareStruct(int nr)
-            {
-                number = nr;
-            }
+            public FilterableBySquareStruct(int nr) => number = nr;
 
-            public bool IsMatch(string searchString)
-            {
-                return searchString.Contains(Square.ToString());
-            }
+            public bool IsMatch(string searchString) => searchString.Contains(Square.ToString());
         }
 
         #endregion

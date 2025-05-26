@@ -67,7 +67,7 @@ namespace Yuumix.OdinToolkits.Modules.Tools.SyntaxHighlighter.Editor
         [PropertyOrder(-10)]
         [Title("使用须知", "Odin 的语法高亮处理有一定局限性，目前仅发现以下要点", TitleAlignments.Centered)]
         [OnInspectorGUI]
-        private void OnGUI1() { }
+        void OnGUI1() { }
 
         /// <summary>
         /// 使用富文本标记进行脚本语法高亮

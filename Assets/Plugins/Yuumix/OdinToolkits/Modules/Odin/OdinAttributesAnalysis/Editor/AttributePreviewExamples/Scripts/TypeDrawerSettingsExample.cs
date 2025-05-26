@@ -1,10 +1,10 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class TypeDrawerSettingsExample : ExampleOdinScriptableObject
@@ -75,33 +75,19 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
             Filter = TypeInclusionFilter.IncludeAll)]
         public Type Filter_All;
 
-        public interface IBaseGeneric<T>
-        {
-        }
+        public interface IBaseGeneric<T> { }
 
-        public interface IBase : IBaseGeneric<int>
-        {
-        }
+        public interface IBase : IBaseGeneric<int> { }
 
-        public abstract class Base : IBase
-        {
-        }
+        public abstract class Base : IBase { }
 
-        public class Concrete : Base
-        {
-        }
+        public class Concrete : Base { }
 
-        public class ConcreteGeneric<T> : Base
-        {
-        }
+        public class ConcreteGeneric<T> : Base { }
 
-        public abstract class BaseGeneric<T> : IBase
-        {
-        }
+        public abstract class BaseGeneric<T> : IBase { }
 
         [CompilerGenerated]
-        public class ConcreteGenerated : Base
-        {
-        }
+        public class ConcreteGenerated : Base { }
     }
 }

@@ -114,7 +114,7 @@ namespace Yuumix.OdinToolkits.Modules.Tools.GenerateTemplateCode.Editor
 
         public List<string> TryGetPath() => preSavePaths;
 
-        private void GenerateCode(string targetNamespace, string targetClassName, string targetPath,
+        void GenerateCode(string targetNamespace, string targetClassName, string targetPath,
             string targetTemplateKey)
         {
             if (string.IsNullOrEmpty(targetNamespace) || string.IsNullOrEmpty(targetClassName) ||

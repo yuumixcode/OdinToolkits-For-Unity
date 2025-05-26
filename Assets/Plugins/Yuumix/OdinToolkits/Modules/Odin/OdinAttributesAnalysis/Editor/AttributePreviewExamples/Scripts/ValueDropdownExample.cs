@@ -1,4 +1,3 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections;
@@ -6,14 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 using Object = UnityEngine.Object;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class ValueDropdownExample : ExampleScriptableObject
     {
-        private static int[] _textureSizes = { 256, 512, 1024 };
+        static int[] _textureSizes = { 256, 512, 1024 };
 
         #region NumberOfItemsBeforeEnablingSearch 参数
 
@@ -21,7 +21,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [InfoBox("设置 NumberOfItemsBeforeEnablingSearch = 7，下拉列表中的元素数量达到 7 个出现搜索框，" +
                  "搜索框不是列表的搜索框")]
         [ValueDropdown("_treeViewOfInts", NumberOfItemsBeforeEnablingSearch = 7)]
-        public List<int> intTreeviewMode2 = new() { 1, 2, 7 };
+        public List<int> intTreeviewMode2 = new List<int> { 1, 2, 7 };
 
         #endregion
 
@@ -72,7 +72,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
                  "使用 ValueDropdownList 即可，" +
                  "根据列表的第一个参数来绘制 TreeView，ExpandAllMenuItems == true 默认情况展开树状图")]
         [ValueDropdown("_treeViewOfInts", ExpandAllMenuItems = true)]
-        public List<int> intTreeview = new() { 1, 2, 7 };
+        public List<int> intTreeview = new List<int> { 1, 2, 7 };
 
         #endregion
 
@@ -103,7 +103,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
 
         [FoldoutGroup("DisableListAddButtonBehaviour 参数 关闭添加元素时的选择框")]
         [ValueDropdown("_treeViewOfInts", DisableListAddButtonBehaviour = true)]
-        public List<int> intTreeviewMode3 = new() { 1, 2, 7 };
+        public List<int> intTreeviewMode3 = new List<int> { 1, 2, 7 };
 
         #endregion
 
@@ -111,14 +111,15 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
 
         [FoldoutGroup("DoubleClickToConfirm 参数 鼠标双击才确认选择")]
         [ValueDropdown("_treeViewOfInts", DoubleClickToConfirm = true)]
-        public List<int> intTreeviewMode4 = new() { 1, 2, 7 };
+        public List<int> intTreeviewMode4 = new List<int> { 1, 2, 7 };
 
         #endregion
 
         #region FlattenTreeView 参数
 
-        [FoldoutGroup("FlattenTreeView 参数 取消树状图缩进")] [ValueDropdown("_treeViewOfInts", FlattenTreeView = true)]
-        public List<int> intTreeviewMode5 = new() { 1, 2, 7 };
+        [FoldoutGroup("FlattenTreeView 参数 取消树状图缩进")]
+        [ValueDropdown("_treeViewOfInts", FlattenTreeView = true)]
+        public List<int> intTreeviewMode5 = new List<int> { 1, 2, 7 };
 
         #endregion
 
@@ -131,12 +132,12 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
 
         #endregion
 
-        private readonly int[] _customInts =
+        readonly int[] _customInts =
         {
             1, 5, 6, 3, 4, 5, 8, 76, 100
         };
 
-        private readonly IEnumerable _treeViewOfInts = new ValueDropdownList<int>
+        readonly IEnumerable _treeViewOfInts = new ValueDropdownList<int>
         {
             { "Node 1/Node 1.1", 1 },
             { "Node 1/Node 1.2", 2 },
@@ -152,7 +153,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
             return Enumerable.Range(0, 10).Select(i => new Vector3(i, i, i));
         }
 
-        private static IEnumerable GetAllSceneObjects()
+        static IEnumerable GetAllSceneObjects()
         {
             return FindObjectsByType<GameObject>(FindObjectsInactive.Include, FindObjectsSortMode.None)
                 .Select(x => new ValueDropdownItem(GetPath(x.transform), x));
@@ -163,7 +164,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
             }
         }
 
-        private static IEnumerable GetAllSirenixAssets()
+        static IEnumerable GetAllSirenixAssets()
         {
             const string root = "Assets/Plugins/Sirenix/";
 
@@ -176,27 +177,36 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
 
         #region ValueGetter
 
-        [FoldoutGroup("ValueGetter 参数 支持多种解析字符串")] [LabelWidth(260)]
+        [FoldoutGroup("ValueGetter 参数 支持多种解析字符串")]
+        [LabelWidth(260)]
         public bool useAlternativeValues;
 
-        [FoldoutGroup("ValueGetter 参数 支持多种解析字符串")] [LabelWidth(260)]
-        public List<string> values = new() { "Value 1", "Value 2", "Value 3" };
+        [FoldoutGroup("ValueGetter 参数 支持多种解析字符串")]
+        [LabelWidth(260)]
+        public List<string> values = new List<string> { "Value 1", "Value 2", "Value 3" };
 
-        [FoldoutGroup("ValueGetter 参数 支持多种解析字符串")] [LabelWidth(260)]
-        public List<string> alternativeValues = new() { "1", "2", "3" };
+        [FoldoutGroup("ValueGetter 参数 支持多种解析字符串")]
+        [LabelWidth(260)]
+        public List<string> alternativeValues = new List<string> { "1", "2", "3" };
 
         [FoldoutGroup("ValueGetter 参数 支持多种解析字符串")]
         [ValueDropdown("@useAlternativeValues ? alternativeValues : ValuesProperty")]
         [LabelWidth(260)]
         public string valueGetterAttributeExpressionExample;
 
-        [FoldoutGroup("ValueGetter 参数 支持多种解析字符串")] [ValueDropdown("values")] [LabelWidth(260)]
+        [FoldoutGroup("ValueGetter 参数 支持多种解析字符串")]
+        [ValueDropdown("values")]
+        [LabelWidth(260)]
         public string valueGetterFieldNameExample;
 
-        [FoldoutGroup("ValueGetter 参数 支持多种解析字符串")] [ValueDropdown("GetValues")] [LabelWidth(260)]
+        [FoldoutGroup("ValueGetter 参数 支持多种解析字符串")]
+        [ValueDropdown("GetValues")]
+        [LabelWidth(260)]
         public string valueGetterMethodNameExample;
 
-        [FoldoutGroup("ValueGetter 参数 支持多种解析字符串")] [ValueDropdown("ValuesProperty")] [LabelWidth(260)]
+        [FoldoutGroup("ValueGetter 参数 支持多种解析字符串")]
+        [ValueDropdown("ValuesProperty")]
+        [LabelWidth(260)]
         public string valueGetterPropertyNameExample;
 
         [FoldoutGroup("ValueGetter 参数 支持多种解析字符串")]
@@ -207,19 +217,16 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [InlineButton("@Debug.Log(\"someSize2 的值为: \" + someSize2)", "输出值")]
         public int someSize2;
 
-        private static readonly IEnumerable _friendlyTextureSizes = new ValueDropdownList<int>
+        static readonly IEnumerable _friendlyTextureSizes = new ValueDropdownList<int>
         {
             { "Small", 256 },
             { "Medium", 512 },
             { "Large", 1024 }
         };
 
-        private List<string> ValuesProperty => useAlternativeValues ? alternativeValues : values;
+        List<string> ValuesProperty => useAlternativeValues ? alternativeValues : values;
 
-        private IEnumerable GetValues()
-        {
-            return useAlternativeValues ? alternativeValues : values;
-        }
+        IEnumerable GetValues() => useAlternativeValues ? alternativeValues : values;
 
         #endregion
 
@@ -263,19 +270,23 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [FoldoutGroup("OnlyChangeValueOnConfirm 参数")]
         [Title("验证默认情况下是否为引用")]
         [Button("Mode 和 Mode2 的 InstanceID 是否相同", ButtonSizes.Large)]
-        private void LogInstanceID()
+        void LogInstanceID()
         {
             Debug.Log("sirenixAssetMode 的 InstanceID 为: " + sirenixAssetMode.GetInstanceID());
             Debug.Log("sirenixAssetMode2 的 InstanceID 为: " + sirenixAssetMode2.GetInstanceID());
             if (sirenixAssetMode.GetInstanceID() == sirenixAssetMode2.GetInstanceID())
+            {
                 Debug.Log("两个 Object 类型（引用类型）的 InstanceId 相同，说明是同一个资源，说明默认情况下是引用");
+            }
         }
 
         #endregion
 
         #region CopyValues
 
-        [FoldoutGroup("CopyValues 参数")] [InfoBox("默认 CopyValues = true")] [ValueDropdown("GetOptions")]
+        [FoldoutGroup("CopyValues 参数")]
+        [InfoBox("默认 CopyValues = true")]
+        [ValueDropdown("GetOptions")]
         public MyComplexType selectedOption1;
 
         [FoldoutGroup("CopyValues 参数")]
@@ -283,14 +294,12 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [ValueDropdown("GetOptions", CopyValues = false)]
         public MyComplexType selectedOption2;
 
-        private ValueDropdownList<MyComplexType> GetOptions()
-        {
-            return new ValueDropdownList<MyComplexType>
+        ValueDropdownList<MyComplexType> GetOptions() =>
+            new ValueDropdownList<MyComplexType>
             {
                 new ValueDropdownItem<MyComplexType>("Option 0", new MyComplexType { Name = "Option 0", value = 0 }),
                 new ValueDropdownItem<MyComplexType>("Option 1", new MyComplexType { Name = "Option 1", value = 1 })
             };
-        }
 
         [Serializable]
         public class MyComplexType

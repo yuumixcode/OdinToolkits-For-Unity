@@ -1,14 +1,16 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class ButtonGroupExample : ExampleScriptableObject
     {
-        [PropertyOrder(20)] [FoldoutGroup("ButtonGroup 基础使用")] [InfoBox("直接使用 ButtonGroup，内置一个默认分组名 \"_DefaultGroup\"")]
+        [PropertyOrder(20)]
+        [FoldoutGroup("ButtonGroup 基础使用")]
+        [InfoBox("直接使用 ButtonGroup，内置一个默认分组名 \"_DefaultGroup\"")]
         public BasicExample basicExample;
 
         [PropertyOrder(40)]
@@ -33,19 +35,19 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         public struct BasicExample
         {
             [ButtonGroup]
-            private void A()
+            void A()
             {
                 Debug.Log("执行 A 方法");
             }
 
             [ButtonGroup]
-            private void B()
+            void B()
             {
                 Debug.Log("执行 B 方法");
             }
 
             [ButtonGroup]
-            private void C()
+            void C()
             {
                 Debug.Log("执行 C 方法");
             }
@@ -56,14 +58,10 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         public struct OrderParameterExample
         {
             [ButtonGroup("Order", Order = 20)]
-            private void H()
-            {
-            }
+            void H() { }
 
             [ButtonGroup("Order", Order = 10)]
-            private void I()
-            {
-            }
+            void I() { }
         }
 
         [Serializable]
@@ -71,7 +69,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         public struct StaticFunctionExample
         {
             [ButtonGroup]
-            private static void G()
+            static void G()
             {
                 Debug.Log("这是一个静态方法");
             }
@@ -83,42 +81,42 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         {
             [ButtonGroup(ButtonHeight = 30)]
             [Button(SdfIconType.ArrowsMove, "")]
-            private void ArrowsMove()
+            void ArrowsMove()
             {
                 Debug.Log("这是 ArrowsMove 方法");
             }
 
             [ButtonGroup]
             [Button(SdfIconType.Crop, "")]
-            private void Crop()
+            void Crop()
             {
                 Debug.Log("这是 Crop 方法");
             }
 
             [ButtonGroup]
             [Button(SdfIconType.TextLeft, "")]
-            private void TextLeft()
+            void TextLeft()
             {
                 Debug.Log("这是 TextLeft 方法");
             }
 
             [ButtonGroup]
             [Button(SdfIconType.TextRight, "")]
-            private void TextRight()
+            void TextRight()
             {
                 Debug.Log("这是 TextRight 方法");
             }
 
             [ButtonGroup]
             [Button(SdfIconType.TextParagraph, "")]
-            private void TextParagraph()
+            void TextParagraph()
             {
                 Debug.Log("这是 TextParagraph 方法");
             }
 
             [ButtonGroup]
             [Button(SdfIconType.Textarea, "")]
-            private void Textarea()
+            void Textarea()
             {
                 Debug.Log("这是 TextArea 方法");
             }

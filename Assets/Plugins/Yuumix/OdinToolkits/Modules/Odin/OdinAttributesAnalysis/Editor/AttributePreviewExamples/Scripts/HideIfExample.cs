@@ -1,35 +1,51 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class HideIfExample : ExampleScriptableObject
     {
-        [PropertyOrder(10)] [Title("用于判断的参数")] public Object someObject;
+        [PropertyOrder(10)]
+        [Title("用于判断的参数")]
+        public Object someObject;
 
-        [PropertyOrder(10)] [EnumToggleButtons]
+        [PropertyOrder(10)]
+        [EnumToggleButtons]
         public InfoMessageType someEnum;
 
-        [PropertyOrder(10)] public bool isToggled;
+        [PropertyOrder(10)]
+        public bool isToggled;
 
-        [PropertyOrder(10)] [FoldoutGroup("基础使用")] [HideIf("someEnum", InfoMessageType.Info)]
+        [PropertyOrder(10)]
+        [FoldoutGroup("基础使用")]
+        [HideIf("someEnum", InfoMessageType.Info)]
         public Vector2 info;
 
-        [PropertyOrder(10)] [FoldoutGroup("基础使用")] [HideIf("someEnum", InfoMessageType.Error)]
+        [PropertyOrder(10)]
+        [FoldoutGroup("基础使用")]
+        [HideIf("someEnum", InfoMessageType.Error)]
         public Vector2 error;
 
-        [PropertyOrder(10)] [FoldoutGroup("基础使用")] [HideIf("someEnum", InfoMessageType.Warning)]
+        [PropertyOrder(10)]
+        [FoldoutGroup("基础使用")]
+        [HideIf("someEnum", InfoMessageType.Warning)]
         public Vector2 warning;
 
-        [PropertyOrder(10)] [FoldoutGroup("基础使用")] [HideIf("isToggled")]
+        [PropertyOrder(10)]
+        [FoldoutGroup("基础使用")]
+        [HideIf("isToggled")]
         public int hideIfToggled;
 
-        [PropertyOrder(10)] [FoldoutGroup("基础使用")] [HideIf("someObject")]
+        [PropertyOrder(10)]
+        [FoldoutGroup("基础使用")]
+        [HideIf("someObject")]
         public Vector3 hideWhenIsNotNull;
 
-        [PropertyOrder(10)] [FoldoutGroup("基础使用")] [HideIf("Method")]
+        [PropertyOrder(10)]
+        [FoldoutGroup("基础使用")]
+        [HideIf("Method")]
         public int hideWithMethod;
 
         [PropertyOrder(10)]
@@ -38,10 +54,8 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
                 "this.someEnum == InfoMessageType.Error")]
         public int hideWithExpression;
 
-        private bool Method()
-        {
-            return (isToggled && someObject != null) ||
-                   someEnum == InfoMessageType.Error;
-        }
+        bool Method() =>
+            (isToggled && someObject != null) ||
+            someEnum == InfoMessageType.Error;
     }
 }

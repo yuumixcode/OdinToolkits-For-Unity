@@ -1,26 +1,30 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class ColorPaletteExample : ExampleScriptableObject
     {
-        [Title("Unity 提供的 Color 相关的特性")] [ColorUsage(true)]
+        [Title("Unity 提供的 Color 相关的特性")]
+        [ColorUsage(true)]
         public Color color1;
 
-        [Title("Odin 的 ColorPalette")] [ColorPalette]
+        [Title("Odin 的 ColorPalette")]
+        [ColorPalette]
         public Color color2;
 
-        [InfoBox("PaletteName 是用于自定义 Palette 的")] [ColorPalette(PaletteName = "Color3")]
+        [InfoBox("PaletteName 是用于自定义 Palette 的")]
+        [ColorPalette(PaletteName = "Color3")]
         public Color color3;
 
-        [ColorPalette(ShowAlpha = true)] public Color color4;
+        [ColorPalette(ShowAlpha = true)]
+        public Color color4;
 
         // ------------------------------------
         // Color palettes can be accessed and modified from code.
@@ -32,14 +36,16 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         // 但是可以自己创建一个同名的类 ColorPalette，通过 ColorPaletteManager 获取到所有的颜色，存入一个字段中，
         // 然后在运行时可以通过代码获取对应的的颜色
         // ------------------------------------
-        [FoldoutGroup("Color Palettes", false)] [ListDrawerSettings(IsReadOnly = true)] [PropertyOrder(9)]
+        [FoldoutGroup("Color Palettes", false)]
+        [ListDrawerSettings(IsReadOnly = true)]
+        [PropertyOrder(9)]
         public List<ColorPalette> colorPalettes;
 
         [FoldoutGroup("Color Palettes")]
         [Button(ButtonSizes.Large)]
         [GUIColor(0, 1, 0)]
         [PropertyOrder(8)]
-        private void FetchColorPalettes()
+        void FetchColorPalettes()
         {
             // Sirenix.OdinInspector.Editor.ColorPaletteManager.Instance.ColorPalettes 这个字段默认是编辑器状态才可以使用
             // 运行时获取不到，不能在业务逻辑中使用，但是可以创造一个同样的类（但是属于 Assembly - CSharp 程序集），
@@ -56,9 +62,11 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [Serializable]
         public class ColorPalette
         {
-            [HideInInspector] public string paletteName;
+            [HideInInspector]
+            public string paletteName;
 
-            [LabelText("$paletteName")] [ListDrawerSettings(ShowFoldout = false)]
+            [LabelText("$paletteName")]
+            [ListDrawerSettings(ShowFoldout = false)]
             public Color[] colors;
         }
     }

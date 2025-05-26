@@ -1,4 +1,3 @@
-using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
@@ -11,6 +10,12 @@ namespace Yuumix.OdinToolkits.Common.Editor.Windows
 {
     public class ToolsPackageWindow : OdinMenuEditorWindow
     {
+        #region MenuItemPath 菜单路径
+
+        const string GenerateTemplateToolMenuPath = "模板代码生成工具";
+
+        #endregion
+
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -40,11 +45,5 @@ namespace Yuumix.OdinToolkits.Common.Editor.Windows
             generateTemplateCodeToolMenuItem.AddThumbnailIcon(true);
             return tree;
         }
-
-        #region MenuItemPath 菜单路径
-
-        private const string GenerateTemplateToolMenuPath = "模板代码生成工具";
-
-        #endregion
     }
 }

@@ -1,8 +1,8 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class HideLabelExample : ExampleScriptableObject
@@ -10,7 +10,11 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [InfoBox("Unity 默认情况，一个完整的 Property 由字段名标签和值组成")]
         public int hideLabel1;
 
-        [PropertyOrder(5)] [HideLabel] [InfoBox("使用 HideLabel 特性，隐藏字段名标签")] [ReadOnly] [EnableGUI]
+        [PropertyOrder(5)]
+        [HideLabel]
+        [InfoBox("使用 HideLabel 特性，隐藏字段名标签")]
+        [ReadOnly]
+        [EnableGUI]
         public string hideLabel2 = "字段名被隐藏了";
 
         [PropertyOrder(10)]
@@ -21,10 +25,16 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [ColorPalette("Fall")]
         public Color wideColor1;
 
-        [PropertyOrder(20)] [FoldoutGroup("Hide Label 扩展")] [Title("Wide Vector 2")] [HideLabel]
+        [PropertyOrder(20)]
+        [FoldoutGroup("Hide Label 扩展")]
+        [Title("Wide Vector 2")]
+        [HideLabel]
         public Vector3 wideVector1;
 
-        [PropertyOrder(30)] [FoldoutGroup("Hide Label 扩展")] [Title("Wide Vector 4")] [HideLabel]
+        [PropertyOrder(30)]
+        [FoldoutGroup("Hide Label 扩展")]
+        [Title("Wide Vector 4")]
+        [HideLabel]
         public Vector4 wideVector2;
 
         [PropertyOrder(40)]

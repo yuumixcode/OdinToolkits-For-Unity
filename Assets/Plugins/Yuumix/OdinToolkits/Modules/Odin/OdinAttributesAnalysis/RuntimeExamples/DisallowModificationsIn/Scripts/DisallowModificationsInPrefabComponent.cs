@@ -1,7 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.RuntimeExamples.DisallowModificationsIn.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.RuntimeExamples.DisallowModificationsIn.Scripts
 {
     public class DisallowModificationsInPrefabComponent : MonoBehaviour
     {
@@ -43,49 +43,49 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.RuntimeExampl
 
         [PropertySpace(20)]
         [Button("修改 instanceInScene 值", ButtonSizes.Large)]
-        private void Change1()
+        void Change1()
         {
             instanceInScene = "尝试代码修改值";
             Debug.Log("修改 instanceInScene 值");
         }
 
         [Button("修改 instanceInPrefab 值", ButtonSizes.Large)]
-        private void Change2()
+        void Change2()
         {
             instanceInPrefab = "尝试代码修改值";
             Debug.Log("修改 instanceInPrefab 值");
         }
 
         [Button("修改 regular 值", ButtonSizes.Large)]
-        private void Change3()
+        void Change3()
         {
             regular = "尝试代码修改值";
             Debug.Log("修改 regular 值");
         }
 
         [Button("修改 variant 值", ButtonSizes.Large)]
-        private void Change4()
+        void Change4()
         {
             variant = "尝试代码修改值";
             Debug.Log("修改 variant 值");
         }
 
         [Button("修改 prefabInstance 值", ButtonSizes.Large)]
-        private void Change5()
+        void Change5()
         {
             prefabInstance = "尝试代码修改值";
             Debug.Log("修改 prefabInstance 值");
         }
 
         [Button("修改 prefabAsset 值", ButtonSizes.Large)]
-        private void Change6()
+        void Change6()
         {
             prefabAsset = "尝试代码修改值";
             Debug.Log("修改 prefabAsset 值");
         }
 
         [Button("修改 prefabInstanceAndNonPrefabInstance 值", ButtonSizes.Large)]
-        private void Change7()
+        void Change7()
         {
             prefabInstanceAndNonPrefabInstance = "尝试代码修改值";
             Debug.Log("修改 prefabInstanceAndNonPrefabInstance 值");

@@ -1,16 +1,21 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class DelayedPropertyExample : ExampleScriptableObject
     {
-        [PropertyOrder(0)] [InfoBox("没有标记任何延迟赋值的字段，只要有修改就会触发事件")] [OnValueChanged("OnValueChanged")]
+        [PropertyOrder(0)]
+        [InfoBox("没有标记任何延迟赋值的字段，只要有修改就会触发事件")]
+        [OnValueChanged("OnValueChanged")]
         public string normal;
 
-        [PropertyOrder(1)] [InfoBox("标记 Unity 内置的 Delayed 特性")] [OnValueChanged("OnValueChanged")] [Delayed]
+        [PropertyOrder(1)]
+        [InfoBox("标记 Unity 内置的 Delayed 特性")]
+        [OnValueChanged("OnValueChanged")]
+        [Delayed]
         public string delayedField;
 
         [PropertyOrder(10)]
@@ -27,7 +32,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [OnValueChanged("OnValueChanged")]
         public string DelayedProperty { get; set; }
 
-        private void OnValueChanged()
+        void OnValueChanged()
         {
             Debug.Log("Value changed!");
         }

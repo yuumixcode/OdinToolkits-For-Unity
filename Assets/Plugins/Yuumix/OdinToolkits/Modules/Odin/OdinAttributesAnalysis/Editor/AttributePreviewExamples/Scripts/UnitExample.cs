@@ -1,16 +1,17 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class UnitExample : ExampleScriptableObject
     {
         // Try entering '6 lb'.
-        [FoldoutGroup("一个参数")] [Unit(Units.Kilogram)]
+        [FoldoutGroup("一个参数")]
+        [Unit(Units.Kilogram)]
         public float weight;
 
         // Try entering '15 mph'.
@@ -21,11 +22,15 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [InlineButton("Log1", "输出实际值")]
         public float speed;
 
-        [FoldoutGroup("两个参数，一个实际单位，一个显示单位")] [Unit(Units.Centimeter, Units.Kilometer)] [InlineButton("Log2", "输出实际值")]
+        [FoldoutGroup("两个参数，一个实际单位，一个显示单位")]
+        [Unit(Units.Centimeter, Units.Kilometer)]
+        [InlineButton("Log2", "输出实际值")]
         public float distance;
 
         // UxmlAttributeDescription.Use the custom unit by referencing it by name.
-        [FoldoutGroup("自定义单位，实际单位为米")] [Unit(Units.Meter, "Odin Toolkits Custom Unit")] [InlineButton("Log3", "输出实际值")]
+        [FoldoutGroup("自定义单位，实际单位为米")]
+        [Unit(Units.Meter, "Odin Toolkits Custom Unit")]
+        [InlineButton("Log3", "输出实际值")]
         public float odin;
 
         [FoldoutGroup("两个参数，一个实际单位，一个显示单位")]
@@ -34,17 +39,17 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
             DisplayAsString = true, ForceDisplayUnit = true)]
         public float SpeedMilesPerHour => speed;
 
-        private void Log1()
+        void Log1()
         {
             Debug.Log(nameof(speed) + ": " + speed + "米每秒");
         }
 
-        private void Log2()
+        void Log2()
         {
             Debug.Log(nameof(distance) + ": " + distance + "厘米");
         }
 
-        private void Log3()
+        void Log3()
         {
             Debug.Log(nameof(odin) + ": " + odin + "米");
         }

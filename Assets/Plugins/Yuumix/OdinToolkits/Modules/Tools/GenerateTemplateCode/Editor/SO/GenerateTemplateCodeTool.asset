@@ -61,6 +61,6 @@ MonoBehaviour:
   - Assets/Plugins/Yuumix/OdinToolkits/Modules/Tools/GenerateTemplateCode/Editor/Templates/CSTemplate.txt
   preSavePaths:
   - Assets
-  debugInspector: 0
+  debugInspector: 1
   templateList:
   - CSTemplate

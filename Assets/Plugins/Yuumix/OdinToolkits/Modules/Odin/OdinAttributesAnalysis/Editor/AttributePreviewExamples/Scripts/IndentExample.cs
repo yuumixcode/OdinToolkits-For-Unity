@@ -1,25 +1,32 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class IndentExample : ExampleScriptableObject
     {
-        [Title("Nicely organize your properties.")] [Indent]
+        [Title("Nicely organize your properties.")]
+        [Indent]
         public int A;
 
-        [Indent(2)] public int B;
+        [Indent(2)]
+        public int B;
 
-        [Indent(3)] public int C;
+        [Indent(3)]
+        public int C;
 
-        [Indent(4)] public int D;
+        [Indent(4)]
+        public int D;
 
-        [Title("Using the Indent attribute")] [Indent]
+        [Title("Using the Indent attribute")]
+        [Indent]
         public int E;
 
-        [Indent(0)] public int F;
+        [Indent(0)]
+        public int F;
 
-        [Indent(-1)] public int G;
+        [Indent(-1)]
+        public int G;
     }
 }

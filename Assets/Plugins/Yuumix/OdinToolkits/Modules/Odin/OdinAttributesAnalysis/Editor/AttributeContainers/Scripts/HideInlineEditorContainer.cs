@@ -1,34 +1,19 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts;
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributeContainers.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributeContainers.Scripts
 {
     public class HideInlineEditorContainer : AbsContainer
     {
-        protected override string SetHeader()
-        {
-            return "HideInlineEditor";
-        }
+        protected override string SetHeader() => "HideInlineEditor";
 
-        protected override string SetBrief()
-        {
-            return "如果一个对象被标记 [InlineEditor]，那么被标记为 [HideInlineEditor] 的 Property 将隐藏";
-        }
+        protected override string SetBrief() => "如果一个对象被标记 [InlineEditor]，那么被标记为 [HideInlineEditor] 的 Property 将隐藏";
 
-        protected override List<string> SetTip()
-        {
-            return new List<string>();
-        }
+        protected override List<string> SetTip() => new List<string>();
 
-        protected override List<ParamValue> SetParamValues()
-        {
-            return new List<ParamValue>();
-        }
+        protected override List<ParamValue> SetParamValues() => new List<ParamValue>();
 
-        protected override string SetOriginalCode()
-        {
-            return ReadCodeWithoutNamespace(typeof(HideInlineEditorExample));
-        }
+        protected override string SetOriginalCode() => ReadCodeWithoutNamespace(typeof(HideInlineEditorExample));
     }
 }

@@ -1,8 +1,8 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using System;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class EnumToggleButtonsExample : ExampleScriptableObject
@@ -27,11 +27,14 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
 
         public enum SomeEnumWithIcons
         {
-            [LabelText(SdfIconType.TextLeft)] TextLeft,
+            [LabelText(SdfIconType.TextLeft)]
+            TextLeft,
 
-            [LabelText(SdfIconType.TextCenter)] TextCenter,
+            [LabelText(SdfIconType.TextCenter)]
+            TextCenter,
 
-            [LabelText(SdfIconType.TextRight)] TextRight
+            [LabelText(SdfIconType.TextRight)]
+            TextRight
         }
 
         public enum SomeEnumWithIconsAndNames
@@ -46,12 +49,15 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
             TextRight
         }
 
-        private const string Code61 = "[EnumToggleButtons]";
+        const string Code61 = "[EnumToggleButtons]";
 
-        [PropertyOrder(1)] [InfoBox("默认的枚举类型样式")]
+        [PropertyOrder(1)]
+        [InfoBox("默认的枚举类型样式")]
         public SomeBitmaskEnum defaultEnumBitmask;
 
-        [PropertyOrder(10)] [FoldoutGroup("EnumToggleButtons 基础使用")] [EnumToggleButtons]
+        [PropertyOrder(10)]
+        [FoldoutGroup("EnumToggleButtons 基础使用")]
+        [EnumToggleButtons]
         public SomeEnum someEnumField;
 
         [PropertyOrder(20)]
@@ -61,7 +67,10 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [InfoBox("隐藏 Label")]
         public SomeEnum wideEnumField;
 
-        [PropertyOrder(30)] [FoldoutGroup("EnumToggleButtons 基础使用")] [InfoBox("位掩码，Flag 标记的枚举，可多选")] [EnumToggleButtons]
+        [PropertyOrder(30)]
+        [FoldoutGroup("EnumToggleButtons 基础使用")]
+        [InfoBox("位掩码，Flag 标记的枚举，可多选")]
+        [EnumToggleButtons]
         public SomeBitmaskEnum bitmaskEnumField;
 
         [PropertyOrder(40)]

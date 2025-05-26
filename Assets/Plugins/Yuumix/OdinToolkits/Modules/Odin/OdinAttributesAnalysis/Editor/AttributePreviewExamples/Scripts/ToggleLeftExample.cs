@@ -1,17 +1,22 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class ToggleLeftExample : ExampleScriptableObject
     {
-        [InfoBox("绘制勾选框在左侧")] [ToggleLeft] public bool leftToggled;
+        [InfoBox("绘制勾选框在左侧")]
+        [ToggleLeft]
+        public bool leftToggled;
 
-        [EnableIf("leftToggled")] public int A;
+        [EnableIf("leftToggled")]
+        public int A;
 
-        [EnableIf("leftToggled")] public bool B;
+        [EnableIf("leftToggled")]
+        public bool B;
 
-        [EnableIf("leftToggled")] public bool C;
+        [EnableIf("leftToggled")]
+        public bool C;
     }
 }

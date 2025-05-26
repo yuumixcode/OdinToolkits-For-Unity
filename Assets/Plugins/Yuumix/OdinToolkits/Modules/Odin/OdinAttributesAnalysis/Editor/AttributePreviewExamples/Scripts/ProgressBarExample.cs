@@ -1,32 +1,38 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class ProgressBarExample : ExampleScriptableObject
     {
-        [FoldoutGroup("min 和 max")] [ProgressBar(0f, 10f)]
+        [FoldoutGroup("min 和 max")]
+        [ProgressBar(0f, 10f)]
         public int progressBar1;
 
-        [FoldoutGroup("ColorGetter")] [ProgressBar(-5f, 15f, ColorGetter = "lightpurple")]
+        [FoldoutGroup("ColorGetter")]
+        [ProgressBar(-5f, 15f, ColorGetter = "lightpurple")]
         public int progressBar2;
 
-        [FoldoutGroup("Height")] [ProgressBar(-10f, 20f, Height = 30)]
+        [FoldoutGroup("Height")]
+        [ProgressBar(-10f, 20f, Height = 30)]
         public int progressBar3;
 
-        [FoldoutGroup("Segmented")] [ProgressBar(-10f, 20f, Segmented = true)]
+        [FoldoutGroup("Segmented")]
+        [ProgressBar(-10f, 20f, Segmented = true)]
         public int progressBar4;
 
         [FoldoutGroup("DrawValueLabel 和 CustomValueStringGetter")]
         [ProgressBar(-10f, 20f, DrawValueLabel = true, CustomValueStringGetter = nameof(progressBar5))]
         public int progressBar5;
 
-        [FoldoutGroup("动态的生命值，颜色变换")] [ProgressBar(0, 100, ColorGetter = "GetHealthBarColor")]
+        [FoldoutGroup("动态的生命值，颜色变换")]
+        [ProgressBar(0, 100, ColorGetter = "GetHealthBarColor")]
         public int dynamicHealthBar;
 
-        [FoldoutGroup("堆叠生命值，多层生命值")] [PropertyRange(0, 300)]
+        [FoldoutGroup("堆叠生命值，多层生命值")]
+        [PropertyRange(0, 300)]
         public int stackHeath;
 
         [FoldoutGroup("堆叠生命值，多层生命值")]
@@ -34,24 +40,27 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [ShowInInspector]
         [ProgressBar(0, 100, ColorGetter = "GetStackedHealthColor",
             BackgroundColorGetter = "GetStackHealthBackgroundColor", DrawValueLabel = false)]
-        private float StackedHealthProgressBar
+        float StackedHealthProgressBar
         {
             get
             {
                 var value = stackHeath % 100f;
-                if (stackHeath != 0 && value == 0) value = 100;
+                if (stackHeath != 0 && value == 0)
+                {
+                    value = 100;
+                }
 
                 return value;
             }
         }
 
-        private Color GetHealthBarColor()
+        Color GetHealthBarColor()
         {
             var color = Color.Lerp(Color.red, Color.green, dynamicHealthBar / 100f);
             return color;
         }
 
-        private Color GetStackedHealthColor()
+        Color GetStackedHealthColor()
         {
             var color = stackHeath switch
             {
@@ -63,7 +72,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
             return color;
         }
 
-        private Color GetStackHealthBackgroundColor()
+        Color GetStackHealthBackgroundColor()
         {
             Color color;
             switch (stackHeath)

@@ -1,16 +1,15 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
-using Yuumix.OdinToolkits.Common.Editor;
-using Yuumix.OdinToolkits.Common.Editor.Locator;
 using Yuumix.OdinToolkits.Common.Runtime;
+using Yuumix.OdinToolkits.Common.Runtime.Locator;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 using Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class HideInExample : ExampleScriptableObject
     {
-        private static string Path =>
+        static string Path =>
             OdinToolkitsPaths.GetRootPath() +
             "/ChineseManual/ChineseAttributesOverview/RuntimeExamples/HideIn";
 

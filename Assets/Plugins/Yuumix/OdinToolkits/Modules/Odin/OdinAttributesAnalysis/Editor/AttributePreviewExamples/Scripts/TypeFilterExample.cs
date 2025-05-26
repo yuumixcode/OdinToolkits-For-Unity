@@ -1,17 +1,19 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class TypeFilterExample : ExampleOdinScriptableObject
     {
-        [PropertyOrder(1)] [FoldoutGroup("FilterGetter 参数")] [TypeFilter("GetFilteredTypeList")]
+        [PropertyOrder(1)]
+        [FoldoutGroup("FilterGetter 参数")]
+        [TypeFilter("GetFilteredTypeList")]
         public BaseClass A;
 
         [PropertyOrder(15)]
@@ -42,7 +44,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         public IEnumerable<Type> GetFilteredTypeList()
         {
             var q = typeof(BaseClass).Assembly.GetTypes()
-                .Where(x => !x.IsAbstract) // Excludes BaseClass
+                .Where(x => !x.IsAbstract)              // Excludes BaseClass
                 .Where(x => !x.IsGenericTypeDefinition) // Excludes C1<>
                 .Where(x => typeof(BaseClass)
                     .IsAssignableFrom(x)); // Excludes classes not inheriting from BaseClass
@@ -60,27 +62,27 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
             public int BaseField;
         }
 
-        private class A1 : BaseClass
+        class A1 : BaseClass
         {
             public int _A;
         }
 
-        private class A2 : A1
+        class A2 : A1
         {
             public int _A2;
         }
 
-        private class B1 : BaseClass
+        class B1 : BaseClass
         {
             public int _B1;
         }
 
-        private class B2 : B1
+        class B2 : B1
         {
             public int _B2;
         }
 
-        private class C1<T> : BaseClass
+        class C1<T> : BaseClass
         {
             public T C;
         }

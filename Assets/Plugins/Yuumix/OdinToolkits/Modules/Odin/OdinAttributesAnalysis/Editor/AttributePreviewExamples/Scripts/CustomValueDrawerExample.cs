@@ -1,20 +1,22 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities.Editor;
 using System;
 using UnityEditor;
 using UnityEngine;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class CustomValueDrawerExample : ExampleScriptableObject
     {
-        [PropertyOrder(-5)] [LabelText("左边最小值: ")]
+        [PropertyOrder(-5)]
+        [LabelText("左边最小值: ")]
         public float from = 2;
 
-        [PropertyOrder(-5)] [LabelText("右边最大值: ")]
+        [PropertyOrder(-5)]
+        [LabelText("右边最大值: ")]
         public float to = 7;
 
         [PropertyOrder(1)]
@@ -64,24 +66,15 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
 #if UNITY_EDITOR // Editor 相关需要宏定义
         // 绘制方法可选参数有四种
         // 1. float value字段值
-        private float MyCustomDrawerStatic(float value)
-        {
-            return EditorGUILayout.Slider(value, 0, 10);
-        }
+        float MyCustomDrawerStatic(float value) => EditorGUILayout.Slider(value, 0, 10);
 
         // 2. GUIContent label 用于设置 label 样式
-        private float MyCustomDrawerInstance(float value, GUIContent label)
-        {
-            return EditorGUILayout.Slider(label, value, from, to);
-        }
+        float MyCustomDrawerInstance(float value, GUIContent label) => EditorGUILayout.Slider(label, value, from, to);
 
-        private float MyCustomDrawerArrayNoLabel(float value)
-        {
-            return EditorGUILayout.Slider(value, from, to);
-        }
+        float MyCustomDrawerArrayNoLabel(float value) => EditorGUILayout.Slider(value, from, to);
 
         // 3. Func<GUIContent, bool> callNextDrawer 用于绘制下一层
-        private float CustomDrawerAppendRange(float value, GUIContent label, Func<GUIContent, bool> callNextDrawer)
+        float CustomDrawerAppendRange(float value, GUIContent label, Func<GUIContent, bool> callNextDrawer)
         {
             SirenixEditorGUI.BeginBox();
             // Odin 的绘制链，调用 callNextDrawer 方法，进入下一层绘制
@@ -92,7 +85,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         }
 
         // 4. InspectorProperty property Odin 封装的类，类似于 Unity 的 SerializedProperty 
-        private float MyCustomDrawSpecial(float value, GUIContent label, Func<GUIContent, bool> callNextDrawer,
+        float MyCustomDrawSpecial(float value, GUIContent label, Func<GUIContent, bool> callNextDrawer,
             InspectorProperty property)
         {
             var rect = EditorGUILayout.GetControlRect();
@@ -105,7 +98,10 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
             SirenixEditorGUI.BeginBox();
             EditorGUILayout.LabelField("Property Attributes 这个字段上标记的特性列表: ");
             var list = property.Attributes;
-            foreach (var item in list) EditorGUILayout.LabelField(item.GetType().Name);
+            foreach (var item in list)
+            {
+                EditorGUILayout.LabelField(item.GetType().Name);
+            }
 
             SirenixEditorGUI.EndBox();
             SirenixEditorGUI.BeginBox();

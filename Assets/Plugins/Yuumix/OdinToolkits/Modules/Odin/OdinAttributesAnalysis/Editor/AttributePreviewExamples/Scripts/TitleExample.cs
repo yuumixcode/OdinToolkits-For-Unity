@@ -1,17 +1,20 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class TitleExample : ExampleScriptableObject
     {
-        [Title("共用参数")] public string title = "SOAP, SOAP & SOAP";
+        [Title("共用参数")]
+        public string title = "SOAP, SOAP & SOAP";
 
         public string alternativeTitle = "YOGA, YOGA & YOGA";
         public bool useAlternativeTitle;
 
-        [FoldoutGroup("Title 参数 支持多种解析字符串")] [Title("主标题")] [LabelWidth(200)]
+        [FoldoutGroup("Title 参数 支持多种解析字符串")]
+        [Title("主标题")]
+        [LabelWidth(200)]
         public string titleMain;
 
         [FoldoutGroup("Title 参数 支持多种解析字符串")]
@@ -19,13 +22,19 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [LabelWidth(200)]
         public string titleAttributeExpressionExample;
 
-        [FoldoutGroup("Title 参数 支持多种解析字符串")] [Title("$title")] [LabelWidth(200)]
+        [FoldoutGroup("Title 参数 支持多种解析字符串")]
+        [Title("$title")]
+        [LabelWidth(200)]
         public string titleFieldNameExample;
 
-        [FoldoutGroup("Title 参数 支持多种解析字符串")] [Title("$GetTitle")] [LabelWidth(200)]
+        [FoldoutGroup("Title 参数 支持多种解析字符串")]
+        [Title("$GetTitle")]
+        [LabelWidth(200)]
         public string titleMethodNameExample;
 
-        [FoldoutGroup("Title 参数 支持多种解析字符串")] [Title("$TitleProperty")] [LabelWidth(200)]
+        [FoldoutGroup("Title 参数 支持多种解析字符串")]
+        [Title("$TitleProperty")]
+        [LabelWidth(200)]
         public string titlePropertyNameExample;
 
         [PropertyOrder(5)]
@@ -41,13 +50,22 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [LabelWidth(200)]
         public string subtitleAttributeExpressionExample;
 
-        [PropertyOrder(5)] [FoldoutGroup("Subtitle 参数 支持多种解析字符串")] [Title("主标题", "$title")] [LabelWidth(200)]
+        [PropertyOrder(5)]
+        [FoldoutGroup("Subtitle 参数 支持多种解析字符串")]
+        [Title("主标题", "$title")]
+        [LabelWidth(200)]
         public string subtitleFieldNameExample;
 
-        [PropertyOrder(5)] [FoldoutGroup("Subtitle 参数 支持多种解析字符串")] [Title("主标题", "$GetTitle")] [LabelWidth(200)]
+        [PropertyOrder(5)]
+        [FoldoutGroup("Subtitle 参数 支持多种解析字符串")]
+        [Title("主标题", "$GetTitle")]
+        [LabelWidth(200)]
         public string subtitleMethodNameExample;
 
-        [PropertyOrder(5)] [FoldoutGroup("Subtitle 参数 支持多种解析字符串")] [Title("主标题", "$TitleProperty")] [LabelWidth(200)]
+        [PropertyOrder(5)]
+        [FoldoutGroup("Subtitle 参数 支持多种解析字符串")]
+        [Title("主标题", "$TitleProperty")]
+        [LabelWidth(200)]
         public string subtitlePropertyNameExample;
 
         [PropertyOrder(10)]
@@ -85,7 +103,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [Title("@DateTime.Now.ToString(\"dd:MM:yyyy\")", "@DateTime.Now.ToString(\"HH:mm:ss\")")]
         public int expression;
 
-        private string TitleProperty => useAlternativeTitle ? alternativeTitle : title;
+        string TitleProperty => useAlternativeTitle ? alternativeTitle : title;
 
         [PropertyOrder(25)]
         [FoldoutGroup("Title 扩展")]
@@ -98,14 +116,9 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [FoldoutGroup("Title 扩展")]
         [Title("Title on a Method")]
         [Button]
-        public void DoNothing()
-        {
-        }
+        public void DoNothing() { }
 
-        private string GetTitle()
-        {
-            return useAlternativeTitle ? alternativeTitle : title;
-        }
+        string GetTitle() => useAlternativeTitle ? alternativeTitle : title;
 
         public override void SetDefaultValue()
         {

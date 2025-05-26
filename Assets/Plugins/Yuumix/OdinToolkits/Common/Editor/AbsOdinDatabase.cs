@@ -12,9 +12,7 @@ namespace Yuumix.OdinToolkits.Common.Editor
         [Button("清空工具数据库",
             ButtonSizes.Medium, Icon = SdfIconType.ArrowCounterclockwise,
             IconAlignment = IconAlignment.LeftOfText)]
-        protected virtual void ClearDatabase()
-        {
-        }
+        protected virtual void ClearDatabase() { }
 
         [PropertyOrder(990)]
         [TitleGroup("工具数据库通用操作")]
@@ -22,9 +20,7 @@ namespace Yuumix.OdinToolkits.Common.Editor
         [Button("初始化数据库",
             ButtonSizes.Medium, Icon = SdfIconType.App,
             IconAlignment = IconAlignment.LeftOfText)]
-        protected virtual void InitializeData()
-        {
-        }
+        protected virtual void InitializeData() { }
 
         [PropertyOrder(1000)]
         [TitleGroup("工具数据库通用操作")]

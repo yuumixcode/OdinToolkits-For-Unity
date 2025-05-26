@@ -1,16 +1,18 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class HideInTablesExample : ExampleScriptableObject
     {
-        [Indent] public MyItem item = new();
+        [Indent]
+        public MyItem item = new MyItem();
 
-        [TableList] public List<MyItem> table = new()
+        [TableList]
+        public List<MyItem> table = new List<MyItem>
         {
             new MyItem(),
             new MyItem(),
@@ -24,7 +26,8 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
 
             public int b;
 
-            [HideInTables] public int hidden;
+            [HideInTables]
+            public int hidden;
         }
     }
 }

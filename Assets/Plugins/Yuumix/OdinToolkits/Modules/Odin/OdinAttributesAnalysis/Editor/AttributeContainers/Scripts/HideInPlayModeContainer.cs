@@ -1,34 +1,19 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts;
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributeContainers.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributeContainers.Scripts
 {
     public class HideInPlayModeContainer : AbsContainer
     {
-        protected override string SetHeader()
-        {
-            return "HideInPlayMode";
-        }
+        protected override string SetHeader() => "HideInPlayMode";
 
-        protected override string SetBrief()
-        {
-            return "Play 状态下隐藏 Property";
-        }
+        protected override string SetBrief() => "Play 状态下隐藏 Property";
 
-        protected override List<string> SetTip()
-        {
-            return new List<string>();
-        }
+        protected override List<string> SetTip() => new List<string>();
 
-        protected override List<ParamValue> SetParamValues()
-        {
-            return new List<ParamValue>();
-        }
+        protected override List<ParamValue> SetParamValues() => new List<ParamValue>();
 
-        protected override string SetOriginalCode()
-        {
-            return ReadCodeWithoutNamespace(typeof(HideInPlayModeExample));
-        }
+        protected override string SetOriginalCode() => ReadCodeWithoutNamespace(typeof(HideInPlayModeExample));
     }
 }

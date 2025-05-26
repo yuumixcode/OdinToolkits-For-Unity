@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.RuntimeExamples.RequiredIn.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.RuntimeExamples.RequiredIn.Scripts
 {
     public class RequiredInPrefabComponent : MonoBehaviour
     {
@@ -44,14 +44,12 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.RuntimeExampl
         [RequiredIn(PrefabKind.PrefabInstanceAndNonPrefabInstance)]
         public GameObject prefabInstanceAndNonPrefabInstance;
 
-        [Title("序号 8 PrefabKind.All")] [RequiredIn(PrefabKind.All)]
+        [Title("序号 8 PrefabKind.All")]
+        [RequiredIn(PrefabKind.All)]
         public GameObject prefabAll;
 
         public string MessageProperty => useAlternativeMessage ? alternativeMessage : message;
 
-        private string GetMessage()
-        {
-            return useAlternativeMessage ? alternativeMessage : message;
-        }
+        string GetMessage() => useAlternativeMessage ? alternativeMessage : message;
     }
 }

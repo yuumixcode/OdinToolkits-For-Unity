@@ -1,25 +1,26 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using System.Collections.Generic;
 using UnityEngine;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class OnCollectionChangedExample : ExampleOdinScriptableObject
     {
-        [InfoBox("改变集合时触发函数")] [OnCollectionChanged("Before", "After")]
-        public List<string> list = new() { "str1", "str2", "str3" };
+        [InfoBox("改变集合时触发函数")]
+        [OnCollectionChanged("Before", "After")]
+        public List<string> list = new List<string> { "str1", "str2", "str3" };
 
         [OnCollectionChanged("Before", "After")]
-        public HashSet<string> Hashset = new() { "str1", "str2", "str3" };
+        public HashSet<string> Hashset = new HashSet<string> { "str1", "str2", "str3" };
 
         [OnCollectionChanged("Before", "After")]
-        public Stack<int> Stack = new();
+        public Stack<int> Stack = new Stack<int>();
 
         [OnCollectionChanged("Before", "After")]
-        public Dictionary<string, string> Dictionary = new()
+        public Dictionary<string, string> Dictionary = new Dictionary<string, string>
             { { "key1", "str1" }, { "key2", "str2" }, { "key3", "str3" } };
 
         public void Before(CollectionChangeInfo info, object value)

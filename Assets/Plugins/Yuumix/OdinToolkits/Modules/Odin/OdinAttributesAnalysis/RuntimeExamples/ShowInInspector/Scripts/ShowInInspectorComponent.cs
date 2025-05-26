@@ -1,21 +1,26 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.RuntimeExamples.ShowInInspector.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.RuntimeExamples.ShowInInspector.Scripts
 {
     public class ShowInInspectorComponent : MonoBehaviour
     {
-        [PropertyOrder(12)] [InfoBox("静态字段")] [ShowInInspector] [InlineButton("Log6", "输出值")]
+        [PropertyOrder(12)]
+        [InfoBox("静态字段")]
+        [ShowInInspector]
+        [InlineButton("Log6", "输出值")]
         public static int StaticField;
 
-        [PropertyOrder(30)] [SerializeField] [InfoBox("依靠私有字段序列化来保存值，通常会隐藏私有字段")]
-        private int evenNumber;
+        [PropertyOrder(30)]
+        [SerializeField]
+        [InfoBox("依靠私有字段序列化来保存值，通常会隐藏私有字段")]
+        int evenNumber;
 
         [PropertyOrder(1)]
         [ShowInInspector]
         [Title("基础显示", "修改值可以生效，但是没有序列化保存，Play 将会丢失")]
         [InlineButton("Log1", "输出值")]
-        private int _myPrivateInt = 5;
+        int _myPrivateInt = 5;
 
         [PropertyOrder(5)]
         [InfoBox("显示属性")]
@@ -55,32 +60,32 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.RuntimeExampl
             set => Time.fixedDeltaTime = value;
         }
 
-        private void Log1()
+        void Log1()
         {
             Debug.Log(_myPrivateInt);
         }
 
-        private void Log2()
+        void Log2()
         {
             Debug.Log(MyPropertyInt);
         }
 
-        private void Log4()
+        void Log4()
         {
             Debug.Log(StaticProperty);
         }
 
-        private void Log6()
+        void Log6()
         {
             Debug.Log(StaticField.ToString());
         }
 
-        private void Log5()
+        void Log5()
         {
             Debug.Log(EvenNumberProperty.ToString());
         }
 
-        private void SetFixedDeltaTimeDefault()
+        void SetFixedDeltaTimeDefault()
         {
             FixedDeltaTime = 0.02f;
         }

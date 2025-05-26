@@ -1,45 +1,32 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts;
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributeContainers.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributeContainers.Scripts
 {
     public class PropertyTooltipContainer : AbsContainer
     {
-        protected override string SetHeader()
-        {
-            return "PropertyTooltip";
-        }
+        protected override string SetHeader() => "PropertyTooltip";
 
-        protected override string SetBrief()
-        {
-            return "给任意 Property 添加 Tooltip";
-        }
+        protected override string SetBrief() => "给任意 Property 添加 Tooltip";
 
-        protected override List<string> SetTip()
-        {
-            return new List<string>
+        protected override List<string> SetTip() =>
+            new List<string>
             {
                 "任意 Property 包括字段，显示的属性，绘制的方法"
             };
-        }
 
-        protected override List<ParamValue> SetParamValues()
-        {
-            return new List<ParamValue>
+        protected override List<ParamValue> SetParamValues() =>
+            new List<ParamValue>
             {
-                new()
+                new ParamValue
                 {
                     returnType = "string",
                     paramName = "Tooltip",
                     paramDescription = "Tooltip 文本，" + DescriptionConfigs.SupportAllResolver
                 }
             };
-        }
 
-        protected override string SetOriginalCode()
-        {
-            return ReadCodeWithoutNamespace(typeof(PropertyTooltipExample));
-        }
+        protected override string SetOriginalCode() => ReadCodeWithoutNamespace(typeof(PropertyTooltipExample));
     }
 }

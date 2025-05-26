@@ -1,60 +1,46 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts;
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributeContainers.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributeContainers.Scripts
 {
     public class SuffixLabelContainer : AbsContainer
     {
-        protected override string SetHeader()
-        {
-            return "SuffixLabel";
-        }
+        protected override string SetHeader() => "SuffixLabel";
 
-        protected override string SetBrief()
-        {
-            return "在一个 Property 后面加一个后缀字符串，用于补充说明";
-        }
+        protected override string SetBrief() => "在一个 Property 后面加一个后缀字符串，用于补充说明";
 
-        protected override List<string> SetTip()
-        {
-            return new List<string>();
-        }
+        protected override List<string> SetTip() => new List<string>();
 
-        protected override List<ParamValue> SetParamValues()
-        {
-            return new List<ParamValue>
+        protected override List<ParamValue> SetParamValues() =>
+            new List<ParamValue>
             {
-                new()
+                new ParamValue
                 {
                     returnType = "string",
                     paramName = "Label",
                     paramDescription = "后缀字符串，" + DescriptionConfigs.SupportAllResolver
                 },
-                new()
+                new ParamValue
                 {
                     returnType = "bool",
                     paramName = "Overlay",
                     paramDescription = "是否覆盖原属性，默认为 false，绘制在 Property 之后"
                 },
-                new()
+                new ParamValue
                 {
                     returnType = "SdfIconType",
                     paramName = "Icon",
                     paramDescription = "后缀图标，默认为 SdfIconType.None"
                 },
-                new()
+                new ParamValue
                 {
                     returnType = "Color",
                     paramName = "IconColor",
                     paramDescription = DescriptionConfigs.ColorDescription
                 }
             };
-        }
 
-        protected override string SetOriginalCode()
-        {
-            return ReadCodeWithoutNamespace(typeof(SuffixLabelExample));
-        }
+        protected override string SetOriginalCode() => ReadCodeWithoutNamespace(typeof(SuffixLabelExample));
     }
 }

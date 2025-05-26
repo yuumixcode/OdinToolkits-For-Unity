@@ -1,18 +1,21 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Scripts;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor.Examples;
 using UnityEngine;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Scripts;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class InlineEditorExample : ExampleScriptableObject
     {
-        [FoldoutGroup("InlineEditor 无参数使用")] [InlineEditor]
+        [FoldoutGroup("InlineEditor 无参数使用")]
+        [InlineEditor]
         public CommonInlineObject inlineComponent;
 
-        [FoldoutGroup("InlineEditor 显示模式")] [Title("InlineEditorModes.GUIOnly 默认模式")] [InlineEditor()]
+        [FoldoutGroup("InlineEditor 显示模式")]
+        [Title("InlineEditorModes.GUIOnly 默认模式")]
+        [InlineEditor]
         public CommonInlineObject inlineComponent2;
 
         [FoldoutGroup("InlineEditor 显示模式")]
@@ -63,7 +66,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         public CommonInlineObject inlineComponent6;
 
         [OnInspectorInit]
-        private void CreateData()
+        void CreateData()
         {
             inlineComponent6 = ExampleHelper.GetScriptableObject<CommonInlineObject>("inlineComponent6");
         }

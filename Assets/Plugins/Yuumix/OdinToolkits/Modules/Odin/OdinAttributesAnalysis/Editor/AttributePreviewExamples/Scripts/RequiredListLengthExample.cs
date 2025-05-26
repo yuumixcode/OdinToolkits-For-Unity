@@ -1,29 +1,31 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using Yuumix.OdinToolkits.Common.Runtime;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 using Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class RequiredListLengthExample : ExampleScriptableObject
     {
-        [FoldoutGroup("固定长度")] [RequiredListLength(3)]
-        public List<int> list = new();
+        [FoldoutGroup("固定长度")]
+        [RequiredListLength(3)]
+        public List<int> list = new List<int>();
 
-        [FoldoutGroup("设置长度范围")] [RequiredListLength(3, 5)]
-        public List<int> list2 = new();
+        [FoldoutGroup("设置长度范围")]
+        [RequiredListLength(3, 5)]
+        public List<int> list2 = new List<int>();
 
-        [TitleGroup("设置长度范围/支持解析字符串")] [RequiredListLength(nameof(SetMinLength), nameof(SetMaxLength))]
-        public List<int> list3 = new();
+        [TitleGroup("设置长度范围/支持解析字符串")]
+        [RequiredListLength(nameof(SetMinLength), nameof(SetMaxLength))]
+        public List<int> list3 = new List<int>();
 
-        private int SetMinLength => 3;
-        private int SetMaxLength => 5;
+        int SetMinLength => 3;
+        int SetMaxLength => 5;
 
-        private static string Path => ProjectEditorUtility
-            .Paths.GetTargetFolderPath("RuntimeExamples",
-                "OdinToolkits") + "/RequiredListLength";
+        static string Path => ProjectEditorUtility.Paths.GetTargetFolderPath("RuntimeExamples",
+            "OdinToolkits") + "/RequiredListLength";
 
         [DisplayAsString(fontSize: 12, overflow: false)]
         [HideLabel]

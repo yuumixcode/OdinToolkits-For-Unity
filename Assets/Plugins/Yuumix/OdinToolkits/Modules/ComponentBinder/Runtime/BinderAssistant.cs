@@ -1,11 +1,13 @@
+#if UNITY_EDITOR
+using UnityEditor;
+using UnityEditor.Callbacks;
+using Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor;
+#endif
 using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using UnityEditor;
-using UnityEditor.Callbacks;
 using UnityEngine;
-using Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor;
 using Debug = UnityEngine.Debug;
 
 namespace Yuumix.OdinToolkits.Modules.ComponentBinder.Runtime
@@ -51,12 +53,12 @@ namespace Yuumix.OdinToolkits.Modules.ComponentBinder.Runtime
         [LabelWidth(100)]
         public string folderPath;
 
-        private void DefaultNamespace()
+        void DefaultNamespace()
         {
             targetNamespace = "Game";
         }
 
-        private void DefaultScriptName()
+        void DefaultScriptName()
         {
             scriptName = gameObject.name + "Presenter";
         }
@@ -90,7 +92,7 @@ namespace Yuumix.OdinToolkits.Modules.ComponentBinder.Runtime
 
         [TitleGroup("按钮操作")]
         [Button("构建绑定单元")]
-        private void CreateUnits()
+        void CreateUnits()
         {
             var labels = transform.GetComponentsInChildren<BinderLabel>(true);
             // OdinLog.Log("获取到标签数量: " + labels.Length);
@@ -118,7 +120,7 @@ namespace Yuumix.OdinToolkits.Modules.ComponentBinder.Runtime
         }
 
 #if UNITY_EDITOR
-        private void Reset()
+        void Reset()
         {
             DefaultNamespace();
             DefaultScriptName();
@@ -127,7 +129,7 @@ namespace Yuumix.OdinToolkits.Modules.ComponentBinder.Runtime
 
         [TitleGroup("按钮操作")]
         [Button("生成文件夹")]
-        private void CreateFolder()
+        void CreateFolder()
         {
             if (!AssetDatabase.IsValidFolder(folderPath))
             {
@@ -140,7 +142,7 @@ namespace Yuumix.OdinToolkits.Modules.ComponentBinder.Runtime
 
         [TitleGroup("按钮操作")]
         [Button("生成脚本")]
-        private void GenerateCode()
+        void GenerateCode()
         {
             var generatedPath = Path.Combine(folderPath, scriptName + ".generated.cs");
             var controllerPath = Path.Combine(folderPath, scriptName + ".cs");
@@ -160,7 +162,7 @@ namespace Yuumix.OdinToolkits.Modules.ComponentBinder.Runtime
             AssetDatabase.Refresh();
         }
 
-        private void WriteControllerScript(string controllerPath)
+        void WriteControllerScript(string controllerPath)
         {
             using (var writer = new StreamWriter(controllerPath))
             {
@@ -188,7 +190,7 @@ namespace Yuumix.OdinToolkits.Modules.ComponentBinder.Runtime
             }
         }
 
-        private void WriteGeneratedScript(string generatedPath)
+        void WriteGeneratedScript(string generatedPath)
         {
             using (var writer = new StreamWriter(generatedPath))
             {
@@ -263,7 +265,7 @@ namespace Yuumix.OdinToolkits.Modules.ComponentBinder.Runtime
         }
 
         [DidReloadScripts]
-        private static void CheckBinderUnit()
+        static void CheckBinderUnit()
         {
             var assistants =
                 FindObjectsByType<BinderAssistant>(FindObjectsInactive.Include, FindObjectsSortMode.None);
@@ -299,7 +301,7 @@ namespace Yuumix.OdinToolkits.Modules.ComponentBinder.Runtime
         }
 
         [DidReloadScripts]
-        private static void AttachToGameObject()
+        static void AttachToGameObject()
         {
             if (!EditorPrefs.HasKey("即将绑定脚本的物体 Id"))
             {

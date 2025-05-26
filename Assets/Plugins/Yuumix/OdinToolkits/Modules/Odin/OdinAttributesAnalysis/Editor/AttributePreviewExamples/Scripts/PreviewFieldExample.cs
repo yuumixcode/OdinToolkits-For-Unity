@@ -1,21 +1,26 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class PreviewFieldExample : ExampleScriptableObject
     {
-        [FoldoutGroup("无参数使用")] [PreviewField] public Texture regularPreviewField;
+        [FoldoutGroup("无参数使用")]
+        [PreviewField]
+        public Texture regularPreviewField;
 
-        [FoldoutGroup("ObjectFieldAlignment")] [PreviewField(ObjectFieldAlignment.Center)]
+        [FoldoutGroup("ObjectFieldAlignment")]
+        [PreviewField(ObjectFieldAlignment.Center)]
         public Texture previewField2;
 
-        [FoldoutGroup("Height")] [PreviewField(Height = 70)]
+        [FoldoutGroup("Height")]
+        [PreviewField(Height = 70)]
         public Texture2D texture2D;
 
-        [FoldoutGroup("FilterMode")] [PreviewField(FilterMode = FilterMode.Point)]
+        [FoldoutGroup("FilterMode")]
+        [PreviewField(FilterMode = FilterMode.Point)]
         public Texture2D texture2D2;
 
         [FoldoutGroup("previewGetter")]
@@ -26,15 +31,17 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [InlineButton("Log4", "输出 Tx4")]
         public Texture2D texture2D3;
 
-        [FoldoutGroup("previewGetter")] [SerializeField] [InfoBox("私有序列化")]
-        private Texture2D texture2D4;
+        [FoldoutGroup("previewGetter")]
+        [SerializeField]
+        [InfoBox("私有序列化")]
+        Texture2D texture2D4;
 
-        private void Log3()
+        void Log3()
         {
             Debug.Log("texture2D3 的值为: " + texture2D3);
         }
 
-        private void Log4()
+        void Log4()
         {
             Debug.Log("texture2D4 的值为: " + texture2D4);
         }

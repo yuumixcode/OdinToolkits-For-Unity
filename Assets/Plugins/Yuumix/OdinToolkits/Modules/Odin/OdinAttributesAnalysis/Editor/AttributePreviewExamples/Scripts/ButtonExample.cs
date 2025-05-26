@@ -1,23 +1,25 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class ButtonExample : ExampleScriptableObject
     {
-        [PropertyOrder(1)] [FoldoutGroup("Button 基础使用")]
+        [PropertyOrder(1)]
+        [FoldoutGroup("Button 基础使用")]
         public bool toggle;
 
-        [PropertyOrder(10)] [FoldoutGroup("Button 基础使用")]
+        [PropertyOrder(10)]
+        [FoldoutGroup("Button 基础使用")]
         public string buttonName = "Dynamic button name";
 
         [PropertyOrder(1)]
         [FoldoutGroup("Button 基础使用")]
         [InfoBox("基础使用，将特性直接置于方法上，用字符串命名按钮，即可快速创建可以执行方法的按钮")]
         [Button("Name of button")]
-        private void NamedButton()
+        void NamedButton()
         {
             SetToggle();
         }
@@ -26,7 +28,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [FoldoutGroup("Button 基础使用")]
         [InfoBox("动态按钮名称，用成员变量赋值按钮名，$ 符号在 Rider 中可以自动补全")]
         [Button("$buttonName")]
-        private void DefaultSizedButton()
+        void DefaultSizedButton()
         {
             SetToggle();
         }
@@ -44,7 +46,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [FoldoutGroup("Button 基础使用")]
         [InfoBox("设置按钮大小，默认可以使用 ButtonSizes 枚举")]
         [Button(ButtonSizes.Small)]
-        private void SmallButton()
+        void SmallButton()
         {
             SetToggle();
         }
@@ -52,7 +54,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [PropertyOrder(40)]
         [FoldoutGroup("Button 基础使用")]
         [Button(ButtonSizes.Medium)]
-        private void MediumSizedButton()
+        void MediumSizedButton()
         {
             SetToggle();
         }
@@ -60,7 +62,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [PropertyOrder(50)]
         [FoldoutGroup("Button 基础使用")]
         [Button(ButtonSizes.Gigantic)]
-        private void GiganticButton()
+        void GiganticButton()
         {
             SetToggle();
         }
@@ -69,12 +71,12 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [FoldoutGroup("Button 基础使用")]
         [InfoBox("设置按钮大小，90 表示的是高度")]
         [Button(90)]
-        private void CustomSizedButton()
+        void CustomSizedButton()
         {
             SetToggle();
         }
 
-        private void SetToggle()
+        void SetToggle()
         {
             toggle = !toggle;
             Debug.Log("toggle 的值改变了，当前值为: " + toggle);
@@ -84,53 +86,41 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [FoldoutGroup("Button 进阶使用 - 图标")]
         [InfoBox("SdfIconType 枚举控制图标样式，IconAlignment 枚举控制图标对齐方式")]
         [Button(SdfIconType.Dice1Fill, IconAlignment.LeftOfText)]
-        private void IconButtonLeftOfText()
-        {
-        }
+        void IconButtonLeftOfText() { }
 
         [PropertyOrder(70)]
         [FoldoutGroup("Button 进阶使用 - 图标")]
         [Button(SdfIconType.Dice2Fill, IconAlignment.RightOfText)]
-        private void IconButtonRightOfText()
-        {
-        }
+        void IconButtonRightOfText() { }
 
         [PropertyOrder(80)]
         [FoldoutGroup("Button 进阶使用 - 图标")]
         [Button(SdfIconType.Dice3Fill, IconAlignment.LeftEdge)]
-        private void IconButtonLeftEdge()
-        {
-        }
+        void IconButtonLeftEdge() { }
 
         [PropertyOrder(90)]
         [FoldoutGroup("Button 进阶使用 - 图标")]
         [Button(SdfIconType.Dice4Fill, IconAlignment.RightEdge)]
-        private void IconButtonRightEdge()
-        {
-        }
+        void IconButtonRightEdge() { }
 
         [PropertyOrder(100)]
         [FoldoutGroup("Button 进阶使用 - 图标")]
         [InfoBox("Stretch 参数控制宽度是否拉伸，默认拉伸")]
         [Button(SdfIconType.Dice5Fill, IconAlignment.RightEdge, Stretch = false)]
-        private void DontStretch()
-        {
-        }
+        void DontStretch() { }
 
         [PropertyOrder(110)]
         [FoldoutGroup("Button 进阶使用 - 图标")]
         [InfoBox("当 Stretch == false 时，ButtonAlignment 控制按钮的位置，" +
                  "范围 0 - 1，0 表示最左侧，1 表示最右侧")]
         [Button(SdfIconType.Dice5Fill, IconAlignment.RightEdge, Stretch = false, ButtonAlignment = 1f)]
-        private void DontStretchAndAlign()
-        {
-        }
+        void DontStretchAndAlign() { }
 
         [PropertyOrder(120)]
         [FoldoutGroup("Button 进阶使用 - 有参数的方法")]
         [InfoBox("设置要输出的 int 类型参数，使用 ButtonStyle.CompactBox 的按钮样式，默认样式")]
         [Button("输出 Int 值", ButtonSizes.Medium, ButtonStyle.CompactBox)]
-        private void HaveArgFunction(int arg1)
+        void HaveArgFunction(int arg1)
         {
             Debug.Log("参数为: " + arg1);
         }
@@ -139,7 +129,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [FoldoutGroup("Button 进阶使用 - 有参数的方法")]
         [InfoBox("设置要输出的 string 类型参数，使用 ButtonStyle.FoldoutButton 的按钮样式")]
         [Button("输出 string 值", ButtonSizes.Medium, ButtonStyle.FoldoutButton)]
-        private void HaveStringArgFunction(string strArg)
+        void HaveStringArgFunction(string strArg)
         {
             Debug.Log("参数为: " + strArg);
         }
@@ -148,7 +138,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [FoldoutGroup("Button 进阶使用 - 有参数的方法")]
         [InfoBox("设置要输出的 float 类型参数，使用 ButtonStyle.Box 的按钮样式")]
         [Button("输出 float 值", ButtonSizes.Medium, ButtonStyle.Box)]
-        private void HaveFloatArgFunction(float floatArg)
+        void HaveFloatArgFunction(float floatArg)
         {
             Debug.Log("参数为: " + floatArg);
         }

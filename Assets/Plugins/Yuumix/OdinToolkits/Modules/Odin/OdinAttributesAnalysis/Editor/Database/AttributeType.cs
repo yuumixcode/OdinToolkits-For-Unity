@@ -1,4 +1,4 @@
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Database
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.Database
 {
     public enum AttributeType
     {

@@ -1,97 +1,86 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts;
 using Sirenix.OdinInspector.Editor;
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributeContainers.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributeContainers.Scripts
 {
     public class ValidateInputContainer : AbsContainer
     {
-        protected override string SetHeader()
-        {
-            return "ValidateInput";
-        }
+        protected override string SetHeader() => "ValidateInput";
 
-        protected override string SetBrief()
-        {
-            return "对值进行验证，不满足要求则发出提示信息";
-        }
+        protected override string SetBrief() => "对值进行验证，不满足要求则发出提示信息";
 
-        protected override List<string> SetTip()
-        {
-            return new List<string>
+        protected override List<string> SetTip() =>
+            new List<string>
             {
                 "需要使用 ref，第三个为提醒等级，也需要使用 ref，代码示例中查看"
             };
-        }
 
-        protected override List<ParamValue> SetParamValues()
-        {
-            return new List<ParamValue>
+        protected override List<ParamValue> SetParamValues() =>
+            new List<ParamValue>
             {
-                new()
+                new ParamValue
                 {
                     returnType = "string",
                     paramName = "condition",
                     paramDescription = "填入验证方法的方法名，返回 true 则验证通过，否则不通过，" + DescriptionConfigs.SupportAllResolver
                 },
-                new()
+                new ParamValue
                 {
                     returnType = "string",
                     paramName = "defaultMessage",
                     paramDescription = "默认的提醒信息，如果不填则使用默认的，" + DescriptionConfigs.SupportAllResolver
                 },
-                new()
+                new ParamValue
                 {
                     returnType = "InfoMessageType",
                     paramName = "messageType",
                     paramDescription = "提醒等级，绘制一个图标在左侧，有 None，Info，Warning，Error"
                 },
-                new()
+                new ParamValue
                 {
                     returnType = "bool",
                     paramName = "IncludeChildren",
                     paramDescription = "是否该值的子字段修改时也会触发验证，默认为 true"
                 },
-                new()
+                new ParamValue
                 {
                     returnType = "bool",
                     paramName = "ContinuousValidationCheck",
                     paramDescription = "是否每帧都进行验证，而不是仅在修改时"
                 }
             };
-        }
 
-        public override List<ResolvedParam> SetResolvedParams()
-        {
-            return new List<ResolvedParam>
+        public override List<ResolvedParam> SetResolvedParams() =>
+            new List<ResolvedParam>
             {
-                new()
+                new ResolvedParam
                 {
                     ParamName = "Condition",
                     ReturnType = "bool",
                     ResolverType = ResolverType.ValueResolver,
                     ParamValues = new List<ParamValue>
                     {
-                        new()
+                        new ParamValue
                         {
                             returnType = "message",
                             paramName = "message",
                             paramDescription = "提醒信息，可以关联成员变量的值"
                         },
-                        new()
+                        new ParamValue
                         {
                             returnType = "InfoMessageType",
                             paramName = "messageType",
                             paramDescription = "提醒等级，绘制一个图标在左侧，有 None，Info，Warning，Error"
                         },
-                        new()
+                        new ParamValue
                         {
                             returnType = typeof(InspectorProperty).FullName,
                             paramName = "$property",
                             paramDescription = DescriptionConfigs.InspectorPropertyDesc
                         },
-                        new()
+                        new ParamValue
                         {
                             returnType = "T 泛型",
                             paramName = "$value",
@@ -99,20 +88,20 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
                         }
                     }
                 },
-                new()
+                new ResolvedParam
                 {
                     ParamName = "DefaultMessage",
                     ReturnType = "string",
                     ResolverType = ResolverType.ValueResolver,
                     ParamValues = new List<ParamValue>
                     {
-                        new()
+                        new ParamValue
                         {
                             returnType = typeof(InspectorProperty).FullName,
                             paramName = "$property",
                             paramDescription = DescriptionConfigs.InspectorPropertyDesc
                         },
-                        new()
+                        new ParamValue
                         {
                             returnType = "T 泛型",
                             paramName = "$value",
@@ -121,11 +110,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
                     }
                 }
             };
-        }
 
-        protected override string SetOriginalCode()
-        {
-            return ReadCodeWithoutNamespace(typeof(ValidateInputExample));
-        }
+        protected override string SetOriginalCode() => ReadCodeWithoutNamespace(typeof(ValidateInputExample));
     }
 }

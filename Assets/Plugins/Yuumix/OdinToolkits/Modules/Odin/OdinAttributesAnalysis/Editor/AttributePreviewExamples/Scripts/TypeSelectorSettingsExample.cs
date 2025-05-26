@@ -1,8 +1,8 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using System;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class TypeSelectorSettingsExample : ExampleScriptableObject
@@ -12,7 +12,8 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [TypeSelectorSettings(FilterTypesFunction = nameof(TypeFilter), ShowCategories = true)]
         public Type CustomTypeFilterExample;
 
-        [FoldoutGroup("Odin 默认绘制的 Type 选择器")] [ShowInInspector]
+        [FoldoutGroup("Odin 默认绘制的 Type 选择器")]
+        [ShowInInspector]
         public Type Default;
 
         [FoldoutGroup("PreferNamespaces 参数")]
@@ -51,9 +52,6 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [TypeSelectorSettings(ShowNoneItem = true, PreferNamespaces = false, ShowCategories = false)]
         public Type ShowNoneItem_On;
 
-        private bool TypeFilter(Type type)
-        {
-            return type.IsAbstract == false && typeof(ExampleScriptableObject).IsAssignableFrom(type);
-        }
+        bool TypeFilter(Type type) => type.IsAbstract == false && typeof(ExampleScriptableObject).IsAssignableFrom(type);
     }
 }

@@ -1,33 +1,42 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class OnValueChangedExample : ExampleScriptableObject
     {
-        [OnValueChanged("CreateMaterial")] public Shader shader;
+        [OnValueChanged("CreateMaterial")]
+        public Shader shader;
 
-        [ReadOnly] [InlineEditor(InlineEditorModes.LargePreview)]
+        [ReadOnly]
+        [InlineEditor(InlineEditorModes.LargePreview)]
         public Material material;
 
-        [OnValueChanged("ValueChange")] [InlineButton("ChangeValue", "代码修改值")]
+        [OnValueChanged("ValueChange")]
+        [InlineButton("ChangeValue", "代码修改值")]
         public int value;
 
-        private void CreateMaterial()
+        void CreateMaterial()
         {
-            if (material != null) DestroyImmediate(material);
+            if (material != null)
+            {
+                DestroyImmediate(material);
+            }
 
-            if (shader != null) material = new Material(shader);
+            if (shader != null)
+            {
+                material = new Material(shader);
+            }
         }
 
-        private void ChangeValue()
+        void ChangeValue()
         {
             value++;
         }
 
-        private void ValueChange()
+        void ValueChange()
         {
             Debug.Log("Value changed to " + value);
         }

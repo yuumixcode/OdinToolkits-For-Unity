@@ -1,15 +1,19 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class TabGroupExample : ExampleScriptableObject
     {
-        [PropertyOrder(10)] [FoldoutGroup("Title", GroupName = "分组连接")] [TabGroup("Title/GroupA", "A")]
+        [PropertyOrder(10)]
+        [FoldoutGroup("Title", GroupName = "分组连接")]
+        [TabGroup("Title/GroupA", "A")]
         public string tabGroup1 = "TabGroup1";
 
-        [PropertyOrder(12)] [FoldoutGroup("Title")] [TabGroup("Title/GroupA", "B")]
+        [PropertyOrder(12)]
+        [FoldoutGroup("Title")]
+        [TabGroup("Title/GroupA", "B")]
         public string tabGroup2 = "TabGroup2";
 
         [PropertyOrder(10)]
@@ -17,10 +21,12 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [TabGroup("useFixedHeight/GroupB", "A", true)]
         public string tabGroup3 = "TabGroup3";
 
-        [PropertyOrder(12)] [TabGroup("useFixedHeight/GroupB", "A")]
+        [PropertyOrder(12)]
+        [TabGroup("useFixedHeight/GroupB", "A")]
         public string tabGroup4 = "TabGroup4";
 
-        [PropertyOrder(10)] [TabGroup("useFixedHeight/GroupB", "B")]
+        [PropertyOrder(10)]
+        [TabGroup("useFixedHeight/GroupB", "B")]
         public string tabGroup5 = "TabGroup5";
 
         [PropertyOrder(10)]
@@ -28,7 +34,8 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [TabGroup("icon/GroupA", "A", SdfIconType.Image, TextColor = "lightorange")]
         public string tabGroup6 = "TabGroup6";
 
-        [PropertyOrder(10)] [TabGroup("icon/GroupA", "B", SdfIconType.Apple, TextColor = "lightgray")]
+        [PropertyOrder(10)]
+        [TabGroup("icon/GroupA", "B", SdfIconType.Apple, TextColor = "lightgray")]
         public string tabGroup7 = "TabGroup7";
 
         [PropertyOrder(10)]
@@ -36,7 +43,8 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [TabGroup("TabName/GroupA", "A", TabName = "A 组")]
         public string tabGroup8 = nameof(tabGroup8);
 
-        [PropertyOrder(10)] [TabGroup("TabName/GroupA", "B", TabName = "B 组")]
+        [PropertyOrder(10)]
+        [TabGroup("TabName/GroupA", "B", TabName = "B 组")]
         public string tabGroup9 = nameof(tabGroup9);
 
         [PropertyOrder(10)]
@@ -44,7 +52,8 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [TabGroup("Paddingless/GroupA", "A", Paddingless = true)]
         public string tabGroup10 = nameof(tabGroup10);
 
-        [PropertyOrder(10)] [TabGroup("Paddingless/GroupA", "B")]
+        [PropertyOrder(10)]
+        [TabGroup("Paddingless/GroupA", "B")]
         public string tabGroup11 = nameof(tabGroup11);
 
         [PropertyOrder(10)]

@@ -1,35 +1,25 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts;
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributeContainers.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributeContainers.Scripts
 {
     public class OnInspectorDisposeContainer : AbsContainer
     {
-        protected override string SetHeader()
-        {
-            return "OnInspectorDispose";
-        }
+        protected override string SetHeader() => "OnInspectorDispose";
 
-        protected override string SetBrief()
-        {
-            return "设置 Inspector 面板的 Dispose 方法，通常是用于结束显示时的处理方法";
-        }
+        protected override string SetBrief() => "设置 Inspector 面板的 Dispose 方法，通常是用于结束显示时的处理方法";
 
-
-        protected override List<string> SetTip()
-        {
-            return new List<string>
+        protected override List<string> SetTip() =>
+            new List<string>
             {
                 "当更换 Inspector 面板选择或垃圾收集器收集 PropertyTree 时，至少触发一次，也有可能触发多次，最常见的是多态 Property 类型发生改变时，会触发 Dispose"
             };
-        }
 
-        protected override List<ParamValue> SetParamValues()
-        {
-            return new List<ParamValue>
+        protected override List<ParamValue> SetParamValues() =>
+            new List<ParamValue>
             {
-                new()
+                new ParamValue
                 {
                     returnType = "string",
                     paramName = "action",
@@ -37,11 +27,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
                                        DescriptionConfigs.SupportAllResolver
                 }
             };
-        }
 
-        protected override string SetOriginalCode()
-        {
-            return ReadCodeWithoutNamespace(typeof(OnInspectorDisposeExample));
-        }
+        protected override string SetOriginalCode() => ReadCodeWithoutNamespace(typeof(OnInspectorDisposeExample));
     }
 }

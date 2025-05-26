@@ -1,52 +1,63 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class DetailedInfoBoxExample : ExampleScriptableObject
     {
-        private const string DetailsYoga = "YOGA 框架 == Yuumi Odin Graphic Architecture";
+        const string DetailsYoga = "YOGA 框架 == Yuumi Odin Graphic Architecture";
 
-        private const string MessageYoga = "YOGA 框架 ...";
+        const string MessageYoga = "YOGA 框架 ...";
 
-        [FoldoutGroup("Message 参数 支持多种解析字符串")] public string message = "YOGA 框架 ...";
+        [FoldoutGroup("Message 参数 支持多种解析字符串")]
+        public string message = "YOGA 框架 ...";
 
-        [FoldoutGroup("Message 参数 支持多种解析字符串")] [DetailedInfoBox("@message", DetailsYoga)]
+        [FoldoutGroup("Message 参数 支持多种解析字符串")]
+        [DetailedInfoBox("@message", DetailsYoga)]
         public string messageAttributeExpressionExample;
 
-        [FoldoutGroup("Message 参数 支持多种解析字符串")] [DetailedInfoBox("$message", DetailsYoga)]
+        [FoldoutGroup("Message 参数 支持多种解析字符串")]
+        [DetailedInfoBox("$message", DetailsYoga)]
         public string messageFieldNameExample;
 
-        [FoldoutGroup("Message 参数 支持多种解析字符串")] [DetailedInfoBox("$GetMessage", DetailsYoga)]
+        [FoldoutGroup("Message 参数 支持多种解析字符串")]
+        [DetailedInfoBox("$GetMessage", DetailsYoga)]
         public string messageMethodNameExample;
 
-        [FoldoutGroup("Message 参数 支持多种解析字符串")] [DetailedInfoBox("$MessageProperty", DetailsYoga)]
+        [FoldoutGroup("Message 参数 支持多种解析字符串")]
+        [DetailedInfoBox("$MessageProperty", DetailsYoga)]
         public string messagePropertyNameExample;
 
-        [FoldoutGroup("Message 参数 支持多种解析字符串")] public string details = "YOGA 框架 == Yuumi Odin Graphic Architecture";
+        [FoldoutGroup("Message 参数 支持多种解析字符串")]
+        public string details = "YOGA 框架 == Yuumi Odin Graphic Architecture";
 
-        [FoldoutGroup("Details 参数 支持多种解析字符串")] [DetailedInfoBox(MessageYoga, "@details")]
+        [FoldoutGroup("Details 参数 支持多种解析字符串")]
+        [DetailedInfoBox(MessageYoga, "@details")]
         public string detailsAttributeExpressionExample;
 
-        [FoldoutGroup("Details 参数 支持多种解析字符串")] [DetailedInfoBox(MessageYoga, "$details")]
+        [FoldoutGroup("Details 参数 支持多种解析字符串")]
+        [DetailedInfoBox(MessageYoga, "$details")]
         public string detailsFieldNameExample;
 
-        [FoldoutGroup("Details 参数 支持多种解析字符串")] [DetailedInfoBox(MessageYoga, "$GetDetails")]
+        [FoldoutGroup("Details 参数 支持多种解析字符串")]
+        [DetailedInfoBox(MessageYoga, "$GetDetails")]
         public string detailsMethodNameExample;
 
-        [FoldoutGroup("Details 参数 支持多种解析字符串")] [DetailedInfoBox(MessageYoga, "$DetailsProperty")]
+        [FoldoutGroup("Details 参数 支持多种解析字符串")]
+        [DetailedInfoBox(MessageYoga, "$DetailsProperty")]
         public string detailsPropertyNameExample;
 
         [FoldoutGroup("VisibleIf 参数 支持多种解析字符串")]
         public bool isVisible = true;
 
-        [FoldoutGroup("VisibleIf 参数 支持多种解析字符串")] [DetailedInfoBox(MessageYoga, DetailsYoga, VisibleIf = "@isVisible")]
+        [FoldoutGroup("VisibleIf 参数 支持多种解析字符串")]
+        [DetailedInfoBox(MessageYoga, DetailsYoga, VisibleIf = "@isVisible")]
         public string visibleIfAttributeExpressionExample;
 
         [FoldoutGroup("VisibleIf 参数 支持多种解析字符串")]
@@ -61,19 +72,23 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [DetailedInfoBox(MessageYoga, DetailsYoga, VisibleIf = nameof(IsVisibleProperty))]
         public string visibleIfPropertyNameExample;
 
-        [FoldoutGroup("InfoMessageType 参数 枚举类型")] [DetailedInfoBox(MessageYoga, DetailsYoga)]
+        [FoldoutGroup("InfoMessageType 参数 枚举类型")]
+        [DetailedInfoBox(MessageYoga, DetailsYoga)]
         public string infoMessageTypeDetailedInfoBox1;
 
-        [FoldoutGroup("InfoMessageType 参数 枚举类型")] [DetailedInfoBox(MessageYoga, DetailsYoga, InfoMessageType.None)]
+        [FoldoutGroup("InfoMessageType 参数 枚举类型")]
+        [DetailedInfoBox(MessageYoga, DetailsYoga, InfoMessageType.None)]
         public string infoMessageTypeDetailedInfoBox2;
 
-        [FoldoutGroup("InfoMessageType 参数 枚举类型")] [DetailedInfoBox(MessageYoga, DetailsYoga, InfoMessageType.Warning)]
+        [FoldoutGroup("InfoMessageType 参数 枚举类型")]
+        [DetailedInfoBox(MessageYoga, DetailsYoga, InfoMessageType.Warning)]
         public string infoMessageTypeDetailedInfoBox3;
 
-        [FoldoutGroup("InfoMessageType 参数 枚举类型")] [DetailedInfoBox(MessageYoga, DetailsYoga, InfoMessageType.Error)]
+        [FoldoutGroup("InfoMessageType 参数 枚举类型")]
+        [DetailedInfoBox(MessageYoga, DetailsYoga, InfoMessageType.Error)]
         public string infoMessageTypeDetailedInfoBox4;
 
-        private string MessageProperty => message;
+        string MessageProperty => message;
 
         public string DetailsProperty => details;
 
@@ -86,20 +101,11 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
             "DetailedInfoBox 完整部分，可以用于属性")]
         public string Property { get; set; }
 
-        private string GetMessage()
-        {
-            return message;
-        }
+        string GetMessage() => message;
 
-        private string GetDetails()
-        {
-            return details;
-        }
+        string GetDetails() => details;
 
-        private bool GetVisibility()
-        {
-            return isVisible;
-        }
+        bool GetVisibility() => isVisible;
 
         [PropertyOrder(40)]
         [FoldoutGroup("DetailedInfoBox 扩展")]
@@ -128,8 +134,13 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         {
             attributes.Add(new LabelWidthAttribute(250));
             if (member.Name == "isVisible")
+            {
                 attributes.Add(new LabelTextAttribute("控制是否显示 DetailedInfoBox"));
-            else if (member.Name == "Property") attributes.Add(new LabelTextAttribute("属性"));
+            }
+            else if (member.Name == "Property")
+            {
+                attributes.Add(new LabelTextAttribute("属性"));
+            }
         }
     }
 #endif

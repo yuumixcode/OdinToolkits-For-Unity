@@ -1,4 +1,3 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Database;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
@@ -6,16 +5,17 @@ using System;
 using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Common.Editor;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.Database;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Window
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.Window
 {
     public class ChineseAttributeEditorWindow : OdinMenuEditorWindow
     {
-        private static ChineseAttributeEditorWindow _window;
+        static ChineseAttributeEditorWindow _window;
         public static Action OnWindowResized;
-        private float _previousMenuTreeWidth;
-        private float _previousWindowWidth;
-        private OdinMenuTree _tree;
+        float _previousMenuTreeWidth;
+        float _previousWindowWidth;
+        OdinMenuTree _tree;
 
         protected override void OnDestroy()
         {
@@ -62,7 +62,9 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Window
         {
             foreach (var map in AttributeChineseDatabase.Instance.ContainerMaps)
             foreach (var container in map.Value)
+            {
                 _tree.AddObjectAtPath(map.Key + "/" + container.GetType().Name.Replace("Container", ""), container);
+            }
 
             return _tree;
         }
@@ -72,18 +74,23 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Window
             base.OnImGUI();
             var currentWindowWidth = position.width;
             var currentMenuTreeWidth = MenuWidth;
-            if (EditorApplication.timeSinceStartup % 0.5f <= 0.01f) OnWindowResized?.Invoke();
+            if (EditorApplication.timeSinceStartup % 0.5f <= 0.01f)
+            {
+                OnWindowResized?.Invoke();
+            }
 
             if (Mathf.Approximately(currentWindowWidth, _previousWindowWidth) &&
                 Mathf.Approximately(currentMenuTreeWidth, _previousMenuTreeWidth))
+            {
                 return;
+            }
 
             _previousWindowWidth = currentWindowWidth;
             _previousMenuTreeWidth = currentMenuTreeWidth;
             OnWindowResized?.Invoke();
         }
 
-        private static void RepaintWindow()
+        static void RepaintWindow()
         {
             _window?.Repaint();
         }

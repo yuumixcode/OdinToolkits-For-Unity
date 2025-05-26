@@ -33,7 +33,7 @@ namespace Yuumix.OdinToolkits.Modules.ComponentBinder.Runtime
             UpdatePath(assistant);
         }
 
-        private void DefaultFieldName()
+        void DefaultFieldName()
         {
             fieldName = labelObj.name + componentFullName.Split('.')[^1];
         }
@@ -44,7 +44,7 @@ namespace Yuumix.OdinToolkits.Modules.ComponentBinder.Runtime
                 labelObj.GetComponent<BinderLabel>().HierarchyPath);
         }
 
-        private ValueDropdownList<string> GetTypesString()
+        ValueDropdownList<string> GetTypesString()
         {
             var list = new ValueDropdownList<string>();
             if (!labelObj)

@@ -1,18 +1,24 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class EnableGUIExample : ExampleScriptableObject
     {
-        [PropertyOrder(0)] [InfoBox("正常字段，没有添加多余特性，不是灰色显示的")]
+        [PropertyOrder(0)]
+        [InfoBox("正常字段，没有添加多余特性，不是灰色显示的")]
         public string enableGUI1 = "";
 
-        [PropertyOrder(1)] [ReadOnly] [InfoBox("只读字段，它将是灰色显示")]
+        [PropertyOrder(1)]
+        [ReadOnly]
+        [InfoBox("只读字段，它将是灰色显示")]
         public string enableGUI2 = "";
 
-        [PropertyOrder(5)] [ReadOnly] [EnableGUI] [InfoBox("只读字段，但是标记了 [EnableGUI] ，强制启用，可以获取焦点，在 Inspector 上修改会警告")]
+        [PropertyOrder(5)]
+        [ReadOnly]
+        [EnableGUI]
+        [InfoBox("只读字段，但是标记了 [EnableGUI] ，强制启用，可以获取焦点，在 Inspector 上修改会警告")]
         public string enableGUI3 = "";
 
         [PropertyOrder(10)]

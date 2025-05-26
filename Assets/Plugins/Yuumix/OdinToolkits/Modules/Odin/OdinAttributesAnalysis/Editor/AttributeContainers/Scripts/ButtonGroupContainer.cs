@@ -1,75 +1,62 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts;
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributeContainers.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributeContainers.Scripts
 {
     public class ButtonGroupContainer : AbsContainer
     {
-        protected override string SetHeader()
-        {
-            return "ButtonGroup";
-        }
+        protected override string SetHeader() => "ButtonGroup";
 
-        protected override string SetBrief()
-        {
-            return "将实例(非静态)方法绘制成按钮，并横向分组";
-        }
+        protected override string SetBrief() => "将实例(非静态)方法绘制成按钮，并横向分组";
 
-        protected override List<string> SetTip()
-        {
-            return new List<string>
+        protected override List<string> SetTip() =>
+            new List<string>
             {
                 "ButtonGroup 可以和 Button 结合使用，Button 对于按钮的设置将覆盖 ButtonGroup"
             };
-        }
 
-        protected override List<ParamValue> SetParamValues()
-        {
-            return new List<ParamValue>
+        protected override List<ParamValue> SetParamValues() =>
+            new List<ParamValue>
             {
-                new()
+                new ParamValue
                 {
                     returnType = "string",
                     paramName = "group",
                     paramDescription = "分组名，默认为 _DefaultGroup，" + DescriptionConfigs.SupportMemberResolverLite
                 },
-                new()
+                new ParamValue
                 {
                     returnType = "float",
                     paramName = "order",
                     paramDescription = "排序，越小越靠左，默认为 0"
                 },
-                new()
+                new ParamValue
                 {
                     returnType = "int",
                     paramName = "ButtonHeight",
                     paramDescription = "按钮高度"
                 },
-                new()
+                new ParamValue
                 {
                     returnType = "IconAlignment",
                     paramName = "IconAlignment",
                     paramDescription = "图标对齐方式"
                 },
-                new()
+                new ParamValue
                 {
                     returnType = "int",
                     paramName = "ButtonAlignment",
                     paramDescription = "0 为向左对齐，1 为向右对齐"
                 },
-                new()
+                new ParamValue
                 {
                     returnType = "bool",
                     paramName = "Stretch",
                     paramDescription = "是否拉伸宽度，默认为 true"
                 }
             };
-        }
 
-        protected override string SetOriginalCode()
-        {
-            return ReadCodeWithoutNamespace(typeof(ButtonGroupExample));
-        }
+        protected override string SetOriginalCode() => ReadCodeWithoutNamespace(typeof(ButtonGroupExample));
     }
 }

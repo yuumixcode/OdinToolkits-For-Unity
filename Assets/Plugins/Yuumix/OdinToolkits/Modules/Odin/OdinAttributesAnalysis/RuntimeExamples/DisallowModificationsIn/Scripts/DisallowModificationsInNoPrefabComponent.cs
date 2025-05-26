@@ -1,14 +1,16 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.RuntimeExamples.DisallowModificationsIn.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.RuntimeExamples.DisallowModificationsIn.Scripts
 {
     public class DisallowModificationsInNoPrefabComponent : MonoBehaviour
     {
-        [DisallowModificationsIn(PrefabKind.None)] [InfoBox("PrefabKind.None 无意义，无法满足这个要求，仅占位，")]
+        [DisallowModificationsIn(PrefabKind.None)]
+        [InfoBox("PrefabKind.None 无意义，无法满足这个要求，仅占位，")]
         public GameObject instance;
 
-        [DisallowModificationsIn(PrefabKind.NonPrefabInstance)] [InfoBox("该物体在场景中且不是预制体时，不允许修改该字段")]
+        [DisallowModificationsIn(PrefabKind.NonPrefabInstance)]
+        [InfoBox("该物体在场景中且不是预制体时，不允许修改该字段")]
         public GameObject noPrefabInstance;
     }
 }

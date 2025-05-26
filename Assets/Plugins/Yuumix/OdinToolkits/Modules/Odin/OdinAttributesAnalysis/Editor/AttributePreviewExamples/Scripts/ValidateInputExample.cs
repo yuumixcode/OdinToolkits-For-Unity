@@ -1,9 +1,9 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class ValidateInputExample : ExampleScriptableObject
@@ -19,13 +19,16 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [LabelWidth(250)]
         public string conditionMethodNameExample;
 
-        [FoldoutGroup("DefaultMessage 参数 支持多种解析字符串")] [LabelWidth(250)]
+        [FoldoutGroup("DefaultMessage 参数 支持多种解析字符串")]
+        [LabelWidth(250)]
         public string alternativeMessage = "YOGA";
 
-        [FoldoutGroup("DefaultMessage 参数 支持多种解析字符串")] [LabelWidth(250)]
+        [FoldoutGroup("DefaultMessage 参数 支持多种解析字符串")]
+        [LabelWidth(250)]
         public string setMessage = "SOAP";
 
-        [FoldoutGroup("DefaultMessage 参数 支持多种解析字符串")] [LabelWidth(250)]
+        [FoldoutGroup("DefaultMessage 参数 支持多种解析字符串")]
+        [LabelWidth(250)]
         public bool useAlternativeMessage = true;
 
         [FoldoutGroup("DefaultMessage 参数 支持多种解析字符串")]
@@ -50,7 +53,9 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [ValidateInput("@false", nameof(MessageProperty), ContinuousValidationCheck = true)]
         public string defaultMessagePropertyNameExample;
 
-        [FoldoutGroup("InfoMessageType 参数 枚举类型")] [ValidateInput("@false", "默认为 Error 类型")] [LabelWidth(250)]
+        [FoldoutGroup("InfoMessageType 参数 枚举类型")]
+        [ValidateInput("@false", "默认为 Error 类型")]
+        [LabelWidth(250)]
         public string infoMessageTypeExampleError;
 
         [FoldoutGroup("InfoMessageType 参数 枚举类型")]
@@ -86,7 +91,9 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [LabelWidth(250)]
         public GameObject dynamicMessage;
 
-        [FoldoutGroup("ValidateInput 扩展")] [Title("动态修改消息类型")] [LabelWidth(250)]
+        [FoldoutGroup("ValidateInput 扩展")]
+        [Title("动态修改消息类型")]
+        [LabelWidth(250)]
         public InfoMessageType messageTypeChanged;
 
         [FoldoutGroup("ValidateInput 扩展")]
@@ -98,7 +105,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         public string MessageProperty => useAlternativeMessage ? alternativeMessage : setMessage;
 
         // 如果想要通过 Condition 方法设置 ValidateInputAttribute 的其他值的话，需要使用 ref 引用，否则无法覆盖默认值
-        private bool IsValid(string value, string thisMessage, ref InfoMessageType messageType)
+        bool IsValid(string value, string thisMessage, ref InfoMessageType messageType)
         {
             thisMessage = "Field can't be empty";
             messageType = InfoMessageType.Error;
@@ -106,30 +113,36 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
             return !string.IsNullOrWhiteSpace(value);
         }
 
-        private string GetMessage()
-        {
-            return useAlternativeMessage ? alternativeMessage : setMessage;
-        }
+        string GetMessage() => useAlternativeMessage ? alternativeMessage : setMessage;
 
-        private bool ChildrenIsValid(TestIncludeChildren testIncludeChildren)
+        bool ChildrenIsValid(TestIncludeChildren testIncludeChildren)
         {
-            if (!string.IsNullOrWhiteSpace(testIncludeChildren.child.name)) return true;
+            if (!string.IsNullOrWhiteSpace(testIncludeChildren.child.name))
+            {
+                return true;
+            }
 
             Debug.Log("TestIncludeChildren 验证一次");
             return false;
         }
 
-        private bool IsContinuousValidation(string value)
+        bool IsContinuousValidation(string value)
         {
             Debug.Log("ContinuousValidation 验证一次");
             return !string.IsNullOrWhiteSpace(value);
         }
 
-        private bool HasMeshRendererDynamicMessage(GameObject gameObject, ref string errorMessage)
+        bool HasMeshRendererDynamicMessage(GameObject gameObject, ref string errorMessage)
         {
-            if (gameObject == null) return true;
+            if (gameObject == null)
+            {
+                return true;
+            }
 
-            if (gameObject.GetComponentInChildren<MeshRenderer>() != null) return true;
+            if (gameObject.GetComponentInChildren<MeshRenderer>() != null)
+            {
+                return true;
+            }
 
             // 如果 errorMessage == null，则使用默认的错误消息
             errorMessage = "\"" + gameObject.name + "\" must have a MeshRenderer component";
@@ -137,10 +150,13 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
             return false;
         }
 
-        private bool HasMeshRendererDynamicMessageAndType(GameObject gameObject, ref string errorMessage,
+        bool HasMeshRendererDynamicMessageAndType(GameObject gameObject, ref string errorMessage,
             ref InfoMessageType messageType)
         {
-            if (gameObject == null) return true;
+            if (gameObject == null)
+            {
+                return true;
+            }
 
             if (gameObject.GetComponentInChildren<MeshRenderer>() == null)
             {

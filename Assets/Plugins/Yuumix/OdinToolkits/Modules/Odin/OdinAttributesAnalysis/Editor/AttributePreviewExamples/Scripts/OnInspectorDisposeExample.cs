@@ -1,7 +1,7 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class OnInspectorDisposeExample : ExampleScriptableObject
@@ -14,22 +14,13 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
 
         public abstract class BaseClass
         {
-            public override string ToString()
-            {
-                return GetType().Name;
-            }
+            public override string ToString() => GetType().Name;
         }
 
-        public class A : BaseClass
-        {
-        }
+        public class A : BaseClass { }
 
-        public class B : BaseClass
-        {
-        }
+        public class B : BaseClass { }
 
-        public class C : BaseClass
-        {
-        }
+        public class C : BaseClass { }
     }
 }

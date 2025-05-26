@@ -11,21 +11,16 @@ namespace Yuumix.OdinToolkits.Modules.Singleton
     public sealed class SingletonAssistant<T> where T : class, ISingleton
     {
         // 使用Lazy<T>确保单例实例在第一次访问时且只在第一次访问时被创建。
-        private static readonly Lazy<T> Instance = new Lazy<T>(SingletonCreator.AssistantCreateSingleton<T>());
+        static readonly Lazy<T> Instance = new Lazy<T>(SingletonCreator.AssistantCreateSingleton<T>());
 
         // 私有构造函数，防止外部实例化。
-        private SingletonAssistant()
-        {
-        }
+        SingletonAssistant() { }
 
         /// <summary>
         /// 静态方法，用于获取T类型的单例实例。
         /// 如果实例尚未创建，则此方法将创建并返回新实例；如果实例已存在，则返回现有的实例。
         /// </summary>
         /// <returns>T类型的单例实例，并且完成初始化</returns>
-        public static T GetInit()
-        {
-            return Instance.Value;
-        }
+        public static T GetInit() => Instance.Value;
     }
 }

@@ -1,16 +1,18 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor.Examples;
 using System;
 using UnityEditor;
 using UnityEngine;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class ResponsiveButtonGroupExample : ExampleScriptableObject
     {
-        [PropertyOrder(10)] [FoldoutGroup("ResponsiveButtonGroup 基础使用")] [InfoBox("内部方法直接使用 [ResponsiveButtonGroup] ")]
+        [PropertyOrder(10)]
+        [FoldoutGroup("ResponsiveButtonGroup 基础使用")]
+        [InfoBox("内部方法直接使用 [ResponsiveButtonGroup] ")]
         public BasicExample basicExample;
 
         [PropertyOrder(20)]
@@ -30,44 +32,32 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [FoldoutGroup("ResponsiveButtonGroup 进阶使用-与其他 Group 结合")]
         [TitleGroup("ResponsiveButtonGroup 进阶使用-与其他 Group 结合/Title1")]
         [ResponsiveButtonGroup("ResponsiveButtonGroup 进阶使用-与其他 Group 结合/Title1/SomeBtnGroup")]
-        public void Baz1()
-        {
-        }
+        public void Baz1() { }
 
         [PropertyOrder(50)]
         [FoldoutGroup("ResponsiveButtonGroup 进阶使用-与其他 Group 结合")]
         [TitleGroup("ResponsiveButtonGroup 进阶使用-与其他 Group 结合/Title1")]
         [ResponsiveButtonGroup("ResponsiveButtonGroup 进阶使用-与其他 Group 结合/Title1/SomeBtnGroup")]
-        public void Baz2()
-        {
-        }
+        public void Baz2() { }
 
         [PropertyOrder(60)]
         [FoldoutGroup("ResponsiveButtonGroup 进阶使用-与其他 Group 结合")]
         [TitleGroup("ResponsiveButtonGroup 进阶使用-与其他 Group 结合/Title2")]
         [ResponsiveButtonGroup("ResponsiveButtonGroup 进阶使用-与其他 Group 结合/Title2/SomeBtnGroup")]
-        public void Baz3()
-        {
-        }
+        public void Baz3() { }
 
         [Serializable]
         [HideLabel]
         public struct BasicExample
         {
             [ResponsiveButtonGroup]
-            public void Foo()
-            {
-            }
+            public void Foo() { }
 
             [ResponsiveButtonGroup]
-            public void Bar()
-            {
-            }
+            public void Bar() { }
 
             [ResponsiveButtonGroup]
-            public void Baz()
-            {
-            }
+            public void Baz() { }
         }
 
         [Serializable]
@@ -75,24 +65,16 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         public struct BasicExample2
         {
             [ResponsiveButtonGroup("UniformGroup", UniformLayout = true)]
-            public void Foo1()
-            {
-            }
+            public void Foo1() { }
 
             [ResponsiveButtonGroup("UniformGroup")]
-            public void Foo2()
-            {
-            }
+            public void Foo2() { }
 
             [ResponsiveButtonGroup("UniformGroup")]
-            public void LongNameWins()
-            {
-            }
+            public void LongNameWins() { }
 
             [ResponsiveButtonGroup("UniformGroup")]
-            public void Foo4()
-            {
-            }
+            public void Foo4() { }
         }
 
         [Serializable]
@@ -100,43 +82,31 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         public struct ButtonSizeExample
         {
             [ResponsiveButtonGroup("DefaultButtonSize", DefaultButtonSize = ButtonSizes.Small)]
-            public void Bar1()
-            {
-            }
+            public void Bar1() { }
 
             [ResponsiveButtonGroup("DefaultButtonSize")]
-            public void Bar2()
-            {
-            }
+            public void Bar2() { }
 
             [ResponsiveButtonGroup("DefaultButtonSize")]
             [Button(ButtonSizes.Large)]
-            public void Bar4()
-            {
-            }
+            public void Bar4() { }
 
             [ResponsiveButtonGroup("DefaultButtonSize")]
             [Button(ButtonSizes.Large)]
-            public void Bar5()
-            {
-            }
+            public void Bar5() { }
 
             [ResponsiveButtonGroup("DefaultButtonSize")]
-            public void Bar6()
-            {
-            }
+            public void Bar6() { }
         }
 #if UNITY_EDITOR
         [InfoBox("Odin 内置的一个 Example")]
         [OnInspectorGUI]
-        private void InfoBox1()
-        {
-        }
+        void InfoBox1() { }
 
         [PropertyOrder(1)]
         [Button(ButtonSizes.Large)]
         [GUIColor(0, 1, 0)]
-        private void OpenDockableWindowExample()
+        void OpenDockableWindowExample()
         {
             var window = EditorWindow.GetWindow<MyDockableGameDashboard>();
             window.WindowPadding = new Vector4();

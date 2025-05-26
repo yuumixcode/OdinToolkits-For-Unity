@@ -1,14 +1,12 @@
 using Sirenix.OdinInspector;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor
 {
     /// <summary>
-    ///     使用 Odin 序列化的 ExampleScriptableObject
+    /// 使用 Odin 序列化的 ExampleScriptableObject
     /// </summary>
     public abstract class ExampleOdinScriptableObject : SerializedScriptableObject
     {
-        public virtual void SetDefaultValue()
-        {
-        }
+        public virtual void SetDefaultValue() { }
     }
 }

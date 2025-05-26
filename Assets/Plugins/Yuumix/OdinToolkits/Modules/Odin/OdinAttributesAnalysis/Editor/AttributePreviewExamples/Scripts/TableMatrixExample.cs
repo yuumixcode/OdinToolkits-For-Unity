@@ -1,9 +1,9 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class TableMatrixExample : ExampleOdinScriptableObject
@@ -12,8 +12,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [Title("默认 [TableMatrix]")]
         [DetailedInfoBox("默认规则解释...",
             "默认文字方向为从左至右 - LabelDirection.LeftToRight，" +
-            "二维数组的 X，默认为列，Y 默认为行，和二维数组的xy相反",
-            InfoMessageType.Info)]
+            "二维数组的 X，默认为列，Y 默认为行，和二维数组的xy相反")]
         [TableMatrix]
         public string[,] Matrix0 = new string[2, 3]
         {
@@ -81,7 +80,10 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
             { "[1,0]", "[1,1]", "[1,2]" }
         };
 
-        [PropertyOrder(10)] [FoldoutGroup("基础使用")] [Title("RowHeight", "RowHeight = 40")] [TableMatrix(RowHeight = 40)]
+        [PropertyOrder(10)]
+        [FoldoutGroup("基础使用")]
+        [Title("RowHeight", "RowHeight = 40")]
+        [TableMatrix(RowHeight = 40)]
         public string[,] Matrix7 = new string[2, 3]
         {
             { "[0,0]", "[0,1]", "[0,2]" },
@@ -149,7 +151,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
             { "[1,0]", "[1,1]", "[1,2]" }
         };
 
-        private (string, LabelDirection) GetLabel(string[,] array, TableAxis axis, int index)
+        (string, LabelDirection) GetLabel(string[,] array, TableAxis axis, int index)
         {
             const string chessFileLetters = "ABCDEFGH";
             return axis switch
@@ -161,7 +163,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
             };
         }
 
-        private string CustomDrawElement1(Rect rect, string value)
+        string CustomDrawElement1(Rect rect, string value)
         {
 #if UNITY_EDITOR
             EditorGUI.LabelField(rect, value);
@@ -169,7 +171,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
 #endif
         }
 
-        private string CustomDrawElement2(Rect rect, string[,] array, int x, int y)
+        string CustomDrawElement2(Rect rect, string[,] array, int x, int y)
         {
 #if UNITY_EDITOR
             var guiStyle = new GUIStyle(EditorStyles.centeredGreyMiniLabel)

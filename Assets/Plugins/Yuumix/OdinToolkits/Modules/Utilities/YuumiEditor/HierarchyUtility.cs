@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Yuumix.OdinToolkits.Common.Runtime;
 #if UNITY_EDITOR
 using UnityEditor.Search;
 #endif
@@ -16,7 +17,8 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor
         {
             if (parentPath == string.Empty)
             {
-                return "父物体路径为空，可能是处于打包成品阶段";
+                OdinEditorLog.Error("父物体路径为空");
+                return "ParentPath == null";
             }
 
             var parentPathArray = parentPath.Split('/');
@@ -35,9 +37,9 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor
 
             return string.Join("/", targetPathList);
         }
-
-        public static bool IsRootTransform(Transform trans) => trans.parent == null;
 #if UNITY_EDITOR
+        public static string GetAbsolutePath(GameObject obj) => GetAbsolutePath(obj.transform);
+
         public static string GetAbsolutePath(Transform trans)
         {
             var path = SearchUtils.GetHierarchyPath(trans.gameObject, false)
@@ -45,8 +47,6 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor
             // Debug.Log("GetHierarchyPath: " +  path);
             return path;
         }
-
-        public static string GetAbsolutePath(GameObject obj) => GetAbsolutePath(obj.transform);
 #endif
     }
 }

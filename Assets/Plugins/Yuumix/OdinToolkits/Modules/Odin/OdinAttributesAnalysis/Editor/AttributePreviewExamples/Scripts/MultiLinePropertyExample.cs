@@ -1,8 +1,8 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class MultiLinePropertyExample : ExampleScriptableObject
@@ -12,10 +12,12 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         // Multiline 和 MultiLineProperty 被指定占用的精确行数
         // 永远不会根据内容收缩或扩展，如果行数不够，就会显示滚动条
 
-        [FoldoutGroup("Unity 内置")] [TextArea(4, 10)]
+        [FoldoutGroup("Unity 内置")]
+        [TextArea(4, 10)]
         public string unityTextAreaField = "";
 
-        [FoldoutGroup("Unity 内置")] [Multiline(10)]
+        [FoldoutGroup("Unity 内置")]
+        [Multiline(10)]
         public string unityMultilineField = "";
 
         [FoldoutGroup("Odin MultiLineProperty")]

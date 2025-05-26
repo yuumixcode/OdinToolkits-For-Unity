@@ -1,8 +1,8 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class DisableContextMenuExample : ExampleScriptableObject
@@ -13,12 +13,15 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [DisableContextMenu]
         public int[] noRightClickList = { 2, 3, 5 };
 
-        [DisableContextMenu] public int noRightClickField = 19;
+        [DisableContextMenu]
+        public int noRightClickField = 19;
 
-        [Title("关闭数组元素右键菜单，不关闭数组 Property 的右键菜单")] [DisableContextMenu(false, true)]
+        [Title("关闭数组元素右键菜单，不关闭数组 Property 的右键菜单")]
+        [DisableContextMenu(false, true)]
         public int[] noRightClickListOnListElements = { 7, 11 };
 
-        [Title("关闭数组 Property 的右键菜单，并关闭数组元素右键菜单")] [DisableContextMenu(true, true)]
+        [Title("关闭数组 Property 的右键菜单，并关闭数组元素右键菜单")]
+        [DisableContextMenu(true, true)]
         public int[] disableRightClickCompletely = { 13, 17 };
 
         [Title("Unity 内置的 ContextMenuItem 特性")]

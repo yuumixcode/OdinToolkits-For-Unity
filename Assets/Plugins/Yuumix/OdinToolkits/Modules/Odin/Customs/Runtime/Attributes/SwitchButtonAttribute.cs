@@ -11,11 +11,11 @@ namespace Yuumix.OdinToolkits.Modules.Odin.Customs.Runtime.Attributes
 
     public class SwitchButtonAttribute : Attribute
     {
-        private const string DefaultBackgroundColorOn = "@new Color(0.498f, 0.843f, 0.992f)";
-        private const string DefaultBackgroundColorOff = "@new Color(0.165f, 0.165f, 0.165f)";
-        private const string DefaultSwitchColorOn = DefaultBackgroundColorOff;
-        private const string DefaultSwitchColorOff = DefaultBackgroundColorOn;
-        private const int DefaultSwitchWidth = 28;
+        const string DefaultBackgroundColorOn = "@new Color(0.498f, 0.843f, 0.992f)";
+        const string DefaultBackgroundColorOff = "@new Color(0.165f, 0.165f, 0.165f)";
+        const string DefaultSwitchColorOn = DefaultBackgroundColorOff;
+        const string DefaultSwitchColorOff = DefaultBackgroundColorOn;
+        const int DefaultSwitchWidth = 28;
         public readonly SwitchAlignment Alignment;
         public readonly bool Rounded;
         public string BackgroundColorOff;
@@ -36,7 +36,7 @@ namespace Yuumix.OdinToolkits.Modules.Odin.Customs.Runtime.Attributes
             SetColors(backgroundColorOn, backgroundColorOff, switchColorOn, switchColorOff);
         }
 
-        private void SetColors(
+        void SetColors(
             string backgroundColorOn,
             string backgroundColorOff,
             string switchColorOn,

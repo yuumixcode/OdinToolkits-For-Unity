@@ -1,16 +1,17 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using System;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class ToggleExample : ExampleScriptableObject
     {
         // 对单一字段进行修改
-        [Toggle(nameof(MyToggleable.enabled))] public MyToggleable toggler = new();
+        [Toggle(nameof(MyToggleable.enabled))]
+        public MyToggleable toggler = new MyToggleable();
 
-        public ToggleableClass toggleable = new();
+        public ToggleableClass toggleable = new ToggleableClass();
 
         [Serializable]
         public class MyToggleable

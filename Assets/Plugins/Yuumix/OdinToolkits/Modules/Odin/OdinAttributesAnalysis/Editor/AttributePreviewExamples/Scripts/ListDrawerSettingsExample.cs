@@ -1,12 +1,12 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities.Editor;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 using ObjectFieldAlignment = Sirenix.OdinInspector.ObjectFieldAlignment;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class ListDrawerSettingsExample : ExampleScriptableObject
@@ -17,7 +17,9 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [ListDrawerSettings(IsReadOnly = true)]
         public int[] readOnlyArray1 = { 1, 2, 3 };
 
-        [FoldoutGroup("ListDrawerSettings 基础使用")] [ReadOnly] [InfoBox("另外一种只读方式 [ReadOnly] ，直接让列表全部无法获取焦点")]
+        [FoldoutGroup("ListDrawerSettings 基础使用")]
+        [ReadOnly]
+        [InfoBox("另外一种只读方式 [ReadOnly] ，直接让列表全部无法获取焦点")]
         public int[] readOnlyArray2 = { 1, 2, 3 };
 
         [FoldoutGroup("ListDrawerSettings 基础使用")]
@@ -75,10 +77,10 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         public int[] colorArray = { 1, 2, 3 };
 
         [FoldoutGroup("ListDrawerSettings 基础使用")]
-        public Color firstColor = new(1f, 0.79f, 0.14f, 1f);
+        public Color firstColor = new Color(1f, 0.79f, 0.14f, 1f);
 
         [FoldoutGroup("ListDrawerSettings 基础使用")]
-        public Color secondColor = new(0.11f, 0.77f, 0.5f, 1f);
+        public Color secondColor = new Color(0.11f, 0.77f, 0.5f, 1f);
 
         [FoldoutGroup("ListDrawerSettings 基础使用")]
         [ListDrawerSettings(ElementColor = "GetElementColor")]
@@ -130,43 +132,39 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [LabelText("对一个元素设置两个 GUI 方法")]
         public SomeStruct[] injectListElementGUI;
 
-        private Color GetElementColor(int index)
-        {
-            return index % 2 == 0 ? firstColor : secondColor;
-        }
+        Color GetElementColor(int index) => index % 2 == 0 ? firstColor : secondColor;
 
-        private void BeginDrawListElement(int index)
+        void BeginDrawListElement(int index)
         {
             SirenixEditorGUI.BeginBox(injectListElementGUI[index].someString);
         }
 
-        private void EndDrawListElement(int index)
+        void EndDrawListElement(int index)
         {
             SirenixEditorGUI.EndBox();
         }
 
-        private void DrawRefreshButton()
+        void DrawRefreshButton()
         {
             if (SirenixEditorGUI.ToolbarButton(EditorIcons.Refresh))
+            {
                 Debug.Log("执行自定义 Refresh 方法");
+            }
         }
 
-        private void CustomRemoveElementFunction(List<int> list, int element)
+        void CustomRemoveElementFunction(List<int> list, int element)
         {
             Debug.Log("移除的元素为: " + element);
             list.Remove(element);
         }
 
-        private void CustomRemoveElementIndex(List<int> list, int index)
+        void CustomRemoveElementIndex(List<int> list, int index)
         {
             list.RemoveAt(index);
             Debug.Log("Custom Remove Element Index Function Called");
         }
 
-        private int CustomAddFunction()
-        {
-            return customAddBehaviour.Count;
-        }
+        int CustomAddFunction() => customAddBehaviour.Count;
 
         [Serializable]
         public struct SomeStruct
@@ -179,12 +177,16 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [Serializable]
         public struct SomeOtherStruct
         {
-            [HorizontalGroup("Split", 55)] [PropertyOrder(-1)] [PreviewField(50, ObjectFieldAlignment.Left)] [HideLabel]
+            [HorizontalGroup("Split", 55)]
+            [PropertyOrder(-1)]
+            [PreviewField(50, ObjectFieldAlignment.Left)]
+            [HideLabel]
             public MonoBehaviour someObject;
 
-            [FoldoutGroup("Split/$Name", false)] public int a, b, c;
+            [FoldoutGroup("Split/$Name", false)]
+            public int a, b, c;
 
-            private string Name => someObject ? someObject.name : "Null";
+            string Name => someObject ? someObject.name : "Null";
         }
     }
 }

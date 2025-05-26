@@ -13,36 +13,36 @@ namespace Yuumix.OdinToolkits.Modules.Odin.Customs.Editor.Drawers
     public class SwitchButtonAttributeDrawer : OdinAttributeDrawer<SwitchButtonAttribute, bool>
     {
         // 动画速度系数（影响切换速度）
-        private const float AnimationSpeedMultiplier = 6f;
-
-        // 控件唯一标识哈希值（用于GUIUtility.hotControl）
-        private static readonly int ControlHint = "SwitchControlHint".GetHashCode();
-
-        // 颜色解析器（用于动态获取属性绑定的颜色值）
-        private ValueResolver<Color> _backgroundColorOnResolver;
-        private ValueResolver<Color> _backgroundColorOffResolver;
-        private ValueResolver<Color> _switchColorOnResolver;
-        private ValueResolver<Color> _switchColorOffResolver;
+        const float AnimationSpeedMultiplier = 6f;
 
         // 开关控件宽度
-        private const int SwitchWidth = 28;
+        const int SwitchWidth = 28;
 
-        // 当前状态的颜色缓存
-        private Color _backgroundColor;
-
-        private Color _switchColor;
-
-        // 开关位置（0-28px范围内移动）
-        private float _switchPosition;
-
-        // 白色纹理（用于绘制背景和滑块）
-        private Texture _whiteTexture;
+        // 控件唯一标识哈希值（用于GUIUtility.hotControl）
+        static readonly int ControlHint = "SwitchControlHint".GetHashCode();
 
         // 是否正在执行动画
-        private bool _animating;
+        bool _animating;
+
+        // 当前状态的颜色缓存
+        Color _backgroundColor;
+        ValueResolver<Color> _backgroundColorOffResolver;
+
+        // 颜色解析器（用于动态获取属性绑定的颜色值）
+        ValueResolver<Color> _backgroundColorOnResolver;
 
         // 是否存在ToggleLeftAttribute特性
-        private bool _hasToggleLeftAttribute;
+        bool _hasToggleLeftAttribute;
+
+        Color _switchColor;
+        ValueResolver<Color> _switchColorOffResolver;
+        ValueResolver<Color> _switchColorOnResolver;
+
+        // 开关位置（0-28px范围内移动）
+        float _switchPosition;
+
+        // 白色纹理（用于绘制背景和滑块）
+        Texture _whiteTexture;
 
         // 初始化方法（仅在属性第一次绘制时调用）
         protected override void Initialize()
@@ -180,17 +180,17 @@ namespace Yuumix.OdinToolkits.Modules.Odin.Customs.Editor.Drawers
         }
 
         // 切换开关状态的方法
-        private void ChangeValueTo(bool newValue)
+        void ChangeValueTo(bool newValue)
         {
             ValueEntry.SmartValue = newValue;
             _animating = true;
         }
 
         // 颜色变化检测方法
-        private bool ColorNeedChanged(Color targetBackgroundColor, Color targetSwitchColor) =>
+        bool ColorNeedChanged(Color targetBackgroundColor, Color targetSwitchColor) =>
             _backgroundColor != targetBackgroundColor || _switchColor != targetSwitchColor;
 
         // 颜色加深辅助方法
-        private static Color Darken(Color color, float factor) => new Color(color.r / factor, color.g / factor, color.b / factor);
+        static Color Darken(Color color, float factor) => new Color(color.r / factor, color.g / factor, color.b / factor);
     }
 }

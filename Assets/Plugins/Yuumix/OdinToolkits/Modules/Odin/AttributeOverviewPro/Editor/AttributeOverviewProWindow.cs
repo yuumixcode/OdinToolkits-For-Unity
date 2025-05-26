@@ -10,7 +10,7 @@ namespace Yuumix.OdinToolkits.Modules.Odin.AttributeOverviewPro.Editor
     public class AttributeOverviewProWindow : OdinMenuEditorWindow
     {
         [MenuItem(OdinToolkitsMenuPaths.AttributeOverviewProMenuPath, false, 1000)]
-        private static void ShowWindow()
+        static void ShowWindow()
         {
             var window = GetWindow<AttributeOverviewProWindow>();
             window.titleContent = new GUIContent("Attribute Overview Pro");

@@ -1,16 +1,22 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
     [IsChineseAttributeExample]
     public class FolderPathExample : ExampleScriptableObject
     {
-        [FoldoutGroup("无参数使用")] [FolderPath] [HideLabel] [InlineButton("Log1", "输出值")]
+        [FoldoutGroup("无参数使用")]
+        [FolderPath]
+        [HideLabel]
+        [InlineButton("Log1", "输出值")]
         public string path1;
 
-        [FoldoutGroup("AbsolutePath 绝对路径")] [FolderPath(AbsolutePath = true)] [HideLabel] [InlineButton("Log2", "输出值")]
+        [FoldoutGroup("AbsolutePath 绝对路径")]
+        [FolderPath(AbsolutePath = true)]
+        [HideLabel]
+        [InlineButton("Log2", "输出值")]
         public string path2;
 
         [FoldoutGroup("ParentFolder")]
@@ -25,30 +31,33 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Attrib
         [InlineButton("Log5", "输出值")]
         public string path5;
 
-        [FoldoutGroup("UseBackslashes")] [HideLabel] [FolderPath(UseBackslashes = true)] [InlineButton("Log6", "输出值")]
+        [FoldoutGroup("UseBackslashes")]
+        [HideLabel]
+        [FolderPath(UseBackslashes = true)]
+        [InlineButton("Log6", "输出值")]
         public string path6;
 
-        private void Log1()
+        void Log1()
         {
             Debug.Log(path1);
         }
 
-        private void Log2()
+        void Log2()
         {
             Debug.Log(path2);
         }
 
-        private void Log4()
+        void Log4()
         {
             Debug.Log(path4);
         }
 
-        private void Log5()
+        void Log5()
         {
             Debug.Log(path5);
         }
 
-        private void Log6()
+        void Log6()
         {
             Debug.Log(path6);
         }

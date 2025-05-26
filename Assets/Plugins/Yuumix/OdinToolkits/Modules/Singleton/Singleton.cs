@@ -11,19 +11,17 @@ namespace Yuumix.OdinToolkits.Modules.Singleton
         /// <summary>
         /// 单例实例的静态存储字段，使用 Lazy&lt;T&gt; 来实现延迟初始化。
         /// </summary>
-        private static readonly Lazy<T> SelfIns = new(SingletonCreator.PrivateCreateInstance<T>());
+        static readonly Lazy<T> SelfIns = new Lazy<T>(SingletonCreator.PrivateCreateInstance<T>());
 
         /// <summary>
         /// 表示实例是否已初始化的私有字段。
         /// </summary>
-        private bool _isInitialized;
+        bool _isInitialized;
 
         /// <summary>
         /// 保护构造函数，防止外部直接实例化。
         /// </summary>
-        protected Singleton()
-        {
-        }
+        protected Singleton() { }
 
         /// <summary>
         /// 以线程安全的方式提供单例实例的访问。
@@ -46,8 +44,6 @@ namespace Yuumix.OdinToolkits.Modules.Singleton
         /// <summary>
         /// 实例化单例对象时执行的初始化方法。
         /// </summary>
-        protected virtual void OnSingletonInit()
-        {
-        }
+        protected virtual void OnSingletonInit() { }
     }
 }

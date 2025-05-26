@@ -27,7 +27,11 @@ namespace Yuumix.OdinToolkits.Modules.Odin.Customs.Editor.AttributeProcessors
                 // }
             }
 
-            if (!hasDisplayAsStringAlignLeftRichTextAttribute) return;
+            if (!hasDisplayAsStringAlignLeftRichTextAttribute)
+            {
+                return;
+            }
+
             // [HideLabel, ShowInInspector, EnableGUI,
             // DisplayAsString(false, TextAlignment.Left, EnableRichText = true, FontSize = 13)]
             attributes.Add(new HideLabelAttribute());

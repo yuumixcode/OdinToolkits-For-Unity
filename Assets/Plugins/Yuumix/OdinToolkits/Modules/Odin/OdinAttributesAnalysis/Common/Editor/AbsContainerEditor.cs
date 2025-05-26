@@ -1,4 +1,3 @@
-using Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Editor.Window;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
@@ -8,28 +7,29 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.Window;
 using Yuumix.OdinToolkits.Modules.Tools.SyntaxHighlighter.Editor;
 
-namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
+namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor
 {
     [CustomEditor(typeof(AbsContainer), true)]
     public class AbsContainerEditor : OdinEditor
     {
-        private const int Padding = 12;
-        private const int ContainerContentPadding = 10;
-        private const int CodeDefaultHeight = 400;
-        private const int CodeDefaultWidth = 600;
-        private readonly List<GUITable> _resolvedParamGUITables = new();
-        private GUIStyle _codeTextStyle;
-        private AbsContainer _container;
-        private GUIStyle _containerContentStyle;
-        private GUIStyle _containerTitleStyle;
-        private Color _darkLineColor;
-        private Color _lightLineColor;
-        private GUITable _paramValueGUITable;
-        private Vector2 _scrollPosition;
-        private GUIStyle _tableCellTextStyle;
-        private GUITable _tipGUITable;
+        const int Padding = 12;
+        const int ContainerContentPadding = 10;
+        const int CodeDefaultHeight = 400;
+        const int CodeDefaultWidth = 600;
+        readonly List<GUITable> _resolvedParamGUITables = new List<GUITable>();
+        GUIStyle _codeTextStyle;
+        AbsContainer _container;
+        GUIStyle _containerContentStyle;
+        GUIStyle _containerTitleStyle;
+        Color _darkLineColor;
+        Color _lightLineColor;
+        GUITable _paramValueGUITable;
+        Vector2 _scrollPosition;
+        GUIStyle _tableCellTextStyle;
+        GUITable _tipGUITable;
 
         protected override void OnEnable()
         {
@@ -65,15 +65,17 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
             EditorApplication.delayCall += CalculateAllTableSize;
         }
 
-        private void OnDestroy()
+        void OnDestroy()
         {
             EditorApplication.delayCall -= CalculateAllTableSize;
         }
 
-        private void CreateResolvedParamGUITables()
+        void CreateResolvedParamGUITables()
         {
             foreach (var resolvedParam in _container.ResolvedParams)
+            {
                 _resolvedParamGUITables.Add(resolvedParam.CreateGUITable());
+            }
         }
 
         public override void OnInspectorGUI()
@@ -86,12 +88,15 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
             DrawExample();
             DrawSeparator();
             DrawCode();
-            if (!(EditorApplication.timeSinceStartup % 0.5f <= 0.01f)) return;
+            if (!(EditorApplication.timeSinceStartup % 0.5f <= 0.01f))
+            {
+                return;
+            }
 
             CalculateAllTableSize();
         }
 
-        private void EnsureGUIStyles()
+        void EnsureGUIStyles()
         {
             _tableCellTextStyle ??= new GUIStyle(SirenixGUIStyles.MultiLineCenteredLabel)
             {
@@ -131,7 +136,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
             };
         }
 
-        private void CreateTipGUITable()
+        void CreateTipGUITable()
         {
             _tipGUITable = GUITable.Create(_container.UseTips, null,
                 new GUITableColumn
@@ -150,7 +155,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
             );
         }
 
-        private void CreateParamGUITable()
+        void CreateParamGUITable()
         {
             _paramValueGUITable = GUITable.Create(_container.ParamValues, null, new GUITableColumn
                 {
@@ -179,14 +184,17 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
                 });
         }
 
-        private void DrawTableCell(Rect rect, string text, GUIStyle style = null)
+        void DrawTableCell(Rect rect, string text, GUIStyle style = null)
         {
             EditorGUI.LabelField(rect, text, style ?? _tableCellTextStyle);
         }
 
-        private void DrawResolvedParams()
+        void DrawResolvedParams()
         {
-            if (_resolvedParamGUITables.Count <= 0) return;
+            if (_resolvedParamGUITables.Count <= 0)
+            {
+                return;
+            }
 
             // 需要容器
             DrawContainer("特性解析字符串的方法签名", DrawInternal);
@@ -208,13 +216,20 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
                     EditorGUI.LabelField(rect.Split(0, 2), "特性参数: " + _container.ResolvedParams[i].ParamName, style);
                     var rect3 = rect.Split(1, 2);
                     if (_container.ResolvedParams[i].ReturnType == typeof(void).Name)
+                    {
                         EditorGUI.LabelField(rect3, "方法无返回值 void", style);
+                    }
                     else
+                    {
                         EditorGUI.LabelField(rect3, "方法返回值类型为：" + _container.ResolvedParams[i].ReturnType, style);
+                    }
 
                     SirenixEditorGUI.EndBoxHeader();
                     _resolvedParamGUITables[i].DrawTable();
-                    if (i == _resolvedParamGUITables.Count - 1) continue;
+                    if (i == _resolvedParamGUITables.Count - 1)
+                    {
+                        continue;
+                    }
 
                     GUILayout.Space(10f);
                     SirenixEditorGUI.HorizontalLineSeparator(_lightLineColor, 2);
@@ -225,16 +240,25 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
             }
         }
 
-        private void DrawExample()
+        void DrawExample()
         {
             // 原生绘制 Example
             var rect = DrawContainer("使用案例预览", base.OnInspectorGUI);
             Type exampleType = null;
-            if (_container.example is not null) exampleType = _container.example.GetType();
+            if (_container.example is not null)
+            {
+                exampleType = _container.example.GetType();
+            }
 
-            if (_container.exampleOdin is not null) exampleType = _container.exampleOdin.GetType();
+            if (_container.exampleOdin is not null)
+            {
+                exampleType = _container.exampleOdin.GetType();
+            }
 
-            if (exampleType is null) return;
+            if (exampleType is null)
+            {
+                return;
+            }
 
             var attribute = TypeCache
                 .GetTypesWithAttribute<IsChineseAttributeExampleAttribute>()
@@ -248,7 +272,10 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
             // 绝对路径转相对路径
             var relative = "Assets/" + PathUtilities.MakeRelative(Application.dataPath, path);
             // Debug.Log("相对路径: " + relative);
-            if (string.IsNullOrEmpty(relative)) return;
+            if (string.IsNullOrEmpty(relative))
+            {
+                return;
+            }
 
             // Assets/OdinToolkits/ChineseGuide/ChineseAttributesOverview/Editor/PreviewExamples/Scripts/CustomValueDrawerExample.cs
             var script = AssetDatabase.LoadAssetAtPath<MonoScript>(relative);
@@ -257,22 +284,30 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
             var rect1 = rect0.Split(0, 2);
             if (GUI.Button(rect1, GUIHelper.TempContent("跳转到脚本文件"),
                     SirenixGUIStyles.ToolbarButton))
+            {
                 EditorGUIUtility.PingObject(script);
+            }
 
             var rect2 = rect0.Split(1, 2);
             if (GUI.Button(rect2, GUIHelper.TempContent("重置案例"),
                     SirenixGUIStyles.ToolbarButton))
             {
-                if (_container.example != null) _container.example.SetDefaultValue();
+                if (_container.example != null)
+                {
+                    _container.example.SetDefaultValue();
+                }
 
-                if (_container.exampleOdin != null) _container.exampleOdin.SetDefaultValue();
+                if (_container.exampleOdin != null)
+                {
+                    _container.exampleOdin.SetDefaultValue();
+                }
 
                 // Debug.Log("重置");
             }
             // SirenixEditorGUI.DrawBorders(rect, 1, Color.green);
         }
 
-        private Rect DrawContainer(string title, Action drawContent, GUIStyle titleStyle = null)
+        Rect DrawContainer(string title, Action drawContent, GUIStyle titleStyle = null)
         {
             titleStyle ??= _containerTitleStyle;
             var headerRect = SirenixEditorGUI.BeginHorizontalToolbar(30f);
@@ -290,15 +325,17 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
             return headerRect;
         }
 
-        private void DrawCode()
+        void DrawCode()
         {
             var headerRect = DrawContainer("代码预览", CodePreview);
             if (GUI.Button(headerRect.AlignCenterY(headerRect.height).AlignRight(80), GUIHelper.TempContent("拷贝代码"),
                     SirenixGUIStyles.ToolbarButton))
+            {
                 Clipboard.Copy(_container.OriginalCode);
+            }
         }
 
-        private void CodePreview()
+        void CodePreview()
         {
             var rect = SirenixEditorGUI.BeginBox();
             GUILayoutUtility.GetRect(GUIHelper.TempContent("宽度卡位"), GUIStyle.none, GUILayout.Width(CodeDefaultWidth),
@@ -317,7 +354,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
             // GUILayout.Label(GUIHelper.TempContent(rect.ToString()));
         }
 
-        private void DrawGUITable(GUITable table, IList dataList, string containerTitle, out Rect rect)
+        void DrawGUITable(GUITable table, IList dataList, string containerTitle, out Rect rect)
         {
             rect = EditorGUILayout.BeginVertical();
             if (table != null && dataList.Count > 0)
@@ -329,7 +366,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
             EditorGUILayout.EndVertical();
         }
 
-        private void CalculateAllTableSize()
+        void CalculateAllTableSize()
         {
             CalculateTipTableSize();
             CalculateParamValueTableSize();
@@ -337,7 +374,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
             // Debug.Log("重新计算表格大小");
         }
 
-        private void CalculateAllResolvedParamTableSize()
+        void CalculateAllResolvedParamTableSize()
         {
             for (var i = 0; i < _resolvedParamGUITables.Count; i++)
             {
@@ -359,7 +396,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
             }
         }
 
-        private void CalculateTipTableSize()
+        void CalculateTipTableSize()
         {
             var table = _tipGUITable;
             for (var row = 1; row < table.RowCount; row++)
@@ -368,7 +405,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
             table.ReCalculateSizes();
         }
 
-        private void CalculateParamValueTableSize()
+        void CalculateParamValueTableSize()
         {
             var table = _paramValueGUITable;
             for (var row = 1; row < table.RowCount; row++)
@@ -386,7 +423,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
             table.ReCalculateSizes();
         }
 
-        private float CalculateHeight(string content, GUITable table, int col, int row)
+        float CalculateHeight(string content, GUITable table, int col, int row)
         {
             _tableCellTextStyle ??= new GUIStyle(SirenixGUIStyles.MultiLineCenteredLabel)
             {
@@ -399,7 +436,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
                 table[col, row].Rect.width);
         }
 
-        private void DrawHeaderAndBrief()
+        void DrawHeaderAndBrief()
         {
             EditorGUILayout.BeginVertical();
             GUILayout.Label(_container.SectionHeader, new GUIStyle(SirenixGUIStyles.TitleCentered)
@@ -412,7 +449,7 @@ namespace Plugins.YOGA.OdinToolkits.Modules.OdinAttributesAnalysis.Common.Editor
             EditorGUILayout.EndVertical();
         }
 
-        private void DrawSeparator(float spaceBefore = Padding, float spaceAfter = Padding)
+        void DrawSeparator(float spaceBefore = Padding, float spaceAfter = Padding)
         {
             EditorGUILayout.BeginVertical();
             GUILayout.Space(spaceBefore);
