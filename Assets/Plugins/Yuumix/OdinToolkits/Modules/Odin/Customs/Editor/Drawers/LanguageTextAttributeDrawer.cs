@@ -5,7 +5,7 @@ using Sirenix.Utilities.Editor;
 using System;
 using UnityEditor;
 using UnityEngine;
-using Yuumix.OdinToolkits.Common.Runtime.Localization;
+using Yuumix.OdinToolkits.Common.YuumiEditor.Localization;
 using Yuumix.OdinToolkits.Modules.Odin.Customs.Runtime.Attributes;
 
 namespace Yuumix.OdinToolkits.Modules.Odin.Customs.Editor.Drawers

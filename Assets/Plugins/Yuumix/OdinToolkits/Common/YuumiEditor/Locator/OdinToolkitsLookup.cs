@@ -2,7 +2,7 @@ using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
 
-namespace Yuumix.OdinToolkits.Common.Runtime.Locator
+namespace Yuumix.OdinToolkits.Common.YuumiEditor.Locator
 {
     public sealed class OdinToolkitsLookup : ScriptableObject
     {

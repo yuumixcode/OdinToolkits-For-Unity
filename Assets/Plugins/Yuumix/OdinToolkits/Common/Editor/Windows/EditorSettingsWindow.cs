@@ -3,7 +3,7 @@ using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
-using Yuumix.OdinToolkits.Common.Runtime.Localization;
+using Yuumix.OdinToolkits.Common.YuumiEditor.Localization;
 
 namespace Yuumix.OdinToolkits.Common.Editor.Windows
 {

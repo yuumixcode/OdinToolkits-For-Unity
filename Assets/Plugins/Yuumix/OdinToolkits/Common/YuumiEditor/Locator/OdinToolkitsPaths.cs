@@ -1,10 +1,8 @@
-﻿using UnityEngine;
-#if UNITY_EDITOR
-using UnityEditor;
+﻿using UnityEditor;
+using UnityEngine;
 using Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor;
-#endif
 
-namespace Yuumix.OdinToolkits.Common.Runtime.Locator
+namespace Yuumix.OdinToolkits.Common.YuumiEditor.Locator
 {
     public static class OdinToolkitsPaths
     {

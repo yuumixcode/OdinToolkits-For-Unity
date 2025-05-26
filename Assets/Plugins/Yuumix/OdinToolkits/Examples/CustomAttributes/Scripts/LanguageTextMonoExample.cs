@@ -1,6 +1,6 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
-using Yuumix.OdinToolkits.Common.Runtime.Localization;
+using Yuumix.OdinToolkits.Common.YuumiEditor.Localization;
 using Yuumix.OdinToolkits.Modules.Odin.Customs.Runtime.Attributes;
 
 namespace Yuumix.OdinToolkits.Examples.CustomAttributes

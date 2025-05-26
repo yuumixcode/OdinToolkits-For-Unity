@@ -1,13 +1,13 @@
 using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
-using Yuumix.OdinToolkits.Common.Runtime.Locator;
+using Yuumix.OdinToolkits.Common.YuumiEditor.Locator;
 using Yuumix.OdinToolkits.Modules.Odin.Customs.Runtime.Attributes;
 #if UNITY_EDITOR
 using Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor;
 #endif
 
-namespace Yuumix.OdinToolkits.Common.Runtime.Localization
+namespace Yuumix.OdinToolkits.Common.YuumiEditor.Localization
 {
     [Serializable]
     public enum InspectorLanguageType
@@ -27,7 +27,7 @@ namespace Yuumix.OdinToolkits.Common.Runtime.Localization
         public Action OnLanguageChange;
 
         static string RelativeFilePath => OdinToolkitsPaths.GetRootPath() +
-                                          "/Common/Runtime/Localization/Resources/InspectorLanguageManagerSO.asset";
+                                          "/Common/YuumiEditor/Localization/Editor/InspectorLanguageManagerSO.asset";
 
         public static InspectorLanguageManagerSO Instance
         {
@@ -40,7 +40,6 @@ namespace Yuumix.OdinToolkits.Common.Runtime.Localization
 #if UNITY_EDITOR
                 _instance = ProjectEditorUtility.SO.GetScriptableObjectDeleteExtra<InspectorLanguageManagerSO>(RelativeFilePath);
 #endif
-                _instance = Resources.Load<InspectorLanguageManagerSO>("InspectorLanguageManagerSO");
                 return _instance;
             }
         }
