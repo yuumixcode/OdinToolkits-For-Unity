@@ -1,7 +1,7 @@
-using System;
 using Sirenix.OdinInspector;
+using System;
 
-namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
+namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor.Examples
 {
     [ResolvedParameterExample]
     public class OnStateUpdateExamples_Action
@@ -11,14 +11,14 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
         [OnStateUpdate("@lastUpdate = DateTime.Now")]
         public string AttributeExpressionExample;
 
-        private DateTime lastUpdate;
+        DateTime lastUpdate;
 
         [FoldoutGroup("Method Name Example")]
         [InfoBox("@\"Last Update: \" + lastUpdate")]
         [OnStateUpdate("OnStateUpdate")]
         public string MethodNameExample;
 
-        private void OnStateUpdate()
+        void OnStateUpdate()
         {
             lastUpdate = DateTime.Now;
         }

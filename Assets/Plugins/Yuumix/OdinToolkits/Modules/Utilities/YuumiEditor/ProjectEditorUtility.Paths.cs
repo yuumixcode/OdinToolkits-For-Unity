@@ -112,11 +112,11 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor
             /// 获取路径中以目标字符串结尾的子路径，且层级最深的路径
             /// </summary>
             /// <param name="fullPath">相对于 Assets 的完整路径（如：Assets/Plugins/.../OdinToolkitsMarker.asset）</param>
-            /// <param name="target">目标结尾字符串（如："OdinToolkits"）</param>
+            /// <param name="endWithString">目标结尾字符串（如："OdinToolkits"）</param>
             /// <returns>如：Assets/.../OdinToolkits</returns>
-            public static string GetSubPathByEndsWith(string fullPath, string target)
+            public static string GetSubPathByEndsWith(string fullPath, string endWithString)
             {
-                if (string.IsNullOrEmpty(fullPath) || string.IsNullOrEmpty(target))
+                if (string.IsNullOrEmpty(fullPath) || string.IsNullOrEmpty(endWithString))
                 {
                     OdinEditorLog.Error("路径或目标字符串不能为空！");
                     return null;
@@ -135,7 +135,7 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor
                 // 遍历查找最后一个匹配的索引
                 for (var i = 0; i < parts.Length; i++)
                 {
-                    if (parts[i] == target)
+                    if (parts[i] == endWithString)
                     {
                         lastIndex = i;
                     }
@@ -147,7 +147,7 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor
                     return string.Join("/", parts, 0, lastIndex + 1);
                 }
 
-                OdinEditorLog.Warning("路径中未找到以 " + target + " 结尾的部分: " + fullPath);
+                OdinEditorLog.Warning("路径中未找到以 " + endWithString + " 结尾的部分: " + fullPath);
                 return null;
             }
 

@@ -1,42 +1,42 @@
-using System;
-using System.Globalization;
-using System.Linq;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
+using System;
+using System.Globalization;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using YOGA.Modules.OdinToolkits.Schwapo.Editor.Window;
+using Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor.Window;
 
-namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
+namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor
 {
     public class AttributeWithResolvedParametersDrawer
         : OdinValueDrawer<AttributeWithResolvedParameters>
     {
-        private const int Padding = 20;
-        private const int ContainerContentPadding = 10;
+        const int Padding = 20;
+        const int ContainerContentPadding = 10;
 
-        private static readonly DateTime LastUpdate = new(2022, 2, 1);
+        static readonly DateTime LastUpdate = new DateTime(2022, 2, 1);
 
-        private static readonly Color DarkLineColor = EditorGUIUtility.isProSkin
+        static readonly Color DarkLineColor = EditorGUIUtility.isProSkin
             ? SirenixGUIStyles.BorderColor
             : new Color(0f, 0f, 0f, 0.2f);
 
-        private static readonly Color LightLineColor = EditorGUIUtility.isProSkin
+        static readonly Color LightLineColor = EditorGUIUtility.isProSkin
             ? new Color(1f, 1f, 1f, 0.1f)
             : new Color(1f, 1f, 1f, 1f);
 
-        private static readonly Color CodeTextColor = new(0.863f, 0.863f, 0.863f, 1f);
+        static readonly Color CodeTextColor = new Color(0.863f, 0.863f, 0.863f, 1f);
 
-        private static readonly Color CodeBackgroundColor = EditorGUIUtility.isProSkin
+        static readonly Color CodeBackgroundColor = EditorGUIUtility.isProSkin
             ? new Color(0.8f, 0.8f, 0.8f, 1f)
             : new Color(0.14f, 0.14f, 0.14f, 1f);
 
-        private static readonly GUIContent WarnIcon = EditorGUIUtility.isProSkin
+        static readonly GUIContent WarnIcon = EditorGUIUtility.isProSkin
             ? EditorGUIUtility.IconContent("d_console.warnicon.inactive.sml@2x")
             : EditorGUIUtility.IconContent("console.warnicon.inactive.sml@2x");
 
-        private static readonly GUIStyle CodeStyle = new("textarea")
+        static readonly GUIStyle CodeStyle = new GUIStyle("textarea")
         {
             richText = true,
             hover = { textColor = CodeTextColor },
@@ -46,12 +46,12 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
             padding = new RectOffset(Padding, Padding, Padding, Padding)
         };
 
-        private static readonly GUIStyle HeaderStyle = new(SirenixGUIStyles.SectionHeaderCentered)
+        static readonly GUIStyle HeaderStyle = new GUIStyle(SirenixGUIStyles.SectionHeaderCentered)
         {
             fontSize = 18
         };
 
-        private static readonly GUIStyle ContainerContentStyle = new(SirenixGUIStyles.ToolbarBackground)
+        static readonly GUIStyle ContainerContentStyle = new GUIStyle(SirenixGUIStyles.ToolbarBackground)
         {
             stretchHeight = false,
             padding = new RectOffset(
@@ -87,15 +87,19 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
             SirenixEditorGUI.BeginVerticalList(false);
 
             foreach (var resolvedParameter in attribute.ResolvedParameters)
+            {
                 if (!searchedParameters.Any() || searchedParameters.Contains(resolvedParameter))
+                {
                     DrawResolvedParameter(attribute, resolvedParameter);
+                }
+            }
 
             SirenixEditorGUI.EndVerticalList();
 
             DrawFooter(attribute);
         }
 
-        private void DrawResolvedParameter(AttributeWithResolvedParameters attribute,
+        void DrawResolvedParameter(AttributeWithResolvedParameters attribute,
             ResolvedParameter resolvedParameter)
         {
             SirenixEditorGUI.BeginListItem(false);
@@ -130,7 +134,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
             SirenixEditorGUI.EndListItem();
         }
 
-        private void BeginPadding(float horizontalPadding = Padding, float verticalPadding = Padding)
+        void BeginPadding(float horizontalPadding = Padding, float verticalPadding = Padding)
         {
             EditorGUILayout.BeginHorizontal();
             GUILayout.Space(horizontalPadding);
@@ -138,7 +142,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
             GUILayout.Space(verticalPadding);
         }
 
-        private void EndPadding(float horizontalPadding = Padding, float verticalPadding = Padding)
+        void EndPadding(float horizontalPadding = Padding, float verticalPadding = Padding)
         {
             GUILayout.Space(verticalPadding);
             EditorGUILayout.EndVertical();
@@ -146,7 +150,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
             EditorGUILayout.EndHorizontal();
         }
 
-        private void DrawSeperator(float spaceBefore = Padding, float spaceAfter = Padding)
+        void DrawSeperator(float spaceBefore = Padding, float spaceAfter = Padding)
         {
             EditorGUILayout.BeginVertical();
             GUILayout.Space(spaceBefore);
@@ -156,7 +160,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
             EditorGUILayout.EndVertical();
         }
 
-        private void DrawExample(ResolvedParameter resolvedParameter)
+        void DrawExample(ResolvedParameter resolvedParameter)
         {
             var headerRect = DrawContainer("Code", () =>
             {
@@ -170,14 +174,16 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
             var buttonRect = headerRect.AlignRight(buttonWidth);
 
             if (GUI.Button(buttonRect, "  Copy  ", SirenixGUIStyles.ToolbarButton))
+            {
                 Clipboard.Copy(resolvedParameter.Example.Code);
+            }
 
             GUILayout.Space(Padding);
 
             DrawContainer("Preview", () => resolvedParameter.Example.DrawPreview());
         }
 
-        private Rect DrawContainer(string title, Action drawContent)
+        Rect DrawContainer(string title, Action drawContent)
         {
             var headerRect = SirenixEditorGUI.BeginHorizontalToolbar();
             var titleWidth = GetWidth(title);
@@ -198,33 +204,42 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
             return headerRect;
         }
 
-        private float GetWidth(string content)
-        {
-            return GUI.skin.label.CalcSize(GUIHelper.TempContent(content)).x;
-        }
+        float GetWidth(string content) => GUI.skin.label.CalcSize(GUIHelper.TempContent(content)).x;
 
-        private void DrawFooter(AttributeWithResolvedParameters attribute)
+        void DrawFooter(AttributeWithResolvedParameters attribute)
         {
             BeginPadding();
             EditorGUILayout.BeginHorizontal();
 
-            if (GUILayout.Button("Attribute Documentation")) Help.BrowseURL(attribute.DocumentationUrl);
+            if (GUILayout.Button("Attribute Documentation"))
+            {
+                Help.BrowseURL(attribute.DocumentationUrl);
+            }
 
-            if (GUILayout.Button("Attribute Examples")) Help.BrowseURL(attribute.AttributeUrl);
+            if (GUILayout.Button("Attribute Examples"))
+            {
+                Help.BrowseURL(attribute.AttributeUrl);
+            }
 
             EditorGUILayout.EndHorizontal();
 
             EditorGUILayout.BeginHorizontal();
 
             if (GUILayout.Button("Resolvers Tutorial"))
+            {
                 Help.BrowseURL(
                     "https://odininspector.com/tutorials/value-and-action-resolvers/resolving-strings-to-stuff");
+            }
 
             if (GUILayout.Button("Attribute Expressions Tutorial"))
+            {
                 Help.BrowseURL("https://odininspector.com/tutorials/using-attributes/attribute-expressions");
+            }
 
             if (GUILayout.Button("Named Values Tutorial"))
+            {
                 Help.BrowseURL("https://odininspector.com/tutorials/value-and-action-resolvers/named-values");
+            }
 
             EditorGUILayout.EndHorizontal();
 

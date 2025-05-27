@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
+namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor.Examples
 {
     [ResolvedParameterExample]
     public class FolderPathExamples_ParentFolder
@@ -31,10 +31,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
         public bool UseDataPath = true;
         public string UnityDataPath => UseDataPath ? Application.dataPath : ParentFolder;
 
-        private string GetParentFolder()
-        {
-            return UseDataPath ? UnityDataPath : ParentFolder;
-        }
+        string GetParentFolder() => UseDataPath ? UnityDataPath : ParentFolder;
     }
     // End
 }

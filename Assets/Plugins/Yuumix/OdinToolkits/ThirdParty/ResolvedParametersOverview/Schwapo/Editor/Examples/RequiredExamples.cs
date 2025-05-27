@@ -1,6 +1,6 @@
 using Sirenix.OdinInspector;
 
-namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
+namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor.Examples
 {
     [ResolvedParameterExample]
     public class RequiredExamples_ErrorMessage
@@ -11,24 +11,24 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
         [Required(ErrorMessage = "@UseAlternativeMessage ? AlternativeMessage : Message")]
         public string AttributeExpressionExample;
 
-        [FoldoutGroup("Field Name Example")] [Required(ErrorMessage = "$Message")]
+        [FoldoutGroup("Field Name Example")]
+        [Required(ErrorMessage = "$Message")]
         public string FieldNameExample;
 
         public string Message = "Peace, Love & Ducks";
 
-        [FoldoutGroup("Method Name Example")] [Required(ErrorMessage = "$GetMessage")]
+        [FoldoutGroup("Method Name Example")]
+        [Required(ErrorMessage = "$GetMessage")]
         public string MethodNameExample;
 
-        [FoldoutGroup("Property Name Example")] [Required(ErrorMessage = "$MessageProperty")]
+        [FoldoutGroup("Property Name Example")]
+        [Required(ErrorMessage = "$MessageProperty")]
         public string PropertyNameExample;
 
         public bool UseAlternativeMessage;
         public string MessageProperty => UseAlternativeMessage ? AlternativeMessage : Message;
 
-        private string GetMessage()
-        {
-            return UseAlternativeMessage ? AlternativeMessage : Message;
-        }
+        string GetMessage() => UseAlternativeMessage ? AlternativeMessage : Message;
     }
     // End
 }

@@ -40,7 +40,7 @@ namespace Yuumix.OdinToolkits.Modules.ComponentBinder.Runtime
             get
             {
 #if UNITY_EDITOR
-                return HierarchyUtility.GetAbsolutePath(transform);
+                return HierarchyEditorUtility.GetAbsolutePath(transform);
 #else
                 return string.Empty;
 #endif

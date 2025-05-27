@@ -1,30 +1,31 @@
 using Sirenix.OdinInspector;
 
-namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
+namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor.Examples
 {
     [ResolvedParameterExample]
     public class MinValueExamples_Expression
     {
-        [FoldoutGroup("Attribute Expression Example")] [MinValue("@MinValue")]
+        [FoldoutGroup("Attribute Expression Example")]
+        [MinValue("@MinValue")]
         public float AttributeExpressionExample;
 
-        [FoldoutGroup("Field Name Example")] [MinValue("MinValue")]
+        [FoldoutGroup("Field Name Example")]
+        [MinValue("MinValue")]
         public float FieldNameExample;
 
-        [FoldoutGroup("Method Name Example")] [MinValue("GetMinValue")]
+        [FoldoutGroup("Method Name Example")]
+        [MinValue("GetMinValue")]
         public float MethodNameExample;
 
         public float MinValue = 10f;
 
-        [FoldoutGroup("Property Name Example")] [MinValue("MinValueProperty")]
+        [FoldoutGroup("Property Name Example")]
+        [MinValue("MinValueProperty")]
         public float PropertyNameExample;
 
         public float MinValueProperty => MinValue;
 
-        private float GetMinValue()
-        {
-            return MinValue;
-        }
+        float GetMinValue() => MinValue;
     }
     // End
 }

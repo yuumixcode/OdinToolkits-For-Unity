@@ -1,6 +1,6 @@
 using Sirenix.OdinInspector;
 
-namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
+namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor.Examples
 {
     [ResolvedParameterExample]
     public class ToggleGroupExamples_ToggleGroupTitle
@@ -8,7 +8,8 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
         public string AlternativeTitle = "Peace, Love & Fenrir";
         public string Title = "Peace, Love & Ducks";
 
-        [FoldoutGroup("Field Name Example")] [ToggleGroup("Field Name Example/Toggle1", ToggleGroupTitle = "$Title")]
+        [FoldoutGroup("Field Name Example")]
+        [ToggleGroup("Field Name Example/Toggle1", ToggleGroupTitle = "$Title")]
         public bool Toggle1;
 
         [FoldoutGroup("Property Name Example")]
@@ -27,10 +28,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
         public bool UseAlternativeTitle;
         public string TitleProperty => UseAlternativeTitle ? AlternativeTitle : Title;
 
-        private string GetTitle()
-        {
-            return UseAlternativeTitle ? AlternativeTitle : Title;
-        }
+        string GetTitle() => UseAlternativeTitle ? AlternativeTitle : Title;
     }
     // End
 }

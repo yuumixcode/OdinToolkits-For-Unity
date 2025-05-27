@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
+namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor.Examples
 {
     [ResolvedParameterExample]
     public class FilePathExamples_ParentFolder
@@ -31,10 +31,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
         public bool UseDataPath = true;
         public string UnityDataPath => UseDataPath ? Application.dataPath : ParentFolder;
 
-        private string GetParentFolder()
-        {
-            return UseDataPath ? UnityDataPath : ParentFolder;
-        }
+        string GetParentFolder() => UseDataPath ? UnityDataPath : ParentFolder;
     }
     // End
 
@@ -47,23 +44,23 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
         [FilePath(Extensions = "@OnlyAllowImages ? \"png, jpg\" : AllowedExtensions")]
         public string AttributeExpressionExample;
 
-        [FoldoutGroup("Field Name Example")] [FilePath(Extensions = "$AllowedExtensions")]
+        [FoldoutGroup("Field Name Example")]
+        [FilePath(Extensions = "$AllowedExtensions")]
         public string FieldNameExample;
 
-        [FoldoutGroup("Method Name Example")] [FilePath(Extensions = "$GetAllowedExtensions")]
+        [FoldoutGroup("Method Name Example")]
+        [FilePath(Extensions = "$GetAllowedExtensions")]
         public string MethodNameExample;
 
         public bool OnlyAllowImages = true;
 
-        [FoldoutGroup("Property Name Example")] [FilePath(Extensions = "$AllowedExtensionsProperty")]
+        [FoldoutGroup("Property Name Example")]
+        [FilePath(Extensions = "$AllowedExtensionsProperty")]
         public string PropertyNameExample;
 
         public string AllowedExtensionsProperty => OnlyAllowImages ? "png, jpg" : AllowedExtensions;
 
-        private string GetAllowedExtensions()
-        {
-            return OnlyAllowImages ? "png, jpg" : AllowedExtensions;
-        }
+        string GetAllowedExtensions() => OnlyAllowImages ? "png, jpg" : AllowedExtensions;
     }
     // End
 }

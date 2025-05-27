@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using Yuumix.OdinToolkits.Modules.Utilities.Runtime;
 using Debug = UnityEngine.Debug;
 
 namespace Yuumix.OdinToolkits.Modules.ComponentBinder.Runtime
@@ -77,7 +78,7 @@ namespace Yuumix.OdinToolkits.Modules.ComponentBinder.Runtime
             get
             {
 #if UNITY_EDITOR
-                return HierarchyUtility.GetAbsolutePath(transform);
+                return HierarchyEditorUtility.GetAbsolutePath(transform);
 #else
                 return string.Empty;
 #endif

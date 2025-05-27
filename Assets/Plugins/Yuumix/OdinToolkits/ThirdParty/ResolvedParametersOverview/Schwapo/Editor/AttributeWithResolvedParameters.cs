@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 
-namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
+namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor
 {
     public class AttributeWithResolvedParameters
     {
-        private const string UnformatedAttributeUrl = "https://odininspector.com/attributes/{0}";
+        const string UnformatedAttributeUrl = "https://odininspector.com/attributes/{0}";
 
-        private const string UnformatedDocumentationUrl =
+        const string UnformatedDocumentationUrl =
             "https://odininspector.com/documentation/sirenix.odininspector.{0}";
 
         public string AttributeUrl;

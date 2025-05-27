@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
+namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor.Examples
 {
     [ResolvedParameterExample]
     public class GUIColorExamples_GetColor
@@ -12,22 +12,22 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
 
         public Color Color = Color.green;
 
-        [FoldoutGroup("Field Name Example")] [GUIColor("$Color")]
+        [FoldoutGroup("Field Name Example")]
+        [GUIColor("$Color")]
         public string FieldNameExample;
 
-        [FoldoutGroup("Method Name Example")] [GUIColor("$GetColor")]
+        [FoldoutGroup("Method Name Example")]
+        [GUIColor("$GetColor")]
         public string MethodNameExample;
 
-        [FoldoutGroup("Property Name Example")] [GUIColor("$ColorProperty")]
+        [FoldoutGroup("Property Name Example")]
+        [GUIColor("$ColorProperty")]
         public string PropertyNameExample;
 
         public bool UseRed;
         public Color ColorProperty => Color;
 
-        private Color GetColor()
-        {
-            return UseRed ? Color.red : Color.green;
-        }
+        Color GetColor() => UseRed ? Color.red : Color.green;
     }
     // End
 }

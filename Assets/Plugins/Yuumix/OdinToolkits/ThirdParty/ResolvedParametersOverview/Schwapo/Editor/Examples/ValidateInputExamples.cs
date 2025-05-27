@@ -1,6 +1,6 @@
 using Sirenix.OdinInspector;
 
-namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
+namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor.Examples
 {
     [ResolvedParameterExample]
     public class ValidateInputExamples_DefaultMessage
@@ -13,12 +13,14 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
             ContinuousValidationCheck = true)]
         public string AttributeExpressionExample;
 
-        [FoldoutGroup("Field Name Example")] [ValidateInput("@false", "$Message", ContinuousValidationCheck = true)]
+        [FoldoutGroup("Field Name Example")]
+        [ValidateInput("@false", "$Message", ContinuousValidationCheck = true)]
         public string FieldNameExample;
 
         public string Message = "Peace, Love & Ducks";
 
-        [FoldoutGroup("Method Name Example")] [ValidateInput("@false", "$GetMessage", ContinuousValidationCheck = true)]
+        [FoldoutGroup("Method Name Example")]
+        [ValidateInput("@false", "$GetMessage", ContinuousValidationCheck = true)]
         public string MethodNameExample;
 
         [FoldoutGroup("Property Name Example")]
@@ -28,10 +30,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
         public bool UseAlternativeMessage = true;
         public string MessageProperty => UseAlternativeMessage ? AlternativeMessage : Message;
 
-        private string GetMessage()
-        {
-            return UseAlternativeMessage ? AlternativeMessage : Message;
-        }
+        string GetMessage() => UseAlternativeMessage ? AlternativeMessage : Message;
     }
     // End
 
@@ -42,10 +41,11 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
         [ValidateInput("@!string.IsNullOrWhiteSpace($value)", "Field can't be empty")]
         public string AttributeExpressionExample;
 
-        [FoldoutGroup("Method Name Example")] [ValidateInput("IsValid")]
+        [FoldoutGroup("Method Name Example")]
+        [ValidateInput("IsValid")]
         public string MethodNameExample;
 
-        private bool IsValid(string value, ref string message, ref InfoMessageType messageType)
+        bool IsValid(string value, ref string message, ref InfoMessageType messageType)
         {
             message = "Field can't be empty";
             messageType = InfoMessageType.Error;

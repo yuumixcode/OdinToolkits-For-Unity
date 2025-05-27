@@ -1,27 +1,36 @@
-using System;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities.Editor;
+using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
+namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor.Examples
 {
     [ResolvedParameterExample]
     public class CustomValueDrawerExamples_Action
     {
-        [FoldoutGroup("Method Name Example")] [CustomValueDrawer("DrawBoolAsButtons")]
+        [FoldoutGroup("Method Name Example")]
+        [CustomValueDrawer("DrawBoolAsButtons")]
         public bool MethodNameExample;
 
-        private bool DrawBoolAsButtons(bool value, GUIContent label, Func<GUIContent, bool> callNextDrawer)
+        bool DrawBoolAsButtons(bool value, GUIContent label, Func<GUIContent, bool> callNextDrawer)
         {
             EditorGUILayout.BeginHorizontal();
 
             EditorGUI.BeginDisabledGroup(value);
-            if (GUILayout.Button("True")) value = true;
+            if (GUILayout.Button("True"))
+            {
+                value = true;
+            }
+
             EditorGUI.EndDisabledGroup();
 
             EditorGUI.BeginDisabledGroup(!value);
-            if (GUILayout.Button("False")) value = false;
+            if (GUILayout.Button("False"))
+            {
+                value = false;
+            }
+
             EditorGUI.EndDisabledGroup();
             EditorGUILayout.EndHorizontal();
 

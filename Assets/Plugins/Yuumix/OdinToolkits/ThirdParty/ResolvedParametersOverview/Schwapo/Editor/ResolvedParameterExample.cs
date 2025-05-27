@@ -1,16 +1,16 @@
-﻿using System;
+﻿using Sirenix.OdinInspector.Editor;
+using Sirenix.Utilities;
+using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Sirenix.OdinInspector.Editor;
-using Sirenix.Utilities;
 using UnityEditor;
 
-namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
+namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor
 {
     public class ResolvedParameterExample
     {
-        private static readonly MethodInfo parseMethod = Type.GetType(
+        static readonly MethodInfo parseMethod = Type.GetType(
                 "Sirenix.OdinInspector.Editor.Examples.SyntaxHighlighter," +
                 "Sirenix.OdinInspector.Editor," +
                 "Version=1.0.0.0," +
@@ -18,10 +18,10 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                 "PublicKeyToken=null")
             .GetMethod("Parse", BindingFlags.Public | BindingFlags.Static);
 
-        private static readonly Func<string, string> ApplyCodeHighlighting =
+        static readonly Func<string, string> ApplyCodeHighlighting =
             (Func<string, string>)Delegate.CreateDelegate(typeof(Func<string, string>), parseMethod);
 
-        private readonly PropertyTree tree;
+        readonly PropertyTree tree;
 
         public string Code;
         public string HighlightedCode;

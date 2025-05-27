@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using Yuumix.OdinToolkits.Common.Runtime;
-using Yuumix.OdinToolkits.Modules.Odin.Customs.Runtime.Attributes;
+using Yuumix.OdinToolkits.Modules.CustomExtensions.Attributes;
 using Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor;
 
 namespace Yuumix.OdinToolkits.Modules.Tools.GenerateTemplateCode.Editor

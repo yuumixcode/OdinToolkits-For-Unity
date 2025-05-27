@@ -1,6 +1,6 @@
 using Sirenix.OdinInspector;
 
-namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
+namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor.Examples
 {
     [ResolvedParameterExample]
     public class FoldoutGroupExamples_GroupName
@@ -12,12 +12,14 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
             GroupName = "@UseAlternativeGroupName ? AlternativeGroupName : GroupName")]
         public string AttributeExpressionExample;
 
-        [FoldoutGroup("Field Name Example")] [FoldoutGroup("Field Name Example/Foldout", GroupName = "$GroupName")]
+        [FoldoutGroup("Field Name Example")]
+        [FoldoutGroup("Field Name Example/Foldout", GroupName = "$GroupName")]
         public string FieldNameExample;
 
         public string GroupName = "Peace, Love & Ducks";
 
-        [FoldoutGroup("Method Name Example")] [FoldoutGroup("Method Name Example/Foldout", GroupName = "$GetGroupName")]
+        [FoldoutGroup("Method Name Example")]
+        [FoldoutGroup("Method Name Example/Foldout", GroupName = "$GetGroupName")]
         public string MethodNameExample;
 
         [FoldoutGroup("Property Name Example")]
@@ -27,10 +29,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
         public bool UseAlternativeGroupName;
         public string GroupNameProperty => UseAlternativeGroupName ? AlternativeGroupName : GroupName;
 
-        private string GetGroupName()
-        {
-            return UseAlternativeGroupName ? AlternativeGroupName : GroupName;
-        }
+        string GetGroupName() => UseAlternativeGroupName ? AlternativeGroupName : GroupName;
     }
     // End
 }

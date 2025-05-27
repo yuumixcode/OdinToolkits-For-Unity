@@ -1,6 +1,6 @@
 using Sirenix.OdinInspector;
 
-namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
+namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor.Examples
 {
     [ResolvedParameterExample]
     public class PropertyTooltipExamples_Tooltip
@@ -12,10 +12,14 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
         [PropertyTooltip("@UseAlternativeTooltip ? AlternativeTooltip : Tooltip")]
         public string AttributeExpressionExample;
 
-        [FoldoutGroup("Field Name Example")] [InfoBox("Hover over the field label")] [PropertyTooltip("$Tooltip")]
+        [FoldoutGroup("Field Name Example")]
+        [InfoBox("Hover over the field label")]
+        [PropertyTooltip("$Tooltip")]
         public string FieldNameExample;
 
-        [FoldoutGroup("Method Name Example")] [InfoBox("Hover over the field label")] [PropertyTooltip("$GetTooltip")]
+        [FoldoutGroup("Method Name Example")]
+        [InfoBox("Hover over the field label")]
+        [PropertyTooltip("$GetTooltip")]
         public string MethodNameExample;
 
         [FoldoutGroup("Property Name Example")]
@@ -27,10 +31,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
         public bool UseAlternativeTooltip;
         public string TooltipProperty => UseAlternativeTooltip ? AlternativeTooltip : Tooltip;
 
-        private string GetTooltip()
-        {
-            return UseAlternativeTooltip ? AlternativeTooltip : Tooltip;
-        }
+        string GetTooltip() => UseAlternativeTooltip ? AlternativeTooltip : Tooltip;
     }
     // End
 }

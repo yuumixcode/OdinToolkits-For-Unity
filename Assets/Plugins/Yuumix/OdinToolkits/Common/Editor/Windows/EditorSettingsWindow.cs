@@ -3,13 +3,13 @@ using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
-using Yuumix.OdinToolkits.Common.YuumiEditor.Localization;
+using Yuumix.OdinToolkits.Common.Localization;
 
 namespace Yuumix.OdinToolkits.Common.Editor.Windows
 {
     public class EditorSettingsWindow : OdinMenuEditorWindow
     {
-        #region MenuItemPath 菜单路径
+        #region MenuItemPath
 
         const string InspectorLanguageManagerMenuPath = "检视面板语言设置";
 
@@ -21,11 +21,11 @@ namespace Yuumix.OdinToolkits.Common.Editor.Windows
             WindowPadding = new Vector4(10, 10, 10, 10);
         }
 
-        [MenuItem(OdinToolkitsMenuPaths.EditorSettingsPath, false, OdinToolkitsMenuPaths.EditorSettingsWindowPriority)]
+        [MenuItem(MenuItemSettings.EditorSettingsMenuItemName, false, MenuItemSettings.EditorSettingsWindowPriority)]
         public static void ShowWindow()
         {
             var window = GetWindow<EditorSettingsWindow>();
-            window.titleContent = new GUIContent("OdinToolkits EditorSettings");
+            window.titleContent = new GUIContent(MenuItemSettings.EditorSettingsWindowName);
             window.position = GUIHelper.GetEditorWindowRect().AlignCenter(800, 600);
             window.minSize = new Vector2(500, 500);
             window.Show();

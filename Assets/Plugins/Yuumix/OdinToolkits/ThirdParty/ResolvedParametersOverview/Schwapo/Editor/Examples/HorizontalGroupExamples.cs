@@ -1,6 +1,6 @@
 using Sirenix.OdinInspector;
 
-namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
+namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor.Examples
 {
     [ResolvedParameterExample]
     public class HorizontalGroupExamples_Title
@@ -12,10 +12,12 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
             Title = "@UseAlternativeTitle ? AlternativeTitle : Title")]
         public string AttributeExpressionExample;
 
-        [FoldoutGroup("Field Name Example")] [HorizontalGroup("Field Name Example/Horizontal", Title = "$Title")]
+        [FoldoutGroup("Field Name Example")]
+        [HorizontalGroup("Field Name Example/Horizontal", Title = "$Title")]
         public string FieldNameExample;
 
-        [FoldoutGroup("Method Name Example")] [HorizontalGroup("Method Name Example/Horizontal", Title = "$GetTitle")]
+        [FoldoutGroup("Method Name Example")]
+        [HorizontalGroup("Method Name Example/Horizontal", Title = "$GetTitle")]
         public string MethodNameExample;
 
         [FoldoutGroup("Property Name Example")]
@@ -26,10 +28,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
         public bool UseAlternativeTitle;
         public string TitleProperty => UseAlternativeTitle ? AlternativeTitle : Title;
 
-        private string GetTitle()
-        {
-            return UseAlternativeTitle ? AlternativeTitle : Title;
-        }
+        string GetTitle() => UseAlternativeTitle ? AlternativeTitle : Title;
     }
     // End
 }

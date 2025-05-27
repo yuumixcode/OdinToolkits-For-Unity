@@ -1,44 +1,38 @@
-// ------------------------------------------------------------------
-// * 第三方引用 - 开源库
-// * 原作者: Schwapo
-// * https://github.com/Schwapo/Odin-Resolved-Parameters-Overview
-// ------------------------------------------------------------------
-// * 整理收录: Yuumi Zeus
-// * https://github.com/Yuumi-Zeus
-// ------------------------------------------------------------------
-
+using Sirenix.OdinInspector.Editor;
 using System;
 using System.Linq;
-using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Common.Editor;
 
-namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Window
+namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor.Window
 {
     public class ResolvedParametersOverviewWindow : OdinMenuEditorWindow
     {
         public static Action OnWindowResized;
-        private static readonly OdinMenuTreeDrawingConfig Config = new();
-        private static ResolvedParametersOverviewWindow window;
-        private float previousMenuTreeWidth;
-        private float previousWindowWidth;
+        static readonly OdinMenuTreeDrawingConfig Config = new OdinMenuTreeDrawingConfig();
+        static ResolvedParametersOverviewWindow _window;
+        float _previousMenuTreeWidth;
+        float _previousWindowWidth;
 
-        private static ResolvedParametersOverviewWindow Window
+        static ResolvedParametersOverviewWindow Window
         {
             get
             {
-                if (window == null) window = GetWindow<ResolvedParametersOverviewWindow>();
+                if (_window == null)
+                {
+                    _window = GetWindow<ResolvedParametersOverviewWindow>();
+                }
 
-                return window;
+                return _window;
             }
         }
 
         // [MenuItem("Tools/Odin Inspector/Resolved Parameters Overview")]
-        [MenuItem(OdinToolkitsMenuPaths.ResolvedParametersPath, false, OdinToolkitsMenuPaths.ThirdPartyPriority)]
+        [MenuItem(MenuItemSettings.ResolvedParametersMenuItemName, false, MenuItemSettings.ResolvedParametersPriority)]
         public static void Open()
         {
-            window = GetWindow<ResolvedParametersOverviewWindow>("Resolved Parameters Overview");
+            _window = GetWindow<ResolvedParametersOverviewWindow>(MenuItemSettings.ResolvedParametersOverviewWindowName);
         }
 
         protected override void Initialize()
@@ -53,24 +47,29 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Window
             var currentWindowWidth = Window.position.width;
             var currentMenuTreeWidth = Window.MenuWidth;
 
-            if (!Mathf.Approximately(currentWindowWidth, previousWindowWidth) ||
-                !Mathf.Approximately(currentMenuTreeWidth, previousMenuTreeWidth))
+            if (!Mathf.Approximately(currentWindowWidth, _previousWindowWidth) ||
+                !Mathf.Approximately(currentMenuTreeWidth, _previousMenuTreeWidth))
             {
-                previousWindowWidth = currentWindowWidth;
-                previousMenuTreeWidth = currentMenuTreeWidth;
+                _previousWindowWidth = currentWindowWidth;
+                _previousMenuTreeWidth = currentMenuTreeWidth;
                 OnWindowResized?.Invoke();
             }
         }
 
         protected override OdinMenuTree BuildMenuTree()
         {
-            var tree = new OdinMenuTree();
-            tree.Config = Config;
+            var tree = new OdinMenuTree
+            {
+                Config = Config
+            };
             tree.Config.SearchTerm = "";
             tree.Config.DrawSearchToolbar = true;
             tree.Config.SearchFunction = menuItem =>
             {
-                if (SearchedFor(menuItem.Name)) return true;
+                if (SearchedFor(menuItem.Name))
+                {
+                    return true;
+                }
 
                 var attribute = (AttributeWithResolvedParameters)menuItem.Value;
 
@@ -78,7 +77,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Window
             };
 
             foreach (var (_, attribute) in AttributeWithResolvedParametersMap.Map)
+            {
                 tree.AddObjectAtPath(attribute.Name, attribute);
+            }
 
             return tree;
         }

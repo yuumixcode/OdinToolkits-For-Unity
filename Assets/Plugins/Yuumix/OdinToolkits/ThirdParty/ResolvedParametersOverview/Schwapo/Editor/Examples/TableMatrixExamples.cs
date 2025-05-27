@@ -2,12 +2,12 @@ using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 
-namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
+namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor.Examples
 {
     [ResolvedParameterExample]
     public class TableMatrixExamples_DrawElementMethod
     {
-        public Color FalseColor = new(1f, 0.4f, 0.14f, 1f);
+        public Color FalseColor = new Color(1f, 0.4f, 0.14f, 1f);
 
         [FoldoutGroup("Method Name Example")]
         [InfoBox("Paste this code into a Odin serialized object.")]
@@ -19,14 +19,16 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
             Copy this code into a SerializedMonoBehaviour to preview it.
         */
 
-        public Color TrueColor = new(0.11f, 0.77f, 0.5f, 1f);
+        public Color TrueColor = new Color(0.11f, 0.77f, 0.5f, 1f);
 
-        private bool DrawAsColoredRect(Rect rect, bool[,] table, int x, int y)
+        bool DrawAsColoredRect(Rect rect, bool[,] table, int x, int y)
         {
             var value = table[x, y];
 
             if (Event.current.type == EventType.MouseDown && rect.Contains(Event.current.mousePosition))
+            {
                 table[x, y] = !value;
+            }
 
             EditorGUI.DrawRect(rect, value ? TrueColor : FalseColor);
 
@@ -44,13 +46,16 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
         [TableMatrix(HorizontalTitle = "@UseAlternativeTitle ? AlternativeTitle : Title")]
         public bool[,] AttributeExpressionExample = new bool[5, 5];
 
-        [FoldoutGroup("Field Name Example")] [TableMatrix(HorizontalTitle = "$Title")]
+        [FoldoutGroup("Field Name Example")]
+        [TableMatrix(HorizontalTitle = "$Title")]
         public bool[,] FieldNameExample = new bool[5, 5];
 
-        [FoldoutGroup("Method Name Example")] [TableMatrix(HorizontalTitle = "$GetTitle")]
+        [FoldoutGroup("Method Name Example")]
+        [TableMatrix(HorizontalTitle = "$GetTitle")]
         public bool[,] MethodNameExample = new bool[5, 5];
 
-        [FoldoutGroup("Property Name Example")] [TableMatrix(HorizontalTitle = "$TitleProperty")]
+        [FoldoutGroup("Property Name Example")]
+        [TableMatrix(HorizontalTitle = "$TitleProperty")]
         public bool[,] PropertyNameExample = new bool[5, 5];
 
         public string Title = "Peace, Love & Ducks";
@@ -65,10 +70,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
         public bool UseAlternativeTitle;
         public string TitleProperty => UseAlternativeTitle ? AlternativeTitle : Title;
 
-        private string GetTitle()
-        {
-            return UseAlternativeTitle ? AlternativeTitle : Title;
-        }
+        string GetTitle() => UseAlternativeTitle ? AlternativeTitle : Title;
     }
     // End
 
@@ -81,13 +83,16 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
         [TableMatrix(VerticalTitle = "@UseAlternativeTitle ? AlternativeTitle : Title")]
         public bool[,] AttributeExpressionExample = new bool[5, 5];
 
-        [FoldoutGroup("Field Name Example")] [TableMatrix(VerticalTitle = "$Title")]
+        [FoldoutGroup("Field Name Example")]
+        [TableMatrix(VerticalTitle = "$Title")]
         public bool[,] FieldNameExample = new bool[5, 5];
 
-        [FoldoutGroup("Method Name Example")] [TableMatrix(VerticalTitle = "$GetTitle")]
+        [FoldoutGroup("Method Name Example")]
+        [TableMatrix(VerticalTitle = "$GetTitle")]
         public bool[,] MethodNameExample = new bool[5, 5];
 
-        [FoldoutGroup("Property Name Example")] [TableMatrix(VerticalTitle = "$TitleProperty")]
+        [FoldoutGroup("Property Name Example")]
+        [TableMatrix(VerticalTitle = "$TitleProperty")]
         public bool[,] PropertyNameExample = new bool[5, 5];
 
         public string Title = "Peace, Love & Ducks";
@@ -102,10 +107,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
         public bool UseAlternativeTitle;
         public string TitleProperty => UseAlternativeTitle ? AlternativeTitle : Title;
 
-        private string GetTitle()
-        {
-            return UseAlternativeTitle ? AlternativeTitle : Title;
-        }
+        string GetTitle() => UseAlternativeTitle ? AlternativeTitle : Title;
     }
     // End
 }

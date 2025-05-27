@@ -1,9 +1,9 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sirenix.OdinInspector;
 
-namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
+namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor.Examples
 {
     [ResolvedParameterExample]
     public class TypeFilterExamples_FilterGetter
@@ -14,7 +14,8 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
             Copy this code into a SerializedMonoBehaviour to preview it.
         */
 
-        [FoldoutGroup("Method Name Example")] [TypeFilter("GetFilteredTypeList")]
+        [FoldoutGroup("Method Name Example")]
+        [TypeFilter("GetFilteredTypeList")]
         public BaseClass[] Array = new BaseClass[3];
 
         public IEnumerable<Type> GetFilteredTypeList()

@@ -1,6 +1,6 @@
 using Sirenix.OdinInspector;
 
-namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
+namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor.Examples
 {
     [ResolvedParameterExample]
     public class BoxGroupExamples_LabelText
@@ -11,24 +11,24 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
         [BoxGroup("Attribute Expression Example/Box", LabelText = "@UseAlternativeLabel ? AlternativeLabel : Label")]
         public string AttributeExpressionExample;
 
-        [FoldoutGroup("Field Name Example")] [BoxGroup("Field Name Example/Box", LabelText = "$Label")]
+        [FoldoutGroup("Field Name Example")]
+        [BoxGroup("Field Name Example/Box", LabelText = "$Label")]
         public string FieldNameExample;
 
         public string Label = "Peace, Love & Ducks";
 
-        [FoldoutGroup("Method Name Example")] [BoxGroup("Method Name Example/Box", LabelText = "$GetLabelText")]
+        [FoldoutGroup("Method Name Example")]
+        [BoxGroup("Method Name Example/Box", LabelText = "$GetLabelText")]
         public string MethodNameExample;
 
-        [FoldoutGroup("Property Name Example")] [BoxGroup("Property Name Example/Box", LabelText = "$LabelProperty")]
+        [FoldoutGroup("Property Name Example")]
+        [BoxGroup("Property Name Example/Box", LabelText = "$LabelProperty")]
         public string PropertyNameExample;
 
         public bool UseAlternativeLabel;
         public string LabelProperty => UseAlternativeLabel ? AlternativeLabel : Label;
 
-        private string GetLabelText()
-        {
-            return UseAlternativeLabel ? AlternativeLabel : Label;
-        }
+        string GetLabelText() => UseAlternativeLabel ? AlternativeLabel : Label;
     }
     // End
 }

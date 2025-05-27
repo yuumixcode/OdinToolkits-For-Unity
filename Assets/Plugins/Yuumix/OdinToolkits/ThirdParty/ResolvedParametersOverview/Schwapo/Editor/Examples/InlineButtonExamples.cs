@@ -1,51 +1,49 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
+namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor.Examples
 {
     [ResolvedParameterExample]
     public class InlineButtonExamples_Label
     {
-        [FoldoutGroup("Attribute Expression Example")] [InlineButton("Action", Label = "@Label")]
+        [FoldoutGroup("Attribute Expression Example")]
+        [InlineButton("Action", Label = "@Label")]
         public string AttributeExpressionExample;
 
         public string Label = "Peace, Love & Ducks";
 
-        [FoldoutGroup("Method Name Example")] [InlineButton("Action", Label = "$GetLabel")]
+        [FoldoutGroup("Method Name Example")]
+        [InlineButton("Action", Label = "$GetLabel")]
         public string MethodNameExample;
 
-        private void Action()
+        void Action()
         {
             Debug.Log("We don't care about the action in this example");
         }
 
-        private string GetLabel()
-        {
-            return Label;
-        }
+        string GetLabel() => Label;
     }
     // End
 
     [ResolvedParameterExample]
     public class InlineButtonExamples_ShowIf
     {
-        [FoldoutGroup("Attribute Expression Example")] [InlineButton("Action", Label = "Click", ShowIf = "@Show")]
+        [FoldoutGroup("Attribute Expression Example")]
+        [InlineButton("Action", Label = "Click", ShowIf = "@Show")]
         public string AttributeExpressionExample;
 
-        [FoldoutGroup("Method Name Example")] [InlineButton("Action", Label = "Click", ShowIf = "GetShowState")]
+        [FoldoutGroup("Method Name Example")]
+        [InlineButton("Action", Label = "Click", ShowIf = "GetShowState")]
         public string MethodNameExample;
 
         public bool Show;
 
-        private void Action()
+        void Action()
         {
             Debug.Log("We don't care about the action in this example");
         }
 
-        private bool GetShowState()
-        {
-            return Show;
-        }
+        bool GetShowState() => Show;
     }
     // End
 
@@ -56,10 +54,11 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
         [InlineButton("@Debug.Log(\"Attribute Expression Example\")", Label = "Log Attribute Expression Example")]
         public string AttributeExpressionExample;
 
-        [FoldoutGroup("Method Name Example")] [InlineButton("LogMethodNameExample")]
+        [FoldoutGroup("Method Name Example")]
+        [InlineButton("LogMethodNameExample")]
         public string MethodNameExample;
 
-        private void LogMethodNameExample()
+        void LogMethodNameExample()
         {
             Debug.Log("Method Name Example");
         }

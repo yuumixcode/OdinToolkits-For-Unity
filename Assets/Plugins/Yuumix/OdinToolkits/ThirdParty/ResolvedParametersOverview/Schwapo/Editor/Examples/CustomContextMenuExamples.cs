@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
+namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor.Examples
 {
     [ResolvedParameterExample]
     public class CustomContextMenuExamples_Action
@@ -16,7 +16,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
         [CustomContextMenu("Log", "Log")]
         public string MethodNameExample = "Love";
 
-        private void Log(string value)
+        void Log(string value)
         {
             Debug.Log(value);
         }

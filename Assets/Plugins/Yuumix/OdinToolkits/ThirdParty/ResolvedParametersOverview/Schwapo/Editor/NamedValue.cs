@@ -1,4 +1,4 @@
-﻿namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
+﻿namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor
 {
     public class NamedValue
     {

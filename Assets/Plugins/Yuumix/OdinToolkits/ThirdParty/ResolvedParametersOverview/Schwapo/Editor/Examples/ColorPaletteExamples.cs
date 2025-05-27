@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
+namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor.Examples
 {
     [ResolvedParameterExample]
     public class ColorPaletteExamples_PaletteName
@@ -10,13 +10,16 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
         [ColorPalette("@UseTropical ? TropicalPaletteName : SepiaPaletteName")]
         public Color AttributeExpressionExample;
 
-        [FoldoutGroup("Field Name Example")] [ColorPalette("$SepiaPaletteName")]
+        [FoldoutGroup("Field Name Example")]
+        [ColorPalette("$SepiaPaletteName")]
         public Color FieldNameExample;
 
-        [FoldoutGroup("Method Name Example")] [ColorPalette("$GetPaletteName")]
+        [FoldoutGroup("Method Name Example")]
+        [ColorPalette("$GetPaletteName")]
         public Color MethodNameExample;
 
-        [FoldoutGroup("Property Name Example")] [ColorPalette("$PaletteNameProperty")]
+        [FoldoutGroup("Property Name Example")]
+        [ColorPalette("$PaletteNameProperty")]
         public Color PropertyNameExample;
 
         public string SepiaPaletteName = "Sepia";
@@ -24,10 +27,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
         public bool UseTropical;
         public string PaletteNameProperty => UseTropical ? TropicalPaletteName : SepiaPaletteName;
 
-        private string GetPaletteName()
-        {
-            return UseTropical ? TropicalPaletteName : SepiaPaletteName;
-        }
+        string GetPaletteName() => UseTropical ? TropicalPaletteName : SepiaPaletteName;
     }
     // End
 }

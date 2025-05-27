@@ -1,6 +1,6 @@
 using Sirenix.OdinInspector;
 
-namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
+namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor.Examples
 {
     [ResolvedParameterExample]
     public class ButtonExamples_Name
@@ -12,32 +12,21 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
 
         [FoldoutGroup("Field Name Example")]
         [Button(Name = "$AwesomeName")]
-        public void FieldNameExample()
-        {
-        }
+        public void FieldNameExample() { }
 
         [FoldoutGroup("Property Name Example")]
         [Button(Name = "$AwesomeNameProperty")]
-        public void PropertyNameExample()
-        {
-        }
+        public void PropertyNameExample() { }
 
         [FoldoutGroup("Attribute Expression Example")]
         [Button(Name = "@UseAwesomeName ? AwesomeName : BoringName")]
-        public void AttributeExpressionExample()
-        {
-        }
+        public void AttributeExpressionExample() { }
 
         [FoldoutGroup("Method Name Example")]
         [Button(Name = "$GetButtonName")]
-        public void MethodNameExample()
-        {
-        }
+        public void MethodNameExample() { }
 
-        private string GetButtonName()
-        {
-            return UseAwesomeName ? AwesomeName : BoringName;
-        }
+        string GetButtonName() => UseAwesomeName ? AwesomeName : BoringName;
     }
     // End
 }

@@ -1,20 +1,20 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
-using Sirenix.OdinInspector;
-using YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples;
+using Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor.Examples;
 
-namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
+namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor
 {
     public static class AttributeWithResolvedParametersMap
     {
         public static Dictionary<Type, AttributeWithResolvedParameters> Map =
-            new()
+            new Dictionary<Type, AttributeWithResolvedParameters>
             {
                 {
                     typeof(AssetListAttribute),
                     new AttributeWithResolvedParameters("Asset List", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(AssetListExamples_CustomFilterMethod),
                             "Custom Filter Method",
                             "Expects a member name or an attribute expression that returns true if the asset should be included in the asset list, otherwise false.",
@@ -24,11 +24,11 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$asset", "TElement",
+                                new NamedValue("$asset", "TElement",
                                     "The asset which should be filtered where TElement is of the type that the list holds"),
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the list that has the attribute applied to it"),
-                                new("$value", "TList", "The List that has the attribute applied to it")
+                                new NamedValue("$value", "TList", "The List that has the attribute applied to it")
                             }
                         )
                     })
@@ -37,7 +37,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(BoxGroupAttribute),
                     new AttributeWithResolvedParameters("Box Group", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(BoxGroupExamples_LabelText),
                             "Label Text",
                             "Expects a member name or an attribute expression that returns the desired label.",
@@ -47,9 +47,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "Group Name",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -58,7 +58,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(ButtonAttribute),
                     new AttributeWithResolvedParameters("Button", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(ButtonExamples_Name),
                             "Name",
                             "Expects a member name or an attribute expression that returns the desired name.",
@@ -68,7 +68,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the method that has the attribute applied to it")
                             }
                         )
@@ -78,7 +78,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(ColorPaletteAttribute),
                     new AttributeWithResolvedParameters("Color Palette", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(ColorPaletteExamples_PaletteName),
                             "Palette Name",
                             "Expects a member name or an attribute expression that returns the desired color palette name.",
@@ -88,9 +88,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the Color field that has the attribute applied to it"),
-                                new("$value", "UnityEngine.Color",
+                                new NamedValue("$value", "UnityEngine.Color",
                                     "The Color field/property that has the attribute applied to it")
                             }
                         )
@@ -100,7 +100,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(CustomContextMenuAttribute),
                     new AttributeWithResolvedParameters("Custom Context Menu", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(CustomContextMenuExamples_Action),
                             "Action",
                             "Expects the name of a method or an attribute expression that defines the action to take when the context menu item is clicked.",
@@ -110,9 +110,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -121,7 +121,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(CustomValueDrawerAttribute),
                     new AttributeWithResolvedParameters("Custom Value Drawer", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(CustomValueDrawerExamples_Action),
                             "Action",
                             "Expects the name of a method or an attribute expression that defines the custom drawer action to take.",
@@ -131,12 +131,12 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$label", "UnityEngine.GUIContent", "The objects label"),
-                                new("$callNextDrawer", "System.Func<GUIContent, bool>",
+                                new NamedValue("$label", "UnityEngine.GUIContent", "The objects label"),
+                                new NamedValue("$callNextDrawer", "System.Func<GUIContent, bool>",
                                     "Calling this function will draw the default inspector for this element"),
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -145,7 +145,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(DetailedInfoBoxAttribute),
                     new AttributeWithResolvedParameters("Detailed Info Box", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(DetailedInfoBoxExamples_VisibleIf),
                             "Visible If",
                             "Expects a member name or an attribute expression that returns true if the detailed info box should be visible, otherwise false.",
@@ -155,12 +155,12 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "True",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         ),
-                        new(
+                        new ResolvedParameter(
                             typeof(DetailedInfoBoxExamples_Message),
                             "Message",
                             "Expects a member name or an attribute expression that returns the desired message.",
@@ -170,12 +170,12 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         ),
-                        new(
+                        new ResolvedParameter(
                             typeof(DetailedInfoBoxExamples_Details),
                             "Details",
                             "Expects a member name or an attribute expression that returns the hideable details of the message box.",
@@ -185,9 +185,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -196,7 +196,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(DisableIfAttribute),
                     new AttributeWithResolvedParameters("Disable If", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(DisableIfExamples_Condition),
                             "Condition",
                             "Expects a member name or an attribute expression that returns true if the object should be disabled, otherwise false.",
@@ -206,9 +206,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -217,7 +217,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(EnableIfAttribute),
                     new AttributeWithResolvedParameters("Enable If", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(EnableIfExamples_Condition),
                             "Condition",
                             "Expects a member name or an attribute expression that returns true if the object should be enabled, otherwise false.",
@@ -227,9 +227,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -238,7 +238,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(FilePathAttribute),
                     new AttributeWithResolvedParameters("File Path", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(FilePathExamples_ParentFolder),
                             "Parent Folder",
                             "Expects a member name or an attribute expression that returns the desired parent folder.",
@@ -248,12 +248,12 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         ),
-                        new(
+                        new ResolvedParameter(
                             typeof(FilePathExamples_Extensions),
                             "Extensions",
                             "Expects a member name or an attribute expression that returns a string of comma separated file extensions that should be allowed (dots are optional).",
@@ -263,9 +263,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -274,7 +274,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(FolderPathAttribute),
                     new AttributeWithResolvedParameters("Folder Path", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(FolderPathExamples_ParentFolder),
                             "Parent Folder",
                             "Expects a member name or an attribute expression that returns the desired parent folder.",
@@ -284,9 +284,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -295,7 +295,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(FoldoutGroupAttribute),
                     new AttributeWithResolvedParameters("Foldout Group", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(FoldoutGroupExamples_GroupName),
                             "Group Name",
                             "Expects a member name or an attribute expression that returns the desired group name.",
@@ -305,9 +305,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -316,7 +316,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(GUIColorAttribute),
                     new AttributeWithResolvedParameters("GUI Color", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(GUIColorExamples_GetColor),
                             "Get Color",
                             "Expects a member name or an attribute expression that returns the desired gui color.",
@@ -326,9 +326,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "Attribute.Color",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -337,7 +337,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(HideIfAttribute),
                     new AttributeWithResolvedParameters("Hide If", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(HideIfExamples_Condition),
                             "Condition",
                             "Expects a member name or an attribute expression that returns true if the object should be hidden, otherwise false.",
@@ -347,9 +347,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -358,7 +358,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(HideIfGroupAttribute),
                     new AttributeWithResolvedParameters("Hide If Group", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(HideIfGroupExamples_Condition),
                             "Condition",
                             "Expects a member name or an attribute expression that returns true if this group and groups that are nested inside of it should be hidden, otherwise false.",
@@ -368,9 +368,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -379,7 +379,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(HorizontalGroupAttribute),
                     new AttributeWithResolvedParameters("Horizontal Group", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(HorizontalGroupExamples_Title),
                             "Title",
                             "Expects a member name or an attribute expression that returns the desired horizontal group title.",
@@ -389,9 +389,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -400,7 +400,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(InfoBoxAttribute),
                     new AttributeWithResolvedParameters("Info Box", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(InfoBoxExamples_VisibleIf),
                             "Visible If",
                             "Expects a member name or an attribute expression that returns true if the info box should be visible, otherwise false.",
@@ -410,12 +410,12 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "True",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         ),
-                        new(
+                        new ResolvedParameter(
                             typeof(InfoBoxExamples_Message),
                             "Message",
                             "Expects a member name or an attribute expression that returns the desired message.",
@@ -425,9 +425,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -436,7 +436,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(InlineButtonAttribute),
                     new AttributeWithResolvedParameters("Inline Button", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(InlineButtonExamples_Label),
                             "Label",
                             "Expects a member name or an attribute expression that returns the desired button label.",
@@ -446,12 +446,12 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         ),
-                        new(
+                        new ResolvedParameter(
                             typeof(InlineButtonExamples_ShowIf),
                             "Show If",
                             "Expects a member name or an attribute expression that returns true if the button should be visible, otherwise false.",
@@ -461,12 +461,12 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "True",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         ),
-                        new(
+                        new ResolvedParameter(
                             typeof(InlineButtonExamples_Action),
                             "Action",
                             "Expects the name of a method or an attribute expression that defines the action to take when the button is clicked.",
@@ -476,9 +476,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -487,7 +487,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(LabelTextAttribute),
                     new AttributeWithResolvedParameters("Label Text", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(LabelTextExamples_Text),
                             "Text",
                             "Expects a member name or an attribute expression that returns the desired label.",
@@ -497,9 +497,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -508,7 +508,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(ListDrawerSettingsAttribute),
                     new AttributeWithResolvedParameters("List Drawer Settings", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(ListDrawerSettingsExamples_CustomAddFunction),
                             "Custom Add Function",
                             "Expects the name of a method or an attribute expression that defines the action to take when the add button of the list is clicked.",
@@ -518,12 +518,12 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         ),
-                        new(
+                        new ResolvedParameter(
                             typeof(ListDrawerSettingsExamples_CustomRemoveElementFunction),
                             "Custom Remove Element Function",
                             "Expects the name of a method or an attribute expression that defines the action to take when the remove button of the list element is clicked.",
@@ -533,13 +533,13 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$removeElement", "TElement", "The list element to be removed."),
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$removeElement", "TElement", "The list element to be removed."),
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         ),
-                        new(
+                        new ResolvedParameter(
                             typeof(ListDrawerSettingsExamples_CustomRemoveIndexFunction),
                             "Custom Remove Index Function",
                             "Expects the name of a method or an attribute expression that defines the action to take when the remove button of the list element is clicked.",
@@ -549,13 +549,13 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$index", "System.Int32", "The index of the list item to be removed."),
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$index", "System.Int32", "The index of the list item to be removed."),
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         ),
-                        new(
+                        new ResolvedParameter(
                             typeof(ListDrawerSettingsExamples_ElementColor),
                             "Element Color",
                             "Expects a member name or an attribute expression that returns the desired element color.",
@@ -565,15 +565,15 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$index", "System.Int32", "The index of the list item being drawn."),
-                                new("$defaultColor", "UnityEngine.Color",
+                                new NamedValue("$index", "System.Int32", "The index of the list item being drawn."),
+                                new NamedValue("$defaultColor", "UnityEngine.Color",
                                     "The default color of this list item (can be changed in Odin's preferences)."),
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         ),
-                        new(
+                        new ResolvedParameter(
                             typeof(ListDrawerSettingsExamples_OnBeginListElementGUI),
                             "On Begin List Element GUI",
                             "Expects the name of a method or an attribute expression that defines the action to take before drawing the list element.",
@@ -583,13 +583,13 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$index", "System.Int32", "The index of the list item being drawn."),
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$index", "System.Int32", "The index of the list item being drawn."),
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         ),
-                        new(
+                        new ResolvedParameter(
                             typeof(ListDrawerSettingsExamples_OnEndListElementGUI),
                             "On End List Element GUI",
                             "Expects the name of a method or an attribute expression that defines the action to take after drawing the list element.",
@@ -599,13 +599,13 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$index", "System.Int32", "The index of the list item being drawn."),
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$index", "System.Int32", "The index of the list item being drawn."),
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         ),
-                        new(
+                        new ResolvedParameter(
                             typeof(ListDrawerSettingsExamples_OnTitleBarGUI),
                             "On Title Bar GUI",
                             "Expects the name of a method or an attribute expression that defines the action to take when the list's title bar is being drawn. This will be called after the default elements of the toolbar have been drawn, but before the toolbar is ended.",
@@ -615,9 +615,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -626,7 +626,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(MaxValueAttribute),
                     new AttributeWithResolvedParameters("Max Value", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(MaxValueExamples_Expression),
                             "Expression",
                             "Expects a member name or an attribute expression that returns the desired max value.",
@@ -636,9 +636,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "Attribute.MaxValue",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -647,7 +647,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(MinMaxSliderAttribute),
                     new AttributeWithResolvedParameters("Min Max Slider", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(MinMaxSliderExamples_MinMaxValueGetter),
                             "Min Max Value Getter",
                             "Expects a member name or an attribute expression that returns a UnityEngine.Vector2 which is used as the min/max bounds.",
@@ -657,12 +657,12 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "Attribute.MinValue\nAttribute.MaxValue",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         ),
-                        new(
+                        new ResolvedParameter(
                             typeof(MinMaxSliderExamples_MinValueGetter),
                             "Min Value Getter",
                             "Expects a member name or an attribute expression that returns the desired minimum value of the UnityEngine.Vector2.",
@@ -672,12 +672,12 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "Attribute.MinValue",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         ),
-                        new(
+                        new ResolvedParameter(
                             typeof(MinMaxSliderExamples_MaxValueGetter),
                             "Max Value Getter",
                             "Expects a member name or an attribute expression that returns the desired maximum value of the UnityEngine.Vector2.",
@@ -687,9 +687,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "Attribute.MaxValue",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -698,7 +698,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(MinValueAttribute),
                     new AttributeWithResolvedParameters("Min Value", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(MinValueExamples_Expression),
                             "Expression",
                             "Expects a member name or an attribute expression that returns the desired max value.",
@@ -708,9 +708,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "Attribute.MinValue",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -719,7 +719,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(OnCollectionChangedAttribute),
                     new AttributeWithResolvedParameters("On Collection Changed", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(OnCollectionChangedExamples_Before),
                             "Before",
                             "Expects the name of a method or an attribute expression that defines the action to take before a change occurs to the collection.",
@@ -729,14 +729,14 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$info", "Sirenix.OdinInspector.Editor.CollectionChangeInfo",
+                                new NamedValue("$info", "Sirenix.OdinInspector.Editor.CollectionChangeInfo",
                                     "Contains information about a change that is going to occur to a collection"),
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         ),
-                        new(
+                        new ResolvedParameter(
                             typeof(OnCollectionChangedExamples_After),
                             "After",
                             "Expects the name of a method or an attribute expression that defines the action to take after a change has occured to the collection.",
@@ -746,11 +746,11 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$info", "Sirenix.OdinInspector.Editor.CollectionChangeInfo",
+                                new NamedValue("$info", "Sirenix.OdinInspector.Editor.CollectionChangeInfo",
                                     "Contains information about a change that has occurred to a collection"),
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -759,7 +759,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(OnInspectorDisposeAttribute),
                     new AttributeWithResolvedParameters("On Inspector Dispose", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(OnInspectorDisposeExamples_Action),
                             "Action",
                             "Expects the name of a method or an attribute expression that defines the action to take when the property's drawers are disposed in the inspector.",
@@ -769,9 +769,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -780,7 +780,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(OnInspectorGUIAttribute),
                     new AttributeWithResolvedParameters("On Inspector GUI", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(OnInspectorGUIExamples_Prepend),
                             "Prepend",
                             "Expects the name of a method or an attribute expression that defines the action to take before the property is drawn.",
@@ -790,12 +790,12 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         ),
-                        new(
+                        new ResolvedParameter(
                             typeof(OnInspectorGUIExamples_Append),
                             "Append",
                             "Expects the name of a method or an attribute expression that defines the action to take after the property is drawn.",
@@ -805,9 +805,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -816,7 +816,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(OnInspectorInitAttribute),
                     new AttributeWithResolvedParameters("On Inspector Init", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(OnInspectorInitExamples_Action),
                             "Action",
                             "Expects the name of a method or an attribute expression that defines the action to take when the property's drawers are initialized.",
@@ -826,9 +826,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -837,7 +837,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(OnStateUpdateAttribute),
                     new AttributeWithResolvedParameters("On State Update", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(OnStateUpdateExamples_Action),
                             "Action",
                             "Expects the name of a method or an attribute expression that defines the action to take when the property's state should be updated.",
@@ -847,9 +847,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -858,7 +858,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(OnValueChangedAttribute),
                     new AttributeWithResolvedParameters("On Value Changed", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(OnValueChangedExamples_Action),
                             "Action",
                             "Expects the name of a method or an attribute expression that defines the action to take when the value has changed.",
@@ -868,9 +868,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -879,7 +879,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(ProgressBarAttribute),
                     new AttributeWithResolvedParameters("Progress Bar", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(ProgressBarExamples_MinGetter),
                             "Min Getter",
                             "Expects a member name or an attribute expression that returns the desired minimum value of the progress bar.",
@@ -889,12 +889,12 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "Attribute.Min",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         ),
-                        new(
+                        new ResolvedParameter(
                             typeof(ProgressBarExamples_MaxGetter),
                             "Max Getter",
                             "Expects a member name or an attribute expression that returns the desired maximum value of the progress bar.",
@@ -904,12 +904,12 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "Attribute.Max",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         ),
-                        new(
+                        new ResolvedParameter(
                             typeof(ProgressBarExamples_ColorGetter),
                             "Color Getter",
                             "Expects a member name or an attribute expression that returns the desired color value of the progress bar's foreground.",
@@ -919,12 +919,12 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "Attribute.Color",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         ),
-                        new(
+                        new ResolvedParameter(
                             typeof(ProgressBarExamples_BackgroundColorGetter),
                             "Background Color Getter",
                             "Expects a member name or an attribute expression that returns the desired color value of the progress bar's background.",
@@ -934,12 +934,12 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "ProgressBarConfig.Default.BackgroundColor",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         ),
-                        new(
+                        new ResolvedParameter(
                             typeof(ProgressBarExamples_CustomValueStringGetter),
                             "Custom Value String Getter",
                             "Expects a member name or an attribute expression that returns the desired label of the progress bar.",
@@ -949,9 +949,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -960,7 +960,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(PropertyRangeAttribute),
                     new AttributeWithResolvedParameters("Property Range", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(PropertyRangeExamples_MinGetter),
                             "Min Getter",
                             "Expects a member name or an attribute expression that returns the desired minimum value.",
@@ -970,12 +970,12 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         ),
-                        new(
+                        new ResolvedParameter(
                             typeof(PropertyRangeExamples_MaxGetter),
                             "Max Getter",
                             "Expects a member name or an attribute expression that returns the desired maximum value.",
@@ -985,9 +985,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -996,7 +996,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(PropertyTooltipAttribute),
                     new AttributeWithResolvedParameters("Property Tooltip", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(PropertyTooltipExamples_Tooltip),
                             "Tooltip",
                             "Expects a member name or an attribute expression that returns the desired tooltip.",
@@ -1006,9 +1006,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -1017,7 +1017,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(RequiredAttribute),
                     new AttributeWithResolvedParameters("Required", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(RequiredExamples_ErrorMessage),
                             "Error Message",
                             "Expects a member name or an attribute expression that returns the desired error message.",
@@ -1027,9 +1027,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -1038,7 +1038,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(ShowIfAttribute),
                     new AttributeWithResolvedParameters("Show If", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(ShowIfExamples_Condition),
                             "Condition",
                             "Expects a member name or an attribute expression that returns true if the object should be shown, otherwise false.",
@@ -1048,9 +1048,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "True",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -1059,7 +1059,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(ShowIfGroupAttribute),
                     new AttributeWithResolvedParameters("Show If Group", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(ShowIfGroupExamples_Condition),
                             "Condition",
                             "Expects a member name or an attribute expression that returns true if this group and groups that are nested inside of it should be shown, otherwise false.",
@@ -1069,9 +1069,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -1080,7 +1080,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(SuffixLabelAttribute),
                     new AttributeWithResolvedParameters("Suffix Label", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(SuffixLabelExamples_Label),
                             "Label",
                             "Expects a member name or an attribute expression that returns the desired suffix label.",
@@ -1090,9 +1090,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -1101,7 +1101,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(TableMatrixAttribute),
                     new AttributeWithResolvedParameters("Table Matrix", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(TableMatrixExamples_DrawElementMethod),
                             "Draw Element Method",
                             "Expects the name of a method or an attribute expression that defines how to draw the current table matrix element.",
@@ -1111,19 +1111,19 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$rect", "UnityEngine.Rect", "The rect of the current table cell"),
-                                new("$element", "TElement",
+                                new NamedValue("$rect", "UnityEngine.Rect", "The rect of the current table cell"),
+                                new NamedValue("$element", "TElement",
                                     "The current table element to draw (same as $value)"),
-                                new("$array", "TArray", "The array that has the attribute applied to it"),
-                                new("$x", "System.Int32", "The x index of the current table cell"),
-                                new("$y", "System.Int32", "The y index of the current table cell"),
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$array", "TArray", "The array that has the attribute applied to it"),
+                                new NamedValue("$x", "System.Int32", "The x index of the current table cell"),
+                                new NamedValue("$y", "System.Int32", "The y index of the current table cell"),
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "TElement",
+                                new NamedValue("$value", "TElement",
                                     "The current table element to draw (same as $element)")
                             }
                         ),
-                        new(
+                        new ResolvedParameter(
                             typeof(TableMatrixExamples_HorizontalTitle),
                             "Horizontal Title",
                             "Expects a member name or an attribute expression that returns the desired horizontal title.",
@@ -1133,12 +1133,12 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         ),
-                        new(
+                        new ResolvedParameter(
                             typeof(TableMatrixExamples_VerticalTitle),
                             "Vertical Title",
                             "Expects a member name or an attribute expression that returns the desired vertical title.",
@@ -1148,9 +1148,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -1159,7 +1159,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(TitleAttribute),
                     new AttributeWithResolvedParameters("Title", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(TitleExamples_Title),
                             "Title",
                             "Expects a member name or an attribute expression that returns the desired title.",
@@ -1169,11 +1169,11 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }),
-                        new(
+                        new ResolvedParameter(
                             typeof(TitleExamples_Subtitle),
                             "Subtitle",
                             "Expects a member name or an attribute expression that returns the desired subtitle.",
@@ -1183,9 +1183,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -1194,7 +1194,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(TitleGroupAttribute),
                     new AttributeWithResolvedParameters("Title Group", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(TitleGroupExamples_GroupName),
                             "Group Name",
                             "Expects a member name or an attribute expression that returns the desired group name.",
@@ -1204,11 +1204,11 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }),
-                        new(
+                        new ResolvedParameter(
                             typeof(TitleGroupExamples_Subtitle),
                             "Subtitle",
                             "Expects a member name or an attribute expression that returns the desired group subtitle.",
@@ -1218,9 +1218,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -1229,7 +1229,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(ToggleGroupAttribute),
                     new AttributeWithResolvedParameters("Toggle Group", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(ToggleGroupExamples_ToggleGroupTitle),
                             "Toggle Group Title",
                             "Expects a member name or an attribute expression that returns the desired title.",
@@ -1239,9 +1239,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -1250,7 +1250,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(TypeFilterAttribute),
                     new AttributeWithResolvedParameters("Type Filter", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(TypeFilterExamples_FilterGetter),
                             "Filter Getter",
                             "Expects a member name or an attribute expression that returns a value that is assignable to IList.",
@@ -1260,9 +1260,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -1271,7 +1271,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(ValidateInputAttribute),
                     new AttributeWithResolvedParameters("Validate Input", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(ValidateInputExamples_DefaultMessage),
                             "Default Message",
                             "Expects a member name or an attribute expression that returns the desired default message.",
@@ -1281,12 +1281,12 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "Attribute.DefaultMessage ?? \"Value is invalid for '\" + Property.NiceName + \"'\"",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         ),
-                        new(
+                        new ResolvedParameter(
                             typeof(ValidateInputExamples_Condition),
                             "Condition",
                             "Expects the name of a method or an attribute expression that returns true if the input is valid, otherwise false.",
@@ -1296,13 +1296,13 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$message", "System.String",
+                                new NamedValue("$message", "System.String",
                                     "The message to be displayed inside the info box."),
-                                new("$messageType", "Sirenix.OdinInspector.InfoMessageType",
+                                new NamedValue("$messageType", "Sirenix.OdinInspector.InfoMessageType",
                                     "The InfoMessageType of the drawn info box."),
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })
@@ -1311,7 +1311,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                     typeof(ValueDropdownAttribute),
                     new AttributeWithResolvedParameters("Value Dropdown", new List<ResolvedParameter>
                     {
-                        new(
+                        new ResolvedParameter(
                             typeof(ValueDropdownExamples_ValuesGetter),
                             "Values Getter",
                             "Expects a member name or an attribute expression that returns a value that is assignable to IList.",
@@ -1321,9 +1321,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                             "None",
                             new List<NamedValue>
                             {
-                                new("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
+                                new NamedValue("$property", "Sirenix.OdinInspector.Editor.InspectorProperty",
                                     "The InspectorProperty representing the object that has the attribute applied to it"),
-                                new("$value", "T", "The object that has the attribute applied to it")
+                                new NamedValue("$value", "T", "The object that has the attribute applied to it")
                             }
                         )
                     })

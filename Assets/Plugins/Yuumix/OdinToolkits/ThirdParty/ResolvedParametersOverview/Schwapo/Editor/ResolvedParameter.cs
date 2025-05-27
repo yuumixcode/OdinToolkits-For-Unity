@@ -1,15 +1,15 @@
-﻿using System;
+﻿using Sirenix.Utilities.Editor;
+using System;
 using System.Collections.Generic;
-using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
 
-namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
+namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor
 {
     public class ResolvedParameter
     {
-        private static readonly GUIStyle TableCellTextStyle
-            = new(SirenixGUIStyles.MultiLineLabel)
+        static readonly GUIStyle TableCellTextStyle
+            = new GUIStyle(SirenixGUIStyles.MultiLineLabel)
             {
                 padding = new RectOffset(10, 10, 10, 10),
                 clipping = TextClipping.Overflow,
@@ -76,7 +76,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
                 });
         }
 
-        private void DrawTableCell(Rect rect, string text)
+        void DrawTableCell(Rect rect, string text)
         {
             EditorGUI.LabelField(rect, text, TableCellTextStyle);
         }
@@ -105,11 +105,9 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor
             NamedValueTable.ReCalculateSizes();
         }
 
-        private float CalculateHeight(string content, GUITable table, int col, int row)
-        {
-            return TableCellTextStyle.CalcHeight(
+        float CalculateHeight(string content, GUITable table, int col, int row) =>
+            TableCellTextStyle.CalcHeight(
                 GUIHelper.TempContent(content),
                 table[col, row].Rect.width);
-        }
     }
 }

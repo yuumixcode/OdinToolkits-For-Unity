@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
+namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor.Examples
 {
     [ResolvedParameterExample]
     public class OnValueChangedExamples_Action
@@ -16,7 +16,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
         [OnValueChanged("OnValueChanged")]
         public string MethodNameExample;
 
-        private void OnValueChanged()
+        void OnValueChanged()
         {
             Debug.Log("On Value Changed");
         }

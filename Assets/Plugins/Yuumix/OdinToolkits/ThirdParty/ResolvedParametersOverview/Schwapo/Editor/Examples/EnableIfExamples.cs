@@ -1,30 +1,31 @@
 using Sirenix.OdinInspector;
 
-namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
+namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor.Examples
 {
     [ResolvedParameterExample]
     public class EnableIfExamples_Condition
     {
-        [FoldoutGroup("Attribute Expression Example")] [EnableIf("@IsEnabled")]
+        [FoldoutGroup("Attribute Expression Example")]
+        [EnableIf("@IsEnabled")]
         public string AttributeExpressionExample;
 
-        [FoldoutGroup("Field Name Example")] [EnableIf("IsEnabled")]
+        [FoldoutGroup("Field Name Example")]
+        [EnableIf("IsEnabled")]
         public string FieldNameExample;
 
         public bool IsEnabled;
 
-        [FoldoutGroup("Method Name Example")] [EnableIf("GetEnabledState")]
+        [FoldoutGroup("Method Name Example")]
+        [EnableIf("GetEnabledState")]
         public string MethodNameExample;
 
-        [FoldoutGroup("Property Name Example")] [EnableIf("IsEnabledProperty")]
+        [FoldoutGroup("Property Name Example")]
+        [EnableIf("IsEnabledProperty")]
         public string PropertyNameExample;
 
         public bool IsEnabledProperty => IsEnabled;
 
-        private bool GetEnabledState()
-        {
-            return IsEnabled;
-        }
+        bool GetEnabledState() => IsEnabled;
     }
     // End
 }

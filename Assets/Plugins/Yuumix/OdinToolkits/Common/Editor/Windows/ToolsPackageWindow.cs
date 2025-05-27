@@ -22,11 +22,11 @@ namespace Yuumix.OdinToolkits.Common.Editor.Windows
             WindowPadding = new Vector4(10, 10, 10, 10);
         }
 
-        [MenuItem(OdinToolkitsMenuPaths.ToolsPackagePath, false, OdinToolkitsMenuPaths.ToolsPackagePriority)]
+        [MenuItem(MenuItemSettings.ToolsPackageMenuItemName, false, MenuItemSettings.ToolsPackagePriority)]
         public static void ShowWindow()
         {
             var window = GetWindow<ToolsPackageWindow>();
-            window.titleContent = new GUIContent("Odin Toolkits 工具包");
+            window.titleContent = new GUIContent(MenuItemSettings.ToolsPackageWindowName);
             window.position = GUIHelper.GetEditorWindowRect().AlignCenter(800, 600);
             window.minSize = new Vector2(500, 500);
             window.Show();

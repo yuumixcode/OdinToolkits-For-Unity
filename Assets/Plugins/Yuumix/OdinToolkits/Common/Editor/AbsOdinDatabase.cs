@@ -29,7 +29,7 @@ namespace Yuumix.OdinToolkits.Common.Editor
         protected void PingScript()
         {
 #if UNITY_EDITOR
-            EditorGUIUtility.PingObject(ProjectEditorUtility.Script.FindAndSelectedScript(typeof(T).Name));
+            EditorGUIUtility.PingObject(ProjectEditorUtility.Script.GetMonoScript(typeof(T).Name));
 #endif
         }
     }

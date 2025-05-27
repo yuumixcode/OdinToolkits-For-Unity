@@ -98,3 +98,5 @@ Assets/UniversalRenderPipelineGlobalSettings.asset.meta
 # Unity 生成的 .csproj 关联的 IDE 配置
 *.csproj.DotSettings
 *.csproj.DotSettings.user
+Assets/Custom Inspector
+Assets/Custom Inspector.meta

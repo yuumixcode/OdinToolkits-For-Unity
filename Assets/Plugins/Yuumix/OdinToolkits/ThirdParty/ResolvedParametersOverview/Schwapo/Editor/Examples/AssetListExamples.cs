@@ -1,9 +1,9 @@
-using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
+namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor.Examples
 {
     [ResolvedParameterExample]
     public class AssetListExamples_CustomFilterMethod
@@ -11,17 +11,14 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
         [FoldoutGroup("Attribute Expression Example")]
         [InfoBox("Should Only Contain Textures That Start With TMP")]
         [AssetList(CustomFilterMethod = "@$asset.name.StartsWith(\"TMP\")")]
-        public List<Texture> AttributeExpressionExample = new();
+        public List<Texture> AttributeExpressionExample = new List<Texture>();
 
         [FoldoutGroup("Method Name Example")]
         [InfoBox("Should Only Contain Prefabs")]
         [AssetList(CustomFilterMethod = "IsPrefab")]
-        public List<GameObject> MethodNameExample = new();
+        public List<GameObject> MethodNameExample = new List<GameObject>();
 
-        private bool IsPrefab(GameObject asset)
-        {
-            return PrefabUtility.GetPrefabAssetType(asset) == PrefabAssetType.Regular;
-        }
+        bool IsPrefab(GameObject asset) => PrefabUtility.GetPrefabAssetType(asset) == PrefabAssetType.Regular;
     }
     // End
 }

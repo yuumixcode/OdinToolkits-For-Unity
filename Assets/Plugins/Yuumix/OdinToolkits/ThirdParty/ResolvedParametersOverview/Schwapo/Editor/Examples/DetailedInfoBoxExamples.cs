@@ -1,6 +1,6 @@
 using Sirenix.OdinInspector;
 
-namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
+namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor.Examples
 {
     [ResolvedParameterExample]
     public class DetailedInfoBoxExamples_VisibleIf
@@ -25,62 +25,61 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
 
         public bool IsVisibleProperty => IsVisible;
 
-        private bool GetVisibility()
-        {
-            return IsVisible;
-        }
+        bool GetVisibility() => IsVisible;
     }
     // End
 
     [ResolvedParameterExample]
     public class DetailedInfoBoxExamples_Message
     {
-        [FoldoutGroup("Attribute Expression Example")] [DetailedInfoBox("@Message", "Ducks are awesome")]
+        [FoldoutGroup("Attribute Expression Example")]
+        [DetailedInfoBox("@Message", "Ducks are awesome")]
         public string AttributeExpressionExample;
 
-        [FoldoutGroup("Field Name Example")] [DetailedInfoBox("$Message", "Ducks are awesome")]
+        [FoldoutGroup("Field Name Example")]
+        [DetailedInfoBox("$Message", "Ducks are awesome")]
         public string FieldNameExample;
 
         public string Message = "Ducks are...";
 
-        [FoldoutGroup("Method Name Example")] [DetailedInfoBox("$GetMessage", "Ducks are awesome")]
+        [FoldoutGroup("Method Name Example")]
+        [DetailedInfoBox("$GetMessage", "Ducks are awesome")]
         public string MethodNameExample;
 
-        [FoldoutGroup("Property Name Example")] [DetailedInfoBox("$MessageProperty", "Ducks are awesome")]
+        [FoldoutGroup("Property Name Example")]
+        [DetailedInfoBox("$MessageProperty", "Ducks are awesome")]
         public string PropertyNameExample;
 
         public string MessageProperty => Message;
 
-        private string GetMessage()
-        {
-            return Message;
-        }
+        string GetMessage() => Message;
     }
     // End
 
     [ResolvedParameterExample]
     public class DetailedInfoBoxExamples_Details
     {
-        [FoldoutGroup("Attribute Expression Example")] [DetailedInfoBox("Ducks are...", "@Details")]
+        [FoldoutGroup("Attribute Expression Example")]
+        [DetailedInfoBox("Ducks are...", "@Details")]
         public string AttributeExpressionExample;
 
         public string Details = "Ducks are awesome";
 
-        [FoldoutGroup("Field Name Example")] [DetailedInfoBox("Ducks are...", "$Details")]
+        [FoldoutGroup("Field Name Example")]
+        [DetailedInfoBox("Ducks are...", "$Details")]
         public string FieldNameExample;
 
-        [FoldoutGroup("Method Name Example")] [DetailedInfoBox("Ducks are...", "$GetDetails")]
+        [FoldoutGroup("Method Name Example")]
+        [DetailedInfoBox("Ducks are...", "$GetDetails")]
         public string MethodNameExample;
 
-        [FoldoutGroup("Property Name Example")] [DetailedInfoBox("Ducks are...", "$DetailsProperty")]
+        [FoldoutGroup("Property Name Example")]
+        [DetailedInfoBox("Ducks are...", "$DetailsProperty")]
         public string PropertyNameExample;
 
         public string DetailsProperty => Details;
 
-        private string GetDetails()
-        {
-            return Details;
-        }
+        string GetDetails() => Details;
     }
     // End
 }

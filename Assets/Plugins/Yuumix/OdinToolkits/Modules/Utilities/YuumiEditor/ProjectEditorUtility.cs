@@ -1,10 +1,8 @@
 ﻿#if UNITY_EDITOR
 using UnityEditor;
-#endif
 using System;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using UnityEngine;
 using Yuumix.OdinToolkits.Common.Runtime;
 using Object = UnityEngine.Object;
@@ -16,7 +14,6 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor
     /// </summary>
     public static partial class ProjectEditorUtility
     {
-#if UNITY_EDITOR
         /// <summary>
         /// Ping 项目中的任何资源，可以是文件夹路径，需要相对路径
         /// </summary>
@@ -34,10 +31,8 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor
             EditorGUIUtility.PingObject(asset);
         }
 
-#endif
         public static class SO
         {
-#if UNITY_EDITOR
             /// <summary>
             /// 是否存在该类型的 SO 资源
             /// </summary>
@@ -117,17 +112,20 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor
                 AssetDatabase.Refresh();
                 return wantToAsset;
             }
-#endif
         }
 
         public static class Script
         {
-#if UNITY_EDITOR
+            public static void SelectMonoScript(string scriptName)
+            {
+                Selection.activeObject = GetMonoScript(scriptName);
+            }
+
             /// <summary>
             /// 查找脚本，并选择这个脚本文件
             /// 注意：查找的是 MonoScript，而不是 ScriptableObject，加载的也是 MonoScript
             /// </summary>
-            public static MonoScript FindAndSelectedScript(string scriptName)
+            public static MonoScript GetMonoScript(string scriptName)
             {
                 MonoScript foundMonoScript = null;
                 var scriptAssetPath = AssetDatabase.FindAssets("t:MonoScript " + scriptName)
@@ -159,9 +157,7 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor
                     .FirstOrDefault();
                 return !string.IsNullOrEmpty(scriptAssetPath) ? scriptAssetPath : null;
             }
-#endif
         }
-
-
     }
 }
+#endif

@@ -1,6 +1,6 @@
 using Sirenix.OdinInspector;
 
-namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
+namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Editor.Examples
 {
     [ResolvedParameterExample]
     public class TitleGroupExamples_GroupName
@@ -12,10 +12,12 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
             GroupName = "@UseAlternativeTitle ? AlternativeTitle : Title")]
         public string AttributeExpressionExample;
 
-        [FoldoutGroup("Field Name Example")] [TitleGroup("Field Name Example/Title", GroupName = "$Title")]
+        [FoldoutGroup("Field Name Example")]
+        [TitleGroup("Field Name Example/Title", GroupName = "$Title")]
         public string FieldNameExample;
 
-        [FoldoutGroup("Method Name Example")] [TitleGroup("Method Name Example/Title", GroupName = "$GetTitle")]
+        [FoldoutGroup("Method Name Example")]
+        [TitleGroup("Method Name Example/Title", GroupName = "$GetTitle")]
         public string MethodNameExample;
 
         [FoldoutGroup("Property Name Example")]
@@ -26,10 +28,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
         public bool UseAlternativeTitle;
         public string TitleProperty => UseAlternativeTitle ? AlternativeTitle : Title;
 
-        private string GetTitle()
-        {
-            return UseAlternativeTitle ? AlternativeTitle : Title;
-        }
+        string GetTitle() => UseAlternativeTitle ? AlternativeTitle : Title;
     }
     // End
 
@@ -43,10 +42,12 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
             Subtitle = "@UseAlternativeSubtitle ? AlternativeSubtitle : Subtitle")]
         public string AttributeExpressionExample;
 
-        [FoldoutGroup("Field Name Example")] [TitleGroup("Field Name Example/Title", Subtitle = "$Subtitle")]
+        [FoldoutGroup("Field Name Example")]
+        [TitleGroup("Field Name Example/Title", Subtitle = "$Subtitle")]
         public string FieldNameExample;
 
-        [FoldoutGroup("Method Name Example")] [TitleGroup("Method Name Example/Title", Subtitle = "$GetSubtitle")]
+        [FoldoutGroup("Method Name Example")]
+        [TitleGroup("Method Name Example/Title", Subtitle = "$GetSubtitle")]
         public string MethodNameExample;
 
         [FoldoutGroup("Property Name Example")]
@@ -57,10 +58,7 @@ namespace YOGA.Modules.OdinToolkits.Schwapo.Editor.Examples
         public bool UseAlternativeSubtitle;
         public string SubtitleProperty => UseAlternativeSubtitle ? AlternativeSubtitle : Subtitle;
 
-        private string GetSubtitle()
-        {
-            return UseAlternativeSubtitle ? AlternativeSubtitle : Subtitle;
-        }
+        string GetSubtitle() => UseAlternativeSubtitle ? AlternativeSubtitle : Subtitle;
     }
     // End
 }
