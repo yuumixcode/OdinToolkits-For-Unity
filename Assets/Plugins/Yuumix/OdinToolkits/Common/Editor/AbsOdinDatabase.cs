@@ -1,6 +1,6 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEditor;
-using Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor;
+using Yuumix.OdinToolkits.YuumiEditor;
 
 namespace Yuumix.OdinToolkits.Common.Editor
 {
@@ -29,7 +29,7 @@ namespace Yuumix.OdinToolkits.Common.Editor
         protected void PingScript()
         {
 #if UNITY_EDITOR
-            EditorGUIUtility.PingObject(ProjectEditorUtility.Script.GetMonoScript(typeof(T).Name));
+            EditorGUIUtility.PingObject(MonoScriptEditorUtil.GetMonoScript(typeof(T).Name));
 #endif
         }
     }

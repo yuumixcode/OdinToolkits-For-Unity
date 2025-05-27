@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Yuumix.OdinToolkits.Modules.Utilities.Runtime
 {
-    public static class ReflectionUtility
+    public static class ReflectionUtil
     {
         // Odin 提供的两个关于反射的工具类
         // Sirenix.Utilities.AssemblyUtilities

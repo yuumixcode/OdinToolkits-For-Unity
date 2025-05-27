@@ -3,8 +3,8 @@ using System;
 using UnityEngine;
 using Yuumix.OdinToolkits.Common.Locator;
 using Yuumix.OdinToolkits.Modules.CustomExtensions.Attributes;
+using Yuumix.OdinToolkits.YuumiEditor;
 #if UNITY_EDITOR
-using Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor;
 #endif
 
 namespace Yuumix.OdinToolkits.Common.Localization
@@ -38,7 +38,7 @@ namespace Yuumix.OdinToolkits.Common.Localization
                     return _instance;
                 }
 #if UNITY_EDITOR
-                _instance = ProjectEditorUtility.SO.GetScriptableObjectDeleteExtra<InspectorLanguageManagerSO>(RelativeFilePath);
+                _instance = ScriptableObjectEditorUtil.GetAssetDeleteExtra<InspectorLanguageManagerSO>(RelativeFilePath);
 #endif
                 return _instance;
             }

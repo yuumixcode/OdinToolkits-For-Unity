@@ -2,7 +2,6 @@
 using System;
 using UnityEngine;
 using Yuumix.OdinToolkits.Modules.Utilities.Runtime;
-using Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor;
 
 namespace Yuumix.OdinToolkits.Modules.ComponentBinder.Runtime
 {
@@ -41,7 +40,7 @@ namespace Yuumix.OdinToolkits.Modules.ComponentBinder.Runtime
 
         public void UpdatePath(BinderAssistant assistant)
         {
-            hierarchyPath = HierarchyUtility.GetRelativePath(assistant.HierarchyPath,
+            hierarchyPath = HierarchyUtil.GetRelativePath(assistant.HierarchyPath,
                 labelObj.GetComponent<BinderLabel>().HierarchyPath);
         }
 

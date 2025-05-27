@@ -3,7 +3,7 @@ using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
-using Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor;
+using Yuumix.OdinToolkits.YuumiEditor;
 
 namespace Yuumix.OdinToolkits.Modules.LearnArchive.EditorExtensions.Editor_API_Usage_Guide.General.Editor
 {
@@ -30,7 +30,7 @@ namespace Yuumix.OdinToolkits.Modules.LearnArchive.EditorExtensions.Editor_API_U
         protected void PingScript()
         {
 #if UNITY_EDITOR
-            EditorGUIUtility.PingObject(ProjectEditorUtility.Script.GetMonoScript(typeof(T).Name));
+            EditorGUIUtility.PingObject(MonoScriptEditorUtil.GetMonoScript(typeof(T).Name));
 #endif
         }
 

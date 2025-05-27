@@ -5,7 +5,7 @@ using Yuumix.OdinToolkits.Common.Runtime;
 
 namespace Yuumix.OdinToolkits.Modules.Utilities.Runtime
 {
-    public static class HierarchyUtility
+    public static class HierarchyUtil
     {
         public static string GetRelativePath(string parentPath, string childPath)
         {

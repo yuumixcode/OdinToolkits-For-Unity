@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using Yuumix.OdinToolkits.Common.Runtime;
 using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
-using Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor;
+using Yuumix.OdinToolkits.YuumiEditor;
 
 namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
@@ -9,7 +9,7 @@ namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.Attribu
     public class ShowInExample : ExampleScriptableObject
     {
         static string Path =>
-            ProjectEditorUtility.Paths.GetTargetFolderPath("RuntimeExamples",
+      PathEditorUtil.GetTargetFolderPath("RuntimeExamples",
                 "OdinToolkits") + "/ShowIn";
 
         [DisplayAsString(fontSize: 12, overflow: false)]
@@ -28,7 +28,7 @@ namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.Attribu
         public void SelectionFolder()
         {
             OdinEditorLog.Log("ShowIn Runtime Example 文件夹路径为: " + Path);
-            ProjectEditorUtility.PingAndSelectAsset(Path);
+            ProjectEditorUtil.PingAndSelectAsset(Path);
         }
     }
 }

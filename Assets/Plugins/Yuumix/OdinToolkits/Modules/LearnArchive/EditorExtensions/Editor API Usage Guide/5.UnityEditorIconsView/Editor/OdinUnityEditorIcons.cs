@@ -30,7 +30,7 @@ namespace Yuumix.OdinToolkits.Modules.LearnArchive.EditorExtensions.Editor_API_U
         {
             base.OnEnable();
             // Unity 版本可能不同，更新图标列表
-            IconList = CollectionUtility.MergeAndRemoveDuplicates(IconList,
+            IconList = CollectionUtil.MergeAndRemoveDuplicates(IconList,
                 (from x in Resources.FindObjectsOfTypeAll<Texture2D>()
                     let icoContent = GetIcon(x.name)
                     where icoContent != null

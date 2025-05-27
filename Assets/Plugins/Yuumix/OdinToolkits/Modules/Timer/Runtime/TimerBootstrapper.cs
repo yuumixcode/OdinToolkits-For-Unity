@@ -24,7 +24,7 @@ namespace Yuumix.OdinToolkits.Modules.Timer.Runtime
             // Set the player loop system
             PlayerLoop.SetPlayerLoop(playerLoop);
             // Print the player loop system
-            PlayerLoopUtility.PrintPlayerLoop(playerLoop);
+            PlayerLoopUtil.PrintPlayerLoop(playerLoop);
 
 #if UNITY_EDITOR
             EditorApplication.playModeStateChanged -= OnPlayModeState;
@@ -45,15 +45,15 @@ namespace Yuumix.OdinToolkits.Modules.Timer.Runtime
 
         static void RemoveTimerManager<T>(ref PlayerLoopSystem loop)
         {
-            var timerSystem = PlayerLoopUtility.GetNewCustomPlayerLoopSystem(typeof(TimerManager), TimerManager.UpdateTimer);
-            PlayerLoopUtility.RemoveSystem<T>(ref loop, timerSystem);
+            var timerSystem = PlayerLoopUtil.GetNewCustomPlayerLoopSystem(typeof(TimerManager), TimerManager.UpdateTimer);
+            PlayerLoopUtil.RemoveSystem<T>(ref loop, timerSystem);
         }
 
         static bool InsertTimerManager<T>(ref PlayerLoopSystem loop, int index)
         {
-            var timerSystem = PlayerLoopUtility.GetNewCustomPlayerLoopSystem(typeof(TimerManager), TimerManager.UpdateTimer);
+            var timerSystem = PlayerLoopUtil.GetNewCustomPlayerLoopSystem(typeof(TimerManager), TimerManager.UpdateTimer);
             // TODO: Insert the timer system into the player loop system at the specified index
-            return PlayerLoopUtility.InsertSystem<T>(ref loop, timerSystem, index);
+            return PlayerLoopUtil.InsertSystem<T>(ref loop, timerSystem, index);
         }
     }
 }

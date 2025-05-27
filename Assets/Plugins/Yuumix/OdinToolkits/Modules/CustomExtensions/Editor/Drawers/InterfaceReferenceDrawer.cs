@@ -4,7 +4,7 @@ using Sirenix.Utilities.Editor;
 using System;
 using UnityEngine;
 using Yuumix.OdinToolkits.Modules.CustomExtensions.Classes;
-using Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor;
+using Yuumix.OdinToolkits.YuumiEditor;
 using GUIContent = UnityEngine.GUIContent;
 using Object = UnityEngine.Object;
 
@@ -94,7 +94,7 @@ namespace Yuumix.OdinToolkits.Modules.CustomExtensions.Editor.Drawers
                 GUILayout.Box(new GUIContent(), SirenixGUIStyles.None,
                     GUILayoutOptions.Height(22F).MinWidth(squareSize + 2).MaxWidth(22F));
                 var lastRect = GUILayoutUtility.GetLastRect();
-                var innerRect = YuumiEditorGUIUtility.GetInnerRectFromRect(lastRect, InnerRectType.Center,
+                var innerRect = YuumiEditorGUIUtil.GetInnerRectFromRect(lastRect, InnerRectType.Center,
                     squareSize, squareSize);
                 var targetObject = interfaceReference.UnderlyingObject;
                 ValidateAndDrawIcon(ref targetObject, interfaceType, innerRect, squareSize);

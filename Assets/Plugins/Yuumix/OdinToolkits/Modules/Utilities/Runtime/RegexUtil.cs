@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace Yuumix.OdinToolkits.Modules.Utilities.Runtime
 {
-    public static class RegexUtility
+    public static class RegexUtil
     {
         const string CanonicalNamespaceRegex = @"([^a-zA-Z0-9._]|[\s]|::|\b(using)\b|\.{2,})";
 

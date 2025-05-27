@@ -2,7 +2,7 @@ using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using Yuumix.OdinToolkits.Common.Editor;
 using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
-using Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor;
+using Yuumix.OdinToolkits.YuumiEditor;
 
 namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.Database
 {
@@ -15,6 +15,6 @@ namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.Databas
         public Dictionary<AttributeType, List<AbsContainer>> ContainerMaps = new Dictionary<AttributeType, List<AbsContainer>>();
 
         public static AttributeChineseDatabase Instance =>
-            ProjectEditorUtility.SO.GetScriptableObjectDeleteExtra<AttributeChineseDatabase>();
+            ScriptableObjectEditorUtil.GetAssetDeleteExtra<AttributeChineseDatabase>();
     }
 }

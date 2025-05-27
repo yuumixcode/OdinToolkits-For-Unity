@@ -1,6 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
-using Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor;
+using Yuumix.OdinToolkits.Modules.Utilities.Runtime;
+using Yuumix.OdinToolkits.YuumiEditor;
 
 namespace Yuumix.OdinToolkits.Common.Locator
 {
@@ -42,9 +43,9 @@ namespace Yuumix.OdinToolkits.Common.Locator
 #if UNITY_EDITOR
         static void SetFolderPath()
         {
-            _markerSOPath = ProjectEditorUtility.SO.GetScriptableObjectAssetPath<OdinToolkitsLookup>();
+            _markerSOPath = ScriptableObjectEditorUtil.GetAssetPath<OdinToolkitsLookup>();
             // Debug.Log("MarkerSOPath:" + _markerSOPath);
-            _odinToolkitsFolderPath = ProjectEditorUtility.Paths.GetSubPathByEndsWith(_markerSOPath, RootFolderName);
+            _odinToolkitsFolderPath = PathUtil.GetSubPathByEndsWith(_markerSOPath, RootFolderName);
             // Debug.Log("FolderPath:" + _odinToolkitsFolderPath);
             PlayerPrefs.SetString(OdinToolkitsRootPathKey, _odinToolkitsFolderPath);
             PlayerPrefs.Save();

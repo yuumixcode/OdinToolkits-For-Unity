@@ -1,10 +1,9 @@
-﻿using System;
-using UnityEngine;
-#if UNITY_EDITOR
+﻿#if UNITY_EDITOR
+using System;
 using UnityEditor;
-#endif
+using UnityEngine;
 
-namespace Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor
+namespace Yuumix.OdinToolkits.YuumiEditor
 {
     public enum InnerRectType
     {
@@ -19,7 +18,7 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor
         BottomRightCorner
     }
 
-    public static class YuumiEditorGUIUtility
+    public static class YuumiEditorGUIUtil
     {
 #if UNITY_EDITOR
         /// <summary>
@@ -88,3 +87,4 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor
         }
     }
 }
+#endif

@@ -32,7 +32,7 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.Runtime
     /// <summary>
     /// 预定义程序集工具类
     /// </summary>
-    public static class PredefinedAssemblyUtility
+    public static class PredefinedAssemblyUtil
     {
         /// <summary>
         /// 根据程序集名称获取程序集类型

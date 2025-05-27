@@ -1,13 +1,13 @@
 ﻿#if UNITY_EDITOR
-using UnityEngine;
 using UnityEditor.Search;
+using UnityEngine;
 
-namespace Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor
+namespace Yuumix.OdinToolkits.YuumiEditor
 {
     /// <summary>
     /// 关于场景层级的工具类，不包括预制体的 Stage 场景
     /// </summary>
-    public static class HierarchyEditorUtility
+    public static class HierarchyEditorUtil
     {
         public static string GetAbsolutePath(GameObject obj) => GetAbsolutePath(obj.transform);
 

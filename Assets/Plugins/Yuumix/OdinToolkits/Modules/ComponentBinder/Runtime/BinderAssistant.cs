@@ -1,7 +1,6 @@
 #if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.Callbacks;
-using Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor;
 #endif
 using Sirenix.OdinInspector;
 using System;
@@ -9,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using Yuumix.OdinToolkits.Modules.Utilities.Runtime;
+using Yuumix.OdinToolkits.YuumiEditor;
 using Debug = UnityEngine.Debug;
 
 namespace Yuumix.OdinToolkits.Modules.ComponentBinder.Runtime
@@ -78,7 +78,7 @@ namespace Yuumix.OdinToolkits.Modules.ComponentBinder.Runtime
             get
             {
 #if UNITY_EDITOR
-                return HierarchyEditorUtility.GetAbsolutePath(transform);
+                return HierarchyEditorUtil.GetAbsolutePath(transform);
 #else
                 return string.Empty;
 #endif
@@ -286,7 +286,7 @@ namespace Yuumix.OdinToolkits.Modules.ComponentBinder.Runtime
                     }
 
                     if (unit.hierarchyPath !=
-                        HierarchyUtility.GetRelativePath(assistant.HierarchyPath,
+                        HierarchyUtil.GetRelativePath(assistant.HierarchyPath,
                             unit.labelObj.GetComponent<BinderLabel>().HierarchyPath))
                     {
                         assistant.HasError = true;

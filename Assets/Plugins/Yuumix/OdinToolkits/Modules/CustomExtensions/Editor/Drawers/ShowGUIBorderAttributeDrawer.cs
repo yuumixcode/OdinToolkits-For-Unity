@@ -1,7 +1,7 @@
 ﻿using Sirenix.OdinInspector.Editor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Modules.CustomExtensions.Attributes;
-using Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor;
+using Yuumix.OdinToolkits.YuumiEditor;
 
 namespace Yuumix.OdinToolkits.Modules.CustomExtensions.Editor.Drawers
 {
@@ -11,7 +11,7 @@ namespace Yuumix.OdinToolkits.Modules.CustomExtensions.Editor.Drawers
         protected override void DrawPropertyLayout(GUIContent label)
         {
             CallNextDrawer(label);
-            YuumiEditorGUIUtility.DrawRectOutlineWithBorder(GUILayoutUtility.GetLastRect(), Color.green);
+            YuumiEditorGUIUtil.DrawRectOutlineWithBorder(GUILayoutUtility.GetLastRect(), Color.green);
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Yuumix.OdinToolkits.Modules.Utilities.Runtime
 {
-    public static class CollectionUtility
+    public static class CollectionUtil
     {
         public static string[] MergeAndRemoveDuplicates(IEnumerable<string> array1, IEnumerable<string> array2)
         {

@@ -4,7 +4,7 @@ using System.IO;
 using UnityEditor;
 using Yuumix.OdinToolkits.Common.Runtime;
 using Yuumix.OdinToolkits.Modules.CustomExtensions.Attributes;
-using Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor;
+using Yuumix.OdinToolkits.YuumiEditor;
 
 namespace Yuumix.OdinToolkits.Modules.Tools.GenerateTemplateCode.Editor
 {
@@ -164,7 +164,7 @@ namespace Yuumix.OdinToolkits.Modules.Tools.GenerateTemplateCode.Editor
             AssetDatabase.ImportAsset(codeRelativePath);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
-            ProjectEditorUtility.PingAndSelectAsset(codeRelativePath);
+            ProjectEditorUtil.PingAndSelectAsset(codeRelativePath);
         }
     }
 }

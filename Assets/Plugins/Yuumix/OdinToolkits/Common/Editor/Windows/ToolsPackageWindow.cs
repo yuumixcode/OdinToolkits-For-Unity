@@ -4,7 +4,7 @@ using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Modules.Tools.GenerateTemplateCode.Editor;
-using Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor;
+using Yuumix.OdinToolkits.YuumiEditor;
 
 namespace Yuumix.OdinToolkits.Common.Editor.Windows
 {
@@ -37,7 +37,7 @@ namespace Yuumix.OdinToolkits.Common.Editor.Windows
             var tree = new OdinMenuTree(false);
             // 构建 Tree
             tree.AddObjectAtPath(GenerateTemplateToolMenuPath,
-                ProjectEditorUtility.SO.GetScriptableObjectDeleteExtra<GenerateTemplateCodeToolSO>());
+                ScriptableObjectEditorUtil.GetAssetDeleteExtra<GenerateTemplateCodeToolSO>());
             // tree.AddObjectAtPath("特殊定制/特性解析代码生成工具",
             //     ProjectEditorUtility.SO.GetScriptableObjectDeleteExtra<AttributeAnalysisGenCodeTool>());
             // 添加图标

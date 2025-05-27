@@ -2,7 +2,7 @@ using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using Yuumix.OdinToolkits.Common.Runtime;
 using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
-using Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor;
+using Yuumix.OdinToolkits.YuumiEditor;
 
 namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {
@@ -24,7 +24,7 @@ namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.Attribu
         int SetMinLength => 3;
         int SetMaxLength => 5;
 
-        static string Path => ProjectEditorUtility.Paths.GetTargetFolderPath("RuntimeExamples",
+        static string Path => PathEditorUtil.GetTargetFolderPath("RuntimeExamples",
             "OdinToolkits") + "/RequiredListLength";
 
         [DisplayAsString(fontSize: 12, overflow: false)]
@@ -43,7 +43,7 @@ namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.Attribu
         public void SelectionFolder()
         {
             OdinEditorLog.Log("RequiredListLength Runtime Example 文件夹路径为: " + Path);
-            ProjectEditorUtility.PingAndSelectAsset(Path);
+            ProjectEditorUtil.PingAndSelectAsset(Path);
         }
     }
 }

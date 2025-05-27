@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Yuumix.OdinToolkits.Modules.Utilities.YuumiEditor;
+using Yuumix.OdinToolkits.YuumiEditor;
 
 namespace Yuumix.OdinToolkits.Modules.ComponentBinder.Runtime
 {
@@ -40,7 +40,7 @@ namespace Yuumix.OdinToolkits.Modules.ComponentBinder.Runtime
             get
             {
 #if UNITY_EDITOR
-                return HierarchyEditorUtility.GetAbsolutePath(transform);
+                return HierarchyEditorUtil.GetAbsolutePath(transform);
 #else
                 return string.Empty;
 #endif

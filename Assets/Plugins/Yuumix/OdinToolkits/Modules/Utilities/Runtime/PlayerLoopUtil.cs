@@ -6,7 +6,7 @@ using UnityEngine.LowLevel;
 
 namespace Yuumix.OdinToolkits.Modules.Utilities.Runtime
 {
-    public static class PlayerLoopUtility
+    public static class PlayerLoopUtil
     {
         public static void RemoveSystem<T>(ref PlayerLoopSystem loop, PlayerLoopSystem systemToRemove)
         {

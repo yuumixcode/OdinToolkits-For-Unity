@@ -17,7 +17,7 @@ namespace Yuumix.OdinToolkits.Modules.LearnArchive.EditorExtensions.Editor_API_U
             // 要获取的所有图标名称
             string[] allIconNames = GetAllNames().ToArray();
             allIconNames =
-              CollectionUtility.MergeAndRemoveDuplicates(allIconNames, UnityBuildInEditorIcons.EssentialIcons);
+              CollectionUtil.MergeAndRemoveDuplicates(allIconNames, UnityBuildInEditorIcons.EssentialIcons);
             var number = 0;
             // 创建脚本文件
             var script = new FileInfo(ScriptPath + ".cs");
