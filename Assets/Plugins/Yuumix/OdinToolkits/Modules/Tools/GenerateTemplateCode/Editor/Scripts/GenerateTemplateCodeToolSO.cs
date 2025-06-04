@@ -2,9 +2,10 @@ using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
+using Yuumix.OdinToolkits;
 using Yuumix.OdinToolkits.Common.Runtime;
+using Yuumix.OdinToolkits.Common.YuumixEditor;
 using Yuumix.OdinToolkits.Modules.CustomExtensions.Attributes;
-using Yuumix.OdinToolkits.YuumiEditor;
 
 namespace Yuumix.OdinToolkits.Modules.Tools.GenerateTemplateCode.Editor
 {

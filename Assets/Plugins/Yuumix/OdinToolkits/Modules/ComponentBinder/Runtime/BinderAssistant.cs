@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.Callbacks;
+using Yuumix.OdinToolkits.Common.YuumixEditor;
 #endif
 using Sirenix.OdinInspector;
 using System;
@@ -8,7 +9,6 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using Yuumix.OdinToolkits.Modules.Utilities.Runtime;
-using Yuumix.OdinToolkits.YuumiEditor;
 using Debug = UnityEngine.Debug;
 
 namespace Yuumix.OdinToolkits.Modules.ComponentBinder.Runtime

@@ -1,8 +1,8 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using Yuumix.OdinToolkits.Common.Editor;
+using Yuumix.OdinToolkits.Common.YuumixEditor;
 using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
-using Yuumix.OdinToolkits.YuumiEditor;
 
 namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.Database
 {

@@ -1,7 +1,8 @@
 using Sirenix.OdinInspector;
+using Yuumix.OdinToolkits;
 using Yuumix.OdinToolkits.Common.Runtime;
+using Yuumix.OdinToolkits.Common.YuumixEditor;
 using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;
-using Yuumix.OdinToolkits.YuumiEditor;
 
 namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.AttributePreviewExamples.Scripts
 {

@@ -3,7 +3,7 @@ using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
-using Yuumix.OdinToolkits.YuumiEditor;
+using Yuumix.OdinToolkits.Common.YuumixEditor;
 
 namespace Yuumix.OdinToolkits.Modules.LearnArchive.EditorExtensions.Editor_API_Usage_Guide.General.Editor
 {

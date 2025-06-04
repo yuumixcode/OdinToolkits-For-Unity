@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Yuumix.OdinToolkits.YuumiEditor;
+#if UNITY_EDITOR
+using Yuumix.OdinToolkits.Common.YuumixEditor;
+#endif
 
 namespace Yuumix.OdinToolkits.Modules.ComponentBinder.Runtime
 {
@@ -42,7 +44,7 @@ namespace Yuumix.OdinToolkits.Modules.ComponentBinder.Runtime
 #if UNITY_EDITOR
                 return HierarchyEditorUtil.GetAbsolutePath(transform);
 #else
-                return string.Empty;
+                return "编辑器阶段使用";
 #endif
             }
         }

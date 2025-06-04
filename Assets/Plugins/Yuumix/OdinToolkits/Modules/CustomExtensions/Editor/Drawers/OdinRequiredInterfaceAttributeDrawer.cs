@@ -3,8 +3,8 @@ using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using System;
 using UnityEngine;
+using Yuumix.OdinToolkits.Common.YuumixEditor;
 using Yuumix.OdinToolkits.Modules.CustomExtensions.Attributes;
-using Yuumix.OdinToolkits.YuumiEditor;
 using Object = UnityEngine.Object;
 
 namespace Yuumix.OdinToolkits.Modules.CustomExtensions.Editor.Drawers
@@ -33,7 +33,7 @@ namespace Yuumix.OdinToolkits.Modules.CustomExtensions.Editor.Drawers
                 GUILayout.Box(new GUIContent(), SirenixGUIStyles.None,
                     GUILayoutOptions.Height(22F).MinWidth(squareSize + 2).MaxWidth(22F));
                 var lastRect = GUILayoutUtility.GetLastRect();
-                var innerRect = YuumiEditorGUIUtil.GetInnerRectFromRect(lastRect, InnerRectType.Center,
+                var innerRect = YuumixEditorGUIUtil.GetInnerRectFromRect(lastRect, InnerRectType.Center,
                     squareSize, squareSize);
                 // SirenixEditorGUI.DrawBorders(lastRect, 1, Color.cyan);
                 ValidateAndDrawIcon(ref referenceValue, interfaceType, innerRect, squareSize);

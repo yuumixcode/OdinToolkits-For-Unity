@@ -1,6 +1,6 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEditor;
-using Yuumix.OdinToolkits.YuumiEditor;
+using Yuumix.OdinToolkits.Common.YuumixEditor;
 
 namespace Yuumix.OdinToolkits.Common.Editor
 {

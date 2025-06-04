@@ -3,8 +3,9 @@ using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
+using Yuumix.OdinToolkits.Common.YuumixEditor;
+using Yuumix.OdinToolkits.Modules.APIBrowser;
 using Yuumix.OdinToolkits.Modules.Tools.GenerateTemplateCode.Editor;
-using Yuumix.OdinToolkits.YuumiEditor;
 
 namespace Yuumix.OdinToolkits.Common.Editor.Windows
 {
@@ -13,6 +14,7 @@ namespace Yuumix.OdinToolkits.Common.Editor.Windows
         #region MenuItemPath 菜单路径
 
         const string GenerateTemplateToolMenuPath = "模板代码生成工具";
+        const string APIBrowser = "API 浏览器";
 
         #endregion
 
@@ -27,7 +29,7 @@ namespace Yuumix.OdinToolkits.Common.Editor.Windows
         {
             var window = GetWindow<ToolsPackageWindow>();
             window.titleContent = new GUIContent(MenuItemSettings.ToolsPackageWindowName);
-            window.position = GUIHelper.GetEditorWindowRect().AlignCenter(800, 600);
+            window.position = GUIHelper.GetEditorWindowRect().AlignCenter(950, 700);
             window.minSize = new Vector2(500, 500);
             window.Show();
         }
@@ -38,11 +40,12 @@ namespace Yuumix.OdinToolkits.Common.Editor.Windows
             // 构建 Tree
             tree.AddObjectAtPath(GenerateTemplateToolMenuPath,
                 ScriptableObjectEditorUtil.GetAssetDeleteExtra<GenerateTemplateCodeToolSO>());
-            // tree.AddObjectAtPath("特殊定制/特性解析代码生成工具",
-            //     ProjectEditorUtility.SO.GetScriptableObjectDeleteExtra<AttributeAnalysisGenCodeTool>());
+            tree.AddObjectAtPath(APIBrowser, ScriptableObjectEditorUtil.GetAssetDeleteExtra<ApiBrowserSO>());
             // 添加图标
             var generateTemplateCodeToolMenuItem = tree.GetMenuItem(GenerateTemplateToolMenuPath);
+            var apiBrowserMenuItem = tree.GetMenuItem(APIBrowser);
             generateTemplateCodeToolMenuItem.AddThumbnailIcon(true);
+            apiBrowserMenuItem.AddThumbnailIcon(true);
             return tree;
         }
     }

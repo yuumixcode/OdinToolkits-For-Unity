@@ -3,7 +3,7 @@ using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
-using Yuumix.OdinToolkits.Common.Localization;
+using Yuumix.OdinToolkits.Common.EditorLocalization;
 
 namespace Yuumix.OdinToolkits.Common.Editor.Windows
 {
@@ -35,7 +35,7 @@ namespace Yuumix.OdinToolkits.Common.Editor.Windows
         {
             var tree = new OdinMenuTree(false);
             // 构建 Tree
-            tree.AddObjectAtPath(InspectorLanguageManagerMenuPath, InspectorLanguageManagerSO.Instance);
+            tree.AddObjectAtPath(InspectorLanguageManagerMenuPath, EditorLocalizationManagerSO.Instance);
             // 添加图标
             var inspectorLanguageManagerMenuItem = tree.GetMenuItem(InspectorLanguageManagerMenuPath);
             inspectorLanguageManagerMenuItem.AddThumbnailIcon(true);

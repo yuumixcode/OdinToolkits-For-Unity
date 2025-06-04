@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
+using Yuumix.OdinToolkits;
 using Yuumix.OdinToolkits.Common.Runtime;
 
 namespace Yuumix.OdinToolkits.Modules.Tools.SyntaxHighlighter.Editor
