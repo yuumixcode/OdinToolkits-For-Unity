@@ -1,34 +1,144 @@
+using Sirenix.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
 using UnityEngine;
 using Yuumix.OdinToolkits.Modules.CustomExtensions.Enums;
 
 namespace Yuumix.OdinToolkits.Modules.Utilities.Runtime
 {
     /// <summary>
-    /// 和 Type 类型相关的工具集
-    /// <br/>
-    /// Utility related to Type 
+    /// Type 类型相关的工具集，包含静态扩展（本身也是一种静态方法）
     /// </summary>
     /// <remarks>
-    /// <c>2025-06-12 Yuumix Zeus 确认注释内容</c><br/>
+    ///     <c>2025-06-13 Yuumix Zeus 确认注释内容</c><br />
     /// </remarks>
+    [LocalizedComment("Type 类型相关的工具集，包含静态扩展（本身也是一种静态方法）",
+        "Type-related Utility, including static extensions (it is also a static method in itself)")]
     public static class TypeUtil
     {
         /// <summary>
         /// 将系统类型名称映射到其 C# 别名的字典
-        /// <br/>
+        /// <br />
         /// A dictionary mapping system type names to their C# aliases.
         /// </summary>
         [LocalizedComment("类型别名映射表", "Type alias mapping table")]
-        public static readonly Dictionary<string, string> TypeAliasMap = new Dictionary<string, string>
+        public static readonly Dictionary<Type, string> TypeAliasMap = new Dictionary<Type, string>
         {
-            { "Single", "float" },
-            { "Int32", "int" },
-            { "String", "string" },
-            { "Boolean", "bool" },
-            { "Void", "void" }
+            {
+                typeof(float),
+                "float"
+            },
+            {
+                typeof(double),
+                "double"
+            },
+            {
+                typeof(sbyte),
+                "sbyte"
+            },
+            {
+                typeof(short),
+                "short"
+            },
+            {
+                typeof(int),
+                "int"
+            },
+            {
+                typeof(long),
+                "long"
+            },
+            {
+                typeof(byte),
+                "byte"
+            },
+            {
+                typeof(ushort),
+                "ushort"
+            },
+            {
+                typeof(uint),
+                "uint"
+            },
+            {
+                typeof(ulong),
+                "ulong"
+            },
+            {
+                typeof(decimal),
+                "decimal"
+            },
+            {
+                typeof(string),
+                "string"
+            },
+            {
+                typeof(char),
+                "char"
+            },
+            {
+                typeof(bool),
+                "bool"
+            },
+            {
+                typeof(float[]),
+                "float[]"
+            },
+            {
+                typeof(double[]),
+                "double[]"
+            },
+            {
+                typeof(sbyte[]),
+                "sbyte[]"
+            },
+            {
+                typeof(short[]),
+                "short[]"
+            },
+            {
+                typeof(int[]),
+                "int[]"
+            },
+            {
+                typeof(long[]),
+                "long[]"
+            },
+            {
+                typeof(byte[]),
+                "byte[]"
+            },
+            {
+                typeof(ushort[]),
+                "ushort[]"
+            },
+            {
+                typeof(uint[]),
+                "uint[]"
+            },
+            {
+                typeof(ulong[]),
+                "ulong[]"
+            },
+            {
+                typeof(decimal[]),
+                "decimal[]"
+            },
+            {
+                typeof(string[]),
+                "string[]"
+            },
+            {
+                typeof(char[]),
+                "char[]"
+            },
+            {
+                typeof(bool[]),
+                "bool[]"
+            }
         };
 
         #region static extensions
@@ -37,38 +147,36 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.Runtime
         /// 将反射获取到的系统类型名称转换为人类可读的 C# 风格类型名称
         /// </summary>
         /// <param name="type">想要获取可读性强的类型定义名称字符串的 Type 对象</param>
+        /// <param name="useFullName">是否获取包含命名空间的类名</param>
         /// <returns>
         /// 可读性高的类型名称
         /// </returns>
         /// <example>
-        /// <c>Single => float </c><br/>
-        /// <c>Enumerable`1 => Enumerable&lt;T&gt;</c>
+        ///     <c>Single => float </c><br />
+        ///     <c>Enumerable`1 => Enumerable&lt;T&gt;</c>
         /// </example>
         [LocalizedComment("将反射获取到的系统类型名称转换为人类可读的 C# 风格类型名称",
             "Convert the system type name obtained by reflection to a human-readable C-style type name")]
-        public static string GetReadableTypeName(this Type type)
+        public static string GetReadableTypeName(this Type type, bool useFullName = false)
         {
-            if (!type.IsGenericType)
+            // TypeExtensions
+            var targetTypeName = type.GetNiceName();
+            if (useFullName)
             {
-                var targetTypeName = type.Name;
-                if (targetTypeName.EndsWith("obj") && targetTypeName.Length > 3)
-                {
-                    targetTypeName = targetTypeName[..^3];
-                }
-
-                return TypeAliasMap.GetValueOrDefault(targetTypeName, targetTypeName);
+                targetTypeName = type.GetNiceFullName();
             }
 
-            var genericTypeName = type.GetGenericTypeDefinition().Name;
-            // 去掉 ` 和数字，Enumerable`1 -> Enumerable
-            genericTypeName = genericTypeName[..genericTypeName.IndexOf('`')];
-            var genericArguments = type.GetGenericArguments();
-            var argumentNames = string.Join(", ", genericArguments.Select(GetReadableTypeName));
-            return $"{genericTypeName}<{argumentNames}>";
+            // 移除 obj 的后缀，针对 Unity 的特殊处理
+            if (targetTypeName.EndsWith("obj") && targetTypeName.Length > 3)
+            {
+                targetTypeName = targetTypeName[..^3];
+            }
+
+            return targetTypeName;
         }
 
         /// <summary>
-        /// 获取 Type 对象的类型种类，类型种类枚举 (TypeCategory) 包括 class，interface，struct，enum，delegate 
+        /// 获取 Type 对象的类型种类，类型种类枚举 (TypeCategory) 包括 class，interface，struct，enum，delegate
         /// </summary>
         /// <returns>TypeCategory 枚举</returns>
         [LocalizedComment("获取 Type 对象的类别种类，类别种类枚举(TypeCategory)包括 class，interface，struct，enum，delegate ",
@@ -105,14 +213,143 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.Runtime
         }
 
         /// <summary>
+        /// 获取类型声明字符串
+        /// </summary>
+        /// <returns>
+        /// 返回字符串，形如：<br />
+        /// <c>
+        /// [Serializable]
+        /// public class ForTestTypeUtilGenericNestedClass&lt;TCollection, TItem&gt;: System.Object
+        /// where TCollection : System.Collections.Generic.IEnumerable&lt;Item&gt;
+        /// </c>
+        /// </returns>
+        [LocalizedComment("获取类型声明字符串，包含特性，基类，泛型，接口",
+            "Get type declaration string, including attribute, base classes, generics, interfaces")]
+        public static string GetTypeDeclaration(this Type type)
+        {
+            var sb = new StringBuilder();
+            var attributes = type.GetCustomAttributes(false);
+            // 1. 添加特性部分，只包含特性名称，不包含特性参数
+            foreach (var attr in attributes)
+            {
+                // 获取特性名称（不含命名空间）
+                var attributeName = attr.GetType().Name;
+
+                // 特殊处理：移除末尾的"Attribute"后缀
+                if (attributeName.EndsWith("Attribute"))
+                {
+                    attributeName = attributeName[..^"Attribute".Length];
+                }
+
+                sb.AppendLine($"[{attributeName}]");
+            }
+
+            // 2. 添加访问修饰符
+            if (type.IsNested)
+            {
+                if (type.IsNestedPublic)
+                {
+                    sb.Append("public ");
+                }
+                else if (type.IsNestedPrivate)
+                {
+                    sb.Append("private ");
+                }
+                else if (type.IsNestedFamily)
+                {
+                    sb.Append("protected "); // protected
+                }
+                else if (type.IsNestedAssembly)
+                {
+                    sb.Append("internal "); // internal
+                }
+                else if (type.IsNestedFamORAssem)
+                {
+                    sb.Append("protected internal ");
+                }
+            }
+            else
+            {
+                sb.Append(type.IsPublic ? "public " : "internal ");
+            }
+
+            // 3. 添加类修饰符
+            // type.IsSealed && type.IsAbstract == static
+            if (type.IsSealed && type.IsAbstract)
+            {
+                sb.Append("static ");
+            }
+            else if (type.IsAbstract)
+            {
+                sb.Append("abstract ");
+            }
+            else if (type.IsSealed)
+            {
+                sb.Append("sealed ");
+            }
+
+            // 4. 添加类型关键字
+            var category = type.GetTypeCategory();
+            switch (category)
+            {
+                case TypeCategory.Class:
+                    sb.Append("class ");
+                    break;
+                case TypeCategory.Interface:
+                    sb.Append("interface ");
+                    break;
+                case TypeCategory.Struct:
+                    sb.Append("struct ");
+                    break;
+                case TypeCategory.Enum:
+                    sb.Append("enum ");
+                    break;
+                case TypeCategory.Delegate:
+                    sb.Append("delegate ");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            // 5. 添加类名（处理泛型）
+            sb.Append(type.GetReadableTypeName());
+
+            // 6. 添加基类和接口
+            var inheritTypes = new List<string>();
+
+            // 添加直接基类
+            if (type.BaseType != null)
+            {
+                inheritTypes.Add(type.BaseType.GetReadableTypeName(true));
+            }
+
+            // 添加实现的接口，忽略编译时生成的接口，包含所有从基类继承的接口
+            var interfaces = type.GetInterfaces()
+                .Where(i => !i.IsDefined(typeof(CompilerGeneratedAttribute), false));
+
+            inheritTypes.AddRange(interfaces.Select(x => x.GetReadableTypeName(true)));
+
+            if (inheritTypes.Count > 0)
+            {
+                sb.Append(" : " + string.Join(", ", inheritTypes));
+            }
+
+            // 7. 添加泛型约束
+            if (type.IsGenericType)
+            {
+                sb.AppendLine(" " + type.GetGenericConstraintsString(true));
+            }
+
+            return sb.ToString();
+        }
+
+        /// <summary>
         /// 判断指定类型是否为委托类型
         /// </summary>
-        [LocalizedComment("判断指定类型是否为委托类型", 
+        [LocalizedComment("判断指定类型是否为委托类型",
             "Determines if the specified type is a delegate type.")]
-        public static bool IsDelegate(this Type type)
-        {
-            return type.IsSubclassOf(typeof(Delegate)) || type.IsSubclassOf(typeof(MulticastDelegate));
-        }
+        public static bool IsDelegate(this Type type) =>
+            type.IsSubclassOf(typeof(Delegate)) || type.IsSubclassOf(typeof(MulticastDelegate));
 
         #endregion
     }

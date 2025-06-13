@@ -50,7 +50,7 @@ namespace Yuumix.OdinToolkits.Common.YuumixEditor
                 allPaths[0] = AssetDatabase.GUIDToAssetPath(guids[0]);
                 // 只获取一个资源 0 号
                 wantToAsset = AssetDatabase.LoadAssetAtPath<T>(allPaths[0]);
-                if (wantToAsset == null)
+                if (!wantToAsset)
                 {
                     EditorLog.Warning("GetScriptableObjectDeleteExtra 中加载资源失败");
                 }
@@ -69,10 +69,10 @@ namespace Yuumix.OdinToolkits.Common.YuumixEditor
 
             if (string.IsNullOrEmpty(filePath))
             {
-                EditorLog.Warning("没有找到对应的 ScriptableObject 资源，且没有设置路径，不会立即生成新资源");
-                return null;
+                EditorLog.Warning("没有找到对应的 ScriptableObject 资源，且没有设置路径，在 Assets/ 目录生成文件");
             }
 
+            filePath = "Assets/Auto-Generate-SO-Asset.asset";
             wantToAsset = ScriptableObject.CreateInstance<T>();
             if (!filePath.EndsWith(".asset"))
             {

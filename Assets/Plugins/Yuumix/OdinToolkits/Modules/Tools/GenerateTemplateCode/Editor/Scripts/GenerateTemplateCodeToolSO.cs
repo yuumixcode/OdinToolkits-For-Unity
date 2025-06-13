@@ -118,7 +118,12 @@ namespace Yuumix.OdinToolkits.Modules.Tools.GenerateTemplateCode.Editor
         void GenerateCode(string targetNamespace, string targetClassName, string targetPath,
             string targetTemplateKey)
         {
-            if (string.IsNullOrEmpty(targetNamespace) || string.IsNullOrEmpty(targetClassName) ||
+            if (string.IsNullOrEmpty(targetNamespace))
+            {
+                targetNamespace = "Default";
+            }
+
+            if (string.IsNullOrEmpty(targetClassName) ||
                 string.IsNullOrEmpty(targetPath))
             {
                 OdinEditorLog.Error("请填写完整工具信息！");

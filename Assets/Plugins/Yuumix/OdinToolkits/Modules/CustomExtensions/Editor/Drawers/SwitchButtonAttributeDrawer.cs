@@ -66,20 +66,16 @@ namespace Yuumix.OdinToolkits.Modules.CustomExtensions.Editor.Drawers
 
         protected override void DrawPropertyLayout(GUIContent label)
         {
-            // 绘制错误提示（如果有颜色解析失败等情况）
             ValueResolver.DrawErrors(
                 _backgroundColorOnResolver,
                 _backgroundColorOffResolver,
                 _switchColorOnResolver,
                 _switchColorOffResolver);
-            // 获取当前颜色值（可能来自动态解析）
             var backgroundColorOn = _backgroundColorOnResolver.GetValue();
             var backgroundColorOff = _backgroundColorOffResolver.GetValue();
             var switchColorOn = _switchColorOnResolver.GetValue();
             var switchColorOff = _switchColorOffResolver.GetValue();
-            // 获取控件整体矩形区域
             var totalRect = EditorGUILayout.GetControlRect(label != null, EditorGUIUtility.singleLineHeight);
-            // 处理标签布局（根据对齐方式调整位置）
             if (label != null && !_hasToggleLeftAttribute)
             {
                 totalRect = EditorGUI.PrefixLabel(totalRect, label);
@@ -186,11 +182,7 @@ namespace Yuumix.OdinToolkits.Modules.CustomExtensions.Editor.Drawers
             _animating = true;
         }
 
-        // 颜色变化检测方法
         bool ColorNeedChanged(Color targetBackgroundColor, Color targetSwitchColor) =>
             _backgroundColor != targetBackgroundColor || _switchColor != targetSwitchColor;
-
-        // 颜色加深辅助方法
-        static Color Darken(Color color, float factor) => new Color(color.r / factor, color.g / factor, color.b / factor);
     }
 }

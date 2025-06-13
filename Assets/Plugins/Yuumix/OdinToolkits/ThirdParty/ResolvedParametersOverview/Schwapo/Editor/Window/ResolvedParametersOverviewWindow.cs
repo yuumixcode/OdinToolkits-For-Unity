@@ -29,10 +29,10 @@ namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Edit
         }
 
         // [MenuItem("Tools/Odin Inspector/Resolved Parameters Overview")]
-        [MenuItem(MenuItemSettings.ResolvedParametersMenuItemName, false, MenuItemSettings.ResolvedParametersPriority)]
+        [MenuItem(MenuItemGlobalSettings.ResolvedParametersMenuItemName, false, MenuItemGlobalSettings.ResolvedParametersPriority)]
         public static void Open()
         {
-            _window = GetWindow<ResolvedParametersOverviewWindow>(MenuItemSettings.ResolvedParametersOverviewWindowName);
+            _window = GetWindow<ResolvedParametersOverviewWindow>(MenuItemGlobalSettings.ResolvedParametersOverviewWindowName);
         }
 
         protected override void Initialize()

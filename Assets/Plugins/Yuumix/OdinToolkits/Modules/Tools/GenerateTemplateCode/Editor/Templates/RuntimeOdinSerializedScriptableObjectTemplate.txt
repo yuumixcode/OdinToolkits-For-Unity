@@ -1,0 +1,14 @@
+using Sirenix.OdinInspector;
+
+namespace #NAMESPACE#
+{
+    public class #CLASSNAME# :
+#if UNITY_EDITOR
+        SerializedScriptableObject
+#else
+        MonoBehaviour
+#endif
+    {
+        
+    }
+}

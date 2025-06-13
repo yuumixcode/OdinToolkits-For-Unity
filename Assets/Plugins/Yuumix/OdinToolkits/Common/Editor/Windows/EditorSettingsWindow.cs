@@ -3,7 +3,7 @@ using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
-using Yuumix.OdinToolkits.Common.EditorLocalization;
+using Yuumix.OdinToolkits.Common.InspectorLocalization;
 
 namespace Yuumix.OdinToolkits.Common.Editor.Windows
 {
@@ -21,11 +21,11 @@ namespace Yuumix.OdinToolkits.Common.Editor.Windows
             WindowPadding = new Vector4(10, 10, 10, 10);
         }
 
-        [MenuItem(MenuItemSettings.EditorSettingsMenuItemName, false, MenuItemSettings.EditorSettingsWindowPriority)]
+        [MenuItem(MenuItemGlobalSettings.EditorSettingsMenuItemName, false, MenuItemGlobalSettings.EditorSettingsWindowPriority)]
         public static void ShowWindow()
         {
             var window = GetWindow<EditorSettingsWindow>();
-            window.titleContent = new GUIContent(MenuItemSettings.EditorSettingsWindowName);
+            window.titleContent = new GUIContent(MenuItemGlobalSettings.EditorSettingsWindowName);
             window.position = GUIHelper.GetEditorWindowRect().AlignCenter(800, 600);
             window.minSize = new Vector2(500, 500);
             window.Show();
@@ -35,7 +35,7 @@ namespace Yuumix.OdinToolkits.Common.Editor.Windows
         {
             var tree = new OdinMenuTree(false);
             // 构建 Tree
-            tree.AddObjectAtPath(InspectorLanguageManagerMenuPath, EditorLocalizationManagerSO.Instance);
+            tree.AddObjectAtPath(InspectorLanguageManagerMenuPath, InspectorLocalizationManagerSO.Instance);
             // 添加图标
             var inspectorLanguageManagerMenuItem = tree.GetMenuItem(InspectorLanguageManagerMenuPath);
             inspectorLanguageManagerMenuItem.AddThumbnailIcon(true);

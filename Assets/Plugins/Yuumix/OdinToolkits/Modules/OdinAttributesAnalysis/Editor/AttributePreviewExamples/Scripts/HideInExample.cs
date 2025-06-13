@@ -1,6 +1,6 @@
 using Sirenix.OdinInspector;
 using Yuumix.OdinToolkits;
-using Yuumix.OdinToolkits.Common.EditorLocator;
+using Yuumix.OdinToolkits.Common.RootLocator;
 using Yuumix.OdinToolkits.Common.Runtime;
 using Yuumix.OdinToolkits.Common.YuumixEditor;
 using Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor;

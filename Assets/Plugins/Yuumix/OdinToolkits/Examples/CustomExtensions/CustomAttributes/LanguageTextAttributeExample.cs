@@ -1,20 +1,22 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
-using Yuumix.OdinToolkits.Common.EditorLocalization;
+using Yuumix.OdinToolkits.Common.InspectorLocalization;
+using Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes;
+using Yuumix.OdinToolkits.Common.InspectorLocalization.GUIWidgets;
 using Yuumix.OdinToolkits.Modules.CustomExtensions.Attributes;
-using Yuumix.OdinToolkits.Modules.CustomExtensions.Classes.InspectorGUI;
+using Yuumix.OdinToolkits.Modules.CustomExtensions.Classes.InspectorGUIWidgets;
 
 namespace Yuumix.OdinToolkits.Examples.CustomExtensions.CustomAttributes
 {
     public class LanguageTextAttributeExample : MonoBehaviour
     {
         // 使用一行代码创建语言切换按钮
-        public SwitchEditorLanguageButton button = new SwitchEditorLanguageButton();
+        public SwitchInspectorLanguageWidget widget = new SwitchInspectorLanguageWidget();
 
-        public EnumLanguageButton enumButton = new EnumLanguageButton();
+        public EnumLanguageWidget enumWidget = new EnumLanguageWidget();
 
         [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
-        public EditorLocalizationManagerSO languageLocalizationManager;
+        public InspectorLocalizationManagerSO languageLocalizationManager;
 
         [LocalizedText("$Text", "Assets", true)]
         public string asset;

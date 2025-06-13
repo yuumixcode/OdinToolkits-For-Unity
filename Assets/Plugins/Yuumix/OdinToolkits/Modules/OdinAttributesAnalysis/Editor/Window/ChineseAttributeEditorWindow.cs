@@ -23,11 +23,11 @@ namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Editor.Window
             base.OnDestroy();
         }
 
-        [MenuItem(MenuItemSettings.AttributeChineseMenuItemName, false, MenuItemSettings.AttributeChinesePriority)]
+        [MenuItem(MenuItemGlobalSettings.AttributeChineseMenuItemName, false, MenuItemGlobalSettings.AttributeChinesePriority)]
         public static void ShowWindow()
         {
             _window = GetWindow<ChineseAttributeEditorWindow>();
-            _window.titleContent = new GUIContent(MenuItemSettings.AttributeChineseWindowName);
+            _window.titleContent = new GUIContent(MenuItemGlobalSettings.AttributeChineseWindowName);
             _window.position = GUIHelper.GetEditorWindowRect().AlignCenter(1000, 750);
             _window.Show();
         }
