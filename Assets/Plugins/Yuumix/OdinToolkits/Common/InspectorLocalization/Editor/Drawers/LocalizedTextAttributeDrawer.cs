@@ -5,26 +5,25 @@ using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes;
+using Yuumix.OdinToolkits.Common.Runtime;
 
 namespace Yuumix.OdinToolkits.Common.InspectorLocalization.Editor.Drawers
 {
     [DrawerPriority(DrawerPriorityLevel.SuperPriority)]
     public class LocalizedTextAttributeDrawer : OdinAttributeDrawer<LocalizedTextAttribute>
     {
-        InspectorLocalizationManagerSO _localizationManager;
         ValueResolver<string> _textProvider;
         ValueResolver<Color> _iconColorResolver;
         GUIContent _tempLabel;
 
         protected override void Initialize()
         {
-            _localizationManager = InspectorLocalizationManagerSO.Instance;
             _textProvider = ValueResolver.GetForString(Property, GetAttributeText());
             _iconColorResolver =
                 ValueResolver.Get(Property, Attribute.IconColor, EditorStyles.label.normal.textColor);
             _tempLabel = new GUIContent();
-            _localizationManager.OnLanguageChange -= ReloadResolver;
-            _localizationManager.OnLanguageChange += ReloadResolver;
+            InspectorLocalizationManagerSO.OnLanguageChange -= ReloadResolver;
+            InspectorLocalizationManagerSO.OnLanguageChange += ReloadResolver;
         }
 
         protected override void DrawPropertyLayout(GUIContent label)
@@ -41,6 +40,7 @@ namespace Yuumix.OdinToolkits.Common.InspectorLocalization.Editor.Drawers
             }
             else
             {
+                ReloadResolver();
                 var str = _textProvider.GetValue();
                 GUIContent nextLabel;
                 if (str == null && Attribute.Icon == SdfIconType.None)
@@ -77,6 +77,9 @@ namespace Yuumix.OdinToolkits.Common.InspectorLocalization.Editor.Drawers
             _textProvider = ValueResolver.GetForString(Property, GetAttributeText());
         }
 
-        string GetAttributeText() => Attribute.MultiLanguageData.GetCurrentOrFallback();
+        string GetAttributeText()
+        {
+            return Attribute.MultiLanguageData.GetCurrentOrFallback();
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes;
 using Yuumix.OdinToolkits.Modules.Utilities.Runtime;
 
 #pragma warning disable CS0067 // 事件从未使用过
@@ -100,7 +101,7 @@ namespace Yuumix.OdinToolkits.Modules.Tools.MemberInfoBrowseExportTool.Editor
                 }
 
                 apiData.fullSignature =
-                    $"{GetAccessModifierString(apiData.modifierType)} {GetStaticKeyword(apiData.isStatic)}{TypeUtil.GetReadableTypeName(field.FieldType)} {apiData.rawName};";
+                    $"{GetAccessModifierString(apiData.modifierType)} {GetStaticKeyword(apiData.isStatic)}{TypeExtensions.GetReadableTypeName(field.FieldType)} {apiData.rawName};";
                 apiList.Add(apiData);
             }
 
@@ -146,7 +147,7 @@ namespace Yuumix.OdinToolkits.Modules.Tools.MemberInfoBrowseExportTool.Editor
                 apiData.fullSignature =
                     $"{GetAccessModifierString(apiData.modifierType)} " +
                     $"{GetStaticKeyword(apiData.isStatic)}{GetAbstractOrVirtual(apiData.isAbstract, apiData.isVirtual)}{cons.Name}" +
-                    $"({string.Join(", ", cons.GetParameters().Select(p => $"{TypeUtil.GetReadableTypeName(p.ParameterType)} {p.Name}"))})";
+                    $"({string.Join(", ", cons.GetParameters().Select(p => $"{TypeExtensions.GetReadableTypeName(p.ParameterType)} {p.Name}"))})";
                 apiList.Add(apiData);
             }
 
@@ -215,7 +216,7 @@ namespace Yuumix.OdinToolkits.Modules.Tools.MemberInfoBrowseExportTool.Editor
                 isVirtual = methodInfo.IsVirtual,
                 isObsolete = methodInfo.IsDefined(typeof(ObsoleteAttribute)),
                 modifierType = ReflectionUtil.GetMethodAccessModifierType(methodInfo),
-                fullSignature = ReflectionUtil.GetFullMethodSignature(methodInfo),
+                fullSignature = ReflectionUtil.GetMethodFullSignature(methodInfo),
             };
             if (methodInfo.GetCustomAttribute<LocalizedCommentAttribute>() != null)
             {
@@ -224,7 +225,7 @@ namespace Yuumix.OdinToolkits.Modules.Tools.MemberInfoBrowseExportTool.Editor
 
             if (memberType == MemberTypes.Property)
             {
-                apiData.propertyReturnTypeName = TypeUtil.GetReadableTypeName(methodInfo.ReturnType);
+                apiData.propertyReturnTypeName = TypeExtensions.GetReadableTypeName(methodInfo.ReturnType);
             }
 
             return apiData;

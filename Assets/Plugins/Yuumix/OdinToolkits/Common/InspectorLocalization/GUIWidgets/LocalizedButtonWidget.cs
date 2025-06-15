@@ -1,30 +1,43 @@
 using Sirenix.OdinInspector;
-using Sirenix.OdinInspector.Editor;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
+using Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes;
 using Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes.WidgetConfigs;
 using Yuumix.OdinToolkits.Common.InspectorLocalization.Structs;
+#if UNITY_EDITOR
+using Sirenix.OdinInspector.Editor;
+#endif
 
 namespace Yuumix.OdinToolkits.Common.InspectorLocalization.GUIWidgets
 {
     /// <summary>
-    /// 本地化按钮自定义类，以字段或者属性的形式实现多语言本地化按钮支持，完美兼容 Odin Inspector 的绘制系统，支持实时语言切换。
-    /// 构造函数中赋值无参方法，推荐静态方法。添加 LocalizedButtonConfigAttribute 进行 Button 样式设置。
+    /// 多语言按钮部件，以字段形式实现多语言按钮支持<br />
+    /// 构造函数中赋值无参方法，推荐静态方法。<br />
+    /// 添加 LocalizedButtonConfigAttribute 进行 Button 样式设置。<br />
+    /// 支持兼容 Odin Inspector 的绘制系统<br />
+    /// 支持实时语言切换
     /// </summary>
+    /// <remarks>
+    ///     <c>2025/06/15 Yuumix Zeus 确认注释</c><br />
+    /// </remarks>
     [Serializable]
     [InlineProperty]
     [HideLabel]
+    [LocalizedComment("本地化按钮组件，用于多语言显示按钮，支持 Odin Inspector 的绘制系统",
+        "Localized button widget, used to display buttons in multiple languages，Supports Odin Inspector Drawing Systems")]
     public class LocalizedButtonWidget
     {
+        Action _targetMethod;
+
+        [LocalizedComment("按钮触发时执行的方法，推荐静态方法",
+            "Methods to execute when the button is triggered, static methods are recommended")]
+        public LocalizedButtonWidget(Action action) => _targetMethod = action;
+
         InspectorLocalizationManagerSO LanguageLocalizationManager => InspectorLocalizationManagerSO.Instance;
         bool IsChinese => LanguageLocalizationManager.IsChinese;
         bool IsEnglish => LanguageLocalizationManager.IsEnglish;
-
-        Action _targetMethod;
-
-        public LocalizedButtonWidget(Action action) => _targetMethod = action;
 
         [ShowIf(nameof(IsChinese), false)]
         [Conditional("UNITY_EDITOR")]
@@ -42,20 +55,25 @@ namespace Yuumix.OdinToolkits.Common.InspectorLocalization.GUIWidgets
     }
 
 #if UNITY_EDITOR
-    internal class LocalizedToolButtonProcessor : OdinAttributeProcessor<LocalizedButtonWidget>
+    internal class LocalizedButtonProcessor : OdinAttributeProcessor<LocalizedButtonWidget>
     {
         public override void ProcessChildMemberAttributes(InspectorProperty parentProperty, MemberInfo member,
             List<Attribute> attributes)
         {
-            if (member.Name == nameof(LocalizedButtonWidget.ChineseButton))
+            switch (member.Name)
             {
-                var config = parentProperty.GetAttribute<LocalizedButtonWidgetConfigAttribute>().Config;
-                attributes.Add(ButtonAttributeConfig.CreateChineseButtonAttribute(config));
-            }
-            else if (member.Name == nameof(LocalizedButtonWidget.EnglishButton))
-            {
-                var config = parentProperty.GetAttribute<LocalizedButtonWidgetConfigAttribute>().Config;
-                attributes.Add(ButtonAttributeConfig.CreateEnglishButtonAttribute(config));
+                case nameof(LocalizedButtonWidget.ChineseButton):
+                {
+                    var config = parentProperty.GetAttribute<LocalizedButtonWidgetConfigAttribute>().Config;
+                    attributes.Add(ButtonAttributeConfig.CreateChineseButtonAttribute(config));
+                    break;
+                }
+                case nameof(LocalizedButtonWidget.EnglishButton):
+                {
+                    var config = parentProperty.GetAttribute<LocalizedButtonWidgetConfigAttribute>().Config;
+                    attributes.Add(ButtonAttributeConfig.CreateEnglishButtonAttribute(config));
+                    break;
+                }
             }
         }
     }

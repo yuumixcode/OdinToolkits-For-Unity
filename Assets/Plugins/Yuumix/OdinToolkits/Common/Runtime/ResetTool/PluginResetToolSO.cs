@@ -10,6 +10,9 @@ namespace Yuumix.OdinToolkits.Common.Runtime.ResetTool
 {
     public interface IPluginReset
     {
+        /// <summary>
+        /// 插件初始化方法，在插件导出包时，或者需要初始化时，调用此方法
+        /// </summary>
         void PluginReset();
     }
 

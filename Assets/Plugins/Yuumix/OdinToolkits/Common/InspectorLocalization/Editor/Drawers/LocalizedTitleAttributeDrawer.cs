@@ -7,20 +7,18 @@ using Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes;
 
 namespace Yuumix.OdinToolkits.Common.InspectorLocalization.Editor.Drawers
 {
-    [DrawerPriority(1.0)]
+    [DrawerPriority(1)]
     public class LocalizedTitleAttributeDrawer : OdinAttributeDrawer<LocalizedTitleAttribute>
     {
-        InspectorLocalizationManagerSO _localizationManager;
-        ValueResolver<string> _titleResolver;
         ValueResolver<string> _subTitleResolver;
+        ValueResolver<string> _titleResolver;
 
         protected override void Initialize()
         {
-            _localizationManager = InspectorLocalizationManagerSO.Instance;
             _titleResolver = ValueResolver.GetForString(Property, GetAttributeTitle());
             _subTitleResolver = ValueResolver.GetForString(Property, GetAttributeSubTitle());
-            _localizationManager.OnLanguageChange -= ReloadResolver;
-            _localizationManager.OnLanguageChange += ReloadResolver;
+            InspectorLocalizationManagerSO.OnLanguageChange -= ReloadResolver;
+            InspectorLocalizationManagerSO.OnLanguageChange += ReloadResolver;
         }
 
         protected override void DrawPropertyLayout(GUIContent label)
@@ -59,6 +57,7 @@ namespace Yuumix.OdinToolkits.Common.InspectorLocalization.Editor.Drawers
         }
 
         string GetAttributeTitle() => Attribute.MultiLanguageData.GetCurrentTitleOrFallback();
+
         string GetAttributeSubTitle() => Attribute.MultiLanguageData.GetCurrentSubTitleOrFallback();
     }
 }

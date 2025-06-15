@@ -10,9 +10,9 @@ using UnityEngine;
 using Yuumix.OdinToolkits.Common.Editor.ScriptableSingleton;
 using Yuumix.OdinToolkits.Common.InspectorLocalization;
 using Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes;
+using Yuumix.OdinToolkits.Common.InspectorLocalization.GUIWidgets;
 using Yuumix.OdinToolkits.Common.Runtime.ResetTool;
 using Yuumix.OdinToolkits.Modules.CustomExtensions.Attributes;
-using Yuumix.OdinToolkits.Modules.CustomExtensions.Classes.InspectorGUIWidgets;
 
 namespace Yuumix.OdinToolkits.Modules.Tools.MemberInfoBrowseExportTool.Editor
 {
@@ -26,8 +26,8 @@ namespace Yuumix.OdinToolkits.Modules.Tools.MemberInfoBrowseExportTool.Editor
             finalAllApiDisplayItems = new List<MemberDisplayItem>();
         }
 
-        public InspectorHeaderWidget headerWidget =
-            new InspectorHeaderWidget("成员信息浏览导出工具", "MemberInfo Browser & Exporter",
+        public LocalizedHeaderWidget headerWidget =
+            new LocalizedHeaderWidget("成员信息浏览导出工具", "MemberInfo Browser & Exporter",
                 "快速浏览目标类型的所有成员信息，包括但不限于字段，方法。以及可以导出特殊的 Markdown 格式的 API 文档或者所有成员文档",
                 "Quickly browse all MemberInfo of the target type, including but not limited to FieldInfo, MethodInfo. " +
                 "And you can export API documents or all MemberInfo documents in special Markdown format.",

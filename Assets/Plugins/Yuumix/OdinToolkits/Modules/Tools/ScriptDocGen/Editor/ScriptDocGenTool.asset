@@ -20,5 +20,16 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: TargetType
+      Entry: 7
+      Data: 0|System.RuntimeType, mscorlib
+    - Name: 
+      Entry: 1
+      Data: Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Test.MemberDataForTest,
+        Assembly-CSharp-firstpass
+    - Name: 
+      Entry: 8
+      Data: 
   header: {}
+  folderPath: /Users/yuumi/OpenSource/ScriptDoc

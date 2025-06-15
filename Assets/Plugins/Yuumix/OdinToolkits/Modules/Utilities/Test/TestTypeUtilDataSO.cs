@@ -18,7 +18,7 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.Test
         public void PluginReset(){
             TypeListForTest = new List<Type>()
             {
-                typeof(TestTypeUtil),
+                typeof(TestTypeExtensions),
                 typeof(OdinEditor),
                 typeof(ForTestTypeUtilGenericNestedClass<,>)
             };

@@ -37,12 +37,13 @@ namespace Yuumix.OdinToolkits.Common.Editor.Windows
             base.OnEnable();
             WindowPadding = new Vector4(10, 10, 10, 10);
             MenuWidth = 230;
-            InspectorLocalizationManagerSO.Instance.OnLanguageChange -= ReBuild;
-            InspectorLocalizationManagerSO.Instance.OnLanguageChange += ReBuild;
+            InspectorLocalizationManagerSO.OnLanguageChange -= ReBuild;
+            InspectorLocalizationManagerSO.OnLanguageChange += ReBuild;
         }
 
         void ReBuild()
         {
+            Debug.Log("ToolPackage Rebuild");
             _selectionInstance = MenuTree.Selection.SelectedValue;
             ShowToast(ToastPosition.BottomRight, SdfIconType.InfoSquareFill,
                 "触发切换语言，正在重建面板，稍等，请勿连续点击!", new Color(0.996f, 0.906f, 0.459f, 1f), 5f);

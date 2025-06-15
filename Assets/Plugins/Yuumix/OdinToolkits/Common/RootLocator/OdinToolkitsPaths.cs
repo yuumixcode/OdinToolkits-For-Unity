@@ -1,16 +1,15 @@
-﻿using UnityEditor;
-using UnityEngine;
-using Yuumix.OdinToolkits.Common.YuumixEditor;
+﻿using UnityEngine;
 using Yuumix.OdinToolkits.Modules.Utilities.Runtime;
+#if UNITY_EDITOR
+using UnityEditor;
+using Yuumix.OdinToolkits.Common.YuumixEditor;
+#endif
 
 namespace Yuumix.OdinToolkits.Common.RootLocator
 {
     /// <summary>
     /// 编辑器阶段使用的 OdinToolkits 文件夹路径定位器
     /// </summary>
-#if UNITY_EDITOR
-    [InitializeOnLoad]
-#endif
     public static class OdinToolkitsPaths
     {
         const string RootFolderName = "OdinToolkits";
@@ -40,10 +39,13 @@ namespace Yuumix.OdinToolkits.Common.RootLocator
         public static string GetRootPath()
         {
 #if UNITY_EDITOR
-            var folderPath = EditorPrefs.GetString(OdinToolkitsRootPathKey);
-            if (AssetDatabase.IsValidFolder(folderPath))
+            if (EditorPrefs.HasKey("OdinToolkitsRootPathKey"))
             {
-                return folderPath;
+                var folderPath = EditorPrefs.GetString(OdinToolkitsRootPathKey);
+                if (AssetDatabase.IsValidFolder(folderPath))
+                {
+                    return folderPath;
+                }
             }
 
             SetFolderPath();

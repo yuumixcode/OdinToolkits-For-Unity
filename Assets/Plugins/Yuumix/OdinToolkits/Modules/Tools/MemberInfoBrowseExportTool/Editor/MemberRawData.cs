@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes;
 using Yuumix.OdinToolkits.Modules.Utilities.Runtime;
 
 namespace Yuumix.OdinToolkits.Modules.Tools.MemberInfoBrowseExportTool.Editor

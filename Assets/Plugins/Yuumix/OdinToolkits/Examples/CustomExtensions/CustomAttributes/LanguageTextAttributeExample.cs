@@ -4,7 +4,6 @@ using Yuumix.OdinToolkits.Common.InspectorLocalization;
 using Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes;
 using Yuumix.OdinToolkits.Common.InspectorLocalization.GUIWidgets;
 using Yuumix.OdinToolkits.Modules.CustomExtensions.Attributes;
-using Yuumix.OdinToolkits.Modules.CustomExtensions.Classes.InspectorGUIWidgets;
 
 namespace Yuumix.OdinToolkits.Examples.CustomExtensions.CustomAttributes
 {

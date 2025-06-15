@@ -7,6 +7,7 @@ using System.Reflection;
 using Yuumix.OdinToolkits.Common.Runtime;
 using Yuumix.OdinToolkits.Modules.Tools.GenerateDocumentation.Runtime;
 using Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Runtime;
+using Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Test;
 
 namespace Yuumix.OdinToolkits.Modules.Tools.GenerateDocumentation.Test
 {

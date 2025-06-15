@@ -5,13 +5,15 @@ using System.Reflection;
 
 namespace Yuumix.OdinToolkits.Modules.Utilities.Runtime
 {
-    [Flags]
     public enum AccessModifierType
     {
         Public = 0,
-        Private = 2,
-        Protected = 4,
+        Protected = 2,
+        Private = 4,
         Internal = 8,
+        ProtectedInternal = 16,
+        PrivateProtected = 32,
+        None = 64
     }
 
     public static class ReflectionUtil
@@ -28,10 +30,6 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.Runtime
             { MemberTypes.Custom, 7 }
         };
 
-        // Odin 提供的两个关于反射的工具类
-        // Sirenix.Utilities.AssemblyUtilities
-        // Sirenix.Utilities.TypeExtensions
-        // ---
         public static Assembly[] GetAssembliesOfNameContainString(string partOfAssemblyName)
         {
             try
@@ -43,9 +41,7 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.Runtime
             }
             catch (Exception ex)
             {
-                // 记录日志或进行其他异常处理
-                Console.WriteLine($"An error occurred: {ex.Message}");
-                return Array.Empty<Assembly>();
+                throw new Exception($"An error occurred: {ex.Message}");
             }
         }
 
@@ -70,10 +66,10 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.Runtime
             }
 
             var parameters = invokeMethod.GetParameters();
-            var paramTypes = parameters.Select(p => TypeUtil.GetReadableTypeName(p.ParameterType)).ToList();
+            var paramTypes = parameters.Select(p => p.ParameterType.GetReadableTypeName()).ToList();
             if (invokeMethod.ReturnType != typeof(void))
             {
-                var returnType = TypeUtil.GetReadableTypeName(invokeMethod.ReturnType);
+                var returnType = invokeMethod.ReturnType.GetReadableTypeName();
                 if (paramTypes.Count > 0)
                 {
                     return $"Func<{string.Join(", ", paramTypes)}, {returnType}>";
@@ -90,26 +86,119 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.Runtime
             return "Action";
         }
 
-        public static AccessModifierType GetMethodAccessModifierType(MethodInfo methodInfo)
+        public static AccessModifierType GetFieldAccessModifierType(this FieldInfo field)
         {
-            if (methodInfo.IsPublic)
+            if (field.IsPublic)
             {
                 return AccessModifierType.Public;
             }
 
-            if (methodInfo.IsPrivate)
+            if (field.IsPrivate)
             {
                 return AccessModifierType.Private;
             }
 
-            return methodInfo.IsFamily ? AccessModifierType.Protected : AccessModifierType.Internal;
+            if (field.IsFamily)
+            {
+                return AccessModifierType.Protected;
+            }
+
+            if (field.IsAssembly)
+            {
+                return AccessModifierType.Internal;
+            }
+
+            if (field.IsFamilyOrAssembly)
+            {
+                return AccessModifierType.ProtectedInternal;
+            }
+
+            if (field.IsFamilyAndAssembly)
+            {
+                return AccessModifierType.PrivateProtected;
+            }
+
+            return AccessModifierType.None;
         }
 
-        public static string GetFullMethodSignature(MethodInfo method)
+        public static AccessModifierType GetPropertyAccessModifierType(PropertyInfo property)
+        {
+            var getMethod = property.GetGetMethod(true);
+            var setMethod = property.GetSetMethod(true);
+
+            AccessModifierType? getAccess = getMethod != null ? GetMethodAccessModifierType(getMethod) : null;
+            AccessModifierType? setAccess = setMethod != null ? GetMethodAccessModifierType(setMethod) : null;
+
+            // 如果只有一个方法，直接返回其访问修饰符
+            if (getAccess.HasValue && !setAccess.HasValue) return getAccess.Value;
+            if (!getAccess.HasValue && setAccess.HasValue) return setAccess.Value;
+
+            // 如果两个方法都有，返回最严格的访问修饰符
+            if (getAccess.HasValue && setAccess.HasValue)
+            {
+                // 定义访问修饰符的严格程度顺序
+                var strictOrder = new[]
+                {
+                    AccessModifierType.Private,
+                    AccessModifierType.PrivateProtected,
+                    AccessModifierType.Protected,
+                    AccessModifierType.Internal,
+                    AccessModifierType.ProtectedInternal,
+                    AccessModifierType.Public
+                };
+
+                return strictOrder.FirstOrDefault(t => t == getAccess.Value || t == setAccess.Value);
+            }
+
+            return AccessModifierType.None;
+        }
+
+        public static AccessModifierType GetMethodAccessModifierType(this MethodBase method)
+        {
+            if (method.IsPublic)
+            {
+                return AccessModifierType.Public;
+            }
+
+            if (method.IsPrivate)
+            {
+                return AccessModifierType.Private;
+            }
+
+            if (method.IsFamily)
+            {
+                return AccessModifierType.Protected;
+            }
+
+            if (method.IsAssembly)
+            {
+                return AccessModifierType.Internal;
+            }
+
+            if (method.IsFamilyOrAssembly)
+            {
+                return AccessModifierType.ProtectedInternal;
+            }
+
+            if (method.IsFamilyAndAssembly)
+            {
+                return AccessModifierType.PrivateProtected;
+            }
+
+            return AccessModifierType.None;
+        }
+
+        public static AccessModifierType GetEventAccessModifierType(this EventInfo eventInfo)
+        {
+            var addMethod = eventInfo.GetAddMethod(true);
+            return addMethod == null ? AccessModifierType.None : GetMethodAccessModifierType(addMethod);
+        }
+
+        public static string GetMethodFullSignature(this MethodInfo method)
         {
             var parameters = string.Join(", ",
-                method.GetParameters().Select(p => $"{TypeUtil.GetReadableTypeName(p.ParameterType)} {p.Name}"));
-            var returnType = TypeUtil.GetReadableTypeName(method.ReturnType);
+                method.GetParameters().Select(p => $"{p.ParameterType.GetReadableTypeName()} {p.Name}"));
+            var returnType = method.ReturnType.GetReadableTypeName();
             var fullSignature = $"{returnType} {method.Name}({parameters})";
             fullSignature = FillSignature(method, fullSignature);
             return fullSignature;
@@ -152,6 +241,25 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.Runtime
 
                 return string.Join(" ", modifiers.Concat(new[] { fullSignature }));
             }
+        }
+
+        public static string GetAccessModifierString(this AccessModifierType modifier)
+        {
+            return modifier switch
+            {
+                AccessModifierType.Public => "public",
+                AccessModifierType.Private => "private",
+                AccessModifierType.Protected => "protected",
+                AccessModifierType.Internal => "internal",
+                AccessModifierType.ProtectedInternal => "protected internal",
+                AccessModifierType.PrivateProtected => "private protected",
+                _ => ""
+            };
+        }
+
+        public static bool IsConstantField(this FieldInfo field)
+        {
+            return field.IsLiteral && !field.IsInitOnly;
         }
     }
 }

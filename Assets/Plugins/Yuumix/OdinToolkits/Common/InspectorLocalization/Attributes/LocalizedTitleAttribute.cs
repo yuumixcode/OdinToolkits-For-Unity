@@ -10,7 +10,7 @@ namespace Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes
     [Conditional("UNITY_EDITOR")]
     public class LocalizedTitleAttribute : Attribute
     {
-        public MultiLanguageTitleData MultiLanguageData;
+        public readonly MultiLanguageTitleData MultiLanguageData;
         public readonly TitleAlignments TitleAlignment;
         public readonly bool HorizontalLine;
         public readonly bool Bold;
@@ -24,7 +24,8 @@ namespace Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes
             bool horizontalLine = true,
             bool bold = true)
         {
-            MultiLanguageData = new MultiLanguageTitleData(chineseTitle, englishTitle, chineseSubTitle, englishSubTitle);
+            MultiLanguageData =
+                new MultiLanguageTitleData(chineseTitle, englishTitle, chineseSubTitle, englishSubTitle);
             TitleAlignment = titleAlignment;
             HorizontalLine = horizontalLine;
             Bold = bold;

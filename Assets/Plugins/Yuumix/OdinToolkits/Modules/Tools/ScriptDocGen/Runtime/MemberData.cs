@@ -3,22 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using UnityEngine;
-
-/// <summary>
-/// 本地化注释特性，用于为代码元素添加中英文注释
-/// </summary>
-[AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited = true)]
-public class LocalizedCommentAttribute : Attribute
-{
-    public string ChineseComment { get; }
-    public string EnglishComment { get; }
-
-    public LocalizedCommentAttribute(string chineseComment, string englishComment)
-    {
-        ChineseComment = chineseComment;
-        EnglishComment = englishComment;
-    }
-}
+using Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes;
 
 /// <summary>
 /// 成员类型枚举，用于表示成员的基本类型
@@ -283,7 +268,7 @@ public class MemberData
     }
 
     // 获取访问修饰符的可读表示
-    private static string GetAccessModifier(MemberInfo member)
+    public static string GetAccessModifier(MemberInfo member)
     {
         if (member is MethodInfo method)
         {
