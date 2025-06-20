@@ -1,16 +1,16 @@
 using Sirenix.OdinInspector;
 using System;
 using System.Diagnostics;
-using Yuumix.OdinToolkits.Common.InspectorLocalization.Structs;
+using Yuumix.OdinToolkits.Common.InspectorLocalization;
 
-namespace Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes
+namespace Yuumix.OdinToolkits.Common.InspectorLocalization
 {
     [DontApplyToListElements]
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
     [Conditional("UNITY_EDITOR")]
     public class LocalizedTitleAttribute : Attribute
     {
-        public readonly MultiLanguageTitleData MultiLanguageData;
+        public readonly MultipleLanguageTitleData MultipleLanguageData;
         public readonly TitleAlignments TitleAlignment;
         public readonly bool HorizontalLine;
         public readonly bool Bold;
@@ -24,8 +24,8 @@ namespace Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes
             bool horizontalLine = true,
             bool bold = true)
         {
-            MultiLanguageData =
-                new MultiLanguageTitleData(chineseTitle, englishTitle, chineseSubTitle, englishSubTitle);
+            MultipleLanguageData =
+                new MultipleLanguageTitleData(chineseTitle, englishTitle, chineseSubTitle, englishSubTitle);
             TitleAlignment = titleAlignment;
             HorizontalLine = horizontalLine;
             Bold = bold;

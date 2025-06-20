@@ -3,14 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
-using Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes;
-using Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes.WidgetConfigs;
-using Yuumix.OdinToolkits.Common.InspectorLocalization.Structs;
+using Yuumix.OdinToolkits.Common.InspectorLocalization;
 #if UNITY_EDITOR
 using Sirenix.OdinInspector.Editor;
 #endif
 
-namespace Yuumix.OdinToolkits.Common.InspectorLocalization.GUIWidgets
+namespace Yuumix.OdinToolkits.Common.InspectorLocalization
 {
     /// <summary>
     /// 多语言按钮部件，以字段形式实现多语言按钮支持<br />
@@ -34,10 +32,9 @@ namespace Yuumix.OdinToolkits.Common.InspectorLocalization.GUIWidgets
         [LocalizedComment("按钮触发时执行的方法，推荐静态方法",
             "Methods to execute when the button is triggered, static methods are recommended")]
         public LocalizedButtonWidget(Action action) => _targetMethod = action;
-
-        InspectorLocalizationManagerSO LanguageLocalizationManager => InspectorLocalizationManagerSO.Instance;
-        bool IsChinese => LanguageLocalizationManager.IsChinese;
-        bool IsEnglish => LanguageLocalizationManager.IsEnglish;
+        
+        bool IsChinese => InspectorLocalizationManagerSO.IsChinese;
+        bool IsEnglish => InspectorLocalizationManagerSO.IsEnglish;
 
         [ShowIf(nameof(IsChinese), false)]
         [Conditional("UNITY_EDITOR")]
@@ -64,14 +61,14 @@ namespace Yuumix.OdinToolkits.Common.InspectorLocalization.GUIWidgets
             {
                 case nameof(LocalizedButtonWidget.ChineseButton):
                 {
-                    var config = parentProperty.GetAttribute<LocalizedButtonWidgetConfigAttribute>().Config;
-                    attributes.Add(ButtonAttributeConfig.CreateChineseButtonAttribute(config));
+                    var config = parentProperty.GetAttribute<LocalizedButtonWidgetConfigAttribute>().Data;
+                    attributes.Add(ButtonAttributeData.CreateChineseButtonAttribute(config));
                     break;
                 }
                 case nameof(LocalizedButtonWidget.EnglishButton):
                 {
-                    var config = parentProperty.GetAttribute<LocalizedButtonWidgetConfigAttribute>().Config;
-                    attributes.Add(ButtonAttributeConfig.CreateEnglishButtonAttribute(config));
+                    var config = parentProperty.GetAttribute<LocalizedButtonWidgetConfigAttribute>().Data;
+                    attributes.Add(ButtonAttributeData.CreateEnglishButtonAttribute(config));
                     break;
                 }
             }

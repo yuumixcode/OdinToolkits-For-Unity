@@ -2,7 +2,7 @@ using Sirenix.OdinInspector;
 using System;
 using System.Diagnostics;
 
-namespace Yuumix.OdinToolkits.Common.InspectorLocalization.GUIWidgets
+namespace Yuumix.OdinToolkits.Common.InspectorLocalization
 {
     [Serializable]
     [InlineProperty]
@@ -10,8 +10,8 @@ namespace Yuumix.OdinToolkits.Common.InspectorLocalization.GUIWidgets
     public class SwitchInspectorLanguageWidget
     {
         InspectorLocalizationManagerSO InspectorLocalizationManager => InspectorLocalizationManagerSO.Instance;
-        bool IsChinese => InspectorLocalizationManager.IsChinese;
-        bool IsEnglish => InspectorLocalizationManager.IsEnglish;
+        bool IsChinese => InspectorLocalizationManagerSO.IsChinese;
+        bool IsEnglish => InspectorLocalizationManagerSO.IsEnglish;
 
         [ShowIf(nameof(IsChinese), false)]
         [PropertyOrder(float.MinValue)]

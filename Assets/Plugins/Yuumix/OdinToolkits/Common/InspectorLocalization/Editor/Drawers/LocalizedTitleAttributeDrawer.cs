@@ -3,9 +3,9 @@ using Sirenix.OdinInspector.Editor.ValueResolvers;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
-using Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes;
+using Yuumix.OdinToolkits.Common.InspectorLocalization;
 
-namespace Yuumix.OdinToolkits.Common.InspectorLocalization.Editor.Drawers
+namespace Yuumix.OdinToolkits.Common.InspectorLocalization.Editor
 {
     [DrawerPriority(1)]
     public class LocalizedTitleAttributeDrawer : OdinAttributeDrawer<LocalizedTitleAttribute>
@@ -56,8 +56,8 @@ namespace Yuumix.OdinToolkits.Common.InspectorLocalization.Editor.Drawers
             _subTitleResolver = ValueResolver.GetForString(Property, GetAttributeSubTitle());
         }
 
-        string GetAttributeTitle() => Attribute.MultiLanguageData.GetCurrentTitleOrFallback();
+        string GetAttributeTitle() => Attribute.MultipleLanguageData.GetCurrentTitleOrFallback();
 
-        string GetAttributeSubTitle() => Attribute.MultiLanguageData.GetCurrentSubTitleOrFallback();
+        string GetAttributeSubTitle() => Attribute.MultipleLanguageData.GetCurrentSubTitleOrFallback();
     }
 }

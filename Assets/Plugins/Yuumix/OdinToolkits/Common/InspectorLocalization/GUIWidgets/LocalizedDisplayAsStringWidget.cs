@@ -2,12 +2,13 @@ using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes.WidgetConfigs;
+using UnityEngine;
+using Yuumix.OdinToolkits.Common.InspectorLocalization;
 #if UNITY_EDITOR
 using Sirenix.OdinInspector.Editor;
 #endif
 
-namespace Yuumix.OdinToolkits.Common.InspectorLocalization.GUIWidgets
+namespace Yuumix.OdinToolkits.Common.InspectorLocalization
 {
     /// <summary>
     /// 多语言字符串显示部件，以字段的形式支持多语言
@@ -28,9 +29,8 @@ namespace Yuumix.OdinToolkits.Common.InspectorLocalization.GUIWidgets
             EnglishDisplay = english ?? chinese;
         }
 
-        InspectorLocalizationManagerSO LocalizationManager => InspectorLocalizationManagerSO.Instance;
-        bool IsChinese => LocalizationManager.IsChinese;
-        bool IsEnglish => LocalizationManager.IsEnglish;
+        bool IsChinese => InspectorLocalizationManagerSO.IsChinese;
+        bool IsEnglish => InspectorLocalizationManagerSO.IsEnglish;
 
         [ShowIf(nameof(IsChinese), false)]
         [HideLabel]
@@ -56,13 +56,29 @@ namespace Yuumix.OdinToolkits.Common.InspectorLocalization.GUIWidgets
                 case nameof(LocalizedDisplayAsStringWidget.ChineseDisplay):
                 {
                     var configAttribute = parentProperty.GetAttribute<LocalizedDisplayWidgetConfigAttribute>();
-                    attributes.Add(configAttribute.CreateDisplayAsStringAttribute());
+                    if (configAttribute == null)
+                    {
+                        Debug.LogError("LocalizedDisplayWidget 类型字段必须添加 LocalizedDisplayWidgetConfigAttribute 特性");
+                    }
+                    else
+                    {
+                        attributes.Add(configAttribute.CreateDisplayAsStringAttribute());
+                    }
+
                     break;
                 }
                 case nameof(LocalizedDisplayAsStringWidget.EnglishDisplay):
                 {
                     var configAttribute = parentProperty.GetAttribute<LocalizedDisplayWidgetConfigAttribute>();
-                    attributes.Add(configAttribute.CreateDisplayAsStringAttribute());
+                    if (configAttribute == null)
+                    {
+                        Debug.LogError("LocalizedDisplayWidget 类型字段必须添加 LocalizedDisplayWidgetConfigAttribute 特性");
+                    }
+                    else
+                    {
+                        attributes.Add(configAttribute.CreateDisplayAsStringAttribute());
+                    }
+
                     break;
                 }
             }

@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using System;
 
-namespace Yuumix.OdinToolkits.Common.InspectorLocalization.GUIWidgets
+namespace Yuumix.OdinToolkits.Common.InspectorLocalization
 {
     [Serializable]
     [InlineProperty]

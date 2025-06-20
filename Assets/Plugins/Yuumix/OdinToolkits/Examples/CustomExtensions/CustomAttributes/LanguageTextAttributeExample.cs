@@ -1,9 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Yuumix.OdinToolkits.Common.InspectorLocalization;
-using Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes;
-using Yuumix.OdinToolkits.Common.InspectorLocalization.GUIWidgets;
-using Yuumix.OdinToolkits.Modules.CustomExtensions.Attributes;
+using Yuumix.OdinToolkits.Modules.CustomExtensions;
 
 namespace Yuumix.OdinToolkits.Examples.CustomExtensions.CustomAttributes
 {

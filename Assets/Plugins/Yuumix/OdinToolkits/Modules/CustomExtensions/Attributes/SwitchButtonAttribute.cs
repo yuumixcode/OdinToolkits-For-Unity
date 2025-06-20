@@ -1,6 +1,6 @@
 using System;
 
-namespace Yuumix.OdinToolkits.Modules.CustomExtensions.Attributes
+namespace Yuumix.OdinToolkits.Modules.CustomExtensions
 {
     public enum SwitchAlignment
     {

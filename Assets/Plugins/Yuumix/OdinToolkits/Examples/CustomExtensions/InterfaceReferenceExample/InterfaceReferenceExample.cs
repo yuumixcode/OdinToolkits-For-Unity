@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
-using Yuumix.OdinToolkits.Modules.CustomExtensions.Attributes;
+using Yuumix.OdinToolkits.Modules.CustomExtensions;
 using Yuumix.OdinToolkits.Modules.CustomExtensions.Classes;
 
 namespace Yuumix.OdinToolkits.Examples.CustomExtensions.InterfaceReferenceExample

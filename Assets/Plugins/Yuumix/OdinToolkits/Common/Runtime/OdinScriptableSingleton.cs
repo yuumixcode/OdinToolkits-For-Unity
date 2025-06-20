@@ -1,6 +1,9 @@
 using Sirenix.OdinInspector;
+
 #if UNITY_EDITOR
 using Yuumix.OdinToolkits.Common.YuumixEditor;
+#else 
+using UnityEngine;
 #endif
 
 namespace Yuumix.OdinToolkits.Common.Runtime

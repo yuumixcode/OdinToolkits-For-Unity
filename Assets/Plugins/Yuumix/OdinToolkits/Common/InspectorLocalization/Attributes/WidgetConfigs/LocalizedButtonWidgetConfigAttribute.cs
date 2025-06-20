@@ -1,8 +1,8 @@
 using Sirenix.OdinInspector;
 using System;
-using Yuumix.OdinToolkits.Common.InspectorLocalization.Structs;
+using Yuumix.OdinToolkits.Common.InspectorLocalization;
 
-namespace Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes.WidgetConfigs
+namespace Yuumix.OdinToolkits.Common.InspectorLocalization
 {
     /// <summary>
     /// 该特性只添加在类型为 LocalizedButton 的字段上，给 LocalizedButton 添加配置信息
@@ -10,7 +10,7 @@ namespace Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes.WidgetConf
     [AttributeUsage(AttributeTargets.Field)]
     public class LocalizedButtonWidgetConfigAttribute : Attribute
     {
-        public ButtonAttributeConfig Config;
+        public ButtonAttributeData Data;
 
         public LocalizedButtonWidgetConfigAttribute(string chineseName = null,
             string englishName = null,
@@ -26,7 +26,7 @@ namespace Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes.WidgetConf
             bool displayParameters = true,
             bool dirtyOnClick = true)
         {
-            Config = new ButtonAttributeConfig(chineseName, englishName, buttonSize, style, icon,
+            Data = new ButtonAttributeData(chineseName, englishName, buttonSize, style, icon,
                 buttonIconAlignment, buttonHeight, stretch, drawResult, expanded, buttonAlignment, displayParameters,
                 dirtyOnClick);
         }

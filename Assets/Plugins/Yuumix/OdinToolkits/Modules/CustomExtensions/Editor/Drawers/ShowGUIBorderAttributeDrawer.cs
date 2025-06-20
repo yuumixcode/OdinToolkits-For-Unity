@@ -1,9 +1,9 @@
 ﻿using Sirenix.OdinInspector.Editor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Common.YuumixEditor;
-using Yuumix.OdinToolkits.Modules.CustomExtensions.Attributes;
+using Yuumix.OdinToolkits.Modules.CustomExtensions;
 
-namespace Yuumix.OdinToolkits.Modules.CustomExtensions.Editor.Drawers
+namespace Yuumix.OdinToolkits.Modules.CustomExtensions.Editor
 {
     [DrawerPriority(0, 10)]
     public class ShowGUIBorderAttributeDrawer : OdinAttributeDrawer<ShowGUIBorderAttribute>

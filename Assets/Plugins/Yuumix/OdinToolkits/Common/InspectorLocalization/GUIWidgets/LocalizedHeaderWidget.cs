@@ -2,10 +2,10 @@ using Sirenix.OdinInspector;
 using System;
 using System.Diagnostics;
 using UnityEngine;
-using Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes.WidgetConfigs;
+using Yuumix.OdinToolkits.Common.InspectorLocalization;
 using Yuumix.OdinToolkits.Modules.Utilities.Runtime;
 
-namespace Yuumix.OdinToolkits.Common.InspectorLocalization.GUIWidgets
+namespace Yuumix.OdinToolkits.Common.InspectorLocalization
 {
     [PropertyOrder(float.MinValue)]
     [Serializable]
@@ -27,9 +27,8 @@ namespace Yuumix.OdinToolkits.Common.InspectorLocalization.GUIWidgets
         string _englishIntroduction;
         string _targetUrl;
         bool HideHeaderIntroduction => _chineseIntroduction == null && _englishIntroduction == null;
-        static InspectorLocalizationManagerSO Manager => InspectorLocalizationManagerSO.Instance;
-        public bool IsChinese => Manager.IsChinese;
-        public bool IsEnglish => Manager.IsEnglish;
+        public bool IsChinese => InspectorLocalizationManagerSO.IsChinese;
+        public bool IsEnglish => InspectorLocalizationManagerSO.IsEnglish;
 
         [BoxGroup("Header", false)]
         [HorizontalGroup("Header/Hori", 0.75f)]
@@ -80,7 +79,7 @@ namespace Yuumix.OdinToolkits.Common.InspectorLocalization.GUIWidgets
         [PropertyOrder(2)]
         [HideIf(nameof(HideHeaderIntroduction))]
         [BoxGroup("Header", false)]
-        [LocalizedDisplayWidgetConfig(false, TextAlignment.Left, 14, true)]
+        [LocalizedDisplayWidgetConfig(false, TextAlignment.Left, 13, true)]
         public LocalizedDisplayAsStringWidget headerIntroduction;
 
         [PropertyOrder(3)]
@@ -92,7 +91,7 @@ namespace Yuumix.OdinToolkits.Common.InspectorLocalization.GUIWidgets
         static void SwitchLanguage()
         {
             var manager = InspectorLocalizationManagerSO.Instance;
-            manager.CurrentLanguage = manager.IsChinese ? LanguageType.English : LanguageType.Chinese;
+            manager.CurrentLanguage = InspectorLocalizationManagerSO.IsChinese ? LanguageType.English : LanguageType.Chinese;
         }
 
         void OpenDocumentationWebsite(string targetUrl = "")

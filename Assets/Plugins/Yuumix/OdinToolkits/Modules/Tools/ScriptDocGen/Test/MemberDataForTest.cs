@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes;
+using Yuumix.OdinToolkits.Common.InspectorLocalization;
 
+#pragma warning disable CS0067 // 事件从未使用过
+#pragma warning disable CS0414
 namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Test
 {
     /// <summary>

@@ -1,16 +1,20 @@
 using Sirenix.OdinInspector;
+using Sirenix.OdinInspector.Editor;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using Yuumix.OdinToolkits;
+using Yuumix.OdinToolkits.Common.Editor;
 using Yuumix.OdinToolkits.Common.Runtime;
 using Yuumix.OdinToolkits.Common.YuumixEditor;
-using Yuumix.OdinToolkits.Modules.CustomExtensions.Attributes;
+using Yuumix.OdinToolkits.Modules.CustomExtensions;
 
 namespace Yuumix.OdinToolkits.Modules.Tools.GenerateTemplateCode.Editor
 {
-    public class GenerateTemplateCodeToolSO : SerializedScriptableObject
+    public class GenerateTemplateCodeToolSO : OdinEditorScriptableSingleton<GenerateTemplateCodeToolSO>,
+        ICanSetBelongToWindow
     {
+        OdinMenuEditorWindow _menuEditorWindow;
         public const string NameSpaceSymbol = "#NAMESPACE#";
         public const string ClassNameSymbol = "#CLASSNAME#";
 
@@ -171,6 +175,16 @@ namespace Yuumix.OdinToolkits.Modules.Tools.GenerateTemplateCode.Editor
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
             ProjectEditorUtil.PingAndSelectAsset(codeRelativePath);
+        }
+
+        public void SetWindow(OdinMenuEditorWindow window)
+        {
+            _menuEditorWindow = window;
+        }
+
+        public void ClearWindow()
+        {
+            _menuEditorWindow = null;
         }
     }
 }

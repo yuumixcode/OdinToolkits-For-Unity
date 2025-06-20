@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sirenix.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -8,12 +9,12 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.Runtime
     public enum AccessModifierType
     {
         Public = 0,
+        ProtectedInternal = 1,
         Protected = 2,
-        Private = 4,
-        Internal = 8,
-        ProtectedInternal = 16,
-        PrivateProtected = 32,
-        None = 64
+        Internal = 4,
+        PrivateProtected = 8,
+        Private = 16,
+        None = 32
     }
 
     public static class ReflectionUtil
@@ -55,11 +56,11 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.Runtime
             return namespaces;
         }
 
-        public static string GetReadableEventReturnType(EventInfo eventInfo)
+        public static string GetReadableEventReturnType(this EventInfo eventInfo)
         {
             var eventHandlerType = eventInfo.EventHandlerType;
             var invokeMethod = eventHandlerType.GetMethod("Invoke");
-            // 这里默认情况下不可能为空，因为事件类型肯定有Invoke方法，除非高级手段做过修改
+            // 这里默认情况下不可能为空，因为事件类型肯定有Invoke方法
             if (invokeMethod == null)
             {
                 return "Action";
@@ -121,7 +122,7 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.Runtime
             return AccessModifierType.None;
         }
 
-        public static AccessModifierType GetPropertyAccessModifierType(PropertyInfo property)
+        public static AccessModifierType GetPropertyAccessModifierType(this PropertyInfo property)
         {
             var getMethod = property.GetGetMethod(true);
             var setMethod = property.GetSetMethod(true);
@@ -129,28 +130,24 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.Runtime
             AccessModifierType? getAccess = getMethod != null ? GetMethodAccessModifierType(getMethod) : null;
             AccessModifierType? setAccess = setMethod != null ? GetMethodAccessModifierType(setMethod) : null;
 
-            // 如果只有一个方法，直接返回其访问修饰符
-            if (getAccess.HasValue && !setAccess.HasValue) return getAccess.Value;
-            if (!getAccess.HasValue && setAccess.HasValue) return setAccess.Value;
-
-            // 如果两个方法都有，返回最严格的访问修饰符
-            if (getAccess.HasValue && setAccess.HasValue)
+            if (!getAccess.HasValue && !setAccess.HasValue)
             {
-                // 定义访问修饰符的严格程度顺序
-                var strictOrder = new[]
-                {
-                    AccessModifierType.Private,
-                    AccessModifierType.PrivateProtected,
-                    AccessModifierType.Protected,
-                    AccessModifierType.Internal,
-                    AccessModifierType.ProtectedInternal,
-                    AccessModifierType.Public
-                };
-
-                return strictOrder.FirstOrDefault(t => t == getAccess.Value || t == setAccess.Value);
+                return AccessModifierType.None;
             }
 
-            return AccessModifierType.None;
+            if (!setAccess.HasValue)
+            {
+                return getAccess.Value;
+            }
+
+            if (!getAccess.HasValue)
+            {
+                return setAccess.Value;
+            }
+
+            return (int)getAccess.Value <= (int)setAccess.Value
+                ? getAccess.Value
+                : setAccess.Value;
         }
 
         public static AccessModifierType GetMethodAccessModifierType(this MethodBase method)
@@ -191,7 +188,32 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.Runtime
         public static AccessModifierType GetEventAccessModifierType(this EventInfo eventInfo)
         {
             var addMethod = eventInfo.GetAddMethod(true);
-            return addMethod == null ? AccessModifierType.None : GetMethodAccessModifierType(addMethod);
+            var removeMethod = eventInfo.GetRemoveMethod(true);
+            var invokeMethod = eventInfo.GetRaiseMethod(true);
+            if (invokeMethod != null)
+            {
+                return GetMethodAccessModifierType(invokeMethod);
+            }
+
+            if (addMethod != null && removeMethod != null)
+            {
+                return GetMethodAccessModifierType(
+                    (int)GetMethodAccessModifierType(addMethod) <= (int)GetMethodAccessModifierType(removeMethod)
+                        ? addMethod
+                        : removeMethod);
+            }
+
+            if (addMethod != null)
+            {
+                return GetMethodAccessModifierType(addMethod);
+            }
+
+            if (removeMethod != null)
+            {
+                return GetMethodAccessModifierType(removeMethod);
+            }
+
+            return AccessModifierType.None;
         }
 
         public static string GetMethodFullSignature(this MethodInfo method)
@@ -261,5 +283,29 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.Runtime
         {
             return field.IsLiteral && !field.IsInitOnly;
         }
+
+        public static bool IsStaticEvent(this EventInfo eventInfo)
+        {
+            var addMethod = eventInfo.GetAddMethod(true);
+            var removeMethod = eventInfo.GetRemoveMethod(true);
+            var invokeMethod = eventInfo.GetRaiseMethod(true);
+            if (invokeMethod != null)
+            {
+                return invokeMethod.IsStatic;
+            }
+
+            if (addMethod != null)
+            {
+                return addMethod.IsStatic;
+            }
+
+            if (removeMethod != null)
+            {
+                return removeMethod.IsStatic;
+            }
+
+            return false;
+        }
+        
     }
 }

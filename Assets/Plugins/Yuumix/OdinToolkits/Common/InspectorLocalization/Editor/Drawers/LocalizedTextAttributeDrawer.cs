@@ -4,10 +4,8 @@ using Sirenix.OdinInspector.Editor.ValueResolvers;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
-using Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes;
-using Yuumix.OdinToolkits.Common.Runtime;
 
-namespace Yuumix.OdinToolkits.Common.InspectorLocalization.Editor.Drawers
+namespace Yuumix.OdinToolkits.Common.InspectorLocalization.Editor
 {
     [DrawerPriority(DrawerPriorityLevel.SuperPriority)]
     public class LocalizedTextAttributeDrawer : OdinAttributeDrawer<LocalizedTextAttribute>
@@ -79,7 +77,7 @@ namespace Yuumix.OdinToolkits.Common.InspectorLocalization.Editor.Drawers
 
         string GetAttributeText()
         {
-            return Attribute.MultiLanguageData.GetCurrentOrFallback();
+            return Attribute.MultipleLanguageData.GetCurrentOrFallback();
         }
     }
 }

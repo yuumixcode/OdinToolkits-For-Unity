@@ -2,7 +2,7 @@ using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
 
-namespace Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes.WidgetConfigs
+namespace Yuumix.OdinToolkits.Common.InspectorLocalization
 {
     [AttributeUsage(AttributeTargets.Field)]
     public class LocalizedDisplayWidgetConfigAttribute : Attribute

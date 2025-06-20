@@ -1,7 +1,7 @@
 using Sirenix.Utilities;
 using System;
 using System.Reflection;
-using Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes;
+using Yuumix.OdinToolkits.Common.InspectorLocalization;
 using Yuumix.OdinToolkits.Modules.Utilities.Runtime;
 using MethodInfoExtensions = Yuumix.OdinToolkits.Modules.Utilities.Runtime.MethodInfoExtensions;
 
@@ -11,20 +11,10 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Runtime
     /// 构造函数数据
     /// </summary>
     [Serializable]
-    public class ConstructorData
+    public class ConstructorData : MemberData
     {
-        public string belongToType;
-        public MemberTypes memberType;
-        public AccessModifierType accessModifierType;
-        public string accessModifier;
-        public bool isStatic;
-        public bool isObsolete;
         public bool isVirtual;
-        public string name;
         public string parameters;
-        public string fullSignature;
-        public string chineseComment;
-        public string englishComment;
 
         public static ConstructorData FromConstructorInfo(ConstructorInfo constructorInfo, Type type)
         {
@@ -32,14 +22,14 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Runtime
             {
                 belongToType = type.GetReadableTypeName(true),
                 memberType = constructorInfo.MemberType,
-                accessModifierType = constructorInfo.GetMethodAccessModifierType(),
+                memberAccessModifierType = constructorInfo.GetMethodAccessModifierType(),
                 isStatic = constructorInfo.IsStatic,
                 isObsolete = constructorInfo.IsDefined(typeof(ObsoleteAttribute)),
                 isVirtual = constructorInfo.IsVirtual,
                 name = constructorInfo.DeclaringType?.Name,
                 parameters = MethodInfoExtensions.GetParamsNames(constructorInfo),
             };
-            consData.accessModifier = consData.accessModifierType.GetAccessModifierString();
+            consData.accessModifier = consData.memberAccessModifierType.GetAccessModifierString();
             consData.fullSignature = consData.accessModifier + " " + constructorInfo.GetFullMethodName();
             if (constructorInfo.GetCustomAttribute<LocalizedCommentAttribute>() == null)
             {

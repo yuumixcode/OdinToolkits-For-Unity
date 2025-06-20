@@ -1,30 +1,16 @@
 using Sirenix.OdinInspector;
 using System;
 using System.Reflection;
-using Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes;
+using Yuumix.OdinToolkits.Common.InspectorLocalization;
 using Yuumix.OdinToolkits.Modules.Utilities.Runtime;
 
 namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Runtime
 {
     [Serializable]
-    public class FieldData
+    public class FieldData : MemberData
     {
-        public string belongToType;
-        public MemberTypes memberType;
-        public AccessModifierType accessModifierType;
-        public string declaringType;
-        public string accessModifier;
-        public string returnType;
-        public bool isStatic;
-        public bool isObsolete;
         public bool isConst;
         public bool isReadonly;
-        public string name;
-        public string fullSignature;
-        public string chineseComment;
-        public string englishComment;
-
-        [ShowInInspector] public bool NoFromInherit => belongToType == declaringType;
 
         public static FieldData FromFieldInfo(FieldInfo fieldInfo, Type type)
         {
@@ -33,7 +19,7 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Runtime
                 belongToType = type.GetReadableTypeName(true),
                 memberType = fieldInfo.MemberType,
                 declaringType = fieldInfo.DeclaringType?.GetReadableTypeName(true),
-                accessModifierType = fieldInfo.GetFieldAccessModifierType(),
+                memberAccessModifierType = fieldInfo.GetFieldAccessModifierType(),
                 returnType = fieldInfo.FieldType.GetReadableTypeName(true),
                 isStatic = fieldInfo.IsStatic,
                 isObsolete = fieldInfo.IsDefined(typeof(ObsoleteAttribute)),
@@ -55,7 +41,8 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Runtime
                 keyword = "static ";
             }
 
-            fieldData.fullSignature = fieldData.accessModifier.TrimEnd(' ') + " " + keyword +
+            fieldData.accessModifier = fieldData.memberAccessModifierType.GetAccessModifierString();
+            fieldData.fullSignature = fieldData.accessModifier.Trim(' ') + " " + keyword +
                                       fieldInfo.FieldType.GetReadableTypeName() + " " + fieldData.name;
             if (fieldInfo.GetCustomAttribute<LocalizedCommentAttribute>() == null)
             {

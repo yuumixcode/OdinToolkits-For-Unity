@@ -7,12 +7,10 @@ using System.Reflection;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
-using Yuumix.OdinToolkits.Common.Editor.ScriptableSingleton;
+using Yuumix.OdinToolkits.Common.Editor;
 using Yuumix.OdinToolkits.Common.InspectorLocalization;
-using Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes;
-using Yuumix.OdinToolkits.Common.InspectorLocalization.GUIWidgets;
-using Yuumix.OdinToolkits.Common.Runtime.ResetTool;
-using Yuumix.OdinToolkits.Modules.CustomExtensions.Attributes;
+using Yuumix.OdinToolkits.Common.ResetTool;
+using Yuumix.OdinToolkits.Modules.CustomExtensions;
 
 namespace Yuumix.OdinToolkits.Modules.Tools.MemberInfoBrowseExportTool.Editor
 {
@@ -175,7 +173,7 @@ namespace Yuumix.OdinToolkits.Modules.Tools.MemberInfoBrowseExportTool.Editor
 
         #region 操作按钮
 
-        bool IsChinese => InspectorLocalizationManagerSO.Instance.IsChinese;
+        bool IsChinese => InspectorLocalizationManagerSO.IsChinese;
 
         [PropertyOrder(8)]
         [LocalizedTitle("操作按钮", "Operation Buttons")]

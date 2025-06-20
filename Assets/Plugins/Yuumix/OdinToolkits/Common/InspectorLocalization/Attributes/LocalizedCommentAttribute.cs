@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using System;
 
-namespace Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes
+namespace Yuumix.OdinToolkits.Common.InspectorLocalization
 {
     /// <summary>
     /// 本地化注释特性，使用特性去提供注释，当使用反射获取成员信息时，可以通过此特性获取注释内容。<br/>

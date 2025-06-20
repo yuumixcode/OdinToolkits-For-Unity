@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
@@ -5,41 +6,38 @@ using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Common.InspectorLocalization;
 
-namespace Yuumix.OdinToolkits.Common.Editor.Windows
+namespace Yuumix.OdinToolkits.Common.Editor
 {
-    public class EditorSettingsWindow : OdinMenuEditorWindow
+    public class EditorSettingsWindow : OdinEditorWindow
     {
-        #region MenuItemPath
-
-        const string InspectorLanguageManagerMenuPath = "检视面板语言设置";
-
-        #endregion
+        [ShowInInspector]
+        [InlineEditor(InlineEditorObjectFieldModes.CompletelyHidden)]
+        [EnableGUI]
+        public InspectorLocalizationManagerSO InspectorLocalizationManager => InspectorLocalizationManagerSO.Instance;
 
         protected override void OnEnable()
         {
             base.OnEnable();
-            WindowPadding = new Vector4(10, 10, 10, 10);
+            WindowPadding = new Vector4(10, 10, 0,0);
         }
 
-        [MenuItem(MenuItemGlobalSettings.EditorSettingsMenuItemName, false, MenuItemGlobalSettings.EditorSettingsWindowPriority)]
+        [MenuItem(MenuItemGlobalSettings.EditorSettingsMenuItemName, false,
+            MenuItemGlobalSettings.EditorSettingsWindowPriority)]
         public static void ShowWindow()
         {
             var window = GetWindow<EditorSettingsWindow>();
-            window.titleContent = new GUIContent(MenuItemGlobalSettings.EditorSettingsWindowName);
+            if (InspectorLocalizationManagerSO.IsChinese)
+            {
+                window.titleContent = new GUIContent(MenuItemGlobalSettings.EditorSettingsWindowNameCn);
+            }
+            else if (InspectorLocalizationManagerSO.IsEnglish)
+            {
+                window.titleContent = new GUIContent(MenuItemGlobalSettings.EditorSettingsWindowNameEn);
+            }
+
             window.position = GUIHelper.GetEditorWindowRect().AlignCenter(800, 600);
             window.minSize = new Vector2(500, 500);
-            window.Show();
-        }
-
-        protected override OdinMenuTree BuildMenuTree()
-        {
-            var tree = new OdinMenuTree(false);
-            // 构建 Tree
-            tree.AddObjectAtPath(InspectorLanguageManagerMenuPath, InspectorLocalizationManagerSO.Instance);
-            // 添加图标
-            var inspectorLanguageManagerMenuItem = tree.GetMenuItem(InspectorLanguageManagerMenuPath);
-            inspectorLanguageManagerMenuItem.AddThumbnailIcon(true);
-            return tree;
+            window.ShowUtility();
         }
     }
 }

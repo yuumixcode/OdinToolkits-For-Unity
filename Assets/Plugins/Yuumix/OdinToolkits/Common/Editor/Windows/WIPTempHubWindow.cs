@@ -3,10 +3,10 @@ using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
-using Yuumix.OdinToolkits.Common.Editor.ScriptableSingleton;
-using Yuumix.OdinToolkits.Common.InspectorLocalization.GUIWidgets;
+using Yuumix.OdinToolkits.Common.Editor;
+using Yuumix.OdinToolkits.Common.InspectorLocalization;
 
-namespace Yuumix.OdinToolkits.Common.Editor.Windows
+namespace Yuumix.OdinToolkits.Common.Editor
 {
     public class WIPTempHubWindow : OdinEditorWindow
     {

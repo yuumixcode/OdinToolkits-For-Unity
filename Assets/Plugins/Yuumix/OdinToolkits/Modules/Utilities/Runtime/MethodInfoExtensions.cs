@@ -69,11 +69,9 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.Runtime
 
             return stringBuilder.ToString();
         }
-
-        /// <summary>Returns the specified method's full name.</summary>
+        
         public static string GetFullMethodName(this MethodBase method) => method.GetFullMethodName("[ext] ");
-
-        /// <summary>Tests if a method is an extension method.</summary>
+        
         public static bool IsExtensionMethod(this MethodBase method)
         {
             var declaringType = method.DeclaringType;

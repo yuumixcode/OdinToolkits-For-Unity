@@ -4,10 +4,10 @@ using Sirenix.Utilities.Editor;
 using System;
 using UnityEngine;
 using Yuumix.OdinToolkits.Common.YuumixEditor;
-using Yuumix.OdinToolkits.Modules.CustomExtensions.Attributes;
+using Yuumix.OdinToolkits.Modules.CustomExtensions;
 using Object = UnityEngine.Object;
 
-namespace Yuumix.OdinToolkits.Modules.CustomExtensions.Editor.Drawers
+namespace Yuumix.OdinToolkits.Modules.CustomExtensions.Editor
 {
     public class RequiredInterfaceAttributeDrawer<TObject> :
         OdinAttributeDrawer<RequiredInterfaceAttribute, TObject>

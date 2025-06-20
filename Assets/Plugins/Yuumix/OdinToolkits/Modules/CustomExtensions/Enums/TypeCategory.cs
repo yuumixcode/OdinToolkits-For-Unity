@@ -1,4 +1,4 @@
-namespace Yuumix.OdinToolkits.Modules.CustomExtensions.Enums
+namespace Yuumix.OdinToolkits.Modules.CustomExtensions
 {
     /// <summary>
     /// 类型种类枚举

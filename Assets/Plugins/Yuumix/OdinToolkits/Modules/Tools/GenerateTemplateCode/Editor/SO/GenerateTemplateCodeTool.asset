@@ -78,15 +78,16 @@ MonoBehaviour:
       Entry: 8
       Data: 
   codeNamespace: TemplateNameSpace
-  codeClassName: TestTypeUtilDataSO
+  codeClassName: TypeStorageSO
   templateSelector: RuntimeOdinSerializedScriptableObjectTemplate
-  codeTargetPath: Assets/Plugins/Yuumix/OdinToolkits/Modules/Utilities/Test
+  codeTargetPath: Assets/Plugins/Yuumix/OdinToolkits/Modules/Tools/ScriptDocGen/Runtime
   templatePathConfig:
   - Assets/Plugins/Yuumix/OdinToolkits/Modules/Tools/GenerateTemplateCode/Editor/Templates/CSTemplate.txt
   - Assets/Plugins/Yuumix/OdinToolkits/Modules/Tools/GenerateTemplateCode/Editor/Templates/RuntimeOdinSerializedMonoBehaviourTemplate.txt
   - Assets/Plugins/Yuumix/OdinToolkits/Modules/Tools/GenerateTemplateCode/Editor/Templates/RuntimeOdinSerializedScriptableObjectTemplate.txt
   preSavePaths:
   - Assets/Plugins/Yuumix/OdinToolkits/Modules/Utilities/Test
+  - Assets/Plugins/Yuumix/OdinToolkits/Modules/Tools/ScriptDocGen/Runtime
   debugInspector: 0
   templateList:
   - CSTemplate

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace Yuumix.OdinToolkits.Common.Editor.ScriptableSingleton
+namespace Yuumix.OdinToolkits.Common.Editor
 {
     // PreferencesFolder 是指用户本地的文件夹，例如：Unity 5.x ，这个编辑器设置可以跨项目调用
     // 例如路径可能是：C:\Users\..\Unity\Editor\Preferences\ScriptableSingletonDemo\PreferencesFolder.yaml

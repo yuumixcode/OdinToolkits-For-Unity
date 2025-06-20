@@ -2,35 +2,20 @@ using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
-using System;
-using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Common.InspectorLocalization;
-using Yuumix.OdinToolkits.Common.InspectorLocalization.Structs;
 using Yuumix.OdinToolkits.Common.YuumixEditor;
 using Yuumix.OdinToolkits.Modules.Tools.GenerateTemplateCode.Editor;
 using Yuumix.OdinToolkits.Modules.Tools.MemberInfoBrowseExportTool.Editor;
 using Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor;
 
-namespace Yuumix.OdinToolkits.Common.Editor.Windows
+namespace Yuumix.OdinToolkits.Common.Editor
 {
     public class ToolsPackageWindow : OdinMenuEditorWindow
     {
-        #region MenuItemPath 菜单路径
-
-        readonly MultiLanguageData _generateTemplateToolMenuPathData =
-            new MultiLanguageData("模板代码生成工具", "Generate Template Tool");
-
-        readonly MultiLanguageData _memberInfoBrowseExportToolMenuPathData =
-            new MultiLanguageData("成员信息浏览导出工具", "MemberInfo Browser & Exporter");
-
-        readonly MultiLanguageData _scriptDocGenToolMenuPathData =
-            new MultiLanguageData("脚本文档生成工具", "Script Doc Generate Tool");
-
-        #endregion
-
         static object _selectionInstance;
+        static bool _hasAddListener;
 
         protected override void OnEnable()
         {
@@ -39,11 +24,34 @@ namespace Yuumix.OdinToolkits.Common.Editor.Windows
             MenuWidth = 230;
             InspectorLocalizationManagerSO.OnLanguageChange -= ReBuild;
             InspectorLocalizationManagerSO.OnLanguageChange += ReBuild;
+            // 设置 window
+            ScriptDocGenToolSO.Instance.SetWindow(this);
+            GenerateTemplateCodeToolSO.Instance.SetWindow(this);
+            OnClose -= ClearWindowReference;
+            OnClose += ClearWindowReference;
+        }
+
+        protected override void OnImGUI()
+        {
+            if (!_hasAddListener)
+            {
+                InspectorLocalizationManagerSO.OnLanguageChange -= ReBuild;
+                InspectorLocalizationManagerSO.OnLanguageChange += ReBuild;
+                _hasAddListener = true;
+            }
+
+            base.OnImGUI();
+        }
+
+        static void ClearWindowReference()
+        {
+            ScriptDocGenToolSO.Instance.ClearWindow();
+            GenerateTemplateCodeToolSO.Instance.ClearWindow();
         }
 
         void ReBuild()
         {
-            Debug.Log("ToolPackage Rebuild");
+            // Debug.Log("ToolPackage Rebuild");
             _selectionInstance = MenuTree.Selection.SelectedValue;
             ShowToast(ToastPosition.BottomRight, SdfIconType.InfoSquareFill,
                 "触发切换语言，正在重建面板，稍等，请勿连续点击!", new Color(0.996f, 0.906f, 0.459f, 1f), 5f);
@@ -85,5 +93,18 @@ namespace Yuumix.OdinToolkits.Common.Editor.Windows
             // Debug.Log("执行 BuildMenuTree");
             return tree;
         }
+
+        #region MenuItemPath 菜单路径
+
+        readonly MultipleLanguageData _generateTemplateToolMenuPathData =
+            new MultipleLanguageData("模板代码生成工具", "Generate Template Tool");
+
+        readonly MultipleLanguageData _memberInfoBrowseExportToolMenuPathData =
+            new MultipleLanguageData("成员信息浏览导出工具", "MemberInfo Browser & Exporter");
+
+        readonly MultipleLanguageData _scriptDocGenToolMenuPathData =
+            new MultipleLanguageData("脚本文档生成工具", "Script Doc Generate Tool");
+
+        #endregion
     }
 }

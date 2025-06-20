@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Yuumix.OdinToolkits.Modules.CustomExtensions.Attributes
+namespace Yuumix.OdinToolkits.Modules.CustomExtensions
 {
     [AttributeUsage(AttributeTargets.Field)]
     public class RequiredInterfaceAttribute : Attribute

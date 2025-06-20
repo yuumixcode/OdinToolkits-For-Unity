@@ -1,9 +1,8 @@
 using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
-using Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes;
 using Yuumix.OdinToolkits.Common.Runtime;
-using Yuumix.OdinToolkits.Common.Runtime.ResetTool;
+using Yuumix.OdinToolkits.Common.ResetTool;
 #if UNITY_EDITOR
 using Sirenix.Utilities.Editor;
 using UnityEditor;
@@ -30,11 +29,11 @@ namespace Yuumix.OdinToolkits.Common.InspectorLocalization
         "Inspector windows localization manager, used to display Inspector windows in multiple languages")]
     public class InspectorLocalizationManagerSO : OdinScriptableSingleton<InspectorLocalizationManagerSO>, IPluginReset
     {
-        LanguageType _currentLanguage;
-
+        [PropertyOrder(0)]
         [ShowInInspector]
         [EnumToggleButtons]
-        [LocalizedText("当前语言: ", "Current Language: ")]
+        [HideLabel]
+        [LocalizedTitle("编辑器面板语言", "Inspector Language")]
         public LanguageType CurrentLanguage
         {
             get => _currentLanguage;
@@ -51,8 +50,11 @@ namespace Yuumix.OdinToolkits.Common.InspectorLocalization
             }
         }
 
-        public bool IsChinese => CurrentLanguage == LanguageType.Chinese;
-        public bool IsEnglish => CurrentLanguage == LanguageType.English;
+        [PropertyOrder(5)]
+        LanguageType _currentLanguage;
+
+        public static bool IsChinese => Instance.CurrentLanguage == LanguageType.Chinese;
+        public static bool IsEnglish => Instance.CurrentLanguage == LanguageType.English;
 
         public void PluginReset()
         {

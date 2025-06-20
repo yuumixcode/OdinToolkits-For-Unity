@@ -2,10 +2,8 @@ using Sirenix.OdinInspector.Editor;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes;
-using Yuumix.OdinToolkits.Common.InspectorLocalization.Structs;
 
-namespace Yuumix.OdinToolkits.Common.InspectorLocalization.Editor.AttributeProcessors
+namespace Yuumix.OdinToolkits.Common.InspectorLocalization.Editor
 {
     public class LocalizationAttributeProcessor<T> : OdinAttributeProcessor<T> where T : class
     {
@@ -20,11 +18,11 @@ namespace Yuumix.OdinToolkits.Common.InspectorLocalization.Editor.AttributeProce
                 var localizedButton = member.GetCustomAttribute<LocalizedButtonAttribute>();
                 if (InspectorLocalizationManagerSO.IsChinese)
                 {
-                    attributes.Add(ButtonAttributeConfig.CreateChineseButtonAttribute(localizedButton.Config));
+                    attributes.Add(ButtonAttributeData.CreateChineseButtonAttribute(localizedButton.Data));
                 }
                 else if (InspectorLocalizationManagerSO.IsEnglish)
                 {
-                    attributes.Add(ButtonAttributeConfig.CreateEnglishButtonAttribute(localizedButton.Config));
+                    attributes.Add(ButtonAttributeData.CreateEnglishButtonAttribute(localizedButton.Data));
                 }
             }
         }

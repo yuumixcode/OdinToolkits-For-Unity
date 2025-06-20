@@ -6,8 +6,8 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using UnityEngine;
-using Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes;
-using Yuumix.OdinToolkits.Modules.CustomExtensions.Enums;
+using Yuumix.OdinToolkits.Common.InspectorLocalization;
+using Yuumix.OdinToolkits.Modules.CustomExtensions;
 
 namespace Yuumix.OdinToolkits.Modules.Utilities.Runtime
 {
@@ -21,6 +21,7 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.Runtime
         "Type-related Utility, including static extensions (it is also a static method in itself)")]
     public static class TypeExtensions
     {
+        
         /// <summary>
         /// 将系统类型名称映射到其 C# 别名的字典
         /// <br />
@@ -29,6 +30,10 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.Runtime
         [LocalizedComment("类型别名映射表", "Type alias mapping table")]
         public static readonly Dictionary<Type, string> TypeAliasMap = new Dictionary<Type, string>
         {
+            {
+                typeof(void),
+                "void"
+            },
             {
                 typeof(float),
                 "float"
@@ -170,6 +175,11 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.Runtime
             if (targetTypeName.EndsWith("obj") && targetTypeName.Length > 3)
             {
                 targetTypeName = targetTypeName[..^3];
+            }
+
+            if (TypeAliasMap.TryGetValue(type, out var alias))
+            {
+                targetTypeName = alias;
             }
 
             return targetTypeName;
@@ -374,8 +384,7 @@ namespace Yuumix.OdinToolkits.Modules.Utilities.Runtime
         public static FieldInfo[] GetUserDefinedFields(this Type type)
         {
             return type.GetRuntimeFields()
-                .Where(f => !f.IsSpecialName &&
-                            !IsAutoPropertyBackingField(f))
+                .Where(f => !f.IsSpecialName && !IsAutoPropertyBackingField(f))
                 .ToArray();
         }
 

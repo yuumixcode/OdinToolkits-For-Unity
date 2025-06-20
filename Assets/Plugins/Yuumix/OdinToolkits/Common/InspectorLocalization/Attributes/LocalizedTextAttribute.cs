@@ -1,9 +1,9 @@
 using Sirenix.OdinInspector;
 using System;
 using System.Diagnostics;
-using Yuumix.OdinToolkits.Common.InspectorLocalization.Structs;
+using Yuumix.OdinToolkits.Common.InspectorLocalization;
 
-namespace Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes
+namespace Yuumix.OdinToolkits.Common.InspectorLocalization
 {
     /// <summary>
     /// 编辑器面板 Label 多语言显示，完美兼容 Odin 绘制系统
@@ -13,7 +13,7 @@ namespace Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes
     [Conditional("UNITY_EDITOR")]
     public class LocalizedTextAttribute : Attribute
     {
-        public MultiLanguageData MultiLanguageData;
+        public MultipleLanguageData MultipleLanguageData;
         public readonly bool NicifyEnglishText;
         public readonly SdfIconType Icon;
 
@@ -30,7 +30,7 @@ namespace Yuumix.OdinToolkits.Common.InspectorLocalization.Attributes
         public LocalizedTextAttribute(string chinese, string english = null, bool nicifyEnglishText = true,
             SdfIconType icon = SdfIconType.None, string iconColor = null)
         {
-            MultiLanguageData = new MultiLanguageData(chinese, english);
+            MultipleLanguageData = new MultipleLanguageData(chinese, english);
             NicifyEnglishText = nicifyEnglishText;
             Icon = icon;
             IconColor = iconColor;

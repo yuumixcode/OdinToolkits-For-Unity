@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using Yuumix.OdinToolkits.Common.YuumixEditor;
 #endif
 
-namespace Yuumix.OdinToolkits.Common.Editor.ScriptableSingleton
+namespace Yuumix.OdinToolkits.Common.Editor
 {
     public abstract class OdinEditorScriptableSingleton<T> : SerializedScriptableObject
         where T : OdinEditorScriptableSingleton<T>
