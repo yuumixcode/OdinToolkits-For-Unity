@@ -1,10 +1,10 @@
-﻿using Sirenix.OdinInspector;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Yuumix.OdinToolkits.Common.Logger;
 
-namespace Yuumix.OdinToolkits.Modules.Singleton
+namespace Yuumix.OdinToolkits.Samples.TestSingleton
 {
-    public abstract class PersistentOdinSingleton<T> : SerializedMonoBehaviour where T : PersistentOdinSingleton<T>
+    public abstract class TestPersistentSingleton<T> : SerializedMonoBehaviour where T : TestPersistentSingleton<T>
     {
         bool _isInitialized;
         static T _instance;
@@ -13,14 +13,14 @@ namespace Yuumix.OdinToolkits.Modules.Singleton
         {
             get
             {
-                // YuumixLogger.Log("Instance 属性被访问，当前 _instance: " + (_instance ? "已赋值" : "null"));
+                YuumixLogger.Log("Instance 属性被访问，当前 _instance: " + (_instance ? "已赋值" : "null"));
                 if (_instance)
                 {
                     return _instance;
                 }
 
                 _instance = FindAnyObjectByType<T>();
-                // YuumixLogger.Log("FindAnyObjectByType<T>() 后 _instance: " + (_instance ? "已赋值" : "null"));
+                YuumixLogger.Log("FindAnyObjectByType<T>() 后 _instance: " + (_instance ? "已赋值" : "null"));
                 if (_instance)
                 {
                     return _instance;
@@ -28,7 +28,7 @@ namespace Yuumix.OdinToolkits.Modules.Singleton
 
                 _instance = new GameObject(typeof(T).Name + " [Auto-Singleton]")
                     .AddComponent<T>();
-                // YuumixLogger.Log("new GameObject().AddComponent 后 _instance: " + (_instance ? "已赋值" : "null"));
+                YuumixLogger.Log("new GameObject().AddComponent 后 _instance: " + (_instance ? "已赋值" : "null"));
                 return _instance;
             }
         }
@@ -38,7 +38,7 @@ namespace Yuumix.OdinToolkits.Modules.Singleton
             if (!_instance)
             {
                 _instance = this as T;
-                // YuumixLogger.Log("Awake 方法内赋值 _instance");
+                YuumixLogger.Log("Awake 方法内赋值 _instance");
                 if (_isInitialized)
                 {
                     return;

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
+using Yuumix.OdinToolkits.Common;
 using Yuumix.OdinToolkits.Common.InspectorMultiLanguage;
 using Yuumix.OdinToolkits.Modules.CustomExtensions;
 using Yuumix.OdinToolkits.Modules.Utilities;
@@ -46,6 +47,10 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Runtime
         [DisplayAsString(false)]
         public string EnglishComment { get; private set; }
 
+        [ShowInInspector]
+        [DisplayAsString(false)]
+        public string[] SeeAlsoLinks { get; private set; }
+
         /// <summary>
         /// 继承链
         /// </summary>
@@ -75,6 +80,7 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Runtime
                 AssemblyName = type.Assembly.GetName().Name,
                 ChineseComment = GetComment(type),
                 EnglishComment = GetComment(type, true),
+                SeeAlsoLinks = GetSeeAlsoLink(type),
                 InheritanceChain = GetInheritanceChain(type),
                 InterfaceList = GetInterfacesList(type),
                 Constructors = GetConstructorsString(type),
@@ -101,6 +107,12 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Runtime
 
             // Debug.Log("Comment 为 null");
             return null;
+        }
+
+        public static string[] GetSeeAlsoLink(Type type)
+        {
+            var links = type.GetAttributes<SeeAlsoLinkAttribute>();
+            return links.Select(x => x.Link).ToArray();
         }
 
         public static string[] GetInheritanceChain(Type type)

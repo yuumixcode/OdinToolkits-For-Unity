@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using Yuumix.OdinToolkits.Common.InspectorMultiLanguage;
 using Yuumix.OdinToolkits.Common.Logger;
-using Yuumix.OdinToolkits.Common.ResetTool;
+using Yuumix.OdinToolkits.Common;
 using Yuumix.OdinToolkits.Common.RootLocator;
 using Yuumix.YuumixEditor;
 
@@ -37,7 +37,7 @@ namespace Yuumix.OdinToolkits.Common
                     YuumixLogger.EditorLogError("加载 " + typeof(OdinToolkitsRuntimeConfig) + " 资源失败，检查加载路径！");
                 }
 #else
-                RuntimeLoad();
+                _cachedInstance = RuntimeLoad();
 #endif
                 return _cachedInstance;
             }
@@ -45,8 +45,7 @@ namespace Yuumix.OdinToolkits.Common
 
         static OdinToolkitsRuntimeConfig RuntimeLoad()
         {
-            _cachedInstance = Yuumix.Instance.OdinToolkitsRuntimeConfig;
-            return _cachedInstance;
+            return Yuumix.Instance.OdinToolkitsRuntimeConfig;
         }
 
         #endregion

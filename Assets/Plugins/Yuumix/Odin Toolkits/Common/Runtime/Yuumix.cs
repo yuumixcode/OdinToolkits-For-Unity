@@ -1,18 +1,47 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Yuumix.OdinToolkits.Common.Logger;
-using Yuumix.OdinToolkits.Modules.Singleton;
 
 namespace Yuumix.OdinToolkits.Common
 {
-    public sealed class Yuumix : PersistentOdinSingleton<Yuumix>
+    public sealed class Yuumix :
+#if UNITY_EDITOR && (ODIN_INSPECTOR_3 || ODIN_INSPECTOR_3_1 || ODIN_INSPECTOR_3_2 || ODIN_INSPECTOR_3_3)
+        SerializedMonoBehaviour
+#else
+        MonoBehaviour
+#endif
     {
+        static Yuumix _instance;
+
+        public static Yuumix Instance
+        {
+            get
+            {
+                if (_instance)
+                {
+                    return _instance;
+                }
+
+                _instance = FindAnyObjectByType<Yuumix>();
+                if (_instance)
+                {
+                    return _instance;
+                }
+
+                _instance = new GameObject("[Yuumix]")
+                    .AddComponent<Yuumix>();
+                return _instance;
+            }
+        }
+
         public OdinToolkitsRuntimeConfig OdinToolkitsRuntimeConfig
         {
             get
             {
                 if (!_odinToolkitsRuntimeConfig)
                 {
-                    _odinToolkitsRuntimeConfig = Resources.Load<OdinToolkitsRuntimeConfig>("Runtime_OdinToolkitsRuntimeConfig");
+                    _odinToolkitsRuntimeConfig =
+                        Resources.Load<OdinToolkitsRuntimeConfig>("Runtime_OdinToolkitsRuntimeConfig");
                 }
 
                 return _odinToolkitsRuntimeConfig;
@@ -21,19 +50,45 @@ namespace Yuumix.OdinToolkits.Common
 
         OdinToolkitsRuntimeConfig _odinToolkitsRuntimeConfig;
 
-        protected override void Awake()
+        void Awake()
         {
-            base.Awake();
+            if (!_instance)
+            {
+                _instance = this;
+                transform.SetParent(null);
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                if (Application.isPlaying)
+                {
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    DestroyImmediate(gameObject);
+                }
+            }
+
             // 初始加载一次
             _odinToolkitsRuntimeConfig = Resources.Load<OdinToolkitsRuntimeConfig>("Runtime_OdinToolkitsRuntimeConfig");
             if (!_odinToolkitsRuntimeConfig)
             {
-                YuumixLogger.EditorLogError("OdinToolkitsRuntimeConfig 配置资源加载失败，需要检查 Resources 路径！", prefix: "Odin Toolkits");
+                YuumixLogger.EditorLogError("OdinToolkitsRuntimeConfig 配置资源加载失败，需要检查 Resources 路径！",
+                    prefix: "Odin Toolkits");
+            }
+        }
+
+        void OnDestroy()
+        {
+            if (_instance && _instance == this)
+            {
+                _instance = null;
             }
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        static void YuumixStart()
+        static void LaunchYuumix()
         {
             _ = Instance;
         }

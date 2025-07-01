@@ -5,11 +5,11 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 using Yuumix.OdinToolkits.Common;
-using Yuumix.OdinToolkits.Common.ResetTool;
+using Yuumix.OdinToolkits.Common.Editor;
 
 namespace Yuumix.OdinToolkits.WorkInProgress.FolderTreeGen
 {
-    public class FolderTreeGen : OdinScriptableSingleton<FolderTreeGen>, IOdinToolkitsReset
+    public class FolderTreeGen : EditorScriptableSingleton<FolderTreeGen>, IOdinToolkitsReset
     {
         public static string[] ContainsFile =
         {

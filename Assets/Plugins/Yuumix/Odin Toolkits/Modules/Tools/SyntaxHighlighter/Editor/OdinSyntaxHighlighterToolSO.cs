@@ -3,15 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
-using Yuumix.OdinToolkits;
 using Yuumix.OdinToolkits.Common;
+using Yuumix.OdinToolkits.Common.Editor;
+using Yuumix.OdinToolkits.Common.Logger;
 
 namespace Yuumix.OdinToolkits.Modules.Tools.SyntaxHighlighter.Editor
 {
     /// <summary>
     /// 获取 Odin 内部的语法高亮处理器并封装，通过此 Presenter 可以借助 Odin 的工具实现语法高亮
     /// </summary>
-    public class OdinSyntaxHighlighterPresenter : SerializedScriptableObject
+    public class OdinSyntaxHighlighterToolSO : EditorScriptableSingleton<OdinSyntaxHighlighterToolSO>
     {
         [Title("Odin 语法高亮的默认颜色配置")]
         [ReadOnly]
@@ -93,13 +94,13 @@ namespace Yuumix.OdinToolkits.Modules.Tools.SyntaxHighlighter.Editor
                 return ParseMethod.Invoke(null, new object[] { code }) as string;
             }
 
-            OdinEditorLog.Error("无法获取 SyntaxHighlighter.Parse 方法");
+            YuumixLogger.EditorLogError("无法获取 SyntaxHighlighter.Parse 方法");
             return string.Empty;
         }
 
         [PropertySpace(10)]
         [Button(ButtonSizes.Large)]
-        public void 测试语法高亮()
+        public void TestSyntaxHighlight()
         {
             const string code = @"
 using System;

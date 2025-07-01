@@ -121,15 +121,15 @@ namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor
             {
                 normal = new GUIStyleState
                 {
-                    textColor = OdinSyntaxHighlighterPresenter.TextColor
+                    textColor = OdinSyntaxHighlighterToolSO.TextColor
                 },
                 active = new GUIStyleState
                 {
-                    textColor = OdinSyntaxHighlighterPresenter.TextColor
+                    textColor = OdinSyntaxHighlighterToolSO.TextColor
                 },
                 focused = new GUIStyleState
                 {
-                    textColor = OdinSyntaxHighlighterPresenter.TextColor
+                    textColor = OdinSyntaxHighlighterToolSO.TextColor
                 },
                 wordWrap = false,
                 fontSize = 13
@@ -340,8 +340,8 @@ namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.Common.Editor
             var rect = SirenixEditorGUI.BeginBox();
             GUILayoutUtility.GetRect(GUIHelper.TempContent("宽度卡位"), GUIStyle.none, GUILayout.Width(CodeDefaultWidth),
                 GUILayout.Height(5));
-            SirenixEditorGUI.DrawSolidRect(rect, OdinSyntaxHighlighterPresenter.BackgroundColor);
-            var highlighterCode = OdinSyntaxHighlighterPresenter.ApplyCodeHighlighting(_container.OriginalCode);
+            SirenixEditorGUI.DrawSolidRect(rect, OdinSyntaxHighlighterToolSO.BackgroundColor);
+            var highlighterCode = OdinSyntaxHighlighterToolSO.ApplyCodeHighlighting(_container.OriginalCode);
             var calcHeight = _codeTextStyle.CalcHeight(GUIHelper.TempContent(highlighterCode), CodeDefaultWidth);
             GUILayout.BeginVertical();
             _scrollPosition = GUILayout.BeginScrollView(_scrollPosition, false, false,

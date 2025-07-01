@@ -33,14 +33,14 @@ namespace Yuumix.YuumixEditor
                 return assetPath;
             }
 
-            EditorLog.Error("没有找到对应类型的 ScriptableObject 文件，需要手动生成对应的文件");
+            YuumixEditorEasyLog.Error("没有找到对应类型的 ScriptableObject 文件，需要手动生成对应的文件");
             return null;
         }
 
         /// <summary>
         /// 获取或创建一个单例 SO 资源，如果资源不存在则创建，如果有多个 SO 资源，则只返回第一个，并删除其他资源
         /// </summary>
-        public static T GetAssetDeleteExtra<T>(string filePath = "") where T : ScriptableObject
+        public static T GetAssetDeleteExtra<T>(string relativeFolderPath = "") where T : ScriptableObject
         {
             T wantToAsset;
             var guids = AssetDatabase.FindAssets("t:" + typeof(T));
@@ -52,7 +52,7 @@ namespace Yuumix.YuumixEditor
                 wantToAsset = AssetDatabase.LoadAssetAtPath<T>(allPaths[0]);
                 if (!wantToAsset)
                 {
-                    EditorLog.Warning("GetScriptableObjectDeleteExtra 中加载资源失败");
+                    YuumixEditorEasyLog.Warning("GetScriptableObjectDeleteExtra 中加载资源失败");
                 }
 
                 // 删除从序号 1 开始的所有资源
@@ -67,18 +67,19 @@ namespace Yuumix.YuumixEditor
                 return wantToAsset;
             }
 
-            if (string.IsNullOrEmpty(filePath))
+            if (string.IsNullOrEmpty(relativeFolderPath))
             {
-                EditorLog.Warning("没有找到对应的 ScriptableObject 资源，且没有设置路径，在 Assets/ 目录生成文件");
+                YuumixEditorEasyLog.Warning("没有找到对应的 ScriptableObject 资源，且没有设置路径，在 Assets/OdinToolkitsData 目录生成文件");
             }
 
-            filePath = "Assets/Auto-Generate-SO-Asset.asset";
+            #region 硬编码路径
+
+            relativeFolderPath = "Assets/OdinToolkitsData/SO";
+
+            #endregion
+
+            var filePath = relativeFolderPath + "/" + typeof(T).Name + "[AutoGen]" + ".asset";
             wantToAsset = ScriptableObject.CreateInstance<T>();
-            if (!filePath.EndsWith(".asset"))
-            {
-                filePath = Path.Combine(filePath, ".asset");
-            }
-
             AssetDatabase.CreateAsset(wantToAsset, filePath);
             AssetDatabase.ImportAsset(filePath);
             AssetDatabase.SaveAssets();

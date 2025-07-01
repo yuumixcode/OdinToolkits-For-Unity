@@ -3,21 +3,21 @@ using UnityEngine;
 
 namespace Yuumix.YuumixEditor
 {
-    public static class EditorLog
+    public static class YuumixEditorEasyLog
     {
         public static void Log(string message)
         {
-            Debug.Log(message);
+            Debug.Log("[YuumixEditor] " + message);
         }
 
         public static void Warning(string message)
         {
-            Debug.LogWarning(message);
+            Debug.LogWarning("[YuumixEditor] " + message);
         }
 
         public static void Error(string message)
         {
-            Debug.LogError(message);
+            Debug.LogError("[YuumixEditor] " + message);
         }
     }
 }

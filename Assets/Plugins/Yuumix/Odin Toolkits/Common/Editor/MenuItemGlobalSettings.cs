@@ -5,14 +5,14 @@
     // % = Mac[shift + command]
     // % 表示 Ctrl（Mac 上是 Command）
     // & 表示 Alt（Mac 上是 Option）
-    // # 表示Shift
+    // # 表示 Shift
     public static class MenuItemGlobalSettings
     {
         #region Top
 
         const string RootMenuItemName = "Tools/Odin Toolkits";
-        const string WindowsMenuItemName = RootMenuItemName + "/Windows";
-        const string ThirdPartyMenuItemName = RootMenuItemName + "/Third Party";
+        const string WindowsMenuItemName = RootMenuItemName + "/Overview Windows";
+        const string CommunityMenuItemName = RootMenuItemName + "/Community";
         const string WIPMenuItemName = RootMenuItemName + "/Work In Progress";
 
         #endregion
@@ -55,21 +55,21 @@
 
         #endregion
 
-        #region ThirdParty 400 - 600
-
-        public const string ResolvedParametersMenuItemName = ThirdPartyMenuItemName + "/Resolved Parameters Overview";
-        public const int ResolvedParametersPriority = 10;
-        public const string ResolvedParametersOverviewWindowName = "Resolved Parameters Overview";
-
-        #endregion
-
-        #region WIP (Work In Progress) EditorWindowHub
+        #region 10 WIP (Work In Progress) EditorWindowHub
 
         public const string TempHubMenuItemName = WIPMenuItemName + "/Temp Hub";
-        public const int TempHubPriority = 15;
+        public const int TempHubPriority = 10;
         public const string ShowToastMethodWindowName = "ShowToast Method Demo";
         public const string InspectObjectMethodWindowName = "InspectObject Method Demo";
         public const string AttributeOverviewProWindowName = "Attribute Overview Pro";
+
+        #endregion
+
+        #region Min-15 Community 
+
+        public const string ResolvedParametersMenuItemName = CommunityMenuItemName + "/Resolved Parameters Overview";
+        public const int ResolvedParametersPriority = 15;
+        public const string ResolvedParametersOverviewWindowName = "Resolved Parameters Overview";
 
         #endregion
 

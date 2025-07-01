@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Yuumix.OdinToolkits;
 using Yuumix.OdinToolkits.Common;
+using Yuumix.OdinToolkits.Common.Logger;
 
 namespace Yuumix.OdinToolkits.Modules.Utilities
 {
@@ -12,7 +12,7 @@ namespace Yuumix.OdinToolkits.Modules.Utilities
         {
             if (parentPath == string.Empty)
             {
-                OdinEditorLog.Error("父物体路径为空");
+                YuumixLogger.LogError("父物体路径为空");
                 return "ParentPath == null";
             }
 
@@ -21,7 +21,7 @@ namespace Yuumix.OdinToolkits.Modules.Utilities
             var targetPathList = new List<string>();
             if (parentPathArray.Where((path, i) => childPathArray[i] != path).Any())
             {
-                Debug.LogError("路径错误，并不是子物体");
+                YuumixLogger.LogError("路径错误，并不是子物体");
                 return null;
             }
 

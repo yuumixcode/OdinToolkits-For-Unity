@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38c95b3ef2d14ba59c7867ef6d989728, type: 3}
-  m_Name: ScriptDocGenTool
+  m_Script: {fileID: 11500000, guid: 8c53957e851794704be8e39ab84960fb, type: 3}
+  m_Name: YuumixLoggerModule
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,31 +21,33 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: TargetType
+    - Name: Types
       Entry: 7
-      Data: 0|System.RuntimeType, mscorlib
+      Data: 0|System.Collections.Generic.List`1[[System.Type, mscorlib]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 1|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
       Data: Yuumix.OdinToolkits.Common.Logger.YuumixLogger, Assembly-CSharp-firstpass
     - Name: 
       Entry: 8
       Data: 
-    - Name: TempTypeList
-      Entry: 7
-      Data: 1|System.Collections.Generic.List`1[[System.Type, mscorlib]], mscorlib
     - Name: 
-      Entry: 12
-      Data: 0
+      Entry: 7
+      Data: 2|System.RuntimeType, mscorlib
+    - Name: 
+      Entry: 1
+      Data: Yuumix.OdinToolkits.Common.Logger.WriteToFileExtension, Assembly-CSharp-firstpass
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
     - Name: 
       Entry: 8
       Data: 
-  header: {}
-  docCategory: 0
-  markdownCategory: 0
-  typeListConfig: {fileID: 11400000, guid: 0319442ea135c4a0c94dbfe54f88e588, type: 2}
-  storageTypeListConfigSOFolderPath: Assets/Plugins/Yuumix/Odin Toolkits/Common/Editor/InternalTypeListConfigSO
-  folderPath: /Users/yuumi/OpenSource/yuumi-zeus.github.io/docs/ScriptingAPI/Common/Logger
-  typeDataList: []

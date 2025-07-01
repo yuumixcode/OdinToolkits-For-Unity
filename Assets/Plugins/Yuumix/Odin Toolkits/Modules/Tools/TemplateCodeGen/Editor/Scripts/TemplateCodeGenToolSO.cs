@@ -10,11 +10,10 @@ using Yuumix.OdinToolkits.Common.Editor;
 using Yuumix.OdinToolkits.Common.InspectorMultiLanguage;
 using Yuumix.OdinToolkits.Common.Version;
 using Yuumix.YuumixEditor;
-using Yuumix.OdinToolkits.Modules.Utilities;
 
 namespace Yuumix.OdinToolkits.Modules.Tools.TemplateCodeGen.Editor
 {
-    public class TemplateCodeGenToolSO : OdinEditorScriptableSingleton<TemplateCodeGenToolSO>
+    public class TemplateCodeGenToolSO : EditorScriptableSingleton<TemplateCodeGenToolSO>
     {
         public static MultiLanguageData GenerateTemplateToolMenuPathData =
             new MultiLanguageData("模板代码生成工具", "Generate Template Tool");

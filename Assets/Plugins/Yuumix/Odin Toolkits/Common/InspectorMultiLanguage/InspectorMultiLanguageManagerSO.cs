@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
-using Yuumix.OdinToolkits.Common.ResetTool;
+using Yuumix.OdinToolkits.Common;
 #if UNITY_EDITOR
 using Sirenix.Utilities.Editor;
 using UnityEditor;
@@ -23,7 +23,7 @@ namespace Yuumix.OdinToolkits.Common.InspectorMultiLanguage
     /// </summary>
     [MultiLanguageComment("Inspector 面板的多语言管理器，用于设置当前语言",
         "Inspector panel's multilingual manager for setting the current language")]
-    public class InspectorMultiLanguageManagerSO : OdinScriptableSingleton<InspectorMultiLanguageManagerSO>,
+    public class InspectorMultiLanguageManagerSO : ScriptableSingletonForEditorStage<InspectorMultiLanguageManagerSO>,
         IOdinToolkitsReset
     {
         [PropertyOrder(5)]

@@ -23,6 +23,8 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Runtime
 
         [ShowInInspector] public bool NoFromInherit => belongToType == declaringType;
 
-        public bool IsAPI => memberAccessModifierType is AccessModifierType.Public or AccessModifierType.Protected or AccessModifierType.ProtectedInternal;
+        [ShowInInspector]
+        public bool IsAPI => memberAccessModifierType is AccessModifierType.Public or AccessModifierType.Protected
+            or AccessModifierType.ProtectedInternal;
     }
 }

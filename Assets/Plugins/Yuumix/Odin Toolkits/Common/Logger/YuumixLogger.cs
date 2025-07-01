@@ -1,5 +1,5 @@
+using Sirenix.Utilities;
 using System;
-using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
@@ -15,10 +15,10 @@ namespace Yuumix.OdinToolkits.Common.Logger
     /// <summary>
     /// Yuumix Odin Toolkits 的日志工具，提供多种封装的 Log 方法
     /// </summary>
-    /// <remarks>游戏运行过程中，如果要存储日志，是否需要做一个检测，每次打开游戏去清空日志，或者文件夹大小超过一定值时进行清理？</remarks>
-    /// <seealso href="https://www.odintoolkits.cn/" />
+    /// <seealso href="https://www.odintoolkits.cn/blog/yuumixloggerdeveloplog/" />
     [MultiLanguageComment("Yuumix Odin Toolkits 的日志工具，提供多种封装的 Log 方法",
         "The logging tool of Yuumix Odin Toolkits offers a variety of encapsulated Log methods.")]
+    [SeeAlsoLink("https://www.odintoolkits.cn/blog/yuumixloggerdeveloplog/")]
     public static class YuumixLogger
     {
         static string NowTimeString => DateTime.Now.ToString("HH:mm:ss");
@@ -163,6 +163,10 @@ namespace Yuumix.OdinToolkits.Common.Logger
                     .Append("]");
             }
 
+            var relativePath = PathUtilities.MakeRelative(Application.dataPath.Replace("/Assets", ""), filePath);
+            var jumpTag =
+                $"<a style='text-decoration: underline; href=\"{relativePath}\" line=\"{lineNumber}\">{relativePath}:{lineNumber}</a>";
+            sb.Append("\n").Append("在下方堆栈面板中点击链接跳转: [ at <color=#ff6565>").Append(jumpTag).Append("</color> ]");
             var logMessage = sb.ToString();
             switch (logType)
             {

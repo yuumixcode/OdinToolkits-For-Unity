@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Yuumix.OdinToolkits.Common.Logger;
 using Yuumix.OdinToolkits.Modules.Utilities;
 
 #if UNITY_EDITOR
@@ -15,6 +16,8 @@ namespace Yuumix.OdinToolkits.Common.RootLocator
     {
         const string RootFolderName = "Odin Toolkits";
         const string OdinToolkitsRootPathKey = "OdinToolkitsRootPath";
+
+        public const string OdinToolkitsAnyDataRootFolder = "Assets/OdinToolkitsData";
 
         /// <summary>
         /// OdinToolkits 相对路径，"Assets/.../OdinToolkits"
@@ -52,7 +55,7 @@ namespace Yuumix.OdinToolkits.Common.RootLocator
             SetFolderPath();
             return EditorPrefs.GetString(OdinToolkitsRootPathKey);
 #else
-            return "编辑器阶段方法";
+            return "仅用于编辑器阶段方法，运行时调用无效";
 #endif
         }
 
@@ -62,7 +65,7 @@ namespace Yuumix.OdinToolkits.Common.RootLocator
             _markerSOPath = ScriptableObjectEditorUtil.GetAssetPath<OdinToolkitsLookup>();
             if (string.IsNullOrEmpty(_markerSOPath))
             {
-                Debug.LogWarning("没有找到 OdinToolkitsLookup 资源");
+                YuumixLogger.EditorLogWarning("没有找到 OdinToolkitsLookup 资源");
                 return;
             }
 

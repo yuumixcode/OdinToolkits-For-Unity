@@ -50,7 +50,7 @@ namespace Yuumix.YuumixEditor
                 return path;
             }
 
-            EditorLog.Error("在项目中没有找到 " + targetFolderName + " 文件夹，请检查是否改名，或者条件不满足");
+            YuumixEditorEasyLog.Error("在项目中没有找到 " + targetFolderName + " 文件夹，请检查是否改名，或者条件不满足");
             return null;
         }
     }

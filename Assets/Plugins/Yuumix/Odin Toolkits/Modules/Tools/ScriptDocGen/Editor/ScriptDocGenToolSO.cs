@@ -12,36 +12,49 @@ using UnityEngine;
 using Yuumix.OdinToolkits.Common.Contributors;
 using Yuumix.OdinToolkits.Common.Editor;
 using Yuumix.OdinToolkits.Common.InspectorMultiLanguage;
-using Yuumix.OdinToolkits.Common.ResetTool;
+using Yuumix.OdinToolkits.Common.Logger;
+using Yuumix.OdinToolkits.Common;
+using Yuumix.OdinToolkits.Common.RootLocator;
+using Yuumix.OdinToolkits.Common.Version;
 using Yuumix.YuumixEditor;
 using Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Runtime;
 using Yuumix.OdinToolkits.Modules.Utilities;
 
 namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
 {
-    public class ScriptDocGenToolSO : OdinEditorScriptableSingleton<ScriptDocGenToolSO>, IOdinToolkitsReset
+    public class ScriptDocGenToolSO : EditorScriptableSingleton<ScriptDocGenToolSO>, IOdinToolkitsReset
     {
         public static MultiLanguageData ScriptDocGenToolMenuPathData =
             new MultiLanguageData("脚本文档生成工具", "Script Doc Generate Tool");
 
-        public const string DefaultStorageFolderPath = "Assets/OdinToolkitsData/TypeListConfigSO";
-        public const string DefaultDocFolderPath = "Assets/OdinToolkitsData/Editor/Documents/";
-        public const string Identifier = "Addition Description";
-        public const string IdentifierTitle = "## " + Identifier;
+        public const string DefaultStorageFolderPath =
+            OdinToolkitsPaths.OdinToolkitsAnyDataRootFolder + "/TypeListConfigSO";
+
+        public const string DefaultDocFolderPath =
+            OdinToolkitsPaths.OdinToolkitsAnyDataRootFolder + "/Editor/Documents/";
+
+        public const string IdentifierTitle = "## Additional Description";
 
         static StringBuilder _userIdentifier = new StringBuilder()
             .AppendLine(IdentifierTitle)
-            .AppendLine("- 不要修改标题级别和内容，" + IdentifierTitle + " 是标识符")
-            .AppendLine("- " + Identifier + " 之后的内容不会被新生成的文档覆盖，可以对特定的方法进行额外说明");
+            .AppendLine()
+            .AppendLine("- `" + IdentifierTitle + "` 是标识符，由 `Odin Toolkits` 文档生成工具自动生成，请勿修改标题级别和内容。")
+            .AppendLine("- `" + IdentifierTitle + "` 之后的内容将不会被覆盖，可以对文档补充说明。");
 
         public static event Action<ToastPosition, SdfIconType, string, Color, float> OnToastEvent;
 
+        [PropertyOrder(-5)]
         public MultiLanguageHeaderWidget header = new MultiLanguageHeaderWidget(
             ScriptDocGenToolMenuPathData.GetChinese(),
             ScriptDocGenToolMenuPathData.GetEnglish(),
             "给定一个 `Type` 类型的值，生成 Markdown 格式的文档，可选 Scripting API 或者 Complete References，默认支持 MkDocs-Material。Scripting API 表示对外的，用户可以调用的程序接口文档，Complete References 表示包含所有成员的参考文档",
             "Given a value of type `Type`, generate a document in the format of Markdown, optional Scripting API and Complete References, and MkDocs-Material is supported by default. Scripting API refers to the external, user-accessible interface documentation, and Complete References refers to the documentation containing all members"
         );
+
+        [PropertyOrder(0)]
+        [OnInspectorGUI]
+        [MultiLanguageTitle("工具使用模式", "Tool Usage Mode ")]
+        public void FirstTitle() { }
 
         [PropertyOrder(1)]
         [HorizontalGroup("Mode", 0.75f)]
@@ -82,6 +95,11 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
         [HideLabel]
         public MarkdownCategory markdownCategory = MarkdownCategory.MkDocsMaterial;
 
+        [PropertyOrder(1)]
+        [MultiLanguageTitle("目标类型", "Target Type")]
+        [OnInspectorGUI]
+        public void TypeTitle() { }
+
         [PropertyOrder(2)]
         [ShowIf("_singleDoc")]
         [HideLabel]
@@ -102,6 +120,7 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
         [InlineButton("CompleteConfig", SdfIconType.Check, "确认")]
         [InlineButton("ResetSOSaveFolderPath", SdfIconType.ArrowClockwise, "")]
         [MultiLanguageText("存放类型列表配置资源的文件夹路径", "Storage TypeListConfigSO Folder Path")]
+        [CustomContextMenu("Reset Default", nameof(ResetSOSaveFolderPath))]
         [LabelWidth(200f)]
         public string storageTypeListConfigSOFolderPath = DefaultStorageFolderPath;
 
@@ -117,7 +136,13 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
         [HideLabel]
         [FolderPath(AbsolutePath = true)]
         [InlineButton(nameof(ResetDocFolderPath), SdfIconType.ArrowClockwise, "")]
+        [CustomContextMenu("Reset Default", nameof(ResetDocFolderPath))]
         public string folderPath;
+
+        [PropertyOrder(19)]
+        [MultiLanguageTitle("解析操作按钮", "Analyze Button")]
+        [OnInspectorGUI]
+        public void AnalyzeTitle() { }
 
         [PropertyOrder(20)]
         [ShowIf("_singleDoc")]
@@ -131,6 +156,12 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
             ButtonSizes.Large, ButtonStyle.Box, SdfIconType.Activity)]
         public MultiLanguageButtonWidget analyzeMultiTypes = new MultiLanguageButtonWidget(AnalyzeMultiple);
 
+        [PropertyOrder(24)]
+        [MultiLanguageTitle("生成文档按钮", "Generate Document Buttons")]
+        [ShowIf("CanShowGenerateTitle")]
+        [OnInspectorGUI]
+        public void GenerateTitle() { }
+
         [PropertyOrder(25)]
         [ShowIf(nameof(CanGeneratedSingle))]
         [MultiLanguageButtonWidgetConfig("生成 Markdown 文档", "Generate Markdown Document",
@@ -142,6 +173,11 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
         [MultiLanguageButtonWidgetConfig("批量生成 Markdown 文档", "Generate Multiple Markdown Documents",
             ButtonSizes.Large, ButtonStyle.Box, SdfIconType.FileEarmarkPlus)]
         public MultiLanguageButtonWidget generateButtonMulti = new MultiLanguageButtonWidget(GenerateMkDocsMultiple);
+
+        [PropertyOrder(100)]
+        [MultiLanguageTitle("过程数据", "Process Data")]
+        [OnInspectorGUI]
+        public void Title() { }
 
         [PropertyOrder(105)]
         [ShowIf("_singleDoc")]
@@ -158,13 +194,16 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
         public MultiLanguageFooterWidget footer = new MultiLanguageFooterWidget(
             new[]
             {
-                new ContributorInfo("2025/06/23", "Yuumix Zeus", "zeriying@gmail.com", "https://github.com/Yuumi-Zeus")
+                new ContributorInfo("2025/07/01", "Yuumix Zeus", "zeriying@gmail.com", "https://github.com/Yuumi-Zeus")
             },
-            "2025/6/23",
+            "2025/07/01",
             new[]
             {
                 new MultiLanguageData("目前支持构造函数，方法，属性，事件，字段，运算符重载成员分析",
-                    "Currently supports constructor, method, property, event, field, operator overloading member analysis")
+                    "Currently supports constructor, method, property, event, field, operator overloading member analysis"),
+                new MultiLanguageData(VersionSpecialString.Fixed + "修复批量生成模式的数组越界问题-2025/07/01",
+                    VersionSpecialString.Fixed +
+                    "Fix the array out-of-bounds issue in batch generation mode.-2025/07/01")
             });
 
         #endregion
@@ -180,7 +219,7 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
         bool CanGeneratedSingle => _thisHasAnalyzedSingle && _singleDoc;
         bool CanGeneratedMultiple => _thisHasAnalyzedMultiple && !_singleDoc;
 
-        #region PluginReset
+        #region OdinToolkitsReset
 
         public void OdinToolkitsReset()
         {
@@ -197,9 +236,8 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
             _customizingSaveConfig = false;
             TempTypeList = new List<Type>();
             ResetSOSaveFolderPath();
+            ResetDocFolderPath();
         }
-
-        #endregion
 
         public void ResetSOSaveFolderPath()
         {
@@ -210,6 +248,8 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
         {
             folderPath = DefaultDocFolderPath;
         }
+
+        #endregion
 
         public void CompleteConfig()
         {
@@ -222,7 +262,7 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
                 SdfIcons.CreateTransparentIconTexture(SdfIconType.SaveFill, Color.white, 16 /*0x10*/, 16 /*0x10*/,
                     0);
             var content = new GUIContent(" 保存为SO资源 ", image,
-                "保存为 " + typeof(TypeListConfigSO) + " 到 " + storageTypeListConfigSOFolderPath);
+                "保存为 " + nameof(TypeListConfigSO) + " 到 " + storageTypeListConfigSOFolderPath);
             var filePath = storageTypeListConfigSOFolderPath + "/" + typeof(TypeListConfigSO) + ".asset";
             if (TempTypeList.Count > 0)
             {
@@ -260,35 +300,6 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
                 Instance._singleDoc ? "成功切换为单文档生成模式" : "成功切换为多文档批量生成模式",
                 Color.white, 5f);
         }
-
-        #region OnInspectorGUI
-
-        [OnInspectorGUI]
-        [MultiLanguageTitle("工具使用模式", "Tool Usage Mode ")]
-        public void FirstTitle() { }
-
-        [PropertyOrder(1)]
-        [MultiLanguageTitle("目标类型", "Target Type")]
-        [OnInspectorGUI]
-        public void TypeTitle() { }
-
-        [PropertyOrder(19)]
-        [MultiLanguageTitle("解析操作按钮", "Analyze Button")]
-        [OnInspectorGUI]
-        public void AnalyzeTitle() { }
-
-        [PropertyOrder(24)]
-        [MultiLanguageTitle("生成文档按钮", "Generate Document Buttons")]
-        [ShowIf("CanShowGenerateTitle")]
-        [OnInspectorGUI]
-        public void GenerateTitle() { }
-
-        [PropertyOrder(100)]
-        [MultiLanguageTitle("过程数据", "Process Data")]
-        [OnInspectorGUI]
-        public void Title() { }
-
-        #endregion
 
         #region Analyze Type
 
@@ -372,13 +383,13 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
                 var filePathWithExtensions = folderPath + "/" + targetType.Name + ".md";
                 if (docCategory == DocCategory.ScriptingAPI)
                 {
-                    filePathWithExtensions = folderPath + "/" + targetType.Name + ".api.md";
+                    filePathWithExtensions = folderPath + "/" + targetType.Name + ".md";
                 }
 
                 if (File.Exists(filePathWithExtensions))
                 {
                     if (!EditorUtility.DisplayDialog("提示",
-                            "已经存在该文件，是否重新生成覆盖文档部分，保留 Remarks 部分？", "确认", "取消"))
+                            "已经存在该文件，是否重新生成覆盖文档部分，保留 " + IdentifierTitle + " 之后的内容？", "确认", "取消"))
                     {
                         return;
                     }
@@ -387,6 +398,7 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
                     var remarkStringBuilder = new StringBuilder();
                     if (readAllLines.Length > 0)
                     {
+                        // 首次出现的标记
                         var remarkIndex = Array.FindIndex(readAllLines, line => line.StartsWith(IdentifierTitle));
                         if (remarkIndex >= 0)
                         {
@@ -403,7 +415,6 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
                 File.WriteAllText(filePathWithExtensions,
                     finalStringBuilder.ToString(),
                     Encoding.UTF8);
-                // Debug.Log("文档生成完毕");
                 Instance._thisHasAnalyzedSingle = false;
                 AssetDatabase.Refresh();
                 EditorUtility.OpenWithDefaultApp(filePathWithExtensions);
@@ -414,13 +425,13 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
         {
             var docCategory = Instance.docCategory;
             var markdownCategory = Instance.markdownCategory;
-            var targetTypes = Instance.TempTypeList;
+            var targetTypes = Instance.typeListConfig ? Instance.typeListConfig.Types : Instance.TempTypeList;
             var typeDataList = Instance.typeDataList;
             var folderPath = Instance.folderPath;
 
             if (!Directory.Exists(folderPath))
             {
-                Debug.LogError("请选择有效的目标路径");
+                YuumixLogger.LogError("请选择有效的目标路径");
                 return;
             }
 
@@ -435,8 +446,17 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
                 {
                     for (var i = 0; i < typeDataList.Count; i++)
                     {
-                        EditorUtility.DisplayProgressBar("脚本文档生成", $"正在生成 {targetTypes[i].Name} 文档",
-                            (float)i / typeDataList.Count);
+                        if (i <= 1)
+                        {
+                            EditorUtility.DisplayProgressBar("脚本文档生成", $"正在生成 {targetTypes[i].Name} 文档",
+                                (float)1 / typeDataList.Count);
+                        }
+                        else
+                        {
+                            EditorUtility.DisplayProgressBar("脚本文档生成", $"正在生成 {targetTypes[i].Name} 文档",
+                                (float)i / typeDataList.Count);
+                        }
+
                         var typeData = typeDataList[i];
                         var headerIntroduction = CreateHeaderIntroductionMkDocs(typeData);
                         var constructorsContent = CreateConstructorsContentMkDocs(typeData, docCategory);
@@ -456,7 +476,7 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
                         var filePathWithExtensions = folderPath + "/" + targetTypes[i].Name + ".md";
                         if (docCategory == DocCategory.ScriptingAPI)
                         {
-                            filePathWithExtensions = folderPath + "/" + targetTypes[i].Name + ".api.md";
+                            filePathWithExtensions = folderPath + "/" + targetTypes[i].Name + ".md";
                         }
 
                         if (File.Exists(filePathWithExtensions))
@@ -523,20 +543,31 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
                     $"# `{data.TypeName} {data.TypeCategory.ToString().ToLower(CultureInfo.CurrentCulture)}`");
             }
 
+            sb.AppendLine();
             sb.AppendLine("## Introduction");
-            if (data.NamespaceName.IsNullOrWhiteSpace())
+            if (!data.NamespaceName.IsNullOrWhiteSpace())
             {
                 sb.AppendLine($"- NameSpace: `{data.NamespaceName}`");
             }
 
             sb.AppendLine($"- Assembly: `{data.AssemblyName}`");
+            if (data.SeeAlsoLinks.Length >= 1)
+            {
+                for (var i = 0; i < data.SeeAlsoLinks.Length; i++)
+                {
+                    sb.AppendLine($"- See Also [{i + 1}] : {data.SeeAlsoLinks[i]}");
+                }
+            }
+
             sb.AppendLine();
             sb.AppendLine("``` csharp");
             sb.AppendLine(data.TypeDeclaration);
             sb.AppendLine("```");
+            sb.AppendLine();
             if (!string.IsNullOrEmpty(data.ChineseComment) || !string.IsNullOrEmpty(data.EnglishComment))
             {
                 sb.AppendLine("### Description");
+                sb.AppendLine();
                 if (!string.IsNullOrEmpty(data.ChineseComment))
                 {
                     sb.AppendLine("- " + data.ChineseComment);
@@ -567,26 +598,13 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
                     return sb;
                 }
 
-                sb.AppendLine("## Constructors");
-                sb.AppendLine("| 构造函数 | 注释 | Comment |");
-                sb.AppendLine("| :--- | :--- | :--- |");
-                foreach (var item in data.Constructors.Where(x =>
-                             !x.isObsolete && x.IsAPI))
-                {
-                    sb.AppendLine("| " + $"`{item.fullSignature}`" + " | " + item.chineseComment + " | " +
-                                  item.englishComment + " |");
-                }
+                AppendHeader();
+                AppendMemberLine(sb, data.Constructors.Where(x => !x.isObsolete && x.IsAPI));
             }
             else
             {
-                sb.AppendLine("## Constructors");
-                sb.AppendLine("| 构造函数 | 注释 | Comment |");
-                sb.AppendLine("| :--- | :--- | :--- |");
-                foreach (var item in data.Constructors.Where(x => !x.isObsolete))
-                {
-                    sb.AppendLine("| " + $"`{item.fullSignature}`" + " | " + item.chineseComment + " | " +
-                                  item.englishComment + " |");
-                }
+                AppendHeader();
+                AppendMemberLine(sb, data.Constructors.Where(x => !x.isObsolete));
             }
 
             if (!data.Constructors.Any(x => x.isObsolete))
@@ -596,23 +614,23 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
 
             if (docCategory == DocCategory.ScriptingAPI)
             {
-                foreach (var item in data.Constructors.Where(x => x.isObsolete && x.IsAPI))
-                {
-                    sb.AppendLine("| " + $"`[Obsolete] {item.fullSignature}`" + " | " + item.chineseComment + " | " +
-                                  item.englishComment + " |");
-                }
+                AppendMemberLine(sb, data.Constructors.Where(x => x.isObsolete && x.IsAPI), true);
             }
             else
             {
-                foreach (var item in data.Constructors.Where(x => x.isObsolete))
-                {
-                    sb.AppendLine("| " + $"`[Obsolete] {item.fullSignature}`" + " | " + item.chineseComment + " | " +
-                                  item.englishComment + " |");
-                }
+                AppendMemberLine(sb, data.Constructors.Where(x => x.isObsolete), true);
             }
 
             sb.AppendLine();
             return sb;
+
+            void AppendHeader()
+            {
+                sb.AppendLine("## Constructors");
+                sb.AppendLine();
+                sb.AppendLine("| 构造函数 | 注释 | Comment |");
+                sb.AppendLine("| :--- | :--- | :--- |");
+            }
         }
 
         static StringBuilder CreateCurrentMethodsContentMkDocs(TypeData data, DocCategory docCategory)
@@ -628,30 +646,16 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
                 case DocCategory.ScriptingAPI:
                     if (!data.CurrentMethods.Any(x => x.IsAPI))
                     {
-                        sb.AppendLine();
+                        // YuumixLogger.EditorLog("!data.CurrentMethods.Any(x => x.IsAPI)");
                         return sb;
                     }
 
-                    sb.AppendLine("## Methods");
-                    sb.AppendLine("| 方法 | 注释 | Comment |");
-                    sb.AppendLine("| :--- | :--- | :--- |");
-                    foreach (var item in data.CurrentMethods.Where(x => !x.isObsolete && x.IsAPI))
-                    {
-                        sb.AppendLine("| " + $"`{item.fullSignature}`" + " | " + item.chineseComment + " | " +
-                                      item.englishComment + " |");
-                    }
-
+                    AppendHeader();
+                    AppendMemberLine(sb, data.CurrentMethods.Where(x => !x.isObsolete && x.IsAPI));
                     break;
                 case DocCategory.CompleteReferences:
-                    sb.AppendLine("## Methods");
-                    sb.AppendLine("| 方法 | 注释 | Comment |");
-                    sb.AppendLine("| :--- | :--- | :--- |");
-                    foreach (var item in data.CurrentMethods.Where(x => !x.isObsolete))
-                    {
-                        sb.AppendLine("| " + $"`{item.fullSignature}`" + " | " + item.chineseComment + " | " +
-                                      item.englishComment + " |");
-                    }
-
+                    AppendHeader();
+                    AppendMemberLine(sb, data.CurrentMethods.Where(x => !x.isObsolete));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(docCategory), docCategory, null);
@@ -659,6 +663,7 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
 
             if (!data.CurrentMethods.Any(x => x.isObsolete))
             {
+                // YuumixLogger.EditorLog("!data.CurrentMethods.Any(x => x.isObsolete)");
                 sb.AppendLine();
                 return sb;
             }
@@ -666,22 +671,10 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
             switch (docCategory)
             {
                 case DocCategory.ScriptingAPI:
-                    foreach (var item in data.CurrentMethods.Where(x => x.isObsolete))
-                    {
-                        sb.AppendLine("| " + $"`[Obsolete] {item.fullSignature}`" + " | " + item.chineseComment +
-                                      " | " +
-                                      item.englishComment + " |");
-                    }
-
+                    AppendMemberLine(sb, data.CurrentMethods.Where(x => x.isObsolete && x.IsAPI), true);
                     break;
                 case DocCategory.CompleteReferences:
-                    foreach (var item in data.CurrentMethods.Where(x => x.isObsolete && x.IsAPI))
-                    {
-                        sb.AppendLine("| " + $"`[Obsolete] {item.fullSignature}`" + " | " + item.chineseComment +
-                                      " | " +
-                                      item.englishComment + " |");
-                    }
-
+                    AppendMemberLine(sb, data.CurrentMethods.Where(x => x.isObsolete), true);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(docCategory), docCategory, null);
@@ -689,6 +682,14 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
 
             sb.AppendLine();
             return sb;
+
+            void AppendHeader()
+            {
+                sb.AppendLine("## Methods");
+                sb.AppendLine();
+                sb.AppendLine("| 方法 | 注释 | Comment |");
+                sb.AppendLine("| :--- | :--- | :--- |");
+            }
         }
 
         static StringBuilder CreateCurrentEventsContentMkDocs(TypeData data, DocCategory docCategory)
@@ -704,30 +705,16 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
                 case DocCategory.ScriptingAPI:
                     if (!data.CurrentEvents.Any(x => x.IsAPI))
                     {
-                        sb.AppendLine();
+                        // YuumixLogger.EditorLog("!data.CurrentEvents.Any(x => x.IsAPI)");
                         return sb;
                     }
 
-                    sb.AppendLine("## Events");
-                    sb.AppendLine("| 事件 | 注释 | Comment |");
-                    sb.AppendLine("| :--- | :--- | :--- |");
-                    foreach (var item in data.CurrentEvents.Where(x => !x.isObsolete && x.IsAPI))
-                    {
-                        sb.AppendLine("| " + $"`{item.fullSignature}`" + " | " + item.chineseComment + " | " +
-                                      item.englishComment + " |");
-                    }
-
+                    AppendHeader();
+                    AppendMemberLine(sb, data.CurrentEvents.Where(x => !x.isObsolete && x.IsAPI));
                     break;
                 case DocCategory.CompleteReferences:
-                    sb.AppendLine("## Events");
-                    sb.AppendLine("| 事件 | 注释 | Comment |");
-                    sb.AppendLine("| :--- | :--- | :--- |");
-                    foreach (var item in data.CurrentEvents.Where(x => !x.isObsolete))
-                    {
-                        sb.AppendLine("| " + $"`{item.fullSignature}`" + " | " + item.chineseComment + " | " +
-                                      item.englishComment + " |");
-                    }
-
+                    AppendHeader();
+                    AppendMemberLine(sb, data.CurrentEvents.Where(x => !x.isObsolete));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(docCategory), docCategory, null);
@@ -735,6 +722,7 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
 
             if (!data.CurrentEvents.Any(x => x.isObsolete))
             {
+                // YuumixLogger.EditorLog("!data.CurrentEvents.Any(x => x.isObsolete)");
                 sb.AppendLine();
                 return sb;
             }
@@ -742,22 +730,10 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
             switch (docCategory)
             {
                 case DocCategory.ScriptingAPI:
-                    foreach (var item in data.CurrentEvents.Where(x => x.isObsolete && x.IsAPI))
-                    {
-                        sb.AppendLine("| " + $"`[Obsolete] {item.fullSignature}`" + " | " + item.chineseComment +
-                                      " | " +
-                                      item.englishComment + " |");
-                    }
-
+                    AppendMemberLine(sb, data.CurrentEvents.Where(x => x.isObsolete && x.IsAPI), true);
                     break;
                 case DocCategory.CompleteReferences:
-                    foreach (var item in data.CurrentEvents.Where(x => x.isObsolete))
-                    {
-                        sb.AppendLine("| " + $"`[Obsolete] {item.fullSignature}`" + " | " + item.chineseComment +
-                                      " | " +
-                                      item.englishComment + " |");
-                    }
-
+                    AppendMemberLine(sb, data.CurrentEvents.Where(x => x.isObsolete), true);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(docCategory), docCategory, null);
@@ -765,6 +741,14 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
 
             sb.AppendLine();
             return sb;
+
+            void AppendHeader()
+            {
+                sb.AppendLine("## Events");
+                sb.AppendLine();
+                sb.AppendLine("| 事件 | 注释 | Comment |");
+                sb.AppendLine("| :--- | :--- | :--- |");
+            }
         }
 
         static StringBuilder CreateCurrentPropertiesContentMkDocs(TypeData data, DocCategory docCategory)
@@ -780,30 +764,16 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
                 case DocCategory.ScriptingAPI:
                     if (!data.CurrentProperties.Any(x => x.IsAPI))
                     {
-                        sb.AppendLine();
+                        // YuumixLogger.EditorLog("!data.CurrentProperties.Any(x => x.IsAPI)");
                         return sb;
                     }
 
-                    sb.AppendLine("## Properties");
-                    sb.AppendLine("| 属性 | 注释 | Comment |");
-                    sb.AppendLine("| :--- | :--- | :--- |");
-                    foreach (var item in data.CurrentProperties.Where(x => !x.isObsolete && x.IsAPI))
-                    {
-                        sb.AppendLine("| " + $"`{item.fullSignature}`" + " | " + item.chineseComment + " | " +
-                                      item.englishComment + " |");
-                    }
-
+                    AppendHeader();
+                    AppendMemberLine(sb, data.CurrentProperties.Where(x => !x.isObsolete && x.IsAPI));
                     break;
                 case DocCategory.CompleteReferences:
-                    sb.AppendLine("## Properties");
-                    sb.AppendLine("| 属性 | 注释 | Comment |");
-                    sb.AppendLine("| :--- | :--- | :--- |");
-                    foreach (var item in data.CurrentProperties.Where(x => !x.isObsolete))
-                    {
-                        sb.AppendLine("| " + $"`{item.fullSignature}`" + " | " + item.chineseComment + " | " +
-                                      item.englishComment + " |");
-                    }
-
+                    AppendHeader();
+                    AppendMemberLine(sb, data.CurrentProperties.Where(x => !x.isObsolete));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(docCategory), docCategory, null);
@@ -811,6 +781,7 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
 
             if (!data.CurrentProperties.Any(x => x.isObsolete))
             {
+                // YuumixLogger.EditorLog("!data.CurrentProperties.Any(x => x.isObsolete)");
                 sb.AppendLine();
                 return sb;
             }
@@ -818,22 +789,10 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
             switch (docCategory)
             {
                 case DocCategory.ScriptingAPI:
-                    foreach (var item in data.CurrentProperties.Where(x => x.isObsolete && x.IsAPI))
-                    {
-                        sb.AppendLine("| " + $"`[Obsolete] {item.fullSignature}`" + " | " + item.chineseComment +
-                                      " | " +
-                                      item.englishComment + " |");
-                    }
-
+                    AppendMemberLine(sb, data.CurrentProperties.Where(x => x.isObsolete && x.IsAPI), true);
                     break;
                 case DocCategory.CompleteReferences:
-                    foreach (var item in data.CurrentProperties.Where(x => x.isObsolete))
-                    {
-                        sb.AppendLine("| " + $"`[Obsolete] {item.fullSignature}`" + " | " + item.chineseComment +
-                                      " | " +
-                                      item.englishComment + " |");
-                    }
-
+                    AppendMemberLine(sb, data.CurrentProperties.Where(x => x.isObsolete), true);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(docCategory), docCategory, null);
@@ -841,6 +800,14 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
 
             sb.AppendLine();
             return sb;
+
+            void AppendHeader()
+            {
+                sb.AppendLine("## Properties");
+                sb.AppendLine();
+                sb.AppendLine("| 属性 | 注释 | Comment |");
+                sb.AppendLine("| :--- | :--- | :--- |");
+            }
         }
 
         static StringBuilder CreateCurrentFieldsContentMkDocs(TypeData data, DocCategory docCategory)
@@ -856,30 +823,16 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
                 case DocCategory.ScriptingAPI:
                     if (!data.CurrentFields.Any(x => x.IsAPI))
                     {
-                        sb.AppendLine();
+                        // YuumixLogger.EditorLog("!data.CurrentFields.Any(x => x.IsAPI)");
                         return sb;
                     }
 
-                    sb.AppendLine("## Fields");
-                    sb.AppendLine("| 字段 | 注释 | Comment |");
-                    sb.AppendLine("| :--- | :--- | :--- |");
-                    foreach (var item in data.CurrentFields.Where(x => !x.isObsolete && x.IsAPI))
-                    {
-                        sb.AppendLine("| " + $"`{item.fullSignature}`" + " | " + item.chineseComment + " | " +
-                                      item.englishComment + " |");
-                    }
-
+                    AppendHeader();
+                    AppendMemberLine(sb, data.CurrentFields.Where(x => !x.isObsolete && x.IsAPI));
                     break;
                 case DocCategory.CompleteReferences:
-                    sb.AppendLine("## Fields");
-                    sb.AppendLine("| 字段 | 注释 | Comment |");
-                    sb.AppendLine("| :--- | :--- | :--- |");
-                    foreach (var item in data.CurrentFields.Where(x => !x.isObsolete))
-                    {
-                        sb.AppendLine("| " + $"`{item.fullSignature}`" + " | " + item.chineseComment + " | " +
-                                      item.englishComment + " |");
-                    }
-
+                    AppendHeader();
+                    AppendMemberLine(sb, data.CurrentFields.Where(x => !x.isObsolete));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(docCategory), docCategory, null);
@@ -887,6 +840,7 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
 
             if (!data.CurrentFields.Any(x => x.isObsolete))
             {
+                // YuumixLogger.EditorLog("!data.CurrentFields.Any(x => x.isObsolete)");
                 sb.AppendLine();
                 return sb;
             }
@@ -894,22 +848,10 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
             switch (docCategory)
             {
                 case DocCategory.ScriptingAPI:
-                    foreach (var item in data.CurrentFields.Where(x => x.isObsolete && x.IsAPI))
-                    {
-                        sb.AppendLine("| " + $"`[Obsolete] {item.fullSignature}`" + " | " + item.chineseComment +
-                                      " | " +
-                                      item.englishComment + " |");
-                    }
-
+                    AppendMemberLine(sb, data.CurrentFields.Where(x => x.isObsolete && x.IsAPI), true);
                     break;
                 case DocCategory.CompleteReferences:
-                    foreach (var item in data.CurrentFields.Where(x => x.isObsolete))
-                    {
-                        sb.AppendLine("| " + $"`[Obsolete] {item.fullSignature}`" + " | " + item.chineseComment +
-                                      " | " +
-                                      item.englishComment + " |");
-                    }
-
+                    AppendMemberLine(sb, data.CurrentFields.Where(x => x.isObsolete), true);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(docCategory), docCategory, null);
@@ -917,13 +859,20 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
 
             sb.AppendLine();
             return sb;
+
+            void AppendHeader()
+            {
+                sb.AppendLine("## Fields");
+                sb.AppendLine();
+                sb.AppendLine("| 字段 | 注释 | Comment |");
+                sb.AppendLine("| :--- | :--- | :--- |");
+            }
         }
 
         static StringBuilder CreateInheritedContentMkDocs(TypeData data, DocCategory docCategory)
         {
             var sb = new StringBuilder();
-            if (data.InheritedMethods.Length <= 0 && data.InheritedProperties.Length <= 0 &&
-                data.InheritedEvents.Length <= 0 && data.InheritedFields.Length <= 0)
+            if (IsNonExistInheritedMember(data))
             {
                 return sb;
             }
@@ -931,77 +880,26 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
             switch (docCategory)
             {
                 case DocCategory.ScriptingAPI:
-                    if (!data.InheritedMethods.Any(x => x.IsAPI) && !data.InheritedEvents.Any(x => x.IsAPI) &&
-                        !data.InheritedProperties.Any(x => x.IsAPI) && !data.InheritedFields.Any(x => x.IsAPI))
+                    if (IsNonExistAPIMember(data))
                     {
-                        sb.AppendLine();
+                        // YuumixLogger.EditorLog("IsNonExistAPIMember(data)");
                         return sb;
                     }
 
-                    sb.AppendLine("## Inherited Members");
-                    sb.AppendLine("| 成员 | 注释 | 声明此方法的类 |");
-                    sb.AppendLine("| :--- | :--- | :--- |");
-                    foreach (var item in data.InheritedMethods.Where(x => !x.isObsolete && x.IsAPI))
-                    {
-                        sb.AppendLine("| " + $"`{item.fullSignature}`" + " | " + item.chineseComment + " | " +
-                                      $"`{item.declaringType}`" + " |");
-                    }
-
-                    foreach (var item in data.InheritedEvents.Where(x => !x.isObsolete && x.IsAPI))
-                    {
-                        sb.AppendLine("| " + $"`{item.fullSignature}`" + " | " + item.chineseComment + " | " +
-                                      $"`{item.declaringType}`" + " |");
-                    }
-
-                    foreach (var item in data.InheritedProperties.Where(x => !x.isObsolete && x.IsAPI))
-                    {
-                        sb.AppendLine("| " + $"`{item.fullSignature}`" + " | " + item.chineseComment + " | " +
-                                      $"`{item.declaringType}`" + " |");
-                    }
-
-                    foreach (var item in data.InheritedFields.Where(x => !x.isObsolete && x.IsAPI))
-                    {
-                        sb.AppendLine("| " + $"`{item.fullSignature}`" + " | " + item.chineseComment + " | " +
-                                      $"`{item.declaringType}`" + " |");
-                    }
-
+                    AppendInheritedHeader(sb);
+                    CreateInheritedMemberString(data, sb, x => !x.isObsolete && x.IsAPI);
                     break;
                 case DocCategory.CompleteReferences:
-                    sb.AppendLine("## Inherited Members");
-                    sb.AppendLine("| 成员 | 注释 | 声明此方法的类 |");
-                    sb.AppendLine("| :--- | :--- | :--- |");
-                    foreach (var item in data.InheritedMethods.Where(x => !x.isObsolete))
-                    {
-                        sb.AppendLine("| " + $"`{item.fullSignature}`" + " | " + item.chineseComment + " | " +
-                                      $"`{item.declaringType}`" + " |");
-                    }
-
-                    foreach (var item in data.InheritedEvents.Where(x => !x.isObsolete))
-                    {
-                        sb.AppendLine("| " + $"`{item.fullSignature}`" + " | " + item.chineseComment + " | " +
-                                      $"`{item.declaringType}`" + " |");
-                    }
-
-                    foreach (var item in data.InheritedProperties.Where(x => !x.isObsolete))
-                    {
-                        sb.AppendLine("| " + $"`{item.fullSignature}`" + " | " + item.chineseComment + " | " +
-                                      $"`{item.declaringType}`" + " |");
-                    }
-
-                    foreach (var item in data.InheritedFields.Where(x => !x.isObsolete))
-                    {
-                        sb.AppendLine("| " + $"`{item.fullSignature}`" + " | " + item.chineseComment + " | " +
-                                      $"`{item.declaringType}`" + " |");
-                    }
-
+                    AppendInheritedHeader(sb);
+                    CreateInheritedMemberString(data, sb, x => !x.isObsolete);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(docCategory), docCategory, null);
             }
 
-            if (!data.InheritedMethods.Any(x => x.isObsolete) && !data.InheritedEvents.Any(x => x.isObsolete) &&
-                !data.InheritedProperties.Any(x => x.isObsolete) && !data.InheritedFields.Any(x => x.isObsolete))
+            if (IsNonExistObsoleteInheritedMember(data))
             {
+                // YuumixLogger.EditorLog("IsNonExistObsoleteInheritedMember(data)");
                 sb.AppendLine();
                 return sb;
             }
@@ -1009,64 +907,10 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
             switch (docCategory)
             {
                 case DocCategory.ScriptingAPI:
-                    foreach (var item in data.InheritedMethods.Where(x => x.isObsolete && x.IsAPI))
-                    {
-                        sb.AppendLine("| " + $"`[Obsolete] {item.fullSignature}`" + " | " + item.chineseComment +
-                                      " | " +
-                                      $"`{item.declaringType}`" + " |");
-                    }
-
-                    foreach (var item in data.InheritedEvents.Where(x => x.isObsolete && x.IsAPI))
-                    {
-                        sb.AppendLine("| " + $"`[Obsolete] {item.fullSignature}`" + " | " + item.chineseComment +
-                                      " | " +
-                                      $"`{item.declaringType}`" + " |");
-                    }
-
-                    foreach (var item in data.InheritedProperties.Where(x => x.isObsolete && x.IsAPI))
-                    {
-                        sb.AppendLine("| " + $"`[Obsolete] {item.fullSignature}`" + " | " + item.chineseComment +
-                                      " | " +
-                                      $"`{item.declaringType}`" + " |");
-                    }
-
-                    foreach (var item in data.InheritedFields.Where(x => x.isObsolete && x.IsAPI))
-                    {
-                        sb.AppendLine("| " + $"`[Obsolete] {item.fullSignature}`" + " | " + item.chineseComment +
-                                      " | " +
-                                      $"`{item.declaringType}`" + " |");
-                    }
-
+                    CreateInheritedMemberString(data, sb, x => x.isObsolete && x.IsAPI, true);
                     break;
                 case DocCategory.CompleteReferences:
-                    foreach (var item in data.InheritedMethods.Where(x => x.isObsolete))
-                    {
-                        sb.AppendLine("| " + $"`[Obsolete] {item.fullSignature}`" + " | " + item.chineseComment +
-                                      " | " +
-                                      $"`{item.declaringType}`" + " |");
-                    }
-
-                    foreach (var item in data.InheritedEvents.Where(x => x.isObsolete))
-                    {
-                        sb.AppendLine("| " + $"`[Obsolete] {item.fullSignature}`" + " | " + item.chineseComment +
-                                      " | " +
-                                      $"`{item.declaringType}`" + " |");
-                    }
-
-                    foreach (var item in data.InheritedProperties.Where(x => x.isObsolete))
-                    {
-                        sb.AppendLine("| " + $"`[Obsolete] {item.fullSignature}`" + " | " + item.chineseComment +
-                                      " | " +
-                                      $"`{item.declaringType}`" + " |");
-                    }
-
-                    foreach (var item in data.InheritedFields.Where(x => x.isObsolete))
-                    {
-                        sb.AppendLine("| " + $"`[Obsolete] {item.fullSignature}`" + " | " + item.chineseComment +
-                                      " | " +
-                                      $"`{item.declaringType}`" + " |");
-                    }
-
+                    CreateInheritedMemberString(data, sb, x => x.isObsolete, true);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(docCategory), docCategory, null);
@@ -1074,6 +918,76 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
 
             sb.AppendLine();
             return sb;
+
+            bool IsNonExistInheritedMember(TypeData dataArg)
+            {
+                return dataArg.InheritedMethods.Length <= 0 && dataArg.InheritedProperties.Length <= 0 &&
+                       dataArg.InheritedEvents.Length <= 0 && dataArg.InheritedFields.Length <= 0;
+            }
+
+            bool IsNonExistObsoleteInheritedMember(TypeData dataArg)
+            {
+                return !dataArg.InheritedMethods.Any(x => x.isObsolete) &&
+                       !dataArg.InheritedEvents.Any(x => x.isObsolete) &&
+                       !dataArg.InheritedProperties.Any(x => x.isObsolete) &&
+                       !dataArg.InheritedFields.Any(x => x.isObsolete);
+            }
+
+            void AppendInheritedHeader(StringBuilder stringBuilder)
+            {
+                stringBuilder.AppendLine("## Inherited Members");
+                stringBuilder.AppendLine();
+                stringBuilder.AppendLine("| 成员 | 注释 | 声明此方法的类 |");
+                stringBuilder.AppendLine("| :--- | :--- | :--- |");
+            }
+
+            bool IsNonExistAPIMember(TypeData dataArg)
+            {
+                return !dataArg.InheritedMethods.Any(x => x.IsAPI) && !dataArg.InheritedEvents.Any(x => x.IsAPI) &&
+                       !dataArg.InheritedProperties.Any(x => x.IsAPI) && !dataArg.InheritedFields.Any(x => x.IsAPI);
+            }
+        }
+
+        static void CreateInheritedMemberString(TypeData data, StringBuilder sb,
+            Func<MemberData, bool> filterPredicate,
+            bool addObsoleteSign = false)
+        {
+            AppendInheritedMemberLine(sb, data.InheritedMethods.Where(filterPredicate), addObsoleteSign);
+            AppendInheritedMemberLine(sb, data.InheritedEvents.Where(filterPredicate), addObsoleteSign);
+            AppendInheritedMemberLine(sb, data.InheritedProperties.Where(filterPredicate), addObsoleteSign);
+            AppendInheritedMemberLine(sb, data.InheritedFields.Where(filterPredicate), addObsoleteSign);
+        }
+
+        static void AppendMemberLine(StringBuilder sb, IEnumerable<MemberData> items,
+            bool addObsoleteSign = false)
+        {
+            foreach (var item in items)
+            {
+                var fullSignature = item.fullSignature;
+                if (addObsoleteSign)
+                {
+                    fullSignature = $"[Obsolete] {fullSignature}";
+                }
+
+                sb.AppendLine("| " + $"`{fullSignature}`" + " | " + item.chineseComment + " | " +
+                              $"`{item.englishComment}`" + " |");
+            }
+        }
+
+        static void AppendInheritedMemberLine(StringBuilder sb, IEnumerable<MemberData> items,
+            bool addObsoleteSign = false)
+        {
+            foreach (var item in items)
+            {
+                var fullSignature = item.fullSignature;
+                if (addObsoleteSign)
+                {
+                    fullSignature = $"[Obsolete] {fullSignature}";
+                }
+
+                sb.AppendLine("| " + $"`{fullSignature}`" + " | " + item.chineseComment + " | " +
+                              $"`{item.declaringType}`" + " |");
+            }
         }
 
         #endregion
