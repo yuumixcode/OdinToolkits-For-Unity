@@ -22,17 +22,11 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes:
     - Name: TargetType
-      Entry: 7
-      Data: 0|System.RuntimeType, mscorlib
-    - Name: 
-      Entry: 1
-      Data: Yuumix.OdinToolkits.Common.Logger.YuumixLogger, Assembly-CSharp-firstpass
-    - Name: 
-      Entry: 8
+      Entry: 6
       Data: 
     - Name: TempTypeList
       Entry: 7
-      Data: 1|System.Collections.Generic.List`1[[System.Type, mscorlib]], mscorlib
+      Data: 0|System.Collections.Generic.List`1[[System.Type, mscorlib]], mscorlib
     - Name: 
       Entry: 12
       Data: 0
@@ -45,7 +39,7 @@ MonoBehaviour:
   header: {}
   docCategory: 0
   markdownCategory: 0
-  typeListConfig: {fileID: 11400000, guid: 0319442ea135c4a0c94dbfe54f88e588, type: 2}
-  storageTypeListConfigSOFolderPath: Assets/Plugins/Yuumix/Odin Toolkits/Common/Editor/InternalTypeListConfigSO
-  folderPath: /Users/yuumi/OpenSource/yuumi-zeus.github.io/docs/ScriptingAPI/Common/Logger
+  typeListConfig: {fileID: 0}
+  storageTypeListConfigSOFolderPath: Assets/OdinToolkitsData/TypeListConfigSO
+  folderPath: Assets/OdinToolkitsData/Editor/Documents/
   typeDataList: []
