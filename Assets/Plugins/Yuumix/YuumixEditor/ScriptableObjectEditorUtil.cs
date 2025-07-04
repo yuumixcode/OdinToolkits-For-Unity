@@ -78,6 +78,7 @@ namespace Yuumix.YuumixEditor
 
             #endregion
 
+            PathEditorUtil.EnsureFolderRecursively(relativeFolderPath);
             var filePath = relativeFolderPath + "/" + typeof(T).Name + "[AutoGen]" + ".asset";
             wantToAsset = ScriptableObject.CreateInstance<T>();
             AssetDatabase.CreateAsset(wantToAsset, filePath);

@@ -6,9 +6,8 @@ using System.Diagnostics;
 namespace Yuumix.OdinToolkits.Common.InspectorMultiLanguage
 {
     /// <summary>
-    /// 此特性可以兼容 Odin Inspector 的绘制系统，
+    /// 多语言 Button 特性，依赖并兼容 Odin Inspector 的绘制系统。
     /// </summary>
-    /// <remarks>已知问题：但是无法实时切换语言，切换语言后需要重新打开面板才能触发，解决方案需要重新触发当前面板的 Processor</remarks>
     [AttributeUsage(AttributeTargets.All, Inherited = false)]
     [Conditional("UNITY_EDITOR")]
     public class MultiLanguageButtonAttribute : ShowInInspectorAttribute
@@ -96,6 +95,7 @@ namespace Yuumix.OdinToolkits.Common.InspectorMultiLanguage
             return button;
         }
 
+        [Obsolete]
         public ButtonAttribute CreateEnglishButton()
         {
             var button = new ButtonAttribute(EnglishName, ButtonSize)

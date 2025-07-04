@@ -20,7 +20,7 @@ namespace Yuumix.OdinToolkits.Samples.TestSingleton
             "创建新的物体并挂载脚本时，立刻触发 Awake，然后再进行 get 方法的下一步。" +
             "测试过程可以直接运行此场景";
 
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        // [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         public static void StartSingleton()
         {
             _ = Instance;

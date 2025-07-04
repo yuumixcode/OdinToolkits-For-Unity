@@ -44,7 +44,7 @@ namespace Yuumix.OdinToolkits.Common.InspectorMultiLanguage
         [PropertySpace(5)]
         [MultiLanguageButtonWidgetConfig("切换为英语", "Switch To Chinese", buttonHeight: 22,
             icon: SdfIconType.Translate)]
-        public MultiLanguageButtonWidget switchEditorLanguage = new MultiLanguageButtonWidget(SwitchLanguage);
+        public MultiLanguageButtonProperty switchEditorLanguage = new MultiLanguageButtonProperty(SwitchLanguage);
 
         [BoxGroup("Header")]
         [HorizontalGroup("Header/Hori", 0.24f)]

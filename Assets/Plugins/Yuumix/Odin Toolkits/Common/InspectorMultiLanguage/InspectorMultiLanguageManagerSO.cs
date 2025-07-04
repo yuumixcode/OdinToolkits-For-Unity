@@ -1,11 +1,11 @@
 using Sirenix.OdinInspector;
 using System;
+using System.Reflection;
 using UnityEngine;
-using Yuumix.OdinToolkits.Common;
 #if UNITY_EDITOR
-using Sirenix.Utilities.Editor;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEditor;
-using UnityEditor.Callbacks;
 #endif
 
 namespace Yuumix.OdinToolkits.Common.InspectorMultiLanguage
@@ -43,7 +43,8 @@ namespace Yuumix.OdinToolkits.Common.InspectorMultiLanguage
 
                 _currentLanguage = value;
                 OnLanguageChange?.Invoke();
-                RefreshEditor();
+                CollectActiveInspectors();
+                OnDelayCallAction();
             }
         }
 
@@ -52,6 +53,13 @@ namespace Yuumix.OdinToolkits.Common.InspectorMultiLanguage
         public static bool IsChinese => Instance.CurrentLanguage == LanguageType.Chinese;
         public static bool IsEnglish => Instance.CurrentLanguage == LanguageType.English;
 
+        static Type _inspectorWindowType = typeof(Editor).Assembly.GetType("UnityEditor.InspectorWindow");
+
+        static FieldInfo _allInspectorsFieldInfo =
+            _inspectorWindowType.GetField("m_AllInspectors", BindingFlags.NonPublic | BindingFlags.Static);
+
+        static readonly List<EditorWindow> ActiveInspectors = new List<EditorWindow>();
+
         public void OdinToolkitsReset()
         {
             CurrentLanguage = LanguageType.Chinese;
@@ -59,50 +67,62 @@ namespace Yuumix.OdinToolkits.Common.InspectorMultiLanguage
 
         public static event Action OnLanguageChange;
 
-        // Todo: 怎么样在语言改变后刷新所有窗口？或者是刷新当前窗口？以及 InspectorWindow 的当前显示的类
-        static void RefreshEditor()
-        {
-#if UNITY_EDITOR
-            var inspectorType = typeof(Editor).Assembly.GetType("UnityEditor.InspectorWindow");
-            foreach (var inspector in (EditorWindow[])Resources.FindObjectsOfTypeAll(inspectorType))
-            {
-                inspector?.Repaint();
-            }
-
-            if (EditorWindow.focusedWindow)
-            {
-                EditorWindow.focusedWindow.Repaint();
-            }
-
-            var curr = GUIHelper.CurrentWindow;
-            if (curr)
-            {
-                curr.Repaint();
-            }
-#endif
-        }
-
         #region Handle Event Subscribe
 
 #if UNITY_EDITOR
-        [DidReloadScripts]
-        static void ClearListener()
-        {
-            OnLanguageChange = null;
-        }
-
         [InitializeOnLoadMethod]
         static void Initialize()
         {
+            // 监听编辑器更新，处理延迟重绘
+            EditorApplication.delayCall -= OnDelayCallAction;
+            EditorApplication.delayCall += OnDelayCallAction;
+            // 添加窗口焦点变更回调
+            EditorApplication.focusChanged -= EditorApplicationOnfocusChanged();
+            EditorApplication.focusChanged += EditorApplicationOnfocusChanged();
+            Selection.selectionChanged -= CollectActiveInspectors;
+            Selection.selectionChanged += CollectActiveInspectors;
             EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
             EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
+        }
+
+        static Action<bool> EditorApplicationOnfocusChanged()
+        {
+            return hasFocus =>
+            {
+                if (hasFocus)
+                {
+                    CollectActiveInspectors();
+                }
+            };
+        }
+
+        static void CollectActiveInspectors()
+        {
+            if (_allInspectorsFieldInfo == null)
+            {
+                return;
+            }
+
+            var windows = (IEnumerable)_allInspectorsFieldInfo.GetValue(_inspectorWindowType);
+            foreach (EditorWindow window in windows)
+            {
+                ActiveInspectors.Add(window);
+            }
+        }
+
+        static void OnDelayCallAction()
+        {
+            foreach (var window in ActiveInspectors)
+            {
+                window.Repaint();
+            }
         }
 
         static void OnPlayModeStateChanged(PlayModeStateChange state)
         {
             if (state == PlayModeStateChange.EnteredPlayMode)
             {
-                ClearListener();
+                OnLanguageChange = null;
             }
         }
 #endif

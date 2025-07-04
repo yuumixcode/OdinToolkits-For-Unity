@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Yuumix.OdinToolkits.Common.InspectorMultiLanguage
 {
-    [AttributeUsage(AttributeTargets.Field)]
+    [AttributeUsage(AttributeTargets.Field|AttributeTargets.Property)]
     public class MultiLanguageDisplayWidgetConfigAttribute : Attribute
     {
         /// <summary>

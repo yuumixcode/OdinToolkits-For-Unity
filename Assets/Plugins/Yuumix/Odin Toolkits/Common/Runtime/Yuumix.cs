@@ -75,7 +75,7 @@ namespace Yuumix.OdinToolkits.Common
             if (!_odinToolkitsRuntimeConfig)
             {
                 YuumixLogger.EditorLogError("OdinToolkitsRuntimeConfig 配置资源加载失败，需要检查 Resources 路径！",
-                    prefix: "Odin Toolkits");
+                    prefix: "[Yuumix Error]");
             }
         }
 

@@ -1,7 +1,8 @@
 using Sirenix.OdinInspector.Editor;
+using Sirenix.Utilities;
+using Sirenix.Utilities.Editor;
 using System;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Common.Editor;
 
@@ -29,10 +30,13 @@ namespace Yuumix.OdinToolkits.ThirdParty.ResolvedParametersOverview.Schwapo.Edit
         }
 
         // [MenuItem("Tools/Odin Inspector/Resolved Parameters Overview")]
-        [MenuItem(MenuItemGlobalSettings.ResolvedParametersMenuItemName, false, MenuItemGlobalSettings.ResolvedParametersPriority)]
+        // [MenuItem(MenuItemGlobalSettings.ResolvedParametersMenuItemName, false, MenuItemGlobalSettings.ResolvedParametersPriority)]
         public static void Open()
         {
             _window = GetWindow<ResolvedParametersOverviewWindow>(MenuItemGlobalSettings.ResolvedParametersOverviewWindowName);
+            _window.position = GUIHelper.GetEditorWindowRect().AlignCenter(800, 600);
+            _window.minSize = new Vector2(500, 500);
+            _window.ShowUtility();
         }
 
         protected override void Initialize()

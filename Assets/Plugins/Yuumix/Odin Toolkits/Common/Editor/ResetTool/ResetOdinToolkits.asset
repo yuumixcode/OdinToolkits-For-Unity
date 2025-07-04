@@ -21,4 +21,8 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  wantToResetSOList: []
+  wantToResetSOList:
+  - {fileID: 11400000, guid: d428d900147a147ce96c5fc376c85418, type: 2}
+  - {fileID: 11400000, guid: 45065b45c44e8479f96eeaea9f2e8879, type: 2}
+  - {fileID: 11400000, guid: c73c4db75b0704e9591e575dcda678fa, type: 2}
+  - {fileID: 11400000, guid: a53e69d6721334118be33aac348d86ca, type: 2}

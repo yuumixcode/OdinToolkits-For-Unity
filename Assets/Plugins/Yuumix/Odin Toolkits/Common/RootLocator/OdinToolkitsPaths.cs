@@ -14,10 +14,9 @@ namespace Yuumix.OdinToolkits.Common.RootLocator
     /// </summary>
     public static class OdinToolkitsPaths
     {
+        public const string OdinToolkitsAnyDataRootFolder = "Assets/OdinToolkitsData";
         const string RootFolderName = "Odin Toolkits";
         const string OdinToolkitsRootPathKey = "OdinToolkitsRootPath";
-
-        public const string OdinToolkitsAnyDataRootFolder = "Assets/OdinToolkitsData";
 
         /// <summary>
         /// OdinToolkits 相对路径，"Assets/.../OdinToolkits"
@@ -55,6 +54,7 @@ namespace Yuumix.OdinToolkits.Common.RootLocator
             SetFolderPath();
             return EditorPrefs.GetString(OdinToolkitsRootPathKey);
 #else
+            Debug.LogWarning("[OdinToolkitsPaths.GetRootPath()] 方法仅用于编辑器阶段，运行时调用无效");
             return "仅用于编辑器阶段方法，运行时调用无效";
 #endif
         }

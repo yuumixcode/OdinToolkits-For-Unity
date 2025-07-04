@@ -8,15 +8,23 @@ using Yuumix.OdinToolkits.Common.InspectorMultiLanguage;
 
 namespace Yuumix.OdinToolkits.Common.Editor
 {
-    [Searchable]
     public class HelpWindow : OdinEditorWindow
     {
-        [MultiLanguageButtonWidgetConfig("https://github.com/Yuumi-Zeus/OdinToolkits-For-Unity",
+        [MultiLanguageButtonWidgetConfig("打开 GitHub 仓库：https://github.com/Yuumi-Zeus/OdinToolkits-For-Unity",
+            "Open GitHub Repo: https://github.com/Yuumi-Zeus/OdinToolkits-For-Unity",
             buttonSize: ButtonSizes.Large, icon: SdfIconType.Github)]
-        public MultiLanguageButtonWidget gitHubButton = new MultiLanguageButtonWidget(() =>
+        public MultiLanguageButtonProperty gitHubButton = new MultiLanguageButtonProperty(() =>
         {
             Application.OpenURL("https://github.com/Yuumi-Zeus/OdinToolkits-For-Unity");
         });
+
+        [PropertyOrder(-1)]
+        [MultiLanguageButton("打开 GitHub 仓库",
+            "Open GitHub Repository")]
+        public void OpenGitHub()
+        {
+            Application.OpenURL("https://github.com/Yuumi-Zeus/OdinToolkits-For-Unity");
+        }
 
         protected override void OnEnable()
         {
@@ -29,15 +37,9 @@ namespace Yuumix.OdinToolkits.Common.Editor
         public static void ShowWindow()
         {
             var window = GetWindow<HelpWindow>();
-            if (InspectorMultiLanguageManagerSO.IsChinese)
-            {
-                window.titleContent = new GUIContent(MenuItemGlobalSettings.HelpWindowNameCn);
-            }
-            else if (InspectorMultiLanguageManagerSO.IsEnglish)
-            {
-                window.titleContent = new GUIContent(MenuItemGlobalSettings.HelpWindowNameEn);
-            }
-
+            var multiLanguageData = new MultiLanguageData(MenuItemGlobalSettings.HelpWindowNameCn,
+                MenuItemGlobalSettings.HelpWindowNameEn);
+            window.titleContent = new GUIContent(multiLanguageData.GetCurrentOrFallback());
             window.position = GUIHelper.GetEditorWindowRect().AlignCenter(800, 600);
             window.minSize = new Vector2(500, 500);
             window.ShowUtility();

@@ -81,7 +81,7 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
         [PropertyOrder(1)]
         [HorizontalGroup("Mode", 0.24f)]
         [MultiLanguageButtonWidgetConfig("切换工具模式", "Switch Tool Mode", buttonHeight: 24, icon: SdfIconType.Hurricane)]
-        public MultiLanguageButtonWidget switchMode = new MultiLanguageButtonWidget(SwitchToolMode);
+        public MultiLanguageButtonProperty switchMode = new MultiLanguageButtonProperty(SwitchToolMode);
 
         [PropertyOrder(1)]
         [EnumToggleButtons]
@@ -148,13 +148,13 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
         [ShowIf("_singleDoc")]
         [MultiLanguageButtonWidgetConfig("解析单个 Type", "Analyze Single Type",
             ButtonSizes.Large, ButtonStyle.Box, SdfIconType.Activity)]
-        public MultiLanguageButtonWidget analyzeSingleType = new MultiLanguageButtonWidget(AnalyzeSingle);
+        public MultiLanguageButtonProperty analyzeSingleType = new MultiLanguageButtonProperty(AnalyzeSingle);
 
         [PropertyOrder(20)]
         [HideIf("_singleDoc")]
         [MultiLanguageButtonWidgetConfig("解析 Type 列表", "Analyze Type List",
             ButtonSizes.Large, ButtonStyle.Box, SdfIconType.Activity)]
-        public MultiLanguageButtonWidget analyzeMultiTypes = new MultiLanguageButtonWidget(AnalyzeMultiple);
+        public MultiLanguageButtonProperty analyzeMultiTypes = new MultiLanguageButtonProperty(AnalyzeMultiple);
 
         [PropertyOrder(24)]
         [MultiLanguageTitle("生成文档按钮", "Generate Document Buttons")]
@@ -166,13 +166,13 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
         [ShowIf(nameof(CanGeneratedSingle))]
         [MultiLanguageButtonWidgetConfig("生成 Markdown 文档", "Generate Markdown Document",
             ButtonSizes.Large, ButtonStyle.Box, SdfIconType.FileEarmarkPlus)]
-        public MultiLanguageButtonWidget generateButtonSingle = new MultiLanguageButtonWidget(GenerateMkDocsSingle);
+        public MultiLanguageButtonProperty generateButtonSingle = new MultiLanguageButtonProperty(GenerateMkDocsSingle);
 
         [PropertyOrder(25)]
         [ShowIf(nameof(CanGeneratedMultiple))]
         [MultiLanguageButtonWidgetConfig("批量生成 Markdown 文档", "Generate Multiple Markdown Documents",
             ButtonSizes.Large, ButtonStyle.Box, SdfIconType.FileEarmarkPlus)]
-        public MultiLanguageButtonWidget generateButtonMulti = new MultiLanguageButtonWidget(GenerateMkDocsMultiple);
+        public MultiLanguageButtonProperty generateButtonMulti = new MultiLanguageButtonProperty(GenerateMkDocsMultiple);
 
         [PropertyOrder(100)]
         [MultiLanguageTitle("过程数据", "Process Data")]

@@ -2,6 +2,7 @@ using Sirenix.OdinInspector.Editor;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using UnityEngine;
 
 namespace Yuumix.OdinToolkits.Common.InspectorMultiLanguage.Editor
 {
@@ -14,14 +15,8 @@ namespace Yuumix.OdinToolkits.Common.InspectorMultiLanguage.Editor
                 member.GetCustomAttribute<MultiLanguageButtonAttribute>() != null)
             {
                 var button = member.GetCustomAttribute<MultiLanguageButtonAttribute>();
-                if (InspectorMultiLanguageManagerSO.IsChinese)
-                {
-                    attributes.Add(button.CreateChineseButton());
-                }
-                else if (InspectorMultiLanguageManagerSO.IsEnglish)
-                {
-                    attributes.Add(button.CreateEnglishButton());
-                }
+                var chineseButton = button.CreateChineseButton();
+                attributes.Add(chineseButton);
             }
         }
     }

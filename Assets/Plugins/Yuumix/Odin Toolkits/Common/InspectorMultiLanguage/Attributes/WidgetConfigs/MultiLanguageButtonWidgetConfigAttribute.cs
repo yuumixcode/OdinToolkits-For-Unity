@@ -4,7 +4,7 @@ using System;
 namespace Yuumix.OdinToolkits.Common.InspectorMultiLanguage
 {
     /// <summary>
-    /// 该特性只添加在类型为 MultiLanguageButton 的字段上，给 MultiLanguageButton 添加配置信息
+    /// 该特性只添加在类型为 MultiLanguageButtonWidget 的字段上，给 MultiLanguageButtonWidget 添加配置信息
     /// </summary>
     [AttributeUsage(AttributeTargets.Field)]
     public class MultiLanguageButtonWidgetConfigAttribute : Attribute

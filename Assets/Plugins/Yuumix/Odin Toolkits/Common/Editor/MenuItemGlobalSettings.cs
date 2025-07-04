@@ -1,4 +1,6 @@
-﻿namespace Yuumix.OdinToolkits.Common.Editor
+﻿using System;
+
+namespace Yuumix.OdinToolkits.Common.Editor
 {
     // 快捷键记录
     // & = Mac[shift + option]
@@ -12,7 +14,7 @@
 
         const string RootMenuItemName = "Tools/Odin Toolkits";
         const string WindowsMenuItemName = RootMenuItemName + "/Overview Windows";
-        const string CommunityMenuItemName = RootMenuItemName + "/Community";
+
         const string WIPMenuItemName = RootMenuItemName + "/Work In Progress";
 
         #endregion
@@ -65,21 +67,28 @@
 
         #endregion
 
-        #region Min-15 Community 
+        #region 495 Community
 
-        public const string ResolvedParametersMenuItemName = CommunityMenuItemName + "/Resolved Parameters Overview";
-        public const int ResolvedParametersPriority = 15;
-        public const string ResolvedParametersOverviewWindowName = "Resolved Parameters Overview";
+        public const string CommunityMenuItemName = RootMenuItemName + "/Community";
+        public const int CommunityPriority = 495;
+        public const string CommunityWindowNameCn = "社区贡献窗口";
+        public const string CommunityWindowNameEn = "Community Window";
 
         #endregion
 
-        #region Help
+        #region 500 Help
 
         public const string HelpMenuItemName = RootMenuItemName + "/Help";
-        public const int HelpWindowPriority = 1000;
+        public const int HelpWindowPriority = 500;
         public const string HelpWindowNameCn = "Odin Toolkits 帮助窗口";
         public const string HelpWindowNameEn = "Odin Toolkits Help Window";
 
         #endregion
+
+        [Obsolete]
+        public const string ResolvedParametersMenuItemName = CommunityMenuItemName + "/Resolved Parameters Overview";
+
+        public const int ResolvedParametersPriority = 15;
+        public const string ResolvedParametersOverviewWindowName = "Resolved Parameters Overview";
     }
 }

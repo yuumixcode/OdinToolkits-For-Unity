@@ -10,7 +10,7 @@ using Sirenix.OdinInspector.Editor;
 namespace Yuumix.OdinToolkits.Common.InspectorMultiLanguage
 {
     /// <summary>
-    /// 多语言按钮控件，以字段形式实现多语言按钮支持<br />
+    /// 多语言按钮，以字段形式实现多语言按钮支持<br />
     /// 必须添加 <c>MultiLanguageButtonWidgetConfigAttribute</c> 特性去设置按钮样式。<br />
     /// 构造函数中赋值无参方法，推荐静态方法。<br />
     /// </summary>
@@ -23,13 +23,13 @@ namespace Yuumix.OdinToolkits.Common.InspectorMultiLanguage
     [HideLabel]
     [MultiLanguageComment("多语言按钮控件，以字段形式实现多语言按钮支持",
         "Multilingual button widget, which implements multilingual button support in the form of fields. Compatible with Odin Inspector")]
-    public class MultiLanguageButtonWidget
+    public class MultiLanguageButtonProperty
     {
         Action _targetMethod;
 
         [MultiLanguageComment("按钮触发时执行的方法，推荐静态方法",
             "Methods to execute when the button is triggered, static methods are recommended")]
-        public MultiLanguageButtonWidget(Action action) => _targetMethod = action;
+        public MultiLanguageButtonProperty(Action action) => _targetMethod = action;
 
         [ShowIfChinese]
         [Conditional("UNITY_EDITOR")]
@@ -47,14 +47,14 @@ namespace Yuumix.OdinToolkits.Common.InspectorMultiLanguage
     }
 
 #if UNITY_EDITOR
-    internal class MultiLanguageButtonProcessor : OdinAttributeProcessor<MultiLanguageButtonWidget>
+    internal class MultiLanguageButtonProcessor : OdinAttributeProcessor<MultiLanguageButtonProperty>
     {
         public override void ProcessChildMemberAttributes(InspectorProperty parentProperty, MemberInfo member,
             List<Attribute> attributes)
         {
             switch (member.Name)
             {
-                case nameof(MultiLanguageButtonWidget.ChineseButton):
+                case nameof(MultiLanguageButtonProperty.ChineseButton):
                 {
                     var config = parentProperty.GetAttribute<MultiLanguageButtonWidgetConfigAttribute>();
                     if (config == null)
@@ -68,7 +68,7 @@ namespace Yuumix.OdinToolkits.Common.InspectorMultiLanguage
                     attributes.Add(config.CreateChineseButton());
                     break;
                 }
-                case nameof(MultiLanguageButtonWidget.EnglishButton):
+                case nameof(MultiLanguageButtonProperty.EnglishButton):
                 {
                     var config = parentProperty.GetAttribute<MultiLanguageButtonWidgetConfigAttribute>();
                     if (config == null)

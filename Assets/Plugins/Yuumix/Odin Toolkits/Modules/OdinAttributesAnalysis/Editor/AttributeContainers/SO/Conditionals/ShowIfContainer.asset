@@ -21,5 +21,5 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  example: {fileID: 11400000, guid: 9a717e4fe66424e75b04a7b44273e9ed, type: 2}
+  example: {fileID: 11400000, guid: 3342a5661cbf24800b921e4c7ac18d8b, type: 2}
   exampleOdin: {fileID: 0}

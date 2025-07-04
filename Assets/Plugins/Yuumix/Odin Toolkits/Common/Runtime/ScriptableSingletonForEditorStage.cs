@@ -12,7 +12,6 @@ namespace Yuumix.OdinToolkits.Common
     /// <summary>
     /// 提供给不在 Editor 文件夹下的编辑器阶段使用的配置文件的单例，有些类实例需要被非 Editor 文件夹的类获取。
     /// </summary>
-    /// <typeparam name="T"></typeparam>
     public abstract class ScriptableSingletonForEditorStage<T> :
 #if UNITY_EDITOR
         SerializedScriptableObject

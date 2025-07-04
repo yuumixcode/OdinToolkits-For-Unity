@@ -22,12 +22,14 @@ namespace Yuumix.OdinToolkits.Common.Contributors
         [DisplayAsString(EnableRichText = true, FontSize = 15)]
         [HorizontalGroup("1/1")]
         [HideLabel]
+        [EnableGUI]
         public string Name { get; set; }
 
         [BoxGroup("1")]
         [ShowInInspector]
         [HorizontalGroup("1/1")]
         [HideLabel]
+        [EnableGUI]
         [DisplayAsString(EnableRichText = true, FontSize = 15)]
         public string Email { get; set; }
 
