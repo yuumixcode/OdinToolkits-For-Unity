@@ -52,6 +52,7 @@ namespace Yuumix.OdinToolkits.Common.InspectorMultiLanguage
 
         public static bool IsChinese => Instance.CurrentLanguage == LanguageType.Chinese;
         public static bool IsEnglish => Instance.CurrentLanguage == LanguageType.English;
+#if UNITY_EDITOR
 
         static Type _inspectorWindowType = typeof(Editor).Assembly.GetType("UnityEditor.InspectorWindow");
 
@@ -59,7 +60,7 @@ namespace Yuumix.OdinToolkits.Common.InspectorMultiLanguage
             _inspectorWindowType.GetField("m_AllInspectors", BindingFlags.NonPublic | BindingFlags.Static);
 
         static readonly List<EditorWindow> ActiveInspectors = new List<EditorWindow>();
-
+#endif
         public void OdinToolkitsReset()
         {
             CurrentLanguage = LanguageType.Chinese;
@@ -77,8 +78,8 @@ namespace Yuumix.OdinToolkits.Common.InspectorMultiLanguage
             EditorApplication.delayCall -= OnDelayCallAction;
             EditorApplication.delayCall += OnDelayCallAction;
             // 添加窗口焦点变更回调
-            EditorApplication.focusChanged -= EditorApplicationOnfocusChanged();
-            EditorApplication.focusChanged += EditorApplicationOnfocusChanged();
+            Application.focusChanged -= EditorApplicationOnfocusChanged();
+            Application.focusChanged += EditorApplicationOnfocusChanged();
             Selection.selectionChanged -= CollectActiveInspectors;
             Selection.selectionChanged += CollectActiveInspectors;
             EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;

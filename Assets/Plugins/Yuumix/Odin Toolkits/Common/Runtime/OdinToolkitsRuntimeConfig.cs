@@ -56,6 +56,11 @@ namespace Yuumix.OdinToolkits.Common
             "可以在运行时和编辑器两个阶段读取的配置文件",
             "Configuration files that can be read at both runtime and in the editor.");
 
+        void OnEnable()
+        {
+            editorStageLogSavePath = Application.dataPath.Replace("/Assets", "") + "/Logs/Yuumix_OdinToolkitsData";
+        }
+
         #region Yuumix Logger
 
         [PropertyOrder(0)]
@@ -74,8 +79,7 @@ namespace Yuumix.OdinToolkits.Common
         [MultiLanguageText("编辑器阶段日志保存路径", "Editor Stage Log Save Path")]
         [CustomContextMenu("Reset", nameof(ResetEditorStageLogSavePath))]
         [LabelWidth(200)]
-        public string editorStageLogSavePath =
-            Application.dataPath.Replace("/Assets", "") + "/Logs/Yuumix_OdinToolkitsData";
+        public string editorStageLogSavePath;
 
         [PropertyOrder(20)]
         [ShowInInspector]
