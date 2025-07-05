@@ -54,7 +54,7 @@ namespace Yuumix.OdinToolkits.Common.InspectorMultiLanguage
         public static bool IsEnglish => Instance.CurrentLanguage == LanguageType.English;
 #if UNITY_EDITOR
 
-        static Type _inspectorWindowType = typeof(Editor).Assembly.GetType("UnityEditor.InspectorWindow");
+        static Type _inspectorWindowType = typeof(UnityEditor.Editor).Assembly.GetType("UnityEditor.InspectorWindow");
 
         static FieldInfo _allInspectorsFieldInfo =
             _inspectorWindowType.GetField("m_AllInspectors", BindingFlags.NonPublic | BindingFlags.Static);
