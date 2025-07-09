@@ -1,7 +1,7 @@
 #if UNITY_EDITOR
 using UnityEngine;
 
-namespace Yuumix.YuumixEditor
+namespace YuumixEditor
 {
     public static class YuumixEditorEasyLog
     {

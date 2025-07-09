@@ -3,7 +3,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace Yuumix.YuumixEditor
+namespace YuumixEditor
 {
     public enum InnerRectType
     {

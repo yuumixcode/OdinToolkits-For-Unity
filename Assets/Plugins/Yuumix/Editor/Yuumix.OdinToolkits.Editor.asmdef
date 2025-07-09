@@ -1,0 +1,20 @@
+{
+    "name": "Yuumix.OdinToolkits.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:ad968d605628d06499b62cdc30f11cf8",
+        "GUID:f4033ac42637d4b36bf7fd3e6f795b76",
+        "GUID:b9df9ea406dee4005b215c9f588f3e41"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

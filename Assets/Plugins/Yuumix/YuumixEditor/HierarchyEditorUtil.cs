@@ -2,7 +2,7 @@
 using UnityEditor.Search;
 using UnityEngine;
 
-namespace Yuumix.YuumixEditor
+namespace YuumixEditor
 {
     /// <summary>
     /// 关于场景层级的工具类，不包括预制体的 Stage 场景

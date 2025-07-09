@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace Yuumix.YuumixEditor
+namespace YuumixEditor
 {
     public static class ScriptableObjectEditorUtil
     {

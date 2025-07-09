@@ -1,0 +1,19 @@
+{
+    "name": "Yuumix.Community",
+    "rootNamespace": "",
+    "references": [
+        "GUID:ad968d605628d06499b62cdc30f11cf8",
+        "GUID:c2f8aebdcb5ef491ebbf0faf39701f38",
+        "GUID:f4033ac42637d4b36bf7fd3e6f795b76",
+        "GUID:b9df9ea406dee4005b215c9f588f3e41"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

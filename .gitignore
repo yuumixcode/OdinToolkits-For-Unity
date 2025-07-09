@@ -77,27 +77,30 @@ crashlytics-build.properties
 # Visual Studio cache files
 .vs/
 
+# 用户本地设置
+UserSettings/
+
 # Rider cache files
 .idea/
 
 # macOS files
 .DS_Store
 
-# 用户本地设置
-UserSettings/
-
 # 排除 Sirenix 公司付费插件
 Assets/Plugins/Sirenix
 Assets/Plugins/Sirenix.meta
-Assets/UniversalRenderPipelineGlobalSettings.asset
-Assets/UniversalRenderPipelineGlobalSettings.asset.meta
 
-# JetBrains IDE 配置文件
-*.DotSettings
-*.DotSettings.user
+# JetBrains IDE 配置文件，例如设置保存中的解决方案团队和解决方案个人
+# *.DotSettings
+# *.DotSettings.user
+
 # Unity 生成的 .csproj 关联的 IDE 配置
-*.csproj.DotSettings
-*.csproj.DotSettings.user
+# *.csproj.DotSettings
+# *.csproj.DotSettings.user
+
+# 排除 Unity Asset Store Tools 插件
+Packages/com.unity.asset-store-tools/
+
 Assets/Custom Inspector
 Assets/Custom Inspector.meta
 Assets/ConsolePro
@@ -105,4 +108,6 @@ Assets/OdinToolkitsData
 Assets/ConsolePro.meta
 Assets/OdinToolkitsData.meta
 
-Packages/com.unity.asset-store-tools/
+Assets/UniversalRenderPipelineGlobalSettings.asset.meta
+
+Assets/UniversalRenderPipelineGlobalSettings.asset

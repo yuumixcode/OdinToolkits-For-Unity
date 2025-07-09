@@ -2,7 +2,7 @@
 using UnityEditor;
 using Object = UnityEngine.Object;
 
-namespace Yuumix.YuumixEditor
+namespace YuumixEditor
 {
     public static class ProjectEditorUtil
     {

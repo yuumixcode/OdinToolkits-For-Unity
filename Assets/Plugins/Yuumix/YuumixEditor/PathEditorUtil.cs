@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using UnityEditor;
 
-namespace Yuumix.YuumixEditor
+namespace YuumixEditor
 {
     public static class PathEditorUtil
     {
