@@ -2,8 +2,7 @@
     "name": "Yuumix.OdinToolkits.Editor",
     "rootNamespace": "",
     "references": [
-        "GUID:b9df9ea406dee4005b215c9f588f3e41",
-        "GUID:f4033ac42637d4b36bf7fd3e6f795b76"
+        "GUID:b9df9ea406dee4005b215c9f588f3e41"
     ],
     "includePlatforms": [
         "Editor"

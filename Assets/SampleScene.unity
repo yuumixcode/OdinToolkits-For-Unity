@@ -151,8 +151,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 872c6f5269e4b4309addbb961581bf16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  header:
-    documentationLink: https://github.com/Yuumix/OdinToolkits
+  widget:
+    _chineseIntroduction: "\u8FD9\u662F\u6D4B\u8BD5"
+    _englishIntroduction: This is Test
+    _targetUrl: https://www.odintoolkits.cn/
+    headerName: {}
+    headerIntroduction: {}
 --- !u!4 &536927804
 Transform:
   m_ObjectHideFlags: 0

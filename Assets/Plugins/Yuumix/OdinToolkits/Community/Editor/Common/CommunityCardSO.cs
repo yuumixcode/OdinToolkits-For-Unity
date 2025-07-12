@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
-using Yuumix.OdinToolkits.Common;
+using Yuumix.OdinToolkits.Shared;
 using Yuumix.OdinToolkits.Core;
 using YuumixEditor;
 

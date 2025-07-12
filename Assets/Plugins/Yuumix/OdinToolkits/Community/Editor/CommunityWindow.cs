@@ -1,10 +1,11 @@
+using Yuumix.OdinToolkits.Core;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
-using Yuumix.OdinToolkits.Common;
+using Yuumix.OdinToolkits.Shared;
 using Yuumix.OdinToolkits.Community.Editor;
 
 namespace Yuumix.OdinToolkits.Editor.Core

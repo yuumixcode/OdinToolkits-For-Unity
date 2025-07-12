@@ -1,6 +1,6 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
-using Yuumix.OdinToolkits.Common;
+using Yuumix.OdinToolkits.Shared;
 
 namespace Yuumix.OdinToolkits.Core
 {
@@ -41,7 +41,7 @@ namespace Yuumix.OdinToolkits.Core
                 if (!_odinToolkitsRuntimeConfig)
                 {
                     _odinToolkitsRuntimeConfig =
-                        Resources.Load<OdinToolkitsRuntimeConfig>("Runtime_OdinToolkitsRuntimeConfig");
+                        Resources.Load<OdinToolkitsRuntimeConfig>("OdinToolkitsRuntimeConfig");
                 }
 
                 return _odinToolkitsRuntimeConfig;

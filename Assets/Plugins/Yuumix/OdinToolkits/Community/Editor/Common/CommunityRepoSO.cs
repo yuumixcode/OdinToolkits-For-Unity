@@ -1,16 +1,16 @@
 using Sirenix.OdinInspector;
 using Sirenix.Utilities.Editor;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using UnityEditor;
-using Yuumix.OdinToolkits.Common;
 using Yuumix.OdinToolkits.Core;
+using UnityEditor;
+using Yuumix.OdinToolkits.Shared;
+using Yuumix.OdinToolkits.Editor.Shared;
 
 namespace Yuumix.OdinToolkits.Community.Editor
 {
     [Searchable()]
-    public class CommunityRepoSO : YuumixEditorScriptableSingleton<CommunityRepoSO>, IOdinToolkitsReset
+    public class CommunityRepoSO : OdinEditorScriptableSingleton<CommunityRepoSO>, IOdinToolkitsReset
     {
         #region Header
 

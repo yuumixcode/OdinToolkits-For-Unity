@@ -1,7 +1,7 @@
 using UnityEngine;
 using Yuumix.OdinToolkits.Common;
 
-namespace Yuumix.OdinToolkits.Samples.TestMultiLanguageButtonAttribute
+namespace Yuumix.OdinToolkits.Samples
 {
     public class SampleMultiLanguageButtonAttribute : MonoBehaviour
     {
