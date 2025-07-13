@@ -13,6 +13,7 @@ namespace YuumixEditor
         /// 递归创建 Assets 下的文件夹路径
         /// </summary>
         /// <param name="relativePath">以 Assets 开头的相对路径</param>
+        [MultiLanguageComment("递归创建 Assets 下的文件夹路径", "Recursively create a folder path under Assets")]
         public static void EnsureFolderRecursively(string relativePath)
         {
             // 移除 Assets 前缀，获取实际的文件夹路径
@@ -37,6 +38,7 @@ namespace YuumixEditor
         /// <summary>
         /// 获取目标文件夹路径
         /// </summary>
+        [MultiLanguageComment("获取目标文件夹路径", "Get the path of the target folder")]
         public static string GetTargetFolderPath(string targetFolderName, params string[] containFolderName)
         {
             string[] paths = AssetDatabase.GetAllAssetPaths();

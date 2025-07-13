@@ -1,4 +1,5 @@
 ﻿using System;
+using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits
 {
@@ -6,6 +7,7 @@ namespace Yuumix.OdinToolkits
     /// 一个通用的 C# 类对象的单例抽象类，使用 Lazy &lt;T&gt; 提供线程安全的单例实例获取方法。
     /// </summary>
     /// <typeparam name="T">继承单例的类型，单纯的 C# 对象，不继承 Mono</typeparam>
+    [MultiLanguageComment("一个通用的 C# 类对象的单例抽象类，使用 Lazy<T> 提供线程安全的单例实例获取方法。", "A generic singleton abstract class for C# class objects, using Lazy<T> to provide a thread - safe method for obtaining singleton instances.")]
     public abstract class Singleton<T> where T : Singleton<T>
     {
         /// <summary>
@@ -22,6 +24,7 @@ namespace Yuumix.OdinToolkits
         /// 以线程安全的方式提供单例实例的访问。
         /// </summary>
         /// <returns>返回类型 T 的单例实例。</returns>
+        [MultiLanguageComment("以线程安全的方式提供单例实例的访问。", "Provides thread - safe access to the singleton instance.")]
         public static T Instance
         {
             get
@@ -41,6 +44,7 @@ namespace Yuumix.OdinToolkits
         /// <summary>
         /// 实例化单例对象时执行的初始化方法。
         /// </summary>
+        [MultiLanguageComment("实例化单例对象时执行的初始化方法。", "Initialization method executed when instantiating the singleton object.")]
         protected virtual void OnSingletonInit() { }
     }
 }

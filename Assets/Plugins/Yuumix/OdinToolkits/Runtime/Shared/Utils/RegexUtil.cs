@@ -1,8 +1,10 @@
 ﻿using System.Text;
 using System.Text.RegularExpressions;
+using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.Shared
 {
+    [MultiLanguageComment("正则表达式工具类", "Regular expression utility class")]
     public static class RegexUtil
     {
         const string CanonicalNamespaceRegex = @"([^a-zA-Z0-9._]|[\s]|::|\b(using)\b|\.{2,})";
@@ -12,6 +14,7 @@ namespace Yuumix.OdinToolkits.Shared
         // [^\w] 表示匹配所有非字母和数字的字符, [^\u4e00-\u9fa5] 表示匹配所有非中文字符
         const string CanonicalScriptClassNameRegex = @"([^\w\u4e00-\u9fa5])";
 
+        [MultiLanguageComment("规范化命名空间", "Canonicalize a namespace")]
         public static string CanonicalNamespace(string input)
         {
             var foundFirstLetter = false;
@@ -37,6 +40,7 @@ namespace Yuumix.OdinToolkits.Shared
             return Regex.Replace(firstResult, CanonicalNamespaceRegex, "");
         }
 
+        [MultiLanguageComment("规范化脚本类名", "Canonicalize a script class name")]
         public static string CanonicalScriptClassName(string className)
         {
             // 移除非法字符

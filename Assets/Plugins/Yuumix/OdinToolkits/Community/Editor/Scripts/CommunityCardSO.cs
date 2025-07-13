@@ -11,6 +11,12 @@ using YuumixEditor;
 
 namespace Yuumix.OdinToolkits.Community.Editor
 {
+    /// <summary>
+    /// Community 资源卡片的基类，继承此类型实现资源卡片
+    /// </summary>
+    /// <typeparam name="T">目标资源卡片</typeparam>
+    [MultiLanguageComment("Community 资源卡片的基类，继承此类型实现资源卡片",
+        "The base class of the Community resource card, by inheriting this type, one can implement the resource card.")]
     public abstract class CommunityCardSO<T> : SerializedScriptableObject where T : CommunityCardSO<T>
     {
         #region 单例
@@ -174,7 +180,7 @@ namespace Yuumix.OdinToolkits.Community.Editor
         /// 打开窗口，或者跳转到具体的文件夹
         /// </summary>
         /// <example>
-        ///     <c>xxxWindow.Show() or ProjectEditorUtil.PingAndSelectAsset()</c>
+        ///     <c>xxxWindow.Show() or ProjectEditorUtil.PingAndSelectAsset(xxx)</c>
         /// </example>
         protected abstract void OpenWindowOrPingFolder();
 
@@ -182,25 +188,6 @@ namespace Yuumix.OdinToolkits.Community.Editor
         /// 打开模块相关链接，可以是任何文章，网站，文档，个人博客等
         /// </summary>
         protected abstract void OpenModuleLink();
-    }
-
-    [Serializable]
-    public class Author
-    {
-        public string name;
-        public string url;
-
-        public override string ToString()
-        {
-            string au = InspectorMultiLanguageSetting.IsChinese ? "作者: " : "Author: ";
-            return au + name.ToYellow() + "  " + url;
-        }
-
-        public Author(string name, string url)
-        {
-            this.name = name;
-            this.url = url;
-        }
     }
 
     internal class CommunityCardSOProcessor<T> : OdinAttributeProcessor<T>

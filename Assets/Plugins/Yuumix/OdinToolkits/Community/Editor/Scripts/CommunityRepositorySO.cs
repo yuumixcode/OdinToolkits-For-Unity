@@ -9,7 +9,11 @@ using Yuumix.OdinToolkits.Shared;
 
 namespace Yuumix.OdinToolkits.Community.Editor
 {
+    /// <summary>
+    /// Community 资源卡片仓库，扩展的资源卡片编写在此类中
+    /// </summary>
     [Searchable]
+    [MultiLanguageComment("Community 资源卡片仓库", "Community Resource Cards Repository")]
     public class CommunityRepositorySO : OdinEditorScriptableSingleton<CommunityRepositorySO>, IOdinToolkitsReset
     {
         #region Header

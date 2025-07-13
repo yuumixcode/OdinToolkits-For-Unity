@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.Shared
 {
+    [MultiLanguageComment("路径工具类", "Path utility class")]
     public class PathUtil
     {
-        /// <summary>
-        /// 查找提供的文件夹中是否存在继承了抽象类的子类，非泛型
-        /// </summary>
-        /// <param name="abstractType"> 抽象基类 </param>
-        /// <param name="folderPath"> 返回带后缀名的脚本路径 </param>
+        [MultiLanguageComment("查找提供的文件夹中是否存在继承了抽象类的子类，非泛型",
+            "Find if there is a non - generic subclass of an abstract class in the provided folder")]
         public static string FindIsSubClassOfInFolder(Type abstractType, string folderPath)
         {
             var assembly = Assembly.GetExecutingAssembly();
@@ -31,12 +30,8 @@ namespace Yuumix.OdinToolkits.Shared
             return null;
         }
 
-        /// <summary>
-        /// 查找提供的文件夹中是否存在继承了抽象类的子类，是抽象泛型类，泛型只有一个 T
-        /// </summary>
-        /// <param name="abstractType"> 泛型抽象基类，一个泛型参数 </param>
-        /// <param name="folderPath"> 文件夹路径 </param>
-        /// <returns> 返回带后缀名的脚本路径 </returns>
+        [MultiLanguageComment("查找提供的文件夹中是否存在继承了抽象类的子类，是抽象泛型类，泛型只有一个 T",
+            "Find if there is a subclass of an abstract generic class (with one generic parameter T) in the provided folder and return the path")]
         public static string FindIsGenericSubClassOfInFolderReturnPath(Type abstractType, string folderPath)
         {
             List<Type> subTypes = Assembly.GetExecutingAssembly()
@@ -62,12 +57,8 @@ namespace Yuumix.OdinToolkits.Shared
             return null;
         }
 
-        /// <summary>
-        /// 查找提供的文件夹中是否存在继承了抽象类的子类，是抽象泛型类，泛型只有一个 T
-        /// </summary>
-        /// <param name="abstractType"> </param>
-        /// <param name="folderPath"> </param>
-        /// <returns> 返回类名 </returns>
+        [MultiLanguageComment("查找提供的文件夹中是否存在继承了抽象类的子类，是抽象泛型类，泛型只有一个 T，返回类名",
+            "Find if there is a subclass of an abstract generic class (with one generic parameter T) in the provided folder and return the class name")]
         public static string FindIsGenericSubClassOfInFolderReturnName(Type abstractType, string folderPath)
         {
             List<Type> subTypes = Assembly.GetExecutingAssembly()
@@ -90,9 +81,8 @@ namespace Yuumix.OdinToolkits.Shared
             return null;
         }
 
-        /// <summary>
-        /// 返回当前项目中继承了该类的子类，是抽象泛型类，泛型只有一个 T
-        /// </summary>
+        [MultiLanguageComment("返回当前项目中继承了该类的子类，是抽象泛型类，泛型只有一个 T，返回全类名",
+            "Return the full names of subclasses of an abstract generic class (with one generic parameter T) in the current project")]
         public static string[] GetIsGenericSubClassOfInProjectReturnFullName(Type absType)
         {
             return AppDomain.CurrentDomain.GetAssemblies()
@@ -105,12 +95,8 @@ namespace Yuumix.OdinToolkits.Shared
                 .ToArray();
         }
 
-        /// <summary>
-        /// 获取路径中以目标字符串结尾的子路径，且层级最深的路径
-        /// </summary>
-        /// <param name="fullPath">相对于 Assets 的完整路径（如：Assets/Plugins/.../OdinToolkitsMarker.asset）</param>
-        /// <param name="endWithString">目标结尾字符串（如："OdinToolkits"）</param>
-        /// <returns>如：Assets/.../OdinToolkits</returns>
+        [MultiLanguageComment("获取路径中以目标字符串结尾的子路径，且层级最深的路径",
+            "Get the deepest sub - path that ends with the target string in the full path")]
         public static string GetSubPathByEndsWith(string fullPath, string endWithString)
         {
             if (string.IsNullOrEmpty(fullPath) || string.IsNullOrEmpty(endWithString))
@@ -148,9 +134,8 @@ namespace Yuumix.OdinToolkits.Shared
             return null;
         }
 
-        /// <summary>
-        /// Combines two paths 替换所有反斜杠为正斜杠，Window 系统资源管理器是 '\', MacOS 系统是 '/'
-        /// </summary>
+        [MultiLanguageComment("组合两个路径，替换所有反斜杠为正斜杠",
+            "Combine two paths and replace all backslashes with forward slashes")]
         public static string CombinePath(string a, string b)
         {
             a = a.Replace("\\", "/").TrimEnd('/');

@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Sirenix.Utilities;
+using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.Shared
 {
@@ -79,6 +80,42 @@ namespace Yuumix.OdinToolkits.Shared
             return declaringType != null &&
                    declaringType.IsSealed && !declaringType.IsGenericType && !declaringType.IsNested &&
                    method.IsDefined(typeof(ExtensionAttribute), false);
+        }
+
+        [MultiLanguageComment("获取方法的访问修饰符类型", "Get the access modifier type of a method")]
+        public static AccessModifierType GetMethodAccessModifierType(this MethodBase method)
+        {
+            if (method.IsPublic)
+            {
+                return AccessModifierType.Public;
+            }
+
+            if (method.IsPrivate)
+            {
+                return AccessModifierType.Private;
+            }
+
+            if (method.IsFamily)
+            {
+                return AccessModifierType.Protected;
+            }
+
+            if (method.IsAssembly)
+            {
+                return AccessModifierType.Internal;
+            }
+
+            if (method.IsFamilyOrAssembly)
+            {
+                return AccessModifierType.ProtectedInternal;
+            }
+
+            if (method.IsFamilyAndAssembly)
+            {
+                return AccessModifierType.PrivateProtected;
+            }
+
+            return AccessModifierType.None;
         }
     }
 }

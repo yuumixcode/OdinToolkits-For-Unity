@@ -1,13 +1,18 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
+using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits
 {
+    [MultiLanguageComment("持久化的 Odin SerializedMonoBehaviour 单例抽象类，在场景切换时不会被销毁。",
+        "Abstract class for a persistent Odin SerializedMonoBehaviour singleton that is not destroyed when the scene changes.")]
     public abstract class PersistentOdinSingleton<T> : SerializedMonoBehaviour where T : PersistentOdinSingleton<T>
     {
         bool _isInitialized;
         static T _instance;
 
+        [MultiLanguageComment("获取单例实例，如果实例不存在则创建一个新的实例。",
+            "Gets the singleton instance. If the instance does not exist, a new instance is created.")]
         public static T Instance
         {
             get
@@ -25,13 +30,15 @@ namespace Yuumix.OdinToolkits
                     return _instance;
                 }
 
-                _instance = new GameObject(typeof(T).Name + " [Auto-Singleton]")
+                _instance = new GameObject(typeof(T).Name + " [Auto - Singleton]")
                     .AddComponent<T>();
                 // YuumixLogger.Log("new GameObject().AddComponent 后 _instance: " + (_instance ? "已赋值" : "null"));
                 return _instance;
             }
         }
 
+        [MultiLanguageComment("Awake 方法，用于初始化单例实例并设置为不销毁。",
+            "Awake method, used to initialize the singleton instance and set it to not be destroyed.")]
         protected virtual void Awake()
         {
             if (!_instance)
@@ -61,6 +68,8 @@ namespace Yuumix.OdinToolkits
             }
         }
 
+        [MultiLanguageComment("OnDestroy 方法，当单例实例被销毁时调用。",
+            "OnDestroy method, called when the singleton instance is destroyed.")]
         protected virtual void OnDestroy()
         {
             if (_instance && _instance == this)
@@ -69,12 +78,14 @@ namespace Yuumix.OdinToolkits
             }
         }
 
+        [MultiLanguageComment("创建一个新的单例实例。", "Creates a new singleton instance.")]
         public static void CreateNewInstance()
         {
             DestroyCurrentInstance();
             _ = Instance;
         }
 
+        [MultiLanguageComment("销毁当前的单例实例。", "Destroys the current singleton instance.")]
         static void DestroyCurrentInstance()
         {
             if (Application.isPlaying)
@@ -89,6 +100,8 @@ namespace Yuumix.OdinToolkits
             _instance = null;
         }
 
+        [MultiLanguageComment("实例化单例对象时执行的初始化方法。",
+            "Initialization method executed when instantiating the singleton object.")]
         protected virtual void OnSingletonInit() { }
     }
 }

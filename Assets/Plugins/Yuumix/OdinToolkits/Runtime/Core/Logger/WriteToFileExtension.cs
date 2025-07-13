@@ -15,19 +15,19 @@ namespace Yuumix.OdinToolkits.Core
     public static class WriteToFileExtension
     {
         // 自动刷新间隔（毫秒）
-        const int FlushIntervalMs = 2000;
+        const int FLUSH_INTERVAL_MS = 2000;
 
         // 最大缓冲区大小（字节）
-        const int MaxBufferSize = 8192;
+        const int MAX_BUFFER_SIZE = 8192;
 
         // 最大队列长度
-        const int MaxQueueSize = 10000;
+        const int MAX_QUEUE_SIZE = 10000;
 
         // 最大文件大小（MB）
-        const int MaxFileSizeMb = 10;
+        const int MAX_FILE_SIZE_MB = 10;
 
         // 日志文件夹最大总大小（100 MB）
-        const long MaxTotalFolderSize = 100 * 1024 * 1024;
+        const long MAX_TOTAL_FOLDER_SIZE = 100 * 1024 * 1024;
 
         static readonly ConcurrentQueue<string> LogQueue = new ConcurrentQueue<string>();
         static DateTime _lastFlushTime = DateTime.Now;
@@ -105,11 +105,13 @@ namespace Yuumix.OdinToolkits.Core
             }
         }
 
+        [MultiLanguageComment("执行写入文件的方法，传入参数和日志级别",
+            "Execute the method of writing to the file, passing in parameters, and log level")]
         public static void Execute(string message, LogType logType)
         {
-            if (LogQueue.Count >= MaxQueueSize)
+            if (LogQueue.Count >= MAX_QUEUE_SIZE)
             {
-                YuumixLogger.LogError("日志队列数量大于等于 " + MaxQueueSize + "，日志输出数量似乎异常，检查是否存在每帧输出");
+                YuumixLogger.LogError("日志队列数量大于等于 " + MAX_QUEUE_SIZE + "，日志输出数量似乎异常，检查是否存在每帧输出");
                 return;
             }
 
@@ -168,13 +170,13 @@ namespace Yuumix.OdinToolkits.Core
                     LogBuffer.Append(logEntry);
 
                     // 检查缓冲区大小是否超过限制
-                    if (LogBuffer.Length >= MaxBufferSize)
+                    if (LogBuffer.Length >= MAX_BUFFER_SIZE)
                     {
                         FlushBuffer();
                     }
                 }
 
-                if ((DateTime.Now - _lastFlushTime).TotalMilliseconds >= FlushIntervalMs)
+                if ((DateTime.Now - _lastFlushTime).TotalMilliseconds >= FLUSH_INTERVAL_MS)
                 {
                     FlushBuffer();
                 }
@@ -236,7 +238,7 @@ namespace Yuumix.OdinToolkits.Core
                 if (File.Exists(CurrentLogFilePath))
                 {
                     var fileInfo = new FileInfo(CurrentLogFilePath);
-                    if (fileInfo.Length >= MaxFileSizeMb * 1024 * 1024)
+                    if (fileInfo.Length >= MAX_FILE_SIZE_MB * 1024 * 1024)
                     {
                         string archiveFilePath = GetArchiveFilePath();
                         // 重命名，那么原来路径的文件就没有了
@@ -292,12 +294,12 @@ namespace Yuumix.OdinToolkits.Core
                     .OrderBy(f => f.LastWriteTime)
                     .ToList();
                 long totalSize = allFiles.Sum(file => file.Length);
-                if (totalSize < MaxTotalFolderSize)
+                if (totalSize < MAX_TOTAL_FOLDER_SIZE)
                 {
                     return;
                 }
 
-                float deleteSizeThreshold = totalSize - MaxTotalFolderSize * 0.9f;
+                float deleteSizeThreshold = totalSize - MAX_TOTAL_FOLDER_SIZE * 0.9f;
                 // 大于或者等于 MaxTotalFolderSize，则删除文件，直到 MaxTotalFolderSize * 0.9f 的文件
                 long deletedSize = 0;
                 foreach (FileInfo file in allFiles)

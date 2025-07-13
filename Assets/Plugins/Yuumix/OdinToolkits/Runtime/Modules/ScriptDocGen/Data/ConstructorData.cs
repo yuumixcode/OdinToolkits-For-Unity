@@ -4,7 +4,6 @@ using System.Linq;
 using System.Reflection;
 using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Shared;
-using MethodInfoExtensions = Yuumix.OdinToolkits.Shared.MethodInfoExtensions;
 
 namespace Yuumix.OdinToolkits
 {
@@ -28,7 +27,7 @@ namespace Yuumix.OdinToolkits
                 isObsolete = constructorInfo.IsDefined(typeof(ObsoleteAttribute)),
                 isVirtual = constructorInfo.IsVirtual,
                 name = constructorInfo.DeclaringType?.Name,
-                parameters = MethodInfoExtensions.GetParamsNames(constructorInfo)
+                parameters = constructorInfo.GetParamsNames()
             };
             consData.accessModifier = consData.memberAccessModifierType.GetAccessModifierString();
             consData.fullSignature = consData.accessModifier + " " + constructorInfo.GetFullMethodName();

@@ -1,11 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using Yuumix.OdinToolkits.Core;
+using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.Shared
 {
+    [MultiLanguageComment("层级结构工具类", "Hierarchy utility class")]
     public static class HierarchyUtil
     {
+        [MultiLanguageComment("获取相对路径", "Get the relative path")]
         public static string GetRelativePath(string parentPath, string childPath)
         {
             if (parentPath == string.Empty)

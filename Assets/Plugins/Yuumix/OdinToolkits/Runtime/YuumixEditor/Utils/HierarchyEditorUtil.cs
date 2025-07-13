@@ -1,6 +1,7 @@
 ﻿#if UNITY_EDITOR
 using UnityEditor.Search;
 using UnityEngine;
+using Yuumix.OdinToolkits.Core;
 
 namespace YuumixEditor
 {
@@ -9,8 +10,13 @@ namespace YuumixEditor
     /// </summary>
     public static class HierarchyEditorUtil
     {
+        [MultiLanguageComment("获取 GameObject 的绝对路径", "Get the absolute path of a GameObject.")]
         public static string GetAbsolutePath(GameObject obj) => GetAbsolutePath(obj.transform);
 
+        /// <summary>
+        /// 获取 Transform 的绝对路径
+        /// </summary>
+        [MultiLanguageComment("获取 Transform 的绝对路径", "Get the absolute path of a Transform.")]
         public static string GetAbsolutePath(Transform trans)
         {
             string path = SearchUtils.GetHierarchyPath(trans.gameObject, false)
