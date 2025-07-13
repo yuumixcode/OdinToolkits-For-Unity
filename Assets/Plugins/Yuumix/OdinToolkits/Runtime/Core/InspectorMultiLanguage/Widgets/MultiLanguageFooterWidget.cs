@@ -1,8 +1,10 @@
 using System;
 using Sirenix.OdinInspector;
-using Sirenix.Utilities.Editor;
-using UnityEditor;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+using Sirenix.Utilities.Editor;
+#endif
 
 namespace Yuumix.OdinToolkits.Core
 {

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Yuumix.OdinToolkits.Core;
-using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.Shared
 {

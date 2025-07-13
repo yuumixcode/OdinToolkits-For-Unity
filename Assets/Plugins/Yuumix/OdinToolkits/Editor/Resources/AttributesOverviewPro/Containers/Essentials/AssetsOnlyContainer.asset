@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AssetsOnlyContainer
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 2
+    SerializedFormat: 0
     SerializedBytes: 
     ReferencedUnityObjects: []
     SerializedBytesString: 
@@ -22,3 +22,4 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   example: {fileID: 11400000, guid: 126390feda08b4d6cbee879b3cb3ccd2, type: 2}
+  exampleOdin: {fileID: 0}
