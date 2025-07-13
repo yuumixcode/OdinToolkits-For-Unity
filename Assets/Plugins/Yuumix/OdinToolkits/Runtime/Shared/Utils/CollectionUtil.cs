@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Yuumix.OdinToolkits.LowLevel
+namespace Yuumix.OdinToolkits.Shared
 {
     public static class CollectionUtil
     {

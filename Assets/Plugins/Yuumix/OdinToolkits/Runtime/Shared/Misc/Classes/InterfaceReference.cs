@@ -2,7 +2,7 @@
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Yuumix.OdinToolkits.Modules.CustomExtensions.Classes
+namespace Yuumix.OdinToolkits.Shared
 {
     /// <summary>
     /// 基于 Odin 的 InterfaceReference 自定义类，接口引用类
@@ -48,7 +48,7 @@ namespace Yuumix.OdinToolkits.Modules.CustomExtensions.Classes
             get
             {
                 // 如果没有被分配对象，则返回 null
-                if (underlyingObject == null)
+                if (!underlyingObject)
                 {
                     return null;
                 }

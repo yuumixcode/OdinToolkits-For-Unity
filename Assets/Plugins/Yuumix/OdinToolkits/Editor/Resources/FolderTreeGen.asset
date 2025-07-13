@@ -26,12 +26,10 @@ MonoBehaviour:
   resultText: "Plugins/\n\u2502  \u251C\u2500 Sirenix/\n\u2502  \u2502  \u251C\u2500
     Assemblies/\n\u2502  \u2502  \u2502  \u251C\u2500 NoEditor/\n\u2502  \u2502 
     \u2502  \u251C\u2500 NoEmitAndNoEditor/\n\u2502  \u2502  \u251C\u2500 Demos/\n\u2502 
-    \u2502  \u2502  \u251C\u2500 Custom Attribute Processors/\n\u2502  \u2502  \u251C\u2500
-    Odin Inspector/\n\u2502  \u2502  \u2502  \u251C\u2500 Assets/\n\u2502  \u2502 
-    \u2502  \u251C\u2500 Config/\n\u2502  \u2502  \u2502  \u251C\u2500 Modules/\n\u2502 
-    \u251C\u2500 Yuumix/\n\u2502  \u2502  \u251C\u2500 OdinToolkits/\n\u2502  \u2502 
-    \u2502  \u251C\u2500 Community/\n\u2502  \u2502  \u2502  \u251C\u2500 Editor/\n\u2502 
-    \u2502  \u2502  \u251C\u2500 Experimental/\n\u2502  \u2502  \u2502  \u251C\u2500
-    Resources/\n\u2502  \u2502  \u2502  \u251C\u2500 Runtime/\n\u2502  \u2502  \u2502 
-    \u251C\u2500 Samples/\n\u2502  \u2502  \u2502  \u251C\u2500 YuumixEditor/\n\u2502 
-    \u2502  \u251C\u2500 CHANGELOG.md\n"
+    \u2502  \u2502  \u251C\u2500 Custom Attribute Processors/\n\u2502  \u2502  \u2502 
+    \u251C\u2500 Custom Drawers/\n\u2502  \u2502  \u251C\u2500 Odin Inspector/\n\u2502 
+    \u2502  \u2502  \u251C\u2500 Assets/\n\u2502  \u2502  \u2502  \u251C\u2500 Config/\n\u2502 
+    \u2502  \u2502  \u251C\u2500 Modules/\n\u2502  \u251C\u2500 Yuumix/\n\u2502 
+    \u2502  \u251C\u2500 OdinToolkits/\n\u2502  \u2502  \u2502  \u251C\u2500 Community/\n\u2502 
+    \u2502  \u2502  \u251C\u2500 Editor/\n\u2502  \u2502  \u2502  \u251C\u2500 Runtime/\n\u2502 
+    \u2502  \u2502  \u251C\u2500 Samples/\n\u2502  \u2502  \u251C\u2500 CHANGELOG.md\n"

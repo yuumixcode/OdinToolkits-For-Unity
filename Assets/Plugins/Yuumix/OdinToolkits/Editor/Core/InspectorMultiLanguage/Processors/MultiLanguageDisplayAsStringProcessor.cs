@@ -2,11 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Yuumix.OdinToolkits.Core;
 using Sirenix.OdinInspector.Editor;
-using Yuumix.OdinToolkits.Shared;
+using Yuumix.OdinToolkits.Core;
 
-namespace Yuumix.OdinToolkits.Editor.Shared
+namespace Yuumix.OdinToolkits.Editor.Core
 {
     public class MultiLanguageDisplayAsStringProcessor : OdinAttributeProcessor<MultiLanguageDisplayAsStringWidget>
     {

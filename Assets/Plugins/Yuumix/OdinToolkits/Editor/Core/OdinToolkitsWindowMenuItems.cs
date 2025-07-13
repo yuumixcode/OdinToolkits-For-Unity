@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Yuumix.OdinToolkits.Editor.Core
+﻿namespace Yuumix.OdinToolkits.Editor.Core
 {
     // 快捷键记录
     // & = Mac[shift + option]
@@ -12,46 +10,43 @@ namespace Yuumix.OdinToolkits.Editor.Core
     {
         #region Primary MenuItem
 
-        const string ROOT_MENU_ITEM_NAME = "Tools/Odin Toolkits";
-        const string GETTING_STARTED_MENU_ITEM_NAME = ROOT_MENU_ITEM_NAME + "/Getting Started";
-        const string OVERVIEW_MENU_ITEM_NAME = ROOT_MENU_ITEM_NAME + "/Overview";
-        const string EXPERIMENTAL_MENU_ITEM_NAME = ROOT_MENU_ITEM_NAME + "/Work In Progress";
+        const string ROOT = "Tools/Odin Toolkits";
+
+        const string EXPERIMENTAL_MENU_ITEM_NAME = ROOT + "/Work In Progress";
 
         #endregion
 
-        #region -105 RuntimeConfig
+        #region -100 GettingStarted
 
-        public const string RuntimeConfigMenuItemName = ROOT_MENU_ITEM_NAME + "/Runtime Config";
-        public const int RuntimeConfigPriority = -105;
-        public const string RuntimeConfigWindowNameCn = "Odin Toolkits 运行时配置文件";
-        public const string RuntimeConfigWindowNameEn = "Odin Toolkits Runtime Config";
-
-        #endregion
-
-        #region -100 EditorSettings
-
-        public const string EditorSettingsMenuItemName = ROOT_MENU_ITEM_NAME + "/Editor Settings";
-        public const int EditorSettingsWindowPriority = -100;
-        public const string EditorSettingsWindowNameCn = "Odin Toolkits 编辑器设置";
-        public const string EditorSettingsWindowNameEn = "Odin Toolkits Editor Settings";
+        public const string GETTING_STARTED = ROOT + "/Getting Started";
+        public const int GETTING_STARTED_PRIORITY = -100;
+        public const string GETTING_STARTED_WINDOW_NAME = "Getting Started";
 
         #endregion
 
-        #region -95 ToolsPackage
+        #region -80 Preferences
 
-        public const string ToolsPackageMenuItemName = ROOT_MENU_ITEM_NAME + "/Tools Package %&T";
-        public const int ToolsPackagePriority = -95;
-        public const string ToolsPackageWindowEnglishName = "Tools Package";
+        public const string PREFERENCES = ROOT + "/Preferences";
+        public const int PREFERENCES_PRIORITY = -80;
+        public const string PREFERENCES_WINDOW_NAME = "Preferences";
+
+        #endregion
+
+        #region 0 ToolsPackage
+
+        public const string TOOLS_PACKAGE_MENU_ITEM_NAME = ROOT + "/Tools Package %&T";
+        public const int TOOLS_PACKAGE_PRIORITY = 0;
+        public const string TOOLS_PACKAGE_WINDOW_ENGLISH_NAME = "Tools Package";
 
         #endregion
 
         #region Windows 0 - 200
 
-        #region 5 Odin Attributes Chinese
+        #region 5 Attribute Overview Pro
 
-        public const string AttributeChineseMenuItemName = OVERVIEW_MENU_ITEM_NAME + "/Attribute Overview Chinese";
-        public const int AttributeChinesePriority = 5;
-        public const string AttributeChineseWindowName = "Attribute Overview Chinese";
+        public const string OVERVIEW_PRO = ROOT + "/Attributes Overview Pro";
+        public const int OVERVIEW_PRO_PRIORITY = 5;
+        public const string OVERVIEW_PRO_WINDOW_NAME = "Attributes Overview Pro";
 
         #endregion
 
@@ -69,25 +64,12 @@ namespace Yuumix.OdinToolkits.Editor.Core
 
         #region 495 Community
 
-        public const string CommunityMenuItemName = ROOT_MENU_ITEM_NAME + "/Community";
-        public const int CommunityPriority = 495;
-        public const string CommunityWindowNameCn = "社区贡献窗口";
-        public const string CommunityWindowNameEn = "Community Window";
+        public const string COMMUNITY = ROOT + "/Community";
+        public const int COMMUNITY_PRIORITY = 495;
+        public const string COMMUNITY_WINDOW_NAME = "Community";
 
         #endregion
 
-        #region 500 Help
-
-        public const string HelpMenuItemName = ROOT_MENU_ITEM_NAME + "/Help";
-        public const int HelpWindowPriority = 500;
-        public const string HelpWindowNameCn = "Odin Toolkits 帮助窗口";
-        public const string HelpWindowNameEn = "Odin Toolkits Help Window";
-
-        #endregion
-
-        [Obsolete]
-        public const string ResolvedParametersMenuItemName = CommunityMenuItemName + "/Resolved Parameters Overview";
-        public const int ResolvedParametersPriority = 15;
         public const string ResolvedParametersOverviewWindowName = "Resolved Parameters Overview";
     }
 }

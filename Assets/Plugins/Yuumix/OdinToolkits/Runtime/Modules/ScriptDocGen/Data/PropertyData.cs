@@ -1,11 +1,9 @@
-using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Shared;
-using Yuumix.OdinToolkits.LowLevel;
 
 namespace Yuumix.OdinToolkits
 {
@@ -34,7 +32,7 @@ namespace Yuumix.OdinToolkits
                     : AccessModifierType.None,
                 setMethodAccessModifierType = propertyInfo.GetSetMethod(true) != null
                     ? propertyInfo.GetSetMethod(true).GetMethodAccessModifierType()
-                    : AccessModifierType.None,
+                    : AccessModifierType.None
             };
             propertyData.accessModifier = propertyData.memberAccessModifierType.GetAccessModifierString();
             propertyData.getMethodAccessModifier = propertyData.getMethodAccessModifierType.GetAccessModifierString();

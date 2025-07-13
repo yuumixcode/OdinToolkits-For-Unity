@@ -1,7 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Yuumix.OdinToolkits.OdinAttributeOverviewChinese
+namespace Yuumix.OdinToolkits
 {
     public class DisallowModificationsInPrefabComponent : MonoBehaviour
     {

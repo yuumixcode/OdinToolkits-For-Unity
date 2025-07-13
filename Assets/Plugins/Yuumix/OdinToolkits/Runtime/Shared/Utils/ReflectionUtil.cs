@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Yuumix.OdinToolkits.Shared;
 
-namespace Yuumix.OdinToolkits.LowLevel
+namespace Yuumix.OdinToolkits.Shared
 {
     public enum AccessModifierType
     {
@@ -35,7 +34,7 @@ namespace Yuumix.OdinToolkits.LowLevel
         {
             try
             {
-                var assemblies = AppDomain.CurrentDomain.GetAssemblies()
+                Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies()
                     .Where(assembly => assembly.FullName.Contains(partOfAssemblyName))
                     .ToArray();
                 return assemblies.Length > 0 ? assemblies : Array.Empty<Assembly>();
@@ -48,8 +47,8 @@ namespace Yuumix.OdinToolkits.LowLevel
 
         public static List<string> GetNamespacesInAssembly(Assembly assembly)
         {
-            var types = assembly.GetTypes();
-            var namespaces = types.Select(type => type.Namespace)
+            Type[] types = assembly.GetTypes();
+            List<string> namespaces = types.Select(type => type.Namespace)
                 .Where(ns => ns != null)
                 .Distinct()
                 .ToList();
@@ -58,19 +57,19 @@ namespace Yuumix.OdinToolkits.LowLevel
 
         public static string GetReadableEventReturnType(this EventInfo eventInfo)
         {
-            var eventHandlerType = eventInfo.EventHandlerType;
-            var invokeMethod = eventHandlerType.GetMethod("Invoke");
+            Type eventHandlerType = eventInfo.EventHandlerType;
+            MethodInfo invokeMethod = eventHandlerType.GetMethod("Invoke");
             // 这里默认情况下不可能为空，因为事件类型肯定有Invoke方法
             if (invokeMethod == null)
             {
                 return "Action";
             }
 
-            var parameters = invokeMethod.GetParameters();
-            var paramTypes = parameters.Select(p => p.ParameterType.GetReadableTypeName()).ToList();
+            ParameterInfo[] parameters = invokeMethod.GetParameters();
+            List<string> paramTypes = parameters.Select(p => p.ParameterType.GetReadableTypeName()).ToList();
             if (invokeMethod.ReturnType != typeof(void))
             {
-                var returnType = invokeMethod.ReturnType.GetReadableTypeName();
+                string returnType = invokeMethod.ReturnType.GetReadableTypeName();
                 if (paramTypes.Count > 0)
                 {
                     return $"Func<{string.Join(", ", paramTypes)}, {returnType}>";
@@ -124,8 +123,8 @@ namespace Yuumix.OdinToolkits.LowLevel
 
         public static AccessModifierType GetPropertyAccessModifierType(this PropertyInfo property)
         {
-            var getMethod = property.GetGetMethod(true);
-            var setMethod = property.GetSetMethod(true);
+            MethodInfo getMethod = property.GetGetMethod(true);
+            MethodInfo setMethod = property.GetSetMethod(true);
 
             AccessModifierType? getAccess = getMethod != null ? GetMethodAccessModifierType(getMethod) : null;
             AccessModifierType? setAccess = setMethod != null ? GetMethodAccessModifierType(setMethod) : null;
@@ -187,9 +186,9 @@ namespace Yuumix.OdinToolkits.LowLevel
 
         public static AccessModifierType GetEventAccessModifierType(this EventInfo eventInfo)
         {
-            var addMethod = eventInfo.GetAddMethod(true);
-            var removeMethod = eventInfo.GetRemoveMethod(true);
-            var invokeMethod = eventInfo.GetRaiseMethod(true);
+            MethodInfo addMethod = eventInfo.GetAddMethod(true);
+            MethodInfo removeMethod = eventInfo.GetRemoveMethod(true);
+            MethodInfo invokeMethod = eventInfo.GetRaiseMethod(true);
             if (invokeMethod != null)
             {
                 return GetMethodAccessModifierType(invokeMethod);
@@ -218,9 +217,9 @@ namespace Yuumix.OdinToolkits.LowLevel
 
         public static string GetMethodFullSignature(this MethodInfo method)
         {
-            var parameters = string.Join(", ",
+            string parameters = string.Join(", ",
                 method.GetParameters().Select(p => $"{p.ParameterType.GetReadableTypeName()} {p.Name}"));
-            var returnType = method.ReturnType.GetReadableTypeName();
+            string returnType = method.ReturnType.GetReadableTypeName();
             var fullSignature = $"{returnType} {method.Name}({parameters})";
             fullSignature = FillSignature(method, fullSignature);
             return fullSignature;
@@ -279,16 +278,13 @@ namespace Yuumix.OdinToolkits.LowLevel
             };
         }
 
-        public static bool IsConstantField(this FieldInfo field)
-        {
-            return field.IsLiteral && !field.IsInitOnly;
-        }
+        public static bool IsConstantField(this FieldInfo field) => field.IsLiteral && !field.IsInitOnly;
 
         public static bool IsStaticEvent(this EventInfo eventInfo)
         {
-            var addMethod = eventInfo.GetAddMethod(true);
-            var removeMethod = eventInfo.GetRemoveMethod(true);
-            var invokeMethod = eventInfo.GetRaiseMethod(true);
+            MethodInfo addMethod = eventInfo.GetAddMethod(true);
+            MethodInfo removeMethod = eventInfo.GetRemoveMethod(true);
+            MethodInfo invokeMethod = eventInfo.GetRaiseMethod(true);
             if (invokeMethod != null)
             {
                 return invokeMethod.IsStatic;
@@ -306,6 +302,5 @@ namespace Yuumix.OdinToolkits.LowLevel
 
             return false;
         }
-        
     }
 }

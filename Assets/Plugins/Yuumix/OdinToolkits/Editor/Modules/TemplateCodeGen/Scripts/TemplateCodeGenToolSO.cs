@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Yuumix.OdinToolkits.Core;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using UnityEngine;
-using Yuumix.OdinToolkits.Shared;
+using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Editor.Shared;
 using YuumixEditor;
 

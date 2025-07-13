@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using Yuumix.OdinToolkits.Shared;
+using Yuumix.OdinToolkits.Core;
 
-namespace Yuumix.OdinToolkits.LowLevel
+namespace Yuumix.OdinToolkits.Shared
 {
     public static class HierarchyUtil
     {
@@ -14,8 +14,8 @@ namespace Yuumix.OdinToolkits.LowLevel
                 return "ParentPath == null";
             }
 
-            var parentPathArray = parentPath.Split('/');
-            var childPathArray = childPath.Split('/');
+            string[] parentPathArray = parentPath.Split('/');
+            string[] childPathArray = childPath.Split('/');
             var targetPathList = new List<string>();
             if (parentPathArray.Where((path, i) => childPathArray[i] != path).Any())
             {
@@ -23,7 +23,7 @@ namespace Yuumix.OdinToolkits.LowLevel
                 return null;
             }
 
-            for (var i = parentPathArray.Length; i < childPathArray.Length; i++)
+            for (int i = parentPathArray.Length; i < childPathArray.Length; i++)
             {
                 targetPathList.Add(childPathArray[i]);
             }

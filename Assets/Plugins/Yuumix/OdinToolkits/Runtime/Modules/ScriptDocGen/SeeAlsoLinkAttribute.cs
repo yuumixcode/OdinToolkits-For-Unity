@@ -8,9 +8,6 @@ namespace Yuumix.OdinToolkits.Shared
     {
         public readonly string Link;
 
-        public SeeAlsoLinkAttribute(string link)
-        {
-            Link = link;
-        }
+        public SeeAlsoLinkAttribute(string link) => Link = link;
     }
 }

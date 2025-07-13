@@ -3,11 +3,11 @@ using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEngine;
-using Yuumix.OdinToolkits.Modules.CustomExtensions.Classes;
+using Yuumix.OdinToolkits.Shared;
 using GUIContent = UnityEngine.GUIContent;
 using Object = UnityEngine.Object;
 
-namespace Plugins.Yuumix.OdinToolkits.Editor.Common.Drawers
+namespace Yuumix.OdinToolkits.Editor.Shared
 {
     /// <summary>
     /// 按 Odin 的绘制流程绘制 OdinInterfaceReference&lt;TInterface, TObject&gt; 类型 <br />

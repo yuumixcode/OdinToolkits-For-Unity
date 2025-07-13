@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 
-namespace Yuumix.OdinToolkits.LowLevel
+namespace Yuumix.OdinToolkits.Shared
 {
     /// <summary>
     /// 预定义的程序集类型枚举
@@ -59,10 +60,11 @@ namespace Yuumix.OdinToolkits.LowLevel
         public static List<Type> GetRuntimeTypesWithInterface(Type interfaceType)
         {
             var targetTypes = new List<Type>();
-            var assemblyTypes = GetRuntimeTypesMap();
-            assemblyTypes.TryGetValue(PredefinedAssemblyType.AssemblyCSharp, out var assemblyCSharpTypes);
+            Dictionary<PredefinedAssemblyType, Type[]> assemblyTypes = GetRuntimeTypesMap();
+            assemblyTypes.TryGetValue(PredefinedAssemblyType.AssemblyCSharp, out Type[] assemblyCSharpTypes);
             AddTypesFromAssembly(assemblyCSharpTypes, interfaceType, targetTypes);
-            assemblyTypes.TryGetValue(PredefinedAssemblyType.AssemblyCSharpFirstPass, out var assemblyCSharpFirstPassTypes);
+            assemblyTypes.TryGetValue(PredefinedAssemblyType.AssemblyCSharpFirstPass,
+                out Type[] assemblyCSharpFirstPassTypes);
             AddTypesFromAssembly(assemblyCSharpFirstPassTypes, interfaceType, targetTypes);
             return targetTypes;
         }
@@ -82,7 +84,7 @@ namespace Yuumix.OdinToolkits.LowLevel
 
             for (var i = 0; i < assemblyTypes.Length; i++)
             {
-                var type = assemblyTypes[i];
+                Type type = assemblyTypes[i];
                 if (type != interfaceType && interfaceType.IsAssignableFrom(type))
                 {
                     results.Add(type);
@@ -96,11 +98,11 @@ namespace Yuumix.OdinToolkits.LowLevel
         /// <returns>包含预定义程序集类型及其对应类型的字典</returns>
         static Dictionary<PredefinedAssemblyType, Type[]> GetRuntimeTypesMap()
         {
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
             var assemblyTypes = new Dictionary<PredefinedAssemblyType, Type[]>();
             for (var i = 0; i < assemblies.Length; i++)
             {
-                var assemblyType = GetAssemblyType(assemblies[i].GetName().Name);
+                PredefinedAssemblyType? assemblyType = GetAssemblyType(assemblies[i].GetName().Name);
                 if (assemblyType != null)
                 {
                     assemblyTypes.Add((PredefinedAssemblyType)assemblyType, assemblies[i].GetTypes());

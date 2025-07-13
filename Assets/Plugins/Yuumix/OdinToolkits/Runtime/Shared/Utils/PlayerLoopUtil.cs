@@ -4,40 +4,56 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.LowLevel;
 
-namespace Yuumix.OdinToolkits.LowLevel
+namespace Yuumix.OdinToolkits.Shared
 {
     public static class PlayerLoopUtil
     {
         public static void RemoveSystem<T>(ref PlayerLoopSystem loop, PlayerLoopSystem systemToRemove)
         {
-            if (loop.subSystemList == null || loop.subSystemList.Length == 0) return;
+            if (loop.subSystemList == null || loop.subSystemList.Length == 0)
+            {
+                return;
+            }
 
             var playerLoopSystemList = new List<PlayerLoopSystem>(loop.subSystemList);
             for (var i = 0; i < playerLoopSystemList.Count; ++i)
+            {
                 if (playerLoopSystemList[i].type == systemToRemove.type &&
                     playerLoopSystemList[i].updateDelegate == systemToRemove.updateDelegate)
                 {
                     playerLoopSystemList.RemoveAt(i);
                     loop.subSystemList = playerLoopSystemList.ToArray();
                 }
+            }
 
             HandleSubSystemLoopForRemoval<T>(ref loop, systemToRemove);
         }
 
         static void HandleSubSystemLoopForRemoval<T>(ref PlayerLoopSystem loop, PlayerLoopSystem systemToRemove)
         {
-            if (loop.subSystemList == null || loop.subSystemList.Length == 0) return;
+            if (loop.subSystemList == null || loop.subSystemList.Length == 0)
+            {
+                return;
+            }
 
             for (var i = 0; i < loop.subSystemList.Length; ++i)
+            {
                 RemoveSystem<T>(ref loop.subSystemList[i], systemToRemove);
+            }
         }
 
         public static bool InsertSystem<T>(ref PlayerLoopSystem loop, PlayerLoopSystem systemToInsert, int index)
         {
-            if (loop.type != typeof(T)) return HandleSubSystemLoop<T>(ref loop, systemToInsert, index);
+            if (loop.type != typeof(T))
+            {
+                return HandleSubSystemLoop<T>(ref loop, systemToInsert, index);
+            }
 
             var playerLoopSystemList = new List<PlayerLoopSystem>();
-            if (loop.subSystemList != null) playerLoopSystemList.AddRange(loop.subSystemList);
+            if (loop.subSystemList != null)
+            {
+                playerLoopSystemList.AddRange(loop.subSystemList);
+            }
 
             playerLoopSystemList.Insert(index, systemToInsert);
             loop.subSystemList = playerLoopSystemList.ToArray();
@@ -46,11 +62,17 @@ namespace Yuumix.OdinToolkits.LowLevel
 
         static bool HandleSubSystemLoop<T>(ref PlayerLoopSystem loop, PlayerLoopSystem systemToInsert, int index)
         {
-            if (loop.subSystemList == null || loop.subSystemList.Length == 0) return false;
+            if (loop.subSystemList == null || loop.subSystemList.Length == 0)
+            {
+                return false;
+            }
 
             for (var i = 0; i < loop.subSystemList.Length; ++i)
             {
-                if (!InsertSystem<T>(ref loop.subSystemList[i], systemToInsert, index)) continue;
+                if (!InsertSystem<T>(ref loop.subSystemList[i], systemToInsert, index))
+                {
+                    continue;
+                }
 
                 return true;
             }
@@ -62,7 +84,10 @@ namespace Yuumix.OdinToolkits.LowLevel
         {
             var sb = new StringBuilder();
             sb.AppendLine("Unity Player Loop:");
-            foreach (var subSystem in loop.subSystemList) PrintSubSystem(subSystem, sb, 0);
+            foreach (PlayerLoopSystem subSystem in loop.subSystemList)
+            {
+                PrintSubSystem(subSystem, sb, 0);
+            }
 
             Debug.Log(sb.ToString());
         }
@@ -77,23 +102,27 @@ namespace Yuumix.OdinToolkits.LowLevel
         {
             // 在字符串构建器中添加当前子系统的类型信息，并换行
             sb.Append(' ', depth * 2).AppendLine(system.type.ToString());
-            if (system.subSystemList == null || system.subSystemList.Length == 0) return;
+            if (system.subSystemList == null || system.subSystemList.Length == 0)
+            {
+                return;
+            }
 
             // 遍历当前子系统的所有子子系统，并递归调用PrintSubSystem进行打印
-            foreach (var subSubSystem in system.subSystemList) PrintSubSystem(subSubSystem, sb, depth + 1);
+            foreach (PlayerLoopSystem subSubSystem in system.subSystemList)
+            {
+                PrintSubSystem(subSubSystem, sb, depth + 1);
+            }
         }
 
         public static PlayerLoopSystem GetNewCustomPlayerLoopSystem(
             Type target, PlayerLoopSystem.UpdateFunction update = default, IntPtr loopCondition = default,
-            PlayerLoopSystem[] subSystems = null)
-        {
-            return new PlayerLoopSystem
+            PlayerLoopSystem[] subSystems = null) =>
+            new PlayerLoopSystem
             {
                 type = target,
                 updateDelegate = update,
                 loopConditionFunction = loopCondition,
                 subSystemList = subSystems
             };
-        }
     }
 }

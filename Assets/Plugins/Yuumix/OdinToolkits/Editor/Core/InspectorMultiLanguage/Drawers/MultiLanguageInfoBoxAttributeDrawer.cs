@@ -1,13 +1,12 @@
-using Yuumix.OdinToolkits.Core;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.OdinInspector.Editor.ValueResolvers;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
-using Yuumix.OdinToolkits.Shared;
+using Yuumix.OdinToolkits.Core;
 
-namespace Yuumix.OdinToolkits.Editor.Shared
+namespace Yuumix.OdinToolkits.Editor.Core
 {
     [DrawerPriority(0.0, 10001.0)]
     public class MultiLanguageInfoBoxAttributeDrawer : OdinAttributeDrawer<MultiLanguageInfoBoxAttribute>
@@ -41,8 +40,8 @@ namespace Yuumix.OdinToolkits.Editor.Shared
                     break;
             }
 
-            InspectorMultiLanguageManagerSO.OnLanguageChange -= ReloadResolver;
-            InspectorMultiLanguageManagerSO.OnLanguageChange += ReloadResolver;
+            InspectorMultiLanguageSetting.OnLanguageChange -= ReloadResolver;
+            InspectorMultiLanguageSetting.OnLanguageChange += ReloadResolver;
         }
 
         void ReloadResolver()

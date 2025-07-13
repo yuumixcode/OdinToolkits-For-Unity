@@ -1,5 +1,4 @@
 using Sirenix.OdinInspector;
-
 #if UNITY_EDITOR
 using YuumixEditor;
 #endif

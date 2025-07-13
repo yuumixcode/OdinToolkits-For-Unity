@@ -1,4 +1,4 @@
-namespace Yuumix.OdinToolkits.Modules.CustomExtensions
+namespace Yuumix.OdinToolkits.Shared
 {
     /// <summary>
     /// 类型种类枚举

@@ -1,13 +1,9 @@
-using Sirenix.OdinInspector;
-using Sirenix.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Yuumix.OdinToolkits.Core;
-using UnityEngine;
 using Yuumix.OdinToolkits.Shared;
-using Yuumix.OdinToolkits.LowLevel;
 
 namespace Yuumix.OdinToolkits
 {
@@ -22,7 +18,7 @@ namespace Yuumix.OdinToolkits
                 belongToType = type.FullName,
                 declaringType = eventInfo.DeclaringType?.FullName,
                 memberAccessModifierType = eventInfo.GetEventAccessModifierType(),
-                returnType = ReflectionUtil.GetReadableEventReturnType(eventInfo),
+                returnType = eventInfo.GetReadableEventReturnType(),
                 isStatic = eventInfo.IsStaticEvent(),
                 isObsolete = eventInfo.IsDefined(typeof(ObsoleteAttribute)),
                 name = eventInfo.Name

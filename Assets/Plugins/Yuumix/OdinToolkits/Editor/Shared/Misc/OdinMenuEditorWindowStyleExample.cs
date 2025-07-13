@@ -3,7 +3,7 @@ using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEngine;
 
-namespace Plugins.Yuumix.OdinToolkits.Editor.Common.Misc
+namespace Yuumix.OdinToolkits.Editor.Shared
 {
     public class OdinMenuEditorWindowStyleExample : OdinMenuEditorWindow
     {

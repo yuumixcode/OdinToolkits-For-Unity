@@ -1,6 +1,6 @@
 using System;
 
-namespace Yuumix.OdinToolkits.Modules.Singleton
+namespace Yuumix.OdinToolkits
 {
     /// <summary>
     /// 单例助手类，用于无法继承单例抽象类的类实现单例模式。

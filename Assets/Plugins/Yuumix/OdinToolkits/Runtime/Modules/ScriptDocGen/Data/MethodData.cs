@@ -4,14 +4,13 @@ using System.Linq;
 using System.Reflection;
 using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Shared;
-using Yuumix.OdinToolkits.LowLevel;
 
 namespace Yuumix.OdinToolkits
 {
     [Serializable]
     public class MethodData : MemberData
     {
-        public static Dictionary<string, string> OperatorStringMap = new Dictionary<string, string>()
+        public static Dictionary<string, string> OperatorStringMap = new Dictionary<string, string>
         {
             // 算术运算符
             { "op_Addition", "operator +" },
@@ -65,7 +64,7 @@ namespace Yuumix.OdinToolkits
             { "op_MemberAccess", "operator ->" },
             { "op_Index", "operator []" },
             { "op_AddressOf", "operator &" },
-            { "op_PointerDereference", "operator * " },
+            { "op_PointerDereference", "operator * " }
         };
 
         public bool isAbstract;
@@ -85,7 +84,7 @@ namespace Yuumix.OdinToolkits
                 isAbstract = methodInfo.IsAbstract,
                 isVirtual = methodInfo.IsVirtual,
                 name = methodInfo.Name,
-                returnType = methodInfo.ReturnType.GetReadableTypeName(),
+                returnType = methodInfo.ReturnType.GetReadableTypeName()
             };
             methodData.accessModifier = methodData.memberAccessModifierType.GetAccessModifierString();
             var keyword = "";
@@ -106,11 +105,11 @@ namespace Yuumix.OdinToolkits
                 keyword = "virtual(override) ";
             }
 
-            var methodName = methodInfo.GetFullMethodName("[Ext]");
+            string methodName = methodInfo.GetFullMethodName("[Ext]");
             if (methodInfo.IsSpecialName && methodInfo.Name.StartsWith("op"))
             {
                 methodData.isOperator = true;
-                foreach (var variable in OperatorStringMap
+                foreach (KeyValuePair<string, string> variable in OperatorStringMap
                              .Where(variable => methodInfo.Name.Contains(variable.Key)))
                 {
                     methodName = methodName.Replace(variable.Key, variable.Value);

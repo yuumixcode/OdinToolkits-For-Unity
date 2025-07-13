@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Yuumix.OdinToolkits.Modules.Singleton
+namespace Yuumix.OdinToolkits
 {
     public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T>
     {

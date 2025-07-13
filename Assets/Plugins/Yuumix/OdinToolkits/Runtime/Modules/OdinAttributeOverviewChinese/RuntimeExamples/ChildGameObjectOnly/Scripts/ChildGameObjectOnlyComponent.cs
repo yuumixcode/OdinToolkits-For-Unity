@@ -1,8 +1,8 @@
-using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Yuumix.OdinToolkits.OdinAttributeOverviewChinese
+namespace Yuumix.OdinToolkits
 {
     public class ChildGameObjectOnlyComponent : MonoBehaviour
     {

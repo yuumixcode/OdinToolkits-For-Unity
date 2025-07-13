@@ -6,9 +6,9 @@ using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
-using Yuumix.OdinToolkits.Modules.CustomExtensions;
+using Yuumix.OdinToolkits.Shared;
 
-namespace Plugins.Yuumix.OdinToolkits.Editor.Common.Drawers
+namespace Yuumix.OdinToolkits.Editor.Shared
 {
     public class SwitchButtonAttributeDrawer : OdinAttributeDrawer<SwitchButtonAttribute, bool>
     {

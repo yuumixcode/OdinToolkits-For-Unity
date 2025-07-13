@@ -1,6 +1,5 @@
 using System;
 using Sirenix.OdinInspector;
-using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.Core
 {
@@ -26,12 +25,12 @@ namespace Yuumix.OdinToolkits.Core
         [HideLabel]
         [ShowInInspector]
         [EnableGUI]
-        public string ChineseDisplay { get; }
+        public string ChineseDisplay { get; set; }
 
         [ShowIfEnglish]
         [HideLabel]
         [ShowInInspector]
         [EnableGUI]
-        public string EnglishDisplay { get; }
+        public string EnglishDisplay { get; set; }
     }
 }

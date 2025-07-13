@@ -1,12 +1,11 @@
-using Yuumix.OdinToolkits.Core;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.OdinInspector.Editor.ValueResolvers;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
-using Yuumix.OdinToolkits.Shared;
+using Yuumix.OdinToolkits.Core;
 
-namespace Yuumix.OdinToolkits.Editor.Shared
+namespace Yuumix.OdinToolkits.Editor.Core
 {
     public class MultiLanguageTitleGroupAttributeDrawer : OdinGroupDrawer<MultiLanguageTitleGroupAttribute>
     {
@@ -16,8 +15,8 @@ namespace Yuumix.OdinToolkits.Editor.Shared
         protected override void Initialize()
         {
             ReloadResolver();
-            InspectorMultiLanguageManagerSO.OnLanguageChange -= ReloadResolver;
-            InspectorMultiLanguageManagerSO.OnLanguageChange += ReloadResolver;
+            InspectorMultiLanguageSetting.OnLanguageChange -= ReloadResolver;
+            InspectorMultiLanguageSetting.OnLanguageChange += ReloadResolver;
         }
 
         protected override void DrawPropertyLayout(GUIContent label)

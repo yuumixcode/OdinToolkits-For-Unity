@@ -1,7 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Yuumix.OdinToolkits.Modules.Singleton
+namespace Yuumix.OdinToolkits
 {
     public abstract class OdinSingleton<T> : SerializedMonoBehaviour where T : OdinSingleton<T>
     {

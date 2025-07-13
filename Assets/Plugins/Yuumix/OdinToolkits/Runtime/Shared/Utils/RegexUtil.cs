@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Yuumix.OdinToolkits.LowLevel
+namespace Yuumix.OdinToolkits.Shared
 {
     public static class RegexUtil
     {
@@ -17,7 +17,7 @@ namespace Yuumix.OdinToolkits.LowLevel
             var foundFirstLetter = false;
             var firstValidator = new StringBuilder();
 
-            foreach (var c in input)
+            foreach (char c in input)
             {
                 // 检查字符是否为字母
                 if (char.IsLetter(c))

@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using Sirenix.Utilities;
 using UnityEditor;
-using Yuumix.OdinToolkits.Shared;
+using Yuumix.OdinToolkits.Core;
 
 namespace YuumixEditor
 {

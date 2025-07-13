@@ -1,4 +1,4 @@
-namespace Yuumix.OdinToolkits.Modules.Singleton
+namespace Yuumix.OdinToolkits
 {
     public interface ISingleton
     {

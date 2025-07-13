@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace Yuumix.OdinToolkits.Modules.Singleton
+namespace Yuumix.OdinToolkits
 {
     public static class SingletonCreator
     {
@@ -15,9 +15,9 @@ namespace Yuumix.OdinToolkits.Modules.Singleton
         public static T PrivateCreateInstance<T>() where T : class
         {
             // 获取指定类型的实例
-            var type = typeof(T);
+            Type type = typeof(T);
             // 获取私有无参构造函数
-            var constructor = type.GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic,
+            ConstructorInfo constructor = type.GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic,
                 null, Type.EmptyTypes, null);
             // 如果没有找到私有无参构造函数，则抛出异常
             if (constructor == null)

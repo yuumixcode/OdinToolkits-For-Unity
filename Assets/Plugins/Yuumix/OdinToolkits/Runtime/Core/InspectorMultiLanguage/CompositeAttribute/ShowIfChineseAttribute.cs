@@ -5,8 +5,8 @@ using Sirenix.OdinInspector;
 namespace Yuumix.OdinToolkits.Core
 {
     [IncludeMyAttributes]
-    [ShowIf("@" + nameof(InspectorMultiLanguageManagerSO) + "." +
-            nameof(InspectorMultiLanguageManagerSO.IsChinese),
+    [ShowIf("@" + nameof(InspectorMultiLanguageSetting) + "." +
+            nameof(InspectorMultiLanguageSetting.IsChinese),
         false)]
     [DontApplyToListElements]
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]

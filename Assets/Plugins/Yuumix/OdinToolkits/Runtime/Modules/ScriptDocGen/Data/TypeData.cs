@@ -1,13 +1,11 @@
-using Sirenix.OdinInspector;
-using Sirenix.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using Yuumix.OdinToolkits.Core;
-using UnityEngine;
 using Yuumix.OdinToolkits.Shared;
-using Yuumix.OdinToolkits.Modules.CustomExtensions;
 
 namespace Yuumix.OdinToolkits
 {
@@ -110,7 +108,7 @@ namespace Yuumix.OdinToolkits
 
         public static string[] GetSeeAlsoLink(Type type)
         {
-            var links = type.GetAttributes<SeeAlsoLinkAttribute>();
+            IEnumerable<SeeAlsoLinkAttribute> links = type.GetAttributes<SeeAlsoLinkAttribute>();
             return links.Select(x => x.Link).ToArray();
         }
 
@@ -134,8 +132,8 @@ namespace Yuumix.OdinToolkits
             "Only get public and instance constructors,exclude static or no-public")]
         public static ConstructorData[] GetConstructorsString(Type type)
         {
-            var constructors = type.GetConstructors();
-            var dataList = constructors.Select(x => ConstructorData.FromConstructorInfo(x, type))
+            ConstructorInfo[] constructors = type.GetConstructors();
+            List<ConstructorData> dataList = constructors.Select(x => ConstructorData.FromConstructorInfo(x, type))
                 .ToList();
             dataList.Sort(new MemberComparer());
             return dataList.ToArray();
@@ -145,14 +143,14 @@ namespace Yuumix.OdinToolkits
             "Get fields' declaration string list")]
         public static FieldData[] GetFieldsString(Type type, bool noNeedFromInherit = true)
         {
-            var fields = type.GetUserDefinedFields().ToArray();
-            var events = type.GetRuntimeEvents().ToArray();
-            var eventNames = events.Select(e => e.Name).ToList();
+            FieldInfo[] fields = type.GetUserDefinedFields().ToArray();
+            EventInfo[] events = type.GetRuntimeEvents().ToArray();
+            List<string> eventNames = events.Select(e => e.Name).ToList();
 
             // 过滤掉已经定义为事件的字段
             fields = fields.Where(f => !eventNames.Contains(f.Name)).ToArray();
 
-            var enumerable = fields.Select(x => FieldData.FromFieldInfo(x, type));
+            IEnumerable<FieldData> enumerable = fields.Select(x => FieldData.FromFieldInfo(x, type));
             List<FieldData> fieldDataList;
             if (noNeedFromInherit)
             {
@@ -172,8 +170,8 @@ namespace Yuumix.OdinToolkits
             "Get methods' declaration string list")]
         public static MethodData[] GetMethodsString(Type type, bool noNeedFromInherit = true)
         {
-            var methods = type.GetRuntimeMethods().Where(x => !x.IsSpecialName);
-            var enumerable = methods.Select(x => MethodData.FromMethodInfo(x, type));
+            IEnumerable<MethodInfo> methods = type.GetRuntimeMethods().Where(x => !x.IsSpecialName);
+            IEnumerable<MethodData> enumerable = methods.Select(x => MethodData.FromMethodInfo(x, type));
             List<MethodData> methodDataList;
             if (noNeedFromInherit)
             {
@@ -193,8 +191,8 @@ namespace Yuumix.OdinToolkits
             "Get properties' declaration string list")]
         public static PropertyData[] GetPropertiesString(Type type, bool noNeedFromInherit = true)
         {
-            var properties = type.GetRuntimeProperties().ToArray();
-            var enumerable = properties.Select(x => PropertyData.FromPropertyInfo(x, type));
+            PropertyInfo[] properties = type.GetRuntimeProperties().ToArray();
+            IEnumerable<PropertyData> enumerable = properties.Select(x => PropertyData.FromPropertyInfo(x, type));
             List<PropertyData> propertyDataList;
             if (noNeedFromInherit)
             {
@@ -214,8 +212,8 @@ namespace Yuumix.OdinToolkits
             "Get events' declaration string list")]
         public static EventData[] GetEventsString(Type type, bool noNeedFromInherit = true)
         {
-            var events = type.GetRuntimeEvents().ToArray();
-            var enumerable = events.Select(x => EventData.FromEventInfo(x, type));
+            EventInfo[] events = type.GetRuntimeEvents().ToArray();
+            IEnumerable<EventData> enumerable = events.Select(x => EventData.FromEventInfo(x, type));
             List<EventData> eventDataList;
             if (noNeedFromInherit)
             {

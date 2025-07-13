@@ -1,14 +1,11 @@
-using Yuumix.OdinToolkits.Core;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
-using Yuumix.OdinToolkits.Shared;
+using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Editor.Core;
-using Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor;
-using Yuumix.OdinToolkits.Editor;
 
 namespace Yuumix.OdinToolkits.Editor.Shared
 {
@@ -23,12 +20,12 @@ namespace Yuumix.OdinToolkits.Editor.Shared
             WindowPadding = new Vector4(10, 10, 10, 10);
             MenuWidth = 230;
             DrawMenuSearchBar = true;
-            InspectorMultiLanguageManagerSO.OnLanguageChange -= ReBuild;
-            InspectorMultiLanguageManagerSO.OnLanguageChange += ReBuild;
+            InspectorMultiLanguageSetting.OnLanguageChange -= ReBuild;
+            InspectorMultiLanguageSetting.OnLanguageChange += ReBuild;
             OnClose -= ClearEventListener;
             OnClose += ClearEventListener;
-            ScriptDocGenToolSO.OnToastEvent -= ShowToast;
-            ScriptDocGenToolSO.OnToastEvent += ShowToast;
+            ScriptDocGenToolSO.ToastEvent -= ShowToast;
+            ScriptDocGenToolSO.ToastEvent += ShowToast;
             TemplateCodeGenToolSO.ToastEvent -= ShowToast;
             TemplateCodeGenToolSO.ToastEvent += ShowToast;
         }
@@ -37,8 +34,8 @@ namespace Yuumix.OdinToolkits.Editor.Shared
         {
             if (!_hasAddListener)
             {
-                InspectorMultiLanguageManagerSO.OnLanguageChange -= ReBuild;
-                InspectorMultiLanguageManagerSO.OnLanguageChange += ReBuild;
+                InspectorMultiLanguageSetting.OnLanguageChange -= ReBuild;
+                InspectorMultiLanguageSetting.OnLanguageChange += ReBuild;
                 _hasAddListener = true;
             }
 
@@ -47,7 +44,8 @@ namespace Yuumix.OdinToolkits.Editor.Shared
 
         void ClearEventListener()
         {
-            ScriptDocGenToolSO.OnToastEvent -= ShowToast;
+            ScriptDocGenToolSO.ToastEvent -= ShowToast;
+            TemplateCodeGenToolSO.ToastEvent -= ShowToast;
         }
 
         void ReBuild()
@@ -60,12 +58,12 @@ namespace Yuumix.OdinToolkits.Editor.Shared
             TrySelectMenuItemWithObject(_selectionInstance);
         }
 
-        [MenuItem(OdinToolkitsWindowMenuItems.ToolsPackageMenuItemName, false,
-            OdinToolkitsWindowMenuItems.ToolsPackagePriority)]
+        [MenuItem(OdinToolkitsWindowMenuItems.TOOLS_PACKAGE_MENU_ITEM_NAME, false,
+            OdinToolkitsWindowMenuItems.TOOLS_PACKAGE_PRIORITY)]
         public static void ShowWindow()
         {
             var window = GetWindow<ToolsPackageWindow>();
-            window.titleContent = new GUIContent(OdinToolkitsWindowMenuItems.ToolsPackageWindowEnglishName);
+            window.titleContent = new GUIContent(OdinToolkitsWindowMenuItems.TOOLS_PACKAGE_WINDOW_ENGLISH_NAME);
             window.position = GUIHelper.GetEditorWindowRect().AlignCenter(1050, 750);
             window.minSize = new Vector2(500, 500);
             window.Show();

@@ -1,14 +1,12 @@
-using Sirenix.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
-using Yuumix.OdinToolkits.Core;
+using Sirenix.Utilities;
 using UnityEngine;
-using Yuumix.OdinToolkits.Shared;
-using Yuumix.OdinToolkits.Modules.CustomExtensions;
+using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.Shared
 {
@@ -165,7 +163,7 @@ namespace Yuumix.OdinToolkits.Shared
         public static string GetReadableTypeName(this Type type, bool useFullName = false)
         {
             // TypeExtensions
-            var targetTypeName = type.GetNiceName();
+            string targetTypeName = type.GetNiceName();
             if (useFullName)
             {
                 targetTypeName = type.GetNiceFullName();
@@ -177,7 +175,7 @@ namespace Yuumix.OdinToolkits.Shared
                 targetTypeName = targetTypeName[..^3];
             }
 
-            if (TypeAliasMap.TryGetValue(type, out var alias))
+            if (TypeAliasMap.TryGetValue(type, out string alias))
             {
                 targetTypeName = alias;
             }
@@ -238,11 +236,11 @@ namespace Yuumix.OdinToolkits.Shared
         public static string GetTypeDeclaration(this Type type)
         {
             var sb = new StringBuilder();
-            var attributes = type.GetCustomAttributes(false);
+            object[] attributes = type.GetCustomAttributes(false);
             // 1. 添加特性部分，只包含特性名称，不包含特性参数
-            foreach (var attr in attributes)
+            foreach (object attr in attributes)
             {
-                var attributeName = attr.GetType().Name;
+                string attributeName = attr.GetType().Name;
                 if (attributeName.EndsWith("Attribute"))
                 {
                     attributeName = attributeName[..^"Attribute".Length];
@@ -270,7 +268,7 @@ namespace Yuumix.OdinToolkits.Shared
             }
 
             // 4. 添加类型关键字
-            var category = type.GetTypeCategory();
+            TypeCategory category = type.GetTypeCategory();
             switch (category)
             {
                 case TypeCategory.Class:
@@ -305,7 +303,7 @@ namespace Yuumix.OdinToolkits.Shared
             }
 
             // 添加实现的接口，忽略编译时生成的接口，包含所有从基类继承的接口
-            var interfaces = type.GetInterfaces()
+            IEnumerable<Type> interfaces = type.GetInterfaces()
                 .Where(i => !i.IsDefined(typeof(CompilerGeneratedAttribute), false));
 
             inheritTypes.AddRange(interfaces.Select(x => x.GetReadableTypeName(true)));

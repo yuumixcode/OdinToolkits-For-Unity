@@ -3,8 +3,8 @@ using System.Globalization;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using Yuumix.OdinToolkits.Core;
 using UnityEngine;
+using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.Shared
 {
@@ -325,7 +325,7 @@ namespace Yuumix.OdinToolkits.Shared
 
             return count;
         }
-        
+
         /// <summary>
         /// 确保字符串以指定的后缀结尾
         /// </summary>

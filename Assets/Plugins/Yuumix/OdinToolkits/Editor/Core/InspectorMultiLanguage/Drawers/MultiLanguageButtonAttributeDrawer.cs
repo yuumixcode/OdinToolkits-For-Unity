@@ -1,12 +1,11 @@
 using System;
-using Yuumix.OdinToolkits.Core;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.OdinInspector.Editor.ValueResolvers;
 using UnityEngine;
-using Yuumix.OdinToolkits.Shared;
+using Yuumix.OdinToolkits.Core;
 
-namespace Yuumix.OdinToolkits.Editor.Shared
+namespace Yuumix.OdinToolkits.Editor.Core
 {
     [DrawerPriority(DrawerPriorityLevel.WrapperPriority)]
     public class MultiLanguageButtonAttributeDrawer : OdinAttributeDrawer<MultiLanguageButtonAttribute>
@@ -21,7 +20,7 @@ namespace Yuumix.OdinToolkits.Editor.Shared
             _chineseGetter = ValueResolver.GetForString(Property, Attribute.ChineseName);
             _englishGetter = ValueResolver.GetForString(Property, Attribute.EnglishName);
             _buttonAttribute.Name =
-                $"@InspectorMultiLanguageManagerSO.IsChinese ? \"{_chineseGetter.GetValue()}\" : \"{_englishGetter.GetValue()}\"";
+                $"@{nameof(InspectorMultiLanguageSetting)}.IsChinese ? \"{_chineseGetter.GetValue()}\" : \"{_englishGetter.GetValue()}\"";
         }
 
         protected override void DrawPropertyLayout(GUIContent label)
@@ -32,7 +31,7 @@ namespace Yuumix.OdinToolkits.Editor.Shared
         [Obsolete]
         void InvalidArchive()
         {
-            if (InspectorMultiLanguageManagerSO.IsChinese)
+            if (InspectorMultiLanguageSetting.IsChinese)
             {
                 _buttonAttribute.Name = "测试";
             }

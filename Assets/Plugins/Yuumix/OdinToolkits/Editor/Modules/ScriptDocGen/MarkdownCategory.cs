@@ -1,7 +1,7 @@
-namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
+namespace Yuumix.OdinToolkits.Editor
 {
     public enum MarkdownCategory
     {
-        MkDocsMaterial,
+        MkDocsMaterial
     }
 }

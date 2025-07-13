@@ -4,17 +4,17 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Yuumix.OdinToolkits.Editor.Shared;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
-using Yuumix.OdinToolkits.Shared;
 using Yuumix.OdinToolkits.Core;
+using Yuumix.OdinToolkits.Editor.Shared;
+using Yuumix.OdinToolkits.Shared;
 using YuumixEditor;
 
-namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
+namespace Yuumix.OdinToolkits.Editor
 {
     public class ScriptDocGenToolSO : OdinEditorScriptableSingleton<ScriptDocGenToolSO>, IOdinToolkitsReset
     {
@@ -35,7 +35,7 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
             .AppendLine("- `" + IdentifierTitle + "` 是标识符，由 `Odin Toolkits` 文档生成工具自动生成，请勿修改标题级别和内容。")
             .AppendLine("- `" + IdentifierTitle + "` 之后的内容将不会被覆盖，可以对文档补充说明。");
 
-        public static event Action<ToastPosition, SdfIconType, string, Color, float> OnToastEvent;
+        public static event Action<ToastPosition, SdfIconType, string, Color, float> ToastEvent;
 
         [PropertyOrder(-5)]
         public MultiLanguageHeaderWidget header = new MultiLanguageHeaderWidget(
@@ -78,7 +78,7 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
         static void SwitchToolMode()
         {
             Instance._singleDoc = !Instance._singleDoc;
-            RaiseOnToastEvent(ToastPosition.BottomRight, SdfIconType.InfoSquareFill,
+            RaiseToastEvent(ToastPosition.BottomRight, SdfIconType.InfoSquareFill,
                 Instance._singleDoc ? "成功切换为单文档生成模式" : "成功切换为多文档批量生成模式",
                 Color.white, 5f);
         }
@@ -158,7 +158,7 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
 
             Instance.typeData = TypeData.FromType(Instance.TargetType);
             Instance._thisHasAnalyzedSingle = true;
-            RaiseOnToastEvent(ToastPosition.BottomRight, SdfIconType.LightningFill,
+            RaiseToastEvent(ToastPosition.BottomRight, SdfIconType.LightningFill,
                 "正在解析目标类型，请勿重复点击！等待文档生成按钮显示",
                 Color.yellow, 5f);
         }
@@ -177,7 +177,7 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
                 Instance.typeDataList.Add(typeData);
             }
 
-            RaiseOnToastEvent(ToastPosition.BottomRight, SdfIconType.LightningFill,
+            RaiseToastEvent(ToastPosition.BottomRight, SdfIconType.LightningFill,
                 "正在解析目标类型，请勿重复点击！等待文档生成按钮显示",
                 Color.yellow, 5f);
             Instance._thisHasAnalyzedMultiple = true;
@@ -978,10 +978,10 @@ namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
 
         #endregion
 
-        static void RaiseOnToastEvent(ToastPosition position, SdfIconType icon, string msg,
+        static void RaiseToastEvent(ToastPosition position, SdfIconType icon, string msg,
             Color color, float duration)
         {
-            OnToastEvent?.Invoke(position, icon, msg, color, duration);
+            ToastEvent?.Invoke(position, icon, msg, color, duration);
         }
     }
 }

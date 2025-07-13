@@ -1,8 +1,8 @@
-using Sirenix.OdinInspector;
 using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Yuumix.OdinToolkits.Modules.Tools.SyntaxHighlighter.Editor
+namespace Yuumix.OdinToolkits.Editor
 {
     [Serializable]
     public class CustomSyntaxHighlighterColorGroup

@@ -1,5 +1,4 @@
 using System;
-using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Shared;
 
 namespace Yuumix.OdinToolkits.Core
@@ -20,12 +19,12 @@ namespace Yuumix.OdinToolkits.Core
 
         public string GetCurrentOrFallback()
         {
-            if (InspectorMultiLanguageManagerSO.IsChinese)
+            if (InspectorMultiLanguageSetting.IsChinese)
             {
                 return _chinese;
             }
 
-            if (InspectorMultiLanguageManagerSO.IsEnglish && !_english.IsNullOrWhiteSpace())
+            if (InspectorMultiLanguageSetting.IsEnglish && !_english.IsNullOrWhiteSpace())
             {
                 return _english;
             }

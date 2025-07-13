@@ -1,10 +1,9 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
-using Yuumix.OdinToolkits.Shared;
 
 namespace Yuumix.OdinToolkits.Core
 {
-    public sealed class Yuumix :
+    public class Yuumix :
 #if UNITY_EDITOR && (ODIN_INSPECTOR_3 || ODIN_INSPECTOR_3_1 || ODIN_INSPECTOR_3_2 || ODIN_INSPECTOR_3_3)
         SerializedMonoBehaviour
 #else
@@ -34,21 +33,20 @@ namespace Yuumix.OdinToolkits.Core
             }
         }
 
-        public OdinToolkitsRuntimeConfig OdinToolkitsRuntimeConfig
+        OdinToolkitsPreferencesSO _odinToolkitsPreferences;
+
+        public OdinToolkitsPreferencesSO OdinToolkitsPreferences
         {
             get
             {
-                if (!_odinToolkitsRuntimeConfig)
+                if (!_odinToolkitsPreferences)
                 {
-                    _odinToolkitsRuntimeConfig =
-                        Resources.Load<OdinToolkitsRuntimeConfig>("OdinToolkitsRuntimeConfig");
+                    _odinToolkitsPreferences = LoadPreferences();
                 }
 
-                return _odinToolkitsRuntimeConfig;
+                return _odinToolkitsPreferences;
             }
         }
-
-        OdinToolkitsRuntimeConfig _odinToolkitsRuntimeConfig;
 
         void Awake()
         {
@@ -71,12 +69,19 @@ namespace Yuumix.OdinToolkits.Core
             }
 
             // 初始加载一次
-            _odinToolkitsRuntimeConfig = Resources.Load<OdinToolkitsRuntimeConfig>("Runtime_OdinToolkitsRuntimeConfig");
-            if (!_odinToolkitsRuntimeConfig)
+            _odinToolkitsPreferences = LoadPreferences();
+        }
+
+        static OdinToolkitsPreferencesSO LoadPreferences()
+        {
+            var asset = Resources.Load<OdinToolkitsPreferencesSO>("OdinToolkitsPreferences");
+            if (!asset)
             {
-                YuumixLogger.EditorLogError("OdinToolkitsRuntimeConfig 配置资源加载失败，需要检查 Resources 路径！",
+                YuumixLogger.EditorLogError(nameof(OdinToolkitsPreferencesSO) + " 配置资源加载失败，需要检查 Resources 路径！",
                     prefix: "[Yuumix Error]");
             }
+
+            return asset;
         }
 
         void OnDestroy()
@@ -88,7 +93,7 @@ namespace Yuumix.OdinToolkits.Core
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        static void LaunchYuumix()
+        static void YuumixGameEntry()
         {
             _ = Instance;
         }

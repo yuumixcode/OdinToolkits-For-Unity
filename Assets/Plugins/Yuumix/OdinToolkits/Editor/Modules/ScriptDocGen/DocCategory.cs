@@ -1,7 +1,4 @@
-using Sirenix.OdinInspector;
-using Yuumix.OdinToolkits.Shared;
-
-namespace Yuumix.OdinToolkits.Modules.Tools.ScriptDocGen.Editor
+namespace Yuumix.OdinToolkits.Editor
 {
     public enum DocCategory
     {

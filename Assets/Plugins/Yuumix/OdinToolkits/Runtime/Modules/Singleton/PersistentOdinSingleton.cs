@@ -1,8 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
-using Yuumix.OdinToolkits.Shared;
 
-namespace Yuumix.OdinToolkits.Modules.Singleton
+namespace Yuumix.OdinToolkits
 {
     public abstract class PersistentOdinSingleton<T> : SerializedMonoBehaviour where T : PersistentOdinSingleton<T>
     {

@@ -1,6 +1,6 @@
 ﻿#if UNITY_EDITOR
 using UnityEditor;
-using Yuumix.OdinToolkits.Shared;
+using Yuumix.OdinToolkits.Core;
 using Object = UnityEngine.Object;
 
 namespace YuumixEditor

@@ -1,9 +1,7 @@
 using System;
 using System.Diagnostics;
-using Yuumix.OdinToolkits.Core;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using Yuumix.OdinToolkits.LowLevel;
 using Yuumix.OdinToolkits.Shared;
 
 namespace Yuumix.OdinToolkits.Core
@@ -18,9 +16,11 @@ namespace Yuumix.OdinToolkits.Core
         "Multi-language header widget, used for module description")]
     public class MultiLanguageHeaderWidget
     {
-        InspectorMultiLanguageManagerSO MultiLanguageManager => InspectorMultiLanguageManagerSO.Instance;
+        InspectorMultiLanguageSetting MultiLanguageManager =>
+            OdinToolkitsPreferencesSO.Instance.inspectorMultiLanguageSetting;
 
-        public MultiLanguageHeaderWidget(string chineseName, string englishName, string chineseIntroduction = null,
+        public MultiLanguageHeaderWidget(string chineseName, string englishName = null,
+            string chineseIntroduction = null,
             string englishIntroduction = null, string targetUrl = null)
         {
             headerName = new MultiLanguageDisplayAsStringWidget(chineseName, englishName);
@@ -36,11 +36,6 @@ namespace Yuumix.OdinToolkits.Core
 
         bool HideHeaderIntroduction => string.IsNullOrWhiteSpace(_chineseIntroduction) &&
                                        string.IsNullOrWhiteSpace(_englishIntroduction);
-
-        [PropertyOrder(-5)]
-        [HorizontalGroup("B/Left")]
-        [OnInspectorGUI]
-        public void HorizontalLeft() { }
 
         [PropertyOrder(0)]
         [BoxGroup("B", false)]
@@ -62,7 +57,7 @@ namespace Yuumix.OdinToolkits.Core
         void SwitchLanguage()
         {
             MultiLanguageManager.CurrentLanguage =
-                InspectorMultiLanguageManagerSO.IsChinese ? LanguageType.English : LanguageType.Chinese;
+                InspectorMultiLanguageSetting.IsChinese ? LanguageType.English : LanguageType.Chinese;
         }
 
         [PropertyOrder(10)]
@@ -87,5 +82,17 @@ namespace Yuumix.OdinToolkits.Core
         [VerticalGroup("B/Middle/1", PaddingBottom = 5f)]
         [MultiLanguageDisplayAsStringWidgetConfig(false, TextAlignment.Left, 13, true)]
         public MultiLanguageDisplayAsStringWidget headerIntroduction;
+
+        public MultiLanguageHeaderWidget ModifyWidget(string chineseName, string englishName = null,
+            string chineseIntroduction = null,
+            string englishIntroduction = null, string targetUrl = null)
+        {
+            headerName.ChineseDisplay = chineseName;
+            headerName.EnglishDisplay = englishName ?? chineseName;
+            headerIntroduction.ChineseDisplay = chineseIntroduction;
+            headerIntroduction.EnglishDisplay = englishIntroduction;
+            _targetUrl = targetUrl ?? "https://www.odintoolkits.cn/";
+            return this;
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Yuumix.OdinToolkits.Modules.Singleton
+namespace Yuumix.OdinToolkits
 {
     /// <summary>
     /// 一个通用的 C# 类对象的单例抽象类，使用 Lazy &lt;T&gt; 提供线程安全的单例实例获取方法。

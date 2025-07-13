@@ -1,13 +1,12 @@
-using Yuumix.OdinToolkits.Core;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.OdinInspector.Editor.ValueResolvers;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
-using Yuumix.OdinToolkits.Shared;
+using Yuumix.OdinToolkits.Core;
 
-namespace Yuumix.OdinToolkits.Editor.Shared
+namespace Yuumix.OdinToolkits.Editor.Core
 {
     [DrawerPriority(DrawerPriorityLevel.SuperPriority)]
     public class MultiLanguageTextAttributeDrawer : OdinAttributeDrawer<MultiLanguageTextAttribute>
@@ -22,8 +21,8 @@ namespace Yuumix.OdinToolkits.Editor.Shared
             _iconColorResolver =
                 ValueResolver.Get(Property, Attribute.IconColor, EditorStyles.label.normal.textColor);
             _tempLabel = new GUIContent();
-            InspectorMultiLanguageManagerSO.OnLanguageChange -= ReloadResolver;
-            InspectorMultiLanguageManagerSO.OnLanguageChange += ReloadResolver;
+            InspectorMultiLanguageSetting.OnLanguageChange -= ReloadResolver;
+            InspectorMultiLanguageSetting.OnLanguageChange += ReloadResolver;
         }
 
         protected override void DrawPropertyLayout(GUIContent label)

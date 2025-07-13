@@ -1,5 +1,5 @@
-﻿using Sirenix.OdinInspector;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Yuumix.OdinToolkits.Modules.Odin.OdinAttributesAnalysis.RuntimeExamples.RequiredListLength.Scripts

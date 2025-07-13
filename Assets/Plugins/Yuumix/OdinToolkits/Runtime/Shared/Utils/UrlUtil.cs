@@ -1,6 +1,6 @@
 using System;
 
-namespace Yuumix.OdinToolkits.LowLevel
+namespace Yuumix.OdinToolkits.Shared
 {
     public static class UrlUtil
     {
@@ -13,7 +13,7 @@ namespace Yuumix.OdinToolkits.LowLevel
                 return fallbackUrl;
             }
 
-            if (Uri.TryCreate(inputUrl, UriKind.Absolute, out var uriResult) &&
+            if (Uri.TryCreate(inputUrl, UriKind.Absolute, out Uri uriResult) &&
                 IsValidWebProtocol(uriResult.Scheme))
             {
                 return uriResult.ToString();

@@ -1,13 +1,13 @@
-using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Yuumix.OdinToolkits.Editor.Shared;
+using Sirenix.OdinInspector;
 using UnityEngine;
+using Yuumix.OdinToolkits.Core;
+using Yuumix.OdinToolkits.Editor.Shared;
 using Yuumix.OdinToolkits.Shared;
-using Yuumix.OdinToolkits.Editor.Core;
 
-namespace Yuumix.OdinToolkits.Modules.Tools.SyntaxHighlighter.Editor
+namespace Yuumix.OdinToolkits.Editor
 {
     /// <summary>
     /// 获取 Odin 内部的语法高亮处理器并封装，通过此 Presenter 可以借助 Odin 的工具实现语法高亮
