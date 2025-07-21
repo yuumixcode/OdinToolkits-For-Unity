@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
@@ -11,7 +12,6 @@ using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Editor.Shared;
-using Yuumix.OdinToolkits.Shared;
 using YuumixEditor;
 
 namespace Yuumix.OdinToolkits.Editor
@@ -21,19 +21,19 @@ namespace Yuumix.OdinToolkits.Editor
         public static MultiLanguageData ScriptDocGenToolMenuPathData =
             new MultiLanguageData("脚本文档生成工具", "Script Doc Generate Tool");
 
-        public const string DefaultStorageFolderPath =
-            OdinToolkitsPaths.ODIN_TOOLKITS_ANY_DATA_ROOT_FOLDER + "/TypeListConfigSO";
+        public const string DEFAULT_STORAGE_FOLDER_PATH =
+            OdinToolkitsPaths.ODIN_TOOLKITS_ANY_DATA_ROOT_FOLDER + "/Editor/ScriptDocGenToolConfigSO";
 
-        public const string DefaultDocFolderPath =
+        public const string DEFAULT_DOC_FOLDER_PATH =
             OdinToolkitsPaths.ODIN_TOOLKITS_ANY_DATA_ROOT_FOLDER + "/Editor/Documents/";
 
-        public const string IdentifierTitle = "## Additional Description";
+        public const string IDENTIFIER = "## Additional Description";
 
-        static StringBuilder _userIdentifier = new StringBuilder()
-            .AppendLine(IdentifierTitle)
+        static StringBuilder _userIdentifierParagraph = new StringBuilder()
+            .AppendLine(IDENTIFIER)
             .AppendLine()
-            .AppendLine("- `" + IdentifierTitle + "` 是标识符，由 `Odin Toolkits` 文档生成工具自动生成，请勿修改标题级别和内容。")
-            .AppendLine("- `" + IdentifierTitle + "` 之后的内容将不会被覆盖，可以对文档补充说明。");
+            .AppendLine("- `" + IDENTIFIER + "` 是标识符，此文档由开源项目 `Odin Toolkits` 的文档生成工具自动生成，请勿修改标题级别和内容。")
+            .AppendLine("- `" + IDENTIFIER + "` 之后的内容将不会被覆盖，可以对文档补充说明。");
 
         public static event Action<ToastPosition, SdfIconType, string, Color, float> ToastEvent;
 
@@ -41,47 +41,9 @@ namespace Yuumix.OdinToolkits.Editor
         public MultiLanguageHeaderWidget header = new MultiLanguageHeaderWidget(
             ScriptDocGenToolMenuPathData.GetChinese(),
             ScriptDocGenToolMenuPathData.GetEnglish(),
-            "给定一个 `Type` 类型的值，生成 Markdown 格式的文档，可选 Scripting API 或者 Complete References，默认支持 MkDocs-Material。Scripting API 表示对外的，用户可以调用的程序接口文档，Complete References 表示包含所有成员的参考文档",
-            "Given a value of type `Type`, generate a document in the format of Markdown, optional Scripting API and Complete References, and MkDocs-Material is supported by default. Scripting API refers to the external, user-accessible interface documentation, and Complete References refers to the documentation containing all members"
+            "根据配置的 `Type` 对象，生成 Markdown 格式的文档，可选 Scripting API 或者 Complete References，默认支持 MkDocs-Material。Scripting API 表示对外的，用户可以调用的程序接口文档，Complete References 表示包含所有成员的参考文档",
+            "Based on the value of the configured `Type`, generate a Markdown format document., generate a document in the format of Markdown, optional Scripting API and Complete References, and MkDocs-Material is supported by default. Scripting API refers to the external, user-accessible interface documentation, and Complete References refers to the documentation containing all members"
         );
-
-        [PropertyOrder(0)]
-        [OnInspectorGUI]
-        [MultiLanguageTitle("工具使用模式", "Tool Usage Mode ")]
-        public void FirstTitle() { }
-
-        [PropertyOrder(1)]
-        [HorizontalGroup("Mode", 0.75f)]
-        [BoxGroup("Mode/1", false)]
-        [ShowIf("_singleDoc", false)]
-        [MultiLanguageDisplayAsStringWidgetConfig(fontSize: 14)]
-        [GUIColor("green")]
-        public MultiLanguageDisplayAsStringWidget singleMode = new MultiLanguageDisplayAsStringWidget(
-            "单文档生成模式",
-            "Single Document Generation Mode"
-        );
-
-        [PropertyOrder(1)]
-        [HorizontalGroup("Mode", 0.75f)]
-        [BoxGroup("Mode/1", false)]
-        [HideIf("_singleDoc", false)]
-        [MultiLanguageDisplayAsStringWidgetConfig(fontSize: 14)]
-        [GUIColor("green")]
-        public MultiLanguageDisplayAsStringWidget multiMode = new MultiLanguageDisplayAsStringWidget(
-            "多文档批量生成模式",
-            "Multi-Documents Batch Generation Mode"
-        );
-
-        [PropertyOrder(1)]
-        [HorizontalGroup("Mode", 0.24f)]
-        [MultiLanguageButton("切换工具模式", "Switch Tool Mode", buttonHeight: 24, icon: SdfIconType.Hurricane)]
-        static void SwitchToolMode()
-        {
-            Instance._singleDoc = !Instance._singleDoc;
-            RaiseToastEvent(ToastPosition.BottomRight, SdfIconType.InfoSquareFill,
-                Instance._singleDoc ? "成功切换为单文档生成模式" : "成功切换为多文档批量生成模式",
-                Color.white, 5f);
-        }
 
         [PropertyOrder(1)]
         [EnumToggleButtons]
@@ -91,47 +53,11 @@ namespace Yuumix.OdinToolkits.Editor
 
         [PropertyOrder(1)]
         [EnumToggleButtons]
-        [MultiLanguageTitle("Markdown 格式适配选择", "Markdown Format Selector")]
+        [MultiLanguageTitle("Markdown 样式自定义选择", "Markdown Style Selector")]
         [HideLabel]
-        public MarkdownCategory markdownCategory = MarkdownCategory.MkDocsMaterial;
-
-        [PropertyOrder(1)]
-        [MultiLanguageTitle("目标类型", "Target Type")]
-        [OnInspectorGUI]
-        public void TypeTitle() { }
+        public MarkdownStyleSO markdownStyle;
 
         [PropertyOrder(2)]
-        [ShowIf("_singleDoc")]
-        [HideLabel]
-        public Type TargetType;
-
-        [PropertyOrder(2)]
-        [HideIf("_singleDoc")]
-        [LabelWidth(200f)]
-        [MultiLanguageText("类型列表配置资源", "TypeList Config SO")]
-        [MultiLanguageInfoBox("TypeListConfigSO 配置资源不为空时，会强制覆盖 TempTypeList",
-            "When the TypeListConfigSO asset is not empty, TempTypeList is forced to be overridden")]
-        public TypeListConfigSO typeListConfig;
-
-        [PropertyOrder(3)]
-        [FolderPath]
-        [MultiLanguageBoxGroup("GroupA", "临时类型列表", "Temp Type List", true)]
-        [ShowIf(nameof(ShowSaveFolderPath))]
-        [InlineButton("CompleteConfig", SdfIconType.Check, "确认")]
-        [InlineButton("ResetSOSaveFolderPath", SdfIconType.ArrowClockwise, "")]
-        [MultiLanguageText("存放类型列表配置资源的文件夹路径", "Storage TypeListConfigSO Folder Path")]
-        [CustomContextMenu("Reset Default", nameof(ResetSOSaveFolderPath))]
-        [LabelWidth(200f)]
-        public string storageTypeListConfigSOFolderPath = DefaultStorageFolderPath;
-
-        [PropertyOrder(5)]
-        [MultiLanguageBoxGroup("GroupA", "临时类型列表", "Temp Type List", true)]
-        [HideIf("HideTempTypeList")]
-        [HideLabel]
-        [ListDrawerSettings(OnTitleBarGUI = nameof(SaveAsTypeListConfigSO), NumberOfItemsPerPage = 10)]
-        public List<Type> TempTypeList = new List<Type>();
-
-        [PropertyOrder(10)]
         [MultiLanguageTitle("生成文档的文件夹路径", "Folder Path For Doc")]
         [HideLabel]
         [FolderPath(AbsolutePath = true)]
@@ -139,178 +65,78 @@ namespace Yuumix.OdinToolkits.Editor
         [CustomContextMenu("Reset Default", nameof(ResetDocFolderPath))]
         public string folderPath;
 
-        [PropertyOrder(19)]
-        [MultiLanguageTitle("解析操作按钮", "Analyze Button")]
-        [OnInspectorGUI]
-        public void AnalyzeTitle() { }
+        [PropertyOrder(8)]
+        [EnumToggleButtons]
+        [HideLabel]
+        [MultiLanguageTitle("工具使用模式", "Tool Usage Mode")]
+        [MultiLanguageInfoBox("目前为单个类型生成单个文档模式", "Single Type To Single Document Mode",
+            visibleIf: nameof(IsSingleType))]
+        [MultiLanguageInfoBox("目前为多个类型生成多个文档模式", "Multiple Types To Multiple Documents Mode",
+            visibleIf: nameof(IsMultipleTypes))]
+        [MultiLanguageInfoBox("目前为单个程序集生成多个文档模式", "Single Assembly To Multiple Documents Mode",
+            visibleIf: nameof(IsSingleAssembly))]
+        [MultiLanguageInfoBox("目前为多个程序集生成多个文档模式", "Multiple Assemblies To Multiple Documents Mode",
+            visibleIf: nameof(IsMultipleAssemblies))]
+        public ToolUsageMode toolUsageMode;
 
-        [PropertyOrder(20)]
-        [ShowIf("_singleDoc")]
-        [MultiLanguageButton("解析单个 Type", "Analyze Single Type",
-            ButtonSizes.Large, ButtonStyle.Box, SdfIconType.Activity)]
-        static void AnalyzeSingle()
-        {
-            if (Instance.TargetType == null)
-            {
-                Debug.LogError("请选择有效的目标类型");
-                return;
-            }
+        bool IsSingleType => toolUsageMode == ToolUsageMode.SingleType;
+        bool IsMultipleTypes => toolUsageMode == ToolUsageMode.MultipleTypes;
+        bool IsSingleAssembly => toolUsageMode == ToolUsageMode.SingleAssembly;
+        bool IsMultipleAssemblies => toolUsageMode == ToolUsageMode.MultipleAssemblies;
 
-            Instance.typeData = TypeData.FromType(Instance.TargetType);
-            Instance._thisHasAnalyzedSingle = true;
-            RaiseToastEvent(ToastPosition.BottomRight, SdfIconType.LightningFill,
-                "正在解析目标类型，请勿重复点击！等待文档生成按钮显示",
-                Color.yellow, 5f);
-        }
+        [PropertyOrder(9)]
+        public HorizontalSeparateWidget separate = new HorizontalSeparateWidget();
 
-        [PropertyOrder(20)]
-        [HideIf("_singleDoc")]
-        [MultiLanguageButton("解析 Type 列表", "Analyze Type List",
-            ButtonSizes.Large, ButtonStyle.Box, SdfIconType.Activity)]
-        static void AnalyzeMultiple()
-        {
-            Instance.typeDataList.Clear();
-            List<Type> targetTypes = Instance.typeListConfig ? Instance.typeListConfig.Types : Instance.TempTypeList;
-            targetTypes.RemoveAll(x => x == null);
-            foreach (TypeData typeData in targetTypes.Select(TypeData.FromType))
-            {
-                Instance.typeDataList.Add(typeData);
-            }
+        [PropertyOrder(10)]
+        [ShowIf("IsSingleType")]
+        [MultiLanguageTitle("单个 Type 配置", "Single Type Config")]
+        [HideLabel]
+        public Type TargetType;
 
-            RaiseToastEvent(ToastPosition.BottomRight, SdfIconType.LightningFill,
-                "正在解析目标类型，请勿重复点击！等待文档生成按钮显示",
-                Color.yellow, 5f);
-            Instance._thisHasAnalyzedMultiple = true;
-        }
+        [PropertyOrder(10)]
+        [ShowIf("IsMultipleTypes")]
+        [LabelWidth(200f)]
+        [MultiLanguageText("类型列表配置资源", "TypeList Config SO")]
+        [MultiLanguageInfoBox("TypeListConfigSO 配置资源不为空时，会强制覆盖 TempTypeList",
+            "When the TypeListConfigSO asset is not empty, TempTypeList is forced to be overridden")]
+        public TypeListConfigSO typeListConfig;
 
-        [PropertyOrder(24)]
-        [MultiLanguageTitle("生成文档按钮", "Generate Document Buttons")]
-        [ShowIf("CanShowGenerateTitle")]
-        [OnInspectorGUI]
-        public void GenerateTitle() { }
+        [PropertyOrder(15)]
+        [ShowIf("CanShowTemporaryTypes")]
+        [MultiLanguageTitle("临时 Type 列表", "Temporary Types List Config")]
+        [ListDrawerSettings(OnTitleBarGUI = nameof(DrawTemporaryTypesTitleBarGUI), NumberOfItemsPerPage = 5)]
+        [HideLabel]
+        public List<Type> TemporaryTypes = new List<Type>();
 
-        [PropertyOrder(25)]
-        [ShowIf(nameof(CanGeneratedSingle))]
-        [MultiLanguageButton("生成 Markdown 文档", "Generate Markdown Document",
-            ButtonSizes.Large, ButtonStyle.Box, SdfIconType.FileEarmarkPlus)]
-        public void GenerateSingle()
-        {
-            GenerateMkDocsSingle();
-        }
+        bool CanShowTemporaryTypes => IsMultipleTypes && !typeListConfig;
 
-        [PropertyOrder(25)]
-        [ShowIf(nameof(CanGeneratedMultiple))]
-        [MultiLanguageButton("批量生成 Markdown 文档", "Generate Multiple Markdown Documents",
-            ButtonSizes.Large, ButtonStyle.Box, SdfIconType.FileEarmarkPlus)]
-        public void GenerateMultiple()
-        {
-            GenerateMkDocsMultiple();
-        }
-
-        [PropertyOrder(100)]
-        [MultiLanguageTitle("过程数据", "Process Data")]
-        [OnInspectorGUI]
-        public void Title() { }
-
-        [PropertyOrder(105)]
-        [ShowIf("_singleDoc")]
-        public TypeData typeData;
-
-        [PropertyOrder(105)]
-        [HideIf("_singleDoc")]
-        [ListDrawerSettings(HideAddButton = true, NumberOfItemsPerPage = 5)]
-        public List<TypeData> typeDataList = new List<TypeData>();
-
-        #region Footer
-
-        [PropertyOrder(120)]
-        public MultiLanguageFooterWidget footer = new MultiLanguageFooterWidget(
-            "2025/07/01",
-            new[]
-            {
-                new MultiLanguageData("目前支持构造函数，方法，属性，事件，字段，运算符重载成员分析",
-                    "Currently supports constructor, method, property, event, field, operator overloading member analysis"),
-                new MultiLanguageData(VersionSpecialString.Fixed + "修复批量生成模式的数组越界问题-2025/07/01",
-                    VersionSpecialString.Fixed +
-                    "Fix the array out-of-bounds issue in batch generation mode.-2025/07/01")
-            });
-
-        #endregion
-
-        bool _thisHasAnalyzedSingle;
-        bool _thisHasAnalyzedMultiple;
-        bool _customizingSaveConfig;
-        bool _singleDoc = true;
-
-        bool ShowSaveFolderPath => _customizingSaveConfig && !_singleDoc && !typeListConfig;
-        bool HideTempTypeList => _singleDoc || typeListConfig;
-        bool CanShowGenerateTitle => CanGeneratedSingle || CanGeneratedMultiple;
-        bool CanGeneratedSingle => _thisHasAnalyzedSingle && _singleDoc;
-        bool CanGeneratedMultiple => _thisHasAnalyzedMultiple && !_singleDoc;
-
-        #region OdinToolkitsReset
-
-        public void OdinToolkitsReset()
-        {
-            _singleDoc = true;
-            docCategory = DocCategory.ScriptingAPI;
-            markdownCategory = MarkdownCategory.MkDocsMaterial;
-            TargetType = null;
-            folderPath = DefaultDocFolderPath;
-            typeData = new TypeData();
-            _thisHasAnalyzedSingle = false;
-            typeDataList.Clear();
-            _thisHasAnalyzedMultiple = false;
-            typeListConfig = null;
-            _customizingSaveConfig = false;
-            TempTypeList = new List<Type>();
-            ResetSOSaveFolderPath();
-            ResetDocFolderPath();
-        }
-
-        public void ResetSOSaveFolderPath()
-        {
-            storageTypeListConfigSOFolderPath = DefaultStorageFolderPath;
-        }
-
-        public void ResetDocFolderPath()
-        {
-            folderPath = DefaultDocFolderPath;
-        }
-
-        #endregion
-
-        public void CompleteConfig()
-        {
-            _customizingSaveConfig = false;
-        }
-
-        void SaveAsTypeListConfigSO()
+        void DrawTemporaryTypesTitleBarGUI()
         {
             Texture2D image =
                 SdfIcons.CreateTransparentIconTexture(SdfIconType.SaveFill, Color.white, 16 /*0x10*/, 16 /*0x10*/,
                     0);
             var content = new GUIContent(" 保存为SO资源 ", image,
-                "保存为 " + nameof(TypeListConfigSO) + " 到 " + storageTypeListConfigSOFolderPath);
-            string filePath = storageTypeListConfigSOFolderPath + "/" + typeof(TypeListConfigSO) + ".asset";
-            if (TempTypeList.Count > 0)
+                "保存为 " + nameof(TypeListConfigSO) + " 资源到 " + storageConfigSOFolderPath);
+            string filePath = storageConfigSOFolderPath + "/" + nameof(TypeListConfigSO) + ".asset";
+            if (TemporaryTypes.Count > 0)
             {
                 if (SirenixEditorGUI.ToolbarButton(content))
                 {
                     var so = CreateInstance<TypeListConfigSO>();
-                    PathEditorUtil.EnsureFolderRecursively(storageTypeListConfigSOFolderPath);
-                    so.Types = TempTypeList;
+                    PathEditorUtil.EnsureFolderRecursively(storageConfigSOFolderPath);
+                    so.Types = TemporaryTypes;
                     AssetDatabase.CreateAsset(so, filePath);
                     AssetDatabase.SaveAssets();
                     AssetDatabase.Refresh();
                     ProjectEditorUtil.PingAndSelectAsset(filePath);
+                    YuumixLogger.OdinToolkitsLog("请更改资源名称，避免下次生成时覆盖内容");
                 }
             }
 
             Texture2D image2 =
                 SdfIcons.CreateTransparentIconTexture(SdfIconType.GearFill, Color.white, 16 /*0x10*/, 16 /*0x10*/,
                     0);
-            var content2 = new GUIContent(" 自定义资源存储位置 ", image2, "当前路径为 " + storageTypeListConfigSOFolderPath);
+            var content2 = new GUIContent(" 自定义资源存储位置 ", image2, "当前路径为 " + storageConfigSOFolderPath);
             if (_customizingSaveConfig)
             {
                 return;
@@ -322,18 +148,170 @@ namespace Yuumix.OdinToolkits.Editor
             }
         }
 
-        #region GenerateMkDocsFile
+        [PropertyOrder(10)]
+        [ShowIf("IsSingleAssembly")]
+        [MultiLanguageTitle("单个程序集配置", "Single Assembly Config")]
+        [HideLabel]
+        [ValueDropdown("GetAssemblyString")]
+        public string targetAssemblyString;
 
-        static void GenerateMkDocsSingle()
+        [PropertyOrder(10)]
+        [ShowIf("IsMultipleAssemblies")]
+        [LabelWidth(200f)]
+        [MultiLanguageText("程序集配置列表", "Assembly List Config SO")]
+        [MultiLanguageInfoBox("AssemblyListConfigSO 配置资源不为空时，会强制覆盖 TemporaryAssemblies",
+            "When the AssemblyListConfigSO asset is not empty, TemporaryAssemblies is forced to be overridden")]
+        public AssemblyListConfigSO assemblyListConfig;
+
+        bool CanShowTemporaryAssemblies => IsMultipleAssemblies && !assemblyListConfig;
+
+        [ShowIf("CanShowTemporaryAssemblies")]
+        [MultiLanguageTitle("临时 Type 列表", "Temporary Types List Config")]
+        [ListDrawerSettings(OnTitleBarGUI = nameof(DrawTemporaryAssembliesStringTitleBarGUI), NumberOfItemsPerPage = 5)]
+        [HideLabel]
+        [PropertyOrder(15)]
+        [ShowIf("IsMultipleAssemblies")]
+        [ValueDropdown("GetAssemblyString", IsUniqueList = true, ExcludeExistingValuesInList = true)]
+        public List<string> temporaryAssembliesString = new List<string>();
+
+        void DrawTemporaryAssembliesStringTitleBarGUI()
         {
-            DocCategory docCategory = Instance.docCategory;
-            MarkdownCategory markdownCategory = Instance.markdownCategory;
-            TypeData typeData = Instance.typeData;
-            string folderPath = Instance.folderPath;
-            Type targetType = Instance.TargetType;
+            Texture2D image =
+                SdfIcons.CreateTransparentIconTexture(SdfIconType.SaveFill, Color.white, 16 /*0x10*/, 16 /*0x10*/,
+                    0);
+            var content = new GUIContent(" 保存为SO资源 ", image,
+                "保存为 " + nameof(AssemblyListConfigSO) + " 资源到 " + storageConfigSOFolderPath);
+            string filePath = storageConfigSOFolderPath + "/" + nameof(AssemblyListConfigSO) + ".asset";
+            if (temporaryAssembliesString.Count > 0)
+            {
+                if (SirenixEditorGUI.ToolbarButton(content))
+                {
+                    var so = CreateInstance<AssemblyListConfigSO>();
+                    PathEditorUtil.EnsureFolderRecursively(storageConfigSOFolderPath);
+                    foreach (string assemblyString in temporaryAssembliesString)
+                    {
+                        Assembly assembly = Assembly.Load(assemblyString);
+                        so.AssemblyStringTypesMap.TryAdd(assemblyString, assembly.GetTypes().ToList());
+                    }
+
+                    AssetDatabase.CreateAsset(so, filePath);
+                    AssetDatabase.SaveAssets();
+                    AssetDatabase.Refresh();
+                    ProjectEditorUtil.PingAndSelectAsset(filePath);
+                    YuumixLogger.OdinToolkitsLog("请更改资源名称，避免下次生成时覆盖内容");
+                }
+            }
+
+            Texture2D image2 =
+                SdfIcons.CreateTransparentIconTexture(SdfIconType.GearFill, Color.white, 16 /*0x10*/, 16 /*0x10*/,
+                    0);
+            var content2 = new GUIContent(" 自定义资源存储位置 ", image2, "当前路径为 " + storageConfigSOFolderPath);
+            if (_customizingSaveConfig)
+            {
+                return;
+            }
+
+            if (SirenixEditorGUI.ToolbarButton(content2))
+            {
+                _customizingSaveConfig = true;
+            }
+        }
+
+        static ValueDropdownList<string> _currentDomainAssemblies;
+
+        ValueDropdownList<string> GetAssemblyString()
+        {
+            if (_currentDomainAssemblies != null &&
+                (_currentDomainAssemblies != null || _currentDomainAssemblies.Count > 0))
+            {
+                return _currentDomainAssemblies;
+            }
+
+            _currentDomainAssemblies = new ValueDropdownList<string>();
+            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            foreach (Assembly assembly in assemblies)
+            {
+                _currentDomainAssemblies.Add(assembly.GetName().Name, assembly.FullName);
+            }
+
+            return _currentDomainAssemblies;
+        }
+
+        bool _customizingSaveConfig;
+
+        bool ShowSaveFolderPath => _customizingSaveConfig &&
+                                   (
+                                       (IsMultipleTypes && !typeListConfig) ||
+                                       (IsMultipleAssemblies && !assemblyListConfig)
+                                   );
+
+        MultiLanguageData _resetSOSaveFolderPathButtonLabel =
+            new MultiLanguageData("重置路径", "Reset SO Folder Path");
+
+        MultiLanguageData _completeConfigButtonLabel = new MultiLanguageData("完成配置", "Complete Config");
+
+        public void CompleteConfig()
+        {
+            _customizingSaveConfig = false;
+        }
+
+        [PropertyOrder(12)]
+        [FolderPath]
+        [ShowIf("ShowSaveFolderPath")]
+        [InlineButton("CompleteConfig", SdfIconType.Check, "$_completeConfigButtonLabel")]
+        [InlineButton("ResetSOSaveFolderPath", SdfIconType.ArrowClockwise, "$_resetSOSaveFolderPathButtonLabel")]
+        [MultiLanguageText("存放配置资源的文件夹路径", "Storage Config SO Folder Path")]
+        [CustomContextMenu("Reset Default", nameof(ResetSOSaveFolderPath))]
+        [LabelWidth(200f)]
+        public string storageConfigSOFolderPath = DEFAULT_STORAGE_FOLDER_PATH;
+
+        [PropertyOrder(50)]
+        [MultiLanguageTitle("解析按钮", "Analyze Button")]
+        [MultiLanguageButton("根据当前模式执行解析", "Analyze based on the current mode", ButtonSizes.Large, ButtonStyle.Box,
+            SdfIconType.FileEarmarkPlus)]
+        public void AnalyzeButton()
+        {
+            switch (toolUsageMode)
+            {
+                case ToolUsageMode.SingleType:
+                    SingleTypeAnalyze();
+                    break;
+                case ToolUsageMode.MultipleTypes:
+                    MultipleTypesAnalyze();
+                    break;
+                case ToolUsageMode.SingleAssembly:
+                    SingleAssemblyAnalyze();
+                    break;
+                case ToolUsageMode.MultipleAssemblies:
+                    MultipleAssembliesAnalyze();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            _hasFinishedAnalyze = true;
+            RaiseToastEvent(ToastPosition.BottomRight, SdfIconType.LightningFill,
+                "正在解析目标类型，请勿重复点击！等待文档生成按钮显示",
+                Color.yellow, 5f);
+        }
+
+        bool CanShowGenerateButton => _hasFinishedAnalyze && (
+            (IsSingleType && TargetType != null) ||
+            (IsMultipleTypes && (typeListConfig || TemporaryTypes.Count > 0)) ||
+            (IsSingleAssembly && targetAssemblyString != null) ||
+            (IsMultipleAssemblies && (assemblyListConfig || temporaryAssembliesString.Count > 0))
+        );
+
+        [PropertyOrder(70)]
+        [ShowIf("CanShowGenerateButton")]
+        [MultiLanguageTitle("生成按钮", "Generate Button")]
+        [MultiLanguageButton("根据解析结果生成 Markdown 文档", "Generate Markdown Document Based On Analysis Result",
+            ButtonSizes.Large, ButtonStyle.Box, SdfIconType.FileEarmarkPlus)]
+        public void GenerateButton()
+        {
             if (!Directory.Exists(folderPath))
             {
-                if (!EditorUtility.DisplayDialog("自动路径补全提示", "当前的文档导出路径不存在，是否自动生成？", "确认", "取消"))
+                if (!EditorUtility.DisplayDialog("自动路径补全提示", "当前的文档导出路径不存在，是否自动生成文件夹路径？", "确认", "取消"))
                 {
                     return;
                 }
@@ -341,6 +319,151 @@ namespace Yuumix.OdinToolkits.Editor
                 PathEditorUtil.EnsureFolderRecursively(folderPath);
             }
 
+            switch (toolUsageMode)
+            {
+                case ToolUsageMode.SingleType:
+                    SingleTypeGenerate();
+                    break;
+                case ToolUsageMode.MultipleTypes:
+                    MultipleTypesGenerate(typeDataList);
+                    break;
+                case ToolUsageMode.SingleAssembly:
+                    SingleAssemblyGenerate(typeDataList);
+                    break;
+                case ToolUsageMode.MultipleAssemblies:
+                    MultipleAssembliesGenerate(typeDataList);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            _hasFinishedAnalyze = false;
+        }
+
+        [PropertyOrder(100)]
+        [MultiLanguageTitle("过程数据", "Process Data")]
+        [OnInspectorGUI]
+        public void ProcessorTitle() { }
+
+        [PropertyOrder(105)]
+        [ShowIf("IsSingleType")]
+        [ReadOnly]
+        public TypeData typeData;
+
+        bool CanShowTypeDataList => IsMultipleTypes || IsSingleAssembly || IsMultipleAssemblies;
+
+        [PropertyOrder(105)]
+        [ShowIf("CanShowTypeDataList")]
+        [ReadOnly]
+        public List<TypeData> typeDataList = new List<TypeData>();
+
+        bool _hasFinishedAnalyze;
+
+        #region Analyze
+
+        void SingleTypeAnalyze()
+        {
+            if (TargetType == null)
+            {
+                YuumixLogger.OdinToolkitsError("请选择有效的目标类型");
+                return;
+            }
+
+            typeData = TypeDataAnalyzer.Analyze(TargetType);
+        }
+
+        void MultipleTypesAnalyze()
+        {
+            if (!typeListConfig && TemporaryTypes.Count <= 0)
+            {
+                YuumixLogger.OdinToolkitsError("设置有效的 Type 对象列表");
+                return;
+            }
+
+            typeDataList = new List<TypeData>();
+            if (typeListConfig)
+            {
+                typeListConfig.Types.RemoveAll(x => x == null);
+                foreach (Type type in typeListConfig.Types)
+                {
+                    typeDataList.Add(TypeData.FromType(type));
+                }
+            }
+            else
+            {
+                TemporaryTypes.RemoveAll(x => x == null);
+                foreach (Type type in TemporaryTypes)
+                {
+                    typeDataList.Add(TypeData.FromType(type));
+                }
+            }
+        }
+
+        void SingleAssemblyAnalyze()
+        {
+            typeDataList = new List<TypeData>();
+            Assembly targetAssembly = Assembly.Load(targetAssemblyString);
+            if (targetAssembly == null)
+            {
+                YuumixLogger.OdinToolkitsError("请选择有效的目标程序集");
+                return;
+            }
+
+            // Debug.Log(targetAssembly);
+            foreach (Type type in targetAssembly.GetTypes()
+                         .Where(t => t.GetCustomAttribute<CompilerGeneratedAttribute>() == null))
+            {
+                typeDataList.Add(TypeData.FromType(type));
+            }
+        }
+
+        void MultipleAssembliesAnalyze()
+        {
+            if (!assemblyListConfig && temporaryAssembliesString.Count <= 0)
+            {
+                YuumixLogger.OdinToolkitsError("设置有效的 Assembly String 对象列表");
+                return;
+            }
+
+            typeDataList = new List<TypeData>();
+            if (assemblyListConfig)
+            {
+                foreach (KeyValuePair<string, List<Type>> variable in assemblyListConfig.AssemblyStringTypesMap)
+                {
+                    variable.Value.RemoveAll(x => x == null);
+                    variable.Value.RemoveAll(t => t.GetCustomAttribute<CompilerGeneratedAttribute>() != null);
+                }
+
+                foreach (Type type in assemblyListConfig.AssemblyStringTypesMap.SelectMany(variable => variable.Value))
+                {
+                    typeDataList.Add(TypeData.FromType(type));
+                }
+            }
+            else
+            {
+                foreach (string assemblyString in temporaryAssembliesString)
+                {
+                    Assembly targetAssembly = Assembly.Load(assemblyString);
+                    if (targetAssembly == null)
+                    {
+                        continue;
+                    }
+
+                    foreach (Type type in targetAssembly.GetTypes()
+                                 .Where(t => t.GetCustomAttribute<CompilerGeneratedAttribute>() == null))
+                    {
+                        typeDataList.Add(TypeData.FromType(type));
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+        #region Generate
+
+        void SingleTypeGenerate()
+        {
             if (typeData.IsObsolete)
             {
                 if (!EditorUtility.DisplayDialog("警告提示", "此类已经被标记为过时，继续生成文档吗？", "确认", "取消"))
@@ -349,639 +472,167 @@ namespace Yuumix.OdinToolkits.Editor
                 }
             }
 
-            if (markdownCategory == MarkdownCategory.MkDocsMaterial)
+            string markdownText = markdownStyle.GetMarkdownText(typeData, docCategory, _userIdentifierParagraph);
+            string fileNameWithoutExtension = TargetType.Name.Replace('<', '[').Replace('>', ']');
+            string filePathWithExtensions = folderPath + "/" + fileNameWithoutExtension + ".md";
+            if (docCategory == DocCategory.CompleteReferences)
             {
-                StringBuilder headerIntroduction = CreateHeaderIntroductionMkDocs(typeData);
-                StringBuilder constructorsContent = CreateConstructorsContentMkDocs(typeData, docCategory);
-                StringBuilder fieldsContent = CreateCurrentFieldsContentMkDocs(typeData, docCategory);
-                StringBuilder methodsContent = CreateCurrentMethodsContentMkDocs(typeData, docCategory);
-                StringBuilder propertiesContent = CreateCurrentPropertiesContentMkDocs(typeData, docCategory);
-                StringBuilder eventsContent = CreateCurrentEventsContentMkDocs(typeData, docCategory);
-                StringBuilder inheritedContent = CreateInheritedContentMkDocs(typeData, docCategory);
-                StringBuilder finalStringBuilder = headerIntroduction
-                    .Append(constructorsContent)
-                    .Append(methodsContent)
-                    .Append(eventsContent)
-                    .Append(propertiesContent)
-                    .Append(fieldsContent)
-                    .Append(inheritedContent);
-                finalStringBuilder.Append(_userIdentifier);
-                string filePathWithExtensions = folderPath + "/" + targetType.Name + ".md";
-                if (docCategory == DocCategory.ScriptingAPI)
-                {
-                    filePathWithExtensions = folderPath + "/" + targetType.Name + ".md";
-                }
-
-                if (File.Exists(filePathWithExtensions))
-                {
-                    if (!EditorUtility.DisplayDialog("提示",
-                            "已经存在该文件，是否重新生成覆盖文档部分，保留 " + IdentifierTitle + " 之后的内容？", "确认", "取消"))
-                    {
-                        return;
-                    }
-
-                    string[] readAllLines = File.ReadAllLines(filePathWithExtensions);
-                    var remarkStringBuilder = new StringBuilder();
-                    if (readAllLines.Length > 0)
-                    {
-                        // 首次出现的标记
-                        int remarkIndex = Array.FindIndex(readAllLines, line => line.StartsWith(IdentifierTitle));
-                        if (remarkIndex >= 0)
-                        {
-                            for (int i = remarkIndex; i < readAllLines.Length; i++)
-                            {
-                                remarkStringBuilder.AppendLine(readAllLines[i]);
-                            }
-
-                            finalStringBuilder.Replace(_userIdentifier.ToString(), remarkStringBuilder.ToString());
-                        }
-                    }
-                }
-
-                File.WriteAllText(filePathWithExtensions,
-                    finalStringBuilder.ToString(),
-                    Encoding.UTF8);
-                Instance._thisHasAnalyzedSingle = false;
-                AssetDatabase.Refresh();
-                EditorUtility.OpenWithDefaultApp(filePathWithExtensions);
-            }
-        }
-
-        static void GenerateMkDocsMultiple()
-        {
-            DocCategory docCategory = Instance.docCategory;
-            MarkdownCategory markdownCategory = Instance.markdownCategory;
-            List<Type> targetTypes = Instance.typeListConfig ? Instance.typeListConfig.Types : Instance.TempTypeList;
-            List<TypeData> typeDataList = Instance.typeDataList;
-            string folderPath = Instance.folderPath;
-
-            if (!Directory.Exists(folderPath))
-            {
-                YuumixLogger.LogError("请选择有效的目标路径");
-                return;
+                filePathWithExtensions = folderPath + "/" + TargetType.Name + ".complete.md";
             }
 
-            if (markdownCategory == MarkdownCategory.MkDocsMaterial)
+            if (File.Exists(filePathWithExtensions))
             {
-                if (typeDataList.Count <= 0)
+                if (!EditorUtility.DisplayDialog("提示",
+                        "已经存在该文档，继续生成将覆盖部分内容，保留首个 " + IDENTIFIER + " 之后的内容，是否继续生成？", "确认", "取消"))
                 {
                     return;
                 }
 
-                try
+                string[] readAllLines = File.ReadAllLines(filePathWithExtensions);
+                var additionalDescriptionStringBuilder = new StringBuilder();
+                if (readAllLines.Length > 0)
                 {
-                    for (var i = 0; i < typeDataList.Count; i++)
+                    // 首次出现的标记
+                    int identifierIndex = Array.FindIndex(readAllLines, line => line.StartsWith(IDENTIFIER));
+                    if (identifierIndex > 0)
                     {
-                        if (i <= 1)
+                        for (int i = identifierIndex; i < readAllLines.Length; i++)
                         {
-                            EditorUtility.DisplayProgressBar("脚本文档生成", $"正在生成 {targetTypes[i].Name} 文档",
-                                (float)1 / typeDataList.Count);
-                        }
-                        else
-                        {
-                            EditorUtility.DisplayProgressBar("脚本文档生成", $"正在生成 {targetTypes[i].Name} 文档",
-                                (float)i / typeDataList.Count);
+                            additionalDescriptionStringBuilder.AppendLine(readAllLines[i]);
                         }
 
-                        TypeData typeData = typeDataList[i];
-                        StringBuilder headerIntroduction = CreateHeaderIntroductionMkDocs(typeData);
-                        StringBuilder constructorsContent = CreateConstructorsContentMkDocs(typeData, docCategory);
-                        StringBuilder fieldsContent = CreateCurrentFieldsContentMkDocs(typeData, docCategory);
-                        StringBuilder methodsContent = CreateCurrentMethodsContentMkDocs(typeData, docCategory);
-                        StringBuilder propertiesContent = CreateCurrentPropertiesContentMkDocs(typeData, docCategory);
-                        StringBuilder eventsContent = CreateCurrentEventsContentMkDocs(typeData, docCategory);
-                        StringBuilder inheritedContent = CreateInheritedContentMkDocs(typeData, docCategory);
-                        StringBuilder finalStringBuilder = headerIntroduction
-                            .Append(constructorsContent)
-                            .Append(methodsContent)
-                            .Append(eventsContent)
-                            .Append(propertiesContent)
-                            .Append(fieldsContent)
-                            .Append(inheritedContent);
-                        finalStringBuilder.Append(_userIdentifier);
-                        string filePathWithExtensions = folderPath + "/" + targetTypes[i].Name + ".md";
-                        if (docCategory == DocCategory.ScriptingAPI)
-                        {
-                            filePathWithExtensions = folderPath + "/" + targetTypes[i].Name + ".md";
-                        }
+                        var additionalDescription = additionalDescriptionStringBuilder.ToString();
+                        var userIdentifierParagraphString = _userIdentifierParagraph.ToString();
+                        markdownText =
+                            markdownText.Replace(userIdentifierParagraphString, additionalDescription);
+                    }
+                }
+            }
 
-                        if (File.Exists(filePathWithExtensions))
+            File.WriteAllText(filePathWithExtensions,
+                markdownText,
+                Encoding.UTF8);
+            AssetDatabase.Refresh();
+            EditorUtility.OpenWithDefaultApp(filePathWithExtensions);
+        }
+
+        void MultipleTypesGenerate(List<TypeData> typeDataCollection)
+        {
+            if (typeDataCollection.Count <= 0)
+            {
+                return;
+            }
+
+            try
+            {
+                for (var i = 0; i < typeDataCollection.Count; i++)
+                {
+                    TypeData data = typeDataCollection[i];
+                    string dataTypeName = data.TypeName;
+                    EditorUtility.DisplayProgressBar("脚本文档生成", $"正在生成 {dataTypeName} 文档",
+                        (float)i / typeDataCollection.Count);
+                    string markdownText = markdownStyle.GetMarkdownText(data, docCategory, _userIdentifierParagraph);
+                    string fileNameWithoutExtension = dataTypeName.Replace('<', '[').Replace('>', ']');
+                    string filePathWithExtensions = folderPath + "/" + fileNameWithoutExtension + ".md";
+                    if (docCategory == DocCategory.CompleteReferences)
+                    {
+                        filePathWithExtensions = folderPath + "/" + dataTypeName + ".complete.md";
+                    }
+
+                    if (File.Exists(filePathWithExtensions))
+                    {
+                        string[] readAllLines = File.ReadAllLines(filePathWithExtensions);
+                        var additionalDescriptionStringBuilder = new StringBuilder();
+                        if (readAllLines.Length > 0)
                         {
-                            string[] readAllLines = File.ReadAllLines(filePathWithExtensions);
-                            var remarkStringBuilder = new StringBuilder();
-                            if (readAllLines.Length > 0)
+                            // 首次出现的标记
+                            int identifierIndex = Array.FindIndex(readAllLines, line => line.StartsWith(IDENTIFIER));
+                            if (identifierIndex > 0)
                             {
-                                int remarkIndex = Array.FindIndex(readAllLines,
-                                    line => line.StartsWith(IdentifierTitle));
-                                if (remarkIndex >= 0)
+                                for (int j = identifierIndex; j < readAllLines.Length; j++)
                                 {
-                                    for (int j = remarkIndex; j < readAllLines.Length; j++)
-                                    {
-                                        remarkStringBuilder.AppendLine(readAllLines[j]);
-                                    }
-
-                                    finalStringBuilder.Replace(_userIdentifier.ToString(),
-                                        remarkStringBuilder.ToString());
+                                    additionalDescriptionStringBuilder.AppendLine(readAllLines[j]);
                                 }
+
+                                var additionalDescription = additionalDescriptionStringBuilder.ToString();
+                                var userIdentifierParagraphString = _userIdentifierParagraph.ToString();
+                                markdownText =
+                                    markdownText.Replace(userIdentifierParagraphString, additionalDescription);
                             }
                         }
-
-                        File.WriteAllText(filePathWithExtensions,
-                            finalStringBuilder.ToString(),
-                            Encoding.UTF8);
                     }
-                }
-                catch (Exception e)
-                {
-                    Debug.LogError(e);
-                }
-                finally
-                {
-                    EditorUtility.ClearProgressBar();
-                }
 
-                Instance._thisHasAnalyzedMultiple = false;
-                AssetDatabase.Refresh();
-                EditorUtility.OpenWithDefaultApp(folderPath);
+                    File.WriteAllText(filePathWithExtensions,
+                        markdownText,
+                        Encoding.UTF8);
+                }
             }
+            finally
+            {
+                EditorUtility.ClearProgressBar();
+            }
+
+            AssetDatabase.Refresh();
+            EditorUtility.OpenWithDefaultApp(folderPath);
         }
+
+        void SingleAssemblyGenerate(List<TypeData> typeDataCollection) => MultipleTypesGenerate(typeDataCollection);
+        void MultipleAssembliesGenerate(List<TypeData> typeDataCollection) => MultipleTypesGenerate(typeDataCollection);
 
         #endregion
 
-        #region StringBuilder MkDocs-Material
-
-        static StringBuilder CreateHeaderIntroductionMkDocs(TypeData data)
-        {
-            var sb = new StringBuilder();
-            if (data.IsStatic)
+        [PropertyOrder(120)]
+        public MultiLanguageFooterWidget footer = new MultiLanguageFooterWidget(
+            "2025/07/22",
+            new[]
             {
-                sb.AppendLine(
-                    $"# `{data.TypeName} static {data.TypeCategory.ToString().ToLower(CultureInfo.CurrentCulture)}`");
-            }
-            else if (data.IsAbstract)
-            {
-                sb.AppendLine(
-                    $"# `{data.TypeName} abstract {data.TypeCategory.ToString().ToLower(CultureInfo.CurrentCulture)}`");
-            }
-            else
-            {
-                sb.AppendLine(
-                    $"# `{data.TypeName} {data.TypeCategory.ToString().ToLower(CultureInfo.CurrentCulture)}`");
-            }
-
-            sb.AppendLine();
-            sb.AppendLine("## Introduction");
-            if (!data.NamespaceName.IsNullOrWhiteSpace())
-            {
-                sb.AppendLine($"- NameSpace: `{data.NamespaceName}`");
-            }
-
-            sb.AppendLine($"- Assembly: `{data.AssemblyName}`");
-            if (data.SeeAlsoLinks.Length >= 1)
-            {
-                for (var i = 0; i < data.SeeAlsoLinks.Length; i++)
-                {
-                    sb.AppendLine($"- See Also [{i + 1}] : {data.SeeAlsoLinks[i]}");
-                }
-            }
-
-            sb.AppendLine();
-            sb.AppendLine("``` csharp");
-            sb.AppendLine(data.TypeDeclaration);
-            sb.AppendLine("```");
-            sb.AppendLine();
-            if (!string.IsNullOrEmpty(data.ChineseComment) || !string.IsNullOrEmpty(data.EnglishComment))
-            {
-                sb.AppendLine("### Description");
-                sb.AppendLine();
-                if (!string.IsNullOrEmpty(data.ChineseComment))
-                {
-                    sb.AppendLine("- " + data.ChineseComment);
-                }
-
-                if (!string.IsNullOrEmpty(data.EnglishComment))
-                {
-                    sb.AppendLine("- " + data.EnglishComment);
-                }
-            }
-
-            sb.AppendLine();
-            return sb;
-        }
-
-        static StringBuilder CreateConstructorsContentMkDocs(TypeData data, DocCategory docCategory)
-        {
-            var sb = new StringBuilder();
-            if (data.IsStatic || data.Constructors.Length <= 0)
-            {
-                return sb;
-            }
-
-            if (docCategory == DocCategory.ScriptingAPI)
-            {
-                if (!data.Constructors.Any(x => x.IsAPI))
-                {
-                    return sb;
-                }
-
-                AppendHeader();
-                AppendMemberLine(sb, data.Constructors.Where(x => !x.isObsolete && x.IsAPI));
-            }
-            else
-            {
-                AppendHeader();
-                AppendMemberLine(sb, data.Constructors.Where(x => !x.isObsolete));
-            }
-
-            if (!data.Constructors.Any(x => x.isObsolete))
-            {
-                return sb;
-            }
-
-            if (docCategory == DocCategory.ScriptingAPI)
-            {
-                AppendMemberLine(sb, data.Constructors.Where(x => x.isObsolete && x.IsAPI), true);
-            }
-            else
-            {
-                AppendMemberLine(sb, data.Constructors.Where(x => x.isObsolete), true);
-            }
-
-            sb.AppendLine();
-            return sb;
-
-            void AppendHeader()
-            {
-                sb.AppendLine("## Constructors");
-                sb.AppendLine();
-                sb.AppendLine("| 构造函数 | 注释 | Comment |");
-                sb.AppendLine("| :--- | :--- | :--- |");
-            }
-        }
-
-        static StringBuilder CreateCurrentMethodsContentMkDocs(TypeData data, DocCategory docCategory)
-        {
-            var sb = new StringBuilder();
-            if (data.CurrentMethods.Length <= 0)
-            {
-                return sb;
-            }
-
-            switch (docCategory)
-            {
-                case DocCategory.ScriptingAPI:
-                    if (!data.CurrentMethods.Any(x => x.IsAPI))
-                    {
-                        // YuumixLogger.EditorLog("!data.CurrentMethods.Any(x => x.IsAPI)");
-                        return sb;
-                    }
-
-                    AppendHeader();
-                    AppendMemberLine(sb, data.CurrentMethods.Where(x => !x.isObsolete && x.IsAPI));
-                    break;
-                case DocCategory.CompleteReferences:
-                    AppendHeader();
-                    AppendMemberLine(sb, data.CurrentMethods.Where(x => !x.isObsolete));
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(docCategory), docCategory, null);
-            }
-
-            if (!data.CurrentMethods.Any(x => x.isObsolete))
-            {
-                // YuumixLogger.EditorLog("!data.CurrentMethods.Any(x => x.isObsolete)");
-                sb.AppendLine();
-                return sb;
-            }
-
-            switch (docCategory)
-            {
-                case DocCategory.ScriptingAPI:
-                    AppendMemberLine(sb, data.CurrentMethods.Where(x => x.isObsolete && x.IsAPI), true);
-                    break;
-                case DocCategory.CompleteReferences:
-                    AppendMemberLine(sb, data.CurrentMethods.Where(x => x.isObsolete), true);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(docCategory), docCategory, null);
-            }
-
-            sb.AppendLine();
-            return sb;
-
-            void AppendHeader()
-            {
-                sb.AppendLine("## Methods");
-                sb.AppendLine();
-                sb.AppendLine("| 方法 | 注释 | Comment |");
-                sb.AppendLine("| :--- | :--- | :--- |");
-            }
-        }
-
-        static StringBuilder CreateCurrentEventsContentMkDocs(TypeData data, DocCategory docCategory)
-        {
-            var sb = new StringBuilder();
-            if (data.CurrentEvents.Length <= 0)
-            {
-                return sb;
-            }
-
-            switch (docCategory)
-            {
-                case DocCategory.ScriptingAPI:
-                    if (!data.CurrentEvents.Any(x => x.IsAPI))
-                    {
-                        // YuumixLogger.EditorLog("!data.CurrentEvents.Any(x => x.IsAPI)");
-                        return sb;
-                    }
-
-                    AppendHeader();
-                    AppendMemberLine(sb, data.CurrentEvents.Where(x => !x.isObsolete && x.IsAPI));
-                    break;
-                case DocCategory.CompleteReferences:
-                    AppendHeader();
-                    AppendMemberLine(sb, data.CurrentEvents.Where(x => !x.isObsolete));
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(docCategory), docCategory, null);
-            }
-
-            if (!data.CurrentEvents.Any(x => x.isObsolete))
-            {
-                // YuumixLogger.EditorLog("!data.CurrentEvents.Any(x => x.isObsolete)");
-                sb.AppendLine();
-                return sb;
-            }
-
-            switch (docCategory)
-            {
-                case DocCategory.ScriptingAPI:
-                    AppendMemberLine(sb, data.CurrentEvents.Where(x => x.isObsolete && x.IsAPI), true);
-                    break;
-                case DocCategory.CompleteReferences:
-                    AppendMemberLine(sb, data.CurrentEvents.Where(x => x.isObsolete), true);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(docCategory), docCategory, null);
-            }
-
-            sb.AppendLine();
-            return sb;
-
-            void AppendHeader()
-            {
-                sb.AppendLine("## Events");
-                sb.AppendLine();
-                sb.AppendLine("| 事件 | 注释 | Comment |");
-                sb.AppendLine("| :--- | :--- | :--- |");
-            }
-        }
-
-        static StringBuilder CreateCurrentPropertiesContentMkDocs(TypeData data, DocCategory docCategory)
-        {
-            var sb = new StringBuilder();
-            if (data.CurrentProperties.Length <= 0)
-            {
-                return sb;
-            }
-
-            switch (docCategory)
-            {
-                case DocCategory.ScriptingAPI:
-                    if (!data.CurrentProperties.Any(x => x.IsAPI))
-                    {
-                        // YuumixLogger.EditorLog("!data.CurrentProperties.Any(x => x.IsAPI)");
-                        return sb;
-                    }
-
-                    AppendHeader();
-                    AppendMemberLine(sb, data.CurrentProperties.Where(x => !x.isObsolete && x.IsAPI));
-                    break;
-                case DocCategory.CompleteReferences:
-                    AppendHeader();
-                    AppendMemberLine(sb, data.CurrentProperties.Where(x => !x.isObsolete));
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(docCategory), docCategory, null);
-            }
-
-            if (!data.CurrentProperties.Any(x => x.isObsolete))
-            {
-                // YuumixLogger.EditorLog("!data.CurrentProperties.Any(x => x.isObsolete)");
-                sb.AppendLine();
-                return sb;
-            }
-
-            switch (docCategory)
-            {
-                case DocCategory.ScriptingAPI:
-                    AppendMemberLine(sb, data.CurrentProperties.Where(x => x.isObsolete && x.IsAPI), true);
-                    break;
-                case DocCategory.CompleteReferences:
-                    AppendMemberLine(sb, data.CurrentProperties.Where(x => x.isObsolete), true);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(docCategory), docCategory, null);
-            }
-
-            sb.AppendLine();
-            return sb;
-
-            void AppendHeader()
-            {
-                sb.AppendLine("## Properties");
-                sb.AppendLine();
-                sb.AppendLine("| 属性 | 注释 | Comment |");
-                sb.AppendLine("| :--- | :--- | :--- |");
-            }
-        }
-
-        static StringBuilder CreateCurrentFieldsContentMkDocs(TypeData data, DocCategory docCategory)
-        {
-            var sb = new StringBuilder();
-            if (data.CurrentFields.Length <= 0)
-            {
-                return sb;
-            }
-
-            switch (docCategory)
-            {
-                case DocCategory.ScriptingAPI:
-                    if (!data.CurrentFields.Any(x => x.IsAPI))
-                    {
-                        // YuumixLogger.EditorLog("!data.CurrentFields.Any(x => x.IsAPI)");
-                        return sb;
-                    }
-
-                    AppendHeader();
-                    AppendMemberLine(sb, data.CurrentFields.Where(x => !x.isObsolete && x.IsAPI));
-                    break;
-                case DocCategory.CompleteReferences:
-                    AppendHeader();
-                    AppendMemberLine(sb, data.CurrentFields.Where(x => !x.isObsolete));
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(docCategory), docCategory, null);
-            }
-
-            if (!data.CurrentFields.Any(x => x.isObsolete))
-            {
-                // YuumixLogger.EditorLog("!data.CurrentFields.Any(x => x.isObsolete)");
-                sb.AppendLine();
-                return sb;
-            }
-
-            switch (docCategory)
-            {
-                case DocCategory.ScriptingAPI:
-                    AppendMemberLine(sb, data.CurrentFields.Where(x => x.isObsolete && x.IsAPI), true);
-                    break;
-                case DocCategory.CompleteReferences:
-                    AppendMemberLine(sb, data.CurrentFields.Where(x => x.isObsolete), true);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(docCategory), docCategory, null);
-            }
-
-            sb.AppendLine();
-            return sb;
-
-            void AppendHeader()
-            {
-                sb.AppendLine("## Fields");
-                sb.AppendLine();
-                sb.AppendLine("| 字段 | 注释 | Comment |");
-                sb.AppendLine("| :--- | :--- | :--- |");
-            }
-        }
-
-        static StringBuilder CreateInheritedContentMkDocs(TypeData data, DocCategory docCategory)
-        {
-            var sb = new StringBuilder();
-            if (IsNonExistInheritedMember(data))
-            {
-                return sb;
-            }
-
-            switch (docCategory)
-            {
-                case DocCategory.ScriptingAPI:
-                    if (IsNonExistAPIMember(data))
-                    {
-                        // YuumixLogger.EditorLog("IsNonExistAPIMember(data)");
-                        return sb;
-                    }
-
-                    AppendInheritedHeader(sb);
-                    CreateInheritedMemberString(data, sb, x => !x.isObsolete && x.IsAPI);
-                    break;
-                case DocCategory.CompleteReferences:
-                    AppendInheritedHeader(sb);
-                    CreateInheritedMemberString(data, sb, x => !x.isObsolete);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(docCategory), docCategory, null);
-            }
-
-            if (IsNonExistObsoleteInheritedMember(data))
-            {
-                // YuumixLogger.EditorLog("IsNonExistObsoleteInheritedMember(data)");
-                sb.AppendLine();
-                return sb;
-            }
-
-            switch (docCategory)
-            {
-                case DocCategory.ScriptingAPI:
-                    CreateInheritedMemberString(data, sb, x => x.isObsolete && x.IsAPI, true);
-                    break;
-                case DocCategory.CompleteReferences:
-                    CreateInheritedMemberString(data, sb, x => x.isObsolete, true);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(docCategory), docCategory, null);
-            }
-
-            sb.AppendLine();
-            return sb;
-
-            bool IsNonExistInheritedMember(TypeData dataArg)
-            {
-                return dataArg.InheritedMethods.Length <= 0 && dataArg.InheritedProperties.Length <= 0 &&
-                       dataArg.InheritedEvents.Length <= 0 && dataArg.InheritedFields.Length <= 0;
-            }
-
-            bool IsNonExistObsoleteInheritedMember(TypeData dataArg)
-            {
-                return !dataArg.InheritedMethods.Any(x => x.isObsolete) &&
-                       !dataArg.InheritedEvents.Any(x => x.isObsolete) &&
-                       !dataArg.InheritedProperties.Any(x => x.isObsolete) &&
-                       !dataArg.InheritedFields.Any(x => x.isObsolete);
-            }
-
-            void AppendInheritedHeader(StringBuilder stringBuilder)
-            {
-                stringBuilder.AppendLine("## Inherited Members");
-                stringBuilder.AppendLine();
-                stringBuilder.AppendLine("| 成员 | 注释 | 声明此方法的类 |");
-                stringBuilder.AppendLine("| :--- | :--- | :--- |");
-            }
-
-            bool IsNonExistAPIMember(TypeData dataArg)
-            {
-                return !dataArg.InheritedMethods.Any(x => x.IsAPI) && !dataArg.InheritedEvents.Any(x => x.IsAPI) &&
-                       !dataArg.InheritedProperties.Any(x => x.IsAPI) && !dataArg.InheritedFields.Any(x => x.IsAPI);
-            }
-        }
-
-        static void CreateInheritedMemberString(TypeData data, StringBuilder sb,
-            Func<MemberData, bool> filterPredicate,
-            bool addObsoleteSign = false)
-        {
-            AppendInheritedMemberLine(sb, data.InheritedMethods.Where(filterPredicate), addObsoleteSign);
-            AppendInheritedMemberLine(sb, data.InheritedEvents.Where(filterPredicate), addObsoleteSign);
-            AppendInheritedMemberLine(sb, data.InheritedProperties.Where(filterPredicate), addObsoleteSign);
-            AppendInheritedMemberLine(sb, data.InheritedFields.Where(filterPredicate), addObsoleteSign);
-        }
-
-        static void AppendMemberLine(StringBuilder sb, IEnumerable<MemberData> items,
-            bool addObsoleteSign = false)
-        {
-            foreach (MemberData item in items)
-            {
-                string fullSignature = item.fullSignature;
-                if (addObsoleteSign)
-                {
-                    fullSignature = $"[Obsolete] {fullSignature}";
-                }
-
-                sb.AppendLine("| " + $"`{fullSignature}`" + " | " + item.chineseComment + " | " +
-                              $"`{item.englishComment}`" + " |");
-            }
-        }
-
-        static void AppendInheritedMemberLine(StringBuilder sb, IEnumerable<MemberData> items,
-            bool addObsoleteSign = false)
-        {
-            foreach (MemberData item in items)
-            {
-                string fullSignature = item.fullSignature;
-                if (addObsoleteSign)
-                {
-                    fullSignature = $"[Obsolete] {fullSignature}";
-                }
-
-                sb.AppendLine("| " + $"`{fullSignature}`" + " | " + item.chineseComment + " | " +
-                              $"`{item.declaringType}`" + " |");
-            }
-        }
-
-        #endregion
+                new MultiLanguageData("目前支持构造函数，方法，属性，事件，字段，运算符重载成员分析",
+                    "Currently supports constructor, method, property, event, field, operator overloading member analysis"),
+                new MultiLanguageData(ChangeCategory.Fixed + "修复批量生成模式的数组越界问题-2025/07/01",
+                    ChangeCategory.Fixed +
+                    "Fix the array out-of-bounds issue in batch generation mode.-2025/07/01"),
+                new MultiLanguageData(ChangeCategory.Added + "依据程序集生成文档 - 2025/07/22",
+                    ChangeCategory.Added +
+                    "Generate documentation based on the assembly. - 2025/07/22"),
+            });
 
         static void RaiseToastEvent(ToastPosition position, SdfIconType icon, string msg,
             Color color, float duration)
         {
             ToastEvent?.Invoke(position, icon, msg, color, duration);
         }
+
+        #region OdinToolkitsReset
+
+        public void OdinToolkitsReset()
+        {
+            toolUsageMode = ToolUsageMode.SingleType;
+            docCategory = DocCategory.ScriptingAPI;
+            markdownStyle = Resources.Load<MkDocsMaterialStyleSO>("MkDocsMaterialStyle");
+            ResetDocFolderPath();
+            TargetType = null;
+            typeListConfig = null;
+            TemporaryTypes = new List<Type>();
+            targetAssemblyString = null;
+            assemblyListConfig = null;
+            temporaryAssembliesString = new List<string>();
+            typeData = null;
+            typeDataList = new List<TypeData>();
+            _hasFinishedAnalyze = false;
+            _customizingSaveConfig = false;
+            ResetSOSaveFolderPath();
+        }
+
+        public void ResetSOSaveFolderPath()
+        {
+            storageConfigSOFolderPath = DEFAULT_STORAGE_FOLDER_PATH;
+        }
+
+        public void ResetDocFolderPath()
+        {
+            folderPath = DEFAULT_DOC_FOLDER_PATH;
+        }
+
+        #endregion
     }
 }

@@ -12,7 +12,7 @@ namespace Yuumix.OdinToolkits.Shared
         {
             if (parentPath == string.Empty)
             {
-                YuumixLogger.LogError("父物体路径为空");
+                Core.YuumixLogger.LogError("父物体路径为空");
                 return "ParentPath == null";
             }
 
@@ -21,7 +21,7 @@ namespace Yuumix.OdinToolkits.Shared
             var targetPathList = new List<string>();
             if (parentPathArray.Where((path, i) => childPathArray[i] != path).Any())
             {
-                YuumixLogger.LogError("路径错误，并不是子物体");
+                Core.YuumixLogger.LogError("路径错误，并不是子物体");
                 return null;
             }
 

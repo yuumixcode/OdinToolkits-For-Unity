@@ -33,18 +33,15 @@ namespace Yuumix.OdinToolkits.Core
         }
 
         public string GetChinese() => _chinese;
-
         public string GetEnglish() => _english;
+        public override string ToString() => GetCurrentOrFallback();
+        public bool Equals(MultiLanguageData other) => _chinese == other._chinese && _english == other._english;
+        public override bool Equals(object obj) => obj is MultiLanguageData other && Equals(other);
+        public override int GetHashCode() => HashCode.Combine(_chinese, _english);
 
         /// <summary>
         /// 隐式类型转换，MultiLanguageData -> String
         /// </summary>
         public static implicit operator string(MultiLanguageData data) => data.GetCurrentOrFallback();
-
-        public bool Equals(MultiLanguageData other) => _chinese == other._chinese && _english == other._english;
-
-        public override bool Equals(object obj) => obj is MultiLanguageData other && Equals(other);
-
-        public override int GetHashCode() => HashCode.Combine(_chinese, _english);
     }
 }

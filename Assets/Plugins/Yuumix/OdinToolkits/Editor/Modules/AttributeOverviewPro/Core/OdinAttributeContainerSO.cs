@@ -67,7 +67,7 @@ namespace Yuumix.OdinToolkits.Editor
 
                 if (exampleAttribute == null)
                 {
-                    YuumixLogger.EditorLogError(
+                    OdinToolkits.Core.YuumixLogger.EditorLogError(
                         $"{exampleType.Name} 没有标注 IsChineseAttributeExampleAttribute");
                     return "";
                 }
@@ -135,18 +135,18 @@ namespace Yuumix.OdinToolkits.Editor
                 }
                 catch (FileNotFoundException)
                 {
-                    OdinEditorLog.Error($"文件未找到: {exampleAttribute.FilePath}");
+                    YuumixLogger.OdinToolkitsError($"文件未找到: {exampleAttribute.FilePath}");
                     return "";
                 }
                 catch (IOException ex)
                 {
-                    OdinEditorLog.Error($"读取文件时发生IO异常: {ex.Message}");
+                    YuumixLogger.OdinToolkitsError($"读取文件时发生IO异常: {ex.Message}");
                     return "";
                 }
             }
             catch (InvalidOperationException ex)
             {
-                OdinEditorLog.Error($"处理类型属性时发生异常: {ex.Message}");
+                YuumixLogger.OdinToolkitsError($"处理类型属性时发生异常: {ex.Message}");
                 return "";
             }
         }

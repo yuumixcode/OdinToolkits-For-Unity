@@ -18,7 +18,7 @@ namespace Yuumix.OdinToolkits.Core
     [MultiLanguageComment("Yuumix Odin Toolkits 的日志工具，提供多种封装的 Log 方法",
         "The logging tool of Yuumix Odin Toolkits offers a variety of encapsulated Log methods.")]
     [SeeAlsoLink("https://www.odintoolkits.cn/blog/yuumixloggerdeveloplog/")]
-    public static class YuumixLogger
+    public static partial class YuumixLogger
     {
         static string NowTimeString => DateTime.Now.ToString("HH:mm:ss");
         static YuumixLoggerSetting Setting => OdinToolkitsPreferencesSO.Instance.yuumixLoggerSetting;
@@ -143,6 +143,42 @@ namespace Yuumix.OdinToolkits.Core
                 default, writeToFile, filePath, lineNumber, memberName);
         }
 
+        [Conditional("UNITY_EDITOR")]
+        public static void OdinToolkitsLog(string message,
+            [CallerFilePath] string filePath = "",
+            [CallerLineNumber] int lineNumber = 0,
+            [CallerMemberName] string memberName = "")
+        {
+            const string prefix = "Odin Toolkits Info";
+            LogInternal(message, LogType.Log, null, null, true, prefix, Color.green,
+                true, null, default, true,
+                filePath, lineNumber, memberName);
+        }
+
+        [Conditional("UNITY_EDITOR")]
+        public static void OdinToolkitsWarning(string message,
+            [CallerFilePath] string filePath = "",
+            [CallerLineNumber] int lineNumber = 0,
+            [CallerMemberName] string memberName = "")
+        {
+            const string prefix = "Odin Toolkits Warning";
+            LogInternal(message, LogType.Warning, null, null, true, prefix, Color.yellow,
+                true, null, default, true,
+                filePath, lineNumber, memberName);
+        }
+
+        [Conditional("UNITY_EDITOR")]
+        public static void OdinToolkitsError(string message,
+            [CallerFilePath] string filePath = "",
+            [CallerLineNumber] int lineNumber = 0,
+            [CallerMemberName] string memberName = "")
+        {
+            const string prefix = "Odin Toolkits Error";
+            LogInternal(message, LogType.Error, null, null, true, prefix, Color.red,
+                true, null, default, true,
+                filePath, lineNumber, memberName);
+        }
+
         static void LogInternal(string message, LogType logType = LogType.Log,
             Type logTagType = null,
             object sender = null,
@@ -166,17 +202,19 @@ namespace Yuumix.OdinToolkits.Core
             );
             if (useCallerSuffix)
             {
-                sb.Append(" [")
+                sb.AppendLine()
+                    .Append(" [")
                     .Append(Path.GetFileName(filePath))
                     .Append(" - line: ").Append(lineNumber)
                     .Append(" - ").Append(memberName)
                     .Append("]");
             }
-
+#if UNITY_EDITOR
             string relativePath = PathUtilities.MakeRelative(Application.dataPath.Replace("/Assets", ""), filePath);
             var jumpTag =
                 $"<a style='text-decoration: underline; href=\"{relativePath}\" line=\"{lineNumber}\">{relativePath}:{lineNumber}</a>";
             sb.Append("\n").Append("在下方堆栈面板中点击链接跳转: [ at <color=#ff6565>").Append(jumpTag).Append("</color> ]");
+#endif
             var logMessage = sb.ToString();
             switch (logType)
             {

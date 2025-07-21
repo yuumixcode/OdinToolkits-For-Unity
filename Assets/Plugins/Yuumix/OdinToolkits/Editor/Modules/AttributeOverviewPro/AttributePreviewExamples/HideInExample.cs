@@ -1,5 +1,5 @@
 using Sirenix.OdinInspector;
-using Yuumix.OdinToolkits.Shared;
+using Yuumix.OdinToolkits.Core;
 using YuumixEditor;
 
 namespace Yuumix.OdinToolkits.Editor
@@ -26,7 +26,7 @@ namespace Yuumix.OdinToolkits.Editor
         [Button("跳转到 Example 文件夹", ButtonSizes.Large)]
         public void SelectionFolder()
         {
-            OdinEditorLog.Log("HideIn Runtime Example 文件夹路径为: " + Path);
+            YuumixLogger.OdinToolkitsLog("HideIn Runtime Example 文件夹路径为: " + Path);
             ProjectEditorUtil.PingAndSelectAsset(Path);
         }
     }

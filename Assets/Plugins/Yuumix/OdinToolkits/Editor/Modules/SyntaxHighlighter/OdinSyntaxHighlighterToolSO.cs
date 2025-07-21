@@ -94,7 +94,7 @@ namespace Yuumix.OdinToolkits.Editor
                 return ParseMethod.Invoke(null, new object[] { code }) as string;
             }
 
-            YuumixLogger.EditorLogError("无法获取 SyntaxHighlighter.Parse 方法");
+            OdinToolkits.Core.YuumixLogger.EditorLogError("无法获取 SyntaxHighlighter.Parse 方法");
             return string.Empty;
         }
 
@@ -120,7 +120,7 @@ public class Example : ScriptableObject
     public List<int> ExampleList;
     public Dictionary<string, int> ExampleDictionary;       
 }";
-            OdinEditorLog.Log(ApplyCodeHighlighting(code));
+            YuumixLogger.OdinToolkitsLog(ApplyCodeHighlighting(code));
         }
     }
 }

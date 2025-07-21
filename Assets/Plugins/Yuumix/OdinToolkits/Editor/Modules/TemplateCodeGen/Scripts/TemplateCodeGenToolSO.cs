@@ -79,8 +79,8 @@ namespace Yuumix.OdinToolkits.Editor
         public MultiLanguageFooterWidget footer = new MultiLanguageFooterWidget(
             "2025/06/27", new[]
             {
-                new MultiLanguageData(VersionSpecialString.Roadmap + "多脚本生成",
-                    VersionSpecialString.Roadmap + "Multi-script Generation")
+                new MultiLanguageData(ChangeCategory.Roadmap + "多脚本生成",
+                    ChangeCategory.Roadmap + "Multi-script Generation")
             });
 
         [ButtonGroup("Btn")]

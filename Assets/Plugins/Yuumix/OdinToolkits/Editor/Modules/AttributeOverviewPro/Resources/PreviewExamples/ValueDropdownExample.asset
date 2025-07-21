@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c9ccb42c62ae40e5b413b8d3a4e7057, type: 3}
+  m_Name: ValueDropdownExample
+  m_EditorClassIdentifier: 
+  intTreeviewMode2: 01000000020000000700000001000000010000000300000003000000030000000100000001000000
+  someSize3: 0
+  someSize4: 0
+  someSize5: 0
+  someSize6: 0
+  intTreeview: 010000000200000007000000
+  uniqueGameObjectsIsUniqueListMode2: []
+  uniqueGameObjectsIsUniqueListMode3: []
+  intTreeviewMode3: 010000000200000007000000
+  intTreeviewMode4: 01000000020000000200000002000000
+  intTreeviewMode5: 010000000200000007000000
+  customInt: 10
+  useAlternativeValues: 0
+  values:
+  - Value 1
+  - Value 2
+  - Value 3
+  alternativeValues:
+  - 1
+  - 2
+  - 3
+  valueGetterAttributeExpressionExample: Value 2
+  valueGetterFieldNameExample: Value 1
+  valueGetterMethodNameExample: Value 1
+  valueGetterPropertyNameExample: Value 1
+  someSize2: 0
+  uniqueGameObjectsNoUniqueList: []
+  uniqueGameObjectsIsUniqueList: []
+  sirenixAssetMode: {fileID: 102900000, guid: 48e08dc33330d11e9d4a1b246c52e4f6, type: 3}
+  sirenixAssetMode2: {fileID: 102900000, guid: 48e08dc33330d11e9d4a1b246c52e4f6, type: 3}
+  selectedOption1:
+    Name: Option 1
+    value: 1
+  selectedOption2:
+    Name: Option 0
+    value: 0
+  vector3ShowChildProperties: {x: 2, y: 2, z: 2}
+  vector3HideChildProperties: {x: 1, y: 1, z: 1}

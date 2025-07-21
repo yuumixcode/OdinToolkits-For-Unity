@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ResetOdinToolkits
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 0
+    SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects: []
     SerializedBytesString: 
@@ -23,6 +23,3 @@ MonoBehaviour:
     SerializationNodes: []
   wantToResetSOList:
   - {fileID: 11400000, guid: 3ea4454c846624c08bfdc2dacd1d09d4, type: 2}
-  - {fileID: 11400000, guid: a53e69d6721334118be33aac348d86ca, type: 2}
-  - {fileID: 11400000, guid: c73c4db75b0704e9591e575dcda678fa, type: 2}
-  - {fileID: 11400000, guid: f32a2a3d7226b4457b4d2efed9edf7e3, type: 2}

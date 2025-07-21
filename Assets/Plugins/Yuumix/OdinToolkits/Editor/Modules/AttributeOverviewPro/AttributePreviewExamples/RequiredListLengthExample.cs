@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Shared;
 using YuumixEditor;
 
@@ -41,7 +42,7 @@ namespace Yuumix.OdinToolkits.Editor
         [Button("跳转到 Example 文件夹", ButtonSizes.Large)]
         public void SelectionFolder()
         {
-            OdinEditorLog.Log("RequiredListLength Runtime Example 文件夹路径为: " + Path);
+            YuumixLogger.OdinToolkitsLog("RequiredListLength Runtime Example 文件夹路径为: " + Path);
             ProjectEditorUtil.PingAndSelectAsset(Path);
         }
     }

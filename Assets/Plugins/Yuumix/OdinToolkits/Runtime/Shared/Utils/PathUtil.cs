@@ -101,13 +101,13 @@ namespace Yuumix.OdinToolkits.Shared
         {
             if (string.IsNullOrEmpty(fullPath) || string.IsNullOrEmpty(endWithString))
             {
-                OdinEditorLog.Error("路径或目标字符串不能为空！");
+                YuumixLogger.OdinToolkitsError("路径或目标字符串不能为空！");
                 return null;
             }
 
             if (!fullPath.StartsWith("Assets"))
             {
-                OdinEditorLog.Error("完整路径不是以 Assets 开头的，需要使用相对路径。");
+                YuumixLogger.OdinToolkitsError("完整路径不是以 Assets 开头的，需要使用相对路径。");
                 return null;
             }
 
@@ -130,7 +130,7 @@ namespace Yuumix.OdinToolkits.Shared
                 return string.Join("/", parts, 0, lastIndex + 1);
             }
 
-            OdinEditorLog.Warning("路径中未找到以 " + endWithString + " 结尾的部分: " + fullPath);
+            YuumixLogger.OdinToolkitsWarning("路径中未找到以 " + endWithString + " 结尾的部分: " + fullPath);
             return null;
         }
 
