@@ -1,6 +1,6 @@
 using Sirenix.OdinInspector;
 
-namespace Community.Schwapo.Editor
+namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
 {
     [ResolvedParameterExample]
     public class ValidateInputExamples_DefaultMessage

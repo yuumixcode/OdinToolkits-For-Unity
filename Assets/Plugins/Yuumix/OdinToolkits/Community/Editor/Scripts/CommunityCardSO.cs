@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core;
-using Yuumix.OdinToolkits.Shared;
+using Yuumix.Universal;
 using YuumixEditor;
 
 namespace Yuumix.OdinToolkits.Community.Editor
@@ -15,7 +15,7 @@ namespace Yuumix.OdinToolkits.Community.Editor
     /// Community 资源卡片的基类，继承此类型实现资源卡片
     /// </summary>
     /// <typeparam name="T">目标资源卡片</typeparam>
-    [MultiLanguageComment("Community 资源卡片的基类，继承此类型实现资源卡片",
+    [BilingualComment("Community 资源卡片的基类，继承此类型实现资源卡片",
         "The base class of the Community resource card, by inheriting this type, one can implement the resource card.")]
     public abstract class CommunityCardSO<T> : SerializedScriptableObject where T : CommunityCardSO<T>
     {
@@ -32,8 +32,7 @@ namespace Yuumix.OdinToolkits.Community.Editor
                     return _instance;
                 }
 
-                _instance = ScriptableObjectEditorUtil.GetAssetAndDeleteExtra<T>(
-                    OdinToolkitsPaths.GetRootPath() + "/Community/Editor/Resources/Cards");
+                _instance = ScriptableObjectEditorUtility.GetAssetAndDeleteExtra<T>();
                 return _instance;
             }
         }
@@ -47,16 +46,16 @@ namespace Yuumix.OdinToolkits.Community.Editor
         [HorizontalGroup("B/H1/V1/H2", 0.75f)]
         [PropertyOrder(-1)]
         [ShowInInspector]
-        [MultiLanguageDisplayAsStringWidgetConfig(false, TextAlignment.Left, 22)]
+        [BilingualDisplayAsStringWidgetConfig(false, TextAlignment.Left, 22)]
         [EnableGUI]
-        public MultiLanguageDisplayAsStringWidget HeaderName => GetCardHeader();
+        public BilingualDisplayAsStringWidget HeaderName => GetCardHeader();
 
         [PropertyOrder(1)]
         [HorizontalGroup("B/H1")]
         [VerticalGroup("B/H1/V1")]
         [HorizontalGroup("B/H1/V1/H2")]
         [VerticalGroup("B/H1/V1/H2/V2")]
-        [MultiLanguageButton("打开窗口或者 Ping 文件夹", "Open Window Or Ping Folder", buttonHeight: 22)]
+        [BilingualButton("打开窗口或者 Ping 文件夹", "Open Window Or Ping Folder", buttonHeight: 22)]
         public void OpenWindowOrPingFolderButton()
         {
             OpenWindowOrPingFolder();
@@ -69,7 +68,7 @@ namespace Yuumix.OdinToolkits.Community.Editor
         [VerticalGroup("B/H1/V1")]
         [HorizontalGroup("B/H1/V1/H2")]
         [VerticalGroup("B/H1/V1/H2/V2")]
-        [MultiLanguageButton("模块链接", "Module Link", buttonHeight: 22, icon: SdfIconType.Link45deg)]
+        [BilingualButton("模块链接", "Module Link", buttonHeight: 22, icon: SdfIconType.Link45deg)]
         public void OpenLink()
         {
             OpenModuleLink();
@@ -81,15 +80,15 @@ namespace Yuumix.OdinToolkits.Community.Editor
         [VerticalGroup("B/H1/V1")]
         [PropertyOrder(5)]
         [ShowInInspector]
-        [MultiLanguageDisplayAsStringWidgetConfig]
-        public MultiLanguageDisplayAsStringWidget Introduction => GetIntroduction();
+        [BilingualDisplayAsStringWidgetConfig]
+        public BilingualDisplayAsStringWidget Introduction => GetIntroduction();
 
         [BoxGroup("B")]
         [HorizontalGroup("B/H1")]
         [VerticalGroup("B/H1/V1")]
         [PropertyOrder(6)]
         [ShowInInspector]
-        [DisplayAsString(14, EnableRichText = true)]
+        // [DisplayAsString(14, EnableRichText = true)]
         [EnableGUI]
         [HideLabel]
         public Author AuthorInfo => GetAuthor();
@@ -110,12 +109,12 @@ namespace Yuumix.OdinToolkits.Community.Editor
             get
             {
                 var sb = new StringBuilder();
-                if (InspectorMultiLanguageSetting.IsChinese)
+                if (BilingualSetting.IsChinese)
                 {
                     sb.Append("标签: ");
                 }
 
-                if (InspectorMultiLanguageSetting.IsEnglish)
+                if (BilingualSetting.IsEnglish)
                 {
                     sb.Append("Tags: ");
                 }
@@ -135,9 +134,9 @@ namespace Yuumix.OdinToolkits.Community.Editor
 
         public bool CanEditTags { get; set; }
 
-        MultiLanguageData _openEditLabel = new MultiLanguageData("编辑标签", "Edit Tags");
+        BilingualData _openEditLabel = new BilingualData("编辑标签", "Edit Tags");
         public string GetOpenButtonLabel => _openEditLabel.GetCurrentOrFallback();
-        MultiLanguageData _finishEditLabel = new MultiLanguageData("完成编辑", "Finish Edit");
+        BilingualData _finishEditLabel = new BilingualData("完成编辑", "Finish Edit");
         public string GetFinishButtonLabel => _finishEditLabel.GetCurrentOrFallback();
 
         void OpenEdit()
@@ -155,7 +154,7 @@ namespace Yuumix.OdinToolkits.Community.Editor
         [VerticalGroup("B/H1/V1")]
         [PropertyOrder(10)]
         [AssetList]
-        [MultiLanguageText("卡片标签", "Card Tags")]
+        [BilingualText("卡片标签", "Card Tags")]
         [ShowIf("CanEditTags")]
         public List<CommunityTagSO> cardWithTags;
 
@@ -172,8 +171,8 @@ namespace Yuumix.OdinToolkits.Community.Editor
                 cardWithTags.Contains(showCardsWithTag));
         }
 
-        protected abstract MultiLanguageDisplayAsStringWidget GetIntroduction();
-        protected abstract MultiLanguageDisplayAsStringWidget GetCardHeader();
+        protected abstract BilingualDisplayAsStringWidget GetIntroduction();
+        protected abstract BilingualDisplayAsStringWidget GetCardHeader();
         protected abstract Author GetAuthor();
 
         /// <summary>

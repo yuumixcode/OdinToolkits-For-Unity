@@ -5,7 +5,7 @@ using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core;
-using Yuumix.OdinToolkits.Editor.Core;
+using Yuumix.OdinToolkits.Core.Editor;
 
 namespace Yuumix.OdinToolkits.Community.Editor
 {
@@ -13,7 +13,7 @@ namespace Yuumix.OdinToolkits.Community.Editor
     {
         [PropertyOrder(-99)]
         [PropertySpace(0, 10)]
-        public MultiLanguageHeaderWidget header = new MultiLanguageHeaderWidget(
+        public BilingualHeaderWidget header = new BilingualHeaderWidget(
             "社区",
             "Community Overview",
             "社区资源或者优质资源推荐的总览窗口",

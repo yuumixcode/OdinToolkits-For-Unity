@@ -1,25 +1,44 @@
 using System;
+using Sirenix.OdinInspector;
+using UnityEngine;
 using Yuumix.OdinToolkits.Core;
-using Yuumix.OdinToolkits.Shared;
+using Yuumix.Universal;
 
 namespace Yuumix.OdinToolkits.Community.Editor
 {
     [Serializable]
     public class Author
     {
-        public string name;
-        public string url;
+        string _name;
+        string _url;
 
-        public override string ToString()
+        [PropertyOrder(1)]
+        [ShowInInspector]
+        [HideLabel]
+        [EnableGUI]
+        [DisplayAsString(EnableRichText = true, FontSize = 14)]
+        [HorizontalGroup]
+        public string Name
         {
-            string au = InspectorMultiLanguageSetting.IsChinese ? "作者: " : "Author: ";
-            return au + name.ToYellow() + "  " + url;
+            get
+            {
+                string prefix = BilingualSetting.IsChinese ? "作者: " : "Author: ";
+                return prefix + _name.ToYellow();
+            }
         }
 
-        public Author(string name, string url)
+        [PropertyOrder(3)]
+        [HorizontalGroup]
+        [Button("$_url", buttonSize: 16)]
+        public void ButtonGUI()
         {
-            this.name = name;
-            this.url = url;
+            Application.OpenURL(_url);
+        }
+
+        public Author(string name, string url = "")
+        {
+            _name = name;
+            _url = url;
         }
     }
 }

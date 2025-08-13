@@ -8,7 +8,7 @@ using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
 
-namespace Community.Schwapo.Editor
+namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
 {
     public class AttributeWithResolvedParametersDrawer
         : OdinValueDrawer<AttributeWithResolvedParameters>

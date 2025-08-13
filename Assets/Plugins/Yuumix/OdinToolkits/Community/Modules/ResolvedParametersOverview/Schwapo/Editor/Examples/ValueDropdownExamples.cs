@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 
-namespace Community.Schwapo.Editor
+namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
 {
     [ResolvedParameterExample]
     public class ValueDropdownExamples_ValuesGetter

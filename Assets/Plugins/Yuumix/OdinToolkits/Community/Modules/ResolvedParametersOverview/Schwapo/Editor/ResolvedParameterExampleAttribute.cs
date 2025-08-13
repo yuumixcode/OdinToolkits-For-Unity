@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 
-namespace Community.Schwapo.Editor
+namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class ResolvedParameterExampleAttribute : Attribute

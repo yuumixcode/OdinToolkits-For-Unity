@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 
-namespace Community.Schwapo.Editor
+namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
 {
     public static class AttributeWithResolvedParametersMap
     {

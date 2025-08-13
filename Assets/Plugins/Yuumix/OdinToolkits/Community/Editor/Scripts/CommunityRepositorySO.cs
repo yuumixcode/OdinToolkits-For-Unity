@@ -3,9 +3,10 @@ using System.Text;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
+using Yuumix.OdinToolkits.Community.Editor;
 using Yuumix.OdinToolkits.Core;
-using Yuumix.OdinToolkits.Editor.Shared;
-using Yuumix.OdinToolkits.Shared;
+using Yuumix.OdinToolkits.Core.Editor;
+using Yuumix.Universal;
 
 namespace Yuumix.OdinToolkits.Community.Editor
 {
@@ -13,7 +14,7 @@ namespace Yuumix.OdinToolkits.Community.Editor
     /// Community 资源卡片仓库，扩展的资源卡片编写在此类中
     /// </summary>
     [Searchable]
-    [MultiLanguageComment("Community 资源卡片仓库", "Community Resource Cards Repository")]
+    [BilingualComment("Community 资源卡片仓库", "Community Resource Cards Repository")]
     public class CommunityRepositorySO : OdinEditorScriptableSingleton<CommunityRepositorySO>, IOdinToolkitsReset
     {
         #region Header
@@ -32,12 +33,12 @@ namespace Yuumix.OdinToolkits.Community.Editor
             get
             {
                 var sb = new StringBuilder();
-                if (InspectorMultiLanguageSetting.IsChinese)
+                if (BilingualSetting.IsChinese)
                 {
                     sb.Append("选择的标签:  ");
                 }
 
-                if (InspectorMultiLanguageSetting.IsEnglish)
+                if (BilingualSetting.IsEnglish)
                 {
                     sb.Append("Selected Tags:  ");
                 }
@@ -55,8 +56,8 @@ namespace Yuumix.OdinToolkits.Community.Editor
             }
         }
 
-        MultiLanguageData _openButton = new MultiLanguageData("选择显示的标签", "Select Tags");
-        MultiLanguageData _closeButton = new MultiLanguageData("隐藏标签面板", "Hide Tags List");
+        BilingualData _openButton = new BilingualData("选择显示的标签", "Select Tags");
+        BilingualData _closeButton = new BilingualData("隐藏标签面板", "Hide Tags List");
         string GetOpenButtonLabel => _openButton.GetCurrentOrFallback();
         string GetCloseButtonLabel => _closeButton.GetCurrentOrFallback();
         public bool CanSelectTags { get; set; }
@@ -76,7 +77,7 @@ namespace Yuumix.OdinToolkits.Community.Editor
         [PropertyOrder(-99)]
         [AssetList]
         [CustomContextMenu("Reset Tags", nameof(ResetTags))]
-        [MultiLanguageText("筛选显示卡片的标签", "Tags used for filtering and displaying the cards")]
+        [BilingualText("筛选显示卡片的标签", "Tags used for filtering and displaying the cards")]
         [ShowIf("CanSelectTags")]
         public List<CommunityTagSO> showCardsWithTag = new List<CommunityTagSO>();
 

@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using Sirenix.Utilities.Editor;
 using UnityEngine;
 
-namespace Community.Schwapo.Editor
+namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
 {
     [ResolvedParameterExample]
     public class ListDrawerSettingsExamples_CustomAddFunction

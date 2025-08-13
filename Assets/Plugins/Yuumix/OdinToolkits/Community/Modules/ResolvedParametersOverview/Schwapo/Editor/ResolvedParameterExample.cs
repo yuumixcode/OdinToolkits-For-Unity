@@ -7,7 +7,7 @@ using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using UnityEditor;
 
-namespace Community.Schwapo.Editor
+namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
 {
     public class ResolvedParameterExample
     {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Community.Schwapo.Editor
+namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
 {
     public class AttributeWithResolvedParameters
     {

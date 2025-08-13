@@ -4,9 +4,9 @@ using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEngine;
-using Yuumix.OdinToolkits.Editor.Core;
+using Yuumix.OdinToolkits.Core.Editor;
 
-namespace Community.Schwapo.Editor
+namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
 {
     public class ResolvedParametersOverviewWindow : OdinMenuEditorWindow
     {
@@ -34,7 +34,7 @@ namespace Community.Schwapo.Editor
         public static void Open()
         {
             _window = GetWindow<ResolvedParametersOverviewWindow>(OdinToolkitsWindowMenuItems
-                .ResolvedParametersOverviewWindowName);
+                .RESOLVED_PARAMETERS_OVERVIEW_WINDOW_NAME);
             _window.position = GUIHelper.GetEditorWindowRect().AlignCenter(800, 600);
             _window.minSize = new Vector2(500, 500);
             _window.ShowUtility();

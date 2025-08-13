@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38c95b3ef2d14ba59c7867ef6d989728, type: 3}
+  m_Name: ScriptDocGenTool
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 0
+    SerializedBytes: 2d010a000000540061007200670065007400540079007000650001010e000000540065006d0070006f007200610072007900540079007000650073002f000000000144000000530079007300740065006d002e0043006f006c006c0065006300740069006f006e0073002e00470065006e0065007200690063002e004c00690073007400600031005b005b00530079007300740065006d002e0054007900700065002c0020006d00730063006f0072006c00690062005d005d002c0020006d00730063006f0072006c0069006200000000000600000000000000000705
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  header: {}
+  docCategory: 1
+  markdownStyle: {fileID: 11400000, guid: 5fde8cd00b3bb4a2896eca3e359f0ebb, type: 2}
+  folderPath: Assets/OdinToolkitsData/Editor/Documents/
+  toolUsageMode: 0
+  typeListConfig: {fileID: 0}
+  targetAssemblyString: 
+  assemblyListConfig: {fileID: 0}
+  temporaryAssembliesString: []
+  storageConfigSOFolderPath: Assets/OdinToolkitsData/Editor/ScriptDocGenToolConfigSO
+  typeDataList: []
