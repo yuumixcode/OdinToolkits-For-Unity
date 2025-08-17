@@ -1,6 +1,6 @@
 # Odin Toolkits
 
-<img src="assets/logo-odintoolkits-color-noshadow.png" alt="Logo" style="zoom:20%; display: block; margin-left: auto; margin-right: auto;" />
+<img src="https://cdn.jsdelivr.net/gh/yuumixcode/odintoolkitsdocs@main/docs/assets/logo-odintoolkits-color-noshadow.png" alt="Logo" style="zoom:20%; display: block; margin-left: auto; margin-right: auto;" />
 
 <p align="center">
   <strong>
