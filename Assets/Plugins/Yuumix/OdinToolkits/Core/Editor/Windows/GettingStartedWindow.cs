@@ -76,18 +76,7 @@ namespace Yuumix.OdinToolkits.Core.Editor
 
         string TemplateCodeGenButtonName =>
             TemplateCodeGenToolSO.GenerateTemplateToolMenuPathData.GetCurrentOrFallback();
-
-        [PropertyOrder(-40)]
-        [BilingualButton("双语特性模块", "MultiLanguage Attributes", ButtonSizes.Large)]
-        [PropertySpace(5)]
-        public void PingMultiLanguage()
-        {
-            ProjectEditorUtility.PingAndSelectAsset(OdinToolkitsPaths.GetRootPath() +
-                                                    "/Runtime/Core/InspectorMultiLanguage/Attributes");
-            ShowToast(ToastPosition.BottomRight, SdfIconType.Info, "已跳转至 MultiLanguage Attributes 文件夹", Color.white,
-                3f);
-        }
-
+        
         [GUIColor("green")]
         [PropertyOrder(-30)]
         [PropertySpace(16)]
