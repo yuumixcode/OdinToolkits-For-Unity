@@ -1,7 +1,9 @@
 {
     "name": "Yuumix.OdinToolkits.Runtime",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "GUID:2d17f089e47cf4a65b80363217c7c288"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38c95b3ef2d14ba59c7867ef6d989728, type: 3}
+  m_Name: ScriptDocGenTool
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: TargetType
+      Entry: 7
+      Data: 0|System.RuntimeType, mscorlib
+    - Name: 
+      Entry: 1
+      Data: Yuumix.OdinToolkits.Core.BilingualData, Yuumix.OdinToolkits.Runtime
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: TemporaryTypes
+      Entry: 7
+      Data: 1|System.Collections.Generic.List`1[[System.Type, mscorlib]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  header: {}
+  docCategory: 0
+  markdownStyle: {fileID: 11400000, guid: 5fde8cd00b3bb4a2896eca3e359f0ebb, type: 2}
+  folderPath: Assets/OdinToolkitsData/Editor/Documents/
+  toolUsageMode: 0
+  typeListConfig: {fileID: 0}
+  targetAssemblyString: 
+  assemblyListConfig: {fileID: 0}
+  temporaryAssembliesString: []
+  storageConfigSOFolderPath: Assets/OdinToolkitsData/Editor/ScriptDocGenToolConfigSO
+  typeDataList: []

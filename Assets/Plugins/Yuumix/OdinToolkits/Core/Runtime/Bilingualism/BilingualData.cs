@@ -3,6 +3,7 @@ using Yuumix.Universal;
 
 namespace Yuumix.OdinToolkits.Core
 {
+    [BilingualComment("双语数据结构体", "Bilingual String Data Structure")]
     [Serializable]
     public readonly struct BilingualData : IEquatable<BilingualData>
     {

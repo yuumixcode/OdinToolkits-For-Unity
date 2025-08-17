@@ -1,13 +1,8 @@
 {
-    "name": "Yuumix.OdinToolkits.Editor",
+    "name": "Yuumix.Universal.Runtime",
     "rootNamespace": "",
-    "references": [
-        "GUID:345532146266e4c3182369bb0e4a1a3f",
-        "GUID:2d17f089e47cf4a65b80363217c7c288"
-    ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "references": [],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

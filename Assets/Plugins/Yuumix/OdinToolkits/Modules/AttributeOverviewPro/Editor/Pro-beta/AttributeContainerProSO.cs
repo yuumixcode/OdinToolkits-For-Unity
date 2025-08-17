@@ -18,13 +18,14 @@ namespace Yuumix.OdinToolkits.Modules.AttributeOverviewPro.Editor
         GUIStyle _containerTitleStyle;
         GUIStyle _containerContentStyle;
 
-        void EnsureGUIStyle()
-        {
+        GUIStyle ContainerTitleStyle =>
             _containerTitleStyle ??= new GUIStyle(SirenixGUIStyles.TitleCentered)
             {
                 fontSize = 15
             };
-            _containerContentStyle = new GUIStyle(SirenixGUIStyles.ToolbarBackground)
+
+        GUIStyle ContainerContentStyle =>
+            _containerContentStyle ??= new GUIStyle(SirenixGUIStyles.ToolbarBackground)
             {
                 stretchHeight = false,
                 padding = new RectOffset(
@@ -33,7 +34,6 @@ namespace Yuumix.OdinToolkits.Modules.AttributeOverviewPro.Editor
                     CONTAINER_CONTENT_PADDING,
                     CONTAINER_CONTENT_PADDING)
             };
-        }
 
         [PropertyOrder(-99)]
         [EnableGUI]
@@ -48,31 +48,33 @@ namespace Yuumix.OdinToolkits.Modules.AttributeOverviewPro.Editor
         [OnInspectorGUI]
         public void UseTips(InspectorProperty property)
         {
-            EnsureGUIStyle();
-            GUIStyle titleStyle = _containerTitleStyle;
             const string title = "使用提示";
-            Rect headerRect = SirenixEditorGUI.BeginHorizontalToolbar();
-            float titleWidth = titleStyle.CalcSize(GUIHelper.TempContent(title)).x;
+            Rect headerRect = SirenixEditorGUI.BeginHorizontalToolbar(30f);
+            float titleWidth = ContainerTitleStyle.CalcSize(GUIHelper.TempContent(title)).x;
             Rect titleRect = headerRect.AlignCenter(titleWidth);
-            EditorGUI.LabelField(titleRect, title, titleStyle);
+            EditorGUI.LabelField(titleRect, title, ContainerTitleStyle);
             // SirenixEditorGUI.DrawBorders(titleRect, 1, Color.green);
             GUILayout.FlexibleSpace();
             SirenixEditorGUI.EndHorizontalToolbar();
-            // GUILayout.Space(-2);
-            contentRect = EditorGUILayout.BeginVertical(_containerContentStyle);
+            GUILayout.Space(-2);
+            _contentRect = EditorGUILayout.BeginVertical(ContainerContentStyle);
         }
 
-        Rect contentRect;
+        [PropertyOrder(-44)]
+        [OnInspectorGUI]
+        public void DrawList()
+        {
+            
+        }
 
-        [PropertyOrder(-45)]
-        public List<string> number = new List<string>() { "1", "2", "3" };
+        Rect _contentRect;
 
         [PropertyOrder(-40)]
         [OnInspectorGUI]
         public void UseTip2(InspectorProperty property)
         {
             EditorGUILayout.EndVertical();
-            // SirenixEditorGUI.DrawBorders(contentRect, 1);
+            SirenixEditorGUI.DrawBorders(_contentRect, 1);
         }
 
         protected abstract BilingualHeaderWidget GetHeaderWidget();
