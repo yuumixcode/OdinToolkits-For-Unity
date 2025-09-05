@@ -2,8 +2,7 @@
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using Yuumix.OdinToolkits.Core;
-using Yuumix.Universal;
+using Yuumix.OdinToolkits.Core.Runtime;
 
 namespace YuumixEditor
 {

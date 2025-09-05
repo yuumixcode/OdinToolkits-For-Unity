@@ -4,7 +4,7 @@ using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
 
-namespace Yuumix.OdinToolkits.Core.Editor
+namespace Yuumix.OdinToolkits.Core.Runtime.Editor
 {
     [DrawerPriority(1)]
     public class BilingualTitleAttributeDrawer : OdinAttributeDrawer<BilingualTitleAttribute>

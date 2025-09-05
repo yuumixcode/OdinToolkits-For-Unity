@@ -1,8 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
-using Yuumix.Universal;
 
-namespace Yuumix.OdinToolkits.Core
+namespace Yuumix.OdinToolkits.Core.Runtime
 {
     [BilingualComment("Odin SerializedMonoBehaviour 单例抽象类。",
         "Abstract class for an Odin SerializedMonoBehaviour singleton.")]

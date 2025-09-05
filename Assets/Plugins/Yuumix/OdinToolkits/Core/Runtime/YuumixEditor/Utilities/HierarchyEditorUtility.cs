@@ -1,7 +1,7 @@
 ﻿#if UNITY_EDITOR
 using UnityEditor.Search;
 using UnityEngine;
-using Yuumix.Universal;
+using Yuumix.OdinToolkits.Core.Runtime;
 
 namespace YuumixEditor
 {

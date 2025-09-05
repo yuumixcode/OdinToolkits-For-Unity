@@ -4,7 +4,7 @@ using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Yuumix.OdinToolkits.Core
+namespace Yuumix.OdinToolkits.Core.Runtime
 {
     [Serializable]
     public class YuumixLoggerSetting : IOdinToolkitsReset

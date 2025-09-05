@@ -6,10 +6,9 @@ using System.Text;
 using Sirenix.Utilities;
 using UnityEngine;
 using UnityEngine.Pool;
-using Yuumix.Universal;
 using Debug = UnityEngine.Debug;
 
-namespace Yuumix.OdinToolkits.Core
+namespace Yuumix.OdinToolkits.Core.Runtime
 {
     /// <summary>
     /// Yuumix Odin Toolkits 的日志工具，提供多种封装的 Log 方法
@@ -24,8 +23,8 @@ namespace Yuumix.OdinToolkits.Core
         static readonly IObjectPool<StringBuilder> StringBuilderPool = new ObjectPool<StringBuilder>(
             () => new StringBuilder(),
             actionOnRelease: sb => sb.Clear(),
-            defaultCapacity: 100,
-            maxSize: 1000
+            defaultCapacity: 50,
+            maxSize: 100
         );
 
         [BilingualComment("包含所有参数的 Log 方法", "The Log method that includes all parameters")]

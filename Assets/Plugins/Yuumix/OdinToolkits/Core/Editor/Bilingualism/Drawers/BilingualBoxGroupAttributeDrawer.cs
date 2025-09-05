@@ -3,7 +3,7 @@ using Sirenix.OdinInspector.Editor.ValueResolvers;
 using Sirenix.Utilities.Editor;
 using UnityEngine;
 
-namespace Yuumix.OdinToolkits.Core.Editor
+namespace Yuumix.OdinToolkits.Core.Runtime.Editor
 {
     public class BilingualBoxGroupAttributeDrawer : OdinGroupDrawer<BilingualBoxGroupAttribute>
     {

@@ -2,8 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Yuumix.OdinToolkits.Core;
-using Yuumix.Universal;
+using Yuumix.OdinToolkits.Core.Runtime;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {

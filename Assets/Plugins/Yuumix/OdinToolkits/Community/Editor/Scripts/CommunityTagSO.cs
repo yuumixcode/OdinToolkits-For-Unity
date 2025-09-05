@@ -1,5 +1,5 @@
 using UnityEngine;
-using Yuumix.Universal;
+using Yuumix.OdinToolkits.Core.Runtime;
 
 namespace Yuumix.OdinToolkits.Community.Editor
 {

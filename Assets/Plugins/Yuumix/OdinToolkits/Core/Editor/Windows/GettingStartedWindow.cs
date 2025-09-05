@@ -8,7 +8,7 @@ using UnityEngine;
 using Yuumix.OdinToolkits.Modules.Editor;
 using YuumixEditor;
 
-namespace Yuumix.OdinToolkits.Core.Editor
+namespace Yuumix.OdinToolkits.Core.Runtime.Editor
 {
     public class GettingStartedWindow : OdinEditorWindow
     {

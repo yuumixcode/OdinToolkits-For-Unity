@@ -4,7 +4,7 @@ using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEngine;
-using Yuumix.OdinToolkits.Core.Editor;
+using Yuumix.OdinToolkits.Core.Runtime.Editor;
 
 namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
 {

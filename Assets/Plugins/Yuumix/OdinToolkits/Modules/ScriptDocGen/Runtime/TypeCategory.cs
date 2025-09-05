@@ -1,4 +1,4 @@
-namespace Yuumix.OdinToolkits.Core
+namespace Yuumix.OdinToolkits.Core.Runtime
 {
     /// <summary>
     /// 类型种类枚举

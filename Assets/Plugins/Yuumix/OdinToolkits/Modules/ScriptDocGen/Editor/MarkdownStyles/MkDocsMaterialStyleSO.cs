@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using Yuumix.OdinToolkits.Core;
+using Yuumix.OdinToolkits.Core.Runtime;
 using Yuumix.OdinToolkits.Modules.Editor;
-using Yuumix.Universal;
 
 namespace Yuumix.OdinToolkits.Modules.ScriptDocGen.Editor
 {

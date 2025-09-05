@@ -1,6 +1,6 @@
-using Yuumix.Universal;
+using Yuumix.OdinToolkits.Core.Runtime;
 
-namespace Yuumix.OdinToolkits.Core.Editor
+namespace Yuumix.OdinToolkits.Core.Runtime.Editor
 {
     public static class ChangeCategory
     {

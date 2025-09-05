@@ -1,9 +1,8 @@
 using System;
 using System.Diagnostics;
 using Sirenix.OdinInspector;
-using Yuumix.Universal;
 
-namespace Yuumix.OdinToolkits.Core
+namespace Yuumix.OdinToolkits.Core.Runtime
 {
     /// <summary>
     /// 多语言的 InfoBox 特性

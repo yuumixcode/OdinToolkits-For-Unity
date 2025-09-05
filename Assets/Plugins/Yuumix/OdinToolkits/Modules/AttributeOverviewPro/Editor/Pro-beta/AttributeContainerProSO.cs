@@ -7,7 +7,7 @@ using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
-using Yuumix.OdinToolkits.Core;
+using Yuumix.OdinToolkits.Core.Runtime;
 using YuumixEditor;
 
 namespace Yuumix.OdinToolkits.Modules.AttributeOverviewPro.Editor

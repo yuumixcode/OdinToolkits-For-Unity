@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector.Editor;
 using UnityEngine;
-using Yuumix.OdinToolkits.Core;
+using Yuumix.OdinToolkits.Core.Runtime;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {

@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using YuumixEditor;
 
-namespace Yuumix.OdinToolkits.Core.Editor
+namespace Yuumix.OdinToolkits.Core.Runtime.Editor
 {
     public abstract class OdinEditorScriptableSingleton<T> : SerializedScriptableObject
         where T : OdinEditorScriptableSingleton<T>

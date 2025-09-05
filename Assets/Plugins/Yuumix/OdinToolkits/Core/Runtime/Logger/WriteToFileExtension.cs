@@ -8,9 +8,8 @@ using System.Text;
 using System.Threading;
 using UnityEditor;
 using UnityEngine;
-using Yuumix.Universal;
 
-namespace Yuumix.OdinToolkits.Core
+namespace Yuumix.OdinToolkits.Core.Runtime
 {
     public static class WriteToFileExtension
     {

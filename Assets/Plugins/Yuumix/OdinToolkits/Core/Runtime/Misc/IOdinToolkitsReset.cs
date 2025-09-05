@@ -1,4 +1,4 @@
-namespace Yuumix.OdinToolkits.Core
+namespace Yuumix.OdinToolkits.Core.Runtime
 {
     /// <summary>
     /// 由 Editor 程序集中的 ResetTool 控制

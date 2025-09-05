@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Modules.Editor;
 
-namespace Yuumix.OdinToolkits.Core.Editor
+namespace Yuumix.OdinToolkits.Core.Runtime.Editor
 {
     public class OdinAttributeOverviewProWindow : OdinMenuEditorWindow
     {

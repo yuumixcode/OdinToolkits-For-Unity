@@ -6,9 +6,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using Sirenix.Utilities;
 using UnityEngine;
-using Yuumix.Universal;
 
-namespace Yuumix.OdinToolkits.Core
+namespace Yuumix.OdinToolkits.Core.Runtime
 {
     /// <summary>
     /// Type 类型相关的工具集，包含静态扩展（本身也是一种静态方法）

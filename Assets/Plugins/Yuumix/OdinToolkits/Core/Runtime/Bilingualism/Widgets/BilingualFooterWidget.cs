@@ -1,13 +1,12 @@
 using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using Yuumix.Universal;
 #if UNITY_EDITOR
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 #endif
 
-namespace Yuumix.OdinToolkits.Core
+namespace Yuumix.OdinToolkits.Core.Runtime
 {
     /// <summary>
     /// 双语页脚控件，为模块补充一些信息

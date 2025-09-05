@@ -2,9 +2,8 @@ using System;
 using System.Diagnostics;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using Yuumix.Universal;
 
-namespace Yuumix.OdinToolkits.Core
+namespace Yuumix.OdinToolkits.Core.Runtime
 {
     /// <summary>
     /// 双语头部说明控件，用于模块的简单介绍

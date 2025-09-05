@@ -1,7 +1,7 @@
 #if UNITY_EDITOR
 using System.Linq;
 using UnityEditor;
-using Yuumix.Universal;
+using Yuumix.OdinToolkits.Core.Runtime;
 
 namespace YuumixEditor
 {

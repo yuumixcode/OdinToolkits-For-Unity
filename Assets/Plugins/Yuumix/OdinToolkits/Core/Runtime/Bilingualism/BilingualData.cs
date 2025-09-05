@@ -1,7 +1,6 @@
 using System;
-using Yuumix.Universal;
 
-namespace Yuumix.OdinToolkits.Core
+namespace Yuumix.OdinToolkits.Core.Runtime
 {
     [BilingualComment("双语数据结构体", "Bilingual String Data Structure")]
     [Serializable]

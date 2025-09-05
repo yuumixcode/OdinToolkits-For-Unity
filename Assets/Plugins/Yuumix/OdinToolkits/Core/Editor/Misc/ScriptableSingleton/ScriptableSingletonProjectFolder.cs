@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace Yuumix.OdinToolkits.Core.Editor
+namespace Yuumix.OdinToolkits.Core.Runtime.Editor
 {
     // ProjectFolder 是指这个文件所在的根目录是项目文件夹，是和 Assets 文件夹同级的目录，所以在编辑器中看不到它
     // 当获取这个静态单例对象时，会在对应目录生成文件

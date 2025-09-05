@@ -1,8 +1,7 @@
 using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using Yuumix.OdinToolkits.Core;
-using Yuumix.Universal;
+using Yuumix.OdinToolkits.Core.Runtime;
 
 namespace Yuumix.OdinToolkits.Community.Editor
 {

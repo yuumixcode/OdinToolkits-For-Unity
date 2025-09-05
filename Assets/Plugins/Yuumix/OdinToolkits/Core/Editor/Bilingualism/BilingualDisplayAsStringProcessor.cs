@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Sirenix.OdinInspector.Editor;
 
-namespace Yuumix.OdinToolkits.Core.Editor
+namespace Yuumix.OdinToolkits.Core.Runtime.Editor
 {
     public class BilingualDisplayAsStringProcessor : OdinAttributeProcessor<BilingualDisplayAsStringWidget>
     {

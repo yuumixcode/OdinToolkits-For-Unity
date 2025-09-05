@@ -1,4 +1,4 @@
-using Yuumix.OdinToolkits.Core;
+using Yuumix.OdinToolkits.Core.Runtime;
 
 namespace Yuumix.OdinToolkits.Modules.AttributeOverviewPro.Editor
 {

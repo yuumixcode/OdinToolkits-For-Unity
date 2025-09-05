@@ -4,9 +4,8 @@ using Sirenix.OdinInspector;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using Yuumix.OdinToolkits.Community.Editor;
-using Yuumix.OdinToolkits.Core;
-using Yuumix.OdinToolkits.Core.Editor;
-using Yuumix.Universal;
+using Yuumix.OdinToolkits.Core.Runtime;
+using Yuumix.OdinToolkits.Core.Runtime.Editor;
 
 namespace Yuumix.OdinToolkits.Community.Editor
 {

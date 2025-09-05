@@ -4,7 +4,7 @@ using Sirenix.OdinInspector.Editor;
 using Sirenix.OdinInspector.Editor.ValueResolvers;
 using UnityEngine;
 
-namespace Yuumix.OdinToolkits.Core.Editor
+namespace Yuumix.OdinToolkits.Core.Runtime.Editor
 {
     [DrawerPriority(DrawerPriorityLevel.WrapperPriority)]
     public class BilingualButtonAttributeDrawer : OdinAttributeDrawer<BilingualButtonAttribute>

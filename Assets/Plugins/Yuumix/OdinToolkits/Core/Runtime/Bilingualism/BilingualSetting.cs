@@ -2,9 +2,8 @@ using System;
 using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
-using Yuumix.Universal;
 
-namespace Yuumix.OdinToolkits.Core
+namespace Yuumix.OdinToolkits.Core.Runtime
 {
     [Serializable]
     public enum LanguageType

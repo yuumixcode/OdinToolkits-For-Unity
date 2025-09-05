@@ -4,7 +4,7 @@ using System.Reflection;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Yuumix.OdinToolkits.Core.Editor
+namespace Yuumix.OdinToolkits.Core.Runtime.Editor
 {
     /// <summary>
     /// 获取 Odin 内部的语法高亮处理器并封装，通过此 Presenter 可以借助 Odin 的工具实现语法高亮

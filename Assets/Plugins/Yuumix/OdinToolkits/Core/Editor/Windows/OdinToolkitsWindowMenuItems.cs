@@ -1,4 +1,4 @@
-﻿namespace Yuumix.OdinToolkits.Core.Editor
+﻿namespace Yuumix.OdinToolkits.Core.Runtime.Editor
 {
     // 快捷键记录
     // & = Mac[shift + option]

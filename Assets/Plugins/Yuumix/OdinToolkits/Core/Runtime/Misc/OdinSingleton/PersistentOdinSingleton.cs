@@ -1,8 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
-using Yuumix.Universal;
 
-namespace Yuumix.OdinToolkits.Core
+namespace Yuumix.OdinToolkits.Core.Runtime
 {
     [BilingualComment("持久化的 Odin SerializedMonoBehaviour 单例抽象类，在场景切换时不会被销毁。",
         "Abstract class for a persistent Odin SerializedMonoBehaviour singleton that is not destroyed when the scene changes.")]
