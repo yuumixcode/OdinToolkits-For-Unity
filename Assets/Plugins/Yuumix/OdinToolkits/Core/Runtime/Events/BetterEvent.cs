@@ -1,88 +1,53 @@
 using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 
 namespace Yuumix.OdinToolkits.Core.Runtime
 {
-    public interface IBetterEvent { }
-
-    public delegate void CustomEventHandler(object sender);
-
-    public delegate void CustomEventHandler<in TEvent>(object sender, TEvent e);
-
-    public partial class BetterEvent
+    /// <summary>
+    /// 支持特定事件参数类型的 BetterEvent 泛型版本
+    /// </summary>
+    /// <typeparam name="T">事件参数类型，必须实现 IEventArgs 接口</typeparam>
+    /// <remarks>扩展自动注销和有序执行订阅方法机制</remarks>
+    [Serializable]
+    [InlineProperty]
+    public class BetterEvent<T> where T : IEventArgs
     {
-        event CustomEventHandler EventNoArgs;
-
-        public void Register(CustomEventHandler method)
-        {
-            EventNoArgs += method;
-        }
-
-        public void Unregister(CustomEventHandler method)
-        {
-            EventNoArgs -= method;
-        }
-
-        public void Publish(object sender)
-        {
-            EventNoArgs?.Invoke(sender);
-        }
-        
-        public void Publish(object sender, EventArgs e)
-        {
-          
-        }
-    }
-
-    public sealed class BetterEvent<T> where T : IEventArgs
-    {
-        // 新增：缓存委托实例，键为原始Action，值为对应的CustomEventHandler
-        readonly Dictionary<Action<object, T>, CustomEventHandler<T>> _delegateCache =
-            new Dictionary<Action<object, T>, CustomEventHandler<T>>();
-
         List<IEventBinding<T>> _bindings;
 
-        event CustomEventHandler<T> Event;
-
-        public void Register(Action<object, T> method)
-        {
-            // 检查是否已缓存，避免重复创建
-            if (!_delegateCache.TryGetValue(method, out CustomEventHandler<T> handler))
-            {
-                handler = new CustomEventHandler<T>(method);
-                _delegateCache[method] = handler; // 缓存委托实例
-            }
-
-            Event += handler; // 使用缓存的实例注册
-        }
-
-        public void Unregister(Action<object, T> method)
-        {
-            // 从缓存中获取注册时使用的同一个委托实例
-            if (_delegateCache.TryGetValue(method, out CustomEventHandler<T> handler))
-            {
-                Event -= handler;              // 移除缓存的实例
-                _delegateCache.Remove(method); // 清理缓存
-            }
-        }
-
-        public void Register(IEventBinding<T> binding)
+        /// <summary>
+        /// 订阅事件绑定
+        /// </summary>
+        /// <param name="binding">事件绑定对象</param>
+        /// <returns>用于自动注销的命令对象</returns>
+        public IAutoUnregister Register(IEventBinding<T> binding)
         {
             EnsureBindingsIsNotNull();
             _bindings.Add(binding);
             _bindings.Sort((a, b) => a.Order.CompareTo(b.Order));
-            EventCenter.RegisterEventBus<T>(this);
+            EventsDebugger.CollectBetterEvent<T>(this);
+            return new UnregisterCommand(() => Unregister(binding));
         }
 
+        /// <summary>
+        /// 取消订阅事件绑定
+        /// </summary>
+        /// <param name="binding">要取消订阅的事件绑定对象</param>
         public void Unregister(IEventBinding<T> binding)
         {
             EnsureBindingsIsNotNull();
             _bindings.Remove(binding);
         }
 
-        public void Publish(object sender, T e)
+        /// <summary>
+        /// 发布带参数的事件
+        /// </summary>
+        /// <param name="e">事件参数</param>
+        [Button("发布事件", ButtonSizes.Medium, ButtonStyle.FoldoutButton)]
+        [HideInEditorMode]
+        public void Publish(T e)
         {
-            Event?.Invoke(sender, e);
+            EnsureBindingsIsNotNull();
             // 创建绑定列表的副本进行遍历，避免在发布过程中修改集合导致的异常
             IEventBinding<T>[] bindingsCopy = _bindings.ToArray();
 
@@ -95,10 +60,11 @@ namespace Yuumix.OdinToolkits.Core.Runtime
             }
         }
 
+        /// <summary>
+        /// 清空所有事件订阅
+        /// </summary>
         public void Clear()
         {
-            Event = null;
-            _delegateCache.Clear(); // 清空缓存
             _bindings?.Clear();
         }
 

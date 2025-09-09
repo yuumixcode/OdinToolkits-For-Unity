@@ -1,50 +1,12 @@
 using System;
+using Sirenix.OdinInspector;
 
 namespace Yuumix.OdinToolkits.Core.Runtime
 {
-    public class EventBinding : IEventBinding
-    {
-        Action _onEventNoArgs;
-
-        Action IEventBinding.OnEventNoArgs
-        {
-            get => _onEventNoArgs;
-            set => _onEventNoArgs = value;
-        }
-
-        public int Order { get; }
-
-        public void Add(Action methodNoArgs)
-        {
-            _onEventNoArgs += methodNoArgs;
-        }
-
-        public void Remove(Action methodNoArgs)
-        {
-            _onEventNoArgs -= methodNoArgs;
-        }
-
-        public void Clear()
-        {
-            _onEventNoArgs = () => { };
-        }
-
-        void IEventBinding.Trigger()
-        {
-            _onEventNoArgs();
-        }
-
-        public EventBinding(Action methodNoArgs, int order = 0)
-        {
-            _onEventNoArgs = methodNoArgs;
-            Order = order;
-        }
-    }
-
+    [Serializable]
     public class EventBinding<T> : IEventBinding<T> where T : IEventArgs
     {
         Action<T> _onEvent = _ => { };
-
         Action _onEventNoArgs = () => { };
 
         public EventBinding(Action methodNoArgs, int order = 0)
@@ -59,24 +21,12 @@ namespace Yuumix.OdinToolkits.Core.Runtime
             Order = order;
         }
 
+        [ShowInInspector] public int Order { get; }
+
         public void Add(Action methodNoArgs)
         {
             _onEventNoArgs += methodNoArgs;
         }
-
-        Action IEventBinding.OnEventNoArgs
-        {
-            get => _onEventNoArgs;
-            set => _onEventNoArgs = value;
-        }
-
-        Action<T> IEventBinding<T>.OnEvent
-        {
-            get => _onEvent;
-            set => _onEvent = value;
-        }
-
-        public int Order { get; }
 
         public void Add(Action<T> method)
         {
@@ -93,16 +43,16 @@ namespace Yuumix.OdinToolkits.Core.Runtime
             _onEvent -= method;
         }
 
-        public void Clear()
+        void IEventBinding<T>.Trigger(T e)
         {
-            _onEventNoArgs = () => { };
-            _onEvent = (_) => { };
+            _onEventNoArgs?.Invoke();
+            _onEvent?.Invoke(e);
         }
 
-        void IEventBinding<T>.Trigger(T args)
+        public void Clear()
         {
-            _onEventNoArgs();
-            _onEvent(args);
+            _onEventNoArgs = null;
+            _onEvent = null;
         }
     }
 }

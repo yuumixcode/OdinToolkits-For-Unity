@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "f5pB/Nd8p98=",
+  "success": true,
+  "projectFilePath": "/Users/yuumi/OpenSource/OdinToolkits/Assets/Plugins/Yuumix/OdinToolkits/Core/Editor/Roslyn/SourceGenerator~/SourceGenerator/SourceGenerator.Sample/SourceGenerator.Sample.csproj",
+  "expectedPackageFiles": [
+    "/Users/yuumi/.nuget/packages/microsoft.netcore.app.ref/8.0.19/microsoft.netcore.app.ref.8.0.19.nupkg.sha512",
+    "/Users/yuumi/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.19/microsoft.aspnetcore.app.ref.8.0.19.nupkg.sha512"
+  ],
+  "logs": []
+}
