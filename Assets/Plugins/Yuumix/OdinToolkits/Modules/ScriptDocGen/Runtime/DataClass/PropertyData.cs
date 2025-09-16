@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Yuumix.OdinToolkits.Core.Runtime;
+using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -21,7 +21,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 memberType = propertyInfo.MemberType,
                 belongToType = type.FullName,
                 declaringType = propertyInfo.DeclaringType?.FullName,
-                memberAccessModifierType = propertyInfo.GetPropertyAccessModifierType(),
+                memberAccessModifierType = TypeAnalyzerUtility.GetPropertyAccessModifierType(propertyInfo),
                 returnType = propertyInfo.GetGetMethod(true).ReturnType.GetReadableTypeName(),
                 isStatic = propertyInfo.GetMethod.IsStatic,
                 isObsolete = propertyInfo.IsDefined(typeof(ObsoleteAttribute)),
@@ -33,9 +33,9 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                     ? propertyInfo.GetSetMethod(true).GetMethodAccessModifierType()
                     : AccessModifierType.None
             };
-            propertyData.accessModifier = propertyData.memberAccessModifierType.GetAccessModifierString();
-            propertyData.getMethodAccessModifier = propertyData.getMethodAccessModifierType.GetAccessModifierString();
-            propertyData.setMethodAccessModifier = propertyData.setMethodAccessModifierType.GetAccessModifierString();
+            propertyData.accessModifier = propertyData.memberAccessModifierType.ConvertToString();
+            propertyData.getMethodAccessModifier = propertyData.getMethodAccessModifierType.ConvertToString();
+            propertyData.setMethodAccessModifier = propertyData.setMethodAccessModifierType.ConvertToString();
             var keyword = "";
             if (propertyData.isStatic)
             {
@@ -69,18 +69,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             }
 
             propertyData.fullSignature += methodsString;
-            IEnumerable<Attribute> attributes = propertyInfo.GetCustomAttributes();
-            if (attributes
-                    .FirstOrDefault(x => typeof(IBilingualComment).IsAssignableFrom(x.GetType())) is not
-                IBilingualComment comment)
-            {
-                propertyData.chineseComment = "无";
-                propertyData.englishComment = "No Comment";
-                return propertyData;
-            }
-
-            propertyData.chineseComment = comment.GetChinese();
-            propertyData.englishComment = comment.GetEnglish();
+            // Summary
+            propertyData.chineseSummary = ChineseSummaryAttribute.GetChineseSummary(propertyInfo) ?? "无";
             return propertyData;
         }
     }

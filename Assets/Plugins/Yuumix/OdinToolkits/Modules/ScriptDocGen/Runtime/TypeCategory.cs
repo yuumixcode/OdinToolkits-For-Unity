@@ -1,4 +1,4 @@
-namespace Yuumix.OdinToolkits.Core.Runtime
+namespace Yuumix.OdinToolkits.Modules
 {
     /// <summary>
     /// 类型种类枚举
@@ -10,6 +10,7 @@ namespace Yuumix.OdinToolkits.Core.Runtime
         Interface, // 接口
         Enum,      // 枚举
         Delegate,  // 委托
+        Record,    // 记录
         Unknown
     }
 

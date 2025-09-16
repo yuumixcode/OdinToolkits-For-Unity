@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Reflection;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
+using Yuumix.OdinToolkits.Core;
 
-namespace Yuumix.OdinToolkits.Core.Runtime.Editor
+namespace Yuumix.OdinToolkits.Core.Editor
 {
     public class OdinToolkitsResetProcessor : OdinAttributeProcessor<IOdinToolkitsReset>
     {

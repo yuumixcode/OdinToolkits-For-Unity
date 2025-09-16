@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Yuumix.OdinToolkits.Core.Runtime
+namespace Yuumix.OdinToolkits.Core
 {
     public class Yuumix :
 #if UNITY_EDITOR && (ODIN_INSPECTOR_3 || ODIN_INSPECTOR_3_1 || ODIN_INSPECTOR_3_2 || ODIN_INSPECTOR_3_3)

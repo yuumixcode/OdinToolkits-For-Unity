@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
-using Yuumix.OdinToolkits.Core.Runtime;
+using Yuumix.OdinToolkits.Core;
 using YuumixEditor;
 
 namespace Yuumix.OdinToolkits.Modules.Editor

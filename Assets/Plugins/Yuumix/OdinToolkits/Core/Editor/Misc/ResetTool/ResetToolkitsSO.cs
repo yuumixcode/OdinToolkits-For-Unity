@@ -3,8 +3,9 @@ using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
+using Yuumix.OdinToolkits.Core;
 
-namespace Yuumix.OdinToolkits.Core.Runtime.Editor
+namespace Yuumix.OdinToolkits.Core.Editor
 {
     public class ResetToolkitsSO : OdinEditorScriptableSingleton<ResetToolkitsSO>
     {

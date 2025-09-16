@@ -3,9 +3,14 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
+    /// <summary>
+    /// 右键快捷生成 ScriptableObject 资源文件
+    /// </summary>
+    [ChineseSummary("右键快捷生成 ScriptableObject 资源文件")]
     public static class QuickCreateSOMenuItem
     {
         const string MENU_NAME = "Assets/Create SO Asset From Selected";

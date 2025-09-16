@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 
-namespace Yuumix.OdinToolkits.Core.Runtime
+
+namespace Yuumix.OdinToolkits.Core
 {
     /// <summary>
     /// 支持特定事件参数类型的 BetterEvent 泛型版本
@@ -20,6 +21,7 @@ namespace Yuumix.OdinToolkits.Core.Runtime
         /// </summary>
         /// <param name="binding">事件绑定对象</param>
         /// <returns>用于自动注销的命令对象</returns>
+ 
         public IAutoUnregister Register(IEventBinding<T> binding)
         {
             EnsureBindingsIsNotNull();
@@ -33,6 +35,7 @@ namespace Yuumix.OdinToolkits.Core.Runtime
         /// 取消订阅事件绑定
         /// </summary>
         /// <param name="binding">要取消订阅的事件绑定对象</param>
+  
         public void Unregister(IEventBinding<T> binding)
         {
             EnsureBindingsIsNotNull();
@@ -43,6 +46,7 @@ namespace Yuumix.OdinToolkits.Core.Runtime
         /// 发布带参数的事件
         /// </summary>
         /// <param name="e">事件参数</param>
+    
         [Button("发布事件", ButtonSizes.Medium, ButtonStyle.FoldoutButton)]
         [HideInEditorMode]
         public void Publish(T e)
@@ -63,6 +67,7 @@ namespace Yuumix.OdinToolkits.Core.Runtime
         /// <summary>
         /// 清空所有事件订阅
         /// </summary>
+        
         public void Clear()
         {
             _bindings?.Clear();

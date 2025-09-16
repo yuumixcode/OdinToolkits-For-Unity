@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Yuumix.OdinToolkits.Core.Runtime;
+using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -19,11 +19,11 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 belongToType = type.GetReadableTypeName(true),
                 memberType = fieldInfo.MemberType,
                 declaringType = fieldInfo.DeclaringType?.GetReadableTypeName(true),
-                memberAccessModifierType = fieldInfo.GetFieldAccessModifierType(),
+                memberAccessModifierType = TypeAnalyzerUtility.GetFieldAccessModifierType(fieldInfo),
                 returnType = fieldInfo.FieldType.GetReadableTypeName(true),
                 isStatic = fieldInfo.IsStatic,
                 isObsolete = fieldInfo.IsDefined(typeof(ObsoleteAttribute)),
-                isConst = fieldInfo.IsConstantField(),
+                isConst = TypeAnalyzerUtility.IsConstantField(fieldInfo),
                 isReadonly = fieldInfo.IsInitOnly,
                 name = fieldInfo.Name
             };
@@ -41,21 +41,13 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 keyword = "static ";
             }
 
-            fieldData.accessModifier = fieldData.memberAccessModifierType.GetAccessModifierString();
+            fieldData.accessModifier = fieldData.memberAccessModifierType.ConvertToString();
             fieldData.fullSignature = fieldData.accessModifier.Trim(' ') + " " + keyword +
                                       fieldInfo.FieldType.GetReadableTypeName() + " " + fieldData.name;
-            IEnumerable<Attribute> attributes = fieldInfo.GetCustomAttributes();
-            if (attributes
-                    .FirstOrDefault(x => typeof(IBilingualComment).IsAssignableFrom(x.GetType())) is not
-                IBilingualComment comment)
-            {
-                fieldData.chineseComment = "无";
-                fieldData.englishComment = "No Comment";
-                return fieldData;
-            }
-
-            fieldData.chineseComment = comment.GetChinese();
-            fieldData.englishComment = comment.GetEnglish();
+            // Summary
+            fieldData.chineseSummary = ChineseSummaryAttribute.GetChineseSummary(fieldInfo) != null
+                ? ChineseSummaryAttribute.GetChineseSummary(fieldInfo)
+                : "无";
 
             return fieldData;
         }

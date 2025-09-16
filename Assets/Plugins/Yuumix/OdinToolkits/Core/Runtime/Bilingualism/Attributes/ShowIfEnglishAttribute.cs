@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using Sirenix.OdinInspector;
 
-namespace Yuumix.OdinToolkits.Core.Runtime
+namespace Yuumix.OdinToolkits.Core
 {
     [IncludeMyAttributes]
     [ShowIf("@" + nameof(BilingualSetting) + "." +

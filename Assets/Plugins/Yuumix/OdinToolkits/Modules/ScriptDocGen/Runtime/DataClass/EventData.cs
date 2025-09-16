@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Sirenix.Utilities;
 using Yuumix.OdinToolkits.Modules.CustomAttributes;
-using Yuumix.OdinToolkits.Core.Runtime;
+using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -17,14 +18,14 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 memberType = MemberTypes.Event,
                 belongToType = type.FullName,
                 declaringType = eventInfo.DeclaringType?.FullName,
-                memberAccessModifierType = eventInfo.GetEventAccessModifierType(),
-                returnType = eventInfo.GetReadableEventReturnType(),
-                isStatic = eventInfo.IsStaticEvent(),
+                memberAccessModifierType = TypeAnalyzerUtility.GetEventAccessModifierType(eventInfo),
+                returnType = TypeAnalyzerUtility.GetReadableEventReturnType(eventInfo),
+                isStatic = eventInfo.IsStatic(),
                 isObsolete = eventInfo.IsDefined(typeof(ObsoleteAttribute)),
                 name = eventInfo.Name
             };
 
-            eventData.accessModifier = eventData.memberAccessModifierType.GetAccessModifierString();
+            eventData.accessModifier = eventData.memberAccessModifierType.ConvertToString();
             var keyword = "";
             if (eventData.isStatic)
             {
@@ -33,18 +34,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
             eventData.fullSignature =
                 eventData.accessModifier + " " + keyword + "event " + eventData.returnType + " " + eventData.name;
-            IEnumerable<Attribute> attributes = eventInfo.GetCustomAttributes();
-            if (attributes
-                    .FirstOrDefault(x => typeof(IBilingualComment).IsAssignableFrom(x.GetType())) is not
-                IBilingualComment comment)
-            {
-                eventData.chineseComment = "无";
-                eventData.englishComment = "No Comment";
-                return eventData;
-            }
-
-            eventData.chineseComment = comment.GetChinese();
-            eventData.englishComment = comment.GetEnglish();
+            // Summary
+            eventData.chineseSummary = ChineseSummaryAttribute.GetChineseSummary(eventInfo) ?? "无";
             return eventData;
         }
     }

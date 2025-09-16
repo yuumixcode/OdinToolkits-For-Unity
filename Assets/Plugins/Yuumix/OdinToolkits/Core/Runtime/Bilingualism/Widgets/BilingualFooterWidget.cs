@@ -6,7 +6,7 @@ using Sirenix.Utilities.Editor;
 using UnityEditor;
 #endif
 
-namespace Yuumix.OdinToolkits.Core.Runtime
+namespace Yuumix.OdinToolkits.Core
 {
     /// <summary>
     /// 双语页脚控件，为模块补充一些信息
@@ -14,8 +14,6 @@ namespace Yuumix.OdinToolkits.Core.Runtime
     [Serializable]
     [InlineProperty]
     [HideLabel]
-    [BilingualComment("双语页脚控件，为模块补充一些信息",
-        "Bilingual footer widget, for the module to supplement some information")]
     public class BilingualFooterWidget
     {
         public BilingualFooterWidget(string lastUpdate = null,

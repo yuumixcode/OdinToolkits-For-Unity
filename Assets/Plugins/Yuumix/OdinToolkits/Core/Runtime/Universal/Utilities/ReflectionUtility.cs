@@ -1,11 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Yuumix.OdinToolkits.Core.Runtime
+namespace Yuumix.OdinToolkits.Core
 {
-    [BilingualComment("访问修饰符类型枚举", "Access modifier type enumeration")]
     public enum AccessModifierType
     {
         Public = 0,
@@ -17,10 +16,8 @@ namespace Yuumix.OdinToolkits.Core.Runtime
         None = 32
     }
 
-    [BilingualComment("反射工具类", "Reflection utility class")]
     public static class ReflectionUtility
     {
-        [BilingualComment("自定义成员类型映射字典", "Custom member type mapping dictionary")]
         public static readonly Dictionary<MemberTypes, int> CustomMemberTypesMap = new Dictionary<MemberTypes, int>
         {
             { MemberTypes.Method, 0 },
@@ -33,7 +30,6 @@ namespace Yuumix.OdinToolkits.Core.Runtime
             { MemberTypes.Custom, 7 }
         };
 
-        [BilingualComment("根据部分程序集名称获取程序集数组", "Get an array of assemblies based on a partial assembly name")]
         public static Assembly[] GetAssembliesOfNameContainString(string partOfAssemblyName)
         {
             try
@@ -49,7 +45,6 @@ namespace Yuumix.OdinToolkits.Core.Runtime
             }
         }
 
-        [BilingualComment("获取程序集中的命名空间列表", "Get a list of namespaces in an assembly")]
         public static List<string> GetNamespacesInAssembly(Assembly assembly)
         {
             Type[] types = assembly.GetTypes();
@@ -60,8 +55,7 @@ namespace Yuumix.OdinToolkits.Core.Runtime
             return namespaces;
         }
 
-        [BilingualComment("获取访问修饰符的字符串表示", "Get the string representation of an access modifier")]
-        public static string GetAccessModifierString(this AccessModifierType modifier)
+        public static string ConvertToString(this AccessModifierType modifier)
         {
             return modifier switch
             {

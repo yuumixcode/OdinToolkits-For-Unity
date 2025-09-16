@@ -4,8 +4,9 @@ using Sirenix.OdinInspector.Editor.ValueResolvers;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
+using Yuumix.OdinToolkits.Core;
 
-namespace Yuumix.OdinToolkits.Core.Runtime.Editor
+namespace Yuumix.OdinToolkits.Core.Editor
 {
     [DrawerPriority(0.0, 10001.0)]
     public class BilingualInfoBoxAttributeDrawer : OdinAttributeDrawer<BilingualInfoBoxAttribute>

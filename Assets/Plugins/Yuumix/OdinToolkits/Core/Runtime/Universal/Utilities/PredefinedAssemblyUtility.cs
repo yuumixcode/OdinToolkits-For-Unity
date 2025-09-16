@@ -1,10 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Yuumix.OdinToolkits.Core.Runtime
+namespace Yuumix.OdinToolkits.Core
 {
-    [BilingualComment("预定义的程序集类型枚举", "Predefined assembly type enumeration")]
     public enum PredefinedAssemblyType
     {
         /// <summary>
@@ -28,10 +27,8 @@ namespace Yuumix.OdinToolkits.Core.Runtime
         AssemblyCSharpFirstPass
     }
 
-    [BilingualComment("预定义程序集工具类", "Predefined assembly utility class")]
     public static class PredefinedAssemblyUtility
     {
-        [BilingualComment("根据程序集名称获取程序集类型", "Get the assembly type based on the assembly name")]
         public static PredefinedAssemblyType? GetAssemblyType(string assemblyName)
         {
             return assemblyName switch
@@ -44,8 +41,6 @@ namespace Yuumix.OdinToolkits.Core.Runtime
             };
         }
 
-        [BilingualComment("获取运行时实现指定接口的类型列表",
-            "Get a list of types that implement a specified interface at runtime")]
         public static List<Type> GetRuntimeTypesWithInterface(Type interfaceType)
         {
             var targetTypes = new List<Type>();
@@ -58,8 +53,6 @@ namespace Yuumix.OdinToolkits.Core.Runtime
             return targetTypes;
         }
 
-        [BilingualComment("从指定程序集中添加实现指定接口的类型到结果集合",
-            "Add types that implement a specified interface from a specified assembly to the result collection")]
         static void AddTypesFromAssembly(Type[] assemblyTypes, Type interfaceType, ICollection<Type> results)
         {
             if (assemblyTypes == null)
@@ -77,7 +70,6 @@ namespace Yuumix.OdinToolkits.Core.Runtime
             }
         }
 
-        [BilingualComment("获取运行时类型映射", "Get the runtime type mapping")]
         static Dictionary<PredefinedAssemblyType, Type[]> GetRuntimeTypesMap()
         {
             Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();

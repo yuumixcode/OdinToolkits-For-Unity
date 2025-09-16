@@ -8,13 +8,11 @@ using UnityEngine;
 using UnityEngine.Pool;
 using Debug = UnityEngine.Debug;
 
-namespace Yuumix.OdinToolkits.Core.Runtime
+namespace Yuumix.OdinToolkits.Core
 {
     /// <summary>
     /// Yuumix Odin Toolkits 的日志工具，提供多种封装的 Log 方法
     /// </summary>
-    [BilingualComment("Yuumix Odin Toolkits 的日志工具，提供多种封装的 Log 方法",
-        "The logging tool of Yuumix Odin Toolkits offers a variety of encapsulated Log methods.")]
     public static class YuumixLogger
     {
         static string NowTimeString => DateTime.Now.ToString("HH:mm:ss");
@@ -27,7 +25,6 @@ namespace Yuumix.OdinToolkits.Core.Runtime
             maxSize: 100
         );
 
-        [BilingualComment("包含所有参数的 Log 方法", "The Log method that includes all parameters")]
         public static void CompleteLog(string message, LogType logType = LogType.Log,
             Type logTagType = null,
             object sender = null,
@@ -44,7 +41,6 @@ namespace Yuumix.OdinToolkits.Core.Runtime
                 suffix, suffixColor, writeToFile, filePath, lineNumber, memberName);
         }
 
-        [BilingualComment("输出 Info 级别的日志", "Outputs Info level logs")]
         public static void Log(string message,
             Type logTagType = null,
             string prefix = "",
@@ -59,7 +55,6 @@ namespace Yuumix.OdinToolkits.Core.Runtime
                 default, writeToFile, filePath, lineNumber, memberName);
         }
 
-        [BilingualComment("输出 Warning 级别的日志", "Outputs Warning level logs")]
         public static void LogWarning(string message,
             Type logTagType = null,
             string prefix = "",
@@ -74,7 +69,6 @@ namespace Yuumix.OdinToolkits.Core.Runtime
                 default, writeToFile, filePath, lineNumber, memberName);
         }
 
-        [BilingualComment("输出 Error 级别的日志", "Outputs Error level logs")]
         public static void LogError(string message,
             Type logTagType = null,
             string prefix = "",
@@ -90,8 +84,6 @@ namespace Yuumix.OdinToolkits.Core.Runtime
         }
 
         [Conditional("UNITY_EDITOR")]
-        [BilingualComment("输出 info 级别的日志，仅在编辑器阶段存在",
-            "Outputs an info-level log, which exists only during the editor stage")]
         public static void EditorLog(string message,
             Type logTagType = null,
             string prefix = "",
@@ -107,8 +99,6 @@ namespace Yuumix.OdinToolkits.Core.Runtime
         }
 
         [Conditional("UNITY_EDITOR")]
-        [BilingualComment("输出 warning 级别的日志，仅在编辑器阶段存在",
-            "Outputs a warning-level log, which exists only during the editor stage")]
         public static void EditorLogWarning(string message,
             Type logTagType = null,
             string prefix = "",
@@ -124,8 +114,6 @@ namespace Yuumix.OdinToolkits.Core.Runtime
         }
 
         [Conditional("UNITY_EDITOR")]
-        [BilingualComment("输出 error 级别的日志，仅在编辑器阶段存在",
-            "Outputs a error-level log, which exists only during the editor stage")]
         public static void EditorLogError(string message,
             Type logTagType = null,
             string prefix = "",

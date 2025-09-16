@@ -9,7 +9,7 @@ using System.Threading;
 using UnityEditor;
 using UnityEngine;
 
-namespace Yuumix.OdinToolkits.Core.Runtime
+namespace Yuumix.OdinToolkits.Core
 {
     public static class WriteToFileExtension
     {
@@ -103,9 +103,7 @@ namespace Yuumix.OdinToolkits.Core.Runtime
                 }
             }
         }
-
-        [BilingualComment("执行写入文件的方法，传入参数和日志级别",
-            "Execute the method of writing to the file, passing in parameters, and log level")]
+        
         public static void Execute(string message, LogType logType)
         {
             if (LogQueue.Count >= MAX_QUEUE_SIZE)

@@ -5,7 +5,7 @@ using System.Linq;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using UnityEditor;
-using Yuumix.OdinToolkits.Core.Runtime;
+using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {

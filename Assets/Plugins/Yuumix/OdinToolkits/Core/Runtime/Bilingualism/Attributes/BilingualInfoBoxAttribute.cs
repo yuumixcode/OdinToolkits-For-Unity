@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using Sirenix.OdinInspector;
 
-namespace Yuumix.OdinToolkits.Core.Runtime
+namespace Yuumix.OdinToolkits.Core
 {
     /// <summary>
     /// 多语言的 InfoBox 特性
@@ -10,7 +10,6 @@ namespace Yuumix.OdinToolkits.Core.Runtime
     [DontApplyToListElements]
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
     [Conditional("UNITY_EDITOR")]
-    [BilingualComment("多语言 InfoBox 特性", "Multi-language InfoBox")]
     public class BilingualInfoBoxAttribute : Attribute
     {
         public BilingualData BilingualData;

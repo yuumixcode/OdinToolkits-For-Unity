@@ -1,4 +1,4 @@
-namespace Yuumix.OdinToolkits.Core.Runtime.Editor
+namespace Yuumix.OdinToolkits.Core.Editor
 {
     public static class OdinToolkitsVersions
     {

@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 using Sirenix.OdinInspector;
-using Yuumix.OdinToolkits.Core.Runtime;
+using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -18,9 +18,9 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         public bool isObsolete;
         public string name;
         public string fullSignature;
-        public string chineseComment;
-        public string englishComment;
-
+        public string chineseSummary;
+        public string englishSummary;
+        
         [ShowInInspector] public bool NoFromInherit => belongToType == declaringType;
 
         [ShowInInspector]

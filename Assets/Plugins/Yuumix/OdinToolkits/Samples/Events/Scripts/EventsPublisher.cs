@@ -1,6 +1,6 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
-using Yuumix.OdinToolkits.Core.Runtime;
+using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.Samples.Events
 {

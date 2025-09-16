@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using Yuumix.OdinToolkits.Core.Runtime;
+using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Modules.Editor;
 
 namespace Yuumix.OdinToolkits.Modules.ScriptDocGen.Editor
@@ -333,8 +333,8 @@ namespace Yuumix.OdinToolkits.Modules.ScriptDocGen.Editor
                 sb.AppendLine("| :--- | :--- | :---| ");
                 foreach (FieldData fieldData in data.CurrentFields)
                 {
-                    sb.AppendLine("| " + $"`{fieldData.name}`" + " | " + fieldData.chineseComment + " | " +
-                                  $"`{fieldData.englishComment}`" + " |");
+                    sb.AppendLine("| " + $"`{fieldData.name}`" + " | " + fieldData.chineseSummary + " | " +
+                                  $"`{fieldData.englishSummary}`" + " |");
                 }
 
                 return sb;
@@ -687,8 +687,8 @@ namespace Yuumix.OdinToolkits.Modules.ScriptDocGen.Editor
                     memberName = $"[Obsolete] {memberName}";
                 }
 
-                sb.AppendLine("| " + $"`{memberName}`" + " | " + item.chineseComment + " | " +
-                              $"`{item.englishComment}`" + " |");
+                sb.AppendLine("| " + $"`{memberName}`" + " | " + item.chineseSummary + " | " +
+                              $"`{item.englishSummary}`" + " |");
             }
         }
 
@@ -703,7 +703,7 @@ namespace Yuumix.OdinToolkits.Modules.ScriptDocGen.Editor
                     memberName = $"[Obsolete] {memberName}";
                 }
 
-                sb.AppendLine("| " + $"`{memberName}`" + " | " + item.chineseComment + " | " +
+                sb.AppendLine("| " + $"`{memberName}`" + " | " + item.chineseSummary + " | " +
                               $"`{item.declaringType}`" + " |");
             }
         }

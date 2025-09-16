@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Yuumix.OdinToolkits.Core.Runtime;
+using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -70,7 +70,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         public bool isVirtual;
         public bool isOperator;
 
-        public static MethodData FromMethodInfo(MethodInfo methodInfo, Type type)
+        public static MethodData CreateFromMethodInfo(MethodInfo methodInfo, Type type)
         {
             var methodData = new MethodData
             {
@@ -85,7 +85,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 name = methodInfo.Name,
                 returnType = methodInfo.ReturnType.GetReadableTypeName()
             };
-            methodData.accessModifier = methodData.memberAccessModifierType.GetAccessModifierString();
+            methodData.accessModifier = methodData.memberAccessModifierType.ConvertToString();
             var keyword = "";
             if (methodInfo.IsStatic)
             {
@@ -104,7 +104,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 keyword = "virtual(override) ";
             }
 
-            string methodName = methodInfo.GetFullMethodName("[Ext]");
+            string methodName = TypeAnalyzerUtility.GetFullMethodName(methodInfo, "[Ext]");
             if (methodInfo.IsSpecialName && methodInfo.Name.StartsWith("op"))
             {
                 methodData.isOperator = true;
@@ -118,18 +118,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
             methodData.fullSignature =
                 methodData.accessModifier + " " + keyword + methodData.returnType + " " + methodName;
-            IEnumerable<Attribute> attributes = methodInfo.GetCustomAttributes();
-            if (attributes
-                    .FirstOrDefault(x => typeof(IBilingualComment).IsAssignableFrom(x.GetType())) is not
-                IBilingualComment comment)
-            {
-                methodData.chineseComment = "无";
-                methodData.englishComment = "No Comment";
-                return methodData;
-            }
-
-            methodData.chineseComment = comment.GetChinese();
-            methodData.englishComment = comment.GetEnglish();
+            // Summary
+            methodData.chineseSummary = ChineseSummaryAttribute.GetChineseSummary(methodInfo) ?? "无";
             return methodData;
         }
     }

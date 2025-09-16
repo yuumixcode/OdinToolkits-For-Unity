@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Yuumix.OdinToolkits.Core.Runtime
+namespace Yuumix.OdinToolkits.Core
 {
     /// <summary>
     /// 自动注销功能的抽象基类，提供在特定时刻自动注销已注册项的功能

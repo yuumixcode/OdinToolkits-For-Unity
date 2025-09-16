@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using Sirenix.OdinInspector;
 
-namespace Yuumix.OdinToolkits.Core.Runtime
+namespace Yuumix.OdinToolkits.Core
 {
     /// <summary>
     /// 多语言 Button 特性，依赖并兼容 Odin Inspector 的绘制系统。

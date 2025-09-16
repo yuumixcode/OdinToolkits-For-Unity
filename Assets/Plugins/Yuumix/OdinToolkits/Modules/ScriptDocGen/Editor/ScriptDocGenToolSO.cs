@@ -10,8 +10,8 @@ using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
-using Yuumix.OdinToolkits.Core.Runtime;
-using Yuumix.OdinToolkits.Core.Runtime.Editor;
+using Yuumix.OdinToolkits.Core;
+using Yuumix.OdinToolkits.Core.Editor;
 using Yuumix.OdinToolkits.Modules.Editor;
 using YuumixEditor;
 

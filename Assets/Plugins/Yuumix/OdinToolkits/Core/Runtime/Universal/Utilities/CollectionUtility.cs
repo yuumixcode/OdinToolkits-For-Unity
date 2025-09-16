@@ -1,12 +1,10 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 
-namespace Yuumix.OdinToolkits.Core.Runtime
+namespace Yuumix.OdinToolkits.Core
 {
-    [BilingualComment("集合工具类", "Collection utility class")]
     public static class CollectionUtility
     {
-        [BilingualComment("合并两个字符串集合并去重", "Merge two string collections and remove duplicates")]
         public static string[] MergeAndRemoveDuplicates(IEnumerable<string> array1, IEnumerable<string> array2)
         {
             // 使用HashSet<string>来快速合并和去重

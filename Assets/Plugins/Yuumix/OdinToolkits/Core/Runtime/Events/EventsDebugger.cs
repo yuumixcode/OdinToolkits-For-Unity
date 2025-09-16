@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 using UnityEditor;
 #endif
 
-namespace Yuumix.OdinToolkits.Core.Runtime
+namespace Yuumix.OdinToolkits.Core
 {
     /// <summary>
     /// 事件调试类，用于在编辑器中查看 BetterEvent 中注册的 BetterEvent 实例

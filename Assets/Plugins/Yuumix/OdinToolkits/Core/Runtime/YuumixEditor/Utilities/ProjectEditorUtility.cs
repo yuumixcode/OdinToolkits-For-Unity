@@ -1,6 +1,6 @@
 ﻿#if UNITY_EDITOR
 using UnityEditor;
-using Yuumix.OdinToolkits.Core.Runtime;
+using Yuumix.OdinToolkits.Core;
 using Object = UnityEngine.Object;
 
 namespace YuumixEditor
@@ -11,8 +11,6 @@ namespace YuumixEditor
         /// Ping 项目中的任何资源，可以是文件夹路径，需要相对路径
         /// </summary>
         /// <param name="relativePath">相对路径</param>
-        [BilingualComment("Ping 项目中的任何资源，可以是文件夹路径，需要相对路径",
-            "Ping any resource in the project, which can be a folder path. A relative path is required")]
         public static void PingAndSelectAsset(string relativePath)
         {
             // Debug.Assert(path.StartsWith("Assets"), "PingFolder 中传入的相对路径必须以 Assets 开头");

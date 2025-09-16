@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 
-namespace Yuumix.OdinToolkits.Core.Runtime
+namespace Yuumix.OdinToolkits.Core
 {
     [Serializable]
     public enum LanguageType
@@ -17,8 +17,6 @@ namespace Yuumix.OdinToolkits.Core.Runtime
     /// Odin Toolkits 的双语设置类，用于设置当前语言
     /// </summary>
     [Serializable]
-    [BilingualComment("Odin Toolkits 的双语设置类，用于设置当前语言",
-        "The bilingual setting of Odin Toolkits, used to set the current language")]
     public class BilingualSetting : IOdinToolkitsReset
     {
         [PropertyOrder(5)]

@@ -2,7 +2,7 @@ using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Yuumix.OdinToolkits.Core.Runtime
+namespace Yuumix.OdinToolkits.Core
 {
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
     public class BilingualDisplayAsStringWidgetConfigAttribute : Attribute

@@ -1,18 +1,17 @@
 using System;
 
-namespace Yuumix.OdinToolkits.Core.Runtime
+namespace Yuumix.OdinToolkits.Core
 {
-    [BilingualComment("双语数据结构体", "Bilingual String Data Structure")]
     [Serializable]
     public readonly struct BilingualData : IEquatable<BilingualData>
     {
         readonly string _chinese;
         readonly string _english;
 
-        public BilingualData(string chinese, string english = null)
+        public BilingualData(string chinese, string english)
         {
             _chinese = chinese;
-            _english = english ?? string.Empty;
+            _english = english;
         }
 
         public string GetCurrentOrFallback()
@@ -34,8 +33,6 @@ namespace Yuumix.OdinToolkits.Core.Runtime
         public string GetEnglish() => _english;
         public override string ToString() => GetCurrentOrFallback();
         public bool Equals(BilingualData other) => _chinese == other._chinese && _english == other._english;
-        public override bool Equals(object obj) => obj is BilingualData other && Equals(other);
-        public override int GetHashCode() => HashCode.Combine(_chinese, _english);
 
         /// <summary>
         /// 隐式类型转换，BilingualData -> String

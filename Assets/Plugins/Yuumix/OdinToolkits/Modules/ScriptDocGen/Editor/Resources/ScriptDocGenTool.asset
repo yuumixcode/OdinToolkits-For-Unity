@@ -22,17 +22,11 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes:
     - Name: TargetType
-      Entry: 7
-      Data: 0|System.RuntimeType, mscorlib
-    - Name: 
-      Entry: 1
-      Data: Yuumix.OdinToolkits.Core.BilingualData, Yuumix.OdinToolkits.Runtime
-    - Name: 
-      Entry: 8
+      Entry: 6
       Data: 
     - Name: TemporaryTypes
       Entry: 7
-      Data: 1|System.Collections.Generic.List`1[[System.Type, mscorlib]], mscorlib
+      Data: 0|System.Collections.Generic.List`1[[System.Type, mscorlib]], mscorlib
     - Name: 
       Entry: 12
       Data: 0
@@ -46,7 +40,7 @@ MonoBehaviour:
   docCategory: 0
   markdownStyle: {fileID: 11400000, guid: 5fde8cd00b3bb4a2896eca3e359f0ebb, type: 2}
   folderPath: Assets/OdinToolkitsData/Editor/Documents/
-  toolUsageMode: 0
+  toolUsageMode: 1
   typeListConfig: {fileID: 0}
   targetAssemblyString: 
   assemblyListConfig: {fileID: 0}

@@ -3,7 +3,7 @@ using System.Diagnostics;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Yuumix.OdinToolkits.Core.Runtime
+namespace Yuumix.OdinToolkits.Core
 {
     /// <summary>
     /// 双语头部说明控件，用于模块的简单介绍
@@ -11,8 +11,6 @@ namespace Yuumix.OdinToolkits.Core.Runtime
     [Serializable]
     [InlineProperty]
     [HideLabel]
-    [BilingualComment("双语头部说明控件，用于模块的简单介绍",
-        "Bilingual header widget, used for module description")]
     public class BilingualHeaderWidget
     {
         BilingualSetting MultiLanguageManager => OdinToolkitsPreferencesSO.Instance.bilingualSetting;

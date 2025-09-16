@@ -2,19 +2,16 @@
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using Yuumix.OdinToolkits.Core.Runtime;
+using Yuumix.OdinToolkits.Core;
 
 namespace YuumixEditor
 {
-    [BilingualComment("脚本化对象编辑器工具类，提供了操作ScriptableObject资源的实用方法。",
-        "Scriptable Object Editor Utility class, providing utility methods for operating ScriptableObject assets.")]
+   
     public static class ScriptableObjectEditorUtility
     {
         /// <summary>
         /// 是否存在该类型的 SO 资源
         /// </summary>
-        [BilingualComment("检查项目中是否存在指定类型的ScriptableObject资源。",
-            "Check if there is a ScriptableObject asset of the specified type in the project.")]
         public static bool HasAssetInProject<T>() where T : ScriptableObject
         {
             string[] assetPaths = AssetDatabase.FindAssets("t:" + typeof(T));
@@ -26,8 +23,6 @@ namespace YuumixEditor
         /// </summary>
         /// <typeparam name="T"> 资源类型 </typeparam>
         /// <returns> 字符串路径 </returns>
-        [BilingualComment("获取指定类型的ScriptableObject资源的路径，如果未找到则返回null。",
-            "Get the path of a ScriptableObject asset of the specified type. Return null if not found.")]
         public static string GetAssetPath<T>() where T : ScriptableObject
         {
             string assetPath = AssetDatabase.FindAssets("t:" + typeof(T))
@@ -45,8 +40,6 @@ namespace YuumixEditor
         /// <summary>
         /// 获取或创建一个单例 SO 资源，如果资源不存在则创建，如果有多个 SO 资源，则只返回第一个，并删除其他资源
         /// </summary>
-        [BilingualComment("获取或创建一个单例ScriptableObject资源，若存在多个则删除多余的资源。",
-            "Get or create a singleton ScriptableObject asset. Delete extra assets if there are multiple ones.")]
         public static T GetAssetAndDeleteExtra<T>(string relativeFolderPath = "") where T : ScriptableObject
         {
             T wantToAsset;

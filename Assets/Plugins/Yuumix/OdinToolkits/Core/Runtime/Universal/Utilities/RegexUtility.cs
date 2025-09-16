@@ -1,21 +1,13 @@
-﻿using System.Text;
+using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Yuumix.OdinToolkits.Core.Runtime
+namespace Yuumix.OdinToolkits.Core
 {
-    [BilingualComment("正则表达式工具类", "Regular expression utility class")]
     public static class RegexUtility
     {
-        const string CanonicalNamespaceRegex = @"([^a-zA-Z0-9._]|[\s]|::|\b(using)\b|\.{2,})";
-
-        // 简写: \w 表示匹配所有字母和数字的字符: [a-zA-Z0-9_]
-        // \u4e00-\u9fa5 表示匹配所有中文字符
-        // [^\w] 表示匹配所有非字母和数字的字符, [^\u4e00-\u9fa5] 表示匹配所有非中文字符
-        const string CanonicalScriptClassNameRegex = @"([^\w\u4e00-\u9fa5])";
-
-        [BilingualComment("规范化命名空间", "Canonicalize a namespace")]
         public static string CanonicalNamespace(string input)
         {
+            const string canonicalNamespaceRegex = @"([^a-zA-Z0-9._]|[\s]|::|\b(using)\b|\.{2,})";
             var foundFirstLetter = false;
             var firstValidator = new StringBuilder();
 
@@ -36,14 +28,17 @@ namespace Yuumix.OdinToolkits.Core.Runtime
 
             var firstResult = firstValidator.ToString();
 
-            return Regex.Replace(firstResult, CanonicalNamespaceRegex, "");
+            return Regex.Replace(firstResult, canonicalNamespaceRegex, "");
         }
 
-        [BilingualComment("规范化脚本类名", "Canonicalize a script class name")]
         public static string CanonicalScriptClassName(string className)
         {
+            // 简写: \w 表示匹配所有字母和数字的字符: [a-zA-Z0-9_]
+            // \u4e00-\u9fa5 表示匹配所有中文字符
+            // [^\w] 表示匹配所有非字母和数字的字符, [^\u4e00-\u9fa5] 表示匹配所有非中文字符
+            const string canonicalScriptClassNameRegex = @"([^\w\u4e00-\u9fa5])";
             // 移除非法字符
-            className = Regex.Replace(className, CanonicalScriptClassNameRegex, "");
+            className = Regex.Replace(className, canonicalScriptClassNameRegex, "");
 
             // 确保类名以大写字母开头
             if (className.Length > 0)

@@ -1,7 +1,7 @@
 using Yuumix.OdinToolkits.Community.Schwapo.Editor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Community.Editor;
-using Yuumix.OdinToolkits.Core.Runtime;
+using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.Community.Editor
 {

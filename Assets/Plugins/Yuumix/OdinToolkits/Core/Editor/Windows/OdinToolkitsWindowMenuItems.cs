@@ -1,4 +1,4 @@
-﻿namespace Yuumix.OdinToolkits.Core.Runtime.Editor
+﻿namespace Yuumix.OdinToolkits.Core.Editor
 {
     // 快捷键记录
     // & = Mac[shift + option]
@@ -50,6 +50,14 @@
 
         #endregion
 
+        #region 6 Script Doc Generator
+
+        public const string SCRIPT_DOC_GEN = ROOT + "/Script Doc Generator";
+        public const int SCRIPT_DOC_GEN_PRIORITY = 6;
+        public const string SCRIPT_DOC_GEN_WINDOW_NAME = "Script Doc Generator";
+
+        #endregion
+
         #endregion
 
         #region 10 WIP (Work In Progress) EditorWindowHub
@@ -65,7 +73,7 @@
         #region 495 Community
 
         public const string COMMUNITY = ROOT + "/Community";
-        public const int COMMUNITY_PRIORITY = 495;
+        public const int COMMUNITY_PRIORITY = 200;
         public const string COMMUNITY_WINDOW_NAME = "Community";
 
         #endregion

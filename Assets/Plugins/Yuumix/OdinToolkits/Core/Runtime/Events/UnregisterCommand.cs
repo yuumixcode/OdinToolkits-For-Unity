@@ -1,6 +1,6 @@
 using System;
 
-namespace Yuumix.OdinToolkits.Core.Runtime
+namespace Yuumix.OdinToolkits.Core
 {
     public readonly struct UnregisterCommand : IAutoUnregister
     {

@@ -4,14 +4,13 @@ using System.Linq;
 using System.Reflection;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
-using Yuumix.OdinToolkits.Core.Runtime;
+using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
     [Serializable]
     public class TypeData
     {
-        // 类型种类
         [ShowInInspector] public TypeCategory TypeCategory { get; private set; }
 
         /// <summary>
@@ -21,7 +20,6 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [DisplayAsString(false)]
         public string TypeDeclaration { get; private set; }
 
-        // 三个 bool 属性
         [ShowInInspector] public bool IsGeneric { get; private set; }
         [ShowInInspector] public bool IsNested { get; private set; }
         [ShowInInspector] public bool IsStatic { get; private set; }
@@ -74,8 +72,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 TypeName = type.GetReadableTypeName(),
                 NamespaceName = type.Namespace,
                 AssemblyName = type.Assembly.GetName().Name,
-                ChineseComment = GetComment(type),
-                EnglishComment = GetComment(type, true),
+                ChineseComment = GetSummary(type),
+                EnglishComment = GetSummary(type, true),
                 SeeAlsoLinks = GetSeeAlsoLink(type),
                 InheritanceChain = GetInheritanceChain(type),
                 InterfaceList = GetInterfacesList(type),
@@ -93,22 +91,22 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             return data;
         }
 
-        public static string GetComment(Type type, bool returnEnglishComment = false)
+        public static string GetSummary(Type type, bool returnEnglishComment = false)
         {
             IEnumerable<Attribute> attributes = type.GetCustomAttributes();
-            if (attributes.FirstOrDefault(x => typeof(IBilingualComment).IsAssignableFrom(x.GetType())) is not
-                IBilingualComment comment)
+            if (attributes.FirstOrDefault(x => typeof(ISummaryAttribute).IsAssignableFrom(x.GetType())) is not
+                ISummaryAttribute comment)
             {
                 return null;
             }
 
-            return returnEnglishComment ? comment.GetEnglish() : comment.GetChinese();
+            return returnEnglishComment ? "No Comment" : comment.GetSummaryContent();
         }
 
         public static string[] GetSeeAlsoLink(Type type)
         {
-            IEnumerable<SeeAlsoLinkAttribute> links = type.GetAttributes<SeeAlsoLinkAttribute>();
-            return links.Select(x => x.Link).ToArray();
+            IEnumerable<ReferenceLinkURLAttribute> links = type.GetAttributes<ReferenceLinkURLAttribute>();
+            return links.Select(x => x.WebLink).ToArray();
         }
 
         public static string[] GetInheritanceChain(Type type)
@@ -127,8 +125,6 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         /// 只获取公共实例构造函数
         /// </summary>
         /// <returns>构造函数声明的字符串列表</returns>
-        [BilingualComment("只获取公共实例构造函数",
-            "Only get public and instance constructors,exclude static or no-public")]
         public static ConstructorData[] GetConstructorsString(Type type)
         {
             ConstructorInfo[] constructors = type.GetConstructors();
@@ -138,8 +134,6 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             return dataList.ToArray();
         }
 
-        [BilingualComment("获取字段的声明字符串列表",
-            "Get fields' declaration string list")]
         public static FieldData[] GetFieldsString(Type type, bool noNeedFromInherit = true)
         {
             FieldInfo[] fields = type.GetUserDefinedFields().ToArray();
@@ -165,12 +159,10 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             return fieldDataList.ToArray();
         }
 
-        [BilingualComment("获取方法的声明字符串列表",
-            "Get methods' declaration string list")]
         public static MethodData[] GetMethodsString(Type type, bool noNeedFromInherit = true)
         {
             IEnumerable<MethodInfo> methods = type.GetRuntimeMethods().Where(x => !x.IsSpecialName);
-            IEnumerable<MethodData> enumerable = methods.Select(x => MethodData.FromMethodInfo(x, type));
+            IEnumerable<MethodData> enumerable = methods.Select(x => MethodData.CreateFromMethodInfo(x, type));
             List<MethodData> methodDataList;
             if (noNeedFromInherit)
             {
@@ -186,8 +178,6 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             return methodDataList.ToArray();
         }
 
-        [BilingualComment("获取属性的声明字符串列表",
-            "Get properties' declaration string list")]
         public static PropertyData[] GetPropertiesString(Type type, bool noNeedFromInherit = true)
         {
             PropertyInfo[] properties = type.GetRuntimeProperties().ToArray();
@@ -207,8 +197,6 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             return propertyDataList.ToArray();
         }
 
-        [BilingualComment("获取事件的声明字符串列表",
-            "Get events' declaration string list")]
         public static EventData[] GetEventsString(Type type, bool noNeedFromInherit = true)
         {
             EventInfo[] events = type.GetRuntimeEvents().ToArray();
@@ -231,7 +219,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         public static MethodData[] GetOperatorMethodsString(Type type)
         {
             return type.GetRuntimeMethods().Where(x => x.IsSpecialName && x.Name.StartsWith("op"))
-                .Select(x => MethodData.FromMethodInfo(x, type))
+                .Select(x => MethodData.CreateFromMethodInfo(x, type))
                 .ToArray();
         }
 

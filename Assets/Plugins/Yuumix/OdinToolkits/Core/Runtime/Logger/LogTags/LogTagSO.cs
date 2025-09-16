@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Yuumix.OdinToolkits.Core.Runtime
+namespace Yuumix.OdinToolkits.Core
 {
     public abstract class LogTagSO : ScriptableObject { }
 }

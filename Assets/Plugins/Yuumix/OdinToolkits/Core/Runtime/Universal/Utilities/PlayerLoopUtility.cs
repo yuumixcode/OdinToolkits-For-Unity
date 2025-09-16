@@ -1,15 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.LowLevel;
 
-namespace Yuumix.OdinToolkits.Core.Runtime
+namespace Yuumix.OdinToolkits.Core
 {
-    [BilingualComment("玩家循环工具类", "Player loop utility class")]
     public static class PlayerLoopUtility
     {
-        [BilingualComment("从玩家循环系统中移除指定系统", "Remove a specified system from the player loop system")]
         public static void RemoveSystem<T>(ref PlayerLoopSystem loop, PlayerLoopSystem systemToRemove)
         {
             if (loop.subSystemList == null || loop.subSystemList.Length == 0)
@@ -31,7 +29,6 @@ namespace Yuumix.OdinToolkits.Core.Runtime
             HandleSubSystemLoopForRemoval<T>(ref loop, systemToRemove);
         }
 
-        [BilingualComment("处理子系统循环以进行移除操作", "Handle the sub - system loop for removal operation")]
         static void HandleSubSystemLoopForRemoval<T>(ref PlayerLoopSystem loop, PlayerLoopSystem systemToRemove)
         {
             if (loop.subSystemList == null || loop.subSystemList.Length == 0)
@@ -45,7 +42,6 @@ namespace Yuumix.OdinToolkits.Core.Runtime
             }
         }
 
-        [BilingualComment("在玩家循环系统中插入指定系统", "'Insert' a specified system into the player loop system")]
         public static bool InsertSystem<T>(ref PlayerLoopSystem loop, PlayerLoopSystem systemToInsert, int index)
         {
             if (loop.type != typeof(T))
@@ -64,7 +60,6 @@ namespace Yuumix.OdinToolkits.Core.Runtime
             return true;
         }
 
-        [BilingualComment("处理子系统循环以进行插入操作", "Handle the sub - system loop for insertion operation")]
         static bool HandleSubSystemLoop<T>(ref PlayerLoopSystem loop, PlayerLoopSystem systemToInsert, int index)
         {
             if (loop.subSystemList == null || loop.subSystemList.Length == 0)
@@ -85,7 +80,6 @@ namespace Yuumix.OdinToolkits.Core.Runtime
             return false;
         }
 
-        [BilingualComment("打印玩家循环系统信息", "Print the player loop system information")]
         public static void PrintPlayerLoop(PlayerLoopSystem loop)
         {
             var sb = new StringBuilder();
@@ -104,7 +98,6 @@ namespace Yuumix.OdinToolkits.Core.Runtime
         /// <param name="system">当前要打印的玩家循环系统实例。</param>
         /// <param name="sb">用于累积输出信息的字符串构建器。</param>
         /// <param name="depth">当前打印的子系统的深度级别，用于格式化输出。</param>
-        [BilingualComment("打印玩家循环系统的子系统信息", "Print the subsystem information of the player loop system")]
         static void PrintSubSystem(PlayerLoopSystem system, StringBuilder sb, int depth)
         {
             // 在字符串构建器中添加当前子系统的类型信息，并换行
@@ -121,7 +114,6 @@ namespace Yuumix.OdinToolkits.Core.Runtime
             }
         }
 
-        [BilingualComment("获取新的自定义玩家循环系统", "Get a new custom player loop system")]
         public static PlayerLoopSystem GetNewCustomPlayerLoopSystem(
             Type target, PlayerLoopSystem.UpdateFunction update = null, IntPtr loopCondition = default,
             PlayerLoopSystem[] subSystems = null) =>

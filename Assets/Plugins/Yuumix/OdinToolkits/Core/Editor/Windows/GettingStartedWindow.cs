@@ -5,10 +5,11 @@ using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
+using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Modules.Editor;
 using YuumixEditor;
 
-namespace Yuumix.OdinToolkits.Core.Runtime.Editor
+namespace Yuumix.OdinToolkits.Core.Editor
 {
     public class GettingStartedWindow : OdinEditorWindow
     {

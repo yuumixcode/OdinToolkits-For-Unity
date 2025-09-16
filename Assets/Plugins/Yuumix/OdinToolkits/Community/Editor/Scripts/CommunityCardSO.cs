@@ -5,7 +5,7 @@ using System.Text;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using UnityEngine;
-using Yuumix.OdinToolkits.Core.Runtime;
+using Yuumix.OdinToolkits.Core;
 using YuumixEditor;
 
 namespace Yuumix.OdinToolkits.Community.Editor
@@ -14,8 +14,6 @@ namespace Yuumix.OdinToolkits.Community.Editor
     /// Community 资源卡片的基类，继承此类型实现资源卡片
     /// </summary>
     /// <typeparam name="T">目标资源卡片</typeparam>
-    [BilingualComment("Community 资源卡片的基类，继承此类型实现资源卡片",
-        "The base class of the Community resource card, by inheriting this type, one can implement the resource card.")]
     public abstract class CommunityCardSO<T> : SerializedScriptableObject where T : CommunityCardSO<T>
     {
         #region 单例

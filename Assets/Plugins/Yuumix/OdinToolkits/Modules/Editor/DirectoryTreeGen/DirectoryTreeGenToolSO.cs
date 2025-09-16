@@ -2,8 +2,8 @@ using System.IO;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;
-using Yuumix.OdinToolkits.Core.Runtime;
-using Yuumix.OdinToolkits.Core.Runtime.Editor;
+using Yuumix.OdinToolkits.Core;
+using Yuumix.OdinToolkits.Core.Editor;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -55,6 +55,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             DirectoryAnalysisData.CurrentRootPath = folderPath;
             _directoryAnalysisData = DirectoryAnalysisData.FromDirectoryInfo(new DirectoryInfo(folderPath));
         }
+
+        BilingualData _operatorButtonsTitleGroupData = new BilingualData("操作按钮", "Operator Buttons");
 
         [BilingualTitleGroup("TG", "操作按钮", "Operator Buttons")]
         [HorizontalGroup("TG/B")]

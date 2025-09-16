@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using Sirenix.OdinInspector;
 
-namespace Yuumix.OdinToolkits.Core.Runtime
+namespace Yuumix.OdinToolkits.Core
 {
     /// <summary>
     /// 多语言的标题特性，默认支持中文和英语
@@ -10,8 +10,6 @@ namespace Yuumix.OdinToolkits.Core.Runtime
     [DontApplyToListElements]
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
     [Conditional("UNITY_EDITOR")]
-    [BilingualComment("多语言的标题特性，默认支持中文和英语",
-        "Multi-language title Attribute, supported by default in Chinese and English")]
     public class BilingualTitleAttribute : Attribute
     {
         public readonly BilingualData TitleData;

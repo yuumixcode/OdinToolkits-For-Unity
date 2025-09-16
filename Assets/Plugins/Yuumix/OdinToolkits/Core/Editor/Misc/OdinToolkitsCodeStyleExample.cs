@@ -7,7 +7,7 @@ using UnityEngine;
 
 #pragma warning disable CS0067 // 事件从未使用过
 
-namespace Yuumix.OdinToolkits.Core.Runtime.Editor
+namespace Yuumix.OdinToolkits.Core.Editor
 {
     #region 整体风格样式说明
 
