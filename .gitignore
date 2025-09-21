@@ -91,12 +91,12 @@ Assets/Plugins/Sirenix
 Assets/Plugins/Sirenix.meta
 
 # JetBrains IDE 配置文件，例如设置保存中的解决方案团队和解决方案个人
-# *.DotSettings
-# *.DotSettings.user
+*.DotSettings
+*.DotSettings.user
 
 # Unity 生成的 .csproj 关联的 IDE 配置
-# *.csproj.DotSettings
-# *.csproj.DotSettings.user
+*.csproj.DotSettings
+*.csproj.DotSettings.user
 
 # 排除 Unity Asset Store Tools 插件
 Packages/com.unity.asset-store-tools/
