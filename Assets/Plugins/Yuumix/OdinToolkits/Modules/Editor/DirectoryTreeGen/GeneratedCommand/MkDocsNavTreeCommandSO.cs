@@ -6,15 +6,15 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 {
     public class MkDocsNavTreeCommandSO : GenerateCommandSO
     {
+        readonly string[] _fileFilterArray =
+        {
+            "CNAME"
+        };
+
         readonly string[] _folderFilterArray =
         {
             "blog",
             "assets"
-        };
-
-        readonly string[] _fileFilterArray =
-        {
-            "CNAME"
         };
 
         public override string Generate(DirectoryAnalysisData data, int maxDepth)

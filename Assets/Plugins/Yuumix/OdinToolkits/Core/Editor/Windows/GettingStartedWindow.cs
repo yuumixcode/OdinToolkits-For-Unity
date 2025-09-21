@@ -1,11 +1,9 @@
-using Yuumix.OdinToolkits.Modules.ScriptDocGen.Editor;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
-using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Modules.Editor;
 using YuumixEditor;
 
@@ -20,13 +18,6 @@ namespace Yuumix.OdinToolkits.Core.Editor
         public BilingualDisplayAsStringWidget titleHeader =
             new BilingualDisplayAsStringWidget("简介", "Introduction");
 
-        [PropertyOrder(-100)]
-        [OnInspectorGUI]
-        public void Separate()
-        {
-            SirenixEditorGUI.DrawThickHorizontalSeperator(4, 5, 10);
-        }
-
         [PropertyOrder(-90)]
         [BilingualDisplayAsStringWidgetConfig(fontSize: 14, enableRichText: true, alignment: TextAlignment.Center)]
         public BilingualDisplayAsStringWidget introduction = new BilingualDisplayAsStringWidget(
@@ -39,6 +30,31 @@ namespace Yuumix.OdinToolkits.Core.Editor
         [BilingualDisplayAsStringWidgetConfig(fontSize: 24, enableRichText: true, alignment: TextAlignment.Center)]
         public BilingualDisplayAsStringWidget core =
             new BilingualDisplayAsStringWidget("核心功能模块", "Core Module");
+
+        [GUIColor("green")]
+        [PropertyOrder(-30)]
+        [PropertySpace(16)]
+        [BilingualDisplayAsStringWidgetConfig(fontSize: 24, enableRichText: true, alignment: TextAlignment.Center)]
+        public BilingualDisplayAsStringWidget help =
+            new BilingualDisplayAsStringWidget("链接", "Help Links");
+
+        string ScriptDocGenButtonName => ScriptDocGenInspectorSO.MenuName;
+
+        string TemplateCodeGenButtonName =>
+            TemplateCodeGenToolSO.GenerateTemplateToolMenuPathData.GetCurrentOrFallback();
+
+        [PropertyOrder(110)]
+        [DisplayAsString(TextAlignment.Center)]
+        [ShowInInspector]
+        [HideLabel]
+        public string Version => OdinToolkitsEditorInfo.VERSION;
+
+        [PropertyOrder(-100)]
+        [OnInspectorGUI]
+        public void Separate()
+        {
+            SirenixEditorGUI.DrawThickHorizontalSeperator(4, 5, 10);
+        }
 
         [PropertyOrder(-50)]
         [OnInspectorGUI]
@@ -60,11 +76,8 @@ namespace Yuumix.OdinToolkits.Core.Editor
         [Button("$ScriptDocGenButtonName", ButtonSizes.Large)]
         public void OpenScriptDocGen()
         {
-            ToolsPackageWindow.ShowWindow();
-            GetWindow<ToolsPackageWindow>().TrySelectMenuItemWithObject(ScriptDocGenToolSO.Instance);
+            ScriptDocGenWindow.Open();
         }
-
-        string ScriptDocGenButtonName => ScriptDocGenToolSO.ScriptDocGenToolMenuPathData.GetCurrentOrFallback();
 
         [PropertyOrder(-40)]
         [Button("$TemplateCodeGenButtonName", ButtonSizes.Large)]
@@ -74,16 +87,6 @@ namespace Yuumix.OdinToolkits.Core.Editor
             ToolsPackageWindow.ShowWindow();
             GetWindow<ToolsPackageWindow>().TrySelectMenuItemWithObject(TemplateCodeGenToolSO.Instance);
         }
-
-        string TemplateCodeGenButtonName =>
-            TemplateCodeGenToolSO.GenerateTemplateToolMenuPathData.GetCurrentOrFallback();
-        
-        [GUIColor("green")]
-        [PropertyOrder(-30)]
-        [PropertySpace(16)]
-        [BilingualDisplayAsStringWidgetConfig(fontSize: 24, enableRichText: true, alignment: TextAlignment.Center)]
-        public BilingualDisplayAsStringWidget help =
-            new BilingualDisplayAsStringWidget("链接", "Help Links");
 
         [PropertyOrder(-29)]
         [OnInspectorGUI]
@@ -137,19 +140,13 @@ namespace Yuumix.OdinToolkits.Core.Editor
             SirenixEditorGUI.DrawThickHorizontalSeperator(4, 5, 10);
         }
 
-        [PropertyOrder(110)]
-        [DisplayAsString(TextAlignment.Center)]
-        [ShowInInspector]
-        [HideLabel]
-        public string Version => OdinToolkitsVersions.VERSION;
-
-        [MenuItem(OdinToolkitsWindowMenuItems.GETTING_STARTED, false,
-            OdinToolkitsWindowMenuItems.GETTING_STARTED_PRIORITY)]
+        [MenuItem(OdinToolkitsMenuItems.GETTING_STARTED, false,
+            OdinToolkitsMenuItems.GETTING_STARTED_PRIORITY)]
         public static void OpenWindow()
         {
             var window = GetWindow<GettingStartedWindow>();
             window.position = GUIHelper.GetEditorWindowRect().AlignCenter(800, 700);
-            window.titleContent = new GUIContent(OdinToolkitsWindowMenuItems.GETTING_STARTED_WINDOW_NAME);
+            window.titleContent = new GUIContent(OdinToolkitsMenuItems.GETTING_STARTED_WINDOW_NAME);
             window.ShowUtility();
         }
     }

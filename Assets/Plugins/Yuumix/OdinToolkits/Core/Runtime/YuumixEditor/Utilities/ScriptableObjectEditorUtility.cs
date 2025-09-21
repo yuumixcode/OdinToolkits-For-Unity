@@ -6,7 +6,6 @@ using Yuumix.OdinToolkits.Core;
 
 namespace YuumixEditor
 {
-   
     public static class ScriptableObjectEditorUtility
     {
         /// <summary>

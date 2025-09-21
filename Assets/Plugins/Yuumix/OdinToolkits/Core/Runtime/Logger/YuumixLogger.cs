@@ -15,15 +15,15 @@ namespace Yuumix.OdinToolkits.Core
     /// </summary>
     public static class YuumixLogger
     {
-        static string NowTimeString => DateTime.Now.ToString("HH:mm:ss");
-        static YuumixLoggerSetting Setting => OdinToolkitsPreferencesSO.Instance.yuumixLoggerSetting;
-
         static readonly IObjectPool<StringBuilder> StringBuilderPool = new ObjectPool<StringBuilder>(
             () => new StringBuilder(),
             actionOnRelease: sb => sb.Clear(),
             defaultCapacity: 50,
             maxSize: 100
         );
+
+        static string NowTimeString => DateTime.Now.ToString("HH:mm:ss");
+        static YuumixLoggerConfig Config => OdinToolkitsRuntimeConfigSO.Instance.yuumixLoggerConfig;
 
         public static void CompleteLog(string message, LogType logType = LogType.Log,
             Type logTagType = null,
@@ -176,7 +176,7 @@ namespace Yuumix.OdinToolkits.Core
             int lineNumber = 0,
             string memberName = "")
         {
-            if (logTagType != null && !Setting.CanLog(logTagType))
+            if (logTagType != null && !Config.CanLog(logTagType))
             {
                 return;
             }
@@ -198,7 +198,7 @@ namespace Yuumix.OdinToolkits.Core
             string relativePath = PathUtilities.MakeRelative(Application.dataPath.Replace("/Assets", ""), filePath);
             var jumpTag =
                 $"<a style='text-decoration: underline; href=\"{relativePath}\" line=\"{lineNumber}\">{relativePath}:{lineNumber}</a>";
-            sb.Append("\n").Append("在下方堆栈面板中点击链接跳转: [ at <color=#ff6565>").Append(jumpTag).Append("</color> ]");
+            sb.Append("\n").Append("堆栈面板中点击跳转: [ at <color=#ff6565>").Append(jumpTag).Append("</color> ]");
 #endif
             var logMessage = sb.ToString();
             switch (logType)

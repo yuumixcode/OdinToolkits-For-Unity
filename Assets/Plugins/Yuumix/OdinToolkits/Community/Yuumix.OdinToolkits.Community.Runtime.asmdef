@@ -1,17 +1,17 @@
 {
-    "name": "Yuumix.OdinToolkits.Community.Runtime",
-    "rootNamespace": "",
-    "references": [
-        "GUID:345532146266e4c3182369bb0e4a1a3f",
-        "GUID:13a7f22e067974ddcbea7aac02504a47"
-    ],
-    "includePlatforms": [],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": [],
-    "versionDefines": [],
-    "noEngineReferences": false
+  "name": "Yuumix.OdinToolkits.Community.Runtime",
+  "rootNamespace": "",
+  "references": [
+    "GUID:345532146266e4c3182369bb0e4a1a3f",
+    "GUID:13a7f22e067974ddcbea7aac02504a47"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
 }

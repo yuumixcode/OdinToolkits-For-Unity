@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
-using UnityEngine;
+using Sirenix.Utilities;
 using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.Modules
@@ -90,7 +90,9 @@ namespace Yuumix.OdinToolkits.Modules
                 isVirtual = methodInfo.IsVirtual,
                 name = methodInfo.Name,
                 returnType = methodInfo.ReturnType.GetReadableTypeName(),
-                parametersString = TypeAnalyzerUtility.GetParamsNamesWithDefaultValue(methodInfo)
+                parametersString = TypeAnalyzerUtility.GetParamsNamesWithDefaultValue(methodInfo),
+                isFromInterfaceImplement = TypeAnalyzerUtility.IsFromInterfaceMethod(methodInfo),
+                isFromAncestor = TypeAnalyzerUtility.IsInheritedOverrideFromAncestor(methodInfo, type)
             };
 
             var keyword = "";
@@ -107,6 +109,13 @@ namespace Yuumix.OdinToolkits.Modules
                 methodData.isOverride = true;
                 keyword = "override ";
             }
+            else if (methodInfo.DeclaringType == methodInfo.GetBaseDefinition().DeclaringType &&
+                     methodInfo.IsVirtual && TypeAnalyzerUtility.IsFromInterfaceMethod(methodInfo))
+            {
+                // 这是实现接口的方法
+                methodData.isOverride = true;
+                keyword = "";
+            }
             else if (methodInfo.IsVirtual)
             {
                 keyword = "virtual ";
@@ -118,7 +127,7 @@ namespace Yuumix.OdinToolkits.Modules
                 keyword += "async ";
             }
 
-            string methodName = TypeAnalyzerUtility.GetFullMethodName(methodInfo, "[Ext] ");
+            string methodName = TypeAnalyzerUtility.GetFullMethodName(methodInfo, "");
             if (methodInfo.IsSpecialName && methodInfo.Name.StartsWith("op"))
             {
                 methodData.isOperator = true;
@@ -130,8 +139,11 @@ namespace Yuumix.OdinToolkits.Modules
                 }
             }
 
+            methodData.partSignature =
+                methodData.AccessModifier + " " + keyword + methodData.returnType + " " + methodData.name;
             methodData.fullSignature =
                 methodData.AccessModifier + " " + keyword + methodData.returnType + " " + methodName;
+
             // 转换运算符要特殊处理
             if (methodInfo.Name.Contains("op_Implicit") || methodInfo.Name.Contains("op_Explicit"))
             {
@@ -140,6 +152,13 @@ namespace Yuumix.OdinToolkits.Modules
             }
 
             methodData.fullSignature += ";";
+            if (methodInfo.IsExtensionMethod())
+            {
+                const string extensionMethodPrefix = "[Extension] ";
+                methodData.partSignature = extensionMethodPrefix + methodData.partSignature;
+                methodData.fullSignature = extensionMethodPrefix + methodData.fullSignature;
+            }
+
             var declarationStringBuilder = new StringBuilder();
             object[] attributesObj = methodInfo.GetCustomAttributes(false);
             foreach (object attr in attributesObj)
@@ -159,5 +178,24 @@ namespace Yuumix.OdinToolkits.Modules
             methodData.chineseSummary = ChineseSummaryAttribute.GetChineseSummary(methodInfo) ?? "无";
             return methodData;
         }
+
+        #region 特殊状态补充
+
+        /// <summary>
+        /// 此方法继承自祖先（不是直接的基类，而是基类的上层）
+        /// </summary>
+        public bool isFromAncestor;
+
+        /// <summary>
+        /// 此方法继承自接口，在该类中实现
+        /// </summary>
+        public bool isFromInterfaceImplement;
+
+        /// <summary>
+        /// 此方法在当前类中存在重载方法
+        /// </summary>
+        public bool isOverloadMethodInDeclaringType;
+
+        #endregion
     }
 }

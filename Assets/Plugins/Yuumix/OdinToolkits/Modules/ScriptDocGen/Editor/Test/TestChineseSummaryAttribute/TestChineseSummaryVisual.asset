@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb43662797f4c45b9a4358c1895a71e8, type: 3}
+  m_Name: TestChineseSummaryVisual
+  m_EditorClassIdentifier: 
+  filePath: Assets/Plugins/Yuumix/OdinToolkits/Modules/XMLConverter/Editor/TestChineseSummary/TestRemoveSummary.cs
+  sourceCodeText: "    /// <summary>\n    /// \u6D4B\u8BD5\u79FB\u9664 ChineseSummary\n   
+    /// </summary>\n    [Obsolete(\"\u4E34\u65F6\u65B9\u6CD5\")]\n    [ChineseSummary(\"\u6D4B\u8BD5\"
+    +\n                    \"\u79FB\u9664\u591A\u884C\u7684\" +\n                   
+    \" ChineseSummary\")]\n    public class TestRemoveSummaryB\n    {\n        [Obsolete(\"\u4E34\u65F6\u65B9\u6CD5\")]
+    [ChineseSummary(\"\u6D4B\u8BD5\" +\n                                          
+    \"\u6210\u5458\u7684\u591A\u884C\u7684\" +\n                                          
+    \" ChineseSummary\")]\n        public void Method()\n        {\n            Debug.Log(\"\u6D4B\u8BD5\u79FB\u9664\u591A\u884C\u7684
+    ChineseSummary\");\n        }\n    }"
+  previewText: "    /// <summary>\n    /// \u6D4B\u8BD5\u79FB\u9664 ChineseSummary\n   
+    /// </summary>\n    [Obsolete(\"\u4E34\u65F6\u65B9\u6CD5\")]\n    public class
+    TestRemoveSummaryB\n    {\n        [Obsolete(\"\u4E34\u65F6\u65B9\u6CD5\")]\n       
+    public void Method()\n        {\n            Debug.Log(\"\u6D4B\u8BD5\u79FB\u9664\u591A\u884C\u7684
+    ChineseSummary\");\n        }\n    }"

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AssetSelectorExample
   m_EditorClassIdentifier: 
   example: {fileID: 0}
-  example2: {fileID: 0}
+  example2: {fileID: 11400000, guid: b1bd8cf0deded4f068f16d98894f704e, type: 2}
   gameObject: {fileID: 0}
   gameObjects:
   - {fileID: 1462825096483765958, guid: 645834207438c498cb6c809cedd19085, type: 3}
@@ -30,7 +30,8 @@ MonoBehaviour:
   - {fileID: 1462825096483765958, guid: 645834207438c498cb6c809cedd19085, type: 3}
   - {fileID: 5848567390394498089, guid: 615b56335de244c8d8ac4409fa2bb529, type: 3}
   gameObjects5: []
-  gameObject6: {fileID: 1462825096483765958, guid: 645834207438c498cb6c809cedd19085, type: 3}
+  gameObject6: {fileID: 1462825096483765958, guid: 645834207438c498cb6c809cedd19085,
+    type: 3}
   gameObjects7:
   - {fileID: 11400000, guid: a8e35432e1688408ab86cd74783004af, type: 2}
   gameObjects8:

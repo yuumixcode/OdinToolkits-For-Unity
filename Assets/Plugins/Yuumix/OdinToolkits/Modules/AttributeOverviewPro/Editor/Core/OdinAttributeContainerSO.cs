@@ -6,6 +6,7 @@ using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using UnityEditor;
 using Yuumix.OdinToolkits.Core;
+using YuumixEditor;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -16,11 +17,6 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "简介",
                 "Introduction");
 
-        [PropertyOrder(-99)]
-        [PropertySpace(0, 10)]
-        [EnableGUI]
-        public BilingualHeaderWidget Header => GetHeaderWidget();
-
         [HideIf("HasOdinExample")]
         [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
         public ExampleSO example;
@@ -28,6 +24,11 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [HideIf("HasExample")]
         [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
         public ExampleOdinSO exampleOdin;
+
+        [PropertyOrder(-99)]
+        [PropertySpace(0, 10)]
+        [EnableGUI]
+        public BilingualHeaderWidget Header => GetHeaderWidget();
 
         public List<ResolvedParam> ResolvedParams => GetResolvedParams();
 

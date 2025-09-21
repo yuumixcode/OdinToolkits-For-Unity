@@ -10,20 +10,14 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     {
         public static string CurrentRootPath;
 
-        internal enum DirectoryAnalysisType
-        {
-            Folder,
-            File
-        }
-
         internal DirectoryAnalysisType AnalysisType;
 
         public string Name;
         public string RelativePath = string.Empty;
 
-        [ShowInInspector] public int Depth => !RelativePath.IsNullOrWhiteSpace() ? RelativePath.Split('/').Length : 0;
-
         public List<DirectoryAnalysisData> SubDirectoryData;
+
+        [ShowInInspector] public int Depth => !RelativePath.IsNullOrWhiteSpace() ? RelativePath.Split('/').Length : 0;
 
         public static DirectoryAnalysisData FromDirectoryInfo(DirectoryInfo directoryInfo)
         {
@@ -89,6 +83,12 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             }
 
             return false;
+        }
+
+        internal enum DirectoryAnalysisType
+        {
+            Folder,
+            File
         }
     }
 }

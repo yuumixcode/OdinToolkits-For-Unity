@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Text;
 using Yuumix.OdinToolkits.Core;
@@ -46,13 +44,14 @@ namespace Yuumix.OdinToolkits.Modules
 
             fieldData.fullSignature = fieldData.AccessModifier.Trim(' ') + " " + keyword +
                                       fieldInfo.FieldType.GetReadableTypeName() + " " + fieldData.name;
+            fieldData.partSignature = fieldData.fullSignature;
             if (fieldData.isConst)
             {
                 fieldData.fullSignature += " = " + fieldInfo.GetRawConstantValue();
                 fieldData.fullSignature += ";";
             }
 
-            if (fieldData.isStatic && fieldData.isReadonly)
+            if (fieldData.isStatic && fieldData.isReadonly && !fieldInfo.FieldType.IsGenericType)
             {
                 fieldData.fullSignature += " = " + fieldInfo.GetValue(null);
                 fieldData.fullSignature += ";";

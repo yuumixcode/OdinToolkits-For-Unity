@@ -2,19 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Text;
 using Sirenix.Utilities;
 using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.Modules
 {
+    /// <summary>
+    /// TypeAnalyzer 的静态工具集
+    /// </summary>
     public static class TypeAnalyzerUtility
     {
         /// <summary>
         /// 将系统类型名称映射到其 C# 别名的字典
-        /// <br />
-        /// A dictionary mapping system type names to their C# aliases.
         /// </summary>
         public static readonly Dictionary<Type, string> TypeAliasMap = new Dictionary<Type, string>
         {
@@ -136,6 +136,38 @@ namespace Yuumix.OdinToolkits.Modules
             }
         };
 
+        #region 解析属性成员方法
+
+        public static AccessModifierType GetPropertyAccessModifierType(PropertyInfo property)
+        {
+            MethodInfo getMethod = property.GetGetMethod(true);
+            MethodInfo setMethod = property.GetSetMethod(true);
+
+            AccessModifierType? getAccess = getMethod != null ? getMethod.GetMethodAccessModifierType() : null;
+            AccessModifierType? setAccess = setMethod != null ? setMethod.GetMethodAccessModifierType() : null;
+
+            if (!getAccess.HasValue && !setAccess.HasValue)
+            {
+                return AccessModifierType.None;
+            }
+
+            if (!setAccess.HasValue)
+            {
+                return getAccess.Value;
+            }
+
+            if (!getAccess.HasValue)
+            {
+                return setAccess.Value;
+            }
+
+            return (int)getAccess.Value <= (int)setAccess.Value
+                ? getAccess.Value
+                : setAccess.Value;
+        }
+
+        #endregion
+
         #region 解析方法成员相关方法
 
         /// <summary>
@@ -242,6 +274,46 @@ namespace Yuumix.OdinToolkits.Modules
             return defaultValue.ToString();
         }
 
+        /// <summary>
+        /// 判断一个 MethodInfo 是否为声明它的类的接口的方法的实现。
+        /// </summary>
+        public static bool IsFromInterfaceMethod(MethodInfo method)
+        {
+            Type declaringType = method.DeclaringType;
+            if (declaringType == null)
+            {
+                return false;
+            }
+
+            Type[] interfaceTypeList = declaringType.GetInterfaces();
+            return interfaceTypeList.Select(interfaceType => declaringType.GetInterfaceMap(interfaceType))
+                .Select(interfaceMapping => interfaceMapping.TargetMethods)
+                .Any(targetMethods => targetMethods.Contains(method));
+        }
+
+        public static bool IsInheritedOverrideFromAncestor(MethodInfo method, Type currentType)
+        {
+            // 方法不是在当前类中声明的
+            if (method.DeclaringType == currentType)
+            {
+                return false;
+            }
+
+            // 是 virtual 或 override 方法
+            if (method.IsVirtual && method.GetBaseDefinition() != method)
+            {
+                Type baseDefinitionDeclaringType = method.GetBaseDefinition().DeclaringType;
+                Type directBaseType = currentType.BaseType;
+                // 如果最初定义的类不是当前类的直接父类，则说明是 override 了从更上层继承的方法
+                if (baseDefinitionDeclaringType != directBaseType)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         #endregion
 
         #region 解析事件成员相关方法
@@ -321,38 +393,6 @@ namespace Yuumix.OdinToolkits.Modules
             {
                 eventData.isStatic = eventInfo.GetRemoveMethod(true).IsStatic;
             }
-        }
-
-        #endregion
-
-        #region 解析属性成员方法
-
-        public static AccessModifierType GetPropertyAccessModifierType(PropertyInfo property)
-        {
-            MethodInfo getMethod = property.GetGetMethod(true);
-            MethodInfo setMethod = property.GetSetMethod(true);
-
-            AccessModifierType? getAccess = getMethod != null ? getMethod.GetMethodAccessModifierType() : null;
-            AccessModifierType? setAccess = setMethod != null ? setMethod.GetMethodAccessModifierType() : null;
-
-            if (!getAccess.HasValue && !setAccess.HasValue)
-            {
-                return AccessModifierType.None;
-            }
-
-            if (!setAccess.HasValue)
-            {
-                return getAccess.Value;
-            }
-
-            if (!getAccess.HasValue)
-            {
-                return setAccess.Value;
-            }
-
-            return (int)getAccess.Value <= (int)setAccess.Value
-                ? getAccess.Value
-                : setAccess.Value;
         }
 
         #endregion

@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b364f944a71234bd88cdaf36b7e26373, type: 3}
+  m_Name: DocGeneratorVisual
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  typeAnalyzerVisualSO: {fileID: 11400000, guid: e2d3afc73045f4ad58338107c7a9a390,
+    type: 2}
+  introductionDocPreviewText: "# `TestConstructorA`\n\n## \u4ECB\u7ECD\n\n- \u79CD\u7C7B:
+    `class`\n- \u6240\u5728\u7A0B\u5E8F\u96C6: `Yuumix.OdinToolkits.Editor`\n- \u6240\u5728\u547D\u540D\u7A7A\u95F4:
+    `Yuumix.OdinToolkits.Modules.Editor`\n\n``` csharp\npublic class TestConstructorA
+    : System.Object\n```\n\n"
+  constructorDocPreviewText: "## \u6784\u9020\u65B9\u6CD5\n\n| \u6784\u9020\u65B9\u6CD5\u7B7E\u540D
+    [\u4EC5\u5305\u542B\u516C\u5171\u5B9E\u4F8B\u65B9\u6CD5] | \u6CE8\u91CA |\n|
+    :--- | :--- |\n| `public TestConstructorA()` | \u516C\u5171\u5B9E\u4F8B\u65E0\u53C2\uFF0C\u5B8C\u7F8E\u89E3\u6790
+    |\n| `public TestConstructorA(int a)` | \u516C\u5171\u5B9E\u4F8B\u6709\u53C2\uFF0C\u5B8C\u7F8E\u89E3\u6790
+    |\n| `public TestConstructorA(List<int> list)` | \u516C\u5171\u5B9E\u4F8B\u6709\u53C2\uFF0C\u53C2\u6570\u91CC\u9762\u6709\u6CDB\u578B\uFF0C\u5B8C\u7F8E\u89E3\u6790
+    |\n\n"
+  methodsDocPreviewText: "## \u65B9\u6CD5\n\n| \u7EE7\u627F\u7684\u65B9\u6CD5\u540D\u79F0
+    | \u6CE8\u91CA | \u58F0\u660E\u65B9\u6CD5\u7684\u7C7B \uFF5C\n| :--- | :--- |
+    :--- |\n| Equals | \u65E0 | System.Object |\n| GetHashCode | \u65E0 | System.Object
+    |\n| GetType | \u65E0 | System.Object |\n| ToString | \u65E0 | System.Object
+    |\n| Finalize | \u65E0 | System.Object |\n| MemberwiseClone | \u65E0 | System.Object
+    |\n\n| \u8FD0\u7B97\u7B26\u65B9\u6CD5\u7B7E\u540D | \u6CE8\u91CA | \u58F0\u660E\u65B9\u6CD5\u7684\u7C7B
+    |\n| :--- | :--- | :--- |\n| public static explicit operator string(TestMethodHA
+    obj); | \u65E0 | Yuumix.OdinToolkits.Modules.Editor.TestMethodHA |\n| public
+    static implicit operator int(TestMethodHA obj); | \u65E0 | Yuumix.OdinToolkits.Modules.Editor.TestMethodHA
+    |\n\n| \u5B8C\u6574\u65B9\u6CD5\u7B7E\u540D\u603B\u89C8 |\n| :--- | \n| public
+    static explicit operator string(TestMethodHA obj); |\n| public static implicit
+    operator int(TestMethodHA obj); |\n| public virtual bool Equals(Object obj);
+    |\n| public virtual int GetHashCode(); |\n| public Type GetType(); |\n| public
+    virtual string ToString(); |\n| protected virtual void Finalize(); |\n| protected
+    Object MemberwiseClone(); |\n\n"
+  eventsDocPreviewText: "## \u4E8B\u4EF6\n\n| \u975E\u7EE7\u627F\u7684\u4E8B\u4EF6\u540D\u79F0
+    | \u6CE8\u91CA |\n| :--- | :--- | \n| PublicEvent | \u65E0 |\n\n"
+  propertyDocPreviewText: "## \u5C5E\u6027\n\n| \u7C7B\u578B | \u975E\u7EE7\u627F\u7684\u5C5E\u6027\u540D\u79F0
+    | \u6CE8\u91CA |\n| :--- | :--- | :--- |\n| int | A | \u65E0 | \n\n"
+  fieldDocPreviewText: "## \u5B57\u6BB5\n\n| \u7C7B\u578B | \u975E\u7EE7\u627F\u7684\u5B57\u6BB5\u540D\u79F0
+    | \u6CE8\u91CA | \n| :--- | :--- | :--- | \n| System.Collections.Generic.List<int>
+    | A | \u65E0 |\n| System.Action<bool> | B | \u65E0 |\n\n"

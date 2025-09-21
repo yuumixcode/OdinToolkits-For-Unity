@@ -17,6 +17,12 @@ namespace Yuumix.OdinToolkits.Core.Editor
         float _previousWindowWidth;
         OdinMenuTree _tree;
 
+        protected override void OnDestroy()
+        {
+            EditorApplication.delayCall -= RepaintWindow;
+            base.OnDestroy();
+        }
+
         protected override void Initialize()
         {
             WindowPadding = new Vector4(10, 10, 10, 10);
@@ -76,17 +82,11 @@ namespace Yuumix.OdinToolkits.Core.Editor
             OnWindowResized?.Invoke();
         }
 
-        protected override void OnDestroy()
-        {
-            EditorApplication.delayCall -= RepaintWindow;
-            base.OnDestroy();
-        }
-
-        [MenuItem(OdinToolkitsWindowMenuItems.OVERVIEW_PRO, false, OdinToolkitsWindowMenuItems.OVERVIEW_PRO_PRIORITY)]
+        [MenuItem(OdinToolkitsMenuItems.OVERVIEW_PRO, false, OdinToolkitsMenuItems.OVERVIEW_PRO_PRIORITY)]
         public static void ShowWindow()
         {
             _window = GetWindow<OdinAttributeOverviewProWindow>();
-            _window.titleContent = new GUIContent(OdinToolkitsWindowMenuItems.OVERVIEW_PRO_WINDOW_NAME);
+            _window.titleContent = new GUIContent(OdinToolkitsMenuItems.OVERVIEW_PRO_WINDOW_NAME);
             _window.position = GUIHelper.GetEditorWindowRect().AlignCenter(1000, 750);
             _window.Show();
         }

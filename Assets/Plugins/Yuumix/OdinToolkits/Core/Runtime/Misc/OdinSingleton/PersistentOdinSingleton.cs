@@ -5,8 +5,8 @@ namespace Yuumix.OdinToolkits.Core
 {
     public abstract class PersistentOdinSingleton<T> : SerializedMonoBehaviour where T : PersistentOdinSingleton<T>
     {
-        bool _isInitialized;
         static T _instance;
+        bool _isInitialized;
 
         public static T Instance
         {

@@ -5,8 +5,8 @@ namespace Yuumix.OdinToolkits.Core
 {
     public abstract class OdinSingleton<T> : SerializedMonoBehaviour where T : OdinSingleton<T>
     {
-        bool _isInitialized;
         static T _instance;
+        bool _isInitialized;
 
         public static T Instance
         {

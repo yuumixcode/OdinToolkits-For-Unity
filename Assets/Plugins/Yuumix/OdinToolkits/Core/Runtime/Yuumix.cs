@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Yuumix.OdinToolkits.Core
 {
     public class Yuumix :
-#if UNITY_EDITOR && (ODIN_INSPECTOR_3 || ODIN_INSPECTOR_3_1 || ODIN_INSPECTOR_3_2 || ODIN_INSPECTOR_3_3)
+#if UNITY_EDITOR
         SerializedMonoBehaviour
 #else
         MonoBehaviour
@@ -33,18 +33,18 @@ namespace Yuumix.OdinToolkits.Core
             }
         }
 
-        OdinToolkitsPreferencesSO _odinToolkitsPreferences;
+        OdinToolkitsRuntimeConfigSO _odinToolkitsRuntimeConfig;
 
-        public OdinToolkitsPreferencesSO OdinToolkitsPreferences
+        public OdinToolkitsRuntimeConfigSO OdinToolkitsRuntimeConfig
         {
             get
             {
-                if (!_odinToolkitsPreferences)
+                if (!_odinToolkitsRuntimeConfig)
                 {
-                    _odinToolkitsPreferences = LoadPreferences();
+                    _odinToolkitsRuntimeConfig = LoadPreferences();
                 }
 
-                return _odinToolkitsPreferences;
+                return _odinToolkitsRuntimeConfig;
             }
         }
 
@@ -69,15 +69,15 @@ namespace Yuumix.OdinToolkits.Core
             }
 
             // 初始加载一次
-            _odinToolkitsPreferences = LoadPreferences();
+            _odinToolkitsRuntimeConfig = LoadPreferences();
         }
 
-        static OdinToolkitsPreferencesSO LoadPreferences()
+        static OdinToolkitsRuntimeConfigSO LoadPreferences()
         {
-            var asset = Resources.Load<OdinToolkitsPreferencesSO>("OdinToolkitsPreferences");
+            var asset = Resources.Load<OdinToolkitsRuntimeConfigSO>("OdinToolkitsPreferences");
             if (!asset)
             {
-                YuumixLogger.LogError(nameof(OdinToolkitsPreferencesSO) + " 配置资源加载失败，需要检查 Resources 路径！",
+                YuumixLogger.LogError(nameof(OdinToolkitsRuntimeConfigSO) + " 配置资源加载失败，需要检查 Resources 路径！",
                     prefix: "[Yuumix Error]");
             }
 

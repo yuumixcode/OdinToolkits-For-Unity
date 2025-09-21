@@ -33,7 +33,7 @@ namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
         // [MenuItem(MenuItemGlobalSettings.ResolvedParametersMenuItemName, false, MenuItemGlobalSettings.ResolvedParametersPriority)]
         public static void Open()
         {
-            _window = GetWindow<ResolvedParametersOverviewWindow>(OdinToolkitsWindowMenuItems
+            _window = GetWindow<ResolvedParametersOverviewWindow>(OdinToolkitsMenuItems
                 .RESOLVED_PARAMETERS_OVERVIEW_WINDOW_NAME);
             _window.position = GUIHelper.GetEditorWindowRect().AlignCenter(800, 600);
             _window.minSize = new Vector2(500, 500);

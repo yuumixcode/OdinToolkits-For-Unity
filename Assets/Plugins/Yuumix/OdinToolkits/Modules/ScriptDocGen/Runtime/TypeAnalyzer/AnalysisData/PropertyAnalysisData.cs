@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Text;
 using Sirenix.Utilities;
@@ -42,8 +40,8 @@ namespace Yuumix.OdinToolkits.Modules
                 keyword = "static ";
             }
 
-            propertyData.fullSignature = propertyData.AccessModifier + " " + keyword + propertyData.returnType + " " +
-                                         propertyData.name;
+            propertyData.partSignature =
+                propertyData.AccessModifier + " " + keyword + propertyData.returnType + " " + propertyData.name;
             var methodsString = "";
             if (propertyData.GetAccessModifier.IsNullOrWhiteSpace() &&
                 propertyData.SetAccessModifier.IsNullOrWhiteSpace())
@@ -68,7 +66,7 @@ namespace Yuumix.OdinToolkits.Modules
                                 propertyData.SetAccessModifier + " set; }";
             }
 
-            propertyData.fullSignature += methodsString;
+            propertyData.fullSignature += propertyData.partSignature + methodsString;
             var declarationStringBuilder = new StringBuilder();
             object[] attributesObj = propertyInfo.GetCustomAttributes(false);
             foreach (object attr in attributesObj)

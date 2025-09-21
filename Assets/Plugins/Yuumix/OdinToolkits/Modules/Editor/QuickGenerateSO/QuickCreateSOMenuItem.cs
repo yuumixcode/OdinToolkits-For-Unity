@@ -2,8 +2,8 @@ using System;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
-using Object = UnityEngine.Object;
 using Yuumix.OdinToolkits.Core;
+using Object = UnityEngine.Object;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {

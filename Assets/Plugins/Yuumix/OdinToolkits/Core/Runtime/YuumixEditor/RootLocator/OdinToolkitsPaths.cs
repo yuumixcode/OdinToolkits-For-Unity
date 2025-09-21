@@ -32,6 +32,10 @@ namespace YuumixEditor
             SetFolderPath();
         }
 
+        /// <summary>
+        /// 获取 OdinToolkits 文件夹相对路径，默认为 "Assets/Plugins/Yuumix/OdinToolkits"
+        /// </summary>
+        /// <returns></returns>
         public static string GetRootPath()
         {
             if (EditorPrefs.HasKey("OdinToolkitsRootPathKey"))

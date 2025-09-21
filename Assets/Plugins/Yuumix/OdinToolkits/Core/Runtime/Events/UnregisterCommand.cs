@@ -6,10 +6,7 @@ namespace Yuumix.OdinToolkits.Core
     {
         readonly Action _unregister;
 
-        public UnregisterCommand(Action unregister)
-        {
-            _unregister = unregister;
-        }
+        public UnregisterCommand(Action unregister) => _unregister = unregister;
 
         public void Unregister()
         {

@@ -10,6 +10,9 @@ using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.Modules
 {
+    /// <summary>
+    /// TypeAnalyzer 中使用的 Type 静态扩展方法
+    /// </summary>
     public static class TypeAnalyzerExtensions
     {
         public static TypeCategory GetTypeCategory(this Type type)

@@ -1,11 +1,9 @@
-using Yuumix.OdinToolkits.Modules.ScriptDocGen.Editor;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
-using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Modules.Editor;
 
 namespace Yuumix.OdinToolkits.Core.Editor
@@ -21,12 +19,10 @@ namespace Yuumix.OdinToolkits.Core.Editor
             WindowPadding = new Vector4(10, 10, 10, 10);
             MenuWidth = 230;
             DrawMenuSearchBar = true;
-            BilingualSetting.OnLanguageChange -= ReBuild;
-            BilingualSetting.OnLanguageChange += ReBuild;
+            InspectorBilingualismConfigSO.OnLanguageChange -= ReBuild;
+            InspectorBilingualismConfigSO.OnLanguageChange += ReBuild;
             OnClose -= ClearEventListener;
             OnClose += ClearEventListener;
-            ScriptDocGenToolSO.ToastEvent -= ShowToast;
-            ScriptDocGenToolSO.ToastEvent += ShowToast;
             TemplateCodeGenToolSO.ToastEvent -= ShowToast;
             TemplateCodeGenToolSO.ToastEvent += ShowToast;
         }
@@ -35,8 +31,8 @@ namespace Yuumix.OdinToolkits.Core.Editor
         {
             if (!_hasAddListener)
             {
-                BilingualSetting.OnLanguageChange -= ReBuild;
-                BilingualSetting.OnLanguageChange += ReBuild;
+                InspectorBilingualismConfigSO.OnLanguageChange -= ReBuild;
+                InspectorBilingualismConfigSO.OnLanguageChange += ReBuild;
                 _hasAddListener = true;
             }
 
@@ -45,7 +41,6 @@ namespace Yuumix.OdinToolkits.Core.Editor
 
         void ClearEventListener()
         {
-            ScriptDocGenToolSO.ToastEvent -= ShowToast;
             TemplateCodeGenToolSO.ToastEvent -= ShowToast;
         }
 
@@ -59,12 +54,12 @@ namespace Yuumix.OdinToolkits.Core.Editor
             TrySelectMenuItemWithObject(_selectionInstance);
         }
 
-        [MenuItem(OdinToolkitsWindowMenuItems.TOOLS_PACKAGE_MENU_ITEM_NAME, false,
-            OdinToolkitsWindowMenuItems.TOOLS_PACKAGE_PRIORITY)]
+        [MenuItem(OdinToolkitsMenuItems.TOOLS_PACKAGE_MENU_ITEM_NAME, false,
+            OdinToolkitsMenuItems.TOOLS_PACKAGE_PRIORITY)]
         public static void ShowWindow()
         {
             var window = GetWindow<ToolsPackageWindow>();
-            window.titleContent = new GUIContent(OdinToolkitsWindowMenuItems.TOOLS_PACKAGE_WINDOW_ENGLISH_NAME);
+            window.titleContent = new GUIContent(OdinToolkitsMenuItems.TOOLS_PACKAGE_WINDOW_ENGLISH_NAME);
             window.position = GUIHelper.GetEditorWindowRect().AlignCenter(1050, 750);
             window.minSize = new Vector2(500, 500);
             window.Show();
@@ -73,20 +68,16 @@ namespace Yuumix.OdinToolkits.Core.Editor
         protected override OdinMenuTree BuildMenuTree()
         {
             var tree = new OdinMenuTree(false);
-            string path1 = ScriptDocGenToolSO.ScriptDocGenToolMenuPathData.GetCurrentOrFallback();
             string path2 = TemplateCodeGenToolSO.GenerateTemplateToolMenuPathData.GetCurrentOrFallback();
             string path3 = DirectoryTreeGenToolSO.DirectoryTreeGenToolMenuPathData.GetCurrentOrFallback();
             // 添加 Object
-            tree.AddObjectAtPath(path1, ScriptDocGenToolSO.Instance);
             tree.AddObjectAtPath(path2, TemplateCodeGenToolSO.Instance);
             tree.AddObjectAtPath(path3, DirectoryTreeGenToolSO.Instance);
             // 获取 MenuItem
-            OdinMenuItem scriptDocGenToolMenuItem = tree.GetMenuItem(path1);
             OdinMenuItem generateTemplateCodeToolMenuItem = tree.GetMenuItem(path2);
             OdinMenuItem directoryTreeGenToolMenuItem = tree.GetMenuItem(path3);
             // 图标
             generateTemplateCodeToolMenuItem.AddThumbnailIcon(true);
-            scriptDocGenToolMenuItem.AddThumbnailIcon(true);
             directoryTreeGenToolMenuItem.AddThumbnailIcon(true);
             // Debug.Log("执行 BuildMenuTree");
             return tree;

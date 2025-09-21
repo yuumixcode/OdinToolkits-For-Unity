@@ -286,32 +286,6 @@ namespace Yuumix.OdinToolkits.Core.Editor
 
     public class OdinToolkitsCodeStyleExample : MonoBehaviour
     {
-        #region Field
-
-        // FIELDS: 
-        // | Avoid special characters (backslashes, symbols, Unicode characters); these can interfere with command line tools.
-        // | Use nouns for names, but prefix booleans with a verb.
-        // | Use meaningful names. Make names searchable and pronounceable. Don’t abbreviate (unless it’s math).
-        // | Use Pascal case for public fields. Use camel case for private variables.
-        // | Specify (or omit) the default private access modifier but do it consistently. 
-        // | We recommend to leave out things that are implicit and thus redundant (such as private) for simplicity 
-        // | if you agree that it doesn't negatively affect ambiguity or readability for you.
-        // | There are lots of opinions on the use of prefixes. 
-        // | Pick what works best for you and the team and be consistent with your style guide.
-        // | You can consider adding an underscore (_) in front of private fields to differentiate from local variables
-        // | You can alternatively use more explicit prefixes: m_ = member variable, s_ = static, k_ = const 
-        // | favoring readability over brevity as the guiding principle.
-        // We recommend using explicit prefixes: m_ = member variable which favors specific and 
-        // readability above saving a few keystrokes. However, we suggest to leave out "private" as it's implicit for simplicity.  
-        // Whatever style you choose do it consistently.
-        // ---
-        // 字段：
-        // 名称使用名词，但布尔型变量以动词为前缀。使用有意义的名称。使名称可搜索且易发音。尽量减少缩写，除非是数学术语。
-        // 公共字段使用帕斯卡命名法。私有变量使用下划线前缀+驼峰命名法。
-        // 省略私有访问修饰符。
-
-        #endregion
-
         // 常量使用全大写
         const int MAX_COUNT = 100;
 
@@ -348,32 +322,6 @@ namespace Yuumix.OdinToolkits.Core.Editor
         // 有些人更喜欢为私有字段使用下划线前缀。
         int _elapsedTimeInDays;
 
-        #region Properties
-
-        // PROPERTIES:
-        // | Preferable to a public field.
-        // | 比公共字段更可取。
-        // | Pascal case, without special characters.
-        // | 使用帕斯卡命名法，不使用特殊字符。
-        // | Use the expression-bodied properties to shorten, but choose your preferrred format.
-        // | 使用表达式体属性来简化，但选择你喜欢的格式。
-        // | E.g. use expression-bodied for read-only properties but { get; set; } for everything else.
-        // | 例如，只读属性使用表达式体，其他属性使用 { get; set; }。
-        // | Use the Auto-Implemented Property for a public property without a backing field.
-        // | 对于没有后备字段的公共属性，使用自动实现属性。
-        // | While you can also use functions to expose private data properties are generally recommended.
-        // | 虽然你也可以使用函数来暴露私有数据，但通常建议使用属性。
-        // | For get or set operations involving complex logic or computation, use methods instead of properties.
-        // | 对于涉及复杂逻辑或计算的 get 或 set 操作，使用方法而不是属性。
-        // --- 
-        // 属性：
-        // 减少公共字段的使用，如果要对外，尽量使用属性。
-        // 对于没有后备字段的公共属性，使用自动实现属性。
-        // 虽然你也可以使用函数来暴露私有数据，但通常建议使用属性。
-        // 对于涉及复杂逻辑或计算的 get 或 set 操作，使用方法而不是属性。
-
-        #endregion
-
         // The private backing field
         // 私有后备字段
         int _maxHealth;
@@ -407,28 +355,6 @@ namespace Yuumix.OdinToolkits.Core.Editor
         // 只写，没有显式的 setter
         public void SetMaxHealth(int newMaxValue) => _maxHealth = newMaxValue;
 
-        #region Events
-
-        // EVENTS:
-        // | Name with a verb phrase.
-        // | Present participle means "before" and past participle means "after."
-        // | Use System.Action delegate for most events (can take 0 to 16 parameters).
-        // | Define a custom EventArg only if necessary (either System.EventArgs or a custom struct).
-        // | OR alternatively, use the System.EventHandler; choose one and apply consistently.
-        // | Choose a naming scheme for events, event handling methods (subscriber/observer), 
-        // | and event raising methods (publisher/subject)
-        // | e.g. event/action = "OpeningDoor", event raising method = "OnDoorOpened", event handling method = "MySubject_DoorOpened"
-        // ---
-        // 事件：
-        // 使用动词短语命名。
-        // 大多数事件使用 System.Action 委托（可以接受 0 到 16 个参数）。
-        // 仅在必要时定义自定义 EventArg（可以是 System.EventArgs 或自定义结构体）。
-        // 尽量使用 event 标记事件，可以在 IDE 中更方便的显示。使用方法封装事件触发方法。
-        // 事件触发方法以 On 开头，事件通常采用动作描述。
-        // 例如，事件/动作 = "OpeningDoor"，事件引发方法 = "OnDoorOpened"
-
-        #endregion
-
         // Event before
         // 事件前
         public event Action OpeningDoor;
@@ -458,39 +384,6 @@ namespace Yuumix.OdinToolkits.Core.Editor
         {
             PointsScored?.Invoke(points);
         }
-
-        #region Methods
-
-        // METHODS:
-        // | While “function” and “method” are often used interchangeably, method is the right term in Unity development
-        // | because you can’t write a function without incorporating it into a class in C#.
-        // | Start a method name with a verb or verb phrases to show an action. Add context if necessary. e.g. GetDirection, FindTarget, etc.
-        // | Methods returning bool should ask questions: Much like Boolean variables themselves.
-        // | Prefix methods with a verb if they return a true-false condition. 
-        // | This phrases them in the form of a question, e.g. IsGameOver, HasStartedTurn
-        // | Use camel case for parameters. Format parameters passed into the method like local variables.
-        // | SOME GENERAL TIPS FOR METHODS:
-        // | Avoid long methods. If a method is too long, consider breaking it into smaller methods.
-        // | Avoid methods with too many parameters. If a method has more than three parameters, 
-        // | consider using a class or struct to group them.
-        // | Avoid excessive overloading: You can generate an endless permutation of method overloads.
-        // | Avoid side effects: A method only needs to do what its name advertises.
-        // | A good name for a method reflects what it does.
-        // | Avoid setting up methods to work in multiple different modes based on a flag. 
-        // | Make two methods with distinct names instead, e.g. GetAngleInDegrees and GetAngleInRadians. 
-        // ---
-        // 方法：
-        // 虽然“函数”几乎等同于“方法”，但在 Unity 开发中，“方法”是正确的术语，因为在 C# 中，必须在类中才能编写函数（方法）
-        // 方法名以动词或动词短语开头，以表示一个动作。必要时添加上下文。例如，GetDirection、FindTarget 等。
-        // 返回布尔值的方法应该是一个问题：就像布尔型变量本身一样。如果方法返回布尔条件，以动词为前缀。
-        // 这会将它们表述为问题的形式，例如，IsGameOver、HasStartedTurn
-        // 避免使用长方法。如果一个方法太长，考虑将其拆分成更小的方法。
-        // 避免使用参数过多的方法。如果一个方法有超过三个参数，考虑使用类或结构体来对它们进行分组。
-        // 避免过度重载：你可以生成无穷无尽的方法重载组合。
-        // 避免副作用：一个方法只需要做它名称所表明的事情。一个好的方法名能反映它的功能。
-        // 避免根据标志设置方法以多种不同模式工作。而是创建两个名称不同的方法，例如，GetAngleInDegrees 和 GetAngleInRadians。
-
-        #endregion
 
         // Methods start with a verb.
         // 方法以动词开头。
@@ -597,6 +490,113 @@ namespace Yuumix.OdinToolkits.Core.Editor
         }
 
         public class CustomEventArgsClass : EventArgs { }
+
+        #region Field
+
+        // FIELDS: 
+        // | Avoid special characters (backslashes, symbols, Unicode characters); these can interfere with command line tools.
+        // | Use nouns for names, but prefix booleans with a verb.
+        // | Use meaningful names. Make names searchable and pronounceable. Don’t abbreviate (unless it’s math).
+        // | Use Pascal case for public fields. Use camel case for private variables.
+        // | Specify (or omit) the default private access modifier but do it consistently. 
+        // | We recommend to leave out things that are implicit and thus redundant (such as private) for simplicity 
+        // | if you agree that it doesn't negatively affect ambiguity or readability for you.
+        // | There are lots of opinions on the use of prefixes. 
+        // | Pick what works best for you and the team and be consistent with your style guide.
+        // | You can consider adding an underscore (_) in front of private fields to differentiate from local variables
+        // | You can alternatively use more explicit prefixes: m_ = member variable, s_ = static, k_ = const 
+        // | favoring readability over brevity as the guiding principle.
+        // We recommend using explicit prefixes: m_ = member variable which favors specific and 
+        // readability above saving a few keystrokes. However, we suggest to leave out "private" as it's implicit for simplicity.  
+        // Whatever style you choose do it consistently.
+        // ---
+        // 字段：
+        // 名称使用名词，但布尔型变量以动词为前缀。使用有意义的名称。使名称可搜索且易发音。尽量减少缩写，除非是数学术语。
+        // 公共字段使用帕斯卡命名法。私有变量使用下划线前缀+驼峰命名法。
+        // 省略私有访问修饰符。
+
+        #endregion
+
+        #region Properties
+
+        // PROPERTIES:
+        // | Preferable to a public field.
+        // | 比公共字段更可取。
+        // | Pascal case, without special characters.
+        // | 使用帕斯卡命名法，不使用特殊字符。
+        // | Use the expression-bodied properties to shorten, but choose your preferrred format.
+        // | 使用表达式体属性来简化，但选择你喜欢的格式。
+        // | E.g. use expression-bodied for read-only properties but { get; set; } for everything else.
+        // | 例如，只读属性使用表达式体，其他属性使用 { get; set; }。
+        // | Use the Auto-Implemented Property for a public property without a backing field.
+        // | 对于没有后备字段的公共属性，使用自动实现属性。
+        // | While you can also use functions to expose private data properties are generally recommended.
+        // | 虽然你也可以使用函数来暴露私有数据，但通常建议使用属性。
+        // | For get or set operations involving complex logic or computation, use methods instead of properties.
+        // | 对于涉及复杂逻辑或计算的 get 或 set 操作，使用方法而不是属性。
+        // --- 
+        // 属性：
+        // 减少公共字段的使用，如果要对外，尽量使用属性。
+        // 对于没有后备字段的公共属性，使用自动实现属性。
+        // 虽然你也可以使用函数来暴露私有数据，但通常建议使用属性。
+        // 对于涉及复杂逻辑或计算的 get 或 set 操作，使用方法而不是属性。
+
+        #endregion
+
+        #region Events
+
+        // EVENTS:
+        // | Name with a verb phrase.
+        // | Present participle means "before" and past participle means "after."
+        // | Use System.Action delegate for most events (can take 0 to 16 parameters).
+        // | Define a custom EventArg only if necessary (either System.EventArgs or a custom struct).
+        // | OR alternatively, use the System.EventHandler; choose one and apply consistently.
+        // | Choose a naming scheme for events, event handling methods (subscriber/observer), 
+        // | and event raising methods (publisher/subject)
+        // | e.g. event/action = "OpeningDoor", event raising method = "OnDoorOpened", event handling method = "MySubject_DoorOpened"
+        // ---
+        // 事件：
+        // 使用动词短语命名。
+        // 大多数事件使用 System.Action 委托（可以接受 0 到 16 个参数）。
+        // 仅在必要时定义自定义 EventArg（可以是 System.EventArgs 或自定义结构体）。
+        // 尽量使用 event 标记事件，可以在 IDE 中更方便的显示。使用方法封装事件触发方法。
+        // 事件触发方法以 On 开头，事件通常采用动作描述。
+        // 例如，事件/动作 = "OpeningDoor"，事件引发方法 = "OnDoorOpened"
+
+        #endregion
+
+        #region Methods
+
+        // METHODS:
+        // | While “function” and “method” are often used interchangeably, method is the right term in Unity development
+        // | because you can’t write a function without incorporating it into a class in C#.
+        // | Start a method name with a verb or verb phrases to show an action. Add context if necessary. e.g. GetDirection, FindTarget, etc.
+        // | Methods returning bool should ask questions: Much like Boolean variables themselves.
+        // | Prefix methods with a verb if they return a true-false condition. 
+        // | This phrases them in the form of a question, e.g. IsGameOver, HasStartedTurn
+        // | Use camel case for parameters. Format parameters passed into the method like local variables.
+        // | SOME GENERAL TIPS FOR METHODS:
+        // | Avoid long methods. If a method is too long, consider breaking it into smaller methods.
+        // | Avoid methods with too many parameters. If a method has more than three parameters, 
+        // | consider using a class or struct to group them.
+        // | Avoid excessive overloading: You can generate an endless permutation of method overloads.
+        // | Avoid side effects: A method only needs to do what its name advertises.
+        // | A good name for a method reflects what it does.
+        // | Avoid setting up methods to work in multiple different modes based on a flag. 
+        // | Make two methods with distinct names instead, e.g. GetAngleInDegrees and GetAngleInRadians. 
+        // ---
+        // 方法：
+        // 虽然“函数”几乎等同于“方法”，但在 Unity 开发中，“方法”是正确的术语，因为在 C# 中，必须在类中才能编写函数（方法）
+        // 方法名以动词或动词短语开头，以表示一个动作。必要时添加上下文。例如，GetDirection、FindTarget 等。
+        // 返回布尔值的方法应该是一个问题：就像布尔型变量本身一样。如果方法返回布尔条件，以动词为前缀。
+        // 这会将它们表述为问题的形式，例如，IsGameOver、HasStartedTurn
+        // 避免使用长方法。如果一个方法太长，考虑将其拆分成更小的方法。
+        // 避免使用参数过多的方法。如果一个方法有超过三个参数，考虑使用类或结构体来对它们进行分组。
+        // 避免过度重载：你可以生成无穷无尽的方法重载组合。
+        // 避免副作用：一个方法只需要做它名称所表明的事情。一个好的方法名能反映它的功能。
+        // 避免根据标志设置方法以多种不同模式工作。而是创建两个名称不同的方法，例如，GetAngleInDegrees 和 GetAngleInRadians。
+
+        #endregion
     }
 
     // OTHER CLASSES:

@@ -35,12 +35,6 @@ namespace Yuumix.OdinToolkits.Core
         static readonly Thread LogWriterThread;
         static readonly CancellationTokenSource CancellationToken;
 
-        static string EditorStageLogSaveFolderPath =>
-            OdinToolkitsPreferencesSO.Instance.yuumixLoggerSetting.EditorLogSavePath;
-
-        static string RuntimeStageLogSaveFolderPath =>
-            OdinToolkitsPreferencesSO.Instance.yuumixLoggerSetting.RuntimeLogSavePath;
-
         static WriteToFileExtension()
         {
             if (!Directory.Exists(EditorStageLogSaveFolderPath))
@@ -67,6 +61,12 @@ namespace Yuumix.OdinToolkits.Core
             AssemblyReloadEvents.beforeAssemblyReload += ShutdownThread;
 #endif
         }
+
+        static string EditorStageLogSaveFolderPath =>
+            OdinToolkitsRuntimeConfigSO.Instance.yuumixLoggerConfig.EditorLogSavePath;
+
+        static string RuntimeStageLogSaveFolderPath =>
+            OdinToolkitsRuntimeConfigSO.Instance.yuumixLoggerConfig.RuntimeLogSavePath;
 
         static string CurrentLogFilePath
         {
@@ -103,7 +103,7 @@ namespace Yuumix.OdinToolkits.Core
                 }
             }
         }
-        
+
         public static void Execute(string message, LogType logType)
         {
             if (LogQueue.Count >= MAX_QUEUE_SIZE)

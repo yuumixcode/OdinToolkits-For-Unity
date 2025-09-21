@@ -13,12 +13,11 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 {
     public class TemplateCodeGenToolSO : OdinEditorScriptableSingleton<TemplateCodeGenToolSO>
     {
-        public static BilingualData GenerateTemplateToolMenuPathData =
-            new BilingualData("模板代码生成工具", "Generate Template Tool");
-
         public const string NAME_SPACE_SYMBOL = "#NAMESPACE#";
         public const string CLASS_NAME_SYMBOL = "#CLASSNAME#";
-        public static event Action<ToastPosition, SdfIconType, string, Color, float> ToastEvent;
+
+        public static BilingualData GenerateTemplateToolMenuPathData =
+            new BilingualData("模板代码生成工具", "Generate Template Tool");
 
         [PropertyOrder(-99)]
         public BilingualHeaderWidget headerWidget = new BilingualHeaderWidget(
@@ -78,6 +77,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [PropertyOrder(999)]
         public BilingualFooterWidget footer = new BilingualFooterWidget(
             "2025/06/27");
+
+        public static event Action<ToastPosition, SdfIconType, string, Color, float> ToastEvent;
 
         [ButtonGroup("Btn")]
         [ShowIfChinese]

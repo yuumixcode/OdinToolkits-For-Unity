@@ -15,6 +15,7 @@ namespace Yuumix.OdinToolkits.Modules
         public AccessModifierType memberAccessModifierType;
         public string returnType;
         public string name;
+        public string partSignature;
         public string fullSignature;
 
         [TextArea]
@@ -28,8 +29,17 @@ namespace Yuumix.OdinToolkits.Modules
 
         public string AccessModifier => memberAccessModifierType.ConvertToString();
 
+        /// <summary>
+        /// 是否由基类声明
+        /// </summary>
         public bool IsFromInheritMember() =>
             !string.IsNullOrEmpty(belongToType) && !string.IsNullOrEmpty(declaringType) &&
             !string.Equals(belongToType, declaringType);
+
+        /// <summary>
+        /// 是否为 API 成员
+        /// </summary>
+        public bool IsAPI() => memberAccessModifierType is AccessModifierType.Public or AccessModifierType.Protected
+            or AccessModifierType.ProtectedInternal;
     }
 }

@@ -1,9 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Text;
-using Sirenix.Utilities;
 using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.Modules
@@ -23,7 +20,7 @@ namespace Yuumix.OdinToolkits.Modules
                 memberAccessModifierType = TypeAnalyzerUtility.GetEventAccessModifierType(eventInfo),
                 returnType = TypeAnalyzerUtility.GetReadableEventReturnType(eventInfo),
                 isObsolete = eventInfo.IsDefined(typeof(ObsoleteAttribute)),
-                name = eventInfo.Name,
+                name = eventInfo.Name
             };
             TypeAnalyzerUtility.IsStaticEvent(eventInfo, eventData);
             var keyword = "";
@@ -35,6 +32,7 @@ namespace Yuumix.OdinToolkits.Modules
             eventData.fullSignature =
                 eventData.AccessModifier + " " + keyword + "event " + eventData.returnType + " " + eventData.name;
             eventData.fullSignature += ";";
+            eventData.partSignature = eventData.fullSignature;
             var declarationStringBuilder = new StringBuilder();
             object[] attributesObj = eventInfo.GetCustomAttributes(false);
             foreach (object attr in attributesObj)
@@ -47,7 +45,7 @@ namespace Yuumix.OdinToolkits.Modules
 
                 declarationStringBuilder.AppendLine($"[{attributeName}]");
             }
-    
+
             declarationStringBuilder.Append(eventData.fullSignature);
             eventData.fullDeclaration = declarationStringBuilder.ToString();
             // Summary

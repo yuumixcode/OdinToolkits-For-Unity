@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Yuumix.OdinToolkits.Core;
+using YuumixEditor;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
