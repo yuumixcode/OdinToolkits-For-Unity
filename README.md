@@ -1,6 +1,10 @@
 # Odin Toolkits
 
-<img src="https://cdn.jsdelivr.net/gh/yuumixcode/odintoolkitsdocs@main/docs/assets/logo-odintoolkits-color-noshadow.png" alt="Logo" style="zoom:20%; display: block; margin-left: auto; margin-right: auto;" />
+<p align="center">
+  <a href="https://yuumixcode.github.io/odintoolkitsdocs/">
+    <img src="https://cdn.jsdelivr.net/gh/yuumixcode/odintoolkitsdocs@main/docs/assets/logo-odintoolkits-color-noshadow.png" width="320" alt="Odin Toolkits">
+  </a>
+</p>
 
 <p align="center">
   <strong>
