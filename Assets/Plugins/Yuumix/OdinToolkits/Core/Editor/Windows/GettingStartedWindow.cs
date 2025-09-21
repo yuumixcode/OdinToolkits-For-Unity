@@ -96,13 +96,13 @@ namespace Yuumix.OdinToolkits.Core.Editor
         }
 
         [PropertyOrder(-25)]
-        [BilingualButton("GitHub 仓库: https://github.com/Yuumi-Zeus/OdinToolkits-For-Unity",
-            "GitHub Repo: https://github.com/Yuumi-Zeus/OdinToolkits-For-Unity", ButtonSizes.Large,
+        [BilingualButton("GitHub 仓库: https://github.com/yuumixcode/OdinToolkits-For-Unity",
+            "GitHub Repo: https://github.com/yuumixcode/OdinToolkits-For-Unity", ButtonSizes.Large,
             icon: SdfIconType.Github)]
         [PropertySpace(5)]
         public void OpenUrlGitHub()
         {
-            Application.OpenURL("https://github.com/Yuumi-Zeus/OdinToolkits-For-Unity");
+            Application.OpenURL("https://github.com/yuumixcode/OdinToolkits-For-Unity");
         }
 
         [PropertyOrder(-20)]
