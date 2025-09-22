@@ -14,21 +14,20 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Unity-2021.3.45f1-blue.svg" />
   <img src="https://img.shields.io/badge/Odin%20Inspector-3.3%2B-orange.svg" />
-  <img src="https://img.shields.io/badge/license-MIT-green.svg" />
+  <img src="https://img.shields.io/badge/license-MIT-green.svg" /><br/ >
+  <a href="https://www.odintoolkits.cn/"><img src="https://img.shields.io/badge/Docs Website-GitHub%20Pages-purple.svg" /></a>
+  <a href="https://odintoolkitsdocumentation.readthedocs.io/latest/"><img src="https://img.shields.io/badge/Docs Website-Read%20the%20Docs-orange.svg" /></a>
 </p>
 <div style="background-color: #fff8e1; border-left: 4px solid #ffb300; padding: 16px; margin: 16px 0; border-radius: 3px;">
   <h2 style="color: #e65100; margin-top: 0; margin-bottom: 12px; font-size: 16px;">⚠️ 重要声明</h2>
   <p style="color: #4e342e; margin: 0 0 10px 0; line-height: 1.5;">
-    <strong>Odin Toolkits</strong> 是由个人开发者自发开发的开源第三方扩展工具包，主要服务于中文开发者群体，旨在提供更贴合中文场景的使用体验。
+    <strong>Odin Toolkits</strong> 是由个人开发者自发开发的开源第三方扩展工具包，主要服务于中文开发者群体，也为英文界面支持预留了解决方案。
   </p>
   <p style="color: #4e342e; margin: 0 0 10px 0; line-height: 1.5;">
     本项目与 <strong>Sirenix 公司</strong> 及官方产品 <strong>Odin Inspector and Serializer</strong> 无任何隶属、合作或授权关系，并非官方衍生产品。
   </p>
-  <p style="color: #4e342e; margin: 0 0 10px 0; line-height: 1.5;">
-    项目核心功能为基于 <strong>Odin Inspector</strong> 接口开发的扩展工具，同时收集整理社区优质扩展案例并优化适配中文环境。
-  </p>
   <p style="color: #4e342e; margin: 0; line-height: 1.5;">
-    本工具包不包含任何官方插件的核心代码，亦不承担官方产品的技术支持、版权纠纷及其他相关责任。
+    本项目不包含 <strong>Odin Inspector and Serializer</strong> 的发行版本包。
   </p>
 </div>
 
@@ -53,7 +52,7 @@
 - Unity 2021.3 或更高版本
 - Odin Inspector And Serializer 3.3 或更高版本
 
-### 安装步骤
+### 步骤
 
 > Odin Toolkits 依赖 Odin Inspector 插件，请先自行导入 Odin Inspector 插件到项目。从 [Unity AssetStore](https://assetstore.unity.com/packages/tools/utilities/odin-inspector-and-serializer-89041) 和 [Sirenix 官网](https://odininspector.com/) 上购买插件或者其他方式获取插件。
 
@@ -131,11 +130,15 @@ Plugins/
 
 ## 相关链接
 
-- [Odin Toolkits 官方文档网站](https://www.odintoolkits.cn/)
-- [Odin Inspector 官方网站](https://odininspector.com/)
-- [Odin Inspector 许可信息](https://odininspector.com/pricing)
+[推荐 -Odin Toolkits 文档网站 - GitHub 部署](https://www.odintoolkits.cn/)
 
-## 项目推荐
+[Odin Toolkits 文档网站 - ReadtheDocs 部署](https://odintoolkitsdocumentation.readthedocs.io/latest/)
+
+[Odin Inspector 官方网站](https://odininspector.com/)
+
+[Odin Inspector 许可信息](https://odininspector.com/pricing)
+
+## 项目及友链推荐
 
 [![Built with Material for MkDocs](https://img.shields.io/badge/Material_for_MkDocs-526CFE?style=for-the-badge&logo=MaterialForMkDocs&logoColor=white)](https://squidfunk.github.io/mkdocs-material/)
 
@@ -144,6 +147,8 @@ Plugins/
 [QFramework - Unity 开发框架](https://github.com/liangxiegame/QFramework)
 
 [ES Framework - Unity 开发框架](https://github.com/Ey-Sive-I-Save/ESFrameWorkPublish.git)
+
+[CLZ Framework - Unity 开发框架 - 开发中](https://github.com/Canglangzi/CocKleBurs-DevelopmentKit)
 
 ## 许可证
 
@@ -188,8 +193,6 @@ Plugins/
 
 ## 支持
 
-业余时间开发，无法即时回复，优先邮件联系。
-
 [zeriying@gmail.com](mailto:zeriying@gmail.com)
 
-> 感谢你看到这里，如果 Odin Toolkits 在你的 Unity 开发中切实提供了帮助，恳请为项目点亮一颗 ★ Star！如果 Odin Toolkits 打包出现错误，请提 issue，或者联系我，我会尽快处理。
+感谢你看到这里，如果 Odin Toolkits 在你的 Unity 开发中切实提供了帮助，恳请为项目点亮一颗 ★ Star！如果 Odin Toolkits 打包出现错误，请提 issue，或者联系我，我会尽快处理。业余时间开发，无法即时回复，请优先邮件联系。
