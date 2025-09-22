@@ -130,7 +130,7 @@ Plugins/
 3. **编辑器专属**：仅在 `Unity` 编辑器阶段生效，本质是 “即插即用” 的编辑器字段；
 4. **模块化设计**：以模块化思路封装样式与交互，开发者可像定义普通字段一样，轻松用它搭建自定义 `Inspector` 界面。
 
-#### `ScriptableObject` 中使用 `Widget` 的最佳实践
+##### `ScriptableObject` 中使用 `Widget` 的最佳实践
 
 建议在 `OnEnable` 方法中为 `Widget` 相关的变量赋值，而非直接设置初始值。原因如下：
 
