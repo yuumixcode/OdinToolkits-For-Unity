@@ -40,7 +40,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - 新增 `ChineseSummaryAttribute` 特性，用于替代 XML 的 Summary 注释，将内容作为元数据标记到成员中，使得反射可以获取
 - 新增支持分析公共实例构造函数、非构造方法、运算符重载方法、属性、事件及字段
 - 新增支持分析目标程序集中的类型并生成文档
-- 新增 `Test` 文件夹，经测试，可以支持相当多的脚本内容分析，包含一份支持文档。
+- 新增 `Test` 文件夹，经手动测试，可以支持相当多的脚本内容分析。
 
 #### Fixed
 
