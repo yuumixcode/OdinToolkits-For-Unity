@@ -1,9 +1,3 @@
----
-tags: 
-创建日期: 星期五, 2025-07-04, 15:44
-修改日期: 星期日, 2025-09-21, 17:47
----
-
 # CHANGELOG
 
 这个项目的所有显著变化都将记录在这个文件中。
@@ -22,7 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### 已知问题
 
-- `Attribute Overview Pro` 正处于重制阶段（其原模块为 `Chinese Attribute Overview`），当前仍存在错误；但该错误仅属于展示层面问题，不影响其他未报错内容，且不影响打包流程
+- `Attribute Overview Pro` 处于重制阶段（其原模块为 `Chinese Attribute Overview`），当前仍存在错误；但该错误仅属于展示层面问题，大部分特性正常显示，不影响其他未报错内容，且不影响打包流程
 
 ### Change
 
@@ -34,7 +28,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - 新增 `InspectorBiligualismConfigSO`，设置面板语言，提供 `OnLanguageChange` 事件接口
 - 新增 `OdinToolkits` 文件夹定位接口，`OdinToolkitsPaths.GetRootPath()` 可以获取到 `OdinToolkits` 文件夹的相对路径，默认为 `"Assets/Plugins/Yuumix/OdinToolkits"`
 - 新增 `Add ChineseSummary` 和 `Remove ChineseSummary` 右键菜单项，可以一键同步脚本中的 `Summary` 注释到 `ChineseSummary` 特性，同时提供一键移除操作，在不需要时可以快速脱离，不影响项目
-- 新增 `OdinToolkits` 设计原则文档
 
 ### 重要更新 - Script Doc Generator 脚本文档生成器
 
