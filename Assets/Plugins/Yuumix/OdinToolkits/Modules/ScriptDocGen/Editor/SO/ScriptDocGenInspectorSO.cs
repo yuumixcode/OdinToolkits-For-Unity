@@ -12,6 +12,7 @@ using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Core.Editor;
+using Yuumix.OdinToolkits.Modules.ScriptDocGen.Editor;
 using YuumixEditor;
 
 namespace Yuumix.OdinToolkits.Modules.Editor

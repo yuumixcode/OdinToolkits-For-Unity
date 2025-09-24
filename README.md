@@ -12,16 +12,16 @@
   <a href="https://odintoolkitsdocumentation.readthedocs.io/latest/"><img src="https://img.shields.io/badge/Docs Website-Read%20the%20Docs-orange.svg" alt="Odin Toolkits 部署 Read the Docs" ></a>
 </p>
 
-
 ## ⚠️ 重要声明
 
-- `Odin Toolkits` 是开源的、第三方扩展工具集，主要面向 `Odin Inspector` 的中文用户，同时为支持英文界面提供了解决方案。
+- `Odin Toolkits` 是开源的、第三方扩展工具集，主要面向 `Odin Inspector and Serializer` 的中文用户，同时为支持英文界面提供了解决方案，欢迎贡献完善英文界面。
 - 本项目与 Sirenix 公司及官方产品 `Odin Inspector and Serializer` 无任何隶属、合作或授权关系，并非官方衍生产品。
 - 本项目不包含 `Odin Inspector and Serializer` 的发行版本。
+- 本文中的 `Odin Inspector` 为 `Odin Inspector and Serializer` 的简称。
 
 ## 项目愿景
 
-- 成为使用 `Odin Inspector` 的开发者的必备扩展工具集
+- 成为使用 `Odin Inspector and Serializer` 的开发者的必备扩展工具集
 
 ## 主要模块
 
@@ -140,6 +140,10 @@ Plugins/
 ## 许可证
 
 本项目基于 MIT 许可证授权。
+
+## Logo 许可证
+
+查看 `LOGO-LICENSE.md` 文档。
 
 ## 更新日志
 

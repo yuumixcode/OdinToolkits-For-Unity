@@ -1,8 +1,9 @@
 using System.Globalization;
 using System.Text;
 using Yuumix.OdinToolkits.Core;
+using Yuumix.OdinToolkits.Modules.Editor;
 
-namespace Yuumix.OdinToolkits.Modules.Editor
+namespace Yuumix.OdinToolkits.Modules.ScriptDocGen.Editor
 {
     /// <summary>
     /// 中文的 API 文档生成器
@@ -69,6 +70,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 return sb;
             }
 
+            sb.AppendLine();
             sb.AppendLine("### 注释");
             sb.AppendLine();
             if (!string.IsNullOrEmpty(data.chineseDescription))
