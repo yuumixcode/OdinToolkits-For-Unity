@@ -22,11 +22,17 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes:
     - Name: TargetType
-      Entry: 6
+      Entry: 7
+      Data: 0|System.RuntimeType, mscorlib
+    - Name: 
+      Entry: 1
+      Data: Yuumix.OdinToolkits.Modules.TypeAnalyzerUtility, Yuumix.OdinToolkits.Runtime
+    - Name: 
+      Entry: 8
       Data: 
     - Name: TemporaryTypes
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[System.Type, mscorlib]], mscorlib
+      Data: 1|System.Collections.Generic.List`1[[System.Type, mscorlib]], mscorlib
     - Name: 
       Entry: 12
       Data: 0
@@ -46,97 +52,243 @@ MonoBehaviour:
   typeAnalysisData:
     typeCategory: 0
     assemblyName: Yuumix.OdinToolkits.Runtime
-    namespaceName: Yuumix.OdinToolkits.Core
-    typeName: DefaultLogTagSO
-    typeDeclaration: 'public class DefaultLogTagSO : Yuumix.OdinToolkits.Core.LogTagSO'
+    namespaceName: Yuumix.OdinToolkits.Modules
+    typeName: TypeAnalyzerUtility
+    typeDeclaration: 'public static class TypeAnalyzerUtility : System.Object;
+
+'
     chineseDescription: 
     englishDescription: 
     isGeneric: 0
     isNested: 0
-    isStatic: 0
-    isSealed: 0
-    isAbstract: 0
+    isStatic: 1
+    isSealed: 1
+    isAbstract: 1
     isObsolete: 0
     referenceWebLinkArray: []
     inheritanceChain:
-    - Yuumix.OdinToolkits.Core.LogTagSO
-    - UnityEngine.ScriptableObject
-    - UnityEngine.Object
     - System.Object
     interfaceArray: []
-    constructorAnalysisDataArray:
-    - declaringType: Yuumix.OdinToolkits.Core.DefaultLogTagSO
-      belongToType: Yuumix.OdinToolkits.Core.DefaultLogTagSO
+    constructorAnalysisDataArray: []
+    methodAnalysisDataArray:
+    - declaringType: Yuumix.OdinToolkits.Modules.TypeAnalyzerUtility
+      belongToType: Yuumix.OdinToolkits.Modules.TypeAnalyzerUtility
       isObsolete: 0
-      memberType: 1
+      memberType: 8
       memberAccessModifierType: 0
-      returnType: Yuumix.OdinToolkits.Core.DefaultLogTagSO
-      name: DefaultLogTagSO
-      partSignature: 
-      fullSignature: public DefaultLogTagSO()
-      fullDeclaration: public DefaultLogTagSO()
+      returnType: AccessModifierType
+      name: GetEventAccessModifierType
+      partSignature: public static AccessModifierType GetEventAccessModifierType
+      fullSignature: public static AccessModifierType GetEventAccessModifierType(EventInfo
+        eventInfo);
+      fullDeclaration: public static AccessModifierType GetEventAccessModifierType(EventInfo
+        eventInfo);
       chineseSummary: "\u65E0"
       englishSummary: 
-      parametersString: 
-    methodAnalysisDataArray:
-    - declaringType: UnityEngine.Object
-      belongToType: Yuumix.OdinToolkits.Core.DefaultLogTagSO
+      parametersString: EventInfo eventInfo
+      isStaticMethod: 1
+      isAbstract: 0
+      isVirtual: 0
+      isOperator: 0
+      isOverride: 0
+      isFromAncestor: 0
+      isFromInterfaceImplement: 0
+      isOverloadMethodInDeclaringType: 0
+    - declaringType: Yuumix.OdinToolkits.Modules.TypeAnalyzerUtility
+      belongToType: Yuumix.OdinToolkits.Modules.TypeAnalyzerUtility
+      isObsolete: 0
+      memberType: 8
+      memberAccessModifierType: 0
+      returnType: AccessModifierType
+      name: GetFieldAccessModifierType
+      partSignature: public static AccessModifierType GetFieldAccessModifierType
+      fullSignature: public static AccessModifierType GetFieldAccessModifierType(FieldInfo
+        field);
+      fullDeclaration: public static AccessModifierType GetFieldAccessModifierType(FieldInfo
+        field);
+      chineseSummary: "\u65E0"
+      englishSummary: 
+      parametersString: FieldInfo field
+      isStaticMethod: 1
+      isAbstract: 0
+      isVirtual: 0
+      isOperator: 0
+      isOverride: 0
+      isFromAncestor: 0
+      isFromInterfaceImplement: 0
+      isOverloadMethodInDeclaringType: 0
+    - declaringType: Yuumix.OdinToolkits.Modules.TypeAnalyzerUtility
+      belongToType: Yuumix.OdinToolkits.Modules.TypeAnalyzerUtility
+      isObsolete: 0
+      memberType: 8
+      memberAccessModifierType: 0
+      returnType: string
+      name: GetFullMethodName
+      partSignature: public static string GetFullMethodName
+      fullSignature: public static string GetFullMethodName(MethodBase method, string
+        extensionMethodPrefix);
+      fullDeclaration: public static string GetFullMethodName(MethodBase method,
+        string extensionMethodPrefix);
+      chineseSummary: "\u65E0"
+      englishSummary: 
+      parametersString: MethodBase method, string extensionMethodPrefix
+      isStaticMethod: 1
+      isAbstract: 0
+      isVirtual: 0
+      isOperator: 0
+      isOverride: 0
+      isFromAncestor: 0
+      isFromInterfaceImplement: 0
+      isOverloadMethodInDeclaringType: 0
+    - declaringType: Yuumix.OdinToolkits.Modules.TypeAnalyzerUtility
+      belongToType: Yuumix.OdinToolkits.Modules.TypeAnalyzerUtility
+      isObsolete: 0
+      memberType: 8
+      memberAccessModifierType: 0
+      returnType: string
+      name: GetParamsNamesWithDefaultValue
+      partSignature: public static string GetParamsNamesWithDefaultValue
+      fullSignature: public static string GetParamsNamesWithDefaultValue(MethodBase
+        method);
+      fullDeclaration: public static string GetParamsNamesWithDefaultValue(MethodBase
+        method);
+      chineseSummary: "\u65E0"
+      englishSummary: 
+      parametersString: MethodBase method
+      isStaticMethod: 1
+      isAbstract: 0
+      isVirtual: 0
+      isOperator: 0
+      isOverride: 0
+      isFromAncestor: 0
+      isFromInterfaceImplement: 0
+      isOverloadMethodInDeclaringType: 0
+    - declaringType: Yuumix.OdinToolkits.Modules.TypeAnalyzerUtility
+      belongToType: Yuumix.OdinToolkits.Modules.TypeAnalyzerUtility
+      isObsolete: 0
+      memberType: 8
+      memberAccessModifierType: 0
+      returnType: AccessModifierType
+      name: GetPropertyAccessModifierType
+      partSignature: public static AccessModifierType GetPropertyAccessModifierType
+      fullSignature: public static AccessModifierType GetPropertyAccessModifierType(PropertyInfo
+        property);
+      fullDeclaration: public static AccessModifierType GetPropertyAccessModifierType(PropertyInfo
+        property);
+      chineseSummary: "\u65E0"
+      englishSummary: 
+      parametersString: PropertyInfo property
+      isStaticMethod: 1
+      isAbstract: 0
+      isVirtual: 0
+      isOperator: 0
+      isOverride: 0
+      isFromAncestor: 0
+      isFromInterfaceImplement: 0
+      isOverloadMethodInDeclaringType: 0
+    - declaringType: Yuumix.OdinToolkits.Modules.TypeAnalyzerUtility
+      belongToType: Yuumix.OdinToolkits.Modules.TypeAnalyzerUtility
+      isObsolete: 0
+      memberType: 8
+      memberAccessModifierType: 0
+      returnType: string
+      name: GetReadableEventReturnType
+      partSignature: public static string GetReadableEventReturnType
+      fullSignature: public static string GetReadableEventReturnType(EventInfo eventInfo);
+      fullDeclaration: public static string GetReadableEventReturnType(EventInfo
+        eventInfo);
+      chineseSummary: "\u65E0"
+      englishSummary: 
+      parametersString: EventInfo eventInfo
+      isStaticMethod: 1
+      isAbstract: 0
+      isVirtual: 0
+      isOperator: 0
+      isOverride: 0
+      isFromAncestor: 0
+      isFromInterfaceImplement: 0
+      isOverloadMethodInDeclaringType: 0
+    - declaringType: Yuumix.OdinToolkits.Modules.TypeAnalyzerUtility
+      belongToType: Yuumix.OdinToolkits.Modules.TypeAnalyzerUtility
       isObsolete: 0
       memberType: 8
       memberAccessModifierType: 0
       returnType: bool
-      name: Equals
-      partSignature: public override bool Equals
-      fullSignature: public override bool Equals(Object other);
-      fullDeclaration: public override bool Equals(Object other);
+      name: IsConstantField
+      partSignature: public static bool IsConstantField
+      fullSignature: public static bool IsConstantField(FieldInfo field);
+      fullDeclaration: public static bool IsConstantField(FieldInfo field);
       chineseSummary: "\u65E0"
       englishSummary: 
-      parametersString: Object other
-      isStaticMethod: 0
+      parametersString: FieldInfo field
+      isStaticMethod: 1
       isAbstract: 0
-      isVirtual: 1
+      isVirtual: 0
       isOperator: 0
-      isOverride: 1
-      isFromAncestor: 1
+      isOverride: 0
+      isFromAncestor: 0
       isFromInterfaceImplement: 0
       isOverloadMethodInDeclaringType: 0
-    - declaringType: UnityEngine.Object
-      belongToType: Yuumix.OdinToolkits.Core.DefaultLogTagSO
+    - declaringType: Yuumix.OdinToolkits.Modules.TypeAnalyzerUtility
+      belongToType: Yuumix.OdinToolkits.Modules.TypeAnalyzerUtility
       isObsolete: 0
       memberType: 8
       memberAccessModifierType: 0
-      returnType: int
-      name: GetHashCode
-      partSignature: public override int GetHashCode
-      fullSignature: public override int GetHashCode();
-      fullDeclaration: public override int GetHashCode();
+      returnType: bool
+      name: IsFromInterfaceMethod
+      partSignature: public static bool IsFromInterfaceMethod
+      fullSignature: public static bool IsFromInterfaceMethod(MethodInfo method);
+      fullDeclaration: public static bool IsFromInterfaceMethod(MethodInfo method);
       chineseSummary: "\u65E0"
       englishSummary: 
-      parametersString: 
-      isStaticMethod: 0
+      parametersString: MethodInfo method
+      isStaticMethod: 1
       isAbstract: 0
-      isVirtual: 1
+      isVirtual: 0
       isOperator: 0
-      isOverride: 1
-      isFromAncestor: 1
+      isOverride: 0
+      isFromAncestor: 0
       isFromInterfaceImplement: 0
       isOverloadMethodInDeclaringType: 0
-    - declaringType: UnityEngine.Object
-      belongToType: Yuumix.OdinToolkits.Core.DefaultLogTagSO
+    - declaringType: Yuumix.OdinToolkits.Modules.TypeAnalyzerUtility
+      belongToType: Yuumix.OdinToolkits.Modules.TypeAnalyzerUtility
       isObsolete: 0
       memberType: 8
       memberAccessModifierType: 0
-      returnType: int
-      name: GetInstanceID
-      partSignature: public int GetInstanceID
-      fullSignature: public int GetInstanceID();
-      fullDeclaration: '[SecuritySafeCritical]
-
-        public int GetInstanceID();'
+      returnType: bool
+      name: IsInheritedOverrideFromAncestor
+      partSignature: public static bool IsInheritedOverrideFromAncestor
+      fullSignature: public static bool IsInheritedOverrideFromAncestor(MethodInfo
+        method, Type currentType);
+      fullDeclaration: public static bool IsInheritedOverrideFromAncestor(MethodInfo
+        method, Type currentType);
       chineseSummary: "\u65E0"
       englishSummary: 
-      parametersString: 
-      isStaticMethod: 0
+      parametersString: MethodInfo method, Type currentType
+      isStaticMethod: 1
+      isAbstract: 0
+      isVirtual: 0
+      isOperator: 0
+      isOverride: 0
+      isFromAncestor: 0
+      isFromInterfaceImplement: 0
+      isOverloadMethodInDeclaringType: 0
+    - declaringType: Yuumix.OdinToolkits.Modules.TypeAnalyzerUtility
+      belongToType: Yuumix.OdinToolkits.Modules.TypeAnalyzerUtility
+      isObsolete: 0
+      memberType: 8
+      memberAccessModifierType: 0
+      returnType: void
+      name: IsStaticEvent
+      partSignature: public static void IsStaticEvent
+      fullSignature: public static void IsStaticEvent(EventInfo eventInfo, EventAnalysisData
+        eventData);
+      fullDeclaration: public static void IsStaticEvent(EventInfo eventInfo, EventAnalysisData
+        eventData);
+      chineseSummary: "\u65E0"
+      englishSummary: 
+      parametersString: EventInfo eventInfo, EventAnalysisData eventData
+      isStaticMethod: 1
       isAbstract: 0
       isVirtual: 0
       isOperator: 0
@@ -145,7 +297,49 @@ MonoBehaviour:
       isFromInterfaceImplement: 0
       isOverloadMethodInDeclaringType: 0
     - declaringType: System.Object
-      belongToType: Yuumix.OdinToolkits.Core.DefaultLogTagSO
+      belongToType: Yuumix.OdinToolkits.Modules.TypeAnalyzerUtility
+      isObsolete: 0
+      memberType: 8
+      memberAccessModifierType: 0
+      returnType: bool
+      name: Equals
+      partSignature: public virtual bool Equals
+      fullSignature: public virtual bool Equals(Object obj);
+      fullDeclaration: public virtual bool Equals(Object obj);
+      chineseSummary: "\u65E0"
+      englishSummary: 
+      parametersString: Object obj
+      isStaticMethod: 0
+      isAbstract: 0
+      isVirtual: 1
+      isOperator: 0
+      isOverride: 0
+      isFromAncestor: 0
+      isFromInterfaceImplement: 0
+      isOverloadMethodInDeclaringType: 0
+    - declaringType: System.Object
+      belongToType: Yuumix.OdinToolkits.Modules.TypeAnalyzerUtility
+      isObsolete: 0
+      memberType: 8
+      memberAccessModifierType: 0
+      returnType: int
+      name: GetHashCode
+      partSignature: public virtual int GetHashCode
+      fullSignature: public virtual int GetHashCode();
+      fullDeclaration: public virtual int GetHashCode();
+      chineseSummary: "\u65E0"
+      englishSummary: 
+      parametersString: 
+      isStaticMethod: 0
+      isAbstract: 0
+      isVirtual: 1
+      isOperator: 0
+      isOverride: 0
+      isFromAncestor: 0
+      isFromInterfaceImplement: 0
+      isOverloadMethodInDeclaringType: 0
+    - declaringType: System.Object
+      belongToType: Yuumix.OdinToolkits.Modules.TypeAnalyzerUtility
       isObsolete: 0
       memberType: 8
       memberAccessModifierType: 0
@@ -165,42 +359,16 @@ MonoBehaviour:
       isFromAncestor: 0
       isFromInterfaceImplement: 0
       isOverloadMethodInDeclaringType: 0
-    - declaringType: UnityEngine.ScriptableObject
-      belongToType: Yuumix.OdinToolkits.Core.DefaultLogTagSO
-      isObsolete: 1
-      memberType: 8
-      memberAccessModifierType: 0
-      returnType: void
-      name: SetDirty
-      partSignature: public void SetDirty
-      fullSignature: public void SetDirty();
-      fullDeclaration: '[Obsolete]
-
-        [NativeConditional]
-
-        public void
-        SetDirty();'
-      chineseSummary: "\u65E0"
-      englishSummary: 
-      parametersString: 
-      isStaticMethod: 0
-      isAbstract: 0
-      isVirtual: 0
-      isOperator: 0
-      isOverride: 0
-      isFromAncestor: 0
-      isFromInterfaceImplement: 0
-      isOverloadMethodInDeclaringType: 0
-    - declaringType: UnityEngine.Object
-      belongToType: Yuumix.OdinToolkits.Core.DefaultLogTagSO
+    - declaringType: System.Object
+      belongToType: Yuumix.OdinToolkits.Modules.TypeAnalyzerUtility
       isObsolete: 0
       memberType: 8
       memberAccessModifierType: 0
       returnType: string
       name: ToString
-      partSignature: public override string ToString
-      fullSignature: public override string ToString();
-      fullDeclaration: public override string ToString();
+      partSignature: public virtual string ToString
+      fullSignature: public virtual string ToString();
+      fullDeclaration: public virtual string ToString();
       chineseSummary: "\u65E0"
       englishSummary: 
       parametersString: 
@@ -208,12 +376,12 @@ MonoBehaviour:
       isAbstract: 0
       isVirtual: 1
       isOperator: 0
-      isOverride: 1
-      isFromAncestor: 1
+      isOverride: 0
+      isFromAncestor: 0
       isFromInterfaceImplement: 0
       isOverloadMethodInDeclaringType: 0
     - declaringType: System.Object
-      belongToType: Yuumix.OdinToolkits.Core.DefaultLogTagSO
+      belongToType: Yuumix.OdinToolkits.Modules.TypeAnalyzerUtility
       isObsolete: 0
       memberType: 8
       memberAccessModifierType: 2
@@ -232,11 +400,11 @@ MonoBehaviour:
       isVirtual: 1
       isOperator: 0
       isOverride: 0
-      isFromAncestor: 1
+      isFromAncestor: 0
       isFromInterfaceImplement: 0
       isOverloadMethodInDeclaringType: 0
     - declaringType: System.Object
-      belongToType: Yuumix.OdinToolkits.Core.DefaultLogTagSO
+      belongToType: Yuumix.OdinToolkits.Modules.TypeAnalyzerUtility
       isObsolete: 0
       memberType: 8
       memberAccessModifierType: 2
@@ -256,39 +424,47 @@ MonoBehaviour:
       isFromAncestor: 0
       isFromInterfaceImplement: 0
       isOverloadMethodInDeclaringType: 0
-    eventAnalysisDataArray: []
-    propertyAnalysisDataArray:
-    - declaringType: UnityEngine.Object
-      belongToType: Yuumix.OdinToolkits.Core.DefaultLogTagSO
+    - declaringType: Yuumix.OdinToolkits.Modules.TypeAnalyzerUtility
+      belongToType: Yuumix.OdinToolkits.Modules.TypeAnalyzerUtility
       isObsolete: 0
-      memberType: 16
-      memberAccessModifierType: 0
-      returnType: HideFlags
-      name: hideFlags
-      partSignature: public HideFlags hideFlags
-      fullSignature: public HideFlags hideFlags { public get; public set; }
-      fullDeclaration: public HideFlags hideFlags { public get; public set; }
-      chineseSummary: "\u65E0"
-      englishSummary: 
-      isStatic: 0
-      getAccessModifierType: 0
-      setAccessModifierType: 0
-    - declaringType: UnityEngine.Object
-      belongToType: Yuumix.OdinToolkits.Core.DefaultLogTagSO
-      isObsolete: 0
-      memberType: 16
-      memberAccessModifierType: 0
+      memberType: 8
+      memberAccessModifierType: 16
       returnType: string
-      name: name
-      partSignature: public string name
-      fullSignature: public string name { public get; public set; }
-      fullDeclaration: public string name { public get; public set; }
+      name: GetDefaultValueString
+      partSignature: private static string GetDefaultValueString
+      fullSignature: private static string GetDefaultValueString(Object defaultValue,
+        Type parameterType);
+      fullDeclaration: private static string GetDefaultValueString(Object defaultValue,
+        Type parameterType);
       chineseSummary: "\u65E0"
       englishSummary: 
-      isStatic: 0
-      getAccessModifierType: 0
-      setAccessModifierType: 0
-    fieldAnalysisDataArray: []
+      parametersString: Object defaultValue, Type parameterType
+      isStaticMethod: 1
+      isAbstract: 0
+      isVirtual: 0
+      isOperator: 0
+      isOverride: 0
+      isFromAncestor: 0
+      isFromInterfaceImplement: 0
+      isOverloadMethodInDeclaringType: 0
+    eventAnalysisDataArray: []
+    propertyAnalysisDataArray: []
+    fieldAnalysisDataArray:
+    - declaringType: Yuumix.OdinToolkits.Modules.TypeAnalyzerUtility
+      belongToType: Yuumix.OdinToolkits.Modules.TypeAnalyzerUtility
+      isObsolete: 0
+      memberType: 4
+      memberAccessModifierType: 0
+      returnType: System.Collections.Generic.Dictionary<Type, string>
+      name: TypeAliasMap
+      partSignature: public readonly Dictionary<Type, string> TypeAliasMap
+      fullSignature: public readonly Dictionary<Type, string> TypeAliasMap;
+      fullDeclaration: public readonly Dictionary<Type, string> TypeAliasMap;
+      chineseSummary: "\u65E0"
+      englishSummary: 
+      isStatic: 1
+      isConst: 0
+      isReadonly: 1
   typeAnalysisDataList:
   - typeCategory: 0
     assemblyName: Yuumix.OdinToolkits.Editor

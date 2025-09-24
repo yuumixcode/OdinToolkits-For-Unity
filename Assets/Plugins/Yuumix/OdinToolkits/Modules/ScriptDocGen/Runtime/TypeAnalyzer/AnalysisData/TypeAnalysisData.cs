@@ -1,6 +1,5 @@
 using System;
-using System.Reflection;
-using Sirenix.Utilities;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core;
 
@@ -44,6 +43,7 @@ namespace Yuumix.OdinToolkits.Modules
         /// 中文描述
         /// </summary>
         [ChineseSummary("中文描述")]
+        [HorizontalGroup("Desc")]
         [TextArea]
         public string chineseDescription;
 
@@ -51,6 +51,7 @@ namespace Yuumix.OdinToolkits.Modules
         /// 英文描述
         /// </summary>
         [ChineseSummary("英文描述")]
+        [HorizontalGroup("Desc")]
         [TextArea]
         public string englishDescription;
 
@@ -138,66 +139,14 @@ namespace Yuumix.OdinToolkits.Modules
         /// </summary>
         [ChineseSummary("所有的字段分析数据数组")]
         public FieldAnalysisData[] fieldAnalysisDataArray;
-
-        /// <summary>
-        /// 生成类型分析数据
-        /// </summary>
-        [ChineseSummary("生成类型分析数据")]
-        public static TypeAnalysisData CreateFromType(Type type) =>
-            new TypeAnalysisData
-            {
-                typeCategory = type.GetTypeCategory(),
-                assemblyName = type.Assembly.GetName().Name,
-                namespaceName = type.Namespace,
-                typeDeclaration = type.GetTypeDeclaration(),
-                typeName = type.GetReadableTypeName(),
-                chineseDescription = type.GetChineseDescription(),
-                englishDescription = type.GetEnglishDescription(),
-                isGeneric = type.IsGenericType,
-                isNested = type.IsNested,
-                isStatic = type.IsStatic(),
-                isSealed = type.IsSealed,
-                isAbstract = type.IsAbstract,
-                isObsolete = type.IsDefined(typeof(ObsoleteAttribute)),
-                referenceWebLinkArray = type.GetReferenceLinks(),
-                inheritanceChain = type.GetInheritanceChain(),
-                interfaceArray = type.GetInterfacesArray(),
-                constructorAnalysisDataArray = type.CreateAllPublicConstructorAnalysisDataArray(),
-                methodAnalysisDataArray = MarkOverloadMethod(type.CreateRuntimeMethodAnalysisDataArray()),
-                eventAnalysisDataArray = type.CreateRuntimeEventAnalysisDataArray(),
-                propertyAnalysisDataArray = type.CreateRuntimePropertyAnalysisDataArray(),
-                fieldAnalysisDataArray = type.CreateUserDefinedFieldAnalysisDataArray()
-            };
-
+        
         /// <summary>
         /// 标记类型中存在的重载方法，加上 [Overload] 前缀
         /// </summary>
-        [ChineseSummary("标记类型中存在的重载方法，加上 [Overload] 前缀")]
         public static MethodAnalysisData[] MarkOverloadMethod(MethodAnalysisData[] methodAnalysisDataArray)
         {
-            const string overloadPrefix = "[Overload] ";
-            for (var i = 0; i < methodAnalysisDataArray.Length; i++)
-            {
-                for (var j = 0; j < methodAnalysisDataArray.Length; j++)
-                {
-                    if (i == j)
-                    {
-                        continue;
-                    }
-
-                    if (methodAnalysisDataArray[i].partSignature == methodAnalysisDataArray[j].partSignature)
-                    {
-                        methodAnalysisDataArray[i].partSignature = methodAnalysisDataArray[i].partSignature
-                            .EnsureStartsWith(overloadPrefix);
-                        methodAnalysisDataArray[j].partSignature = methodAnalysisDataArray[i].partSignature
-                            .EnsureStartsWith(overloadPrefix);
-                        methodAnalysisDataArray[i].isOverloadMethodInDeclaringType = true;
-                        methodAnalysisDataArray[j].isOverloadMethodInDeclaringType = true;
-                    }
-                }
-            }
-
-            return methodAnalysisDataArray;
+            var factory = new TypeAnalysisDataFactory();
+            return factory.MarkOverloadMethod(methodAnalysisDataArray);
         }
     }
 }

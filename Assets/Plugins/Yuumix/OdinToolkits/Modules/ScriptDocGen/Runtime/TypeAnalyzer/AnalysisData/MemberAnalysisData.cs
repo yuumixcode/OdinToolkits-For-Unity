@@ -6,7 +6,7 @@ using Yuumix.OdinToolkits.Core;
 namespace Yuumix.OdinToolkits.Modules
 {
     [Serializable]
-    public class MemberAnalysisData
+    public class MemberAnalysisData : IMemberAnalysisData
     {
         public string declaringType;
         public string belongToType;
@@ -26,6 +26,19 @@ namespace Yuumix.OdinToolkits.Modules
 
         [TextArea]
         public string englishSummary;
+
+        public string DeclaringType => declaringType;
+        public string BelongToType => belongToType;
+        public bool IsObsolete => isObsolete;
+        public MemberTypes MemberType => memberType;
+        public AccessModifierType MemberAccessModifierType => memberAccessModifierType;
+        public string ReturnType => returnType;
+        public string Name => name;
+        public string PartSignature => partSignature;
+        public string FullSignature => fullSignature;
+        public string FullDeclaration => fullDeclaration;
+        public string ChineseSummary => chineseSummary;
+        public string EnglishSummary => englishSummary;
 
         public string AccessModifier => memberAccessModifierType.ConvertToString();
 

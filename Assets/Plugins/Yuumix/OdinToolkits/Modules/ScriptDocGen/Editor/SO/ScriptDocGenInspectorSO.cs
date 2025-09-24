@@ -12,10 +12,9 @@ using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Core.Editor;
-using Yuumix.OdinToolkits.Modules.ScriptDocGen.Editor;
 using YuumixEditor;
 
-namespace Yuumix.OdinToolkits.Modules.Editor
+namespace Yuumix.OdinToolkits.Modules.ScriptDocGen.Editor
 {
     public class ScriptDocGenInspectorSO : OdinEditorScriptableSingleton<ScriptDocGenInspectorSO>,
         IOdinToolkitsEditorReset
@@ -348,7 +347,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         void SingleTypeAnalyze()
         {
-            typeAnalysisData = TypeAnalysisData.CreateFromType(TargetType);
+            typeAnalysisData = new TypeAnalysisDataFactory().CreateFromType(TargetType);
         }
 
         void MultipleTypesAnalyze()
@@ -359,7 +358,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 typesConfig.Types.RemoveAll(x => x == null);
                 foreach (Type type in typesConfig.Types)
                 {
-                    typeAnalysisDataList.Add(TypeAnalysisData.CreateFromType(type));
+                    typeAnalysisDataList.Add(new TypeAnalysisDataFactory().CreateFromType(TargetType));
                 }
             }
             else
@@ -367,7 +366,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 TemporaryTypes.RemoveAll(x => x == null);
                 foreach (Type type in TemporaryTypes)
                 {
-                    typeAnalysisDataList.Add(TypeAnalysisData.CreateFromType(type));
+                    typeAnalysisDataList.Add(new TypeAnalysisDataFactory().CreateFromType(TargetType));
                 }
             }
         }
@@ -380,7 +379,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             foreach (Type type in targetAssembly.GetTypes()
                          .Where(t => t.GetCustomAttribute<CompilerGeneratedAttribute>() == null))
             {
-                typeAnalysisDataList.Add(TypeAnalysisData.CreateFromType(type));
+                typeAnalysisDataList.Add(new TypeAnalysisDataFactory().CreateFromType(TargetType));
             }
         }
 

@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core.Editor;
 
-namespace Yuumix.OdinToolkits.Modules.Editor
+namespace Yuumix.OdinToolkits.Modules.ScriptDocGen.Editor
 {
     public class ScriptDocGenWindow : OdinEditorWindow
     {

@@ -201,7 +201,11 @@ namespace Yuumix.OdinToolkits.Modules
 
                 if (inheritTypes.Count > 0)
                 {
-                    sb.Append(" : " + string.Join(", ", inheritTypes));
+                    sb.Append(" : ");
+                    foreach (string inheritType in inheritTypes)
+                    {
+                        sb.AppendLine(inheritType + ";");
+                    }
                 }
 
                 // 7. 添加泛型约束
@@ -389,8 +393,9 @@ namespace Yuumix.OdinToolkits.Modules
         public static ConstructorAnalysisData[] CreateAllPublicConstructorAnalysisDataArray(this Type type)
         {
             ConstructorInfo[] constructors = type.GetConstructors();
+            var factory = new ConstructorAnalysisDataFactory();
             List<ConstructorAnalysisData> dataList = constructors
-                .Select(x => ConstructorAnalysisData.CreateFromConstructorInfo(x, type))
+                .Select(x => factory.CreateFromConstructorInfo(x, type))
                 .ToList();
             dataList.Sort(new ConstructorAnalysisDataComparer());
             return dataList.ToArray();
@@ -399,12 +404,13 @@ namespace Yuumix.OdinToolkits.Modules
         public static MethodAnalysisData[] CreateRuntimeMethodAnalysisDataArray(this Type type)
         {
             IEnumerable<MethodInfo> methods = type.GetRuntimeMethods();
+            var factory = new MethodAnalysisDataFactory();
             // 剔除掉特殊方法，例如 Property 的 get 和 set， Event 的 add 和 remove
             methods = methods.Where(x =>
                 x != null && !x.Name.Contains("add_") && !x.Name.Contains("remove_") &&
                 !x.Name.Contains("get_") && !x.Name.Contains("set_"));
             List<MethodAnalysisData> dataList =
-                methods.Select(x => MethodAnalysisData.CreateFromMethodInfo(x, type))
+                methods.Select(x => factory.CreateFromMethodInfo(x, type))
                     .ToList();
             dataList.Sort(new MethodAnalysisDataComparer());
             return dataList.ToArray();
@@ -413,8 +419,9 @@ namespace Yuumix.OdinToolkits.Modules
         public static EventAnalysisData[] CreateRuntimeEventAnalysisDataArray(this Type type)
         {
             IEnumerable<EventInfo> events = type.GetRuntimeEvents();
+            var factory = new EventAnalysisDataFactory();
             List<EventAnalysisData> dataList = events
-                .Select(x => EventAnalysisData.FromEventInfo(x, type))
+                .Select(x => factory.CreateFromEventInfo(x, type))
                 .ToList();
             dataList.Sort(new EventAnalysisDataComparer());
             return dataList.ToArray();
@@ -423,8 +430,9 @@ namespace Yuumix.OdinToolkits.Modules
         public static PropertyAnalysisData[] CreateRuntimePropertyAnalysisDataArray(this Type type)
         {
             IEnumerable<PropertyInfo> properties = type.GetRuntimeProperties();
+            var factory = new PropertyAnalysisDataFactory();
             List<PropertyAnalysisData> dataList = properties
-                .Select(x => PropertyAnalysisData.FromPropertyInfo(x, type))
+                .Select(x => factory.CreateFromPropertyInfo(x, type))
                 .ToList();
             dataList.Sort(new PropertyAnalysisDataComparer());
             return dataList.ToArray();
@@ -433,8 +441,9 @@ namespace Yuumix.OdinToolkits.Modules
         public static FieldAnalysisData[] CreateUserDefinedFieldAnalysisDataArray(this Type type)
         {
             IEnumerable<FieldInfo> fields = type.GetUserDefinedFields();
+            var factory = new FieldAnalysisDataFactory();
             List<FieldAnalysisData> dataList = fields
-                .Select(x => FieldAnalysisData.FromFieldInfo(x, type))
+                .Select(x => factory.CreateFromFieldInfo(x, type))
                 .ToList();
             dataList.Sort(new FieldAnalysisDataComparer());
             return dataList.ToArray();
