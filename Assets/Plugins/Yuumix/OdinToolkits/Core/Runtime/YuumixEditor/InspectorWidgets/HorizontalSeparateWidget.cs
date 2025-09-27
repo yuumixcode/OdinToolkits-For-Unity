@@ -11,7 +11,7 @@ namespace YuumixEditor
     /// <summary>
     /// 水平横向分割线组件
     /// </summary>
-    [ChineseSummary("水平横向分割线组件")]
+    [Summary("水平横向分割线组件")]
     [Serializable]
     [HideLabel]
     [InlineProperty]
@@ -20,25 +20,25 @@ namespace YuumixEditor
         /// <summary>
         /// 深色横线高度
         /// </summary>
-        [ChineseSummary("深色横线高度")]
+        [Summary("深色横线高度")]
         int _darkLineHeight;
 
         /// <summary>
         /// 浅色横线高度，构造函数中未设置则默认为深色横线高度 - 1
         /// </summary>
-        [ChineseSummary("浅色横线高度，构造函数中未设置则默认为深色横线高度 - 1")]
+        [Summary("浅色横线高度，构造函数中未设置则默认为深色横线高度 - 1")]
         int _lightLineHeight;
 
         /// <summary>
         /// 分割线下方高度
         /// </summary>
-        [ChineseSummary("分割线下方高度")]
+        [Summary("分割线下方高度")]
         float _spaceAfter;
 
         /// <summary>
         /// 分割线上方高度
         /// </summary>
-        [ChineseSummary("分割线上方高度")]
+        [Summary("分割线上方高度")]
         float _spaceBefore;
 
         public HorizontalSeparateWidget()

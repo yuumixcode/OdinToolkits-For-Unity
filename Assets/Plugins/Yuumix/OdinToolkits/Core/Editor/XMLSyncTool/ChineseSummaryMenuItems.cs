@@ -8,7 +8,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     /// <summary>
     /// 右键快捷处理 ChineseSummary 特性
     /// </summary>
-    [ChineseSummary("右键快捷处理 ChineseSummary 特性")]
+    [Summary("右键快捷处理 ChineseSummary 特性")]
     public static class ChineseSummaryMenuItems
     {
         const string ADD_MENU_NAME = "Assets/Add ChineseSummary";

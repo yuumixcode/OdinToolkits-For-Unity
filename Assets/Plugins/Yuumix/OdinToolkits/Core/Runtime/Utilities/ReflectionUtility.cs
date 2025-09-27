@@ -5,6 +5,7 @@ using System.Reflection;
 
 namespace Yuumix.OdinToolkits.Core
 {
+    [Serializable]
     public enum AccessModifierType
     {
         Public = 0,

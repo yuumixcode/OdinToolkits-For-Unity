@@ -46,7 +46,7 @@ namespace Yuumix.OdinToolkits.Core
         /// <summary>
         /// 隐式类型转换，BilingualData 可以直接转换为 String
         /// </summary>
-        [ChineseSummary("隐式类型转换，BilingualData 可以直接转换为 String")]
+        [Summary("隐式类型转换，BilingualData 可以直接转换为 String")]
         public static implicit operator string(BilingualData data) => data.GetCurrentOrFallback();
     }
 }

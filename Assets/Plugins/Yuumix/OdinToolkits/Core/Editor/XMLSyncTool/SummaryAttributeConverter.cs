@@ -52,11 +52,11 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             }
 
             string newLineSymbol = DetectNewLine(sourceCode);
-            var namespaceSymbolRegex = new Regex("using " + typeof(ChineseSummaryAttribute).Namespace + ";");
-            var namespaceSymbolRegex2 = new Regex("namespace " + typeof(ChineseSummaryAttribute).Namespace);
+            var namespaceSymbolRegex = new Regex("using " + typeof(SummaryAttribute).Namespace + ";");
+            var namespaceSymbolRegex2 = new Regex("namespace " + typeof(SummaryAttribute).Namespace);
             if (!namespaceSymbolRegex.IsMatch(sourceCode) && !namespaceSymbolRegex2.IsMatch(sourceCode))
             {
-                sourceCode = "using " + typeof(ChineseSummaryAttribute).Namespace + ";" + newLineSymbol + sourceCode;
+                sourceCode = "using " + typeof(SummaryAttribute).Namespace + ";" + newLineSymbol + sourceCode;
             }
 
             // 使用正则表达式匹配带有 summary 注释的代码成员

@@ -15,7 +15,7 @@ namespace Yuumix.OdinToolkits.Core
     public class EnglishSummaryAttribute : Attribute, ISummaryAttribute
     {
         readonly string _english;
-        string ISummaryAttribute.GetSummaryContent() => _english;
+        string ISummaryAttribute.GetSummary() => _english;
         public string GetEnglish() => _english;
 
         public static string GetEnglishSummary(MemberInfo memberInfo)
