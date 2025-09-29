@@ -52,7 +52,6 @@ namespace Yuumix.OdinToolkits.Core
         {
             if (!_instance)
             {
-                _instance = this;
                 transform.SetParent(null);
                 DontDestroyOnLoad(gameObject);
             }
@@ -74,7 +73,7 @@ namespace Yuumix.OdinToolkits.Core
 
         static OdinToolkitsRuntimeConfigSO LoadPreferences()
         {
-            var asset = Resources.Load<OdinToolkitsRuntimeConfigSO>("OdinToolkitsPreferences");
+            var asset = Resources.Load<OdinToolkitsRuntimeConfigSO>("OdinToolkitsRuntimeConfig");
             if (!asset)
             {
                 YuumixLogger.LogError(nameof(OdinToolkitsRuntimeConfigSO) + " 配置资源加载失败，需要检查 Resources 路径！",
@@ -82,14 +81,6 @@ namespace Yuumix.OdinToolkits.Core
             }
 
             return asset;
-        }
-
-        void OnDestroy()
-        {
-            if (_instance && _instance == this)
-            {
-                _instance = null;
-            }
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]

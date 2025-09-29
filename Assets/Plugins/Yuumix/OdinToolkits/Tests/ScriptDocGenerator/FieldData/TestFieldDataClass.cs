@@ -17,85 +17,26 @@ namespace Yuumix.OdinToolkits.Tests
     /// </summary>
     public class TestFieldDataClass : AbstractTestFieldClass
     {
-
-        #region 基本类型字段
-        
-       
-        #endregion
-
-        #region 引用类型字段
+        #region 测试方法
 
         /// <summary>
-        /// 字符串字段
+        /// 获取字段信息
         /// </summary>
-        public string stringField = "Hello World";
-
-        /// <summary>
-        /// 数组字段
-        /// </summary>
-        public int[] arrayField = new int[] { 1, 2, 3, 4, 5 };
-
-        /// <summary>
-        /// 多维数组字段
-        /// </summary>
-        public int[,] MultiArrayField = new int[,] { { 1, 2 }, { 3, 4 } };
-
-        /// <summary>
-        /// 交错数组字段
-        /// </summary>
-        public int[][] JaggedArrayField = new int[][] { new int[] { 1, 2 }, new int[] { 3, 4, 5 } };
-
-        /// <summary>
-        /// 列表字段
-        /// </summary>
-        public List<string> listField = new List<string> { "Item1", "Item2", "Item3" };
-
-        /// <summary>
-        /// 字典字段
-        /// </summary>
-        public Dictionary<string, int> DictionaryField = new Dictionary<string, int>
+        /// <returns>所有字段的名称列表</returns>
+        public List<string> GetAllFieldNames()
         {
-            { "Key1", 1 },
-            { "Key2", 2 },
-            { "Key3", 3 }
-        };
+            var fieldNames = new List<string>();
+            var fields = GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic |
+                                             BindingFlags.Instance |
+                                             BindingFlags.Static);
 
-        /// <summary>
-        /// 枚举字段
-        /// </summary>
-        public TestValue valueField = TestValue.Value2;
+            foreach (var field in fields)
+            {
+                fieldNames.Add(field.Name);
+            }
 
-        /// <summary>
-        /// 事件字段
-        /// </summary>
-        public event EventHandler TestEvent;
-
-        #endregion
-
-        #region 泛型类型字段
-
-        /// <summary>
-        /// 复杂泛型字段
-        /// </summary>
-        public Dictionary<string, List<int>> ComplexGenericField = new Dictionary<string, List<int>>
-        {
-            { "Group1", new List<int> { 1, 2, 3 } },
-            { "Group2", new List<int> { 4, 5, 6 } }
-        };
-
-        /// <summary>
-        /// 嵌套泛型字段
-        /// </summary>
-        public List<Dictionary<string, int>> NestedGenericField = new List<Dictionary<string, int>>
-        {
-            new Dictionary<string, int> { { "A", 1 }, { "B", 2 } },
-            new Dictionary<string, int> { { "C", 3 }, { "D", 4 } }
-        };
-
-        /// <summary>
-        /// 自定义泛型字段
-        /// </summary>
-        public GenericWrapper<int> CustomGenericField = new GenericWrapper<int>(42);
+            return fieldNames;
+        }
 
         #endregion
 
@@ -210,7 +151,7 @@ namespace Yuumix.OdinToolkits.Tests
         /// <summary>
         /// volatile 字段
         /// </summary>
-        public volatile int volatileField = 0;
+        public volatile int volatileField;
 
         #endregion
 
@@ -282,45 +223,32 @@ namespace Yuumix.OdinToolkits.Tests
 
         #endregion
 
-        #region 测试方法
+        #region 泛型类型字段
 
         /// <summary>
-        /// 触发测试事件
+        /// 复杂泛型字段
         /// </summary>
-        public void TriggerTestEvent()
+        public Dictionary<string, List<int>> ComplexGenericField = new Dictionary<string, List<int>>
         {
-            TestEvent?.Invoke(this, EventArgs.Empty);
-        }
+            { "Group1", new List<int> { 1, 2, 3 } },
+            { "Group2", new List<int> { 4, 5, 6 } }
+        };
 
         /// <summary>
-        /// 获取字段信息
+        /// 嵌套泛型字段
         /// </summary>
-        /// <returns>所有字段的名称列表</returns>
-        public List<string> GetAllFieldNames()
+        public List<Dictionary<string, int>> NestedGenericField = new List<Dictionary<string, int>>
         {
-            var fieldNames = new List<string>();
-            FieldInfo[] fields = GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic |
-                                                     BindingFlags.Instance |
-                                                     BindingFlags.Static);
+            new Dictionary<string, int> { { "A", 1 }, { "B", 2 } },
+            new Dictionary<string, int> { { "C", 3 }, { "D", 4 } }
+        };
 
-            foreach (FieldInfo field in fields)
-            {
-                fieldNames.Add(field.Name);
-            }
-
-            return fieldNames;
-        }
+        /// <summary>
+        /// 自定义泛型字段
+        /// </summary>
+        public GenericWrapper<int> CustomGenericField = new GenericWrapper<int>(42);
 
         #endregion
-    }
-
-    /// <summary>
-    /// 测试枚举
-    /// </summary>
-    public enum TestValue
-    {
-        Value1 = 0,
-        Value2 = 1
     }
 
     /// <summary>
@@ -342,8 +270,7 @@ namespace Yuumix.OdinToolkits.Tests
     /// <typeparam name="T">泛型类型参数</typeparam>
     public class GenericWrapper<T>
     {
-        public T Value { get; }
-
         public GenericWrapper(T value) => Value = value;
+        public T Value { get; }
     }
 }
