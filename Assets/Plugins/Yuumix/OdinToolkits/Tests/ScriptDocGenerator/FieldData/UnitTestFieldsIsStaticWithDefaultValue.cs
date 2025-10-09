@@ -15,7 +15,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         static readonly FieldInfo[] TestFields = typeof(TestClass).GetRuntimeFields().ToArray();
 
         static readonly IFieldData[] TestFieldData =
-            TestFields.Select(f => UnitTestAnalysisFactory.Instance.CreateFieldData(f)).ToArray();
+            TestFields.Select(f => UnitTestAnalysisFactory.Default.CreateFieldData(f)).ToArray();
 
         static readonly Dictionary<string, string> FieldExpectedSignatureMaps = new Dictionary<string, string>
         {

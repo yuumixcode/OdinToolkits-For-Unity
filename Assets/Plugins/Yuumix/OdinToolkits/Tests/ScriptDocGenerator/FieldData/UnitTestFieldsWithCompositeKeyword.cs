@@ -14,7 +14,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
     /// </summary>
     public class UnitTestFieldsWithCompositeKeyword
     {
-        static readonly IAnalysisDataFactory TargetFactory = UnitTestAnalysisFactory.Instance;
+        static readonly IAnalysisDataFactory TargetFactory = UnitTestAnalysisFactory.Default;
 
         static readonly FieldInfo[] TestFields = typeof(TestClass).GetRuntimeFields().ToArray();
 

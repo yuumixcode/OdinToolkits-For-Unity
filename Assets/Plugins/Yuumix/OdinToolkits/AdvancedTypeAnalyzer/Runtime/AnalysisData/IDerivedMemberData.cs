@@ -14,7 +14,7 @@ namespace Yuumix.OdinToolkits.AdvancedTypeAnalyzer
         public bool IsStatic { get; }
 
         /// <summary>
-        /// 成员类别
+        /// 成员类型（字段、属性、方法等）
         /// </summary>
         MemberTypes MemberType { get; }
 
@@ -34,20 +34,13 @@ namespace Yuumix.OdinToolkits.AdvancedTypeAnalyzer
         string AccessModifierName { get; }
 
         /// <summary>
-        /// 成员签名字符串，包含访问修饰符、返回类型和名称以及参数，不包含特性
+        /// 成员签名字符串，包含访问修饰符、字段修饰符（static/readonly/const）、类型名称和成员名称
         /// </summary>
         string Signature { get; }
 
         /// <summary>
-        /// 包含特性的完整声明字符串
+        /// 包含特性的完整声明字符串，包含特性声明和成员签名
         /// </summary>
         string FullDeclarationWithAttributes { get; }
-
-        /// <summary>
-        /// 生成包含特性的完整声明字符串
-        /// </summary>
-        /// <param name="attributesDeclaration">特性声明字符串</param>
-        /// <param name="signature">字段签名字符串</param>
-        string GetFullDeclarationWithAttributes(string attributesDeclaration, string signature);
     }
 }

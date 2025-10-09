@@ -3,6 +3,11 @@ using System.Reflection;
 
 namespace Yuumix.OdinToolkits.Core
 {
+    public interface ISummaryAttribute
+    {
+        string GetSummary();
+    }
+
     /// <summary>
     /// 中文注释特性，取代 XML 的 Summary 注释，用于反射时获取注释。
     /// </summary>
@@ -24,13 +29,13 @@ namespace Yuumix.OdinToolkits.Core
 
         public static string GetSummary(MemberInfo memberInfo)
         {
-            object[] attributes = memberInfo.GetCustomAttributes(typeof(SummaryAttribute), false);
+            var attributes = memberInfo.GetCustomAttributes(typeof(SummaryAttribute), false);
             return attributes.Length > 0 ? ((SummaryAttribute)attributes[0]).GetChinese() : null;
         }
 
         public static string GetSummary(Type type)
         {
-            object[] attributes = type.GetCustomAttributes(typeof(SummaryAttribute), false);
+            var attributes = type.GetCustomAttributes(typeof(SummaryAttribute), false);
             return attributes.Length > 0 ? ((SummaryAttribute)attributes[0]).GetChinese() : null;
         }
     }
