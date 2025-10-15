@@ -6,6 +6,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class HideIfExample : ExampleSO
     {
+        #region Serialized Fields
+
         [PropertyOrder(10)]
         [Title("用于判断的参数")]
         public Object someObject;
@@ -52,6 +54,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [HideIf("@this.isToggled && this.someObject != null || " +
                 "this.someEnum == InfoMessageType.Error")]
         public int hideWithExpression;
+
+        #endregion
 
         bool Method() =>
             (isToggled && someObject != null) ||

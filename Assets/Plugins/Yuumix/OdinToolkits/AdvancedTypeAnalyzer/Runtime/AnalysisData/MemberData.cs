@@ -1,8 +1,9 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using UnityEngine;
 using Yuumix.OdinToolkits.Core;
-using Yuumix.OdinToolkits.Core.CompositeAttributes;
 
 namespace Yuumix.OdinToolkits.AdvancedTypeAnalyzer
 {
@@ -27,27 +28,27 @@ namespace Yuumix.OdinToolkits.AdvancedTypeAnalyzer
         Type DeclaringType { get; }
 
         /// <summary>
-        /// 声明类型的短名称
+        /// 声明类型的名称
         /// </summary>
         string DeclaringTypeName { get; }
 
         /// <summary>
-        /// 声明类型的完全限定名称
+        /// 声明类型的完整名称，包括命名空间
         /// </summary>
         string DeclaringTypeFullName { get; }
 
         /// <summary>
-        /// 用于获取此 MemberInfo 实例的类对象。
+        /// 通过反射获取该成员的类型
         /// </summary>
         Type ReflectedType { get; }
 
         /// <summary>
-        /// 获取此成员的反射类型的短名称。
+        /// 通过反射获取该成员的类型名称
         /// </summary>
         string ReflectedTypeName { get; }
 
         /// <summary>
-        /// 获取此成员的反射类型的完全限定名称。
+        /// 通过反射获取该成员的类型的完整名称，包括命名空间
         /// </summary>
         string ReflectedTypeFullName { get; }
 
@@ -62,19 +63,9 @@ namespace Yuumix.OdinToolkits.AdvancedTypeAnalyzer
         string SummaryAttributeValue { get; }
 
         /// <summary>
-        /// 成员的自定义属性数据
+        /// 成员是否从继承中获取，这里的成员不包括 Type 类型
         /// </summary>
-        IEnumerable<CustomAttributeData> CustomAttributesData { get; }
-
-        /// <summary>
-        /// 获取一个用于标识元数据元素的值
-        /// </summary>
-        int MetadataToken { get; }
-
-        /// <summary>
-        /// 包含此成员的模块
-        /// </summary>
-        Module Module { get; }
+        bool IsFromInheritance { get; }
     }
 
     /// <summary>
@@ -83,38 +74,86 @@ namespace Yuumix.OdinToolkits.AdvancedTypeAnalyzer
     [Serializable]
     public abstract class MemberData : IMemberData
     {
+        /// <summary>
+        /// 默认特性过滤器，被过滤的特性不会包含在 AttributesDeclaration 中
+        /// </summary>
         public static readonly DefaultAttributeFilter DefaultAttributeFilter = new DefaultAttributeFilter(new[]
         {
             typeof(SummaryAttribute)
         });
 
-        protected MemberData(MemberInfo methodInfo, IAttributeFilter filter = null)
+        protected MemberData(MemberInfo memberInfo, IAttributeFilter filter = null)
         {
-            Name = methodInfo.Name;
-            IsObsolete = methodInfo.IsDefined(typeof(ObsoleteAttribute), false);
-            DeclaringType = methodInfo.DeclaringType;
-            ReflectedType = methodInfo.ReflectedType;
-            // ---
-            SummaryAttributeValue = methodInfo.GetCustomAttribute<SummaryAttribute>()?.GetSummary();
-            AttributesDeclaration = methodInfo.GetAttributesDeclarationWithMultiLine(filter ?? DefaultAttributeFilter);
-            // ---
-            MetadataToken = methodInfo.MetadataToken;
-            Module = methodInfo.Module;
-            CustomAttributesData = methodInfo.GetCustomAttributesData();
+            Name = memberInfo.Name;
+            IsObsolete = memberInfo.IsDefined(typeof(ObsoleteAttribute), false);
+            DeclaringType = memberInfo.DeclaringType;
+            DeclaringTypeName = DeclaringType?.GetReadableTypeName();
+            DeclaringTypeFullName = DeclaringType?.GetReadableTypeName(true);
+            ReflectedType = memberInfo.ReflectedType;
+            ReflectedTypeName = ReflectedType?.GetReadableTypeName();
+            ReflectedTypeFullName = ReflectedType?.GetReadableTypeName(true);
+            AttributesDeclaration = memberInfo.GetAttributesDeclarationWithMultiLine(filter ?? DefaultAttributeFilter);
+            SummaryAttributeValue = memberInfo.GetCustomAttribute<SummaryAttribute>()?.GetSummary();
+            IsFromInheritance = memberInfo.IsFromInheritance();
+            // PostProcess
+            if (memberInfo is Type type)
+            {
+                ImplementIsType = true;
+                Name = type.GetReadableTypeName();
+            }
+            else if (memberInfo is ConstructorInfo)
+            {
+                ImplementIsConstructor = true;
+                Name = DeclaringTypeName?.Split('<')[0];
+            }
+            else if (memberInfo is MethodInfo)
+            {
+                ImplementIsMethod = true;
+            }
         }
 
-        [ShowProperty] public string Name { get; }
-        [ShowProperty] public bool IsObsolete { get; }
+        #region IMemberData Members
+
+        [BilingualText("成员名", nameof(Name))]
+        [ShowEnableProperty]
+        public string Name { get; }
+
+        [BilingualText("是否为过时成员", nameof(IsObsolete))]
+        [ShowEnableProperty]
+        public bool IsObsolete { get; }
+
         public Type DeclaringType { get; }
-        [ShowProperty] public string DeclaringTypeName => DeclaringType?.GetReadableTypeName();
-        [ShowProperty] public string DeclaringTypeFullName => DeclaringType?.GetReadableTypeName(true);
+        public string DeclaringTypeName { get; }
+
+        [ShowEnableProperty]
+        [BilingualText("声明成员的类的完整名称", nameof(DeclaringTypeFullName))]
+        [HideIf("ImplementIsType")]
+        public string DeclaringTypeFullName { get; }
+
         public Type ReflectedType { get; }
-        [ShowProperty] public string ReflectedTypeName => ReflectedType?.GetReadableTypeName();
-        [ShowProperty] public string ReflectedTypeFullName => ReflectedType?.GetReadableTypeName(true);
-        [ShowProperty] public string AttributesDeclaration { get; }
-        [ShowProperty] public string SummaryAttributeValue { get; }
-        [ShowProperty] public IEnumerable<CustomAttributeData> CustomAttributesData { get; }
-        [ShowProperty] public int MetadataToken { get; }
-        [ShowProperty] public Module Module { get; }
+        public string ReflectedTypeName { get; }
+        public string ReflectedTypeFullName { get; }
+        public string AttributesDeclaration { get; }
+
+        [PropertyOrder(100)]
+        [ShowEnableProperty]
+        [BilingualTitle("Summary 注释", nameof(SummaryAttributeValue))]
+        [HideLabel]
+        [MultiLineProperty]
+        public string SummaryAttributeValue { get; }
+
+        public bool IsFromInheritance { get; }
+
+        #endregion
+
+        #region 辅助显示
+
+        bool ImplementIsType { get; }
+
+        bool ImplementIsConstructor { get; }
+
+        bool ImplementIsMethod { get; }
+
+        #endregion
     }
 }

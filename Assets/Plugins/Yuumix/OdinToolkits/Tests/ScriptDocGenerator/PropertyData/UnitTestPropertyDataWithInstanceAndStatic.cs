@@ -124,6 +124,8 @@ namespace Yuumix.OdinToolkits.Tests.Editor
                 propertyData.Signature);
         }
 
+        #region Nested type: TestClass
+
         class TestClass
         {
             public int IntPropertyPublicGetPublicSet { get; set; }
@@ -135,5 +137,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             public bool BoolPropertyPrivateGetPublicSet { private get; set; }
             public int StaticIntPropertyPublicGetPublicSet { get; set; }
         }
+
+        #endregion
     }
 }

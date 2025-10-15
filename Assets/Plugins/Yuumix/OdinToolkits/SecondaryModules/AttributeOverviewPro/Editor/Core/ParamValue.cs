@@ -5,8 +5,12 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [Serializable]
     public class ParamValue
     {
-        public string returnType;
-        public string paramName;
+        #region Serialized Fields
+
         public string paramDescription;
+        public string paramName;
+        public string returnType;
+
+        #endregion
     }
 }

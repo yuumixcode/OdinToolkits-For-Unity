@@ -1,7 +1,7 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Yuumix.OdinToolkits.Core.Editor
@@ -50,6 +50,8 @@ namespace Yuumix.OdinToolkits.Core.Editor
         public static readonly MethodInfo ParseMethod =
             SyntaxHighlighterType.GetMethod("Parse", BindingFlags.Static | BindingFlags.Public);
 
+        #region Serialized Fields
+
         [PropertyOrder(-5)]
         [DisplayAsString(TextAlignment.Left, FontSize = 14)]
         [HideLabel]
@@ -73,6 +75,8 @@ namespace Yuumix.OdinToolkits.Core.Editor
         [HideInInspector]
         public List<CustomSyntaxHighlighterColorGroup>
             customColorGroups = new List<CustomSyntaxHighlighterColorGroup>();
+
+        #endregion
 
         [PropertyOrder(-10)]
         [Title("使用须知", "Odin 的语法高亮处理有一定局限性，目前仅发现以下要点", TitleAlignments.Centered)]

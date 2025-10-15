@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
@@ -7,13 +7,17 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class ShowPropertyResolverExample : ExampleOdinSO
     {
+        #region Serialized Fields
+
         [ShowPropertyResolver]
-        public string myString;
+        public Dictionary<int, Vector3> MyDictionary;
 
         [ShowPropertyResolver]
         public List<int> myList;
 
         [ShowPropertyResolver]
-        public Dictionary<int, Vector3> MyDictionary;
+        public string myString;
+
+        #endregion
     }
 }

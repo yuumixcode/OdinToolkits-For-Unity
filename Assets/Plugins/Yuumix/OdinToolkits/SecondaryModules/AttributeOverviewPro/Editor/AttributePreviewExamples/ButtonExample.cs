@@ -6,6 +6,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class ButtonExample : ExampleSO
     {
+        #region Serialized Fields
+
         [PropertyOrder(1)]
         [FoldoutGroup("Button 基础使用")]
         public bool toggle;
@@ -13,6 +15,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [PropertyOrder(10)]
         [FoldoutGroup("Button 基础使用")]
         public string buttonName = "Dynamic button name";
+
+        #endregion
 
         [PropertyOrder(1)]
         [FoldoutGroup("Button 基础使用")]

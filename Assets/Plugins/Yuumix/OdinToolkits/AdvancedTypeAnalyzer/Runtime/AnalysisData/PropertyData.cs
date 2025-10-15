@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -30,44 +31,33 @@ namespace Yuumix.OdinToolkits.AdvancedTypeAnalyzer
         /// 属性类型的完整名称，包括命名空间
         /// </summary>
         string PropertyTypeFullName { get; }
+    }
+
+    [Serializable]
+    public class PropertyData : MemberData, IPropertyData
+    {
+        public PropertyData(PropertyInfo propertyInfo, IAttributeFilter filter = null) : base(propertyInfo, filter)
+        {
+            // IDerivedMemberData 
+            IsStatic = propertyInfo.IsStaticProperty();
+            MemberType = propertyInfo.MemberType;
+            MemberTypeName = MemberType.ToString();
+            AccessModifier = propertyInfo.GetPropertyAccessModifierType();
+            AccessModifierName = AccessModifier.ConvertToString();
+            // IPropertyData
+            PropertyType = propertyInfo.PropertyType;
+            PropertyTypeName = PropertyType.GetReadableTypeName();
+            PropertyTypeFullName = PropertyType.GetReadableTypeName(true);
+            DefaultValue = propertyInfo.TryGetPropertyCustomDefaultValue(out var value) ? value : null;
+            Signature = GetPropertySignature(propertyInfo,
+                TypeAnalyzerUtility.GetFormattedDefaultValue(PropertyType, DefaultValue));
+            FullDeclarationWithAttributes = AttributesDeclaration + Signature;
+        }
 
         /// <summary>
         /// 获取属性的签名，包括访问修饰符、静态修饰符、属性类型和属性名称
         /// </summary>
-        /// <param name="accessModifier">访问修饰符字符串</param>
-        /// <param name="isStatic">是否为静态</param>
-        /// <param name="propertyTypeName">属性类型名称</param>
-        /// <param name="propertyName">属性名称</param>
-        /// <param name="propertyInfo">PropertyInfo 实例</param>
-        /// <param name="defaultValue">默认值，没有则为 null</param>
-        /// <param name="formattedDefaultValue">格式化的默认值字符串</param>
-        string GetPropertySignature(string accessModifier, bool isStatic, string propertyTypeName,
-            string propertyName, PropertyInfo propertyInfo, object defaultValue, string formattedDefaultValue);
-    }
-
-    public class PropertyData : MemberData, IPropertyData
-    {
-        public PropertyData(PropertyInfo propertyInfo) : base(propertyInfo)
-        {
-            IsStatic = propertyInfo.IsStaticProperty();
-            MemberType = propertyInfo.MemberType;
-            AccessModifier = propertyInfo.GetPropertyAccessModifierType();
-            // --- 属性特有信息 ---
-            PropertyType = propertyInfo.PropertyType;
-            DefaultValue = propertyInfo.TryGetPropertyCustomDefaultValue(out var value) ? value : null;
-            Signature = GetPropertySignature(AccessModifierName, IsStatic, PropertyTypeName, Name,
-                propertyInfo, DefaultValue, TypeAnalyzerUtility.GetFormattedDefaultValue(PropertyType, DefaultValue));
-        }
-
-        #region IPropertyData 接口实现
-
-        public object DefaultValue { get; }
-        public Type PropertyType { get; }
-        public string PropertyTypeName => PropertyType.GetReadableTypeName();
-        public string PropertyTypeFullName => PropertyType.GetReadableTypeName(true);
-
-        public string GetPropertySignature(string accessModifier, bool isStatic, string propertyTypeName,
-            string propertyName, PropertyInfo propertyInfo, object defaultValue, string formattedDefaultValue)
+        string GetPropertySignature(PropertyInfo propertyInfo, string formattedDefaultValue)
         {
             // --- get set ---
             var getSetPart = "{ ";
@@ -88,29 +78,53 @@ namespace Yuumix.OdinToolkits.AdvancedTypeAnalyzer
             }
 
             getSetPart += "}";
-            var hasDefaultValue = defaultValue != null;
+            var hasDefaultValue = DefaultValue != null;
             var signatureParts = new List<string>
             {
-                isStatic ? accessModifier + " static" : accessModifier,
-                propertyTypeName,
-                propertyName,
+                IsStatic ? AccessModifierName + " static" : AccessModifierName,
+                PropertyTypeName,
+                Name,
                 hasDefaultValue ? getSetPart + " = " + formattedDefaultValue + ";" : getSetPart
             };
             var signature = string.Join(" ", signatureParts);
             return signature;
         }
 
-        #endregion
-
-        #region IDerivedMemberData 接口实现
+        #region IDerivedMemberData
 
         public bool IsStatic { get; }
         public MemberTypes MemberType { get; }
-        public string MemberTypeName => MemberType.ToString();
+        public string MemberTypeName { get; }
         public AccessModifierType AccessModifier { get; }
-        public string AccessModifierName => AccessModifier.ConvertToString();
-        public string Signature { get; }
-        public string FullDeclarationWithAttributes => AttributesDeclaration + Signature;
+        public string AccessModifierName { get; }
+
+        [PropertyOrder(60)]
+        [ShowEnableProperty]
+        [BilingualTitle("属性签名", nameof(Signature))]
+        [HideLabel]
+        public string Signature { get; private set; }
+
+        [PropertyOrder(60)]
+        [ShowEnableProperty]
+        [BilingualTitle("完整属性声明 - 包含特性和签名 - 默认剔除 [Summary] 特性",
+            nameof(FullDeclarationWithAttributes) + " - Include Attributes and Signature - Default Exclude [Summary]")]
+        [HideLabel]
+        [MultiLineProperty]
+        public string FullDeclarationWithAttributes { get; }
+
+        #endregion
+
+        #region IPropertyData
+
+        public object DefaultValue { get; }
+        public Type PropertyType { get; }
+        public string PropertyTypeName { get; }
+
+        [PropertyOrder(60)]
+        [ShowEnableProperty]
+        [BilingualTitle("属性类型的完整名称", nameof(PropertyTypeFullName))]
+        [HideLabel]
+        public string PropertyTypeFullName { get; }
 
         #endregion
     }

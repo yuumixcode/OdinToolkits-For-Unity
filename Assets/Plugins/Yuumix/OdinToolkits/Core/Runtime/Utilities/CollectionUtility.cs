@@ -11,7 +11,7 @@ namespace Yuumix.OdinToolkits.Core
             var uniqueStrings = new HashSet<string>(array1);
 
             // 添加第二个数组中的元素到HashSet中，重复的会被自动忽略
-            foreach (string item in array2)
+            foreach (var item in array2)
             {
                 uniqueStrings.Add(item);
             }

@@ -1,8 +1,8 @@
+using Sirenix.OdinInspector;
+using Sirenix.OdinInspector.Editor;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Sirenix.OdinInspector;
-using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core;
@@ -18,6 +18,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         public static BilingualData GenerateTemplateToolMenuPathData =
             new BilingualData("模板代码生成工具", "Generate Template Tool");
+
+        #region Serialized Fields
 
         [PropertyOrder(-99)]
         public BilingualHeaderWidget headerWidget = new BilingualHeaderWidget(
@@ -78,6 +80,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         public BilingualFooterWidget footer = new BilingualFooterWidget(
             "2025/06/27");
 
+        #endregion
+
         public static event Action<ToastPosition, SdfIconType, string, Color, float> ToastEvent;
 
         [ButtonGroup("Btn")]
@@ -119,13 +123,13 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             templateList.Clear();
             TemplatePathMaps.Clear();
             var noTxtNumber = 0;
-            foreach (string template in templatePathConfig)
+            foreach (var template in templatePathConfig)
             {
-                string content = template.Split('/')[^1];
+                var content = template.Split('/')[^1];
                 // OdinEditorLog.Log(content);
                 if (content.EndsWith(".txt"))
                 {
-                    string templateName = content.Replace(".txt", "");
+                    var templateName = content.Replace(".txt", "");
                     if (!TemplatePathMaps.TryAdd(templateName, template))
                     {
                         const string msg2 = "发现重复添加模板，请修改";
@@ -149,7 +153,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
             if (noTxtNumber > 0)
             {
-                string msg3 = "存在" + noTxtNumber + "个非 .txt 类型的文件，请重新选择路径";
+                var msg3 = "存在" + noTxtNumber + "个非 .txt 类型的文件，请重新选择路径";
                 OnToastEvent(ToastPosition.BottomRight, SdfIconType.ExclamationLg, msg3, Color.yellow, 5);
             }
         }
@@ -178,7 +182,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 OnToastEvent(ToastPosition.BottomRight, SdfIconType.ExclamationLg, msg, Color.red, 5);
             }
 
-            TemplatePathMaps.TryGetValue(targetTemplateKey, out string templatePath);
+            TemplatePathMaps.TryGetValue(targetTemplateKey, out var templatePath);
             if (templatePath == null)
             {
                 const string msg = "不存在这个模板，请修改模板路径配置后，点击应用配置按钮";
@@ -186,9 +190,9 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 return;
             }
 
-            string absolutePath = Path.GetFullPath(templatePath);
+            var absolutePath = Path.GetFullPath(templatePath);
             // Debug.Log("模板绝对路径为: " + absolutePath);
-            string templateContent = File.ReadAllText(absolutePath);
+            var templateContent = File.ReadAllText(absolutePath);
             if (!templateContent.Contains(NAME_SPACE_SYMBOL) || !templateContent.Contains(CLASS_NAME_SYMBOL))
             {
                 const string msg = "模板中不存在 " + NAME_SPACE_SYMBOL + " 或 " + CLASS_NAME_SYMBOL + " 占位符";
@@ -199,8 +203,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             templateContent = templateContent.Replace(NAME_SPACE_SYMBOL, targetNamespace);
             templateContent = templateContent.Replace(CLASS_NAME_SYMBOL, targetClassName);
             // Debug.Log("读取到的模板代码替换后为: " + templateContent);
-            string codeRelativePath = targetPath + "/" + targetClassName + ".cs";
-            string codeAbsolutePath = Path.GetFullPath(codeRelativePath);
+            var codeRelativePath = targetPath + "/" + targetClassName + ".cs";
+            var codeAbsolutePath = Path.GetFullPath(codeRelativePath);
             // Debug.Log("目标文件的绝对路径为: " + codePath);
             if (File.Exists(codeAbsolutePath))
             {

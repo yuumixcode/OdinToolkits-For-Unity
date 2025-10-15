@@ -6,6 +6,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class CustomContextMenuExample : ExampleSO
     {
+        #region Serialized Fields
+
         [Title("Unity 内置的 ContextMenuItem 特性")]
         [InfoBox("Odin 会默认覆盖 Context 菜单，需要标记 [DrawWithUnity]，" +
                  "使用 Unity 原生菜单，才可以查看此特性新增的菜单项")]
@@ -17,6 +19,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [InfoBox("新增右键菜单方法")]
         [CustomContextMenu("Say Hello/Twice", "SayHello")]
         public int myProperty;
+
+        #endregion
 
         void SayHello()
         {

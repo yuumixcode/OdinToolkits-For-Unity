@@ -1,4 +1,6 @@
 using NUnit.Framework;
+using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -39,7 +41,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             {
                 nameof(TestClass.ConcurrentDictionaryField),
                 "public ConcurrentDictionary<string, int> ConcurrentDictionaryField;"
-            },
+            }
         };
 
         [Test]
@@ -157,6 +159,8 @@ namespace Yuumix.OdinToolkits.Tests.Editor
                 fieldData.Signature);
         }
 
+        #region Nested type: TestClass
+
         class TestClass
         {
             #region 数组类型
@@ -227,12 +231,12 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             /// <summary>
             /// ArrayList字段
             /// </summary>
-            public System.Collections.ArrayList ArrayListField;
+            public ArrayList ArrayListField;
 
             /// <summary>
             /// Hashtable字段
             /// </summary>
-            public System.Collections.Hashtable HashtableField;
+            public Hashtable HashtableField;
 
             #endregion
 
@@ -251,9 +255,11 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             /// <summary>
             /// 并发字典字段
             /// </summary>
-            public System.Collections.Concurrent.ConcurrentDictionary<string, int> ConcurrentDictionaryField;
+            public ConcurrentDictionary<string, int> ConcurrentDictionaryField;
 
             #endregion
         }
+
+        #endregion
     }
 }

@@ -27,6 +27,8 @@ namespace Yuumix.OdinToolkits.Core
             }
         }
 
+        #region Event Functions
+
         protected virtual void Awake()
         {
             if (!_instance)
@@ -56,6 +58,8 @@ namespace Yuumix.OdinToolkits.Core
                 _instance = null;
             }
         }
+
+        #endregion
 
         public static void CreateNewInstance()
         {

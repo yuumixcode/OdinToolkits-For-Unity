@@ -6,6 +6,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class DisableIfExample : ExampleSO
     {
+        #region Serialized Fields
+
         [PropertyOrder(10)]
         [Title("用于判断的参数")]
         public Object someObject;
@@ -52,6 +54,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [DisableIf("@this.isToggled && this.someObject != null || " +
                    "this.someEnum == InfoMessageType.Error")]
         public int disableWithExpression;
+
+        #endregion
 
         bool Method() =>
             (isToggled && someObject != null) ||

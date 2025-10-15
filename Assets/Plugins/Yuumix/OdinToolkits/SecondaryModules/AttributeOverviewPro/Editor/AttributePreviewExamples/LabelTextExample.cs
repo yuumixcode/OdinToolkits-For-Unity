@@ -5,6 +5,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class LabelTextExample : ExampleSO
     {
+        #region Serialized Fields
+
         [FoldoutGroup("text 参数")]
         [LabelText("1")]
         public int myInt1 = 1;
@@ -34,5 +36,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [FoldoutGroup("icon 和 IconColor")]
         [LabelText("", SdfIconType.HeartFill, IconColor = "lightpurple")]
         public int labelIcon2 = 123;
+
+        #endregion
     }
 }

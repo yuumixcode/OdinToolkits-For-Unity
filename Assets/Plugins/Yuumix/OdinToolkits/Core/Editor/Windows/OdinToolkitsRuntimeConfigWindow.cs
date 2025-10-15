@@ -9,8 +9,14 @@ namespace Yuumix.OdinToolkits.Core.Editor
 {
     public class OdinToolkitsRuntimeConfigWindow : OdinEditorWindow
     {
+        #region Serialized Fields
+
         [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
         public OdinToolkitsRuntimeConfigSO runtimeConfig;
+
+        #endregion
+
+        #region Event Functions
 
         protected override void OnEnable()
         {
@@ -20,6 +26,8 @@ namespace Yuumix.OdinToolkits.Core.Editor
                 runtimeConfig = OdinToolkitsRuntimeConfigSO.Instance;
             }
         }
+
+        #endregion
 
         [MenuItem(OdinToolkitsMenuItems.RUNTIME_CONFIG, false, OdinToolkitsMenuItems.RUNTIME_CONFIG_PRIORITY)]
         public static void ShowWindow()

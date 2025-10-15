@@ -5,6 +5,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class TitleExample : ExampleSO
     {
+        #region Serialized Fields
+
         [Title("共用参数")]
         public string title = "SOAP, SOAP & SOAP";
 
@@ -101,6 +103,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [FoldoutGroup("Title 扩展")]
         [Title("@DateTime.Now.ToString(\"dd:MM:yyyy\")", "@DateTime.Now.ToString(\"HH:mm:ss\")")]
         public int expression;
+
+        #endregion
 
         string TitleProperty => useAlternativeTitle ? alternativeTitle : title;
 

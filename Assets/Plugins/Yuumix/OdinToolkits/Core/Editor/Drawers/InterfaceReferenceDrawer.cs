@@ -1,7 +1,7 @@
-﻿using System;
-using Sirenix.OdinInspector.Editor;
+﻿using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
+using System;
 using UnityEngine;
 using GUIContent = UnityEngine.GUIContent;
 using Object = UnityEngine.Object;
@@ -33,9 +33,9 @@ namespace Yuumix.OdinToolkits.Core.Editor
         {
             // --- 绘制时推荐使用自动布局 + 部分调整
             // 首先通过 Odin 的 SmartValue 获取当前值，也就是这个字段的值，即 reference; 
-            TReference interfaceReference = ValueEntry.SmartValue;
+            var interfaceReference = ValueEntry.SmartValue;
             // 获取接口类型，此时可以直接从泛型约束中获取（使用 Unity 原生方式会比较麻烦）
-            Type interfaceType = typeof(TInterface);
+            var interfaceType = typeof(TInterface);
             // 此时绘制一个 ErrorMessageBox，进行提示
             if (!interfaceReference.UnderlyingObject)
             {
@@ -91,9 +91,9 @@ namespace Yuumix.OdinToolkits.Core.Editor
                 const float squareSize = 14f;
                 GUILayout.Box(new GUIContent(), SirenixGUIStyles.None,
                     GUILayoutOptions.Height(22F).MinWidth(squareSize + 2).MaxWidth(22F));
-                Rect lastRect = GUILayoutUtility.GetLastRect();
-                Rect innerRect = lastRect.AlignCenterXY(squareSize, squareSize);
-                TObject targetObject = interfaceReference.UnderlyingObject;
+                var lastRect = GUILayoutUtility.GetLastRect();
+                var innerRect = lastRect.AlignCenterXY(squareSize, squareSize);
+                var targetObject = interfaceReference.UnderlyingObject;
                 ValidateAndDrawIcon(ref targetObject, interfaceType, innerRect, squareSize);
             }
             // 类似 EditorGUILayout.EndHorizontal();
@@ -116,7 +116,7 @@ namespace Yuumix.OdinToolkits.Core.Editor
                 }
                 else
                 {
-                    Type targetType = target.GetType();
+                    var targetType = target.GetType();
                     isValid = interfaceType.IsAssignableFrom(targetType);
                 }
             }

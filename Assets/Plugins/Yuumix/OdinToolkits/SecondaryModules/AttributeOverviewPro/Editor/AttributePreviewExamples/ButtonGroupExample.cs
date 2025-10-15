@@ -1,5 +1,5 @@
-using System;
 using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
@@ -7,6 +7,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class ButtonGroupExample : ExampleSO
     {
+        #region Serialized Fields
+
         [PropertyOrder(20)]
         [FoldoutGroup("ButtonGroup 基础使用")]
         [InfoBox("直接使用 ButtonGroup，内置一个默认分组名 \"_DefaultGroup\"")]
@@ -28,6 +30,10 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [InfoBox("官方表示作用于任何实例方法（非静态），" +
                  "但是这个静态方法依旧有效，可能在某些情况下静态方法会失效")]
         public StaticFunctionExample staticExample;
+
+        #endregion
+
+        #region Nested type: ${0}
 
         [Serializable]
         [HideLabel]
@@ -120,5 +126,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 Debug.Log("这是 TextArea 方法");
             }
         }
+
+        #endregion
     }
 }

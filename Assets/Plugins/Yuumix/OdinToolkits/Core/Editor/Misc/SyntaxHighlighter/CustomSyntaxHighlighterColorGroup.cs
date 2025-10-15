@@ -1,5 +1,5 @@
-using System;
 using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 
 namespace Yuumix.OdinToolkits.Core.Editor
@@ -7,6 +7,8 @@ namespace Yuumix.OdinToolkits.Core.Editor
     [Serializable]
     public class CustomSyntaxHighlighterColorGroup
     {
+        #region Serialized Fields
+
         [BoxGroup(ShowLabel = false)]
         [ColorPalette]
         [LabelText("背景颜色")]
@@ -42,5 +44,7 @@ namespace Yuumix.OdinToolkits.Core.Editor
         [ColorPalette]
         [LabelText("字符串颜色")]
         public Color stringLiteralColor;
+
+        #endregion
     }
 }

@@ -32,7 +32,7 @@ namespace Yuumix.OdinToolkits.Core.Editor
             SirenixEditorGUI.BeginBox(label1, Attribute.CenterLabel);
             for (var index = 0; index < Property.Children.Count; index++)
             {
-                InspectorProperty child = Property.Children[index];
+                var child = Property.Children[index];
                 child.Draw(child.Label);
             }
 

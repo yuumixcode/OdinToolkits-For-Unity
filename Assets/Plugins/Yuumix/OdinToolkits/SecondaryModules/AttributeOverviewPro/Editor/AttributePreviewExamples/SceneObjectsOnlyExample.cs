@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
@@ -7,6 +7,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class SceneObjectsOnlyExample : ExampleSO
     {
+        #region Serialized Fields
+
         [Title("Scene Objects only")]
         [SceneObjectsOnly]
         public List<GameObject> onlySceneObjects;
@@ -16,5 +18,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         [SceneObjectsOnly]
         public MeshRenderer someMeshRenderer;
+
+        #endregion
     }
 }

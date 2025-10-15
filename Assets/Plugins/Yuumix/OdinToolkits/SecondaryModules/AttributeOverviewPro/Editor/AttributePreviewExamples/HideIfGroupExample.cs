@@ -8,6 +8,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                  "如果设置 Condition，则路径将只表示组名")]
     public class HideIfGroupExample : ExampleSO
     {
+        #region Serialized Fields
+
         public bool toggle = true;
 
         // 没有写条件，那么路径将覆盖组名，引用成员名，toggle 既是 Group 的组名（可以和其他 Group 连接）
@@ -40,5 +42,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         [HideIfGroup("RectGroup", Condition = "toggle")]
         public GameObject gameObject;
+
+        #endregion
     }
 }

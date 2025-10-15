@@ -1,11 +1,13 @@
-using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Yuumix.OdinToolkits.Modules
 {
     public class ChildGameObjectOnlyComponent : MonoBehaviour
     {
+        #region Serialized Fields
+
         [ChildGameObjectsOnly(IncludeSelf = false)]
         public GameObject onlyChild;
 
@@ -14,5 +16,7 @@ namespace Yuumix.OdinToolkits.Modules
 
         [ChildGameObjectsOnly(IncludeSelf = true)]
         public List<GameObject> children;
+
+        #endregion
     }
 }

@@ -1,7 +1,7 @@
-using System;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using Sirenix.Utilities;
+using System;
 using UnityEngine;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
@@ -69,6 +69,77 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             return type.InstantiateDefault(false) as IVector2<int>;
         }
 
+        #region Nested type: ${0}
+
+        [Serializable]
+        public class Demo<T> : IDemo<T>
+        {
+            #region IDemo<T> Members
+
+            [OdinSerialize] public T Value { get; set; }
+
+            #endregion
+        }
+
+        public class DemoInt32 : Demo<int> { }
+
+        [Serializable]
+        public class DemoInt32Interface : IDemo<int>
+        {
+            #region IDemo<int> Members
+
+            [OdinSerialize] public int Value { get; set; }
+
+            #endregion
+        }
+
+        [Serializable]
+        public class DemoSOFloat32 : SerializedScriptableObject, IDemo<float>
+        {
+            #region IDemo<float> Members
+
+            [OdinSerialize] public float Value { get; set; }
+
+            #endregion
+        }
+
+        // 使用 Odin 序列化要继承 SerializedScriptableObject
+        [Serializable]
+        public class DemoSOInt32 : SerializedScriptableObject, IDemo<int>
+        {
+            #region IDemo<int> Members
+
+            [OdinSerialize] public int Value { get; set; }
+
+            #endregion
+        }
+
+        [Serializable]
+        public class DemoSOInt32Target : SerializedScriptableObject, IDemo<int>
+        {
+            #region Serialized Fields
+
+            public int target;
+
+            #endregion
+
+            #region IDemo<int> Members
+
+            [OdinSerialize] public int Value { get; set; }
+
+            #endregion
+        }
+
+        public struct DemoStructInt32 : IDemo<int>
+        {
+            [OdinSerialize] public int Value { get; set; }
+        }
+
+        public interface IDemo<T>
+        {
+            T Value { get; set; }
+        }
+
         public interface IVector2<T>
         {
             T X { get; set; }
@@ -84,54 +155,15 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 Y = (x + 1) * 4;
             }
 
+            #region IVector2<int> Members
+
             [OdinSerialize] public int X { get; set; }
 
             [OdinSerialize] public int Y { get; set; }
+
+            #endregion
         }
 
-        public interface IDemo<T>
-        {
-            T Value { get; set; }
-        }
-
-        // 使用 Odin 序列化要继承 SerializedScriptableObject
-        [Serializable]
-        public class DemoSOInt32 : SerializedScriptableObject, IDemo<int>
-        {
-            [OdinSerialize] public int Value { get; set; }
-        }
-
-        [Serializable]
-        public class DemoSOInt32Target : SerializedScriptableObject, IDemo<int>
-        {
-            public int target;
-
-            [OdinSerialize] public int Value { get; set; }
-        }
-
-        [Serializable]
-        public class DemoSOFloat32 : SerializedScriptableObject, IDemo<float>
-        {
-            [OdinSerialize] public float Value { get; set; }
-        }
-
-        [Serializable]
-        public class Demo<T> : IDemo<T>
-        {
-            [OdinSerialize] public T Value { get; set; }
-        }
-
-        [Serializable]
-        public class DemoInt32Interface : IDemo<int>
-        {
-            [OdinSerialize] public int Value { get; set; }
-        }
-
-        public class DemoInt32 : Demo<int> { }
-
-        public struct DemoStructInt32 : IDemo<int>
-        {
-            [OdinSerialize] public int Value { get; set; }
-        }
+        #endregion
     }
 }

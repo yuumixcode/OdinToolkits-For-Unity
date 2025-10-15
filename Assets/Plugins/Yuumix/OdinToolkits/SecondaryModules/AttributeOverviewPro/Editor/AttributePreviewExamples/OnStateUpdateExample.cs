@@ -1,8 +1,8 @@
-using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -11,6 +11,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class OnStateUpdateExample : ExampleSO
     {
+        #region Serialized Fields
+
         // @ 表示解析表达式
         // # 表示 Property 的路径，使用 () 包裹
         // $ 表示引用，$value 表示自身 Property 的值，
@@ -20,13 +22,17 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [OnInspectorGUI(nameof(DebugProperty))]
         public bool controlList1;
 
-        [TabGroup("控制其他 property")]
-        [OnInspectorGUI(nameof(DebugProperty))]
-        public List<string> list1;
-
         [TabGroup("展开依赖其他 property")]
         [OnInspectorGUI(nameof(DebugProperty))]
         public bool controlList2;
+
+        [TabGroup("显示依赖其他 property")]
+        [OnInspectorGUI(nameof(DebugProperty))]
+        public bool controlList3;
+
+        [TabGroup("控制其他 property")]
+        [OnInspectorGUI(nameof(DebugProperty))]
+        public List<string> list1;
 
         [TabGroup("展开依赖其他 property")]
         [OnStateUpdate("@$property.State.Expanded = controlList2")]
@@ -34,13 +40,11 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         public List<string> list2;
 
         [TabGroup("显示依赖其他 property")]
-        [OnInspectorGUI(nameof(DebugProperty))]
-        public bool controlList3;
-
-        [TabGroup("显示依赖其他 property")]
         [OnStateUpdate(nameof(Visible))]
         [OnInspectorGUI(nameof(DebugProperty))]
         public List<string> list3;
+
+        #endregion
 
 #if UNITY_EDITOR // 如果在运行时使用 InspectorProperty 要注意宏定义，它是一个编辑器类型
         // 使用方法引用相比于直接使用表达式，它可以代码高亮，避免细节出错
@@ -81,7 +85,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         public static void DoAttributes(InspectorProperty property, bool border = false)
         {
-            Rect rect = SirenixEditorGUI.BeginLegendBox(GUIHelper.TempContent(property.Label.text + " 特性列表"));
+            var rect = SirenixEditorGUI.BeginLegendBox(GUIHelper.TempContent(property.Label.text + " 特性列表"));
             for (var i = 0; i < property.Attributes.Count; i++)
             {
                 EditorGUILayout.SelectableLabel(i + ": " + property.Attributes[i].GetType().Name,

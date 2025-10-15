@@ -13,6 +13,8 @@ namespace Yuumix.OdinToolkits.Core.Editor
         static object _selectionInstance;
         static bool _hasAddListener;
 
+        #region Event Functions
+
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -26,6 +28,8 @@ namespace Yuumix.OdinToolkits.Core.Editor
             TemplateCodeGenToolSO.ToastEvent -= ShowToast;
             TemplateCodeGenToolSO.ToastEvent += ShowToast;
         }
+
+        #endregion
 
         protected override void OnImGUI()
         {
@@ -68,14 +72,14 @@ namespace Yuumix.OdinToolkits.Core.Editor
         protected override OdinMenuTree BuildMenuTree()
         {
             var tree = new OdinMenuTree(false);
-            string path2 = TemplateCodeGenToolSO.GenerateTemplateToolMenuPathData.GetCurrentOrFallback();
-            string path3 = DirectoryTreeGenToolSO.DirectoryTreeGenToolMenuPathData.GetCurrentOrFallback();
+            var path2 = TemplateCodeGenToolSO.GenerateTemplateToolMenuPathData.GetCurrentOrFallback();
+            var path3 = DirectoryTreeGenToolSO.DirectoryTreeGenToolMenuPathData.GetCurrentOrFallback();
             // 添加 Object
             tree.AddObjectAtPath(path2, TemplateCodeGenToolSO.Instance);
             tree.AddObjectAtPath(path3, DirectoryTreeGenToolSO.Instance);
             // 获取 MenuItem
-            OdinMenuItem generateTemplateCodeToolMenuItem = tree.GetMenuItem(path2);
-            OdinMenuItem directoryTreeGenToolMenuItem = tree.GetMenuItem(path3);
+            var generateTemplateCodeToolMenuItem = tree.GetMenuItem(path2);
+            var directoryTreeGenToolMenuItem = tree.GetMenuItem(path3);
             // 图标
             generateTemplateCodeToolMenuItem.AddThumbnailIcon(true);
             directoryTreeGenToolMenuItem.AddThumbnailIcon(true);

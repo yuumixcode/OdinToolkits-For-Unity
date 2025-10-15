@@ -15,7 +15,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         static readonly IFieldData[] TestFieldData =
             TestFields.Select(f => UnitTestAnalysisFactory.Default.CreateFieldData(f)).ToArray();
 
-        static readonly Dictionary<string, string> FieldExpectedSignatureMaps = new Dictionary<string, string>()
+        static readonly Dictionary<string, string> FieldExpectedSignatureMaps = new Dictionary<string, string>
         {
             { nameof(Action), "public Action ActionField;" },
             { typeof(Action<int, string>).Name, "public Action<int, string> ActionWithParamsField;" },
@@ -64,6 +64,8 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             Assert.AreEqual(FieldExpectedSignatureMaps[typeof(Comparison<string>).Name], fieldData.Signature);
         }
 
+        #region Nested type: TestClass
+
         class TestClass
         {
             /// <summary>
@@ -77,6 +79,11 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             public Action<int, string> ActionWithParamsField;
 
             /// <summary>
+            /// Comparison 字段
+            /// </summary>
+            public Comparison<string> ComparisonField;
+
+            /// <summary>
             /// Func 带参数字段
             /// </summary>
             public Func<int, string, bool> FuncWithParamsField;
@@ -85,11 +92,8 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             /// Predicate 字段
             /// </summary>
             public Predicate<int> PredicateField;
-
-            /// <summary>
-            /// Comparison 字段
-            /// </summary>
-            public Comparison<string> ComparisonField;
         }
+
+        #endregion
     }
 }

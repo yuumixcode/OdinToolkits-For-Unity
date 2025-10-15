@@ -5,6 +5,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class FoldoutGroupExample : ExampleSO
     {
+        #region Serialized Fields
+
         [FoldoutGroup("基础使用")]
         [Title("groupName: \"基础使用\"")]
         public string foldoutGroup1;
@@ -20,5 +22,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [FoldoutGroup("Group D", true)]
         [Title("expanded: true")]
         public string foldoutGroup4;
+
+        #endregion
     }
 }

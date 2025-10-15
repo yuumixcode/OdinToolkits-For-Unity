@@ -1,8 +1,8 @@
 #if UNITY_EDITOR
 
-using System;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities.Editor;
+using System;
 using Yuumix.OdinToolkits.Core;
 
 namespace YuumixEditor
@@ -44,8 +44,8 @@ namespace YuumixEditor
 
         string GetAdditionalDescText()
         {
-            string chineseText = "补充说明 - 上次更新时间: " + _lastUpdate;
-            string englishText = "Additional Description - Last Update: " + _lastUpdate;
+            var chineseText = "补充说明 - 上次更新时间: " + _lastUpdate;
+            var englishText = "Additional Description - Last Update: " + _lastUpdate;
             return new BilingualData(chineseText, englishText).GetCurrentOrFallback();
         }
 

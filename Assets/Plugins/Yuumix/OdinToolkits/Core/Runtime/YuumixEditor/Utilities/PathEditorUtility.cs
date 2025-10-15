@@ -1,7 +1,7 @@
 #if UNITY_EDITOR
+using Sirenix.Utilities;
 using System.IO;
 using System.Linq;
-using Sirenix.Utilities;
 using UnityEditor;
 using Yuumix.OdinToolkits.Core;
 
@@ -16,16 +16,16 @@ namespace YuumixEditor
         public static void EnsureFolderRecursively(string relativePath)
         {
             // 移除 Assets 前缀，获取实际的文件夹路径
-            string pathWithoutAssets = relativePath.Replace("Assets/", "");
-            string[] folders = pathWithoutAssets.Split('/');
+            var pathWithoutAssets = relativePath.Replace("Assets/", "");
+            var folders = pathWithoutAssets.Split('/');
             var currentPath = "Assets";
-            foreach (string folder in folders)
+            foreach (var folder in folders)
             {
                 currentPath = PathUtilities.Combine(currentPath, folder);
                 if (!AssetDatabase.IsValidFolder(currentPath))
                 {
-                    string parentPath = Path.GetDirectoryName(currentPath);
-                    string folderName = Path.GetFileName(currentPath);
+                    var parentPath = Path.GetDirectoryName(currentPath);
+                    var folderName = Path.GetFileName(currentPath);
                     AssetDatabase.CreateFolder(parentPath, folderName);
                 }
             }
@@ -39,8 +39,8 @@ namespace YuumixEditor
         /// </summary>
         public static string GetTargetFolderPath(string targetFolderName, params string[] containFolderName)
         {
-            string[] paths = AssetDatabase.GetAllAssetPaths();
-            foreach (string path in paths)
+            var paths = AssetDatabase.GetAllAssetPaths();
+            foreach (var path in paths)
             {
                 // 检查路径是否不以目标文件夹名称结束，或者路径不包含所有指定的文件夹名称
                 if (!path.EndsWith(targetFolderName) || !containFolderName.All(path.Contains))

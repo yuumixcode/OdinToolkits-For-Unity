@@ -1,7 +1,7 @@
-using System.Collections.Generic;
-using System.Text;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities.Editor;
+using System.Collections.Generic;
+using System.Text;
 using UnityEditor;
 using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Core.Editor;
@@ -98,10 +98,10 @@ namespace Yuumix.OdinToolkits.Community.Editor
         void ResetTags()
         {
             showCardsWithTag.Clear();
-            string[] list = AssetDatabase.FindAssets("t:" + nameof(CommunityTagSO));
-            foreach (string t in list)
+            var list = AssetDatabase.FindAssets("t:" + nameof(CommunityTagSO));
+            foreach (var t in list)
             {
-                string path = AssetDatabase.GUIDToAssetPath(t);
+                var path = AssetDatabase.GUIDToAssetPath(t);
                 var tag = AssetDatabase.LoadAssetAtPath<CommunityTagSO>(path);
                 if (tag.name == "Sirenix")
                 {

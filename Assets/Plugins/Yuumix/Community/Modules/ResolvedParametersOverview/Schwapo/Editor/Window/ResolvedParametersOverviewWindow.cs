@@ -1,8 +1,8 @@
-using System;
-using System.Linq;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
+using System;
+using System.Linq;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core.Editor;
 
@@ -49,8 +49,8 @@ namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
         {
             base.OnImGUI();
 
-            float currentWindowWidth = Window.position.width;
-            float currentMenuTreeWidth = Window.MenuWidth;
+            var currentWindowWidth = Window.position.width;
+            var currentMenuTreeWidth = Window.MenuWidth;
 
             if (!Mathf.Approximately(currentWindowWidth, _previousWindowWidth) ||
                 !Mathf.Approximately(currentMenuTreeWidth, _previousMenuTreeWidth))
@@ -81,7 +81,7 @@ namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
                 return attribute.ResolvedParameters.Any(p => SearchedFor(p.Name));
             };
 
-            foreach ((Type _, AttributeWithResolvedParameters attribute) in AttributeWithResolvedParametersMap.Map)
+            foreach (var (_, attribute) in AttributeWithResolvedParametersMap.Map)
             {
                 tree.AddObjectAtPath(attribute.Name, attribute);
             }
@@ -91,8 +91,8 @@ namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
 
         public static bool SearchedFor(string str)
         {
-            string unifiedSearchStr = str.ToLower().Replace(" ", "");
-            string unifiedSearchTerm = Config.SearchTerm.ToLower().Replace(" ", "");
+            var unifiedSearchStr = str.ToLower().Replace(" ", "");
+            var unifiedSearchTerm = Config.SearchTerm.ToLower().Replace(" ", "");
             return unifiedSearchStr.Contains(unifiedSearchTerm);
         }
 

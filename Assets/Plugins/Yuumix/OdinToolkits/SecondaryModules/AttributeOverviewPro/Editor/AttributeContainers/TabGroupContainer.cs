@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {

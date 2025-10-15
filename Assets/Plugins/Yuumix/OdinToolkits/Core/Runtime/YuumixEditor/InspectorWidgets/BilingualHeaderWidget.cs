@@ -1,8 +1,8 @@
 #if UNITY_EDITOR
 
+using Sirenix.OdinInspector;
 using System;
 using System.Diagnostics;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core;
 
@@ -16,13 +16,7 @@ namespace YuumixEditor
     [HideLabel]
     public class BilingualHeaderWidget
     {
-        [PropertyOrder(0)]
-        [BoxGroup("B", false)]
-        [HorizontalGroup("B/Middle", PaddingLeft = 3f, PaddingRight = 3f)]
-        [VerticalGroup("B/Middle/1", PaddingTop = 5f)]
-        [HorizontalGroup("B/Middle/1/Top", 0.8f)]
-        [BilingualDisplayAsStringWidgetConfig(false, TextAlignment.Left, 30)]
-        public BilingualDisplayAsStringWidget headerName;
+        #region Serialized Fields
 
         [PropertyOrder(30)]
         [HideIf(nameof(HideHeaderIntroduction))]
@@ -31,6 +25,16 @@ namespace YuumixEditor
         [VerticalGroup("B/Middle/1", PaddingBottom = 5f)]
         [BilingualDisplayAsStringWidgetConfig(false, TextAlignment.Left, 13, true)]
         public BilingualDisplayAsStringWidget headerIntroduction;
+
+        [PropertyOrder(0)]
+        [BoxGroup("B", false)]
+        [HorizontalGroup("B/Middle", PaddingLeft = 3f, PaddingRight = 3f)]
+        [VerticalGroup("B/Middle/1", PaddingTop = 5f)]
+        [HorizontalGroup("B/Middle/1/Top", 0.8f)]
+        [BilingualDisplayAsStringWidgetConfig(false, TextAlignment.Left, 30)]
+        public BilingualDisplayAsStringWidget headerName;
+
+        #endregion
 
         string _chineseIntroduction;
         string _englishIntroduction;
@@ -80,7 +84,7 @@ namespace YuumixEditor
         [PropertySpace(3)]
         public void OpenUrl()
         {
-            string validatedUrl = UrlUtility.ValidateAndNormalizeUrl(_targetUrl, OdinToolkitsWebLinks.HOME);
+            var validatedUrl = UrlUtility.ValidateAndNormalizeUrl(_targetUrl, OdinToolkitsWebLinks.HOME);
             Application.OpenURL(validatedUrl);
         }
 

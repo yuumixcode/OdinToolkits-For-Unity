@@ -1,5 +1,5 @@
-using System;
 using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
@@ -7,6 +7,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class InlinePropertyExample : ExampleSO
     {
+        #region Serialized Fields
+
         [Title("Unity 原生绘制样式 Vector3")]
         public Vector3 vector3;
 
@@ -20,6 +22,10 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         [Title("自定义结构体 [InlineProperty] 作用于类")]
         public Vector3Int myVector3Int;
+
+        #endregion
+
+        #region Nested type: ${0}
 
         [Serializable]
         [InlineProperty(LabelWidth = 13)]
@@ -45,5 +51,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             [HorizontalGroup]
             public int Y;
         }
+
+        #endregion
     }
 }

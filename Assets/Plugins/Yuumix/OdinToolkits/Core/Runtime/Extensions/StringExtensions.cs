@@ -52,8 +52,8 @@ namespace Yuumix.OdinToolkits.Core
 
             using (var md5 = MD5.Create())
             {
-                byte[] inputBytes = Encoding.UTF8.GetBytes(source);
-                byte[] hashBytes = md5.ComputeHash(inputBytes);
+                var inputBytes = Encoding.UTF8.GetBytes(source);
+                var hashBytes = md5.ComputeHash(inputBytes);
 
                 return BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
             }

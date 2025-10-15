@@ -83,7 +83,7 @@ namespace Yuumix.OdinToolkits.Core.Editor
 
                 if (_drawMessageBox)
                 {
-                    string message = _messageResolver.GetValue();
+                    var message = _messageResolver.GetValue();
                     if (Attribute.HasDefinedIcon)
                     {
                         SirenixEditorGUI.IconMessageBox(message, Attribute.Icon,

@@ -1,6 +1,6 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
-using Sirenix.OdinInspector;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -27,8 +27,8 @@ namespace Yuumix.OdinToolkits.Core
 
         public static void CollectBetterEvent<T>(object betterEvent) where T : IEventArgs
         {
-            Type eventArgsType = typeof(T);
-            if (BetterEventCache.TryGetValue(eventArgsType, out List<object> objects))
+            var eventArgsType = typeof(T);
+            if (BetterEventCache.TryGetValue(eventArgsType, out var objects))
             {
                 objects.Add(betterEvent);
             }

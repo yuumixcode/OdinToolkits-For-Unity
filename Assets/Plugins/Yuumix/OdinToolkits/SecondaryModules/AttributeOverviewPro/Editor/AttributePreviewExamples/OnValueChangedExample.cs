@@ -6,6 +6,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class OnValueChangedExample : ExampleSO
     {
+        #region Serialized Fields
+
         [OnValueChanged("CreateMaterial")]
         public Shader shader;
 
@@ -16,6 +18,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [OnValueChanged("ValueChange")]
         [InlineButton("ChangeValue", "代码修改值")]
         public int value;
+
+        #endregion
 
         void CreateMaterial()
         {

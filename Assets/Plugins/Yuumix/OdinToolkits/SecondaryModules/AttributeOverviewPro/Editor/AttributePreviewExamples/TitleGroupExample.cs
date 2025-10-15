@@ -5,6 +5,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class TitleGroupExample : ExampleSO
     {
+        #region Serialized Fields
+
         [FoldoutGroup("title 参数")]
         [TitleGroup("title 参数/主标题")]
         public int titleGroup1;
@@ -44,5 +46,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [FoldoutGroup("order 参数")]
         [TitleGroup("order 参数/标题2", order: 2)]
         public int titleGroup10;
+
+        #endregion
     }
 }

@@ -5,6 +5,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class IndentExample : ExampleSO
     {
+        #region Serialized Fields
+
         [Title("Nicely organize your properties.")]
         [Indent]
         public int A;
@@ -27,5 +29,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         [Indent(-1)]
         public int G;
+
+        #endregion
     }
 }

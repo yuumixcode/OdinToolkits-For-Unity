@@ -6,6 +6,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class SuffixLabelExample : ExampleSO
     {
+        #region Serialized Fields
+
         [SuffixLabel("Prefab")]
         public GameObject GameObject;
 
@@ -35,5 +37,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         [SuffixLabel(SdfIconType.HeartFill, Overlay = true)]
         public string OnlyIcon2;
+
+        #endregion
     }
 }

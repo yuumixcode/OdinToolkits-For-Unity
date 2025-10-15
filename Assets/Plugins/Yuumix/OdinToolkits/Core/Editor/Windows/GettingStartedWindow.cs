@@ -5,13 +5,15 @@ using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Modules.Editor;
-using Yuumix.OdinToolkits.Modules.ScriptDocGen.Editor;
+using Yuumix.OdinToolkits.ScriptDocGen.Editor;
 using YuumixEditor;
 
 namespace Yuumix.OdinToolkits.Core.Editor
 {
     public class GettingStartedWindow : OdinEditorWindow
     {
+        #region Serialized Fields
+
         [GUIColor("green")]
         [PropertyOrder(-100)]
         [PropertySpace]
@@ -39,7 +41,9 @@ namespace Yuumix.OdinToolkits.Core.Editor
         public BilingualDisplayAsStringWidget help =
             new BilingualDisplayAsStringWidget("链接", "Help Links");
 
-        string ScriptDocGenButtonName => ScriptDocGenInspectorSO.MenuName;
+        #endregion
+
+        string ScriptDocGenButtonName => ScriptDocGeneratorVisualPanelSO.MenuName;
 
         string TemplateCodeGenButtonName =>
             TemplateCodeGenToolSO.GenerateTemplateToolMenuPathData.GetCurrentOrFallback();

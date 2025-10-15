@@ -6,6 +6,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class HideLabelExample : ExampleSO
     {
+        #region Serialized Fields
+
         [InfoBox("Unity 默认情况，一个完整的 Property 由字段名标签和值组成")]
         public int hideLabel1;
 
@@ -42,6 +44,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [HideLabel]
         [MultiLineProperty]
         public string wideMultilineTextField = "";
+
+        #endregion
 
         public override void SetDefaultValue()
         {

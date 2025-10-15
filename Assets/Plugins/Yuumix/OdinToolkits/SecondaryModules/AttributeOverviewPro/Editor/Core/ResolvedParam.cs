@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Sirenix.Utilities.Editor;
+﻿using Sirenix.Utilities.Editor;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 

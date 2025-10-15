@@ -18,7 +18,7 @@ namespace YuumixEditor
         public static MonoScript GetMonoScript(string scriptName)
         {
             MonoScript foundMonoScript = null;
-            string scriptAssetPath = AssetDatabase.FindAssets("t:MonoScript " + scriptName)
+            var scriptAssetPath = AssetDatabase.FindAssets("t:MonoScript " + scriptName)
                 .Select(AssetDatabase.GUIDToAssetPath)
                 .FirstOrDefault();
 
@@ -40,7 +40,7 @@ namespace YuumixEditor
         /// </summary>
         public static string FindScriptPath(string scriptName)
         {
-            string scriptAssetPath = AssetDatabase.FindAssets("t:MonoScript " + scriptName)
+            var scriptAssetPath = AssetDatabase.FindAssets("t:MonoScript " + scriptName)
                 .Select(AssetDatabase.GUIDToAssetPath)
                 .FirstOrDefault();
             return !string.IsNullOrEmpty(scriptAssetPath) ? scriptAssetPath : null;

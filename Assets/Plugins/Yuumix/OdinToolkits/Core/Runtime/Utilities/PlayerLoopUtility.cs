@@ -84,7 +84,7 @@ namespace Yuumix.OdinToolkits.Core
         {
             var sb = new StringBuilder();
             sb.AppendLine("Unity Player Loop:");
-            foreach (PlayerLoopSystem subSystem in loop.subSystemList)
+            foreach (var subSystem in loop.subSystemList)
             {
                 PrintSubSystem(subSystem, sb, 0);
             }
@@ -108,7 +108,7 @@ namespace Yuumix.OdinToolkits.Core
             }
 
             // 遍历当前子系统的所有子子系统，并递归调用PrintSubSystem进行打印
-            foreach (PlayerLoopSystem subSubSystem in system.subSystemList)
+            foreach (var subSubSystem in system.subSystemList)
             {
                 PrintSubSystem(subSubSystem, sb, depth + 1);
             }

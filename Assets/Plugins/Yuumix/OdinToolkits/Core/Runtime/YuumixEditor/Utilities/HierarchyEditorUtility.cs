@@ -16,7 +16,7 @@ namespace YuumixEditor
         /// </summary>
         public static string GetAbsolutePath(Transform trans)
         {
-            string path = SearchUtils.GetHierarchyPath(trans.gameObject, false)
+            var path = SearchUtils.GetHierarchyPath(trans.gameObject, false)
                 .TrimStart('/');
             // Debug.Log("GetHierarchyPath: " +  path);
             return path;

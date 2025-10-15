@@ -35,7 +35,7 @@ namespace Yuumix.OdinToolkits.Core
         {
             try
             {
-                Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies()
+                var assemblies = AppDomain.CurrentDomain.GetAssemblies()
                     .Where(assembly => assembly.FullName.Contains(partOfAssemblyName))
                     .ToArray();
                 return assemblies.Length > 0 ? assemblies : Array.Empty<Assembly>();
@@ -48,8 +48,8 @@ namespace Yuumix.OdinToolkits.Core
 
         public static List<string> GetNamespacesInAssembly(Assembly assembly)
         {
-            Type[] types = assembly.GetTypes();
-            List<string> namespaces = types.Select(type => type.Namespace)
+            var types = assembly.GetTypes();
+            var namespaces = types.Select(type => type.Namespace)
                 .Where(ns => ns != null)
                 .Distinct()
                 .ToList();

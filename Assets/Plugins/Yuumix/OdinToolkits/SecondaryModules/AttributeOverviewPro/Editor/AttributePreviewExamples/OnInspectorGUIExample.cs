@@ -7,6 +7,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class OnInspectorGUIExample : ExampleSO
     {
+        #region Serialized Fields
+
         [OnInspectorInit("@texture = Sirenix.Utilities.Editor.EditorIcons.OdinInspectorLogo")]
         [OnInspectorGUI("DrawPreview")]
         public Texture2D texture;
@@ -15,6 +17,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [OnInspectorInit("@texture2D = Sirenix.Utilities.Editor.EditorIcons.OdinInspectorLogo")]
         [OnInspectorGUI(nameof(DrawPreview), nameof(DrawPreview))]
         public Texture2D texture2D;
+
+        #endregion
 
         void DrawPreview()
         {

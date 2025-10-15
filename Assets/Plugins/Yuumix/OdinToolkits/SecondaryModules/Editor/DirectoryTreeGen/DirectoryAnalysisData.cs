@@ -1,7 +1,7 @@
+using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Sirenix.OdinInspector;
 using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
@@ -29,8 +29,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                     ? "Root"
                     : directoryInfo.FullName.Replace(CurrentRootPath + "/", "")
             };
-            DirectoryInfo[] subDirectoryInfos = directoryInfo.GetDirectories();
-            FileInfo[] subFileInfos = directoryInfo.GetFiles();
+            var subDirectoryInfos = directoryInfo.GetDirectories();
+            var subFileInfos = directoryInfo.GetFiles();
             if (subDirectoryInfos.Length + subFileInfos.Length <= 0)
             {
                 data.SubDirectoryData = null;
@@ -38,12 +38,12 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             }
 
             data.SubDirectoryData = new List<DirectoryAnalysisData>();
-            foreach (DirectoryInfo subDirectoryInfo in subDirectoryInfos)
+            foreach (var subDirectoryInfo in subDirectoryInfos)
             {
                 data.SubDirectoryData.Add(FromDirectoryInfo(subDirectoryInfo));
             }
 
-            foreach (FileInfo subFileInfo in subFileInfos)
+            foreach (var subFileInfo in subFileInfos)
             {
                 if (PredicateFilterFileInfo(subFileInfo))
                 {
@@ -85,10 +85,14 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             return false;
         }
 
+        #region Nested type: DirectoryAnalysisType
+
         internal enum DirectoryAnalysisType
         {
             Folder,
             File
         }
+
+        #endregion
     }
 }

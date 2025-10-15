@@ -11,6 +11,8 @@ namespace Yuumix.OdinToolkits.Community.Editor
 {
     public class CommunityWindow : OdinEditorWindow
     {
+        #region Serialized Fields
+
         [PropertyOrder(-99)]
         [PropertySpace(0, 10)]
         public BilingualHeaderWidget header = new BilingualHeaderWidget(
@@ -22,6 +24,10 @@ namespace Yuumix.OdinToolkits.Community.Editor
         [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
         public CommunityRepositorySO repository;
 
+        #endregion
+
+        #region Event Functions
+
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -32,6 +38,8 @@ namespace Yuumix.OdinToolkits.Community.Editor
                 repository.CanSelectTags = false;
             }
         }
+
+        #endregion
 
         [MenuItem(OdinToolkitsMenuItems.COMMUNITY, false,
             OdinToolkitsMenuItems.COMMUNITY_PRIORITY)]

@@ -47,6 +47,29 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             Assert.AreEqual("public int? NullableField;", fieldData.Signature);
         }
 
+        #region Nested type: ITestInterface
+
+        /// <summary>
+        /// 测试接口
+        /// </summary>
+        public interface ITestInterface { }
+
+        #endregion
+
+        #region Nested type: TestAbstractClass
+
+        /// <summary>
+        /// 测试抽象类
+        /// </summary>
+        public abstract class TestAbstractClass
+        {
+            public abstract void AbstractMethod();
+        }
+
+        #endregion
+
+        #region Nested type: TestClass
+
         public class TestClass
         {
             /// <summary>
@@ -70,17 +93,6 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             public int? NullableField = null;
         }
 
-        /// <summary>
-        /// 测试接口
-        /// </summary>
-        public interface ITestInterface { }
-
-        /// <summary>
-        /// 测试抽象类
-        /// </summary>
-        public abstract class TestAbstractClass
-        {
-            public abstract void AbstractMethod();
-        }
+        #endregion
     }
 }

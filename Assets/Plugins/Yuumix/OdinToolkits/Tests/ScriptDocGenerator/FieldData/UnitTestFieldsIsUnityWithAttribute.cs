@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 using Yuumix.OdinToolkits.AdvancedTypeAnalyzer;
+
 #pragma warning disable CS0618 // 类型或成员已过时
 
 namespace Yuumix.OdinToolkits.Tests.Editor
@@ -20,7 +21,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             FieldInfos.Select(f => UnitTestAnalysisFactory.Default.CreateFieldData(f)).ToArray();
 
         static readonly Dictionary<string, string> FieldExpectedFullDeclarationWithAttributesMaps =
-            new Dictionary<string, string>()
+            new Dictionary<string, string>
             {
                 {
                     nameof(TestClass.gameObjectField),
@@ -117,9 +118,13 @@ public LayerMask layerMaskField;"
                 FieldExpectedFullDeclarationWithAttributesMaps[nameof(TestClass.layerMaskField)]));
         }
 
+        #region Nested type: TestClass
+
         [Serializable]
         class TestClass
         {
+            #region Serialized Fields
+
             /// <summary>
             /// GameObject 字段
             /// </summary>
@@ -159,6 +164,10 @@ public LayerMask layerMaskField;"
             /// </summary>
             [Obsolete("Use newField instead")]
             public LayerMask layerMaskField;
+
+            #endregion
         }
+
+        #endregion
     }
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Yuumix.OdinToolkits.AdvancedTypeAnalyzer;
-using Yuumix.OdinToolkits.Modules.ScriptDocGen.Editor.Test.TestChineseSummaryAttribute;
 
 namespace Yuumix.OdinToolkits.Tests.Editor
 {

@@ -1,6 +1,6 @@
+using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
-using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 
@@ -8,9 +8,15 @@ namespace Yuumix.OdinToolkits.Core.Editor
 {
     public class OdinToolkitsEditorResetSO : OdinEditorScriptableSingleton<OdinToolkitsEditorResetSO>
     {
+        #region Serialized Fields
+
         [AssetList(CustomFilterMethod = nameof(FilterSO))]
         [BilingualTitle("选择将要进行重置的资源文件")]
         public List<ScriptableObject> wantToResetSOList;
+
+        #endregion
+
+        #region Event Functions
 
         [Button("重置选中的 SO 文件", ButtonSizes.Large)]
         public void Reset()
@@ -23,7 +29,7 @@ namespace Yuumix.OdinToolkits.Core.Editor
                 return;
             }
 
-            foreach (ScriptableObject item in wantToResetSOList)
+            foreach (var item in wantToResetSOList)
             {
                 switch (item)
                 {
@@ -38,6 +44,8 @@ namespace Yuumix.OdinToolkits.Core.Editor
                 }
             }
         }
+
+        #endregion
 
         ScriptableObject FilterSO(ScriptableObject asset)
         {

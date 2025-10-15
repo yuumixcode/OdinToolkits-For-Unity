@@ -1,8 +1,8 @@
+using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sirenix.OdinInspector;
-using Sirenix.Utilities;
 using UnityEngine;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
@@ -42,7 +42,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         public IEnumerable<Type> GetFilteredTypeList()
         {
-            IEnumerable<Type> q = typeof(BaseClass).Assembly.GetTypes()
+            var q = typeof(BaseClass).Assembly.GetTypes()
                 .Where(x => !x.IsAbstract)              // Excludes BaseClass
                 .Where(x => !x.IsGenericTypeDefinition) // Excludes C1<>
                 .Where(x => typeof(BaseClass)
@@ -55,6 +55,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
             return q;
         }
+
+        #region Nested type: ${0}
 
         public abstract class BaseClass
         {
@@ -85,5 +87,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         {
             public T C;
         }
+
+        #endregion
     }
 }

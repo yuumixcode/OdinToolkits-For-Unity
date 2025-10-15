@@ -1,5 +1,5 @@
-using System;
 using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
@@ -7,6 +7,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class ValidateInputExample : ExampleSO
     {
+        #region Serialized Fields
+
         [FoldoutGroup("Condition 参数 用于验证值")]
         [ValidateInput("@!string.IsNullOrWhiteSpace($value)", "Field can't be empty")]
         [LabelWidth(250)]
@@ -101,6 +103,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [LabelWidth(250)]
         public GameObject dynamicMessageAndType;
 
+        #endregion
+
         public string MessageProperty => useAlternativeMessage ? alternativeMessage : setMessage;
 
         // 如果想要通过 Condition 方法设置 ValidateInputAttribute 的其他值的话，需要使用 ref 引用，否则无法覆盖默认值
@@ -170,17 +174,29 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             return true;
         }
 
+        #region Nested type: ${0}
+
         [Serializable]
         public class TestIncludeChildren
         {
+            #region Serialized Fields
+
             public Child child;
+
+            #endregion
         }
 
         [Serializable]
         public class Child
         {
+            #region Serialized Fields
+
             public string name;
             public int num;
+
+            #endregion
         }
+
+        #endregion
     }
 }

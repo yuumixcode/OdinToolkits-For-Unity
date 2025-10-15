@@ -1,18 +1,17 @@
-using Yuumix.OdinToolkits.Core;
 using System.Linq;
 using UnityEditor;
-using UnityEngine;
+using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
     /// <summary>
-    /// 右键快捷处理 ChineseSummary 特性
+    /// 右键快捷处理 Summary 特性
     /// </summary>
-    [Summary("右键快捷处理 ChineseSummary 特性")]
+    [Summary("右键快捷处理 Summary 特性")]
     public static class ChineseSummaryMenuItems
     {
-        const string ADD_MENU_NAME = "Assets/Add ChineseSummary";
-        const string REMOVE_MENU_NAME = "Assets/Remove ChineseSummary";
+        const string ADD_MENU_NAME = "Assets/Add SummaryAttribute";
+        const string REMOVE_MENU_NAME = "Assets/Remove SummaryAttribute";
 
         [MenuItem(ADD_MENU_NAME)]
         public static void QuickAddChineseSummary()
@@ -24,7 +23,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             }
             else
             {
-                foreach (Object obj in Selection.objects)
+                foreach (var obj in Selection.objects)
                 {
                     SummaryAttributeConverter.WriteSyncChineseSummaryText(
                         AssetDatabase.GetAssetPath(obj));
@@ -42,7 +41,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             }
             else
             {
-                foreach (Object obj in Selection.objects)
+                foreach (var obj in Selection.objects)
                 {
                     SummaryAttributeConverter.WriteRemoveChineseSummaryText(
                         AssetDatabase.GetAssetPath(obj));
@@ -58,7 +57,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         static bool IsMonoScript()
         {
-            Object selectedObject = Selection.activeObject;
+            var selectedObject = Selection.activeObject;
             return selectedObject && Selection.objects.All(obj => obj is MonoScript);
         }
     }

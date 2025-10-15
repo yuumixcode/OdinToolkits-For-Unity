@@ -1,6 +1,6 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
@@ -8,6 +8,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class TableListExample : ExampleSO
     {
+        #region Serialized Fields
+
         [PropertyOrder(10)]
         [FoldoutGroup("基础使用")]
         [Title("IsReadOnly", "IsReadOnly = true")]
@@ -118,9 +120,15 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             }
         };
 
+        #endregion
+
+        #region Nested type: ${0}
+
         [Serializable]
         public class CustomClass
         {
+            #region Serialized Fields
+
             [TableColumnWidth(40, false)]
             public int 序号;
 
@@ -131,6 +139,10 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             public string name;
 
             public GameObject obj;
+
+            #endregion
         }
+
+        #endregion
     }
 }

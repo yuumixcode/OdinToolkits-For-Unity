@@ -1,6 +1,6 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
-using Sirenix.OdinInspector;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -13,6 +13,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             new MyClass { a = 3, b = 2, c = 1 }
         };
 
+        #region Serialized Fields
+
         public List<MyClass> list0 = StaticList;
 
         [TitleGroup("List1")]
@@ -21,6 +23,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [TitleGroup("List2 标记 [HideDuplicateReferenceBox]")]
         [HideDuplicateReferenceBox]
         public List<MyClass> list2 = StaticList;
+
+        #endregion
 
         [TitleGroup("循环引用", "没有标记 [Serializable]，由 Odin 序列化")]
         public ReferenceTypeClass FirstObject;
@@ -41,12 +45,18 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             SecondObject = FirstObject;
         }
 
+        #region Nested type: ${0}
+
         [Serializable]
         public class MyClass
         {
+            #region Serialized Fields
+
             public int a;
             public int b;
             public int c;
+
+            #endregion
         }
 
         public class ReferenceTypeClass
@@ -54,5 +64,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             public int A;
             public ReferenceTypeClass RecursiveRef;
         }
+
+        #endregion
     }
 }

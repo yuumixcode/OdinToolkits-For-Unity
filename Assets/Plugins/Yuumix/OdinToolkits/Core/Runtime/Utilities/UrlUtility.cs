@@ -13,7 +13,7 @@ namespace Yuumix.OdinToolkits.Core
                 return fallbackUrl;
             }
 
-            if (Uri.TryCreate(inputUrl, UriKind.Absolute, out Uri uriResult) &&
+            if (Uri.TryCreate(inputUrl, UriKind.Absolute, out var uriResult) &&
                 IsValidWebProtocol(uriResult.Scheme))
             {
                 return uriResult.ToString();

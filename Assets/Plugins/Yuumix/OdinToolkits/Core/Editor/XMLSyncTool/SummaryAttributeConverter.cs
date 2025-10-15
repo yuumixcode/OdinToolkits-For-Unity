@@ -19,7 +19,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         public static void WriteSyncChineseSummaryText(string filePath)
         {
-            string sourceCode = File.ReadAllText(filePath);
+            var sourceCode = File.ReadAllText(filePath);
             sourceCode = GetCodeWithSyncToChineseSummary(sourceCode);
             File.WriteAllText(filePath, sourceCode);
             Debug.Log("同步 " + filePath + " 的 Summary 注释为 ChineseSummary 成功！");
@@ -28,7 +28,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         public static void WriteRemoveChineseSummaryText(string filePath)
         {
-            string sourceCode = File.ReadAllText(filePath);
+            var sourceCode = File.ReadAllText(filePath);
             sourceCode = GetCodeWithRemoveAllChineseSummary(sourceCode);
             File.WriteAllText(filePath, sourceCode);
             Debug.Log("移除 " + filePath + " 的 ChineseSummary 特性成功！");
@@ -51,7 +51,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 return sourceCode;
             }
 
-            string newLineSymbol = DetectNewLine(sourceCode);
+            var newLineSymbol = DetectNewLine(sourceCode);
             var namespaceSymbolRegex = new Regex("using " + typeof(SummaryAttribute).Namespace + ";");
             var namespaceSymbolRegex2 = new Regex("namespace " + typeof(SummaryAttribute).Namespace);
             if (!namespaceSymbolRegex.IsMatch(sourceCode) && !namespaceSymbolRegex2.IsMatch(sourceCode))
@@ -65,28 +65,28 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             var regex = new Regex(@"(\s*///\s*<summary>(.*?)</summary>\s*)(.*?)((?=;|\{))",
                 RegexOptions.Singleline | RegexOptions.Multiline);
 
-            MatchCollection matches = regex.Matches(sourceCode);
+            var matches = regex.Matches(sourceCode);
             for (var i = 0; i < matches.Count; i++)
             {
-                string summaryComment = matches[i].Groups[1].Value;
-                string summaryContent = matches[i].Groups[2].Value;
-                string otherXmlAndAttributesAndDeclaration = matches[i].Groups[3].Value;
+                var summaryComment = matches[i].Groups[1].Value;
+                var summaryContent = matches[i].Groups[2].Value;
+                var otherXmlAndAttributesAndDeclaration = matches[i].Groups[3].Value;
 
                 // 清理 summary 内容
-                string cleanedSummary = CleanSummaryContent(summaryContent);
+                var cleanedSummary = CleanSummaryContent(summaryContent);
                 if (string.IsNullOrEmpty(cleanedSummary))
                 {
                     continue; // 如果清理后内容为空，则跳过当前匹配项
                 }
 
                 // 获取对应成员的 xml 注释的缩进
-                string indent = Regex.Match(summaryComment, @"^\s*").Value;
+                var indent = Regex.Match(summaryComment, @"^\s*").Value;
                 // Debug.Log(indent + "，indent 的长度为：" + indent.Length);
-                (string xmlComments, string attributesAndDeclaration) =
+                var (xmlComments, attributesAndDeclaration) =
                     SplitCodeParts(otherXmlAndAttributesAndDeclaration, newLineSymbol);
-                string newAttributesAndDeclaration =
+                var newAttributesAndDeclaration =
                     SyncAttribute(attributesAndDeclaration, cleanedSummary, indent);
-                string newSummaryAndOther = MergeThreeCodeParts(summaryComment, xmlComments,
+                var newSummaryAndOther = MergeThreeCodeParts(summaryComment, xmlComments,
                     newAttributesAndDeclaration, newLineSymbol);
                 sourceCode = sourceCode.Replace(matches[i].Groups[0].Value, newSummaryAndOther);
             }
@@ -112,7 +112,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             // [ChineseSummary("xxx" +
             //     "yyy" +
             //     "zzz")]
-            const string pattern = @"(\[ChineseSummary\s*\()(.*?)(\)\s*\])";
+            var pattern = @"(\[" + nameof(SummaryAttribute).Replace("Attribute", "") + @"\s*\()(.*?)(\)\s*\])";
             const RegexOptions regexOptions = RegexOptions.Singleline; // 让.匹配换行符
 
             // 检查是否已存在ChineseSummary特性
@@ -125,7 +125,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             }
 
             var sb = new StringBuilder();
-            sb.Append($"[ChineseSummary(\"{cleanedSummaryContent}\")]")
+            sb.Append($"[{nameof(SummaryAttribute).Replace("Attribute", "")}(\"{cleanedSummaryContent}\")]")
                 .Append(indent)
                 .Append(attributesAndDeclaration);
             return sb.ToString();
@@ -134,7 +134,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         static string MergeThreeCodeParts(string summaryComment, string xmlComments,
             string newAttributesAndDeclaration, string newLineSymbol)
         {
-            string result = summaryComment;
+            var result = summaryComment;
             if (!string.IsNullOrEmpty(xmlComments))
             {
                 result += xmlComments + newLineSymbol;
@@ -163,7 +163,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             }
 
             // 使用指定的换行符拆分
-            string[] lines = code.Split(new[] { newLine }, StringSplitOptions.None);
+            var lines = code.Split(new[] { newLine }, StringSplitOptions.None);
             var xmlSection = new List<string>();
             var attributeAndDeclarationSection = new List<string>();
             var index = 0;
@@ -175,8 +175,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             // 提取 /// 注释部分
             while (index < lines.Length)
             {
-                string line = lines[index];
-                string trimmedLine = line.TrimStart();
+                var line = lines[index];
+                var trimmedLine = line.TrimStart();
                 if (trimmedLine.StartsWith("///") || trimmedLine.StartsWith("//"))
                 {
                     xmlSection.Add(line);
@@ -196,8 +196,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             // 提取特性部分
             while (index < lines.Length)
             {
-                string line = lines[index];
-                string trimmedLine = line.TrimStart();
+                var line = lines[index];
+                var trimmedLine = line.TrimStart();
                 if (trimmedLine.StartsWith("["))
                 {
                     attributeAndDeclarationSection.Add(line);
@@ -242,7 +242,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             }
 
             // 移除 XML 子标签（如 <param>, <returns> 等）
-            string cleaned = Regex.Replace(summaryContent, @"<[^>]+>", "");
+            var cleaned = Regex.Replace(summaryContent, @"<[^>]+>", "");
 
             // 移除多余的注释符号（///）
             cleaned = Regex.Replace(cleaned, @"^\s*///\s*", "", RegexOptions.Multiline);
@@ -312,7 +312,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             var result = new StringBuilder();
             var currentState = ParseState.Code;
             var i = 0;
-            int length = sourceCode.Length;
+            var length = sourceCode.Length;
 
             while (i < length)
             {
@@ -368,7 +368,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                         if (i < length)
                         {
                             // 完整添加当前换行符（可能是\r、\n或\r\n）
-                            int newLineLength = GetNewLineLength(sourceCode, i);
+                            var newLineLength = GetNewLineLength(sourceCode, i);
                             result.Append(sourceCode, i, newLineLength);
                             i += newLineLength;
                             currentState = ParseState.Code;
@@ -426,7 +426,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         static bool IsChineseSummaryAttribute(string code, int index)
         {
             // 跳过前面的空白
-            int i = index;
+            var i = index;
             while (i < code.Length && char.IsWhiteSpace(code[i]))
             {
                 i++;
@@ -475,7 +475,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         // 跳过整个ChineseSummary特性（兼容多行）
         static int SkipChineseSummaryAttribute(string code, int index)
         {
-            int i = index;
+            var i = index;
             var bracketDepth = 0;
             var inString = false;
             var stringDelimiter = '"';
@@ -483,7 +483,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
             while (i < code.Length)
             {
-                char c = code[i];
+                var c = code[i];
 
                 // 处理字符串
                 if (c == stringDelimiter && !escaped)
@@ -548,7 +548,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             // (?=;|\{|$) 先行断言，匹配下一个字符为分号、左大括号或行末，不匹配字符，所以捕获组内容为空字符串。
             var regex = new Regex(@"(\s*///\s*<summary>(.*?)</summary>\s*)(.*?)((?=;|\{))",
                 RegexOptions.Singleline | RegexOptions.Multiline);
-            MatchCollection matches = regex.Matches(sourceCode);
+            var matches = regex.Matches(sourceCode);
             Debug.Log("匹配到的数量：" + matches.Count);
             foreach (Match match in matches)
             {
@@ -567,7 +567,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             string otherXmlAndAttributesAndDeclaration,
             string newLine)
         {
-            (string xmlComments, string attributesAndDeclaration) =
+            var (xmlComments, attributesAndDeclaration) =
                 SplitCodeParts(otherXmlAndAttributesAndDeclaration, newLine);
             return (xmlComments, attributesAndDeclaration);
         }

@@ -1,5 +1,5 @@
-using System;
 using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core;
 
@@ -27,7 +27,7 @@ namespace Yuumix.OdinToolkits.Community.Editor
         {
             get
             {
-                string prefix = InspectorBilingualismConfigSO.IsChinese ? "作者: " : "Author: ";
+                var prefix = InspectorBilingualismConfigSO.IsChinese ? "作者: " : "Author: ";
                 return prefix + _name.ToYellow();
             }
         }

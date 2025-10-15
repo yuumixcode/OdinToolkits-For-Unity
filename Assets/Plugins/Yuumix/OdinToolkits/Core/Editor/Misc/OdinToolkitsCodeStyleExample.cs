@@ -292,6 +292,8 @@ namespace Yuumix.OdinToolkits.Core.Editor
         // 静态使用 Rider 默认
         static int _sharedCount;
 
+        #region Serialized Fields
+
         // Use [SerializeField] attribute if you want to display a private field in Inspector.
         // 如果你想在检查器中显示私有字段，请使用 [SerializeField] 属性。
         // Booleans ask a question that can be answered true or false.
@@ -317,6 +319,8 @@ namespace Yuumix.OdinToolkits.Core.Editor
         [Tooltip("This is another statistic for the player.")]
         [SerializeField]
         float anotherStat;
+
+        #endregion
 
         // Some prefer to use an underscore prefix for private fields.
         // 有些人更喜欢为私有字段使用下划线前缀。
@@ -474,6 +478,8 @@ namespace Yuumix.OdinToolkits.Core.Editor
             // .. 
         }
 
+        #region Nested type: ${0}
+
         // This is a custom EventArg made from a struct.
         // 这是一个由结构体构成的自定义 EventArg。
         public struct CustomEventArgs
@@ -490,6 +496,8 @@ namespace Yuumix.OdinToolkits.Core.Editor
         }
 
         public class CustomEventArgsClass : EventArgs { }
+
+        #endregion
 
         #region Field
 

@@ -20,12 +20,12 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 return;
             }
 
-            foreach (DirectoryAnalysisData t in data.SubDirectoryData)
+            foreach (var t in data.SubDirectoryData)
             {
-                DirectoryAnalysisData subData = t;
-                int depth = subData.Depth;
-                string indentString = GetIndentation(depth);
-                string finalLine = indentString + "├─ " + t.Name;
+                var subData = t;
+                var depth = subData.Depth;
+                var indentString = GetIndentation(depth);
+                var finalLine = indentString + "├─ " + t.Name;
                 if (subData.AnalysisType == DirectoryAnalysisData.DirectoryAnalysisType.Folder)
                 {
                     finalLine += "/";

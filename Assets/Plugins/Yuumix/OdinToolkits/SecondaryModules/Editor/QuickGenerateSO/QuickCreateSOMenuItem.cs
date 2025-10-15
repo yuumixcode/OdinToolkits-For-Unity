@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
@@ -18,20 +17,20 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [MenuItem(MENU_NAME, true)]
         static bool CanCreateScriptableObjectFromSelected()
         {
-            Object selectedObject = Selection.activeObject;
+            var selectedObject = Selection.activeObject;
             if (!selectedObject)
             {
                 return false;
             }
 
-            foreach (Object obj in Selection.objects)
+            foreach (var obj in Selection.objects)
             {
                 if (obj is not MonoScript script)
                 {
                     continue;
                 }
 
-                Type scriptClass = script.GetClass();
+                var scriptClass = script.GetClass();
                 if (scriptClass == null)
                 {
                     continue;
@@ -69,7 +68,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
             var instance = ScriptableObject.CreateInstance(script.GetClass());
 
-            string defaultName = script.name;
+            var defaultName = script.name;
             if (defaultName.EndsWith("SO"))
             {
                 defaultName = defaultName[..^2];
@@ -81,16 +80,16 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         static void MultiSelectCreateSO()
         {
-            foreach (string guid in Selection.assetGUIDs)
+            foreach (var guid in Selection.assetGUIDs)
             {
-                string objAssetPath = AssetDatabase.GUIDToAssetPath(guid);
+                var objAssetPath = AssetDatabase.GUIDToAssetPath(guid);
                 var obj = AssetDatabase.LoadAssetAtPath<Object>(objAssetPath);
                 if (obj is not MonoScript script)
                 {
                     continue;
                 }
 
-                Type scriptClass = script.GetClass();
+                var scriptClass = script.GetClass();
                 if (scriptClass == null)
                 {
                     continue;
@@ -106,13 +105,13 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                     objAssetPath = Path.GetDirectoryName(objAssetPath);
                 }
 
-                string defaultName = script.name;
+                var defaultName = script.name;
                 if (defaultName.EndsWith("SO"))
                 {
                     defaultName = defaultName[..^2];
                 }
 
-                string assetPath = AssetDatabase.GenerateUniqueAssetPath($"{objAssetPath}/{defaultName}.asset");
+                var assetPath = AssetDatabase.GenerateUniqueAssetPath($"{objAssetPath}/{defaultName}.asset");
                 AssetDatabase.CreateAsset(ScriptableObject.CreateInstance(scriptClass), assetPath);
                 AssetDatabase.SaveAssets();
                 Debug.Log("生成一个 SO 资源，路径为: " + assetPath);

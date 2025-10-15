@@ -1,11 +1,13 @@
-﻿using System.Collections.Generic;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Yuumix.OdinToolkits.Modules
 {
     public class RequiredListLengthPrefabComponent : MonoBehaviour
     {
+        #region Serialized Fields
+
         [Title(nameof(PrefabKind.InstanceInScene))]
         [RequiredListLength(3, PrefabKind = PrefabKind.InstanceInScene)]
         [InfoBox("该物体是场景中的预制体时，开启长度限制")]
@@ -45,5 +47,7 @@ namespace Yuumix.OdinToolkits.Modules
         [RequiredListLength(3, PrefabKind = PrefabKind.All)]
         [InfoBox("只要和预制体有关，就开启长度限制")]
         public List<int> list8 = new List<int>();
+
+        #endregion
     }
 }

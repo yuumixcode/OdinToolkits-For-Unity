@@ -1,9 +1,9 @@
+using Sirenix.OdinInspector;
+using Sirenix.OdinInspector.Editor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Sirenix.OdinInspector;
-using Sirenix.OdinInspector.Editor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core;
 using YuumixEditor;
@@ -16,6 +16,8 @@ namespace Yuumix.OdinToolkits.Community.Editor
     /// <typeparam name="T">目标资源卡片</typeparam>
     public abstract class CommunityCardSO<T> : SerializedScriptableObject where T : CommunityCardSO<T>
     {
+        #region Serialized Fields
+
         BilingualData _openEditLabel = new BilingualData("编辑标签", "Edit Tags");
         BilingualData _finishEditLabel = new BilingualData("完成编辑", "Finish Edit");
 
@@ -27,6 +29,8 @@ namespace Yuumix.OdinToolkits.Community.Editor
         [BilingualText("卡片标签", "Card Tags")]
         [ShowIf("CanEditTags")]
         public List<CommunityTagSO> cardWithTags;
+
+        #endregion
 
         [BoxGroup("B", false)]
         [PropertySpace(5)]

@@ -1,8 +1,8 @@
+using Sirenix.OdinInspector;
+using Sirenix.OdinInspector.Editor.Examples;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sirenix.OdinInspector;
-using Sirenix.OdinInspector.Editor.Examples;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -10,6 +10,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [Searchable]
     public class SearchableExample : ExampleSO
     {
+        #region ExampleEnum enum
+
         public enum ExampleEnum
         {
             One,
@@ -18,6 +20,10 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             Four,
             Five
         }
+
+        #endregion
+
+        #region Nested type: ${0}
 
         [Serializable]
         public struct ExampleStruct
@@ -33,6 +39,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 Enum = (ExampleEnum)ExampleHelper.RandomInt(0, 5);
             }
         }
+
+        #endregion
 
         #region Searchable 普通参数
 
@@ -117,17 +125,25 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [Serializable]
         public class Perk
         {
+            #region Serialized Fields
+
             public string Name;
 
             [TableList]
             public List<Effect> effects;
+
+            #endregion
         }
 
         [Serializable]
         public class Effect
         {
+            #region Serialized Fields
+
             public Skill Skill;
             public float Value;
+
+            #endregion
         }
 
         public enum Skill
@@ -301,20 +317,28 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [Serializable]
         public class ExampleClass
         {
+            #region Serialized Fields
+
             public string someString = "Saehrimnir is a tasty delicacy";
             public int someInt = 13579;
 
             public DataContainer dataContainerOne = new DataContainer { Name = "Example Data Set One" };
+
+            #endregion
         }
 
         [Serializable]
         [Searchable]
         public class DataContainer
         {
+            #region Serialized Fields
+
             public string Name;
 
             public List<ExampleStruct> data =
                 new List<ExampleStruct>(Enumerable.Range(1, 10).Select(i => new ExampleStruct(i)));
+
+            #endregion
         }
 
         [Serializable]

@@ -9,8 +9,14 @@ namespace Yuumix.OdinToolkits.Core.Editor
 {
     public class OdinToolkitEditorSettingsWindow : OdinEditorWindow
     {
+        #region Serialized Fields
+
         [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
         public InspectorBilingualismConfigSO bilingualismConfig;
+
+        #endregion
+
+        #region Event Functions
 
         protected override void OnEnable()
         {
@@ -20,6 +26,8 @@ namespace Yuumix.OdinToolkits.Core.Editor
                 bilingualismConfig = InspectorBilingualismConfigSO.Instance;
             }
         }
+
+        #endregion
 
         [MenuItem(OdinToolkitsMenuItems.EDITOR_SETTINGS, priority = OdinToolkitsMenuItems.EDITOR_SETTINGS_PRIORITY)]
         public static void ShowWindow()

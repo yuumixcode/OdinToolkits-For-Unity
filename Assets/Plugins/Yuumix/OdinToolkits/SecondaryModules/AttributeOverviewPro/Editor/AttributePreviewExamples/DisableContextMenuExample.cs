@@ -6,6 +6,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class DisableContextMenuExample : ExampleSO
     {
+        #region Serialized Fields
+
         [Title("默认只关闭标记的 Property 的右键菜单")]
         [InfoBox("DisableContextMenu 只能禁用 Odin 提供的 ContextMenu，并不会关闭 Unity 原生部分",
             InfoMessageType.Warning)]
@@ -29,5 +31,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [DisableContextMenu]
         [ContextMenuItem("测试 Unity 特性", "SayHello")]
         public int unityProperty;
+
+        #endregion
     }
 }

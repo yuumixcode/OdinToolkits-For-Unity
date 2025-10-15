@@ -20,7 +20,11 @@ namespace Yuumix.OdinToolkits.AdvancedTypeAnalyzer
             }
         }
 
+        #region IAttributeFilter Members
+
         public Type[] ExcludeTypes { get; }
         public bool ShouldFilterOut(Type type) => ExcludeTypes.Contains(type);
+
+        #endregion
     }
 }

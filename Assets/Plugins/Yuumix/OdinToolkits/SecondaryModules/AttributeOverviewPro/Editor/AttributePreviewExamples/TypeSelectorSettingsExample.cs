@@ -1,5 +1,5 @@
-using System;
 using Sirenix.OdinInspector;
+using System;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -51,6 +51,6 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [TypeSelectorSettings(ShowNoneItem = true, PreferNamespaces = false, ShowCategories = false)]
         public Type ShowNoneItem_On;
 
-        bool TypeFilter(Type type) => type.IsAbstract == false && typeof(ExampleSO).IsAssignableFrom(type);
+        bool TypeFilter(Type type) => !type.IsAbstract && typeof(ExampleSO).IsAssignableFrom(type);
     }
 }

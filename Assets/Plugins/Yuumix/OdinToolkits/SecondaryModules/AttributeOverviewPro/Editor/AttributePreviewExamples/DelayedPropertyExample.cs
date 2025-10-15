@@ -6,6 +6,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class DelayedPropertyExample : ExampleSO
     {
+        #region Serialized Fields
+
         [PropertyOrder(0)]
         [InfoBox("没有标记任何延迟赋值的字段，只要有修改就会触发事件")]
         [OnValueChanged("OnValueChanged")]
@@ -22,6 +24,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [OnValueChanged("OnValueChanged")]
         [DelayedProperty]
         public string odinDelayedField;
+
+        #endregion
 
         [ShowInInspector]
         [PropertyOrder(20)]

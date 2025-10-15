@@ -1,6 +1,6 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
-using Sirenix.OdinInspector;
 
 namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
 {

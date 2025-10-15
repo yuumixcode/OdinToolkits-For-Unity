@@ -5,6 +5,8 @@ namespace Yuumix.OdinToolkits.Modules.AttributeOverviewPro.Runtime.RuntimeExampl
 {
     public class DisableInPrefabComponent : MonoBehaviour
     {
+        #region Serialized Fields
+
         [Title("PrefabKind.InstanceInScene")]
         [InfoBox("该物体是场景中的预制体时，无法选中")]
         [DisableIn(PrefabKind.InstanceInScene)]
@@ -40,5 +42,7 @@ namespace Yuumix.OdinToolkits.Modules.AttributeOverviewPro.Runtime.RuntimeExampl
         [InfoBox("该物体是场景中的预制体或者嵌套预制体或者非预制体时，无法选中")]
         [DisableIn(PrefabKind.PrefabInstanceAndNonPrefabInstance)]
         public string prefabInstanceAndNonPrefabInstance = "Prefab Instances, as well as non-prefab instances";
+
+        #endregion
     }
 }

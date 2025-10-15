@@ -1,6 +1,6 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
@@ -8,6 +8,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class TableColumnWidthExample : ExampleSO
     {
+        #region Serialized Fields
+
         [TableList]
         public List<CustomClass> list = new List<CustomClass>
         {
@@ -23,9 +25,15 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             }
         };
 
+        #endregion
+
+        #region Nested type: ${0}
+
         [Serializable]
         public class CustomClass
         {
+            #region Serialized Fields
+
             [TableColumnWidth(40)]
             [LabelText("序号")]
             public int index;
@@ -39,6 +47,10 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
             [TableColumnWidth(100)]
             public GameObject obj;
+
+            #endregion
         }
+
+        #endregion
     }
 }

@@ -8,18 +8,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class GUIColorExample : ExampleSO
     {
-        [FoldoutGroup("构造函数 (R,G,B,A)")]
-        [InfoBox("可以使用 RGBA 和 RGB，Rider 中可以预览这个颜色，默认的 Alpha == 1 ")]
-        [GUIColor(1, 1, 0.5f)]
-        public int guiColor0;
-
-        [FoldoutGroup("GetColor 参数 支持多种解析字符串")]
-        [LabelWidth(200)]
-        public Color color = Color.green;
-
-        [FoldoutGroup("GetColor 参数 支持多种解析字符串")]
-        [LabelWidth(200)]
-        public bool useRed;
+        #region Serialized Fields
 
         [FoldoutGroup("GetColor 参数 支持多种解析字符串")]
         [GUIColor("@useRed ? UnityEngine.Color.red : UnityEngine.Color.green")]
@@ -27,19 +16,18 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         public string attributeExpressionExample;
 
         [FoldoutGroup("GetColor 参数 支持多种解析字符串")]
+        [LabelWidth(200)]
+        public Color color = Color.green;
+
+        [FoldoutGroup("GetColor 参数 支持多种解析字符串")]
         [GUIColor("$color")]
         [LabelWidth(200)]
         public string fieldNameExample;
 
-        [FoldoutGroup("GetColor 参数 支持多种解析字符串")]
-        [GUIColor("$GetColor")]
-        [LabelWidth(200)]
-        public string methodNameExample;
-
-        [FoldoutGroup("GetColor 参数 支持多种解析字符串")]
-        [GUIColor("$ColorProperty")]
-        [LabelWidth(200)]
-        public string propertyNameExample;
+        [FoldoutGroup("构造函数 (R,G,B,A)")]
+        [InfoBox("可以使用 RGBA 和 RGB，Rider 中可以预览这个颜色，默认的 Alpha == 1 ")]
+        [GUIColor(1, 1, 0.5f)]
+        public int guiColor0;
 
         [FoldoutGroup("GUIColor 扩展")]
         [InfoBox("直接使用 Odin 内置的特殊字符")]
@@ -55,6 +43,22 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [InfoBox("动态变换颜色")]
         [GUIColor("$GetDynamicColor")]
         public int guiColor4;
+
+        [FoldoutGroup("GetColor 参数 支持多种解析字符串")]
+        [GUIColor("$GetColor")]
+        [LabelWidth(200)]
+        public string methodNameExample;
+
+        [FoldoutGroup("GetColor 参数 支持多种解析字符串")]
+        [GUIColor("$ColorProperty")]
+        [LabelWidth(200)]
+        public string propertyNameExample;
+
+        [FoldoutGroup("GetColor 参数 支持多种解析字符串")]
+        [LabelWidth(200)]
+        public bool useRed;
+
+        #endregion
 
         public Color ColorProperty => color;
 

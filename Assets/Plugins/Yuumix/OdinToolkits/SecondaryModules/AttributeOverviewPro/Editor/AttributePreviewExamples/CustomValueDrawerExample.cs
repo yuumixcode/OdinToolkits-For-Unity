@@ -1,8 +1,7 @@
-using System;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
-using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -11,6 +10,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class CustomValueDrawerExample : ExampleSO
     {
+        #region Serialized Fields
+
         [PropertyOrder(-5)]
         [LabelText("左边最小值: ")]
         public float from = 2;
@@ -52,6 +53,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [CustomValueDrawer("MyCustomDrawSpecial")]
         public float specialFloat;
 
+        #endregion
+
         public override void SetDefaultValue()
         {
             customDrawerStatic = 0;
@@ -79,7 +82,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             SirenixEditorGUI.BeginBox();
             // Odin 的绘制链，调用 callNextDrawer 方法，进入下一层绘制
             callNextDrawer(label);
-            float result = EditorGUILayout.Slider(label, value, from, to);
+            var result = EditorGUILayout.Slider(label, value, from, to);
             SirenixEditorGUI.EndBox();
             return result;
         }
@@ -88,7 +91,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         float MyCustomDrawSpecial(float value, GUIContent label, Func<GUIContent, bool> callNextDrawer,
             InspectorProperty property)
         {
-            Rect rect = EditorGUILayout.GetControlRect();
+            var rect = EditorGUILayout.GetControlRect();
             SirenixEditorGUI.DrawHorizontalLineSeperator(rect.x, rect.center.y, rect.width, 1);
             SirenixEditorGUI.BeginBox(label);
             EditorGUILayout.LabelField("Property 的 Odin 路径: (可以看到属于一个 Group) " + property.Path);
@@ -97,8 +100,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             SirenixEditorGUI.EndBox();
             SirenixEditorGUI.BeginBox();
             EditorGUILayout.LabelField("Property Attributes 这个字段上标记的特性列表: ");
-            ImmutableList<Attribute> list = property.Attributes;
-            foreach (Attribute item in list)
+            var list = property.Attributes;
+            foreach (var item in list)
             {
                 EditorGUILayout.LabelField(item.GetType().Name);
             }
@@ -106,7 +109,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             SirenixEditorGUI.EndBox();
             SirenixEditorGUI.BeginBox();
             callNextDrawer(label);
-            float result = EditorGUILayout.Slider(label, value, from, to);
+            var result = EditorGUILayout.Slider(label, value, from, to);
             SirenixEditorGUI.EndBox();
             // 绘制边框 property.LastDrawnValueRect 绘制此属性的最后一个区域
             SirenixEditorGUI.DrawBorders(new Rect(property.LastDrawnValueRect)

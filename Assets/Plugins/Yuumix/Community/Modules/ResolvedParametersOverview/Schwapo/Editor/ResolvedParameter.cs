@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Sirenix.Utilities.Editor;
+using System;
 using System.Collections.Generic;
-using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
 
@@ -85,18 +85,18 @@ namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
 
         public void ResizeTables()
         {
-            float resolverTypeHeight = CalculateHeight(ResolverType, ResolverInfoTable, 0, 1);
-            float resolvesToHeight = CalculateHeight(ResolvesTo, ResolverInfoTable, 1, 1);
-            float fallbackValueHeight = CalculateHeight(FallbackValue, ResolverInfoTable, 2, 1);
-            float maxHeight = Mathf.Max(resolverTypeHeight, resolvesToHeight, fallbackValueHeight);
+            var resolverTypeHeight = CalculateHeight(ResolverType, ResolverInfoTable, 0, 1);
+            var resolvesToHeight = CalculateHeight(ResolvesTo, ResolverInfoTable, 1, 1);
+            var fallbackValueHeight = CalculateHeight(FallbackValue, ResolverInfoTable, 2, 1);
+            var maxHeight = Mathf.Max(resolverTypeHeight, resolvesToHeight, fallbackValueHeight);
             ResolverInfoTable[0, 1].Height = maxHeight + 10f;
 
             for (var row = 2; row < NamedValueTable.RowCount; row++)
             {
-                NamedValue namedValue = NamedValues[row - 2];
-                float nameHeight = CalculateHeight(namedValue.Name, NamedValueTable, 0, row);
-                float typeHeight = CalculateHeight(namedValue.Type, NamedValueTable, 1, row);
-                float descriptionHeight = CalculateHeight(namedValue.Description, NamedValueTable, 2, row);
+                var namedValue = NamedValues[row - 2];
+                var nameHeight = CalculateHeight(namedValue.Name, NamedValueTable, 0, row);
+                var typeHeight = CalculateHeight(namedValue.Type, NamedValueTable, 1, row);
+                var descriptionHeight = CalculateHeight(namedValue.Description, NamedValueTable, 2, row);
                 maxHeight = Mathf.Max(nameHeight, typeHeight, descriptionHeight);
 
                 for (var col = 0; col < NamedValueTable.ColumnCount; col++)

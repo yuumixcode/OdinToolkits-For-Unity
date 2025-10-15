@@ -1,5 +1,5 @@
-using System;
 using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -15,6 +15,8 @@ namespace Yuumix.OdinToolkits.Core
     [Serializable]
     public class InspectorBilingualismConfigSO : ScriptableObject, IOdinToolkitsRuntimeReset
     {
+        #region LanguageType enum
+
         /// <summary>
         /// Odin Toolkits 编辑器语言类型
         /// </summary>
@@ -26,6 +28,8 @@ namespace Yuumix.OdinToolkits.Core
             Chinese,
             English
         }
+
+        #endregion
 
         static InspectorBilingualismConfigSO _instance;
 
@@ -70,10 +74,14 @@ namespace Yuumix.OdinToolkits.Core
         public static bool IsEnglish =>
             Instance.CurrentLanguage == LanguageType.English;
 
+        #region IOdinToolkitsRuntimeReset Members
+
         public void RuntimeReset()
         {
             CurrentLanguage = LanguageType.Chinese;
         }
+
+        #endregion
 
         public static event Action OnLanguageChange;
 #if UNITY_EDITOR

@@ -2,7 +2,6 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using UnityEngine;
 using Yuumix.OdinToolkits.AdvancedTypeAnalyzer;
 
 // ReSharper disable UnusedMember.Local
@@ -20,7 +19,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
 
         static readonly IFieldData[] TestFieldData = TestFields.Select(f => TargetFactory.CreateFieldData(f)).ToArray();
 
-        static readonly Dictionary<string, string> FieldExpectedSignatureMaps = new Dictionary<string, string>()
+        static readonly Dictionary<string, string> FieldExpectedSignatureMaps = new Dictionary<string, string>
         {
             { "CONST_FIELD", "public const bool CONST_FIELD = true;" },
             { "StaticReadOnlyField", "public static readonly bool StaticReadOnlyField;" },
@@ -56,6 +55,8 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             Assert.AreEqual(FieldExpectedSignatureMaps["ReadOnlyField"], fieldData.Signature);
         }
 
+        #region Nested type: TestClass
+
         class TestClass
         {
             /// <summary>
@@ -78,5 +79,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             /// </summary>
             public readonly bool ReadOnlyField;
         }
+
+        #endregion
     }
 }

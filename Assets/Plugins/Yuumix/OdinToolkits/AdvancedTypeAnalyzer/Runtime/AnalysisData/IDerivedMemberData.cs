@@ -32,7 +32,7 @@ namespace Yuumix.OdinToolkits.AdvancedTypeAnalyzer
         /// 访问修饰符的字符串表示形式
         /// </summary>
         string AccessModifierName { get; }
-
+        
         /// <summary>
         /// 成员签名字符串，包含访问修饰符、字段修饰符（static/readonly/const）、类型名称和成员名称
         /// </summary>

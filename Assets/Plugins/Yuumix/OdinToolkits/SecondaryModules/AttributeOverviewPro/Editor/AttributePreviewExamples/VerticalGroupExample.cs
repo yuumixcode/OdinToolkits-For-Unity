@@ -5,6 +5,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class VerticalGroupExample : ExampleSO
     {
+        #region Serialized Fields
+
         [HorizontalGroup("Horizon", 0.5f, Title = "横向组")]
         [VerticalGroup("Horizon/Left", PaddingBottom = 100)]
         public int verticalGroup1;
@@ -18,5 +20,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         public int verticalGroup3;
 
         public int normalGroup;
+
+        #endregion
     }
 }

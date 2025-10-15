@@ -21,7 +21,7 @@ namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
             ResolvedParameters = resolvedParameters;
 
             var attributeUrlName = $"{name.ToLower().Replace(' ', '-')}-attribute";
-            string documentationUrlName = attributeUrlName.Replace("-", "");
+            var documentationUrlName = attributeUrlName.Replace("-", "");
 
             AttributeUrl = string.Format(UnformatedAttributeUrl, attributeUrlName);
             DocumentationUrl = string.Format(UnformatedDocumentationUrl, documentationUrlName);

@@ -1,6 +1,8 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Reflection;
 using Yuumix.OdinToolkits.Core;
+using Yuumix.OdinToolkits.Modules;
 
 namespace Yuumix.OdinToolkits.AdvancedTypeAnalyzer
 {
@@ -43,19 +45,6 @@ namespace Yuumix.OdinToolkits.AdvancedTypeAnalyzer
         /// 这个字段的类型的完整名称
         /// </summary>
         public string FieldTypeFullName { get; }
-
-        /// <summary>
-        /// 生成字段签名字符串
-        /// </summary>
-        /// <param name="keywordSnippet">关键字片段</param>
-        /// <param name="defaultValue">是否有自定义默认值，为 null 表示没有</param>
-        /// <param name="formattedDefaultValue">格式化的默认值</param>
-        /// <param name="accessModifierName">访问修饰符名称</param>
-        /// <param name="fieldTypeName">字段类型名称</param>
-        /// <param name="name">字段名称</param>
-        string GetFieldSignature(string keywordSnippet, object defaultValue, string formattedDefaultValue,
-            string accessModifierName, string fieldTypeName,
-            string name);
     }
 
     /// <summary>
@@ -64,51 +53,77 @@ namespace Yuumix.OdinToolkits.AdvancedTypeAnalyzer
     [Serializable]
     public class FieldData : MemberData, IFieldData
     {
-        public FieldData(FieldInfo fieldInfo) : base(fieldInfo)
+        public FieldData(FieldInfo fieldInfo, IAttributeFilter filter = null) : base(fieldInfo, filter)
         {
             IsStatic = fieldInfo.IsStatic;
-            AccessModifier = fieldInfo.GetFieldAccessModifier();
             MemberType = fieldInfo.MemberType;
+            MemberTypeName = MemberType.ToString();
+            AccessModifier = fieldInfo.GetFieldAccessModifier();
+            AccessModifierName = AccessModifier.ConvertToString();
             // ---
             FieldType = fieldInfo.FieldType;
+            IsDynamic = fieldInfo.IsDynamicField();
+            FieldTypeName = IsDynamic ? "dynamic" : FieldType?.GetReadableTypeName();
+            FieldTypeFullName = IsDynamic ? "dynamic" : FieldType?.GetReadableTypeName(true);
             IsReadOnly = fieldInfo.IsInitOnly;
             IsConstant = fieldInfo.IsLiteral && !fieldInfo.IsInitOnly;
-            IsDynamic = fieldInfo.IsDynamicField();
             DefaultValue = fieldInfo.TryGetFieldCustomDefaultValue(out var value) ? value : null;
             Signature = GetFieldSignature(
                 TypeAnalyzerUtility.GetKeywordSnippetInSignature(IsConstant, IsStatic, IsReadOnly),
-                DefaultValue,
-                TypeAnalyzerUtility.GetFormattedDefaultValue(FieldType, DefaultValue),
-                AccessModifierName, FieldTypeName, Name);
+                TypeAnalyzerUtility.GetFormattedDefaultValue(FieldType, DefaultValue));
+            FullDeclarationWithAttributes = AttributesDeclaration + Signature;
         }
 
-        #region IFieldData 接口实现
+        string GetFieldSignature(string keywordSnippet, string formattedDefaultValue)
+        {
+            if (DeclaringType.IsEnum)
+            {
+                return $"{AccessModifierName} {keywordSnippet}{FieldTypeName} {Name};";
+            }
+
+            return DefaultValue != null
+                ? $"{AccessModifierName} {keywordSnippet}{FieldTypeName} {Name} = {formattedDefaultValue};"
+                : $"{AccessModifierName} {keywordSnippet}{FieldTypeName} {Name};";
+        }
+
+        #region IFieldData
 
         public bool IsReadOnly { get; }
         public bool IsConstant { get; }
         public bool IsDynamic { get; }
         public object DefaultValue { get; }
         public Type FieldType { get; }
-        public string FieldTypeName => IsDynamic ? "dynamic" : FieldType?.GetReadableTypeName();
-        public string FieldTypeFullName => IsDynamic ? "dynamic" : FieldType?.GetReadableTypeName(true);
+        public string FieldTypeName { get; }
 
-        public string GetFieldSignature(string keywordSnippet, object defaultValue, string formattedDefaultValue,
-            string accessModifierName, string fieldTypeName, string name) =>
-            defaultValue != null
-                ? $"{accessModifierName} {keywordSnippet}{fieldTypeName} {name} = {formattedDefaultValue};"
-                : $"{accessModifierName} {keywordSnippet}{fieldTypeName} {name};";
+        [PropertyOrder(60)]
+        [ShowEnableProperty]
+        [BilingualTitle("字段类型完整名称", nameof(FieldTypeName))]
+        [HideLabel]
+        public string FieldTypeFullName { get; }
 
         #endregion
 
-        #region IDerivedMemberData 接口实现
+        #region IDerivedMemberData
 
         public bool IsStatic { get; }
         public MemberTypes MemberType { get; }
-        public string MemberTypeName => MemberType.ToString();
+        public string MemberTypeName { get; }
         public AccessModifierType AccessModifier { get; }
-        public string AccessModifierName => AccessModifier.ConvertToString();
-        public string Signature { get; }
-        public string FullDeclarationWithAttributes => AttributesDeclaration + Signature;
+        public string AccessModifierName { get; }
+
+        [PropertyOrder(60)]
+        [ShowEnableProperty]
+        [BilingualTitle("字段签名", nameof(Signature))]
+        [HideLabel]
+        public string Signature { get; private set; }
+
+        [PropertyOrder(60)]
+        [ShowEnableProperty]
+        [BilingualTitle("完整字段声明 - 包含特性和签名 - 默认剔除 [Summary] 特性",
+            nameof(FullDeclarationWithAttributes) + " - Include Attributes and Signature - Default Exclude [Summary]")]
+        [HideLabel]
+        [MultiLineProperty]
+        public string FullDeclarationWithAttributes { get; }
 
         #endregion
     }

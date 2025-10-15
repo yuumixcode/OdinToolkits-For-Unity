@@ -19,11 +19,15 @@ namespace Yuumix.OdinToolkits.Core
     public class InterfaceReference<TInterface, TObject>
         where TInterface : class where TObject : Object
     {
+        #region Serialized Fields
+
         /// <summary>
         /// 基础对象，用于存储可以被分配为 TInterface 类型字段的，继承自 UnityEngine.Object 的对象
         /// </summary>
         [SerializeField]
         TObject underlyingObject;
+
+        #endregion
 
         // 构造函数
         public InterfaceReference() { }

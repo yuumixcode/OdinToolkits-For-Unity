@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
@@ -7,6 +7,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class AssetsOnlyExample : ExampleSO
     {
+        #region Serialized Fields
+
         // PropertyOrder 默认为 0
         [LabelText("普通的引用选择器: ")]
         public GameObject normal;
@@ -25,6 +27,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [AssetsOnly]
         [LabelText("AssetsOnly 标记的列表: ")]
         public List<GameObject> prefabs;
+
+        #endregion
 
         public override void SetDefaultValue()
         {

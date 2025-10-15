@@ -40,7 +40,7 @@ namespace YuumixEditor
         {
             if (EditorPrefs.HasKey("OdinToolkitsRootPathKey"))
             {
-                string folderPath = EditorPrefs.GetString(ODIN_TOOLKITS_ROOT_PATH_KEY);
+                var folderPath = EditorPrefs.GetString(ODIN_TOOLKITS_ROOT_PATH_KEY);
                 if (AssetDatabase.IsValidFolder(folderPath))
                 {
                     return folderPath;
@@ -80,8 +80,8 @@ namespace YuumixEditor
                 }
 
                 // 分割路径
-                string[] parts = fullPath.Split('/');
-                int lastIndex = -1;
+                var parts = fullPath.Split('/');
+                var lastIndex = -1;
 
                 // 遍历查找最后一个匹配的索引
                 for (var i = 0; i < parts.Length; i++)

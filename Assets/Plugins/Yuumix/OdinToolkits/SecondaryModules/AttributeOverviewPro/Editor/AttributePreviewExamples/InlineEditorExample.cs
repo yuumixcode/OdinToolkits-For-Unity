@@ -7,6 +7,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class InlineEditorExample : ExampleSO
     {
+        #region Serialized Fields
+
         [FoldoutGroup("InlineEditor 无参数使用")]
         [InlineEditor]
         public CommonInlineObject inlineComponent;
@@ -62,6 +64,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [InfoBox("彻底隐藏，必须代码中赋值，否则一旦为 null，面板中无法赋值")]
         [InlineEditor(InlineEditorObjectFieldModes.CompletelyHidden)]
         public CommonInlineObject inlineComponent6;
+
+        #endregion
 
         [OnInspectorInit]
         void CreateData()

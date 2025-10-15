@@ -6,6 +6,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class InfoBoxExample : ExampleSO
     {
+        #region Serialized Fields
+
         [FoldoutGroup("message 参数")]
         [InfoBox("提示信息")]
         public int first;
@@ -50,6 +52,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [FoldoutGroup("Icon 和 IconColor")]
         [InfoBox("控制图标颜色和图标", Icon = SdfIconType.App, IconColor = "lightblue")]
         public int i;
+
+        #endregion
 
         static bool IsInEditMode() => !Application.isPlaying;
     }

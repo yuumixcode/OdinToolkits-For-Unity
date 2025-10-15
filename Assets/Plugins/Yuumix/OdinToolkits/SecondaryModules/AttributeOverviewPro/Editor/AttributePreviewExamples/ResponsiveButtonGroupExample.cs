@@ -1,6 +1,6 @@
-using System;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor.Examples;
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -9,6 +9,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class ResponsiveButtonGroupExample : ExampleSO
     {
+        #region Serialized Fields
+
         [PropertyOrder(10)]
         [FoldoutGroup("ResponsiveButtonGroup 基础使用")]
         [InfoBox("内部方法直接使用 [ResponsiveButtonGroup] ")]
@@ -27,6 +29,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                  "DefaultButtonSize 默认的按钮大小，但是会被 Button 特性覆盖这个 Group 设置的按钮大小")]
         public ButtonSizeExample buttonSizeExample;
 
+        #endregion
+
         [PropertyOrder(40)]
         [FoldoutGroup("ResponsiveButtonGroup 进阶使用-与其他 Group 结合")]
         [TitleGroup("ResponsiveButtonGroup 进阶使用-与其他 Group 结合/Title1")]
@@ -44,6 +48,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [TitleGroup("ResponsiveButtonGroup 进阶使用-与其他 Group 结合/Title2")]
         [ResponsiveButtonGroup("ResponsiveButtonGroup 进阶使用-与其他 Group 结合/Title2/SomeBtnGroup")]
         public void Baz3() { }
+
+        #region Nested type: ${0}
 
         [Serializable]
         [HideLabel]
@@ -97,6 +103,9 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             [ResponsiveButtonGroup("DefaultButtonSize")]
             public void Bar6() { }
         }
+
+        #endregion
+
 #if UNITY_EDITOR
         [InfoBox("Odin 内置的一个 Example")]
         [OnInspectorGUI]

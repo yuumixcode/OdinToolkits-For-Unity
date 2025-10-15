@@ -12,10 +12,10 @@ namespace Yuumix.OdinToolkits.Core
         /// <returns>十六进制颜色字符串</returns>
         public static string ToHexString(this Color color, bool includeAlpha = false)
         {
-            int r = Mathf.RoundToInt(color.r * 255);
-            int g = Mathf.RoundToInt(color.g * 255);
-            int b = Mathf.RoundToInt(color.b * 255);
-            int a = Mathf.RoundToInt(color.a * 255);
+            var r = Mathf.RoundToInt(color.r * 255);
+            var g = Mathf.RoundToInt(color.g * 255);
+            var b = Mathf.RoundToInt(color.b * 255);
+            var a = Mathf.RoundToInt(color.a * 255);
 
             return includeAlpha ? $"{r:X2}{g:X2}{b:X2}{a:X2}" : $"{r:X2}{g:X2}{b:X2}";
         }

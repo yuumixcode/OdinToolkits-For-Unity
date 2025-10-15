@@ -1,5 +1,5 @@
-using System;
 using Sirenix.OdinInspector;
+using System;
 
 namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
 {

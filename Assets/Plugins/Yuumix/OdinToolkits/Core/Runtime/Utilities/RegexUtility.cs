@@ -20,7 +20,7 @@ namespace Yuumix.OdinToolkits.Core
             var foundFirstLetter = false;
             var firstValidator = new StringBuilder();
 
-            foreach (char c in input)
+            foreach (var c in input)
             {
                 // 检查字符是否为字母
                 if (char.IsLetter(c))

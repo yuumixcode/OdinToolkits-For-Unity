@@ -12,10 +12,15 @@ namespace Yuumix.OdinToolkits.Modules.AttributeOverviewPro.Editor
     public abstract class AttributeContainerProSO : SerializedScriptableObject, IOdinToolkitsEditorReset
     {
         const int CONTAINER_CONTENT_PADDING = 10;
-        GUIStyle _containerTitleStyle;
+
+        #region Serialized Fields
+
         GUIStyle _containerContentStyle;
+        GUIStyle _containerTitleStyle;
 
         Rect _contentRect;
+
+        #endregion
 
         GUIStyle ContainerTitleStyle =>
             _containerTitleStyle ??= new GUIStyle(SirenixGUIStyles.TitleCentered)
@@ -43,16 +48,20 @@ namespace Yuumix.OdinToolkits.Modules.AttributeOverviewPro.Editor
         [ShowInInspector]
         public HorizontalSeparateWidget Separate => new HorizontalSeparateWidget();
 
+        #region IOdinToolkitsEditorReset Members
+
         public abstract void EditorReset();
+
+        #endregion
 
         [PropertyOrder(-50)]
         [OnInspectorGUI]
         public void UseTips(InspectorProperty property)
         {
             const string title = "使用提示";
-            Rect headerRect = SirenixEditorGUI.BeginHorizontalToolbar(30f);
-            float titleWidth = ContainerTitleStyle.CalcSize(GUIHelper.TempContent(title)).x;
-            Rect titleRect = headerRect.AlignCenter(titleWidth);
+            var headerRect = SirenixEditorGUI.BeginHorizontalToolbar(30f);
+            var titleWidth = ContainerTitleStyle.CalcSize(GUIHelper.TempContent(title)).x;
+            var titleRect = headerRect.AlignCenter(titleWidth);
             EditorGUI.LabelField(titleRect, title, ContainerTitleStyle);
             // SirenixEditorGUI.DrawBorders(titleRect, 1, Color.green);
             GUILayout.FlexibleSpace();

@@ -13,7 +13,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             typeof(TestClass).GetRuntimeProperties().ToArray();
 
         static readonly IPropertyData[] PropertyDataArray =
-            PropertyInfos.Select(UnitTestAnalysisFactory.Default.CreatePropertyData).ToArray();
+            PropertyInfos.Select(p => UnitTestAnalysisFactory.Default.CreatePropertyData(p)).ToArray();
 
         static readonly Dictionary<string, string> ExpectedSignatureMaps = new Dictionary<string, string>
         {
@@ -176,15 +176,11 @@ namespace Yuumix.OdinToolkits.Tests.Editor
                 propertyData.Signature);
         }
 
-        enum TestEnum
-        {
-            A,
-            B,
-            C,
-        }
+        #region Nested type: TestClass
 
         class TestClass
         {
+            public TestClass() => StringPropertyInitOnCtor = "Hello World";
             public static int StaticIntPropertyWithDefaultValue { get; set; } = 1;
             public static float StaticFloatPropertyWithDefaultValue { get; set; } = 1f;
             public static bool StaticBoolPropertyWithDefaultValue { get; set; } = true;
@@ -196,11 +192,19 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             public string StringPropertyWithDefaultValue { get; set; } = "World";
             public TestEnum EnumPropertyWithDefaultValue { get; set; } = TestEnum.C;
             public string StringPropertyInitOnCtor { get; set; }
-
-            public TestClass()
-            {
-                StringPropertyInitOnCtor = "Hello World";
-            }
         }
+
+        #endregion
+
+        #region Nested type: TestEnum
+
+        enum TestEnum
+        {
+            A,
+            B,
+            C
+        }
+
+        #endregion
     }
 }

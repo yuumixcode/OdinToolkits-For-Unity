@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Sirenix.OdinInspector.Editor;
+using Sirenix.Utilities;
+using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Sirenix.OdinInspector.Editor;
-using Sirenix.Utilities;
 using UnityEditor;
 
 namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
@@ -29,13 +28,13 @@ namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
 
         public ResolvedParameterExample(Type exampleType)
         {
-            ResolvedParameterExampleAttribute exampleAttribute = TypeCache
+            var exampleAttribute = TypeCache
                 .GetTypesWithAttribute<ResolvedParameterExampleAttribute>()
                 .Where(type => type == exampleType)
                 .Select(type => type.GetAttribute<ResolvedParameterExampleAttribute>())
                 .Single();
 
-            IEnumerable<string> splitCode = File.ReadLines(exampleAttribute.FilePath)
+            var splitCode = File.ReadLines(exampleAttribute.FilePath)
                 .Skip(exampleAttribute.LineNumber)
                 .TakeWhile(line => !line.TrimStart().StartsWith("// End"));
 

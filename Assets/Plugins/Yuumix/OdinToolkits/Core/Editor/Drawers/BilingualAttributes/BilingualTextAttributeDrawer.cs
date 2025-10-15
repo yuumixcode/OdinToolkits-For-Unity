@@ -43,7 +43,7 @@ namespace Yuumix.OdinToolkits.Core.Editor
             }
             else
             {
-                string str = _textProvider.GetValue();
+                var str = _textProvider.GetValue();
                 GUIContent nextLabel;
                 if (str == null && Attribute.Icon == SdfIconType.None)
                 {
@@ -51,7 +51,7 @@ namespace Yuumix.OdinToolkits.Core.Editor
                 }
                 else
                 {
-                    string name = str ?? label.text;
+                    var name = str ?? label.text;
                     if (Attribute.NicifyEnglishText)
                     {
                         name = ObjectNames.NicifyVariableName(name);
@@ -61,7 +61,7 @@ namespace Yuumix.OdinToolkits.Core.Editor
                     nextLabel = _tempLabel;
                     if (Attribute.Icon != SdfIconType.None)
                     {
-                        Color color = _iconColorResolver.GetValue();
+                        var color = _iconColorResolver.GetValue();
                         Debug.Log("Color: " + color);
                         nextLabel.image =
                             SdfIcons.CreateTransparentIconTexture(Attribute.Icon, color, 16 /*0x10*/, 16 /*0x10*/,

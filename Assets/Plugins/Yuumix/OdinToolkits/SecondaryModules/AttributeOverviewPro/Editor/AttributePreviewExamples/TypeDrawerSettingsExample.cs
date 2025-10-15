@@ -1,13 +1,15 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using Sirenix.OdinInspector;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
     [OdinToolkitsAttributeExample]
     public class TypeDrawerSettingsExample : ExampleOdinSO
     {
+        #region Serialized Fields
+
         public Type Default;
 
         [FoldoutGroup(nameof(TypeDrawerSettingsAttribute.BaseType))]
@@ -74,6 +76,10 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             Filter = TypeInclusionFilter.IncludeAll)]
         public Type Filter_All;
 
+        #endregion
+
+        #region Nested type: ${0}
+
         public interface IBaseGeneric<T> { }
 
         public interface IBase : IBaseGeneric<int> { }
@@ -88,5 +94,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         [CompilerGenerated]
         public class ConcreteGenerated : Base { }
+
+        #endregion
     }
 }

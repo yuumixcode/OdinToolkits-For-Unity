@@ -1,6 +1,8 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Reflection;
 using Yuumix.OdinToolkits.Core;
+using Yuumix.OdinToolkits.Modules;
 
 namespace Yuumix.OdinToolkits.AdvancedTypeAnalyzer
 {
@@ -37,23 +39,35 @@ namespace Yuumix.OdinToolkits.AdvancedTypeAnalyzer
     /// <summary>
     /// 事件解析数据类，用于存储事件的解析数据
     /// </summary>
+    [Serializable]
     public class EventData : MemberData, IEventData
     {
-        public EventData(EventInfo eventInfo) : base(eventInfo)
+        public EventData(EventInfo eventInfo, IAttributeFilter filter = null) : base(eventInfo, filter)
         {
-            IsStatic = eventInfo.GetAddMethod(true).IsStatic;
-            AccessModifier = eventInfo.GetEventAccessModifierType();
-            MemberType = eventInfo.MemberType;
-            // --- 事件特有信息 ---
+            // IEventData
             EventType = eventInfo.EventHandlerType;
+            EventTypeName = EventType.GetReadableTypeName();
+            EventTypeFullName = EventType.GetReadableTypeName(true);
+            // IDerivedMemberData 
+            IsStatic = eventInfo.GetAddMethod(true).IsStatic;
+            MemberType = eventInfo.MemberType;
+            MemberTypeName = MemberType.ToString();
+            AccessModifier = eventInfo.GetEventAccessModifierType();
+            AccessModifierName = AccessModifier.ConvertToString();
             Signature = GetEventSignature(AccessModifierName, IsStatic, EventTypeName, Name);
+            FullDeclarationWithAttributes = AttributesDeclaration + Signature;
         }
 
         #region IEventData 接口实现
 
         public Type EventType { get; }
-        public string EventTypeName => EventType.GetReadableTypeName();
-        public string EventTypeFullName => EventType.GetReadableTypeName(true);
+        public string EventTypeName { get; }
+
+        [PropertyOrder(60)]
+        [ShowEnableProperty]
+        [BilingualTitle("事件类型完整名称", nameof(EventTypeFullName))]
+        [HideLabel]
+        public string EventTypeFullName { get; }
 
         public string GetEventSignature(string accessModifier, bool isStatic, string eventType, string eventName)
         {
@@ -73,11 +87,23 @@ namespace Yuumix.OdinToolkits.AdvancedTypeAnalyzer
 
         public bool IsStatic { get; }
         public MemberTypes MemberType { get; }
-        public string MemberTypeName => MemberType.ToString();
+        public string MemberTypeName { get; }
         public AccessModifierType AccessModifier { get; }
-        public string AccessModifierName => AccessModifier.ConvertToString();
-        public string Signature { get; }
-        public string FullDeclarationWithAttributes => AttributesDeclaration + Signature;
+        public string AccessModifierName { get; }
+
+        [PropertyOrder(60)]
+        [ShowEnableProperty]
+        [BilingualTitle("事件签名", nameof(Signature))]
+        [HideLabel]
+        public string Signature { get; private set; }
+
+        [PropertyOrder(60)]
+        [ShowEnableProperty]
+        [BilingualTitle("完整事件声明 - 包含特性和签名 - 默认剔除 [Summary] 特性",
+            nameof(FullDeclarationWithAttributes) + " - Include Attributes and Signature - Default Exclude [Summary]")]
+        [HideLabel]
+        [MultiLineProperty]
+        public string FullDeclarationWithAttributes { get; }
 
         #endregion
     }

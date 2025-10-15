@@ -10,6 +10,13 @@ namespace Yuumix.OdinToolkits.Core
     {
         static OdinToolkitsRuntimeConfigSO _instance;
 
+        #region Serialized Fields
+
+        [HideLabel]
+        public YuumixLoggerConfig yuumixLoggerConfig;
+
+        #endregion
+
         public static OdinToolkitsRuntimeConfigSO Instance
         {
             get
@@ -23,6 +30,8 @@ namespace Yuumix.OdinToolkits.Core
             }
         }
 
+        #region Event Functions
+
         void OnEnable()
         {
             if (yuumixLoggerConfig == null)
@@ -32,12 +41,15 @@ namespace Yuumix.OdinToolkits.Core
             }
         }
 
-        [HideLabel]
-        public YuumixLoggerConfig yuumixLoggerConfig;
+        #endregion
+
+        #region IOdinToolkitsRuntimeReset Members
 
         public void RuntimeReset()
         {
             yuumixLoggerConfig.RuntimeReset();
         }
+
+        #endregion
     }
 }

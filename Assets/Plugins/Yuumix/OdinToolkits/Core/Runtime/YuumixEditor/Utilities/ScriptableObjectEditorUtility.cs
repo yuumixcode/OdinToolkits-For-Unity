@@ -13,7 +13,7 @@ namespace YuumixEditor
         /// </summary>
         public static bool HasAssetInProject<T>() where T : ScriptableObject
         {
-            string[] assetPaths = AssetDatabase.FindAssets("t:" + typeof(T));
+            var assetPaths = AssetDatabase.FindAssets("t:" + typeof(T));
             return assetPaths.Length > 0;
         }
 
@@ -24,7 +24,7 @@ namespace YuumixEditor
         /// <returns> 字符串路径 </returns>
         public static string GetAssetPath<T>() where T : ScriptableObject
         {
-            string assetPath = AssetDatabase.FindAssets("t:" + typeof(T))
+            var assetPath = AssetDatabase.FindAssets("t:" + typeof(T))
                 .Select(AssetDatabase.GUIDToAssetPath)
                 .FirstOrDefault();
             if (!string.IsNullOrEmpty(assetPath))
@@ -42,7 +42,7 @@ namespace YuumixEditor
         public static T GetAssetAndDeleteExtra<T>(string relativeFolderPath = "") where T : ScriptableObject
         {
             T wantToAsset;
-            string[] guids = AssetDatabase.FindAssets("t:" + typeof(T));
+            var guids = AssetDatabase.FindAssets("t:" + typeof(T));
             var allPaths = new string[guids.Length];
             if (guids.Length > 0)
             {
@@ -71,7 +71,7 @@ namespace YuumixEditor
             }
 
             PathEditorUtility.EnsureFolderRecursively(relativeFolderPath);
-            string filePath = relativeFolderPath + "/" + typeof(T).Name + "[AutoGen]" + ".asset";
+            var filePath = relativeFolderPath + "/" + typeof(T).Name + "[AutoGen]" + ".asset";
             wantToAsset = ScriptableObject.CreateInstance<T>();
             AssetDatabase.CreateAsset(wantToAsset, filePath);
             AssetDatabase.ImportAsset(filePath);

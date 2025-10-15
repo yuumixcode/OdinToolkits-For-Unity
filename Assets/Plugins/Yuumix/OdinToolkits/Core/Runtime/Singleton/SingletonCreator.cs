@@ -15,9 +15,9 @@ namespace Yuumix.OdinToolkits.Core
         public static T PrivateCreateInstance<T>() where T : class
         {
             // 获取指定类型的实例
-            Type type = typeof(T);
+            var type = typeof(T);
             // 获取私有无参构造函数
-            ConstructorInfo constructor = type.GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic,
+            var constructor = type.GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic,
                 null, Type.EmptyTypes, null);
             // 如果没有找到私有无参构造函数，则抛出异常
             if (constructor == null)

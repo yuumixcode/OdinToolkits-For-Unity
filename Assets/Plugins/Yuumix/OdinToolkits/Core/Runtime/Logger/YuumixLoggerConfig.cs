@@ -1,7 +1,7 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Yuumix.OdinToolkits.Core
@@ -9,11 +9,15 @@ namespace Yuumix.OdinToolkits.Core
     [Serializable]
     public class YuumixLoggerConfig : IOdinToolkitsRuntimeReset
     {
+        #region Serialized Fields
+
         [PropertyOrder(10)]
         [BilingualText("允许输出的 LogTag 设置", "LogTag List which are allowed Log")]
         [AssetList]
         [CustomContextMenu("Reset", nameof(ResetCanLogTag))]
         public List<LogTagSO> canLogTag = new List<LogTagSO>();
+
+        #endregion
 
         string _editorStageLogSavePath;
 
@@ -49,11 +53,15 @@ namespace Yuumix.OdinToolkits.Core
 
         IEnumerable<Type> CanLogCategoryTypes => canLogTag.Select(e => e.GetType());
 
+        #region IOdinToolkitsRuntimeReset Members
+
         public void RuntimeReset()
         {
             ResetCanLogTag();
             ResetEditorStageLogSavePath();
         }
+
+        #endregion
 
         [PropertyOrder(0)]
         [OnInspectorGUI]

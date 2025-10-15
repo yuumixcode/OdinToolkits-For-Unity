@@ -6,6 +6,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class PreviewFieldExample : ExampleSO
     {
+        #region Serialized Fields
+
         [FoldoutGroup("无参数使用")]
         [PreviewField]
         public Texture regularPreviewField;
@@ -34,6 +36,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [SerializeField]
         [InfoBox("私有序列化")]
         Texture2D texture2D4;
+
+        #endregion
 
         void Log3()
         {

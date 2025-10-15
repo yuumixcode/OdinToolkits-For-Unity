@@ -15,18 +15,24 @@ namespace Yuumix.OdinToolkits.Core
     public class EnglishSummaryAttribute : Attribute, ISummaryAttribute
     {
         readonly string _english;
+
+        #region ISummaryAttribute Members
+
         string ISummaryAttribute.GetSummary() => _english;
+
+        #endregion
+
         public string GetEnglish() => _english;
 
         public static string GetEnglishSummary(MemberInfo memberInfo)
         {
-            object[] attributes = memberInfo.GetCustomAttributes(typeof(EnglishSummaryAttribute), false);
+            var attributes = memberInfo.GetCustomAttributes(typeof(EnglishSummaryAttribute), false);
             return attributes.Length > 0 ? ((EnglishSummaryAttribute)attributes[0]).GetEnglish() : null;
         }
 
         public static string GetEnglishSummary(Type type)
         {
-            object[] attributes = type.GetCustomAttributes(typeof(EnglishSummaryAttribute), false);
+            var attributes = type.GetCustomAttributes(typeof(EnglishSummaryAttribute), false);
             return attributes.Length > 0 ? ((EnglishSummaryAttribute)attributes[0]).GetEnglish() : null;
         }
     }

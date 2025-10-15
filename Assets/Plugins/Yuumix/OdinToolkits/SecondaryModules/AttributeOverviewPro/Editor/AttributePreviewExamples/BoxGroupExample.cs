@@ -5,6 +5,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class BoxGroupExample : ExampleSO
     {
+        #region Serialized Fields
+
         [PropertyOrder(10)]
         [FoldoutGroup("基础使用")]
         [BoxGroup("基础使用/A Group", false, order: 1)]
@@ -44,5 +46,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [BoxGroup("基础使用/E Group", LabelText = "自定义标题")]
         [Title("LabelText: 自定义标题")]
         public string groupName2;
+
+        #endregion
     }
 }

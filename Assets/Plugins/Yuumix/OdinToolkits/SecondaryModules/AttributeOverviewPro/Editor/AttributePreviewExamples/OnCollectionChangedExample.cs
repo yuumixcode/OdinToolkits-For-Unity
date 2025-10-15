@@ -1,6 +1,6 @@
-using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
@@ -8,6 +8,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class OnCollectionChangedExample : ExampleOdinSO
     {
+        #region Serialized Fields
+
         [InfoBox("改变集合时触发函数")]
         [OnCollectionChanged("Before", "After")]
         public List<string> list = new List<string> { "str1", "str2", "str3" };
@@ -21,6 +23,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [OnCollectionChanged("Before", "After")]
         public Dictionary<string, string> Dictionary = new Dictionary<string, string>
             { { "key1", "str1" }, { "key2", "str2" }, { "key3", "str3" } };
+
+        #endregion
 
         public void Before(CollectionChangeInfo info, object value)
         {

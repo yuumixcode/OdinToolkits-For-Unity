@@ -14,8 +14,8 @@ namespace Yuumix.OdinToolkits.Core
                 return "ParentPath == null";
             }
 
-            string[] parentPathArray = parentPath.Split('/');
-            string[] childPathArray = childPath.Split('/');
+            var parentPathArray = parentPath.Split('/');
+            var childPathArray = childPath.Split('/');
             var targetPathList = new List<string>();
             if (parentPathArray.Where((path, i) => childPathArray[i] != path).Any())
             {
@@ -23,7 +23,7 @@ namespace Yuumix.OdinToolkits.Core
                 return null;
             }
 
-            for (int i = parentPathArray.Length; i < childPathArray.Length; i++)
+            for (var i = parentPathArray.Length; i < childPathArray.Length; i++)
             {
                 targetPathList.Add(childPathArray[i]);
             }

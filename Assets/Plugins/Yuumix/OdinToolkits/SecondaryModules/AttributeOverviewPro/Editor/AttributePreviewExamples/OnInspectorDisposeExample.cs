@@ -11,6 +11,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [DisplayAsString]
         public BaseClass PolymorphicField;
 
+        #region Nested type: ${0}
+
         public abstract class BaseClass
         {
             public override string ToString() => GetType().Name;
@@ -21,5 +23,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         public class B : BaseClass { }
 
         public class C : BaseClass { }
+
+        #endregion
     }
 }

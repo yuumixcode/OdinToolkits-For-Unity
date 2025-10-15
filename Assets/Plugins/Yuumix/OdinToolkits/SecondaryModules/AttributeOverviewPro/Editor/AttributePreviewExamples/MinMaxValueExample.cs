@@ -6,6 +6,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class MinMaxValueExample : ExampleSO
     {
+        #region Serialized Fields
+
         [Title("Int")]
         [MinValue(0)]
         public int intMinValue0;
@@ -26,5 +28,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         [MaxValue(10)]
         public Vector3 vector3MaxValue0;
+
+        #endregion
     }
 }

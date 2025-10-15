@@ -1,12 +1,14 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
-using Sirenix.OdinInspector;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
     [OdinToolkitsAttributeExample]
     public class HideInTablesExample : ExampleSO
     {
+        #region Serialized Fields
+
         [Indent]
         public MyItem item = new MyItem();
 
@@ -18,15 +20,25 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             new MyItem()
         };
 
+        #endregion
+
+        #region Nested type: ${0}
+
         [Serializable]
         public class MyItem
         {
+            #region Serialized Fields
+
             public string a;
 
             public int b;
 
             [HideInTables]
             public int hidden;
+
+            #endregion
         }
+
+        #endregion
     }
 }

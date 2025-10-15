@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using Yuumix.OdinToolkits.Core;
 using YuumixEditor;
 
@@ -8,6 +8,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class RequiredListLengthExample : ExampleSO
     {
+        #region Serialized Fields
+
         [FoldoutGroup("固定长度")]
         [RequiredListLength(3)]
         public List<int> list = new List<int>();
@@ -19,6 +21,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [TitleGroup("设置长度范围/支持解析字符串")]
         [RequiredListLength(nameof(SetMinLength), nameof(SetMaxLength))]
         public List<int> list3 = new List<int>();
+
+        #endregion
 
         int SetMinLength => 3;
         int SetMaxLength => 5;

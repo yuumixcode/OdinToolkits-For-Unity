@@ -6,6 +6,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class FolderPathExample : ExampleSO
     {
+        #region Serialized Fields
+
         [FoldoutGroup("无参数使用")]
         [FolderPath]
         [HideLabel]
@@ -35,6 +37,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [FolderPath(UseBackslashes = true)]
         [InlineButton("Log6", "输出值")]
         public string path6;
+
+        #endregion
 
         void Log1()
         {

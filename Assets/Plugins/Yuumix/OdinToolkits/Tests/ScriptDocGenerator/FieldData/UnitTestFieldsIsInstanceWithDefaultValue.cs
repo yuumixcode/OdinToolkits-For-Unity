@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Yuumix.OdinToolkits.AdvancedTypeAnalyzer;
-using Yuumix.OdinToolkits.Modules.ScriptDocGen.Editor.Test.TestChineseSummaryAttribute;
 
 namespace Yuumix.OdinToolkits.Tests.Editor
 {
@@ -525,29 +524,14 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         class TestClass
         {
             /// <summary>
-            /// 字符串实例字段
-            /// </summary>
-            public string StringField = "Hello, World!";
-
-            /// <summary>
-            /// 整型实例字段
-            /// </summary>
-            public int IntField = 2147483647;
-
-            /// <summary>
-            /// 单精度浮点型实例字段
-            /// </summary>
-            public float FloatField = 3.14159f;
-
-            /// <summary>
             /// 布尔实例字段
             /// </summary>
             public bool BooleanField = true;
 
             /// <summary>
-            /// 字符实例字段
+            /// 布尔实例字段（构造函数初始化）
             /// </summary>
-            public char CharField = 'A';
+            public bool BooleanFieldInitOnCtor;
 
             /// <summary>
             /// 字节实例字段
@@ -555,39 +539,19 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             public byte ByteField = 255;
 
             /// <summary>
-            /// 有符号字节实例字段
+            /// 字节实例字段（构造函数初始化）
             /// </summary>
-            public sbyte SbyteField = -128;
+            public byte ByteFieldInitOnCtor;
 
             /// <summary>
-            /// 短整型实例字段
+            /// 字符实例字段
             /// </summary>
-            public short ShortField = 32767;
+            public char CharField = 'A';
 
             /// <summary>
-            /// 无符号短整型实例字段
+            /// 字符实例字段（构造函数初始化）
             /// </summary>
-            public ushort UshortField = 65535;
-
-            /// <summary>
-            /// 长整型实例字段
-            /// </summary>
-            public long LongField = 9223372036854775807L;
-
-            /// <summary>
-            /// 无符号长整型实例字段
-            /// </summary>
-            public ulong UlongField = 18446744073709551615ul;
-
-            /// <summary>
-            /// 无符号整型实例字段
-            /// </summary>
-            public uint UintField = 4294967295u;
-
-            /// <summary>
-            /// 双精度浮点型实例字段
-            /// </summary>
-            public double DoubleField = 2.71828182845904d;
+            public char CharFieldInitOnCtor;
 
             /// <summary>
             /// 十进制实例字段
@@ -595,14 +559,94 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             public decimal DecimalField = 123.456m;
 
             /// <summary>
+            /// 十进制实例字段（构造函数初始化）
+            /// </summary>
+            public decimal DecimalFieldInitOnCtor;
+
+            /// <summary>
+            /// 双精度浮点型实例字段
+            /// </summary>
+            public double DoubleField = 2.71828182845904d;
+
+            /// <summary>
+            /// 双精度浮点型实例字段（构造函数初始化）
+            /// </summary>
+            public double DoubleFieldInitOnCtor;
+
+            /// <summary>
             /// 枚举实例字段
             /// </summary>
             public ScriptDocGeneratorTestEnum EnumField = ScriptDocGeneratorTestEnum.Value2;
 
             /// <summary>
+            /// 枚举实例字段（构造函数初始化）
+            /// </summary>
+            public ScriptDocGeneratorTestEnum EnumFieldInitOnCtor;
+
+            /// <summary>
+            /// 单精度浮点型实例字段
+            /// </summary>
+            public float FloatField = 3.14159f;
+
+            /// <summary>
+            /// 单精度浮点型实例字段（构造函数初始化）
+            /// </summary>
+            public float FloatFieldInitOnCtor;
+
+            /// <summary>
+            /// 整型实例字段
+            /// </summary>
+            public int IntField = 2147483647;
+
+            /// <summary>
+            /// 整型实例字段（构造函数初始化）
+            /// </summary>
+            public int IntFieldInitOnCtor;
+
+            /// <summary>
+            /// 长整型实例字段
+            /// </summary>
+            public long LongField = 9223372036854775807L;
+
+            /// <summary>
+            /// 长整型实例字段（构造函数初始化）
+            /// </summary>
+            public long LongFieldInitOnCtor;
+
+            /// <summary>
             /// 嵌套类的枚举实例字段
             /// </summary>
             public TestEnum NestedEnumField = TestEnum.Value2;
+
+            /// <summary>
+            /// 嵌套类的枚举实例字段（构造函数初始化）
+            /// </summary>
+            public TestEnum NestedEnumFieldInitOnCtor;
+
+            /// <summary>
+            /// 有符号字节实例字段
+            /// </summary>
+            public sbyte SbyteField = -128;
+
+            /// <summary>
+            /// 有符号字节实例字段（构造函数初始化）
+            /// </summary>
+            public sbyte SbyteFieldInitOnCtor;
+
+            /// <summary>
+            /// 短整型实例字段
+            /// </summary>
+            public short ShortField = 32767;
+
+            /// <summary>
+            /// 短整型实例字段（构造函数初始化）
+            /// </summary>
+            public short ShortFieldInitOnCtor;
+
+            /// <summary>
+            /// 字符串实例字段
+            /// </summary>
+            public string StringField = "Hello, World!";
 
             // --- 构造函数初始化的字段
 
@@ -612,54 +656,9 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             public string StringFieldInitOnCtor;
 
             /// <summary>
-            /// 整型实例字段（构造函数初始化）
+            /// 无符号整型实例字段
             /// </summary>
-            public int IntFieldInitOnCtor;
-
-            /// <summary>
-            /// 单精度浮点型实例字段（构造函数初始化）
-            /// </summary>
-            public float FloatFieldInitOnCtor;
-
-            /// <summary>
-            /// 布尔实例字段（构造函数初始化）
-            /// </summary>
-            public bool BooleanFieldInitOnCtor;
-
-            /// <summary>
-            /// 字符实例字段（构造函数初始化）
-            /// </summary>
-            public char CharFieldInitOnCtor;
-
-            /// <summary>
-            /// 字节实例字段（构造函数初始化）
-            /// </summary>
-            public byte ByteFieldInitOnCtor;
-
-            /// <summary>
-            /// 有符号字节实例字段（构造函数初始化）
-            /// </summary>
-            public sbyte SbyteFieldInitOnCtor;
-
-            /// <summary>
-            /// 短整型实例字段（构造函数初始化）
-            /// </summary>
-            public short ShortFieldInitOnCtor;
-
-            /// <summary>
-            /// 无符号短整型实例字段（构造函数初始化）
-            /// </summary>
-            public ushort UshortFieldInitOnCtor;
-
-            /// <summary>
-            /// 长整型实例字段（构造函数初始化）
-            /// </summary>
-            public long LongFieldInitOnCtor;
-
-            /// <summary>
-            /// 无符号长整型实例字段（构造函数初始化）
-            /// </summary>
-            public ulong UlongFieldInitOnCtor;
+            public uint UintField = 4294967295u;
 
             /// <summary>
             /// 无符号整型实例字段（构造函数初始化）
@@ -667,24 +666,24 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             public uint UintFieldInitOnCtor;
 
             /// <summary>
-            /// 双精度浮点型实例字段（构造函数初始化）
+            /// 无符号长整型实例字段
             /// </summary>
-            public double DoubleFieldInitOnCtor;
+            public ulong UlongField = 18446744073709551615ul;
 
             /// <summary>
-            /// 十进制实例字段（构造函数初始化）
+            /// 无符号长整型实例字段（构造函数初始化）
             /// </summary>
-            public decimal DecimalFieldInitOnCtor;
+            public ulong UlongFieldInitOnCtor;
 
             /// <summary>
-            /// 枚举实例字段（构造函数初始化）
+            /// 无符号短整型实例字段
             /// </summary>
-            public ScriptDocGeneratorTestEnum EnumFieldInitOnCtor;
+            public ushort UshortField = 65535;
 
             /// <summary>
-            /// 嵌套类的枚举实例字段（构造函数初始化）
+            /// 无符号短整型实例字段（构造函数初始化）
             /// </summary>
-            public TestEnum NestedEnumFieldInitOnCtor;
+            public ushort UshortFieldInitOnCtor;
 
             public TestClass()
             {

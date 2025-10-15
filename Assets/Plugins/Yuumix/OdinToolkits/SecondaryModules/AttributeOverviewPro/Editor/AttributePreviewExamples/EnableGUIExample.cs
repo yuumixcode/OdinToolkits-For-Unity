@@ -5,6 +5,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class EnableGUIExample : ExampleSO
     {
+        #region Serialized Fields
+
         [PropertyOrder(0)]
         [InfoBox("正常字段，没有添加多余特性，不是灰色显示的")]
         public string enableGUI1 = "";
@@ -19,6 +21,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [EnableGUI]
         [InfoBox("只读字段，但是标记了 [EnableGUI] ，强制启用，可以获取焦点，在 Inspector 上修改会警告")]
         public string enableGUI3 = "";
+
+        #endregion
 
         [PropertyOrder(10)]
         [ShowInInspector]

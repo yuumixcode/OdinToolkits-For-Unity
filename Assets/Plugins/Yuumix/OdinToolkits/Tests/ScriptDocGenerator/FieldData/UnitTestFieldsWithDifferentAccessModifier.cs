@@ -2,7 +2,6 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using UnityEngine;
 using Yuumix.OdinToolkits.AdvancedTypeAnalyzer;
 
 namespace Yuumix.OdinToolkits.Tests.Editor
@@ -18,7 +17,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
 
         static readonly IFieldData[] TestFieldData = TestFields.Select(f => TargetFactory.CreateFieldData(f)).ToArray();
 
-        static readonly Dictionary<string, string> FieldExpectedSignatureMaps = new Dictionary<string, string>()
+        static readonly Dictionary<string, string> FieldExpectedSignatureMaps = new Dictionary<string, string>
         {
             { "_privateField", "private int _privateField;" },
             { "InternalField", "internal int InternalField;" },
@@ -70,6 +69,8 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             Assert.AreEqual(FieldExpectedSignatureMaps["PublicField"], fieldData.Signature);
         }
 
+        #region Nested type: TestClass
+
         class TestClass
         {
             /// <summary>
@@ -102,5 +103,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             /// </summary>
             public int PublicField;
         }
+
+        #endregion
     }
 }

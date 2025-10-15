@@ -1,8 +1,8 @@
+using Sirenix.OdinInspector;
+using Sirenix.OdinInspector.Editor;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Sirenix.OdinInspector;
-using Sirenix.OdinInspector.Editor;
 using UnityEngine;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
@@ -13,6 +13,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         const string DetailsYoga = "YOGA 框架 == Yuumi Odin Graphic Architecture";
 
         const string MessageYoga = "YOGA 框架 ...";
+
+        #region Serialized Fields
 
         [FoldoutGroup("Message 参数 支持多种解析字符串")]
         public string message = "YOGA 框架 ...";
@@ -86,6 +88,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [FoldoutGroup("InfoMessageType 参数 枚举类型")]
         [DetailedInfoBox(MessageYoga, DetailsYoga, InfoMessageType.Error)]
         public string infoMessageTypeDetailedInfoBox4;
+
+        #endregion
 
         string MessageProperty => message;
 

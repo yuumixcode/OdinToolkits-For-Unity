@@ -24,7 +24,7 @@ namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
         bool DrawAsColoredRect(Rect rect, bool[,] table, int x,
             int y)
         {
-            bool value = table[x, y];
+            var value = table[x, y];
 
             if (Event.current.type == EventType.MouseDown && rect.Contains(Event.current.mousePosition))
             {

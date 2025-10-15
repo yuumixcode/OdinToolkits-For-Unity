@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -112,7 +111,7 @@ namespace Yuumix.OdinToolkits.Core
                 return;
             }
 
-            string logEntry = BuildLogEntry(message, logType);
+            var logEntry = BuildLogEntry(message, logType);
             LogQueue.Enqueue(logEntry);
             return;
 
@@ -162,7 +161,7 @@ namespace Yuumix.OdinToolkits.Core
             while (!CancellationToken.Token.IsCancellationRequested)
             {
                 // 如果日志队列中存在信息，则加载到缓冲区，准备写入
-                while (LogQueue.TryDequeue(out string logEntry))
+                while (LogQueue.TryDequeue(out var logEntry))
                 {
                     LogBuffer.Append(logEntry);
 
@@ -216,7 +215,7 @@ namespace Yuumix.OdinToolkits.Core
 
             static string GetArchiveFilePath()
             {
-                string basePath = CurrentLogFilePath.Replace(".log", "");
+                var basePath = CurrentLogFilePath.Replace(".log", "");
                 var index = 1;
 
                 string archiveFilePath;
@@ -224,8 +223,7 @@ namespace Yuumix.OdinToolkits.Core
                 {
                     archiveFilePath = $"{basePath}_Archive_{index}.log";
                     index++;
-                }
-                while (File.Exists(archiveFilePath));
+                } while (File.Exists(archiveFilePath));
 
                 return archiveFilePath;
             }
@@ -237,7 +235,7 @@ namespace Yuumix.OdinToolkits.Core
                     var fileInfo = new FileInfo(CurrentLogFilePath);
                     if (fileInfo.Length >= MAX_FILE_SIZE_MB * 1024 * 1024)
                     {
-                        string archiveFilePath = GetArchiveFilePath();
+                        var archiveFilePath = GetArchiveFilePath();
                         // 重命名，那么原来路径的文件就没有了
                         if (File.Exists(CurrentLogFilePath))
                         {
@@ -286,20 +284,20 @@ namespace Yuumix.OdinToolkits.Core
                     return;
                 }
 
-                List<FileInfo> allFiles = Directory.GetFiles(logFolderPath)
+                var allFiles = Directory.GetFiles(logFolderPath)
                     .Select(f => new FileInfo(f))
                     .OrderBy(f => f.LastWriteTime)
                     .ToList();
-                long totalSize = allFiles.Sum(file => file.Length);
+                var totalSize = allFiles.Sum(file => file.Length);
                 if (totalSize < MAX_TOTAL_FOLDER_SIZE)
                 {
                     return;
                 }
 
-                float deleteSizeThreshold = totalSize - MAX_TOTAL_FOLDER_SIZE * 0.9f;
+                var deleteSizeThreshold = totalSize - MAX_TOTAL_FOLDER_SIZE * 0.9f;
                 // 大于或者等于 MaxTotalFolderSize，则删除文件，直到 MaxTotalFolderSize * 0.9f 的文件
                 long deletedSize = 0;
-                foreach (FileInfo file in allFiles)
+                foreach (var file in allFiles)
                 {
                     file.Delete();
                     deletedSize += file.Length;

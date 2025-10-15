@@ -20,7 +20,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         static readonly EventInfo[] EventInfos = typeof(TestClass).GetRuntimeEvents().ToArray();
 
         static readonly IEventData[] EventDataArray =
-            EventInfos.Select(UnitTestAnalysisFactory.Default.CreateEventData).ToArray();
+            EventInfos.Select(e => UnitTestAnalysisFactory.Default.CreateEventData(e)).ToArray();
 
         static readonly Dictionary<string, string> ExpectedSignatureMaps = new Dictionary<string, string>
         {
@@ -80,6 +80,8 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             Assert.AreEqual(ExpectedSignatureMaps[nameof(TestClass.StaticActionEvent)], fieldData.Signature);
         }
 
+        #region Nested type: TestClass
+
         class TestClass
         {
             /// <summary>
@@ -112,5 +114,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             /// </summary>
             public static event Action<bool> StaticActionEvent;
         }
+
+        #endregion
     }
 }

@@ -4,6 +4,32 @@ using System.Reflection;
 namespace Yuumix.OdinToolkits.AdvancedTypeAnalyzer
 {
     /// <summary>
+    /// 参数方向枚举
+    /// </summary>
+    public enum ParameterDirection
+    {
+        /// <summary>
+        /// 输入参数
+        /// </summary>
+        In = 0,
+
+        /// <summary>
+        /// 输出参数
+        /// </summary>
+        Out = 1,
+
+        /// <summary>
+        /// 引用参数
+        /// </summary>
+        Ref = 2,
+
+        /// <summary>
+        /// 返回值参数
+        /// </summary>
+        RetVal = 3
+    }
+
+    /// <summary>
     /// 参数信息解析数据接口
     /// </summary>
     public interface IParameterData
@@ -129,40 +155,39 @@ namespace Yuumix.OdinToolkits.AdvancedTypeAnalyzer
             if (HasDefaultValue)
             {
                 result += " = ";
-                result += GetDefaultValueString(DefaultValue, ParameterType);
+                result += GetDefaultValueString(ParameterType, DefaultValue);
             }
 
             return result;
         }
 
-        static string GetDefaultValueString(object defaultValue, Type parameterType)
+        static string GetDefaultValueString(Type parameterType, object value)
         {
-            if (defaultValue == null)
+            if (value != null && parameterType.IsEnum)
             {
-                return "null";
+                var enumTypeName = parameterType.Name;
+                var enumName = Enum.GetName(parameterType, value);
+                return $"{enumTypeName}.{enumName}";
             }
 
-            if (parameterType == typeof(string))
+            return value switch
             {
-                return "\"" + defaultValue + "\"";
-            }
-
-            if (parameterType == typeof(bool))
-            {
-                return defaultValue.ToString().ToLower();
-            }
-
-            if (parameterType == typeof(char))
-            {
-                return "'" + defaultValue + "'";
-            }
-
-            if (parameterType.IsEnum)
-            {
-                return parameterType.Name + "." + defaultValue;
-            }
-
-            return defaultValue.ToString();
+                null => "null",
+                string str => $"\"{str}\"",
+                bool b => b ? "true" : "false",
+                float f => $"{f}f",
+                char c => $"'{c}'",
+                double d => $"{d}d",
+                decimal m => $"{m}m",
+                uint u => $"{u}u",
+                long l => $"{l}L",
+                ulong ul => $"{ul}ul",
+                short s => $"{s}",
+                ushort us => $"{us}",
+                byte b2 => $"{b2}",
+                sbyte sb => $"{sb}",
+                _ => value.ToString()
+            };
         }
     }
 }

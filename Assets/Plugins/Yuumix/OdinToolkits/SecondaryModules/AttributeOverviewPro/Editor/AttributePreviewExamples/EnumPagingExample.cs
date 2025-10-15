@@ -6,6 +6,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     [OdinToolkitsAttributeExample]
     public class EnumPagingExample : ExampleSO
     {
+        #region SomeEnum enum
+
         public enum SomeEnum
         {
             A,
@@ -13,10 +15,17 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             C
         }
 
+        #endregion
+
+        #region Serialized Fields
+
         [PropertyOrder(1)]
         [FoldoutGroup("EnumPaging 基础使用")]
         [EnumPaging]
         public SomeEnum someEnumField;
+
+        #endregion
+
 #if UNITY_EDITOR
         [PropertyOrder(20)]
         [FoldoutGroup("EnumPaging 进阶使用")]

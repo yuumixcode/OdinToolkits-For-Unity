@@ -1,7 +1,7 @@
 #if UNITY_EDITOR
 
-using System;
 using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 
 namespace YuumixEditor
@@ -29,12 +29,16 @@ namespace YuumixEditor
             => "This resource file is used to locate the path of the OdinToolkits folder to prevent errors " +
                "when moving the OdinToolkits folder as a whole.";
 
+        #region Nested type: ${0}
+
         [IncludeMyAttributes]
         [PropertySpace(10)]
         [HideLabel]
         [ShowInInspector]
         [EnableGUI]
         public class TempCompositeAttribute : Attribute { }
+
+        #endregion
     }
 }
 #endif

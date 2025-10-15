@@ -1,10 +1,10 @@
+using Sirenix.OdinInspector.Editor;
+using Sirenix.Utilities;
+using Sirenix.Utilities.Editor;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Sirenix.OdinInspector.Editor;
-using Sirenix.Utilities;
-using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core.Editor;
@@ -30,6 +30,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         GUIStyle _tableCellTextStyle;
         GUITable _tipGUITable;
 
+        #region Event Functions
+
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -52,9 +54,9 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             _lightLineColor = EditorGUIUtility.isProSkin
                 ? new Color(1f, 1f, 1f, 0.1f)
                 : new Color(1f, 1f, 1f, 1f);
-            InspectorProperty property =
+            var property =
                 Tree.RootProperty.FindChild(p => p.Name == nameof(OdinAttributeContainerSO.example), false);
-            InspectorProperty property2 =
+            var property2 =
                 Tree.RootProperty.FindChild(p => p.Name == nameof(OdinAttributeContainerSO.exampleOdin), false);
             property.Children
                 .Recurse()
@@ -71,9 +73,11 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             EditorApplication.delayCall -= CalculateAllTableSize;
         }
 
+        #endregion
+
         void CreateResolvedParamGUITables()
         {
-            foreach (ResolvedParam resolvedParam in _container.ResolvedParams)
+            foreach (var resolvedParam in _container.ResolvedParams)
             {
                 _resolvedParamGUITables.Add(resolvedParam.CreateGUITable());
             }
@@ -83,8 +87,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         {
             EnsureGUIStyles();
             DrawHeaderAndBrief();
-            DrawGUITable(_tipGUITable, _container.UseTips, "使用提示", out Rect rect2);
-            DrawGUITable(_paramValueGUITable, _container.ParamValues, "特性参数", out Rect rect3);
+            DrawGUITable(_tipGUITable, _container.UseTips, "使用提示", out var rect2);
+            DrawGUITable(_paramValueGUITable, _container.ParamValues, "特性参数", out var rect3);
             DrawResolvedParams();
             DrawExample();
             DrawSeparator();
@@ -212,10 +216,10 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                         fontSize = 14
                     };
                     SirenixEditorGUI.BeginBoxHeader();
-                    Rect rect = GUILayoutUtility.GetRect(GUIHelper.TempContent(_container.ResolvedParams[i].ParamName)
+                    var rect = GUILayoutUtility.GetRect(GUIHelper.TempContent(_container.ResolvedParams[i].ParamName)
                         , style).AlignCenter(600);
                     EditorGUI.LabelField(rect.Split(0, 2), "特性参数: " + _container.ResolvedParams[i].ParamName, style);
-                    Rect rect3 = rect.Split(1, 2);
+                    var rect3 = rect.Split(1, 2);
                     if (_container.ResolvedParams[i].ReturnType == typeof(void).Name)
                     {
                         EditorGUI.LabelField(rect3, "方法无返回值 void", style);
@@ -244,7 +248,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         void DrawExample()
         {
             // 原生绘制 Example
-            Rect rect = DrawContainer("使用案例预览", base.OnInspectorGUI);
+            var rect = DrawContainer("使用案例预览", base.OnInspectorGUI);
             Type exampleType = null;
             if (_container.example)
             {
@@ -261,17 +265,17 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 return;
             }
 
-            OdinToolkitsAttributeExampleAttribute attribute = TypeCache
+            var attribute = TypeCache
                 .GetTypesWithAttribute<OdinToolkitsAttributeExampleAttribute>()
                 .Where(type => type == exampleType)
                 .Select(type => type.GetAttribute<OdinToolkitsAttributeExampleAttribute>())
                 .SingleOrDefault();
             // Debug.Log("attribute: " + attribute);
-            string path = attribute?.FilePath;
+            var path = attribute?.FilePath;
             // Debug.Log("绝对路径: " + path);
             // Debug.Log("项目路径: " + Application.dataPath);
             // 绝对路径转相对路径
-            string relative = "Assets/" + PathUtilities.MakeRelative(Application.dataPath, path);
+            var relative = "Assets/" + PathUtilities.MakeRelative(Application.dataPath, path);
             // Debug.Log("相对路径: " + relative);
             if (string.IsNullOrEmpty(relative))
             {
@@ -281,15 +285,15 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             // Assets/OdinToolkits/ChineseGuide/ChineseAttributesOverview/Editor/PreviewExamples/Scripts/CustomValueDrawerExample.cs
             var script = AssetDatabase.LoadAssetAtPath<MonoScript>(relative);
             // Debug.Log("script: " + script);
-            Rect rect0 = rect.AlignCenterY(rect.height).AlignRight(200);
-            Rect rect1 = rect0.Split(0, 2);
+            var rect0 = rect.AlignCenterY(rect.height).AlignRight(200);
+            var rect1 = rect0.Split(0, 2);
             if (GUI.Button(rect1, GUIHelper.TempContent("跳转到脚本文件"),
                     SirenixGUIStyles.ToolbarButton))
             {
                 EditorGUIUtility.PingObject(script);
             }
 
-            Rect rect2 = rect0.Split(1, 2);
+            var rect2 = rect0.Split(1, 2);
             if (GUI.Button(rect2, GUIHelper.TempContent("重置案例"),
                     SirenixGUIStyles.ToolbarButton))
             {
@@ -311,15 +315,15 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         Rect DrawContainer(string title, Action drawContent, GUIStyle titleStyle = null)
         {
             titleStyle ??= _containerTitleStyle;
-            Rect headerRect = SirenixEditorGUI.BeginHorizontalToolbar(30f);
-            float titleWidth = titleStyle.CalcSize(GUIHelper.TempContent(title)).x;
-            Rect titleRect = headerRect.AlignCenter(titleWidth);
+            var headerRect = SirenixEditorGUI.BeginHorizontalToolbar(30f);
+            var titleWidth = titleStyle.CalcSize(GUIHelper.TempContent(title)).x;
+            var titleRect = headerRect.AlignCenter(titleWidth);
             EditorGUI.LabelField(titleRect, title, titleStyle);
             // SirenixEditorGUI.DrawBorders(titleRect, 1, Color.green);
             GUILayout.FlexibleSpace();
             SirenixEditorGUI.EndHorizontalToolbar();
             GUILayout.Space(-2);
-            Rect contentRect = EditorGUILayout.BeginVertical(_containerContentStyle);
+            var contentRect = EditorGUILayout.BeginVertical(_containerContentStyle);
             drawContent();
             EditorGUILayout.EndVertical();
             SirenixEditorGUI.DrawBorders(contentRect, 1);
@@ -328,7 +332,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         void DrawCode()
         {
-            Rect headerRect = DrawContainer("代码预览", CodePreview);
+            var headerRect = DrawContainer("代码预览", CodePreview);
             if (GUI.Button(headerRect.AlignCenterY(headerRect.height).AlignRight(80), GUIHelper.TempContent("拷贝代码"),
                     SirenixGUIStyles.ToolbarButton))
             {
@@ -338,12 +342,12 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         void CodePreview()
         {
-            Rect rect = SirenixEditorGUI.BeginBox();
+            var rect = SirenixEditorGUI.BeginBox();
             GUILayoutUtility.GetRect(GUIHelper.TempContent("宽度卡位"), GUIStyle.none, GUILayout.Width(CodeDefaultWidth),
                 GUILayout.Height(5));
             SirenixEditorGUI.DrawSolidRect(rect, OdinSyntaxHighlighterSO.BackgroundColor);
-            string highlighterCode = OdinSyntaxHighlighterSO.ApplyCodeHighlighting(_container.OriginalCode);
-            float calcHeight = _codeTextStyle.CalcHeight(GUIHelper.TempContent(highlighterCode), CodeDefaultWidth);
+            var highlighterCode = OdinSyntaxHighlighterSO.ApplyCodeHighlighting(_container.OriginalCode);
+            var calcHeight = _codeTextStyle.CalcHeight(GUIHelper.TempContent(highlighterCode), CodeDefaultWidth);
             GUILayout.BeginVertical();
             _scrollPosition = GUILayout.BeginScrollView(_scrollPosition, false, false,
                 GUILayout.Height(calcHeight + 30), GUILayout.MaxHeight(CodeDefaultHeight));
@@ -380,14 +384,14 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         {
             for (var i = 0; i < _resolvedParamGUITables.Count; i++)
             {
-                GUITable table = _resolvedParamGUITables[i];
+                var table = _resolvedParamGUITables[i];
                 for (var row = 1; row < table.RowCount; row++)
                 {
-                    float returnTypeCellHeight =
+                    var returnTypeCellHeight =
                         CalculateHeight(_container.ResolvedParams[i].ParamValues[row - 1].returnType, table, 1, row);
-                    float paramNameCellHeight =
+                    var paramNameCellHeight =
                         CalculateHeight(_container.ResolvedParams[i].ParamValues[row - 1].paramName, table, 2, row);
-                    float paramDescriptionCellHeight =
+                    var paramDescriptionCellHeight =
                         CalculateHeight(_container.ResolvedParams[i].ParamValues[row - 1].paramDescription, table, 3,
                             row);
                     table[1, row].Height =
@@ -400,7 +404,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         void CalculateTipTableSize()
         {
-            GUITable table = _tipGUITable;
+            var table = _tipGUITable;
             for (var row = 1; row < table.RowCount; row++)
             {
                 table[1, row].Height = CalculateHeight(_container.UseTips[row - 1], table, 1, row) + 15f;
@@ -411,14 +415,14 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         void CalculateParamValueTableSize()
         {
-            GUITable table = _paramValueGUITable;
+            var table = _paramValueGUITable;
             for (var row = 1; row < table.RowCount; row++)
             {
-                float returnTypeCellHeight =
+                var returnTypeCellHeight =
                     CalculateHeight(_container.ParamValues[row - 1].returnType, table, 1, row);
-                float paramNameCellHeight =
+                var paramNameCellHeight =
                     CalculateHeight(_container.ParamValues[row - 1].paramName, table, 2, row);
-                float paramDescriptionCellHeight =
+                var paramDescriptionCellHeight =
                     CalculateHeight(_container.ParamValues[row - 1].paramDescription, table, 3, row);
                 table[1, row].Height =
                     Mathf.Max(returnTypeCellHeight, paramNameCellHeight, paramDescriptionCellHeight) + 15f;
