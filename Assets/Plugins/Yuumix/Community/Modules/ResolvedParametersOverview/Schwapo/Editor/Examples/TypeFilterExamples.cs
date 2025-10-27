@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
+namespace Yuumix.Community.Schwapo.Editor
 {
     [ResolvedParameterExample]
     public class TypeFilterExamples_FilterGetter

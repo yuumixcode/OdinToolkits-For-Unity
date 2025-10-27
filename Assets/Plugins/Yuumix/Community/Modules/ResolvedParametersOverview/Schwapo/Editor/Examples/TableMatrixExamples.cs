@@ -2,7 +2,7 @@ using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 
-namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
+namespace Yuumix.Community.Schwapo.Editor
 {
     [ResolvedParameterExample]
     public class TableMatrixExamples_DrawElementMethod

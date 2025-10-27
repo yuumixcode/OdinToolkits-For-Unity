@@ -1,7 +1,8 @@
 using UnityEngine;
+using Yuumix.Community.Editor;
 using YuumixEditor;
 
-namespace Yuumix.OdinToolkits.Community.Editor
+namespace Yuumix.Community.SwitchAttribute.Editor
 {
     public class SwitchButtonAttributeCardSO : CommunityCardSO<SwitchButtonAttributeCardSO>
     {
@@ -17,7 +18,7 @@ namespace Yuumix.OdinToolkits.Community.Editor
 
         protected override void OpenWindowOrPingFolder()
         {
-            ProjectEditorUtility.PingAndSelectAsset(OdinToolkitsPaths.GetRootPath() +
+            ProjectEditorUtility.PingAndSelectAsset(OdinToolkitsEditorPaths.GetRootFolderPath() +
                                                     "/Community/Modules/SwitchAttribute");
         }
 

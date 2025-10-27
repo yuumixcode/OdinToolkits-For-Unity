@@ -4,7 +4,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
+namespace Yuumix.Community.Schwapo.Editor
 {
     [ResolvedParameterExample]
     public class CustomValueDrawerExamples_Action

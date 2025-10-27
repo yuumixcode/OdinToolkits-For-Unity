@@ -7,7 +7,7 @@ using UnityEngine;
 using Yuumix.OdinToolkits.Core.Editor;
 using YuumixEditor;
 
-namespace Yuumix.OdinToolkits.Community.Editor
+namespace Yuumix.Community.Editor
 {
     public class CommunityWindow : OdinEditorWindow
     {
@@ -32,11 +32,13 @@ namespace Yuumix.OdinToolkits.Community.Editor
         {
             base.OnEnable();
             WindowPadding = new Vector4(10, 10, 10, 10);
-            if (!repository)
+            if (repository)
             {
-                repository = CommunityRepositorySO.Instance;
-                repository.CanSelectTags = false;
+                return;
             }
+
+            repository = CommunityRepositorySO.Instance;
+            repository.CanSelectTags = false;
         }
 
         #endregion

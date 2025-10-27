@@ -1,4 +1,4 @@
-﻿namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
+﻿namespace Yuumix.Community.Schwapo.Editor
 {
     public class NamedValue
     {

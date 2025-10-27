@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using System;
 
-namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
+namespace Yuumix.Community.Schwapo.Editor
 {
     [ResolvedParameterExample]
     public class OnStateUpdateExamples_Action

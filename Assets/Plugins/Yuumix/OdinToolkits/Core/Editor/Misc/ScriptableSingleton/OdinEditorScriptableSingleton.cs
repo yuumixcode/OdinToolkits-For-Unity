@@ -3,6 +3,9 @@ using YuumixEditor;
 
 namespace Yuumix.OdinToolkits.Core.Editor
 {
+    /// <summary>
+    /// 使用了 Odin 序列化的，编辑器阶段的 ScriptableObject 单例抽象类
+    /// </summary>
     public abstract class OdinEditorScriptableSingleton<T> : SerializedScriptableObject
         where T : OdinEditorScriptableSingleton<T>
     {
@@ -18,7 +21,7 @@ namespace Yuumix.OdinToolkits.Core.Editor
                 }
 
                 _instance = ScriptableObjectEditorUtility.GetAssetAndDeleteExtra<T>(
-                    OdinToolkitsPaths.ODIN_TOOLKITS_ANY_DATA_ROOT_FOLDER + "/Editor/SO");
+                    OdinToolkitsEditorPaths.ODIN_TOOLKITS_ANY_DATA_ROOT_FOLDER + "/Editor/SO");
                 return _instance;
             }
         }

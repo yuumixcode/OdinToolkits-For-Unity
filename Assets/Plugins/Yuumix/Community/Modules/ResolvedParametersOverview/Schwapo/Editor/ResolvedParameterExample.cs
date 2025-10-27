@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEditor;
 
-namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
+namespace Yuumix.Community.Schwapo.Editor
 {
     public class ResolvedParameterExample
     {

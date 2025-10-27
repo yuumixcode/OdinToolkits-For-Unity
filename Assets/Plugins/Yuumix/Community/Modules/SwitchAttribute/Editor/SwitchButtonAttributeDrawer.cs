@@ -1,21 +1,22 @@
-using System;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.OdinInspector.Editor.ValueResolvers;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
+using System;
 using UnityEditor;
 using UnityEngine;
+using Yuumix.Community.SwitchAttribute;
 
-namespace Yuumix.OdinToolkits.Modules.CustomAttributes.Editor
+namespace Yuumix.Community.SwitchAttribute.Editor
 {
     public class SwitchButtonAttributeDrawer : OdinAttributeDrawer<SwitchButtonAttribute, bool>
     {
         // 动画速度系数（影响切换速度）
-        const float AnimationSpeedMultiplier = 6f;
+        const float ANIMATION_SPEED_MULTIPLIER = 6f;
 
         // 开关控件宽度
-        const int SwitchWidth = 28;
+        const int SWITCH_WIDTH = 28;
 
         // 控件唯一标识哈希值（用于GUIUtility.hotControl）
         static readonly int ControlHint = "SwitchControlHint".GetHashCode();
@@ -52,11 +53,11 @@ namespace Yuumix.OdinToolkits.Modules.CustomAttributes.Editor
             _switchColorOnResolver = ValueResolver.Get<Color>(Property, Attribute.SwitchColorOn);
             _switchColorOffResolver = ValueResolver.Get<Color>(Property, Attribute.SwitchColorOff);
             // 获取当前开关状态对应的颜色
-            bool isOn = ValueEntry.SmartValue;
+            var isOn = ValueEntry.SmartValue;
             _backgroundColor = isOn ? _backgroundColorOnResolver.GetValue() : _backgroundColorOffResolver.GetValue();
             _switchColor = isOn ? _switchColorOnResolver.GetValue() : _switchColorOffResolver.GetValue();
             // 初始化滑块位置（开状态居中，关状态左对齐）
-            _switchPosition = isOn ? SwitchWidth * 0.5f : 0f;
+            _switchPosition = isOn ? SWITCH_WIDTH * 0.5f : 0f;
             // 获取白色纹理（Unity内置资源）
             _whiteTexture = Texture2D.whiteTexture;
             // 检测是否存在ToggleLeftAttribute特性（影响标签布局）
@@ -70,37 +71,37 @@ namespace Yuumix.OdinToolkits.Modules.CustomAttributes.Editor
                 _backgroundColorOffResolver,
                 _switchColorOnResolver,
                 _switchColorOffResolver);
-            Color backgroundColorOn = _backgroundColorOnResolver.GetValue();
-            Color backgroundColorOff = _backgroundColorOffResolver.GetValue();
-            Color switchColorOn = _switchColorOnResolver.GetValue();
-            Color switchColorOff = _switchColorOffResolver.GetValue();
-            Rect totalRect = EditorGUILayout.GetControlRect(label != null, EditorGUIUtility.singleLineHeight);
+            var backgroundColorOn = _backgroundColorOnResolver.GetValue();
+            var backgroundColorOff = _backgroundColorOffResolver.GetValue();
+            var switchColorOn = _switchColorOnResolver.GetValue();
+            var switchColorOff = _switchColorOffResolver.GetValue();
+            var totalRect = EditorGUILayout.GetControlRect(label != null, EditorGUIUtility.singleLineHeight);
             if (label != null && !_hasToggleLeftAttribute)
             {
                 totalRect = EditorGUI.PrefixLabel(totalRect, label);
             }
 
-            const float preHeight = SwitchWidth * 0.5f;
-            float height = preHeight < totalRect.height ? preHeight : totalRect.height;
+            const float preHeight = SWITCH_WIDTH * 0.5f;
+            var height = preHeight < totalRect.height ? preHeight : totalRect.height;
             // 根据对齐方式计算开关背景区域
-            Rect switchBackgroundRect = Attribute.Alignment switch
+            var switchBackgroundRect = Attribute.Alignment switch
             {
-                SwitchAlignment.Left => totalRect.AlignLeft(SwitchWidth).AlignCenterY(height),
-                SwitchAlignment.Right => totalRect.AlignRight(SwitchWidth).AlignCenterY(height),
-                SwitchAlignment.Center => totalRect.AlignCenterX(SwitchWidth).AlignCenterY(height),
+                SwitchAlignment.Left => totalRect.AlignLeft(SWITCH_WIDTH).AlignCenterY(height),
+                SwitchAlignment.Right => totalRect.AlignRight(SWITCH_WIDTH).AlignCenterY(height),
+                SwitchAlignment.Center => totalRect.AlignCenterX(SWITCH_WIDTH).AlignCenterY(height),
                 _ => throw new ArgumentException("Invalid alignment")
             };
 
             // 获取当前事件信息
-            Event evt = Event.current;
+            var evt = Event.current;
             // 获取当前控件唯一标识
-            int controlID = GUIUtility.GetControlID(ControlHint, FocusType.Passive, switchBackgroundRect);
+            var controlID = GUIUtility.GetControlID(ControlHint, FocusType.Passive, switchBackgroundRect);
             // 当前开关状态
-            bool isOn = ValueEntry.SmartValue;
+            var isOn = ValueEntry.SmartValue;
             // 目标背景颜色
-            Color targetBackgroundColor = isOn ? backgroundColorOn : backgroundColorOff;
+            var targetBackgroundColor = isOn ? backgroundColorOn : backgroundColorOff;
             // 目标开关颜色
-            Color targetSwitchColor = isOn ? switchColorOn : switchColorOff;
+            var targetSwitchColor = isOn ? switchColorOn : switchColorOff;
             // 处理颜色变化时的动画过渡
             if (ColorNeedChanged(targetBackgroundColor, targetSwitchColor))
             {
@@ -113,19 +114,19 @@ namespace Yuumix.OdinToolkits.Modules.CustomAttributes.Editor
                 // 平滑过渡背景颜色
                 _backgroundColor = _backgroundColor.MoveTowards(
                     targetBackgroundColor,
-                    GUITimeHelper.LayoutDeltaTime * AnimationSpeedMultiplier);
+                    GUITimeHelper.LayoutDeltaTime * ANIMATION_SPEED_MULTIPLIER);
 
                 // 平滑过渡开关颜色
                 _switchColor = _switchColor.MoveTowards(
                     targetSwitchColor,
-                    GUITimeHelper.LayoutDeltaTime * AnimationSpeedMultiplier);
+                    GUITimeHelper.LayoutDeltaTime * ANIMATION_SPEED_MULTIPLIER);
 
                 // 平滑移动开关位置
-                float targetSwitchPosition = isOn ? SwitchWidth * 0.5f : 0f;
+                var targetSwitchPosition = isOn ? SWITCH_WIDTH * 0.5f : 0f;
                 _switchPosition = Mathf.MoveTowards(
                     _switchPosition,
                     targetSwitchPosition,
-                    GUITimeHelper.LayoutDeltaTime * AnimationSpeedMultiplier * SwitchWidth * 0.5f);
+                    GUITimeHelper.LayoutDeltaTime * ANIMATION_SPEED_MULTIPLIER * SWITCH_WIDTH * 0.5f);
 
                 // 动画结束条件检查
                 if (_backgroundColor == targetBackgroundColor
@@ -151,18 +152,18 @@ namespace Yuumix.OdinToolkits.Modules.CustomAttributes.Editor
             }
 
             // 计算最终背景颜色（考虑焦点状态）
-            Color finalBackgroundColor = _backgroundColor;
+            var finalBackgroundColor = _backgroundColor;
             // 圆角半径（根据是否开启圆角特性）
-            float borderRadius = Attribute.Rounded ? 99f : 0f;
+            var borderRadius = Attribute.Rounded ? 99f : 0f;
             // 绘制背景矩形
             GUI.DrawTexture(switchBackgroundRect, _whiteTexture, ScaleMode.StretchToFill, true, 0f,
                 finalBackgroundColor, 0f, borderRadius);
             // 计算最终开关颜色
-            Color finalSwitchColor = _switchColor;
+            var finalSwitchColor = _switchColor;
             // 计算开关滑块矩形区域
-            Rect switchRect = switchBackgroundRect
-                .SetWidth(SwitchWidth * 0.5f) // 设置宽度为父容器一半
-                .Padding(SwitchWidth * 0.07f) // 内边距
+            var switchRect = switchBackgroundRect
+                .SetWidth(SWITCH_WIDTH * 0.5f) // 设置宽度为父容器一半
+                .Padding(SWITCH_WIDTH * 0.07f) // 内边距
                 .AddX(_switchPosition);       // X轴偏移量控制滑块位置
             // 绘制开关滑块
             GUI.DrawTexture(switchRect, _whiteTexture, ScaleMode.StretchToFill, true, 0f,
@@ -170,7 +171,7 @@ namespace Yuumix.OdinToolkits.Modules.CustomAttributes.Editor
             // 处理 ToggleLeftAttribute 特性（标签位置调整）
             if (_hasToggleLeftAttribute)
             {
-                EditorGUI.LabelField(totalRect.AddX(SwitchWidth + 4f), label);
+                EditorGUI.LabelField(totalRect.AddX(SWITCH_WIDTH + 4f), label);
             }
         }
 

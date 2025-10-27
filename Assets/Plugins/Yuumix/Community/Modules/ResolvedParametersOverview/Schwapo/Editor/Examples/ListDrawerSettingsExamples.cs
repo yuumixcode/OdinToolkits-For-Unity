@@ -1,9 +1,9 @@
-using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities.Editor;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
+namespace Yuumix.Community.Schwapo.Editor
 {
     [ResolvedParameterExample]
     public class ListDrawerSettingsExamples_CustomAddFunction

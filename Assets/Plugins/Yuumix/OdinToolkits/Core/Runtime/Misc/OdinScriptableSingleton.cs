@@ -20,7 +20,7 @@ namespace Yuumix.OdinToolkits.Core
 
 #if UNITY_EDITOR
                 _instance = ScriptableObjectEditorUtility.GetAssetAndDeleteExtra<T>(
-                    OdinToolkitsPaths.ODIN_TOOLKITS_ANY_DATA_ROOT_FOLDER + "/SO");
+                    OdinToolkitsEditorPaths.ODIN_TOOLKITS_ANY_DATA_ROOT_FOLDER + "/SO");
 #endif
                 return _instance;
             }

@@ -1,14 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
+using System;
+using System.Globalization;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
+namespace Yuumix.Community.Schwapo.Editor
 {
     public class AttributeWithResolvedParametersDrawer
         : OdinValueDrawer<AttributeWithResolvedParameters>
@@ -63,7 +62,7 @@ namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
 
         protected override void Initialize()
         {
-            List<ResolvedParameter> resolvedParameters = ValueEntry.SmartValue.ResolvedParameters;
+            var resolvedParameters = ValueEntry.SmartValue.ResolvedParameters;
             resolvedParameters.ForEach(p => p.Example.CollapsePreviews());
 
             ResolvedParametersOverviewWindow.OnWindowResized += () => resolvedParameters.ForEach(p => p.ResizeTables());
@@ -79,14 +78,14 @@ namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
 
         protected override void DrawPropertyLayout(GUIContent label)
         {
-            AttributeWithResolvedParameters attribute = ValueEntry.SmartValue;
+            var attribute = ValueEntry.SmartValue;
 
-            IEnumerable<ResolvedParameter> searchedParameters = attribute.ResolvedParameters
+            var searchedParameters = attribute.ResolvedParameters
                 .Where(p => ResolvedParametersOverviewWindow.SearchedFor(p.Name));
 
             SirenixEditorGUI.BeginVerticalList(false);
 
-            foreach (ResolvedParameter resolvedParameter in attribute.ResolvedParameters)
+            foreach (var resolvedParameter in attribute.ResolvedParameters)
             {
                 if (!searchedParameters.Any() || searchedParameters.Contains(resolvedParameter))
                 {
@@ -112,7 +111,7 @@ namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
 
             if (!resolvedParameter.AdditionalInfo.IsNullOrWhitespace())
             {
-                Rect seperatorRect = EditorGUILayout.BeginHorizontal();
+                var seperatorRect = EditorGUILayout.BeginHorizontal();
                 DrawSeperator();
                 var iconSize = 16f;
                 GUILayout.Space(Padding * 2 + iconSize);
@@ -162,16 +161,16 @@ namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
 
         void DrawExample(ResolvedParameter resolvedParameter)
         {
-            Rect headerRect = DrawContainer("Code", () =>
+            var headerRect = DrawContainer("Code", () =>
             {
-                Color defaultBackgroundColor = GUI.backgroundColor;
+                var defaultBackgroundColor = GUI.backgroundColor;
                 GUI.backgroundColor = CodeBackgroundColor;
                 EditorGUILayout.TextArea(resolvedParameter.Example.HighlightedCode, CodeStyle);
                 GUI.backgroundColor = defaultBackgroundColor;
             });
 
-            float buttonWidth = GetWidth("  Copy  ");
-            Rect buttonRect = headerRect.AlignRight(buttonWidth);
+            var buttonWidth = GetWidth("  Copy  ");
+            var buttonRect = headerRect.AlignRight(buttonWidth);
 
             if (GUI.Button(buttonRect, "  Copy  ", SirenixGUIStyles.ToolbarButton))
             {
@@ -185,9 +184,9 @@ namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
 
         Rect DrawContainer(string title, Action drawContent)
         {
-            Rect headerRect = SirenixEditorGUI.BeginHorizontalToolbar();
-            float titleWidth = GetWidth(title);
-            Rect titleRect = headerRect.AlignCenter(titleWidth);
+            var headerRect = SirenixEditorGUI.BeginHorizontalToolbar();
+            var titleWidth = GetWidth(title);
+            var titleRect = headerRect.AlignCenter(titleWidth);
 
             EditorGUI.LabelField(titleRect, title);
             GUILayout.FlexibleSpace();
@@ -195,7 +194,7 @@ namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
 
             GUILayout.Space(-1);
 
-            Rect contentRect = EditorGUILayout.BeginVertical(ContainerContentStyle);
+            var contentRect = EditorGUILayout.BeginVertical(ContainerContentStyle);
             drawContent();
             EditorGUILayout.EndVertical();
 

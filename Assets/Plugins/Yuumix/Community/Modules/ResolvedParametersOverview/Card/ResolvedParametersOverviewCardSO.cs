@@ -1,8 +1,8 @@
 using UnityEngine;
-using Yuumix.OdinToolkits.Community.Schwapo.Editor;
+using Yuumix.Community.Editor;
 using YuumixEditor;
 
-namespace Yuumix.OdinToolkits.Community.Editor
+namespace Yuumix.Community.Schwapo.Editor
 {
     public class ResolvedParametersOverviewCardSO : CommunityCardSO<ResolvedParametersOverviewCardSO>
     {

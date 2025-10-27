@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core;
 
-namespace Yuumix.OdinToolkits.Community.Editor
+namespace Yuumix.Community.Editor
 {
     [Serializable]
     public class Author

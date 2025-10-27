@@ -3,10 +3,12 @@ using Sirenix.Utilities.Editor;
 using System.Collections.Generic;
 using System.Text;
 using UnityEditor;
+using Yuumix.Community.Schwapo.Editor;
+using Yuumix.Community.SwitchAttribute.Editor;
 using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Core.Editor;
 
-namespace Yuumix.OdinToolkits.Community.Editor
+namespace Yuumix.Community.Editor
 {
     /// <summary>
     /// Community 资源卡片仓库，扩展的资源卡片编写在此类中
@@ -112,7 +114,7 @@ namespace Yuumix.OdinToolkits.Community.Editor
 
         #endregion
     }
-
+    
     #region Order = 5 - Cards Example - Yuumix
 
     public partial class CommunityRepositorySO
@@ -123,7 +125,7 @@ namespace Yuumix.OdinToolkits.Community.Editor
         public ResolvedParametersOverviewCardSO ResolvedParametersOverviewCardSO =>
             ResolvedParametersOverviewCardSO.Instance;
 
-        bool CanShowCardForResolvedParametersOverview() =>
+        static bool CanShowCardForResolvedParametersOverview() =>
             ResolvedParametersOverviewCardSO.Instance.CanShowInCommunityRepo();
     }
 
@@ -139,7 +141,7 @@ namespace Yuumix.OdinToolkits.Community.Editor
         public SwitchButtonAttributeCardSO SwitchButtonAttributeCardSO =>
             SwitchButtonAttributeCardSO.Instance;
 
-        bool CanShowSwitchButtonAttributeCard() =>
+        static bool CanShowSwitchButtonAttributeCard() =>
             SwitchButtonAttributeCardSO.Instance.CanShowInCommunityRepo();
     }
 

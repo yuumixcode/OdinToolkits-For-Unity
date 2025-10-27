@@ -25,18 +25,16 @@ namespace Yuumix.OdinToolkits.Core
 
         public string GetSummary() => _chinese;
 
-        public string GetChinese() => _chinese;
-
-        public static string GetSummary(MemberInfo memberInfo)
+        public static string GetSummaryAttributeValue(MemberInfo memberInfo)
         {
             var attributes = memberInfo.GetCustomAttributes(typeof(SummaryAttribute), false);
-            return attributes.Length > 0 ? ((SummaryAttribute)attributes[0]).GetChinese() : null;
+            return attributes.Length > 0 ? ((SummaryAttribute)attributes[0]).GetSummary() : null;
         }
 
-        public static string GetSummary(Type type)
+        public static string GetSummaryAttributeValue(Type type)
         {
             var attributes = type.GetCustomAttributes(typeof(SummaryAttribute), false);
-            return attributes.Length > 0 ? ((SummaryAttribute)attributes[0]).GetChinese() : null;
+            return attributes.Length > 0 ? ((SummaryAttribute)attributes[0]).GetSummary() : null;
         }
     }
 }

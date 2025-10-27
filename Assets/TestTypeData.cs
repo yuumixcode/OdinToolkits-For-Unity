@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
-using Yuumix.OdinToolkits.AdvancedTypeAnalyzer;
+using Yuumix.OdinToolkits.ScriptDocGenerator;
 
 public class TestTypeData : SerializedMonoBehaviour
 {

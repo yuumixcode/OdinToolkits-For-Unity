@@ -1,6 +1,6 @@
 using Sirenix.OdinInspector;
 
-namespace Yuumix.OdinToolkits.Community.Schwapo.Editor
+namespace Yuumix.Community.Schwapo.Editor
 {
     [ResolvedParameterExample]
     public class PropertyTooltipExamples_Tooltip

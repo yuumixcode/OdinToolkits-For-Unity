@@ -5,7 +5,7 @@
 <p align="center"><strong>探索 Odin Inspector 进阶功能、整合社区优质项目、优化游戏开发流程。</strong></p>
 
 <p align="center">
-  <a href="https://docs.unity3d.com/2021.3/Documentation/Manual/index.html"><img src="https://img.shields.io/badge/Unity-2021.3.45f1-blue.svg" alt="Unity 2021 文档"></a>
+  <a href="https://docs.unity3d.com/2021.3/Documentation/Manual/index.html"><img src="https://img.shields.io/badge/Unity-2021.3.45f2c1-blue.svg" alt="Unity 2021 文档"></a>
   <a href="https://odininspector.com/"><img src="https://img.shields.io/badge/Odin%20Inspector-3.3%2B-orange.svg" alt="Odin Inspector 官网" ></a>
   <a href="https://github.com/yuumixcode/OdinToolkits-For-Unity?tab=MIT-1-ov-file"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License" ></a><br/ >
   <a href="https://www.odintoolkits.cn/"><img src="https://img.shields.io/badge/Docs Website-GitHub%20Pages-purple.svg" alt="Odin Toolkits 部署 GitHub Pages" ></a>
@@ -35,7 +35,7 @@
 
 ### 前提条件
 
-- `Unity 2021.3.45f1 LTS` 或更高版本
+- `Unity 2021.3.45f2c1 LTS` 或更高版本
 - `Odin Inspector And Serializer 3.3` 或更高版本
 
 ### 具体步骤
@@ -65,20 +65,18 @@
 ``` markdown
 Plugins/
 ├─ Yuumix/
+│  ├─ Community/
+│  │  ├─ Editor/
+│  │  ├─ Modules/
 │  ├─ OdinToolkits/
-│  │  ├─ Community/
-│  │  │  ├─ Editor/
-│  │  │  ├─ Modules/
+│  │  ├─ AttributeOverviewPro/
 │  │  ├─ Core/
 │  │  │  ├─ Editor/
 │  │  │  ├─ Resources/
 │  │  │  ├─ Runtime/
 │  │  ├─ Modules/
-│  │  │  ├─ AttributeOverviewPro/
-│  │  │  ├─ CustomAttributes/
-│  │  │  ├─ Editor/
-│  │  │  ├─ ScriptDocGen/
-│  ├─ CHANGELOG.md
+│  │  ├─ ScriptDocGenerator/
+│  │  ├─ Tests/
 ```
 
 ## 开发原则
@@ -91,9 +89,9 @@ Plugins/
 
 `Yuumix.OdinToolkits.Editor`
 
-`Yuumix.OdinToolkits.Community.Runtime`
+`Yuumix.Community.Runtime`
 
-`Yuumix.OdinToolkits.Community.Editor`
+`Yuumix.Community.Editor`
 
 ### 命名空间设计
 
@@ -118,9 +116,9 @@ Plugins/
 3. **编辑器专属**：仅在 `Unity` 编辑器阶段生效，本质是 “即插即用” 的编辑器字段；
 4. **模块化设计**：以模块化思路封装样式与交互，开发者可像定义普通字段一样，轻松用它搭建自定义 `Inspector` 界面。
 
-建议在 `OnEnable` 方法中为 `Widget` 相关的变量赋值，而非直接设置初始值。原因如下：
+建议在 `ScriptableObject` 的 `OnEnable` 方法中为 `Widget` 相关的变量赋值，而非直接设置初始值。原因如下：
 
-1. **规避直接设初始值的局限**：`ScriptableObject` 属于 `Unity` 资源类型，若直接为 `Widget` 设置初始值，后续将无法调整该 `Widget` 配置；若需更改，只能重新创建 `ScriptableObject` 资源，操作成本高。
+1. **规避直接设初始值的局限**：如果在 `ScriptableObject` 中使用，而 `ScriptableObject` 属于 `Unity` 资源类型，若直接为 `Widget` 设置初始值，后续将无法调整该 `Widget` 配置；若需更改，只能重新创建 `ScriptableObject` 资源，操作成本高。
 2. **确保样式修改即时生效**：通过 `OnEnable` 赋值时，每次打开 `ScriptableObject` 资源时，都会自动重新生成一个 `Widget` 对象，无需手动重建资源即可应用最新配置。
 
 #### `YuumixEditor` 文件夹以及命名空间
@@ -129,7 +127,7 @@ Plugins/
 
 ## 相关链接
 
-[推荐 -Odin Toolkits 文档网站 - GitHub 部署](https://www.odintoolkits.cn/)
+[推荐 - Odin Toolkits 文档网站 - GitHub 部署](https://www.odintoolkits.cn/)
 
 [Odin Toolkits 文档网站 - Read the Docs 部署](https://odintoolkitsdocumentation.readthedocs.io/latest/)
 
@@ -159,7 +157,7 @@ Plugins/
 
 感谢你看到这里，如果 `Odin Toolkits` 在你的 `Unity` 开发过程中切实提供了帮助，恳请为项目点亮一颗 ★ Star！
 
-如果 Odin Toolkits 打包出现错误，请提 issue，或者联系我，我会尽快处理，业余时间开发，无法即时回复，请优先邮件联系。
+如果 `Odin Toolkits` 打包出现错误，请提 issue，或者联系我，我会尽快处理，业余时间开发，无法即时回复，请优先邮件联系。
 
 ## 项目及友链推荐
 

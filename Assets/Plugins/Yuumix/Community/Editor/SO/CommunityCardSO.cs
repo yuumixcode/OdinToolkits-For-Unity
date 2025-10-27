@@ -8,7 +8,7 @@ using UnityEngine;
 using Yuumix.OdinToolkits.Core;
 using YuumixEditor;
 
-namespace Yuumix.OdinToolkits.Community.Editor
+namespace Yuumix.Community.Editor
 {
     /// <summary>
     /// Community 资源卡片的基类，继承此类型实现资源卡片
