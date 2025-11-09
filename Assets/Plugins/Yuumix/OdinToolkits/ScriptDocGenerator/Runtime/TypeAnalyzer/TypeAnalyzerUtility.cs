@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core;
 
@@ -209,9 +207,9 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         }
 
         /// <summary>
-        /// 获取关键字片段，用于生成字段签名
+        /// 获取字段的关键字片段，用于生成字段签名
         /// </summary>
-        [Summary("获取关键字片段，用于生成字段签名")]
+        [Summary("获取字段的关键字片段，用于生成字段签名")]
         public static string GetKeywordSnippetInSignature(bool isConst, bool isStatic, bool isReadOnly)
         {
             var keyword = "";
@@ -244,9 +242,9 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         }
 
         /// <summary>
-        /// 获取格式化的默认值字符串，用于生成字段签名
+        /// 获取格式化的默认值字符串，用于生成签名
         /// </summary>
-        [Summary("获取格式化的默认值字符串，用于生成字段签名")]
+        [Summary("获取格式化的默认值字符串，用于生成签名")]
         public static string GetFormattedDefaultValue(Type memberType, object value)
         {
             if (memberType == typeof(Quaternion) ||

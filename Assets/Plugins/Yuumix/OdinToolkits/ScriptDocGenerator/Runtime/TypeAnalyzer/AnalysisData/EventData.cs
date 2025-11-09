@@ -5,19 +5,9 @@ using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.ScriptDocGenerator
 {
-    [Summary("事件数据接口，继承自 IDerivedMemberData")]
-    public interface IEventData : IDerivedMemberData
-    {
-        [Summary("事件类型")]
-        Type EventType { get; }
-
-        [Summary("事件类型名称")]
-        string EventTypeName { get; }
-
-        [Summary("事件类型的完整名称，包括命名空间")]
-        string EventTypeFullName { get; }
-    }
-
+    /// <summary>
+    /// 事件解析数据类，用于存储事件的解析数据
+    /// </summary>
     [Summary("事件解析数据类，用于存储事件的解析数据")]
     [Serializable]
     public class EventData : MemberData, IEventData

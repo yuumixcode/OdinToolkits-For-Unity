@@ -12,13 +12,12 @@ using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Core.Editor;
-using Yuumix.OdinToolkits.ScriptDocGenerator;
 using YuumixEditor;
 
-namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
+namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
 {
     /// <summary>
-    /// ScriptDocGenerator 可视化操作面板，ScriptableObject 资源类
+    /// ScriptDocGenerator 可视化操作面板类
     /// </summary>
     public class ScriptDocGeneratorVisualPanelSO : OdinEditorScriptableSingleton<ScriptDocGeneratorVisualPanelSO>,
         IOdinToolkitsEditorReset
@@ -28,6 +27,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
 
         public const string IDENTIFIER_CN = "## 额外说明";
         public const string IDENTIFIER_EN = "## Additional Description";
+        const string NONE_ASSEMBLY = "None Assembly";
         public static BilingualData MenuName = new BilingualData("脚本文档生成工具", "Script Doc Generator");
 
         public static StringBuilder UserIdentifierParagraph = new StringBuilder()
@@ -37,14 +37,12 @@ namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
                         "本文档由 [`Odin Toolkits For Unity`](" + OdinToolkitsWebLinks.GITHUB_REPOSITORY +
                         ") 辅助生成。");
 
-        /// <summary>
-        /// ScriptDocGenerator 使用的分析数据工厂
-        /// </summary>
-        public static readonly IAnalysisDataFactory AnalysisDataFactory = new YuumixDefaultAnalysisDataFactory();
+        static IAnalysisDataFactory _analysisDataFactory;
 
         #region Serialized Fields
 
-        #region 文件夹路径
+        [PropertyOrder(-5)]
+        public BilingualHeaderWidget headerWidget;
 
         [PropertyOrder(2)]
         [BilingualTitle("存放脚本文档的目标文件夹路径 [可拖拽]", "Folder Path For Document [Drag And Drop Allowed]")]
@@ -56,7 +54,9 @@ namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
 
         #endregion
 
-        #endregion
+        bool IsSingleType => typeSource == TypeSource.SingleType;
+        bool IsMultipleType => typeSource == TypeSource.MultipleTypes;
+        bool IsSingleAssembly => typeSource == TypeSource.SingleAssembly;
 
         #region Event Functions
 
@@ -69,40 +69,9 @@ namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
                 "and generates the corresponding document with one click. By default, an API document generator is provided, " +
                 "and a custom generator suitable for the project can also be defined."
             );
-            footerWidget = new BilingualFooterWidget(
-                "2025/09/20",
-                new[]
-                {
-                    new ChangeLogData(ChangeLogCategory.Added,
-                        "支持分析公共实例构造函数、非构造方法、运算符重载方法、属性、事件及字段",
-                        "Support analysis of public instance constructors, non-constructor methods, operator overloading methods, properties, events and fields"),
-                    new ChangeLogData(ChangeLogCategory.Added,
-                        "支持分析目标程序集中的类型并生成文档",
-                        "Support analyzing types in target assemblies and generating documentation"),
-                    new ChangeLogData(ChangeLogCategory.Changed,
-                        "升级为独立模块，重构代码逻辑和用户 UI 界面",
-                        "Upgrade to an independent module, restructure the code logic and user UI interface"),
-                    new ChangeLogData(ChangeLogCategory.Fixed,
-                        "中文 API 文档生成器中，方法在高层级基类（不限层级，如祖父类及以上）声明、在下层基类（不限层级）重写时未被正确归纳至继承方法列表的问题",
-                        "In the Chinese API Documentation Generator, there is a problem where methods declared in a high-level base class " +
-                        "(without any specific hierarchy limit, such as a grandparent class or above) and overridden in a lower-level base class " +
-                        "(without any specific hierarchy limit) are not correctly included in the inherited method list."),
-                    new ChangeLogData(ChangeLogCategory.Fixed,
-                        "方法分析数据中，接口声明的方法在当前类实现时，代码逻辑中并不存在 override 关键字，而方法声明字符串中错误显示 override 的问题",
-                        "In the MethodAnalysisData, when implementing the interface declaration methods in the current class, " +
-                        "the code logic does not contain the \"override\" keyword, but the error of incorrectly displaying \"override\" in the method declaration string occurs.")
-                });
+
+            _analysisDataFactory = new YuumixDefaultAnalysisDataFactory();
         }
-
-        #endregion
-
-        #region 双语组件
-
-        [PropertyOrder(-5)]
-        public BilingualHeaderWidget headerWidget;
-
-        [PropertyOrder(200)]
-        public BilingualFooterWidget footerWidget;
 
         #endregion
 
@@ -139,7 +108,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
         [HideLabel]
         [InlineButton("ResetTypeSourceEnum", SdfIconType.ArrowClockwise, "")]
         [CustomContextMenu("Reset To Default", "ResetTypeSourceEnum")]
-        public TypeSourceEnum typeSource;
+        public TypeSource typeSource;
 
         string GetTypeSourceEnumLabelText()
         {
@@ -147,15 +116,15 @@ namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
             var englishText = "Type Source Mode";
             switch (typeSource)
             {
-                case TypeSourceEnum.SingleType:
+                case TypeSource.SingleType:
                     chineseText += " - [当前选择: 单类型模式]";
                     englishText += " - [Current Selection: Single Type Mode]";
                     break;
-                case TypeSourceEnum.MultipleType:
+                case TypeSource.MultipleTypes:
                     chineseText += " - [当前选择: 多类型模式]";
                     englishText += " - [Current Selection: Multiple Type Mode]";
                     break;
-                case TypeSourceEnum.SingleAssembly:
+                case TypeSource.SingleAssembly:
                     chineseText += " - [当前选择: 单程序集模式]";
                     englishText += " - [Current Selection: Single Assembly Mode]";
                     break;
@@ -164,10 +133,10 @@ namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
             return new BilingualData(chineseText, englishText);
         }
 
-        public enum TypeSourceEnum
+        public enum TypeSource
         {
             SingleType,
-            MultipleType,
+            MultipleTypes,
             SingleAssembly
         }
 
@@ -198,7 +167,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
         [AssetSelector(FlattenTreeView = true)]
         [InlineButton("ResetTypesConfigSO", SdfIconType.ArrowClockwise, "")]
         [CustomContextMenu("Reset To Default", "ResetTypesConfigSO")]
-        public TypesConfigSO typesConfig;
+        public TypesCacheSO typesCache;
 
         [PropertyOrder(25)]
         [ShowIf("CanShowTemporaryTypes")]
@@ -214,21 +183,21 @@ namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
         [ShowIf("ShowSaveFolderPath")]
         [HideLabel]
         [InlineButton("CompleteConfig", SdfIconType.Check, "$_completeConfigButtonLabel")]
-        [InlineButton("ResetTypesConfigSOFolderPath", SdfIconType.ArrowClockwise, "$_resetSOSaveFolderPathButtonLabel")]
-        [BilingualTitle("存放 TypesConfigSO 的文件夹路径", "Folder Path For TypesConfigSO")]
-        [CustomContextMenu("Reset To Default", nameof(ResetTypesConfigSOFolderPath))]
-        public string typesConfigSOFolderPath = DEFAULT_TYPES_CONFIG_SO_FOLDER_PATH;
+        [InlineButton("ResetTypesCacheSOFolderPath", SdfIconType.ArrowClockwise, "$_resetSOSaveFolderPathButtonLabel")]
+        [BilingualTitle("存放 TypesCacheSO 的文件夹路径", "Folder Path For TypesCacheSO")]
+        [CustomContextMenu("Reset To Default", nameof(ResetTypesCacheSOFolderPath))]
+        public string typesCacheSOFolderPath = DEFAULT_TYPES_CACHE_SO_FOLDER_PATH;
 
         BilingualData _completeConfigButtonLabel = new BilingualData("完成设置", "Complete Setting");
 
         BilingualData _resetSOSaveFolderPathButtonLabel =
             new BilingualData("重置路径", "Reset Folder Path");
 
-        bool ShowSaveFolderPath => IsMultipleType && _isCustomizingSaveConfig && !typesConfig;
-        bool CanShowTemporaryTypes => IsMultipleType && !typesConfig;
+        bool ShowSaveFolderPath => IsMultipleType && _isCustomizingSaveConfig && !typesCache;
+        bool CanShowTemporaryTypes => IsMultipleType && !typesCache;
 
-        const string DEFAULT_TYPES_CONFIG_SO_FOLDER_PATH =
-            OdinToolkitsEditorPaths.ODIN_TOOLKITS_ANY_DATA_ROOT_FOLDER + "/Editor/ScriptDocGenTypesConfigSO";
+        const string DEFAULT_TYPES_CACHE_SO_FOLDER_PATH =
+            OdinToolkitsEditorPaths.ODIN_TOOLKITS_ANY_DATA_ROOT_FOLDER + "/Editor/TypesCacheSO";
 
         bool _isCustomizingSaveConfig;
 
@@ -238,25 +207,22 @@ namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
                 SdfIcons.CreateTransparentIconTexture(SdfIconType.SaveFill, Color.white, 16 /*0x10*/, 16 /*0x10*/,
                     0);
             var content = new GUIContent(" 保存为SO资源 ", image,
-                "保存为 " + nameof(TypesConfigSO) + " 资源到 " + typesConfigSOFolderPath);
-            var filePathWithExtension = typesConfigSOFolderPath + "/" + nameof(TypesConfigSO) + ".asset";
-            if (TemporaryTypes.Count > 0)
+                "保存为 " + nameof(TypesCacheSO) + " 资源到 " + typesCacheSOFolderPath);
+            var filePathWithExtension = typesCacheSOFolderPath + "/" + nameof(TypesCacheSO) + ".asset";
+            if (TemporaryTypes.Count > 0 && SirenixEditorGUI.ToolbarButton(content))
             {
-                if (SirenixEditorGUI.ToolbarButton(content))
-                {
-                    var so = CreateInstance<TypesConfigSO>();
-                    PathEditorUtility.EnsureFolderRecursively(typesConfigSOFolderPath);
-                    so.Types = TemporaryTypes;
-                    ProjectWindowUtil.CreateAsset(so, filePathWithExtension);
-                    ProjectEditorUtility.PingAndSelectAsset(filePathWithExtension);
-                    YuumixLogger.OdinToolkitsLog("请更改资源名称，避免下次生成时覆盖内容");
-                }
+                var so = CreateInstance<TypesCacheSO>();
+                PathEditorUtility.EnsureFolderRecursively(typesCacheSOFolderPath);
+                so.Types = TemporaryTypes;
+                ProjectWindowUtil.CreateAsset(so, filePathWithExtension);
+                ProjectEditorUtility.PingAndSelectAsset(filePathWithExtension);
+                YuumixLogger.OdinToolkitsLog("请更改资源名称，避免下次生成时覆盖内容");
             }
 
             var image2 =
                 SdfIcons.CreateTransparentIconTexture(SdfIconType.GearFill, Color.white, 16 /*0x10*/, 16 /*0x10*/,
                     0);
-            var content2 = new GUIContent(" 自定义资源存储位置 ", image2, "当前路径为 " + typesConfigSOFolderPath);
+            var content2 = new GUIContent(" 自定义资源存储位置 ", image2, "当前路径为 " + typesCacheSOFolderPath);
             if (_isCustomizingSaveConfig)
             {
                 return;
@@ -320,7 +286,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
         {
             switch (typeSource)
             {
-                case TypeSourceEnum.SingleType:
+                case TypeSource.SingleType:
                     if (TargetType == null)
                     {
                         YuumixLogger.OdinToolkitsError("请选择有效的目标类型");
@@ -329,8 +295,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
 
                     SingleTypeAnalyze();
                     break;
-                case TypeSourceEnum.MultipleType:
-                    if (!typesConfig && TemporaryTypes.Count <= 0)
+                case TypeSource.MultipleTypes:
+                    if (!typesCache && TemporaryTypes.Count <= 0)
                     {
                         YuumixLogger.OdinToolkitsError("设置有效的 Type 对象列表");
                         return;
@@ -338,7 +304,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
 
                     MultipleTypesAnalyze();
                     break;
-                case TypeSourceEnum.SingleAssembly:
+                case TypeSource.SingleAssembly:
                     if (targetAssemblyString is null or NONE_ASSEMBLY)
                     {
                         YuumixLogger.OdinToolkitsError("请选择目标程序集，不能为 " + NONE_ASSEMBLY);
@@ -365,18 +331,18 @@ namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
 
         void SingleTypeAnalyze()
         {
-            TypeData = AnalysisDataFactory.CreateTypeData(TargetType, AnalysisDataFactory);
+            TypeData = _analysisDataFactory.CreateTypeData(TargetType, _analysisDataFactory);
         }
 
         void MultipleTypesAnalyze()
         {
             TypeDataList = new List<ITypeData>();
-            if (typesConfig)
+            if (typesCache)
             {
-                typesConfig.Types.RemoveAll(x => x == null);
-                foreach (var type in typesConfig.Types)
+                typesCache.Types.RemoveAll(x => x == null);
+                foreach (var type in typesCache.Types)
                 {
-                    TypeDataList.Add(AnalysisDataFactory.CreateTypeData(type, AnalysisDataFactory));
+                    TypeDataList.Add(_analysisDataFactory.CreateTypeData(type, _analysisDataFactory));
                 }
             }
             else
@@ -384,7 +350,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
                 TemporaryTypes.RemoveAll(x => x == null);
                 foreach (var type in TemporaryTypes)
                 {
-                    TypeDataList.Add(AnalysisDataFactory.CreateTypeData(type, AnalysisDataFactory));
+                    TypeDataList.Add(_analysisDataFactory.CreateTypeData(type, _analysisDataFactory));
                 }
             }
         }
@@ -396,7 +362,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
             foreach (var type in targetAssembly.GetTypes()
                          .Where(t => t.GetCustomAttribute<CompilerGeneratedAttribute>() == null))
             {
-                TypeDataList.Add(AnalysisDataFactory.CreateTypeData(type, AnalysisDataFactory));
+                TypeDataList.Add(_analysisDataFactory.CreateTypeData(type, _analysisDataFactory));
             }
         }
 
@@ -424,15 +390,13 @@ namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
 
             switch (typeSource)
             {
-                case TypeSourceEnum.SingleType:
+                case TypeSource.SingleType:
                     SingleTypeGenerate(TypeData, docGeneratorSetting, folderPath);
                     break;
-                case TypeSourceEnum.MultipleType:
-                case TypeSourceEnum.SingleAssembly:
+                case TypeSource.MultipleTypes:
+                case TypeSource.SingleAssembly:
                     MultipleTypesGenerate(TypeDataList, docGeneratorSetting, folderPath);
                     break;
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
 
             _hasFinishedAnalyze = false;
@@ -461,7 +425,6 @@ namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
                 var additionalDescriptionStringBuilder = new StringBuilder();
                 if (readAllLines.Length > 0)
                 {
-                    // 首次出现的标记
                     var identifierIndex = Array.FindIndex(readAllLines, line => line.StartsWith(IDENTIFIER_CN));
                     if (identifierIndex > 0)
                     {
@@ -510,7 +473,6 @@ namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
                         var additionalDescriptionStringBuilder = new StringBuilder();
                         if (readAllLines.Length > 0)
                         {
-                            // 首次出现的标记
                             var identifierIndex = Array.FindIndex(readAllLines, line => line.StartsWith(IDENTIFIER_CN));
                             if (identifierIndex > 0)
                             {
@@ -548,7 +510,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
             (IsSingleAssembly && TypeDataList is { Count: > 0 }));
 
         static void ReadGenerateSO(ITypeData typeData, DocGeneratorSettingSO generatorSetting, string targetFolderPath,
-            IMemberData memberData, out string markdownText, out string filePathWithExtensions)
+            IMemberData memberData, out string markdownText, out string filePathWithoutExtensions)
         {
             markdownText = generatorSetting.GetGeneratedDoc(typeData);
             if (generatorSetting.generateIdentifier)
@@ -562,18 +524,28 @@ namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
             if (generatorSetting.generateNamespaceFolder)
             {
                 var namespaceString = typeData.NamespaceName;
-                targetFolderPath = targetFolderPath + "/" + namespaceString;
+                if (!string.IsNullOrEmpty(namespaceString))
+                {
+                    var namespaceFolders = namespaceString.Split('.');
+                    targetFolderPath = namespaceFolders.Aggregate(targetFolderPath,
+                        Path.Combine);
+                }
+                else
+                {
+                    targetFolderPath = Path.Combine(targetFolderPath, "WithoutNamespace");
+                }
+
                 PathEditorUtility.EnsureFolderRecursively(targetFolderPath);
             }
 
-            filePathWithExtensions = targetFolderPath + "/" + fileNameWithoutExtension;
+            filePathWithoutExtensions = Path.Combine(targetFolderPath, fileNameWithoutExtension);
             if (generatorSetting.customizeDocFileExtensionName)
             {
-                filePathWithExtensions += generatorSetting.docFileExtensionName.EnsureStartsWith(".");
+                filePathWithoutExtensions += generatorSetting.docFileExtensionName.EnsureStartsWith(".");
             }
             else
             {
-                filePathWithExtensions += ".md";
+                filePathWithoutExtensions += ".md";
             }
         }
 
@@ -596,16 +568,6 @@ namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
 
         #endregion
 
-        #region 多部分共用内容
-
-        bool IsSingleType => typeSource == TypeSourceEnum.SingleType;
-        bool IsMultipleType => typeSource == TypeSourceEnum.MultipleType;
-        bool IsSingleAssembly => typeSource == TypeSourceEnum.SingleAssembly;
-
-        const string NONE_ASSEMBLY = "None Assembly";
-
-        #endregion
-
         #region 恢复默认值
 
         public void EditorReset()
@@ -616,15 +578,16 @@ namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
             ResetSingleType();
             ResetTypesConfigSO();
             ResetTemporaryTypes();
-            ResetTypesConfigSOFolderPath();
+            ResetTypesCacheSOFolderPath();
             ResetIsCustomizingSaveConfig();
             ResetSingleAssemblyString();
             ResetHasAnalyzed();
+            ResetTypeAnalysisData();
         }
 
         void ResetTypeSourceEnum()
         {
-            typeSource = TypeSourceEnum.SingleType;
+            typeSource = TypeSource.SingleType;
         }
 
         void ResetDocFolderPath()
@@ -634,7 +597,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
 
         void ResetDocGeneratorSO()
         {
-            docGeneratorSetting = Resources.Load<CnAPIDocGeneratorSettingSO>("DocGenerators/CnAPIDocGeneratorSetting");
+            docGeneratorSetting = Resources.Load<CnAPIDocGeneratorSettingSO>("DocGenerators/中文API文档生成设置");
         }
 
         void ResetSingleType()
@@ -644,7 +607,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
 
         void ResetTypesConfigSO()
         {
-            typesConfig = null;
+            typesCache = null;
         }
 
         void ResetTemporaryTypes()
@@ -652,9 +615,9 @@ namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
             TemporaryTypes = new List<Type>();
         }
 
-        void ResetTypesConfigSOFolderPath()
+        void ResetTypesCacheSOFolderPath()
         {
-            typesConfigSOFolderPath = DEFAULT_TYPES_CONFIG_SO_FOLDER_PATH;
+            typesCacheSOFolderPath = DEFAULT_TYPES_CACHE_SO_FOLDER_PATH;
         }
 
         void ResetIsCustomizingSaveConfig()
@@ -670,6 +633,12 @@ namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
         void ResetHasAnalyzed()
         {
             _hasFinishedAnalyze = false;
+        }
+
+        void ResetTypeAnalysisData()
+        {
+            TypeData = null;
+            TypeDataList = null;
         }
 
         #endregion

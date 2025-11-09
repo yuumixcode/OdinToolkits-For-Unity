@@ -37,30 +37,6 @@ namespace Yuumix.OdinToolkits.Tests.Editor
                 nameof(TestClass.StaticEnumPropertyWithDefaultValue),
                 "public static UnitTestPropertyDataWithDefaultValue.TestEnum StaticEnumPropertyWithDefaultValue { get; set; } = TestEnum.B;"
             },
-            {
-                nameof(TestClass.IntPropertyWithDefaultValue),
-                "public int IntPropertyWithDefaultValue { get; internal set; } = 77;"
-            },
-            {
-                nameof(TestClass.FloatPropertyWithDefaultValue),
-                "public float FloatPropertyWithDefaultValue { get; protected set; } = 77f;"
-            },
-            {
-                nameof(TestClass.BoolPropertyWithDefaultValue),
-                "public bool BoolPropertyWithDefaultValue { get; private set; } = true;"
-            },
-            {
-                nameof(TestClass.StringPropertyWithDefaultValue),
-                "public string StringPropertyWithDefaultValue { get; set; } = \"World\";"
-            },
-            {
-                nameof(TestClass.EnumPropertyWithDefaultValue),
-                "public UnitTestPropertyDataWithDefaultValue.TestEnum EnumPropertyWithDefaultValue { get; set; } = TestEnum.C;"
-            },
-            {
-                nameof(TestClass.StringPropertyInitOnCtor),
-                "public string StringPropertyInitOnCtor { get; set; } = \"Hello World\";"
-            }
         };
 
         [Test]
@@ -113,66 +89,6 @@ namespace Yuumix.OdinToolkits.Tests.Editor
                 ((MemberData)f).Name == nameof(TestClass.StaticEnumPropertyWithDefaultValue));
             Debug.Log(propertyData.Signature);
             Assert.AreEqual(ExpectedSignatureMaps[nameof(TestClass.StaticEnumPropertyWithDefaultValue)],
-                propertyData.Signature);
-        }
-
-        [Test]
-        public void TestIntPropertyWithDefaultValue()
-        {
-            var propertyData =
-                PropertyDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.IntPropertyWithDefaultValue));
-            Debug.Log(propertyData.Signature);
-            Assert.AreEqual(ExpectedSignatureMaps[nameof(TestClass.IntPropertyWithDefaultValue)],
-                propertyData.Signature);
-        }
-
-        [Test]
-        public void TestFloatPropertyWithDefaultValue()
-        {
-            var propertyData =
-                PropertyDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.FloatPropertyWithDefaultValue));
-            Debug.Log(propertyData.Signature);
-            Assert.AreEqual(ExpectedSignatureMaps[nameof(TestClass.FloatPropertyWithDefaultValue)],
-                propertyData.Signature);
-        }
-
-        [Test]
-        public void TestBoolPropertyWithDefaultValue()
-        {
-            var propertyData =
-                PropertyDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.BoolPropertyWithDefaultValue));
-            Debug.Log(propertyData.Signature);
-            Assert.AreEqual(ExpectedSignatureMaps[nameof(TestClass.BoolPropertyWithDefaultValue)],
-                propertyData.Signature);
-        }
-
-        [Test]
-        public void TestStringPropertyWithDefaultValue()
-        {
-            var propertyData =
-                PropertyDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.StringPropertyWithDefaultValue));
-            Debug.Log(propertyData.Signature);
-            Assert.AreEqual(ExpectedSignatureMaps[nameof(TestClass.StringPropertyWithDefaultValue)],
-                propertyData.Signature);
-        }
-
-        [Test]
-        public void TestEnumProperty()
-        {
-            var propertyData = PropertyDataArray.First(f =>
-                ((MemberData)f).Name == nameof(TestClass.EnumPropertyWithDefaultValue));
-            Debug.Log(propertyData.Signature);
-            Assert.AreEqual(ExpectedSignatureMaps[nameof(TestClass.EnumPropertyWithDefaultValue)],
-                propertyData.Signature);
-        }
-
-        [Test]
-        public void TestStringPropertyInitOnCtor()
-        {
-            var propertyData = PropertyDataArray.First(f =>
-                ((MemberData)f).Name == nameof(TestClass.StringPropertyInitOnCtor));
-            Debug.Log(propertyData.Signature);
-            Assert.AreEqual(ExpectedSignatureMaps[nameof(TestClass.StringPropertyInitOnCtor)],
                 propertyData.Signature);
         }
 

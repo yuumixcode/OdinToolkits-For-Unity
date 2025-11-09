@@ -11,26 +11,10 @@ using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.ScriptDocGenerator
 {
-    public interface ITypeData : IDerivedMemberData
-    {
-        TypeCategory TypeCategory { get; }
-        Assembly Assembly { get; }
-        string AssemblyName { get; }
-        string NamespaceName { get; }
-        bool IsGenericType { get; }
-        public bool IsSealed { get; }
-        public bool IsAbstract { get; }
-        public string[] ReferenceWebLinkArray { get; }
-        public string[] InheritanceChain { get; }
-        public string[] InterfaceArray { get; }
-        IAnalysisDataFactory DataFactory { get; }
-        IConstructorData[] RuntimeReflectedConstructorsData { get; }
-        IMethodData[] RuntimeReflectedMethodsData { get; }
-        IEventData[] RuntimeReflectedEventsData { get; }
-        IPropertyData[] RuntimeReflectedPropertiesData { get; }
-        IFieldData[] RuntimeReflectedFieldsData { get; }
-    }
-
+    /// <summary>
+    /// 类型解析数据类，存储类型的各种成员的解析数据
+    /// </summary>
+    [Summary("类型解析数据类，存储类型的各种成员的解析数据")]
     [Serializable]
     public class TypeData : MemberData, ITypeData
     {
@@ -198,67 +182,133 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
 
         #region ITypeData
 
+        /// <summary>
+        /// Type 种类
+        /// </summary>
+        [Summary("Type 种类")]
         [PropertyOrder(-5)]
         [ShowEnableProperty]
         [BilingualText("Type 种类", nameof(TypeCategory))]
         public TypeCategory TypeCategory { get; }
 
+        /// <summary>
+        /// 类型所在的程序集
+        /// </summary>
+        [Summary("类型所在的程序集")]
         public Assembly Assembly { get; }
 
+        /// <summary>
+        /// 程序集名称
+        /// </summary>
+        [Summary("程序集名称")]
         [PropertyOrder(-5)]
         [ShowEnableProperty]
         [BilingualText("程序集名称", nameof(AssemblyName))]
         public string AssemblyName { get; }
 
+        /// <summary>
+        /// 命名空间名称
+        /// </summary>
+        [Summary("命名空间名称")]
         [PropertyOrder(-5)]
         [ShowEnableProperty]
         [BilingualText("命名空间名称", nameof(NamespaceName))]
         public string NamespaceName { get; }
 
+        /// <summary>
+        /// 是否为泛型类型
+        /// </summary>
+        [Summary("是否为泛型类型")]
         public bool IsGenericType { get; }
+
+        /// <summary>
+        /// 是否为密封类
+        /// </summary>
+        [Summary("是否为密封类")]
         public bool IsSealed { get; }
+
+        /// <summary>
+        /// 是否为抽象类
+        /// </summary>
+        [Summary("是否为抽象类")]
         public bool IsAbstract { get; }
 
+        /// <summary>
+        /// 引用链接数组
+        /// </summary>
+        [Summary("引用链接数组")]
         [PropertyOrder(150)]
         [ShowEnableProperty]
         [BilingualText("引用链接", nameof(ReferenceWebLinkArray))]
         [HideDuplicateReferenceBox]
         public string[] ReferenceWebLinkArray { get; }
 
+        /// <summary>
+        /// 继承链数组
+        /// </summary>
+        [Summary("继承链数组")]
         [PropertyOrder(150)]
         [ShowEnableProperty]
         [BilingualText("继承链", nameof(InheritanceChain))]
         [HideDuplicateReferenceBox]
         public string[] InheritanceChain { get; }
 
+        /// <summary>
+        /// 接口列表数组
+        /// </summary>
+        [Summary("接口列表数组")]
         [PropertyOrder(150)]
         [ShowEnableProperty]
         [BilingualText("接口列表", nameof(InterfaceArray))]
         [HideDuplicateReferenceBox]
         public string[] InterfaceArray { get; }
 
+        /// <summary>
+        /// 分析数据工厂实例对象
+        /// </summary>
+        [Summary("分析数据工厂实例对象")]
         public IAnalysisDataFactory DataFactory { get; }
 
+        /// <summary>
+        /// 声明的构造方法解析数据数组，只包含公共构造函数，GetConstructors() 方法
+        /// </summary>
+        [Summary("声明的构造方法解析数据数组，只包含公共构造函数，GetConstructors() 方法")]
         [PropertyOrder(200)]
         [ShowEnableProperty]
         [BilingualText("声明的构造方法解析数据", nameof(RuntimeReflectedConstructorsData))]
         public IConstructorData[] RuntimeReflectedConstructorsData { get; }
 
+        /// <summary>
+        /// 声明的方法解析数据数组，GetRuntimeMethods() 方法
+        /// </summary>
+        [Summary("声明的方法解析数据数组，GetRuntimeMethods() 方法")]
         [PropertyOrder(200)]
         [ShowEnableProperty]
         [BilingualText("声明的方法解析数据", nameof(RuntimeReflectedMethodsData))]
         public IMethodData[] RuntimeReflectedMethodsData { get; }
 
+        /// <summary>
+        /// 声明的事件解析数据数组，GetRuntimeEvents() 方法
+        /// </summary>
+        [Summary("声明的事件解析数据数组，GetRuntimeEvents() 方法")]
         [PropertyOrder(200)]
         [ShowEnableProperty]
         [BilingualText("声明的事件解析数据", nameof(RuntimeReflectedEventsData))]
         public IEventData[] RuntimeReflectedEventsData { get; }
 
+        /// <summary>
+        /// 声明的属性解析数据数组，GetRuntimeProperties() 方法
+        /// </summary>
+        [Summary("声明的属性解析数据数组，GetRuntimeProperties() 方法")]
         [PropertyOrder(200)]
         [ShowEnableProperty]
         [BilingualText("声明的属性解析数据", nameof(RuntimeReflectedPropertiesData))]
         public IPropertyData[] RuntimeReflectedPropertiesData { get; }
 
+        /// <summary>
+        /// 类型的字段解析数据数组，GetUserDefinedFields() 方法
+        /// </summary>
+        [Summary("类型的字段解析数据数组，GetUserDefinedFields() 方法")]
         [PropertyOrder(200)]
         [ShowEnableProperty]
         [BilingualText("声明的字段解析数据", nameof(RuntimeReflectedFieldsData))]
@@ -268,13 +318,46 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
 
         #region IDerivedMemberData
 
+        /// <summary>
+        /// 是否为静态类型
+        /// </summary>
+        [Summary("是否为静态类型")]
         public bool IsStatic { get; }
+
+        /// <summary>
+        /// 成员类型
+        /// </summary>
+        [Summary("成员类型")]
         public MemberTypes MemberType { get; }
+
+        /// <summary>
+        /// 成员类型名称
+        /// </summary>
+        [Summary("成员类型名称")]
         public string MemberTypeName { get; }
+
+        /// <summary>
+        /// 访问修饰符
+        /// </summary>
+        [Summary("访问修饰符")]
         public AccessModifierType AccessModifier { get; }
+
+        /// <summary>
+        /// 访问修饰符名称
+        /// </summary>
+        [Summary("访问修饰符名称")]
         public string AccessModifierName { get; }
+
+        /// <summary>
+        /// 类型签名，不包含特性声明
+        /// </summary>
+        [Summary("类型签名，不包含特性声明")]
         public string Signature { get; }
 
+        /// <summary>
+        /// 完整类型声明 - 包含特性和签名 - 默认剔除 [Summary] 特性
+        /// </summary>
+        [Summary("完整类型声明 - 包含特性和签名 - 默认剔除 [Summary] 特性")]
         [PropertyOrder(90)]
         [ShowEnableProperty]
         [BilingualTitle("完整类型声明 - 包含特性和签名 - 默认剔除 [Summary] 特性",

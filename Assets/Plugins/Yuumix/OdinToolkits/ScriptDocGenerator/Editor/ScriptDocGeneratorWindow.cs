@@ -6,9 +6,9 @@ using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core.Editor;
 
-namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
+namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
 {
-    public class ScriptDocGenWindow : OdinEditorWindow
+    public class ScriptDocGeneratorWindow : OdinEditorWindow
     {
         #region Serialized Fields
 
@@ -36,7 +36,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
             OdinToolkitsMenuItems.SCRIPT_DOC_GEN_PRIORITY)]
         public static void Open()
         {
-            var window = GetWindow<ScriptDocGenWindow>();
+            var window = GetWindow<ScriptDocGeneratorWindow>();
             window.titleContent = new GUIContent(OdinToolkitsMenuItems.SCRIPT_DOC_GEN_WINDOW_NAME);
             window.position = GUIHelper.GetEditorWindowRect().AlignCenter(1100, 800);
             window.Show();

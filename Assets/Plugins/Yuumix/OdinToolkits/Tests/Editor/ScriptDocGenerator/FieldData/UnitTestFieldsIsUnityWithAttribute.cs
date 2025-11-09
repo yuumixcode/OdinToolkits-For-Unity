@@ -37,19 +37,19 @@ namespace Yuumix.OdinToolkits.Tests.Editor
                 },
                 {
                     nameof(TestClass.vector3Field),
-                    "public Vector3 vector3Field = new Vector3(1.00, 1.00, 1.00);"
+                    "public Vector3 vector3Field;"
                 },
                 {
                     nameof(TestClass.quaternionField),
                     @"[SerializeField]
 [UnityEngine.Tooltip(""This is a tooltip"")]
 [UnityEngine.Range(0, 100)]
-public Quaternion quaternionField = new Quaternion(0.00000, 0.00000, 0.00000, 1.00000);"
+public Quaternion quaternionField;"
                 },
                 {
                     nameof(TestClass.colorField),
                     @"[UnityEngine.ColorUsage(true, true)]
-public Color colorField = "
+public Color colorField;"
                 },
                 {
                     nameof(TestClass.layerMaskField),

@@ -75,11 +75,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [ReadOnly]
         [DictionaryDrawerSettings(DisplayMode = DictionaryDisplayOptions.Foldout)]
         public Dictionary<string, string> TemplatePathMaps = new Dictionary<string, string>();
-
-        [PropertyOrder(999)]
-        public BilingualFooterWidget footer = new BilingualFooterWidget(
-            "2025/06/27");
-
+        
         #endregion
 
         public static event Action<ToastPosition, SdfIconType, string, Color, float> ToastEvent;

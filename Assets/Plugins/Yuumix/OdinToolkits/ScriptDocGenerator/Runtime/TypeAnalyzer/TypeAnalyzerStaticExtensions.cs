@@ -67,8 +67,6 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             { "op_PointerDereference", "operator * " }
         };
 
-        #region EventInfo
-
         /// <summary>
         /// 获取事件的访问修饰符类型
         /// </summary>
@@ -98,10 +96,6 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             return invokeMethod != null ? invokeMethod.GetMethodAccessModifierType() : AccessModifierType.None;
         }
 
-        #endregion
-
-        #region IDerivedMemberData
-
         /// <summary>
         /// 判断是否为 API 成员，返回 true 表示是 API 成员，返回 false 表示不是。API 成员指的是公共成员或受保护成员。
         /// </summary>
@@ -123,10 +117,6 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             memberData = derivedMemberData as IMemberData;
             return memberData != null;
         }
-
-        #endregion
-
-        #region Type
 
         /// <summary>
         /// 获取类型的种类
@@ -466,11 +456,11 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         public static bool IsReferenceTypeExcludeString(this Type type) =>
             !type.IsPrimitive && !type.IsValueType && type != typeof(string);
 
+        /// <summary>
+        /// 判断一个类型是否为抽象类或接口
+        /// </summary>
+        [Summary("判断一个类型是否为抽象类或接口")]
         public static bool IsAbstractOrInterface(this Type type) => type.IsAbstract || type.IsInterface;
-
-        #endregion
-
-        #region MemberInfo
 
         /// <summary>
         /// 判断成员是否从继承中获取，这里的成员不包括 Type 类型
@@ -527,10 +517,6 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             return attributesStringBuilder.ToString();
         }
 
-        #endregion
-
-        #region MethodInfo
-
         /// <summary>
         /// 获取方法的关键字片段，用于生成方法签名，如：static、virtual、async 等
         /// </summary>
@@ -570,12 +556,9 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         }
 
         /// <summary>
-        /// 判断方法是否是从祖先类继承的，但不是在当前类中重写的
+        /// 判断方法是否为从祖先类继承的重写方法，重写声明不是在当前类中
         /// </summary>
-        /// <param name="method"></param>
-        /// <param name="currentType"></param>
-        /// <returns></returns>
-        [Summary("判断方法是否是从祖先类继承的，但不是在当前类中重写的")]
+        [Summary("判断方法是否为从祖先类继承的重写方法，重写声明不是在当前类中")]
         public static bool IsInheritedOverrideFromAncestor(this MethodInfo method, Type currentType)
         {
             // 方法不是在当前类中声明的
@@ -588,7 +571,6 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             {
                 var baseDefinitionDeclaringType = method.GetBaseDefinition().DeclaringType;
                 var directBaseType = currentType.BaseType;
-                // 如果最初定义的类不是当前类的直接父类，则说明是 override 了从更上层继承的方法
                 if (baseDefinitionDeclaringType != directBaseType)
                 {
                     return true;
@@ -607,10 +589,6 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
              methodInfo.DeclaringType != methodInfo.GetBaseDefinition().DeclaringType)
             || (methodInfo.DeclaringType == methodInfo.GetBaseDefinition().DeclaringType &&
                 methodInfo.IsVirtual && methodInfo.IsFromInterfaceImplementMethod());
-
-        #endregion
-
-        #region MethodBase
 
         /// <summary>
         /// 判断方法是否是异步方法
@@ -764,10 +742,6 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
                 .Any(targetMethods => targetMethods.Contains(method));
         }
 
-        #endregion
-
-        #region PropertyInfo
-
         /// <summary>
         /// 判断是否为静态属性
         /// </summary>
@@ -810,9 +784,9 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         }
 
         /// <summary>
-        /// 获取属性的自定义默认值，不能获取到值则返回 null
+        /// 获取属性的自定义默认值，不能获取到值则返回 null，只获取静态属性的默认值。
         /// </summary>
-        [Summary("获取属性的自定义默认值，不能获取到值则返回 null")]
+        [Summary("获取属性的自定义默认值，不能获取到值则返回 null，只获取静态属性的默认值。")]
         public static bool TryGetPropertyCustomDefaultValue(this PropertyInfo propertyInfo, out object defaultValue)
         {
             var propertyType = propertyInfo.PropertyType;
@@ -837,46 +811,9 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
                 return true;
             }
 
-            var propertyDeclaringType = propertyInfo.DeclaringType;
-            if (propertyDeclaringType == null || propertyDeclaringType.IsAbstractOrInterface() ||
-                typeof(MonoBehaviour).IsAssignableFrom(propertyDeclaringType))
-            {
-                defaultValue = null;
-                return false;
-            }
-
-            // 检查是否存在无参数构造函数
-            var parameterlessConstructor = propertyDeclaringType.GetConstructor(Type.EmptyTypes);
-            if (parameterlessConstructor == null)
-            {
-                defaultValue = null;
-                return false;
-            }
-
-            var instance = typeof(ScriptableObject).IsAssignableFrom(propertyDeclaringType)
-                ? ScriptableObject.CreateInstance(propertyDeclaringType)
-                : Activator.CreateInstance(propertyDeclaringType);
-            if (instance == null)
-            {
-                defaultValue = null;
-                return false;
-            }
-
-            var instancePropertyValue = propertyInfo.GetMemberValue(instance);
-            if (instancePropertyValue == null ||
-                TypeAnalyzerUtility.TreatedAsTypeDefaultValue(instancePropertyValue, propertyInfo.PropertyType))
-            {
-                defaultValue = null;
-                return false;
-            }
-
-            defaultValue = instancePropertyValue;
-            return true;
+            defaultValue = null;
+            return false;
         }
-
-        #endregion
-
-        #region FieldInfo
 
         /// <summary>
         /// 获取字段访问修饰符
@@ -927,9 +864,9 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
                fieldInfo.GetCustomAttributes(typeof(DynamicAttribute), false).Length > 0;
 
         /// <summary>
-        /// 获取字段的自定义默认值，不能获取到值则返回 null
+        /// 获取字段的自定义默认值，不能获取到值则返回 null。只获取静态字段和常量字段的默认值。
         /// </summary>
-        [Summary("获取字段的自定义默认值，不能获取到值则返回 null")]
+        [Summary("获取字段的自定义默认值，不能获取到值则返回 null。只获取静态字段和常量字段的默认值。")]
         public static bool TryGetFieldCustomDefaultValue(this FieldInfo fieldInfo, out object defaultValue)
         {
             var fieldType = fieldInfo.FieldType;
@@ -968,43 +905,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
                 return true;
             }
 
-            var fieldDeclaringType = fieldInfo.DeclaringType;
-            if (fieldDeclaringType == null || fieldDeclaringType.IsAbstractOrInterface() ||
-                typeof(MonoBehaviour).IsAssignableFrom(fieldDeclaringType))
-            {
-                defaultValue = null;
-                return false;
-            }
-
-            // 检查是否存在无参数构造函数
-            var parameterlessConstructor = fieldDeclaringType.GetConstructor(Type.EmptyTypes);
-            if (parameterlessConstructor == null)
-            {
-                defaultValue = null;
-                return false;
-            }
-
-            var instance = typeof(ScriptableObject).IsAssignableFrom(fieldDeclaringType)
-                ? ScriptableObject.CreateInstance(fieldDeclaringType)
-                : Activator.CreateInstance(fieldDeclaringType);
-            if (instance == null)
-            {
-                defaultValue = null;
-                return false;
-            }
-
-            var instanceFieldValue = fieldInfo.GetValue(instance);
-            if (instanceFieldValue == null ||
-                TypeAnalyzerUtility.TreatedAsTypeDefaultValue(instanceFieldValue, fieldInfo.FieldType))
-            {
-                defaultValue = null;
-                return false;
-            }
-
-            defaultValue = instanceFieldValue;
-            return true;
+            defaultValue = null;
+            return false;
         }
-
-        #endregion
     }
 }

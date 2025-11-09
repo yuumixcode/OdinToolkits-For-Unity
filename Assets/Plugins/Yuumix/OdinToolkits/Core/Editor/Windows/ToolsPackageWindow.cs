@@ -74,16 +74,19 @@ namespace Yuumix.OdinToolkits.Core.Editor
             var tree = new OdinMenuTree(false);
             var path2 = TemplateCodeGenToolSO.GenerateTemplateToolMenuPathData.GetCurrentOrFallback();
             var path3 = DirectoryTreeGenToolSO.DirectoryTreeGenToolMenuPathData.GetCurrentOrFallback();
+            var path4 = ExportPackageToolVisualPanelSO.ToolMenuPathData.GetCurrentOrFallback();
             // 添加 Object
             tree.AddObjectAtPath(path2, TemplateCodeGenToolSO.Instance);
             tree.AddObjectAtPath(path3, DirectoryTreeGenToolSO.Instance);
+            tree.AddObjectAtPath(path4, ExportPackageToolVisualPanelSO.Instance);
             // 获取 MenuItem
             var generateTemplateCodeToolMenuItem = tree.GetMenuItem(path2);
             var directoryTreeGenToolMenuItem = tree.GetMenuItem(path3);
+            var exportPackageToolMenuItem = tree.GetMenuItem(path4);
             // 图标
             generateTemplateCodeToolMenuItem.AddThumbnailIcon(true);
             directoryTreeGenToolMenuItem.AddThumbnailIcon(true);
-            // Debug.Log("执行 BuildMenuTree");
+            exportPackageToolMenuItem.AddThumbnailIcon(true);
             return tree;
         }
     }

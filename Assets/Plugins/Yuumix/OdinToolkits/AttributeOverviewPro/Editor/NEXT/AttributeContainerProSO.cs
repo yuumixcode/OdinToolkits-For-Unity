@@ -17,27 +17,38 @@ namespace Yuumix.OdinToolkits.Modules.AttributeOverviewPro.Editor
 
         GUIStyle _containerContentStyle;
         GUIStyle _containerTitleStyle;
-
         Rect _contentRect;
 
         #endregion
 
-        GUIStyle ContainerTitleStyle =>
-            _containerTitleStyle ??= new GUIStyle(SirenixGUIStyles.TitleCentered)
+        GUIStyle ContainerTitleStyle
+        {
+            get
             {
-                fontSize = 15
-            };
+                _containerTitleStyle ??= new GUIStyle(SirenixGUIStyles.TitleCentered)
+                {
+                    fontSize = 15
+                };
+                return _containerTitleStyle;
+            }
+        }
 
-        GUIStyle ContainerContentStyle =>
-            _containerContentStyle ??= new GUIStyle(SirenixGUIStyles.ToolbarBackground)
+        GUIStyle ContainerContentStyle
+        {
+            get
             {
-                stretchHeight = false,
-                padding = new RectOffset(
-                    CONTAINER_CONTENT_PADDING,
-                    CONTAINER_CONTENT_PADDING,
-                    CONTAINER_CONTENT_PADDING,
-                    CONTAINER_CONTENT_PADDING)
-            };
+                _containerContentStyle ??= new GUIStyle(SirenixGUIStyles.ToolbarBackground)
+                {
+                    stretchHeight = false,
+                    padding = new RectOffset(
+                        CONTAINER_CONTENT_PADDING,
+                        CONTAINER_CONTENT_PADDING,
+                        CONTAINER_CONTENT_PADDING,
+                        CONTAINER_CONTENT_PADDING)
+                };
+                return _containerContentStyle;
+            }
+        }
 
         [PropertyOrder(-99)]
         [EnableGUI]

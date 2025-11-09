@@ -97,74 +97,10 @@ UserSettings/
 # 排除 Unity Asset Store Tools 插件
 Packages/com.unity.asset-store-tools/
 
-Assets/Custom Inspector
-Assets/Custom Inspector.meta
-Assets/ConsolePro
 Assets/OdinToolkitsData
-Assets/ConsolePro.meta
 Assets/OdinToolkitsData.meta
 
 Assets/UniversalRenderPipelineGlobalSettings.asset.meta
 Assets/UniversalRenderPipelineGlobalSettings.asset
 
-Assets/Plugins/Sirenix/Odin Inspector/
-
-Assets/Plugins/Sirenix/Odin Inspector.meta
-
-Assets/Plugins/Sirenix/Demos.meta
-
-Assets/Plugins/Sirenix/Assemblies/link.xml
-
-Assets/Plugins/Sirenix/Assemblies/link.xml.meta
-
-Assets/Plugins/Sirenix/Assemblies/NoEditor/
-
-Assets/Plugins/Sirenix/Assemblies/NoEmitAndNoEditor/
-
-Assets/Plugins/Sirenix/Assemblies/NoEditor.meta
-
-Assets/Plugins/Sirenix/Assemblies/NoEmitAndNoEditor.meta
-
-Assets/Plugins/Sirenix/Assemblies/Sirenix.OdinInspector.Editor.dll
-
-Assets/Plugins/Sirenix/Assemblies/Sirenix.OdinInspector.Editor.dll.meta
-
-Assets/Plugins/Sirenix/Assemblies/Sirenix.OdinInspector.Editor.xml
-
-Assets/Plugins/Sirenix/Assemblies/Sirenix.OdinInspector.Editor.xml.meta
-
-Assets/Plugins/Sirenix/Assemblies/Sirenix.Reflection.Editor.dll
-
-Assets/Plugins/Sirenix/Assemblies/Sirenix.Reflection.Editor.dll.meta
-
-Assets/Plugins/Sirenix/Assemblies/Sirenix.Serialization.Config.dll
-
-Assets/Plugins/Sirenix/Assemblies/Sirenix.Serialization.Config.dll.meta
-
-Assets/Plugins/Sirenix/Assemblies/Sirenix.Serialization.Config.xml
-
-Assets/Plugins/Sirenix/Assemblies/Sirenix.Serialization.Config.xml.meta
-
-Assets/Plugins/Sirenix/Assemblies/Sirenix.Serialization.dll
-
-Assets/Plugins/Sirenix/Assemblies/Sirenix.Serialization.dll.meta
-
-Assets/Plugins/Sirenix/Assemblies/Sirenix.Serialization.xml
-
-Assets/Plugins/Sirenix/Assemblies/Sirenix.Serialization.xml.meta
-
-Assets/Plugins/Sirenix/Assemblies/Sirenix.Utilities.dll
-
-Assets/Plugins/Sirenix/Assemblies/Sirenix.Utilities.dll.meta
-
-Assets/Plugins/Sirenix/Assemblies/Sirenix.Utilities.Editor.dll
-
-Assets/Plugins/Sirenix/Assemblies/Sirenix.Utilities.Editor.dll.meta
-
-Assets/Plugins/Sirenix/Assemblies/Sirenix.Utilities.Editor.xml
-
-Assets/Plugins/Sirenix/Assemblies/Sirenix.Utilities.Editor.xml.meta
-
-Assets/Plugins/Sirenix/Assemblies/Sirenix.Utilities.xml
-
-Assets/Plugins/Sirenix/Assemblies/Sirenix.Utilities.xml.meta
+Assets/Plugins/Sirenix/

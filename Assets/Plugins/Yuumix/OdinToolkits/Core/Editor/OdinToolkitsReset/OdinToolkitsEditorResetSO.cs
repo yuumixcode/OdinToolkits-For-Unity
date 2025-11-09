@@ -10,7 +10,7 @@ namespace Yuumix.OdinToolkits.Core.Editor
     {
         #region Serialized Fields
 
-        [AssetList(CustomFilterMethod = nameof(FilterSO))]
+        [AssetList(CustomFilterMethod = nameof(FilterOdinResetSO))]
         [BilingualTitle("选择将要进行重置的资源文件")]
         public List<ScriptableObject> wantToResetSOList;
 
@@ -47,7 +47,7 @@ namespace Yuumix.OdinToolkits.Core.Editor
 
         #endregion
 
-        ScriptableObject FilterSO(ScriptableObject asset)
+        public static ScriptableObject FilterOdinResetSO(ScriptableObject asset)
         {
             return asset.GetType()
                 .GetInterfaces()

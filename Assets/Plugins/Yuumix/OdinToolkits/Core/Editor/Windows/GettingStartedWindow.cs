@@ -5,7 +5,8 @@ using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Modules.Editor;
-using Yuumix.OdinToolkits.ScriptDocGen.Editor;
+using Yuumix.OdinToolkits.OdinAttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.ScriptDocGenerator.Editor;
 using YuumixEditor;
 
 namespace Yuumix.OdinToolkits.Core.Editor
@@ -24,7 +25,7 @@ namespace Yuumix.OdinToolkits.Core.Editor
         [PropertyOrder(-90)]
         [BilingualDisplayAsStringWidgetConfig(fontSize: 14, enableRichText: true, alignment: TextAlignment.Center)]
         public BilingualDisplayAsStringWidget introduction = new BilingualDisplayAsStringWidget(
-            "Odin Toolkits 是依赖 Unity 插件 Odin Inspector And Serializer 的第三方扩展工具集，模块化设计，积累对整个项目低侵入性的解决方案，按需使用。",
+            "Odin Toolkits 是 Unity 插件 Odin Inspector And Serializer 的第三方扩展工具集。探索 Odin Inspector 进阶功能、整合社区优质项目、优化游戏开发流程。",
             "Odin Toolkits is a third-party extension toolkit that relies on the Unity plugin Odin Inspector And Serializer. It is designed in a modular way, accumulating low-intrusive solutions for the entire project and can be used as needed.");
 
         [GUIColor("green")]
@@ -39,14 +40,13 @@ namespace Yuumix.OdinToolkits.Core.Editor
         [PropertySpace(16)]
         [BilingualDisplayAsStringWidgetConfig(fontSize: 24, enableRichText: true, alignment: TextAlignment.Center)]
         public BilingualDisplayAsStringWidget help =
-            new BilingualDisplayAsStringWidget("链接", "Help Links");
+            new BilingualDisplayAsStringWidget("帮助链接", "Help Links");
 
         #endregion
 
         string ScriptDocGenButtonName => ScriptDocGeneratorVisualPanelSO.MenuName;
 
-        string TemplateCodeGenButtonName =>
-            TemplateCodeGenToolSO.GenerateTemplateToolMenuPathData.GetCurrentOrFallback();
+        string ToolPackagesButtonName => new BilingualData("工具箱", "Tool Packages");
 
         [PropertyOrder(110)]
         [DisplayAsString(TextAlignment.Center)]
@@ -70,6 +70,14 @@ namespace Yuumix.OdinToolkits.Core.Editor
 
         [PropertyOrder(-40)]
         [PropertySpace(5)]
+        [Button("$ScriptDocGenButtonName", ButtonSizes.Large)]
+        public void OpenScriptDocGen()
+        {
+            ScriptDocGeneratorWindow.Open();
+        }
+
+        [PropertyOrder(-40)]
+        [PropertySpace(5)]
         [BilingualButton("Odin 特性中文总览", "AttributeOverview Pro", ButtonSizes.Large)]
         public void OpenAttributeOverviewPro()
         {
@@ -77,20 +85,11 @@ namespace Yuumix.OdinToolkits.Core.Editor
         }
 
         [PropertyOrder(-40)]
-        [PropertySpace(5)]
-        [Button("$ScriptDocGenButtonName", ButtonSizes.Large)]
-        public void OpenScriptDocGen()
-        {
-            ScriptDocGenWindow.Open();
-        }
-
-        [PropertyOrder(-40)]
-        [Button("$TemplateCodeGenButtonName", ButtonSizes.Large)]
+        [Button("$ToolPackagesButtonName", ButtonSizes.Large)]
         [PropertySpace(5)]
         public void OpenTemplateCodeGen()
         {
             ToolsPackageWindow.ShowWindow();
-            GetWindow<ToolsPackageWindow>().TrySelectMenuItemWithObject(TemplateCodeGenToolSO.Instance);
         }
 
         [PropertyOrder(-29)]

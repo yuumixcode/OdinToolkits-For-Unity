@@ -2,12 +2,11 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using Yuumix.OdinToolkits.Core;
-using Yuumix.OdinToolkits.ScriptDocGenerator;
 
-namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
+namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
 {
     /// <summary>
-    /// 中文的 API 文档生成器
+    /// 中文的 API 文档生成器设置
     /// </summary>
     public class CnAPIDocGeneratorSettingSO : DocGeneratorSettingSO
     {
@@ -349,7 +348,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
             return sb;
         }
 
-        public static StringBuilder CreatePropertiesContent(IPropertyData[] propertyDataArray)
+        static StringBuilder CreatePropertiesContent(IPropertyData[] propertyDataArray)
         {
             var sb = new StringBuilder();
             if (propertyDataArray.Length <= 0)
@@ -442,7 +441,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGen.Editor
             return sb;
         }
 
-        public static StringBuilder CreateFieldsContent(IFieldData[] fieldDataArray)
+        static StringBuilder CreateFieldsContent(IFieldData[] fieldDataArray)
         {
             var sb = new StringBuilder();
             if (fieldDataArray.Length <= 0)

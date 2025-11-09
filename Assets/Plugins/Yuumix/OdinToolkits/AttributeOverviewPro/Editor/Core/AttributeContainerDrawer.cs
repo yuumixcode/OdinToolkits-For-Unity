@@ -8,6 +8,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core.Editor;
+using Yuumix.OdinToolkits.OdinAttributeOverviewPro.Editor;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {

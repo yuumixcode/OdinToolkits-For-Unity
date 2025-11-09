@@ -5,6 +5,6 @@ namespace Yuumix.OdinToolkits.Core.Editor
     /// </summary>
     public static class OdinToolkitsEditorInfo
     {
-        public const string VERSION = "Odin Toolkits v0.4.0 - alpha";
+        public const string VERSION = "Odin Toolkits v0.5.0 - alpha";
     }
 }
