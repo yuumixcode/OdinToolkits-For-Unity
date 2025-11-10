@@ -1,6 +1,6 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
-using Sirenix.OdinInspector;
 
 namespace Yuumix.OdinToolkits.Core
 {
@@ -49,9 +49,9 @@ namespace Yuumix.OdinToolkits.Core
         {
             EnsureBindingsIsNotNull();
             // 创建绑定列表的副本进行遍历，避免在发布过程中修改集合导致的异常
-            IEventBinding<T>[] bindingsCopy = _bindings.ToArray();
+            var bindingsCopy = _bindings.ToArray();
 
-            foreach (IEventBinding<T> binding in bindingsCopy)
+            foreach (var binding in bindingsCopy)
             {
                 if (_bindings.Contains(binding))
                 {

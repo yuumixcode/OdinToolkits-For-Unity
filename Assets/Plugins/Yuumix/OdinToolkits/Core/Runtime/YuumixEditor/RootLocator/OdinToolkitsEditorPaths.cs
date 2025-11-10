@@ -10,7 +10,7 @@ namespace YuumixEditor
     public static class OdinToolkitsEditorPaths
     {
         /// <summary>
-        /// OdinToolkits 生成的相关内容的根文件夹路径，"Assets/OdinToolkitsData"，参考 AddressableData 
+        /// OdinToolkits 生成的相关内容的根文件夹路径，"Assets/OdinToolkitsData"，参考 AddressableData
         /// </summary>
         public const string ODIN_TOOLKITS_ANY_DATA_ROOT_FOLDER = "Assets/OdinToolkitsData";
 

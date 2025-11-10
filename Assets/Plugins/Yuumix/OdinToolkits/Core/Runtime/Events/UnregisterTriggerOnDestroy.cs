@@ -5,9 +5,13 @@ namespace Yuumix.OdinToolkits.Core
     /// </summary>
     public class UnregisterTriggerOnDestroy : UnregisterTriggerBase
     {
+        #region Event Functions
+
         void OnDestroy()
         {
             UnregisterAll();
         }
+
+        #endregion
     }
 }

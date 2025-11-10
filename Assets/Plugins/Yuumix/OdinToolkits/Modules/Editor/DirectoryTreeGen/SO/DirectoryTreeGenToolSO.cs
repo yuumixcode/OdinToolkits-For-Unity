@@ -1,6 +1,6 @@
-using System.IO;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
+using System.IO;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Core.Editor;
@@ -19,6 +19,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             ".meta",
             ".asmdef"
         };
+
+        #region Serialized Fields
 
         public BilingualHeaderWidget headerWidget =
             new BilingualHeaderWidget(DirectoryTreeGenToolMenuPathData.GetChinese(),
@@ -57,6 +59,10 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [OdinSerialize]
         DirectoryAnalysisData _directoryAnalysisData;
 
+        #endregion
+
+        #region IOdinToolkitsEditorReset Members
+
         public void EditorReset()
         {
             folderPath = null;
@@ -65,6 +71,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             command = null;
             _directoryAnalysisData = null;
         }
+
+        #endregion
 
         [BilingualTitleGroup("TG", "操作按钮", "Operator Buttons")]
         [HorizontalGroup("TG/B")]

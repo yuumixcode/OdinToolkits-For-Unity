@@ -1,6 +1,5 @@
 using NUnit.Framework;
 using UnityEngine;
-using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Core.Editor;
 
 namespace Yuumix.OdinToolkits.Tests.Editor

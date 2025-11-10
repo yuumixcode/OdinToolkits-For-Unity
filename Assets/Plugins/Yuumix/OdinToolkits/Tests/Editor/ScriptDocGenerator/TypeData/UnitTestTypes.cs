@@ -1,10 +1,9 @@
 using NUnit.Framework;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using UnityEngine;
-using Yuumix.OdinToolkits.ScriptDocGenerator;
 using Yuumix.OdinToolkits.Core;
+using Yuumix.OdinToolkits.ScriptDocGenerator;
 
 namespace Yuumix.OdinToolkits.Tests.Editor
 {
@@ -37,9 +36,6 @@ namespace Yuumix.OdinToolkits.Tests.Editor
 
     public class UnitTestTypes : TestAbstractClass
     {
-     
-        
-
         [Test]
         public void TestInterface()
         {

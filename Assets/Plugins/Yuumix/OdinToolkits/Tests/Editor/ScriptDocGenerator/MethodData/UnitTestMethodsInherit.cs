@@ -25,8 +25,6 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         static readonly IMethodData[] TestClassAbstractMethodDataArray = TestClassAbstractMethodInfos
             .Select(x => UnitTestAnalysisFactory.Default.CreateMethodData(x)).ToArray();
 
-       
-
         [Test]
         public void TestVirtualMethod()
         {

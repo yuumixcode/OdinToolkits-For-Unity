@@ -36,7 +36,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             {
                 nameof(TestClass.StaticEnumPropertyWithDefaultValue),
                 "public static UnitTestPropertyDataWithDefaultValue.TestEnum StaticEnumPropertyWithDefaultValue { get; set; } = TestEnum.B;"
-            },
+            }
         };
 
         [Test]

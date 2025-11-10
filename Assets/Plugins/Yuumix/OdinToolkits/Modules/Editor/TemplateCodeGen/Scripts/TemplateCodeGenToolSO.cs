@@ -75,7 +75,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [ReadOnly]
         [DictionaryDrawerSettings(DisplayMode = DictionaryDisplayOptions.Foldout)]
         public Dictionary<string, string> TemplatePathMaps = new Dictionary<string, string>();
-        
+
         #endregion
 
         public static event Action<ToastPosition, SdfIconType, string, Color, float> ToastEvent;

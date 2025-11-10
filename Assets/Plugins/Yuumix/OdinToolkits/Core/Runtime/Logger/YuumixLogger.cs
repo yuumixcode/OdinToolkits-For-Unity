@@ -1,9 +1,9 @@
+using Sirenix.Utilities;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
-using Sirenix.Utilities;
 using UnityEngine;
 using UnityEngine.Pool;
 using Debug = UnityEngine.Debug;
@@ -181,7 +181,7 @@ namespace Yuumix.OdinToolkits.Core
                 return;
             }
 
-            StringBuilder sb = StringBuilderPool.Get();
+            var sb = StringBuilderPool.Get();
             sb = CreateMessage(sb, message, sender, showTimeStamp, prefix, prefixColor, useCallerSuffix,
                 suffix, suffixColor
             );
@@ -195,7 +195,7 @@ namespace Yuumix.OdinToolkits.Core
                     .Append("]");
             }
 #if UNITY_EDITOR
-            string relativePath = PathUtilities.MakeRelative(Application.dataPath.Replace("/Assets", ""), filePath);
+            var relativePath = PathUtilities.MakeRelative(Application.dataPath.Replace("/Assets", ""), filePath);
             var jumpTag =
                 $"<a style='text-decoration: underline; href=\"{relativePath}\" line=\"{lineNumber}\">{relativePath}:{lineNumber}</a>";
             sb.Append("\n").Append("堆栈面板中点击跳转: [ at <color=#ff6565>").Append(jumpTag).Append("</color> ]");
@@ -249,7 +249,7 @@ namespace Yuumix.OdinToolkits.Core
             {
                 if (prefixColor != default)
                 {
-                    string prefixColorString = prefixColor.ToHexString();
+                    var prefixColorString = prefixColor.ToHexString();
                     sb.Append("<color=#").Append(prefixColorString).Append(">")
                         .Append("[").Append(prefix)
                         .Append("]</color> ");
@@ -263,7 +263,7 @@ namespace Yuumix.OdinToolkits.Core
                 return sb;
             }
 
-            string suffixColorString = suffixColor.ToHexString();
+            var suffixColorString = suffixColor.ToHexString();
             sb.Append("<color=#").Append(suffixColorString).Append(">")
                 .Append("[").Append(suffix)
                 .Append("]</color> ");

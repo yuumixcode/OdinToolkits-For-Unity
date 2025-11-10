@@ -9,9 +9,13 @@ namespace Yuumix.OdinToolkits.Module.Editor
 {
     public class OdinToolkitsExportSettingsSO : ExportSettingsSO
     {
+        #region Serialized Fields
+
         [AssetList(CustomFilterMethod = nameof(FilterOdinResetSO))]
         [BilingualTitle("在打包导出前需要重置的资源文件", "Before Export, Need To Reset The Resource Files")]
         public List<ScriptableObject> wantToResetSOList;
+
+        #endregion
 
         public override void BeforeExportReset()
         {

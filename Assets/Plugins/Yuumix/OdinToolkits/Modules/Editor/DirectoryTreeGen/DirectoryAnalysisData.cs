@@ -17,7 +17,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         public List<DirectoryAnalysisData> SubDirectoryData;
 
-        [ShowInInspector] public int Depth => !RelativePath.IsNullOrWhiteSpace() ? RelativePath.Split('/').Length : 0;
+        [ShowInInspector]
+        public int Depth => !RelativePath.IsNullOrWhiteSpace() ? RelativePath.Split('/').Length : 0;
 
         public static DirectoryAnalysisData FromDirectoryInfo(DirectoryInfo directoryInfo)
         {

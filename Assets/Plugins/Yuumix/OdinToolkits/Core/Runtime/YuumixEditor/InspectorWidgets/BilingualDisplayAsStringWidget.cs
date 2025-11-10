@@ -1,7 +1,7 @@
 #if UNITY_EDITOR
 
-using System;
 using Sirenix.OdinInspector;
+using System;
 using Yuumix.OdinToolkits.Core;
 
 namespace YuumixEditor

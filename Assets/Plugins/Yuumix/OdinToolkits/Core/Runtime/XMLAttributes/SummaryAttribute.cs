@@ -23,7 +23,11 @@ namespace Yuumix.OdinToolkits.Core
 
         public SummaryAttribute(string chinese) => _chinese = chinese;
 
+        #region ISummaryAttribute Members
+
         public string GetSummary() => _chinese;
+
+        #endregion
 
         public static string GetSummaryAttributeValue(MemberInfo memberInfo)
         {

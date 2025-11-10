@@ -6,7 +6,12 @@ namespace Yuumix.OdinToolkits.Core
     public abstract class OdinSingleton<T> : SerializedMonoBehaviour where T : OdinSingleton<T>
     {
         static T _instance;
+
+        #region Serialized Fields
+
         bool _isInitialized;
+
+        #endregion
 
         public static T Instance
         {
@@ -28,6 +33,8 @@ namespace Yuumix.OdinToolkits.Core
                 return _instance;
             }
         }
+
+        #region Event Functions
 
         protected virtual void Awake()
         {
@@ -62,6 +69,8 @@ namespace Yuumix.OdinToolkits.Core
                 _instance = null;
             }
         }
+
+        #endregion
 
         public static void CreateNewInstance()
         {

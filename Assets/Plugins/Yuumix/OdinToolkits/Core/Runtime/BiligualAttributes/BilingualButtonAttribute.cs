@@ -13,7 +13,7 @@ namespace Yuumix.OdinToolkits.Core
     {
         // The alignment of the button represented by a range from 0 to 1 where 0 is the left edge of the available space and 1 is the right edge.
         // ButtonAlignment only has an effect when Stretch is set to false.
-        public readonly float ButtonAlignment;
+        public float ButtonAlignment;
         public readonly int ButtonHeight;
         public readonly IconAlignment ButtonIconAlignment;
         public readonly ButtonSizes ButtonSize;

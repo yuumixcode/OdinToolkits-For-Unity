@@ -29,7 +29,7 @@ namespace YuumixEditor
             => "This resource file is used to locate the path of the OdinToolkits folder to prevent errors " +
                "when moving the OdinToolkits folder as a whole.";
 
-        #region Nested type: TempCompositeAttribute
+        #region Nested type: ${0}
 
         [AttributeUsage(AttributeTargets.All)]
         [IncludeMyAttributes]

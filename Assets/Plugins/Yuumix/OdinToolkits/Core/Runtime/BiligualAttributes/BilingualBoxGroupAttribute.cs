@@ -1,6 +1,6 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Diagnostics;
-using Sirenix.OdinInspector;
 
 namespace Yuumix.OdinToolkits.Core
 {
@@ -9,7 +9,6 @@ namespace Yuumix.OdinToolkits.Core
     public class BilingualBoxGroupAttribute : PropertyGroupAttribute
     {
         bool _hasCombineValues;
-        public BilingualData LanguageData;
 
         public BilingualBoxGroupAttribute(string groupId,
             string chinese, string english = null,
@@ -28,8 +27,10 @@ namespace Yuumix.OdinToolkits.Core
         public BilingualBoxGroupAttribute()
             : this("_DefaultMultiLanguageBoxGroup", "Null", showLabel: false) { }
 
-        public bool ShowLabel { get; private set; }
-        public bool CenterLabel { get; private set; }
+        public BilingualData LanguageData { get; set; }
+
+        public bool ShowLabel { get; set; }
+        public bool CenterLabel { get; set; }
 
         /// <summary>
         /// 如果为 <c>true</c>，则表示在使用此特性实例的成员所属的类中，存在相同 <c>Type</c> 的，<c>GroupId</c> 相同的特性实例。

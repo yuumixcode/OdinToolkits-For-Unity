@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -12,10 +11,10 @@ namespace Yuumix.OdinToolkits.Core
         public static string FindIsSubClassOfInFolder(Type abstractType, string folderPath)
         {
             var assembly = Assembly.GetExecutingAssembly();
-            List<Type> subclasses = assembly.GetTypes().Where(t => t.IsSubclassOf(abstractType)).ToList();
-            foreach (Type subClass in subclasses)
+            var subclasses = assembly.GetTypes().Where(t => t.IsSubclassOf(abstractType)).ToList();
+            foreach (var subClass in subclasses)
             {
-                string scriptPath = Path.Combine(folderPath, subClass.Name + ".cs");
+                var scriptPath = Path.Combine(folderPath, subClass.Name + ".cs");
                 if (!File.Exists(scriptPath))
                 {
                     continue;
@@ -29,17 +28,17 @@ namespace Yuumix.OdinToolkits.Core
 
         public static string FindIsGenericSubClassOfInFolderReturnPath(Type abstractType, string folderPath)
         {
-            List<Type> subTypes = Assembly.GetExecutingAssembly()
+            var subTypes = Assembly.GetExecutingAssembly()
                 .GetTypes()
                 .Where(t => t.IsClass && !t.IsAbstract && t.BaseType is { IsGenericType: true }
                             && t.BaseType.GetGenericTypeDefinition() == abstractType &&
                             t.BaseType.GetGenericArguments()[0] == t)
                 .ToList();
 
-            foreach (Type subType in subTypes)
+            foreach (var subType in subTypes)
             {
                 // Debug.Log(subType.FullName);
-                string scriptPath = Path.Combine(folderPath, subType.Name + ".cs");
+                var scriptPath = Path.Combine(folderPath, subType.Name + ".cs");
                 // Debug.Log(scriptPath);
                 if (!File.Exists(scriptPath))
                 {
@@ -54,15 +53,15 @@ namespace Yuumix.OdinToolkits.Core
 
         public static string FindIsGenericSubClassOfInFolderReturnName(Type abstractType, string folderPath)
         {
-            List<Type> subTypes = Assembly.GetExecutingAssembly()
+            var subTypes = Assembly.GetExecutingAssembly()
                 .GetTypes()
                 .Where(t => t.IsClass && !t.IsAbstract && t.BaseType is { IsGenericType: true }
                             && t.BaseType.GetGenericTypeDefinition() == abstractType &&
                             t.BaseType.GetGenericArguments()[0] == t)
                 .ToList();
-            foreach (Type subType in subTypes)
+            foreach (var subType in subTypes)
             {
-                string scriptPath = Path.Combine(folderPath, subType.Name + ".cs");
+                var scriptPath = Path.Combine(folderPath, subType.Name + ".cs");
                 if (!File.Exists(scriptPath))
                 {
                     continue;
@@ -101,8 +100,8 @@ namespace Yuumix.OdinToolkits.Core
             }
 
             // 分割路径
-            string[] parts = fullPath.Split('/');
-            int lastIndex = -1;
+            var parts = fullPath.Split('/');
+            var lastIndex = -1;
 
             // 遍历查找最后一个匹配的索引
             for (var i = 0; i < parts.Length; i++)

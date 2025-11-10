@@ -16,6 +16,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     {
         public static BilingualData ToolMenuPathData = new BilingualData("导出包工具", "Export Package Tool");
 
+        #region Serialized Fields
+
         [PropertyOrder(-99)]
         public BilingualHeaderWidget headerWidget;
 
@@ -24,13 +26,9 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
         public ExportSettingsSO exportSettings;
 
-        /// <summary>
-        /// 判断导出路径是否包含导出工具自身的脚本文件，如果包含，则需要在实际导出前重置导出设置
-        /// </summary>
-        static bool ExportPathsContainsSelf(List<string> paths)
-        {
-            return paths.Any(path => path.Contains(nameof(ExportPackageToolVisualPanelSO) + ".cs"));
-        }
+        #endregion
+
+        #region Event Functions
 
         void OnEnable()
         {
@@ -40,9 +38,23 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "Based on the export settings, export the specified folders and files to the specified path.");
         }
 
+        #endregion
+
+        #region IOdinToolkitsEditorReset Members
+
         public void EditorReset()
         {
             exportSettings = null;
+        }
+
+        #endregion
+
+        /// <summary>
+        /// 判断导出路径是否包含导出工具自身的脚本文件，如果包含，则需要在实际导出前重置导出设置
+        /// </summary>
+        static bool ExportPathsContainsSelf(List<string> paths)
+        {
+            return paths.Any(path => path.Contains(nameof(ExportPackageToolVisualPanelSO) + ".cs"));
         }
 
         [PropertySpace(10f)]

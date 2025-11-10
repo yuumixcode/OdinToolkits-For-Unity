@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -22,7 +21,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             var sb = new StringBuilder();
             sb.AppendLine("nav:");
             GenerateFirstLevelFileLine(data, sb);
-            foreach (DirectoryAnalysisData subData in data.SubDirectoryData.Where(s =>
+            foreach (var subData in data.SubDirectoryData.Where(s =>
                          s.Depth == 1 && s.AnalysisType == DirectoryAnalysisData.DirectoryAnalysisType.Folder))
             {
                 RecursiveGenerate(subData, sb, maxDepth);
@@ -34,13 +33,13 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         void GenerateFirstLevelFileLine(DirectoryAnalysisData data, StringBuilder sb)
         {
-            List<DirectoryAnalysisData> subDataList = data.SubDirectoryData;
+            var subDataList = data.SubDirectoryData;
             if (subDataList == null || subDataList.Count <= 0)
             {
                 return;
             }
 
-            foreach (DirectoryAnalysisData directoryAnalysisData in subDataList.Where(s =>
+            foreach (var directoryAnalysisData in subDataList.Where(s =>
                          s.AnalysisType == DirectoryAnalysisData.DirectoryAnalysisType.File &&
                          !_fileFilterArray.Contains(s.Name)))
             {
@@ -59,22 +58,22 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
             if (data.Depth == 1 && data.AnalysisType == DirectoryAnalysisData.DirectoryAnalysisType.Folder)
             {
-                string indentString = GetIndentation(data.Depth);
-                string finalLine = indentString + data.Name + ":";
+                var indentString = GetIndentation(data.Depth);
+                var finalLine = indentString + data.Name + ":";
                 sb.AppendLine(finalLine);
             }
 
-            List<DirectoryAnalysisData> subDataList = data.SubDirectoryData;
+            var subDataList = data.SubDirectoryData;
             if (subDataList == null || subDataList.Count <= 0)
             {
                 return;
             }
 
-            foreach (DirectoryAnalysisData subData in data.SubDirectoryData)
+            foreach (var subData in data.SubDirectoryData)
             {
-                int depth = subData.Depth;
-                string indentString = GetIndentation(depth);
-                string finalLine = indentString + subData.Name + ":";
+                var depth = subData.Depth;
+                var indentString = GetIndentation(depth);
+                var finalLine = indentString + subData.Name + ":";
                 if (subData.AnalysisType == DirectoryAnalysisData.DirectoryAnalysisType.File)
                 {
                     finalLine = indentString + subData.Name.Split('.')[0] + ": " + subData.RelativePath;

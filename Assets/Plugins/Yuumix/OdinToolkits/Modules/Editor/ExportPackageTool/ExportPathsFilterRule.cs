@@ -1,5 +1,4 @@
 using Yuumix.OdinToolkits.Core;
-using UnityEngine;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -14,6 +13,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         /// </summary>
         [Summary("判断文件路径是否被排除")]
         public abstract bool IsExcludedFile(string filePath);
+
         /// <summary>
         /// 判断文件夹路径是否被排除
         /// </summary>
