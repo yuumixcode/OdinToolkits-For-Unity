@@ -114,7 +114,7 @@ namespace Yuumix.Community.Editor
 
         #endregion
     }
-    
+
     #region Order = 5 - Cards Example - Yuumix
 
     public partial class CommunityRepositorySO

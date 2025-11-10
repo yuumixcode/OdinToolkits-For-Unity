@@ -20,8 +20,8 @@ namespace Yuumix.OdinToolkits.Core.Editor
 
         protected override void DrawPropertyLayout(GUIContent label)
         {
-            InspectorProperty property = Property;
-            BilingualTitleGroupAttribute attribute = Attribute;
+            var property = Property;
+            var attribute = Attribute;
             if (property != property.Tree.GetRootProperty(0))
             {
                 EditorGUILayout.Space();
@@ -32,7 +32,7 @@ namespace Yuumix.OdinToolkits.Core.Editor
             GUIHelper.PushIndentLevel(EditorGUI.indentLevel + (attribute.Indent ? 1 : 0));
             for (var index = 0; index < property.Children.Count; ++index)
             {
-                InspectorProperty child = property.Children[index];
+                var child = property.Children[index];
                 child.Draw(child.Label);
             }
 

@@ -11,38 +11,6 @@ namespace Yuumix.OdinToolkits.Core
     [Conditional("UNITY_EDITOR")]
     public class BilingualButtonAttribute : ShowInInspectorAttribute
     {
-        // The alignment of the button represented by a range from 0 to 1 where 0 is the left edge of the available space and 1 is the right edge.
-        // ButtonAlignment only has an effect when Stretch is set to false.
-        public float ButtonAlignment;
-        public readonly int ButtonHeight;
-        public readonly IconAlignment ButtonIconAlignment;
-        public readonly ButtonSizes ButtonSize;
-        public readonly string ChineseName;
-
-        /// <summary>
-        /// Whether the containing object or scene (if there is one) should be marked dirty when the button is clicked. True by
-        /// default. Note that if this is false, undo for any changes caused by the button click is also disabled, as registering
-        /// undo events also causes dirtying.
-        /// </summary>
-        public readonly bool DirtyOnClick;
-
-        /// <summary>
-        ///     <para>Whether to display the button method's parameters (if any) as values in the inspector. True by default.</para>
-        ///     <para>
-        ///     If this is set to false, the button method will instead be invoked through an ActionResolver or ValueResolver
-        ///     (based on whether it returns a value), giving access to contextual named parameter values like "InspectorProperty
-        ///     property" that can be passed to the button method.
-        ///     </para>
-        /// </summary>
-        public readonly bool DisplayParameters;
-
-        public readonly bool DrawResult;
-        public readonly string EnglishName;
-        public readonly bool Expanded;
-        public readonly SdfIconType Icon;
-        public readonly bool Stretch;
-        public readonly ButtonStyle Style;
-
         public BilingualButtonAttribute(string chineseName, string englishName = null,
             ButtonSizes buttonSize = ButtonSizes.Medium,
             ButtonStyle style = ButtonStyle.Box,
@@ -70,6 +38,42 @@ namespace Yuumix.OdinToolkits.Core
             DisplayParameters = displayParameters;
             DirtyOnClick = dirtyOnClick;
         }
+
+        // The alignment of the button represented by a range from 0 to 1 where 0 is the left edge of the available space and 1 is the right edge.
+        // ButtonAlignment only has an effect when Stretch is set to false.
+        public float ButtonAlignment { get; set; }
+        public int ButtonHeight { get; set; }
+        public IconAlignment ButtonIconAlignment { get; set; }
+        public ButtonSizes ButtonSize { get; set; }
+        public string ChineseName { get; set; }
+
+        /// <summary>
+        /// Whether the containing object or scene (if there is one) should be marked dirty when the button is clicked. True by
+        /// default. Note that if this is false, undo for any changes caused by the button click is also disabled, as registering
+        /// undo events also causes dirtying.
+        /// </summary>
+        public bool DirtyOnClick { get; set; }
+
+        /// <summary>
+        ///     <para>Whether to display the button method's parameters (if any) as values in the inspector. True by default.</para>
+        ///     <para>
+        ///     If this is set to false, the button method will instead be invoked through an ActionResolver or ValueResolver
+        ///     (based on whether it returns a value), giving access to contextual named parameter values like "InspectorProperty
+        ///     property" that can be passed to the button method.
+        ///     </para>
+        /// </summary>
+        public bool DisplayParameters { get; set; }
+
+        /// <summary>
+        /// Whether to draw the result of the button method invocation below the button. True by default.
+        /// </summary>
+        public bool DrawResult { get; set; }
+
+        public string EnglishName { get; set; }
+        public bool Expanded { get; set; }
+        public SdfIconType Icon { get; set; }
+        public bool Stretch { get; set; }
+        public ButtonStyle Style { get; set; }
 
         public ButtonAttribute CreateButton()
         {

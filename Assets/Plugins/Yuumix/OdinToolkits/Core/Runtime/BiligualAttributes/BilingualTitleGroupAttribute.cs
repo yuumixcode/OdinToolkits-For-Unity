@@ -8,13 +8,6 @@ namespace Yuumix.OdinToolkits.Core
     [Conditional("UNITY_EDITOR")]
     public class BilingualTitleGroupAttribute : PropertyGroupAttribute
     {
-        public bool BoldTitle;
-        public bool HorizontalLine;
-        public bool Indent;
-        public BilingualData SubtitleData;
-        public TitleAlignments TitleAlignment;
-        public BilingualData TitleData;
-
         public BilingualTitleGroupAttribute(string groupId,
             string chineseTitle,
             string englishTitle = null,
@@ -35,6 +28,13 @@ namespace Yuumix.OdinToolkits.Core
             BoldTitle = boldTitle;
             Indent = indent;
         }
+
+        public bool BoldTitle { get; set; }
+        public bool HorizontalLine { get; set; }
+        public bool Indent { get; set; }
+        public BilingualData SubtitleData { get; set; }
+        public TitleAlignments TitleAlignment { get; set; }
+        public BilingualData TitleData { get; set; }
 
         protected override void CombineValuesWith(PropertyGroupAttribute other)
         {

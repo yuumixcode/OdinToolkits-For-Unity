@@ -41,7 +41,7 @@ namespace Yuumix.OdinToolkits.Core
             {
                 if (!_odinToolkitsRuntimeConfig)
                 {
-                    _odinToolkitsRuntimeConfig = LoadPreferences();
+                    _odinToolkitsRuntimeConfig = LoadRuntimeConfigSO();
                 }
 
                 return _odinToolkitsRuntimeConfig;
@@ -66,12 +66,11 @@ namespace Yuumix.OdinToolkits.Core
                     DestroyImmediate(gameObject);
                 }
             }
-
-            // 初始加载一次
-            _odinToolkitsRuntimeConfig = LoadPreferences();
+            
+            _odinToolkitsRuntimeConfig = LoadRuntimeConfigSO();
         }
 
-        static OdinToolkitsRuntimeConfigSO LoadPreferences()
+        static OdinToolkitsRuntimeConfigSO LoadRuntimeConfigSO()
         {
             var asset = Resources.Load<OdinToolkitsRuntimeConfigSO>("OdinToolkitsRuntimeConfig");
             if (!asset)

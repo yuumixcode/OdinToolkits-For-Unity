@@ -94,7 +94,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             DrawExample();
             DrawSeparator();
             DrawCode();
-            if (!(EditorApplication.timeSinceStartup % 0.5f <= 0.01f))
+            if (EditorApplication.timeSinceStartup % 0.5f > 0.01f)
             {
                 return;
             }

@@ -12,13 +12,6 @@ namespace Yuumix.OdinToolkits.Core
     [Conditional("UNITY_EDITOR")]
     public class BilingualTitleAttribute : Attribute
     {
-        public readonly bool BeforeSpace;
-        public readonly bool Bold;
-        public readonly bool HorizontalLine;
-        public readonly BilingualData SubtitleData;
-        public readonly TitleAlignments TitleAlignment;
-        public readonly BilingualData TitleData;
-
         public BilingualTitleAttribute(
             string chineseTitle,
             string englishTitle = null,
@@ -36,5 +29,12 @@ namespace Yuumix.OdinToolkits.Core
             Bold = bold;
             BeforeSpace = beforeSpace;
         }
+
+        public bool BeforeSpace { get; set; }
+        public bool Bold { get; set; }
+        public bool HorizontalLine { get; set; }
+        public BilingualData SubtitleData { get; set; }
+        public TitleAlignments TitleAlignment { get; set; }
+        public BilingualData TitleData { get; set; }
     }
 }

@@ -4,7 +4,6 @@ using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
-using Yuumix.OdinToolkits.Modules.Editor;
 using Yuumix.OdinToolkits.OdinAttributeOverviewPro.Editor;
 using Yuumix.OdinToolkits.ScriptDocGenerator.Editor;
 using YuumixEditor;

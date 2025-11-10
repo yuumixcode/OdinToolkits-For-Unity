@@ -12,7 +12,16 @@ namespace Yuumix.OdinToolkits.Core
     [Conditional("UNITY_EDITOR")]
     public class BilingualTextAttribute : Attribute
     {
-        public readonly SdfIconType Icon;
+        public BilingualTextAttribute(string chinese, string english = null, bool nicifyEnglishText = true,
+            SdfIconType icon = SdfIconType.None, string iconColor = null)
+        {
+            BilingualData = new BilingualData(chinese, english);
+            NicifyEnglishText = nicifyEnglishText;
+            Icon = icon;
+            IconColor = iconColor;
+        }
+
+        public SdfIconType Icon { get; set; }
 
         /// <summary>
         /// Supports a variety of color formats, including named colors (e.g. "red", "orange", "green", "blue"), hex
@@ -22,18 +31,9 @@ namespace Yuumix.OdinToolkits.Core
         /// lightcyan, lightgray, lightgreen, lightgrey, lightmagenta, lightorange, lightpurple, lightred, lightyellow, darkblue,
         /// darkcyan, darkgray, darkgreen, darkgrey, darkmagenta, darkorange, darkpurple, darkred, darkyellow.
         /// </summary>
-        public readonly string IconColor;
+        public string IconColor { get; set; }
 
-        public readonly bool NicifyEnglishText;
-        public BilingualData BilingualData;
-
-        public BilingualTextAttribute(string chinese, string english = null, bool nicifyEnglishText = true,
-            SdfIconType icon = SdfIconType.None, string iconColor = null)
-        {
-            BilingualData = new BilingualData(chinese, english);
-            NicifyEnglishText = nicifyEnglishText;
-            Icon = icon;
-            IconColor = iconColor;
-        }
+        public bool NicifyEnglishText { get; set; }
+        public BilingualData BilingualData { get; set; }
     }
 }
