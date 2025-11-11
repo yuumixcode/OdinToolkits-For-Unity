@@ -50,7 +50,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             }
 
             signature += accessModifierName + " ";
-            signature += methodInfo.GetKeywordSnippetInSignature();
+            signature += methodInfo.GetMethodKeywordSnippet();
             if (!methodInfo.Name.Contains("op_Implicit") && !methodInfo.Name.Contains("op_Explicit"))
             {
                 signature += methodInfo.ReturnType.GetReadableTypeName() + " ";

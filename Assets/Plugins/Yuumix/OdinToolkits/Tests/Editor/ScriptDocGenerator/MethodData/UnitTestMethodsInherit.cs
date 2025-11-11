@@ -8,11 +8,6 @@ namespace Yuumix.OdinToolkits.Tests.Editor
 {
     public class UnitTestMethodsInherit
     {
-        static readonly IMethodData[] UnitTestMethodsInheritMethodsDataArray =
-            typeof(UnitTestMethodsInherit).GetRuntimeMethods()
-                .Select(x => UnitTestAnalysisFactory.Default.CreateMethodData(x))
-                .ToArray();
-
         static readonly MethodInfo[] TestClassImplementMethodInfos =
             typeof(TestClassImplement).GetRuntimeMethods().ToArray();
 

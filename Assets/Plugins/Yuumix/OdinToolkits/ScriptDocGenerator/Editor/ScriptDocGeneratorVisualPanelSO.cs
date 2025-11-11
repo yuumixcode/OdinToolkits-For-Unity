@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Security.AccessControl;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
@@ -212,7 +213,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
             if (TemporaryTypes.Count > 0 && SirenixEditorGUI.ToolbarButton(content))
             {
                 var so = CreateInstance<TypesCacheSO>();
-                PathEditorUtility.EnsureFolderRecursively(typesCacheSOFolderPath);
+                PathEditorUtility.CreateDirectoryRecursivelyInAssets(typesCacheSOFolderPath);
                 so.Types = TemporaryTypes;
                 ProjectWindowUtil.CreateAsset(so, filePathWithExtension);
                 ProjectEditorUtility.PingAndSelectAsset(filePathWithExtension);
@@ -385,7 +386,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
                     return;
                 }
 
-                PathEditorUtility.EnsureFolderRecursively(folderPath);
+                PathEditorUtility.CreateDirectoryRecursivelyInAssets(folderPath);
             }
 
             switch (typeSource)
@@ -441,9 +442,10 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
                 }
             }
 
+            var utf8WithoutBom = new UTF8Encoding(false);
             File.WriteAllText(filePathWithExtensions,
                 markdownText,
-                Encoding.UTF8);
+                utf8WithoutBom);
             AssetDatabase.Refresh();
             EditorUtility.OpenWithDefaultApp(filePathWithExtensions);
         }
@@ -490,9 +492,10 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
                         }
                     }
 
+                    var utf8WithoutBom = new UTF8Encoding(false);
                     File.WriteAllText(filePathWithExtensions,
                         markdownText,
-                        Encoding.UTF8);
+                        utf8WithoutBom);
                 }
             }
             finally
@@ -535,7 +538,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
                     targetFolderPath = Path.Combine(targetFolderPath, "WithoutNamespace");
                 }
 
-                PathEditorUtility.EnsureFolderRecursively(targetFolderPath);
+                Directory.CreateDirectory(targetFolderPath);
             }
 
             filePathWithoutExtensions = Path.Combine(targetFolderPath, fileNameWithoutExtension);

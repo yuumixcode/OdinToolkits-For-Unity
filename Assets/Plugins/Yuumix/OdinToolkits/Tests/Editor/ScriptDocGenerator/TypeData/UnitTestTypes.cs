@@ -47,18 +47,6 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         }
 
         [Test]
-        public void TestClassWithAttribute()
-        {
-            var typeData = new TypeData(typeof(TestClassWithAttribute));
-            Debug.Log(typeData.MemberType);
-            Assert.IsTrue(typeData.MemberType == MemberTypes.TypeInfo);
-            Debug.Log(typeData.FullDeclarationWithAttributes);
-            Assert.AreEqual(
-                @"[ReferenceLinkURL]
-public class TestClassWithAttribute", typeData.FullDeclarationWithAttributes);
-        }
-
-        [Test]
         public void TestAbstractClass()
         {
             var typeData = new TypeData(typeof(TestAbstractClass));
@@ -89,6 +77,17 @@ public class TestClassWithAttribute", typeData.FullDeclarationWithAttributes);
         }
 
         [Test]
+        public void TestUnitTestTypes()
+        {
+            var typeData = new TypeData(typeof(UnitTestTypes));
+            Debug.Log(typeData.MemberType);
+            Debug.Log(typeData.FullDeclarationWithAttributes);
+            Assert.IsTrue(typeData.MemberType == MemberTypes.TypeInfo
+                          && "public class UnitTestTypes : Yuumix.OdinToolkits.Tests.Editor.TestAbstractClass" ==
+                          typeData.FullDeclarationWithAttributes);
+        }
+
+        [Test]
         public void TestGenericClass()
         {
             var typeData = new TypeData(typeof(TestGenericClass<>));
@@ -96,6 +95,18 @@ public class TestClassWithAttribute", typeData.FullDeclarationWithAttributes);
             Assert.IsTrue(typeData.MemberType == MemberTypes.TypeInfo);
             Debug.Log(typeData.FullDeclarationWithAttributes);
             Assert.AreEqual("public class TestGenericClass<T> where T : class", typeData.FullDeclarationWithAttributes);
+        }
+
+        [Test]
+        public void TestClassWithAttribute()
+        {
+            var typeData = new TypeData(typeof(TestClassWithAttribute));
+            Debug.Log(typeData.MemberType);
+            Assert.IsTrue(typeData.MemberType == MemberTypes.TypeInfo);
+            Debug.Log(typeData.FullDeclarationWithAttributes);
+            Assert.AreEqual(
+                @"[ReferenceLinkURL(""https://learn.microsoft.com/en-us/dotnet/api/system.object?view=net-9.0"")]
+public class TestClassWithAttribute", typeData.FullDeclarationWithAttributes);
         }
 
         [Test]
@@ -155,16 +166,6 @@ public record TestRecord : System.IEquatable<TestRecord>", typeData.FullDeclarat
         }
 
         [Test]
-        public void TestNestedClass()
-        {
-            var typeData = new TypeData(typeof(NestedClass));
-            Debug.Log(typeData.MemberType);
-            Assert.IsTrue(typeData.MemberType == MemberTypes.NestedType);
-            Debug.Log(typeData.FullDeclarationWithAttributes);
-            Assert.AreEqual("private class UnitTestTypes.NestedClass", typeData.FullDeclarationWithAttributes);
-        }
-
-        [Test]
         public void TestScriptDocGeneratorTestEnum()
         {
             var typeData = new TypeData(typeof(ScriptDocGeneratorTestEnum));
@@ -180,14 +181,13 @@ System.IConvertible",
         }
 
         [Test]
-        public void TestUnitTestTypes()
+        public void TestNestedClass()
         {
-            var typeData = new TypeData(typeof(UnitTestTypes));
+            var typeData = new TypeData(typeof(NestedClass));
             Debug.Log(typeData.MemberType);
+            Assert.IsTrue(typeData.MemberType == MemberTypes.NestedType);
             Debug.Log(typeData.FullDeclarationWithAttributes);
-            Assert.IsTrue(typeData.MemberType == MemberTypes.TypeInfo
-                          && "public class UnitTestTypes : Yuumix.OdinToolkits.Tests.Editor.TestAbstractClass" ==
-                          typeData.FullDeclarationWithAttributes);
+            Assert.AreEqual("private class UnitTestTypes.NestedClass", typeData.FullDeclarationWithAttributes);
         }
 
         #region Nested type: NestedClass

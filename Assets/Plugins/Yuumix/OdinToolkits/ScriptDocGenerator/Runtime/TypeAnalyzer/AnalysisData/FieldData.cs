@@ -25,7 +25,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             IsConstant = fieldInfo.IsLiteral && !fieldInfo.IsInitOnly;
             DefaultValue = fieldInfo.TryGetFieldCustomDefaultValue(out var value) ? value : null;
             Signature = GetFieldSignature(
-                TypeAnalyzerUtility.GetKeywordSnippetInSignature(IsConstant, IsStatic, IsReadOnly),
+                TypeAnalyzerUtility.GetFieldKeywordSnippet(IsConstant, IsStatic, IsReadOnly),
                 TypeAnalyzerUtility.GetFormattedDefaultValue(FieldType, DefaultValue));
             FullDeclarationWithAttributes = AttributesDeclaration + Signature;
         }

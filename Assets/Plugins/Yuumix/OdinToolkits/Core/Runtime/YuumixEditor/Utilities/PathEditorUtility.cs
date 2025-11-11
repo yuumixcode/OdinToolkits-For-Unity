@@ -12,8 +12,7 @@ namespace YuumixEditor
         /// <summary>
         /// 递归创建 Assets 下的文件夹路径
         /// </summary>
-        /// <param name="relativePath">以 Assets 开头的相对路径</param>
-        public static void EnsureFolderRecursively(string relativePath)
+        public static void CreateDirectoryRecursivelyInAssets(string relativePath)
         {
             // 移除 Assets 前缀，获取实际的文件夹路径
             var pathWithoutAssets = relativePath.Replace("Assets/", "");

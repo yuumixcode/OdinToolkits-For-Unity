@@ -68,40 +68,83 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         };
 
         /// <summary>
-        /// 获取事件的访问修饰符类型
-        /// </summary>
-        [Summary("获取事件的访问修饰符类型")]
-        public static AccessModifierType GetEventAccessModifierType(this EventInfo eventInfo)
-        {
-            var addMethod = eventInfo.GetAddMethod(true);
-            var removeMethod = eventInfo.GetRemoveMethod(true);
-            var invokeMethod = eventInfo.GetRaiseMethod(true);
-            if (addMethod != null && removeMethod != null)
-            {
-                return ((int)addMethod.GetMethodAccessModifierType() <= (int)removeMethod.GetMethodAccessModifierType()
-                    ? addMethod
-                    : removeMethod).GetMethodAccessModifierType();
-            }
-
-            if (addMethod != null)
-            {
-                return addMethod.GetMethodAccessModifierType();
-            }
-
-            if (removeMethod != null)
-            {
-                return removeMethod.GetMethodAccessModifierType();
-            }
-
-            return invokeMethod != null ? invokeMethod.GetMethodAccessModifierType() : AccessModifierType.None;
-        }
-
-        /// <summary>
         /// 判断是否为 API 成员，返回 true 表示是 API 成员，返回 false 表示不是。API 成员指的是公共成员或受保护成员。
         /// </summary>
         [Summary("判断是否为 API 成员，返回 true 表示是 API 成员，返回 false 表示不是。API 成员指的是公共成员或受保护成员。")]
         public static bool IsApiMember(this IDerivedMemberData derivedMemberData) =>
             derivedMemberData.AccessModifier is AccessModifierType.Public or AccessModifierType.Protected;
+
+        /// <summary>
+        /// 判断成员是否从继承中获取，这里的成员不包括 Type 类型
+        /// </summary>
+        [Summary("判断成员是否从继承中获取，这里的成员不包括 Type 类型")]
+        public static bool IsFromInheritance(this MemberInfo member)
+        {
+            if (member.DeclaringType == null || member.ReflectedType == null)
+            {
+                return false;
+            }
+
+            if (member is MethodInfo methodInfo && methodInfo.IsOverrideMethod())
+            {
+                var baseMethod = methodInfo.GetBaseDefinition();
+                return baseMethod.DeclaringType != methodInfo.DeclaringType;
+            }
+
+            return member.DeclaringType != member.ReflectedType;
+        }
+
+        /// <summary>
+        /// 获取特性声明字符串，多行显示
+        /// </summary>
+        [Summary("获取特性声明字符串，多行显示")]
+        public static string GetAttributesDeclarationWithMultiLine(this MemberInfo member,
+            IAttributeFilter filter = null)
+        {
+            var attributes = member.GetCustomAttributes(false);
+            if (attributes.Length == 0)
+            {
+                return string.Empty;
+            }
+
+            var attributesStringBuilder = new StringBuilder();
+            foreach (var attr in attributes)
+            {
+                var attributeType = attr.GetType();
+                if (filter != null && filter.ShouldFilterOut(attributeType))
+                {
+                    continue;
+                }
+
+                if (TypeAnalyzerUtility.TryGetFormatedAttributeWithFullParameter(attr, out var attributeSignature))
+                {
+                    attributesStringBuilder.AppendLine(attributeSignature);
+                    continue;
+                }
+
+                var attributeName = TypeAnalyzerUtility.GetAttributeNameWithoutSuffix(attributeType.Name);
+                attributesStringBuilder.AppendLine($"[{attributeName}]");
+            }
+
+            return attributesStringBuilder.ToString();
+        }
+
+        /// <summary>
+        /// 判断是否为静态属性
+        /// </summary>
+        [Summary("判断是否为静态属性")]
+        public static bool IsStaticProperty(this PropertyInfo propertyInfo)
+            => propertyInfo.GetGetMethod(true)?.IsStatic
+               ?? propertyInfo.GetSetMethod(true)?.IsStatic
+               ?? false;
+
+        /// <summary>
+        /// 判断是否为动态字段
+        /// </summary>
+        [Summary("判断是否为动态字段")]
+        public static bool IsDynamicField(this FieldInfo fieldInfo)
+            => fieldInfo.FieldType == typeof(object) &&
+               fieldInfo.GetCustomAttributes(typeof(DynamicAttribute), false).Length > 0;
 
         /// <summary>
         /// 将 IDerivedMemberData 转换为 IMemberData，转换成功返回 true，转换失败返回 false
@@ -117,6 +160,86 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             memberData = derivedMemberData as IMemberData;
             return memberData != null;
         }
+
+        /// <summary>
+        /// 获取属性的自定义默认值，不能获取到值则返回 null，只获取静态属性的默认值。
+        /// </summary>
+        [Summary("获取属性的自定义默认值，不能获取到值则返回 null，只获取静态属性的默认值。")]
+        public static bool TryGetPropertyCustomDefaultValue(this PropertyInfo propertyInfo, out object defaultValue)
+        {
+            var propertyType = propertyInfo.PropertyType;
+            if (propertyType.IsReferenceTypeExcludeString() || propertyType.IsAbstractOrInterface())
+            {
+                defaultValue = null;
+                return false;
+            }
+
+            var isStatic = propertyInfo.IsStaticProperty();
+            if (isStatic)
+            {
+                var staticValue = propertyInfo.GetMemberValue(null);
+                if (staticValue == null ||
+                    TypeAnalyzerUtility.TreatedAsTypeDefaultValue(staticValue, propertyInfo.PropertyType))
+                {
+                    defaultValue = null;
+                    return false;
+                }
+
+                defaultValue = staticValue;
+                return true;
+            }
+
+            defaultValue = null;
+            return false;
+        }
+
+        /// <summary>
+        /// 获取字段的自定义默认值，不能获取到值则返回 null。只获取静态字段和常量字段的默认值。
+        /// </summary>
+        [Summary("获取字段的自定义默认值，不能获取到值则返回 null。只获取静态字段和常量字段的默认值。")]
+        public static bool TryGetFieldCustomDefaultValue(this FieldInfo fieldInfo, out object defaultValue)
+        {
+            var fieldType = fieldInfo.FieldType;
+            if (fieldType.IsReferenceTypeExcludeString() || fieldType.IsAbstractOrInterface())
+            {
+                defaultValue = null;
+                return false;
+            }
+
+            var isConst = fieldInfo.IsLiteral && !fieldInfo.IsInitOnly;
+            var isStatic = fieldInfo.IsStatic;
+            if (isConst)
+            {
+                var constValue = fieldInfo.GetRawConstantValue();
+                if (TypeAnalyzerUtility.TreatedAsTypeDefaultValue(constValue, fieldInfo.FieldType))
+                {
+                    defaultValue = null;
+                    return false;
+                }
+
+                defaultValue = constValue;
+                return true;
+            }
+
+            if (isStatic)
+            {
+                var staticValue = fieldInfo.GetValue(null);
+                if (staticValue == null ||
+                    TypeAnalyzerUtility.TreatedAsTypeDefaultValue(staticValue, fieldInfo.FieldType))
+                {
+                    defaultValue = null;
+                    return false;
+                }
+
+                defaultValue = staticValue;
+                return true;
+            }
+
+            defaultValue = null;
+            return false;
+        }
+
+        #region Type
 
         /// <summary>
         /// 获取类型的种类
@@ -151,47 +274,6 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
 
             Debug.LogError("出现不存在的 TypeCategory，需要补充枚举！");
             return TypeCategory.Unknown;
-        }
-
-        /// <summary>
-        /// 判断指定类型是否为委托类型
-        /// </summary>
-        [Summary("判断指定类型是否为委托类型")]
-        public static bool IsDelegate(this Type type) =>
-            type.IsSubclassOf(typeof(Delegate)) || type.IsSubclassOf(typeof(MulticastDelegate));
-
-        /// <summary>
-        /// 判断类型是否为 record struct（值类型 record）
-        /// </summary>
-        [Summary("判断类型是否为 record struct（值类型 record）")]
-        public static bool IsRecordStruct(this Type type)
-        {
-            if (type == null)
-            {
-                throw new ArgumentNullException(nameof(type));
-            }
-
-            // 条件：是值类型、不是枚举、且是 record
-            return type.IsValueType && !type.IsEnum && IsRecord(type);
-        }
-
-        /// <summary>
-        /// 判断指定类型是否为 record（包括 record class 和 record struct）
-        /// </summary>
-        [Summary("判断指定类型是否为 record（包括 record class 和 record struct）")]
-        public static bool IsRecord(this Type type)
-        {
-            if (type == null)
-            {
-                throw new ArgumentNullException(nameof(type));
-            }
-
-            // 核心判断：检查是否存在名为 "<Clone>$" 的方法
-            // （record 类型编译后会自动生成该方法用于复制实例）
-            var cloneMethod = type.GetMethod("<Clone>$",
-                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-
-            return cloneMethod != null;
         }
 
         /// <summary>
@@ -326,47 +408,6 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         }
 
         /// <summary>
-        /// 获取类型的访问修饰符
-        /// </summary>
-        [Summary("获取类型的访问修饰符")]
-        public static AccessModifierType GetTypeAccessModifier(this Type type)
-        {
-            if (type.IsNested)
-            {
-                if (type.IsNestedPublic)
-                {
-                    return AccessModifierType.Public;
-                }
-
-                if (type.IsNestedPrivate)
-                {
-                    return AccessModifierType.Private;
-                }
-
-                if (type.IsNestedFamily)
-                {
-                    return AccessModifierType.Protected;
-                }
-
-                if (type.IsNestedAssembly)
-                {
-                    return AccessModifierType.Internal;
-                }
-
-                if (type.IsNestedFamORAssem)
-                {
-                    return AccessModifierType.ProtectedInternal;
-                }
-            }
-            else
-            {
-                return type.IsPublic ? AccessModifierType.Public : AccessModifierType.Internal;
-            }
-
-            return AccessModifierType.Public;
-        }
-
-        /// <summary>
         /// 将反射获取到的系统类型名称转换为人类可读的 C# 风格类型名称
         /// </summary>
         /// <param name="type">想要获取可读性强的类型定义名称字符串的 Type 对象</param>
@@ -408,14 +449,10 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         public static FieldInfo[] GetUserDefinedFields(this Type type)
         {
             return type.GetRuntimeFields()
-                .Where(f => !f.IsSpecialName && !IsAutoPropertyBackingField(f))
+                .Where(f => !f.IsSpecialName
+                            && !(f.Name.Contains("k__BackingField") ||
+                                 f.Name.Contains("__BackingField")))
                 .ToArray();
-
-            static bool IsAutoPropertyBackingField(FieldInfo field)
-            {
-                return field.Name.Contains("k__BackingField") ||
-                       field.Name.Contains("__BackingField");
-            }
         }
 
         /// <summary>
@@ -425,7 +462,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         public static string[] GetReferenceLinks(this Type type)
         {
             var links = type.GetAttributes<ReferenceLinkURLAttribute>();
-            return links.Select(x => x.WebLink).ToArray();
+            return links.Select(x => x.WebUrl).ToArray();
         }
 
         /// <summary>
@@ -463,180 +500,49 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         public static bool IsAbstractOrInterface(this Type type) => type.IsAbstract || type.IsInterface;
 
         /// <summary>
-        /// 判断成员是否从继承中获取，这里的成员不包括 Type 类型
+        /// 判断指定类型是否为委托类型
         /// </summary>
-        [Summary("判断成员是否从继承中获取，这里的成员不包括 Type 类型")]
-        public static bool IsFromInheritance(this MemberInfo member)
+        [Summary("判断指定类型是否为委托类型")]
+        public static bool IsDelegate(this Type type) =>
+            type.IsSubclassOf(typeof(Delegate)) || type.IsSubclassOf(typeof(MulticastDelegate));
+
+        /// <summary>
+        /// 判断类型是否为 record struct（值类型 record）
+        /// </summary>
+        [Summary("判断类型是否为 record struct（值类型 record）")]
+        public static bool IsRecordStruct(this Type type)
         {
-            if (member.DeclaringType == null || member.ReflectedType == null)
+            if (type == null)
             {
-                return false;
+                throw new ArgumentNullException(nameof(type));
             }
 
-            if (member is MethodInfo methodInfo && methodInfo.IsOverrideMethod())
-            {
-                var baseMethod = methodInfo.GetBaseDefinition();
-                return baseMethod.DeclaringType != methodInfo.DeclaringType;
-            }
-
-            return member.DeclaringType != member.ReflectedType;
+            // 条件：是值类型、不是枚举、且是 record
+            return type.IsValueType && !type.IsEnum && IsRecord(type);
         }
 
         /// <summary>
-        /// 获取特性声明字符串，多行显示
+        /// 判断指定类型是否为 record（包括 record class 和 record struct）
         /// </summary>
-        [Summary("获取特性声明字符串，多行显示")]
-        public static string GetAttributesDeclarationWithMultiLine(this MemberInfo member,
-            IAttributeFilter filter = null)
+        [Summary("判断指定类型是否为 record（包括 record class 和 record struct）")]
+        public static bool IsRecord(this Type type)
         {
-            var attributes = member.GetCustomAttributes(false);
-            if (attributes.Length == 0)
+            if (type == null)
             {
-                return string.Empty;
+                throw new ArgumentNullException(nameof(type));
             }
 
-            var attributesStringBuilder = new StringBuilder();
-            foreach (var attr in attributes)
-            {
-                var attributeType = attr.GetType();
-                if (filter != null && filter.ShouldFilterOut(attributeType))
-                {
-                    continue;
-                }
+            // 核心判断：检查是否存在名为 "<Clone>$" 的方法
+            // （record 类型编译后会自动生成该方法用于复制实例）
+            var cloneMethod = type.GetMethod("<Clone>$",
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
-                if (TypeAnalyzerUtility.TryGetFormatedAttributeWithFullParameter(attr, out var attributeSignature))
-                {
-                    attributesStringBuilder.AppendLine(attributeSignature);
-                    continue;
-                }
-
-                var attributeName = TypeAnalyzerUtility.GetAttributeNameWithoutSuffix(attributeType.Name);
-                attributesStringBuilder.AppendLine($"[{attributeName}]");
-            }
-
-            return attributesStringBuilder.ToString();
+            return cloneMethod != null;
         }
 
-        /// <summary>
-        /// 获取方法的关键字片段，用于生成方法签名，如：static、virtual、async 等
-        /// </summary>
-        [Summary("获取方法的关键字片段，用于生成方法签名，如：static、virtual、async 等")]
-        public static string GetKeywordSnippetInSignature(this MethodInfo methodInfo)
-        {
-            var keyword = "";
-            if (methodInfo.IsStatic)
-            {
-                keyword = "static ";
-            }
-            else if (methodInfo.IsAbstract)
-            {
-                keyword = "abstract ";
-            }
-            else if (methodInfo.IsVirtual && methodInfo.DeclaringType != methodInfo.GetBaseDefinition().DeclaringType)
-            {
-                keyword = "override ";
-            }
-            else if (methodInfo.DeclaringType == methodInfo.GetBaseDefinition().DeclaringType &&
-                     methodInfo.IsVirtual && methodInfo.IsFromInterfaceImplementMethod())
-            {
-                // 这是实现接口的方法
-                keyword = "";
-            }
-            else if (methodInfo.IsVirtual)
-            {
-                keyword = "virtual ";
-            }
+        #endregion
 
-            if (methodInfo.GetCustomAttribute<AsyncStateMachineAttribute>() != null)
-            {
-                keyword += "async ";
-            }
-
-            return keyword;
-        }
-
-        /// <summary>
-        /// 判断方法是否为从祖先类继承的重写方法，重写声明不是在当前类中
-        /// </summary>
-        [Summary("判断方法是否为从祖先类继承的重写方法，重写声明不是在当前类中")]
-        public static bool IsInheritedOverrideFromAncestor(this MethodInfo method, Type currentType)
-        {
-            // 方法不是在当前类中声明的
-            if (method.DeclaringType == currentType)
-            {
-                return false;
-            }
-
-            if (method.IsVirtual && method.GetBaseDefinition() != method)
-            {
-                var baseDefinitionDeclaringType = method.GetBaseDefinition().DeclaringType;
-                var directBaseType = currentType.BaseType;
-                if (baseDefinitionDeclaringType != directBaseType)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// 方法是否具有 override 的特性
-        /// </summary>
-        [Summary("方法是否具有 override 的特性")]
-        public static bool IsOverrideMethod(this MethodInfo methodInfo) =>
-            (methodInfo.IsVirtual &&
-             methodInfo.DeclaringType != methodInfo.GetBaseDefinition().DeclaringType)
-            || (methodInfo.DeclaringType == methodInfo.GetBaseDefinition().DeclaringType &&
-                methodInfo.IsVirtual && methodInfo.IsFromInterfaceImplementMethod());
-
-        /// <summary>
-        /// 判断方法是否是异步方法
-        /// </summary>
-        [Summary("判断方法是否是异步方法")]
-        public static bool IsAsyncMethod(this MethodBase methodBase) =>
-            methodBase.GetCustomAttribute<AsyncStateMachineAttribute>() != null;
-
-        /// <summary>
-        /// 判断方法是否是运算符方法
-        /// </summary>
-        [Summary("判断方法是否是运算符方法")]
-        public static bool IsOperatorMethod(this MethodBase methodInfo) =>
-            methodInfo.IsSpecialName && methodInfo.Name.StartsWith("op_");
-
-        /// <summary>
-        /// 获取方法的访问修饰符类型
-        /// </summary>
-        [Summary("获取方法的访问修饰符类型")]
-        public static AccessModifierType GetMethodAccessModifierType(this MethodBase method)
-        {
-            if (method.IsPublic)
-            {
-                return AccessModifierType.Public;
-            }
-
-            if (method.IsPrivate)
-            {
-                return AccessModifierType.Private;
-            }
-
-            if (method.IsFamily)
-            {
-                return AccessModifierType.Protected;
-            }
-
-            if (method.IsAssembly)
-            {
-                return AccessModifierType.Internal;
-            }
-
-            if (method.IsFamilyOrAssembly)
-            {
-                return AccessModifierType.ProtectedInternal;
-            }
-
-            return method.IsFamilyAndAssembly ? AccessModifierType.PrivateProtected : AccessModifierType.None;
-        }
+        #region Method
 
         /// <summary>
         /// 获取方法的部分签名，包含名称和参数列表，不包含返回值和修饰符
@@ -719,6 +625,44 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         }
 
         /// <summary>
+        /// 获取方法的关键字片段字符串
+        /// </summary>
+        [Summary("获取方法的关键字片段字符串")]
+        public static string GetMethodKeywordSnippet(this MethodInfo methodInfo)
+        {
+            var keyword = "";
+            if (methodInfo.IsStatic)
+            {
+                keyword = "static ";
+            }
+            else if (methodInfo.IsAbstract)
+            {
+                keyword = "abstract ";
+            }
+            else if (methodInfo.IsVirtual && methodInfo.DeclaringType != methodInfo.GetBaseDefinition().DeclaringType)
+            {
+                keyword = "override ";
+            }
+            else if (methodInfo.DeclaringType == methodInfo.GetBaseDefinition().DeclaringType &&
+                     methodInfo.IsVirtual && methodInfo.IsFromInterfaceImplementMethod())
+            {
+                // 这是实现接口的方法
+                keyword = "";
+            }
+            else if (methodInfo.IsVirtual)
+            {
+                keyword = "virtual ";
+            }
+
+            if (methodInfo.GetCustomAttribute<AsyncStateMachineAttribute>() != null)
+            {
+                keyword += "async ";
+            }
+
+            return keyword;
+        }
+
+        /// <summary>
         /// 判断是否为接口的实现方法
         /// </summary>
         [Summary("判断是否为接口的实现方法")]
@@ -743,13 +687,161 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         }
 
         /// <summary>
-        /// 判断是否为静态属性
+        /// 判断方法是否为从祖先类继承的重写方法，重写声明不是在当前类中
         /// </summary>
-        [Summary("判断是否为静态属性")]
-        public static bool IsStaticProperty(this PropertyInfo propertyInfo)
-            => propertyInfo.GetGetMethod(true)?.IsStatic
-               ?? propertyInfo.GetSetMethod(true)?.IsStatic
-               ?? false;
+        [Summary("判断方法是否为从祖先类继承的重写方法，重写声明不是在当前类中")]
+        public static bool IsInheritedOverrideFromAncestor(this MethodInfo method, Type currentType)
+        {
+            // 方法不是在当前类中声明的
+            if (method.DeclaringType == currentType)
+            {
+                return false;
+            }
+
+            if (method.IsVirtual && method.GetBaseDefinition() != method)
+            {
+                var baseDefinitionDeclaringType = method.GetBaseDefinition().DeclaringType;
+                var directBaseType = currentType.BaseType;
+                if (baseDefinitionDeclaringType != directBaseType)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 方法是否具有 override 的特性
+        /// </summary>
+        [Summary("方法是否具有 override 的特性")]
+        public static bool IsOverrideMethod(this MethodInfo methodInfo) =>
+            (methodInfo.IsVirtual &&
+             methodInfo.DeclaringType != methodInfo.GetBaseDefinition().DeclaringType)
+            || (methodInfo.DeclaringType == methodInfo.GetBaseDefinition().DeclaringType &&
+                methodInfo.IsVirtual && methodInfo.IsFromInterfaceImplementMethod());
+
+        /// <summary>
+        /// 判断方法是否是异步方法
+        /// </summary>
+        [Summary("判断方法是否是异步方法")]
+        public static bool IsAsyncMethod(this MethodBase methodBase) =>
+            methodBase.GetCustomAttribute<AsyncStateMachineAttribute>() != null;
+
+        /// <summary>
+        /// 判断方法是否是运算符方法
+        /// </summary>
+        [Summary("判断方法是否是运算符方法")]
+        public static bool IsOperatorMethod(this MethodBase methodInfo) =>
+            methodInfo.IsSpecialName && methodInfo.Name.StartsWith("op_");
+
+        #endregion
+
+        #region AccessModifierType
+
+        /// <summary>
+        /// 获取类型的访问修饰符
+        /// </summary>
+        [Summary("获取类型的访问修饰符")]
+        public static AccessModifierType GetTypeAccessModifier(this Type type)
+        {
+            if (type.IsNested)
+            {
+                if (type.IsNestedPublic)
+                {
+                    return AccessModifierType.Public;
+                }
+
+                if (type.IsNestedPrivate)
+                {
+                    return AccessModifierType.Private;
+                }
+
+                if (type.IsNestedFamily)
+                {
+                    return AccessModifierType.Protected;
+                }
+
+                if (type.IsNestedAssembly)
+                {
+                    return AccessModifierType.Internal;
+                }
+
+                if (type.IsNestedFamORAssem)
+                {
+                    return AccessModifierType.ProtectedInternal;
+                }
+            }
+            else
+            {
+                return type.IsPublic ? AccessModifierType.Public : AccessModifierType.Internal;
+            }
+
+            return AccessModifierType.Public;
+        }
+
+        /// <summary>
+        /// 获取事件的访问修饰符类型
+        /// </summary>
+        [Summary("获取事件的访问修饰符类型")]
+        public static AccessModifierType GetEventAccessModifierType(this EventInfo eventInfo)
+        {
+            var addMethod = eventInfo.GetAddMethod(true);
+            var removeMethod = eventInfo.GetRemoveMethod(true);
+            var invokeMethod = eventInfo.GetRaiseMethod(true);
+            if (addMethod != null && removeMethod != null)
+            {
+                return ((int)addMethod.GetMethodAccessModifierType() <= (int)removeMethod.GetMethodAccessModifierType()
+                    ? addMethod
+                    : removeMethod).GetMethodAccessModifierType();
+            }
+
+            if (addMethod != null)
+            {
+                return addMethod.GetMethodAccessModifierType();
+            }
+
+            if (removeMethod != null)
+            {
+                return removeMethod.GetMethodAccessModifierType();
+            }
+
+            return invokeMethod != null ? invokeMethod.GetMethodAccessModifierType() : AccessModifierType.None;
+        }
+
+        /// <summary>
+        /// 获取方法的访问修饰符类型
+        /// </summary>
+        [Summary("获取方法的访问修饰符类型")]
+        public static AccessModifierType GetMethodAccessModifierType(this MethodBase method)
+        {
+            if (method.IsPublic)
+            {
+                return AccessModifierType.Public;
+            }
+
+            if (method.IsPrivate)
+            {
+                return AccessModifierType.Private;
+            }
+
+            if (method.IsFamily)
+            {
+                return AccessModifierType.Protected;
+            }
+
+            if (method.IsAssembly)
+            {
+                return AccessModifierType.Internal;
+            }
+
+            if (method.IsFamilyOrAssembly)
+            {
+                return AccessModifierType.ProtectedInternal;
+            }
+
+            return method.IsFamilyAndAssembly ? AccessModifierType.PrivateProtected : AccessModifierType.None;
+        }
 
         /// <summary>
         /// 获取属性的访问修饰符类型
@@ -781,38 +873,6 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             return (int)getAccess.Value <= (int)setAccess.Value
                 ? getAccess.Value
                 : setAccess.Value;
-        }
-
-        /// <summary>
-        /// 获取属性的自定义默认值，不能获取到值则返回 null，只获取静态属性的默认值。
-        /// </summary>
-        [Summary("获取属性的自定义默认值，不能获取到值则返回 null，只获取静态属性的默认值。")]
-        public static bool TryGetPropertyCustomDefaultValue(this PropertyInfo propertyInfo, out object defaultValue)
-        {
-            var propertyType = propertyInfo.PropertyType;
-            if (propertyType.IsReferenceTypeExcludeString() || propertyType.IsAbstractOrInterface())
-            {
-                defaultValue = null;
-                return false;
-            }
-
-            var isStatic = propertyInfo.IsStaticProperty();
-            if (isStatic)
-            {
-                var staticValue = propertyInfo.GetMemberValue(null);
-                if (staticValue == null ||
-                    TypeAnalyzerUtility.TreatedAsTypeDefaultValue(staticValue, propertyInfo.PropertyType))
-                {
-                    defaultValue = null;
-                    return false;
-                }
-
-                defaultValue = staticValue;
-                return true;
-            }
-
-            defaultValue = null;
-            return false;
         }
 
         /// <summary>
@@ -855,58 +915,6 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             return fieldInfo.IsFamilyAndAssembly ? AccessModifierType.PrivateProtected : AccessModifierType.None;
         }
 
-        /// <summary>
-        /// 判断是否为动态字段
-        /// </summary>
-        [Summary("判断是否为动态字段")]
-        public static bool IsDynamicField(this FieldInfo fieldInfo)
-            => fieldInfo.FieldType == typeof(object) &&
-               fieldInfo.GetCustomAttributes(typeof(DynamicAttribute), false).Length > 0;
-
-        /// <summary>
-        /// 获取字段的自定义默认值，不能获取到值则返回 null。只获取静态字段和常量字段的默认值。
-        /// </summary>
-        [Summary("获取字段的自定义默认值，不能获取到值则返回 null。只获取静态字段和常量字段的默认值。")]
-        public static bool TryGetFieldCustomDefaultValue(this FieldInfo fieldInfo, out object defaultValue)
-        {
-            var fieldType = fieldInfo.FieldType;
-            if (fieldType.IsReferenceTypeExcludeString() || fieldType.IsAbstractOrInterface())
-            {
-                defaultValue = null;
-                return false;
-            }
-
-            var isConst = fieldInfo.IsLiteral && !fieldInfo.IsInitOnly;
-            var isStatic = fieldInfo.IsStatic;
-            if (isConst)
-            {
-                var constValue = fieldInfo.GetRawConstantValue();
-                if (TypeAnalyzerUtility.TreatedAsTypeDefaultValue(constValue, fieldInfo.FieldType))
-                {
-                    defaultValue = null;
-                    return false;
-                }
-
-                defaultValue = constValue;
-                return true;
-            }
-
-            if (isStatic)
-            {
-                var staticValue = fieldInfo.GetValue(null);
-                if (staticValue == null ||
-                    TypeAnalyzerUtility.TreatedAsTypeDefaultValue(staticValue, fieldInfo.FieldType))
-                {
-                    defaultValue = null;
-                    return false;
-                }
-
-                defaultValue = staticValue;
-                return true;
-            }
-
-            defaultValue = null;
-            return false;
-        }
+        #endregion
     }
 }

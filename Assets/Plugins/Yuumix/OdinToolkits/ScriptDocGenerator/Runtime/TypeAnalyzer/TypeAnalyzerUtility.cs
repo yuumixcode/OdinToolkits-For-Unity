@@ -147,6 +147,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             out string attributeFullSignature)
         {
             var attributeFullName = GetAttributeNameWithoutSuffix(attrInstance.GetType().FullName);
+            var attributeName = GetAttributeNameWithoutSuffix(attrInstance.GetType().Name);
             switch (attrInstance)
             {
                 case ObsoleteAttribute obsoleteAttr:
@@ -165,6 +166,10 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
                     attributeFullSignature =
                         $"[{attributeFullName}({colorUsageAttr.showAlpha.ToString().ToLower()}, " +
                         $"{colorUsageAttr.hdr.ToString().ToLower()})]";
+                    return true;
+                case ReferenceLinkURLAttribute referenceLinkAttr:
+                    attributeFullSignature =
+                        $"[{attributeName}(\"{referenceLinkAttr.WebUrl}\")]";
                     return true;
             }
 
@@ -207,10 +212,10 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         }
 
         /// <summary>
-        /// 获取字段的关键字片段，用于生成字段签名
+        /// 获取字段的关键字片段字符串
         /// </summary>
-        [Summary("获取字段的关键字片段，用于生成字段签名")]
-        public static string GetKeywordSnippetInSignature(bool isConst, bool isStatic, bool isReadOnly)
+        [Summary("获取字段的关键字片段字符串")]
+        public static string GetFieldKeywordSnippet(bool isConst, bool isStatic, bool isReadOnly)
         {
             var keyword = "";
             if (isConst)
