@@ -2,6 +2,7 @@ using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using System;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.ScriptDocGenerator
@@ -50,14 +51,52 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             }
 
             signature += accessModifierName + " ";
-            signature += methodInfo.GetMethodKeywordSnippet();
+            signature += GetMethodKeywordSnippet(methodInfo);
             if (!methodInfo.Name.Contains("op_Implicit") && !methodInfo.Name.Contains("op_Explicit"))
             {
                 signature += methodInfo.ReturnType.GetReadableTypeName() + " ";
             }
 
-            signature += methodInfo.GetPartMethodSignatureContainsNameAndParameters();
+            signature += methodInfo.GetMethodNameAndParameters();
             return signature;
+        }
+
+        /// <summary>
+        /// 获取方法的关键字片段字符串
+        /// </summary>
+        [Summary("获取方法的关键字片段字符串")]
+        public static string GetMethodKeywordSnippet(MethodInfo methodInfo)
+        {
+            var keyword = "";
+            if (methodInfo.IsStatic)
+            {
+                keyword = "static ";
+            }
+            else if (methodInfo.IsAbstract)
+            {
+                keyword = "abstract ";
+            }
+            else if (methodInfo.IsVirtual && methodInfo.DeclaringType != methodInfo.GetBaseDefinition().DeclaringType)
+            {
+                keyword = "override ";
+            }
+            else if (methodInfo.DeclaringType == methodInfo.GetBaseDefinition().DeclaringType &&
+                     methodInfo.IsVirtual && methodInfo.IsFromInterfaceImplementMethod())
+            {
+                // 这是实现接口的方法
+                keyword = "";
+            }
+            else if (methodInfo.IsVirtual)
+            {
+                keyword = "virtual ";
+            }
+
+            if (methodInfo.GetCustomAttribute<AsyncStateMachineAttribute>() != null)
+            {
+                keyword += "async ";
+            }
+
+            return keyword;
         }
 
         #region IMethodData

@@ -7,7 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Security.AccessControl;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
@@ -29,9 +28,11 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
         public const string IDENTIFIER_CN = "## 额外说明";
         public const string IDENTIFIER_EN = "## Additional Description";
         const string NONE_ASSEMBLY = "None Assembly";
-        public static BilingualData MenuName = new BilingualData("脚本文档生成工具", "Script Doc Generator");
 
-        public static StringBuilder UserIdentifierParagraph = new StringBuilder()
+        public static readonly BilingualData ModuleName =
+            new BilingualData("脚本文档生成工具", "Script Doc Generator");
+
+        public static StringBuilder UserIdentifierDescriptionParagraph = new StringBuilder()
             .AppendLine(IDENTIFIER_CN)
             .AppendLine()
             .AppendLine("> 首个 `" + IDENTIFIER_CN + "` 是增量生成文档标识符，请勿修改标题级别和内容！" +
@@ -39,21 +40,6 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
                         ") 辅助生成。");
 
         static IAnalysisDataFactory _analysisDataFactory;
-
-        #region Serialized Fields
-
-        [PropertyOrder(-5)]
-        public BilingualHeaderWidget headerWidget;
-
-        [PropertyOrder(2)]
-        [BilingualTitle("存放脚本文档的目标文件夹路径 [可拖拽]", "Folder Path For Document [Drag And Drop Allowed]")]
-        [HideLabel]
-        [FolderPath(AbsolutePath = true)]
-        [InlineButton(nameof(ResetDocFolderPath), SdfIconType.ArrowClockwise, "")]
-        [CustomContextMenu("Reset To Default", nameof(ResetDocFolderPath))]
-        public string folderPath;
-
-        #endregion
 
         bool IsSingleType => typeSource == TypeSource.SingleType;
         bool IsMultipleType => typeSource == TypeSource.MultipleTypes;
@@ -65,9 +51,9 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
         {
             headerWidget = new BilingualHeaderWidget(
                 "脚本文档生成工具", "Script Doc Generator",
-                "用户提供一个 Type 类型的值，分析 Type 数据，选择合适的文档生成器，一键生成对应的文档。默认提供 API 文档生成器，可以自定义适合项目的生成器。",
+                "用户提供一个 Type 类型的值，分析 Type 数据，选择合适的文档生成器，一键生成对应的文档。默认提供中文 API 文档生成器，可以自定义适合项目的生成器。",
                 "The user provides a value of the Type, analyze the Type data, selects the appropriate document generator, " +
-                "and generates the corresponding document with one click. By default, an API document generator is provided, " +
+                "and generates the corresponding document with one click. By default, a Chinese API document generator is provided, " +
                 "and a custom generator suitable for the project can also be defined."
             );
 
@@ -76,20 +62,35 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
 
         #endregion
 
+        #region Serialized Fields
+
+        [PropertyOrder(-5)]
+        public BilingualHeaderWidget headerWidget;
+
+        [PropertyOrder(2)]
+        [BilingualTitle("生成脚本文档的目标文件夹路径 [可拖拽]", "Folder Path For Document [Drag And Drop Allowed]")]
+        [HideLabel]
+        [FolderPath(AbsolutePath = true)]
+        [InlineButton(nameof(ResetDocFolderPath), SdfIconType.ArrowClockwise, "")]
+        [CustomContextMenu("Reset To Default", nameof(ResetDocFolderPath))]
+        public string docFolderPath;
+
+        #endregion
+
         #region 文档生成器选择
 
         [PropertyOrder(10)]
         [Title("$GetDocGeneratorTitle")]
         [HideLabel]
-        [InlineButton(nameof(ResetDocGeneratorSO), SdfIconType.ArrowClockwise, "")]
-        [CustomContextMenu("Reset To Default", nameof(ResetDocGeneratorSO))]
+        [InlineButton(nameof(ResetDocGeneratorSettingSO), SdfIconType.ArrowClockwise, "")]
+        [CustomContextMenu("Reset To Default", nameof(ResetDocGeneratorSettingSO))]
         [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
         public DocGeneratorSettingSO docGeneratorSetting;
 
         string GetDocGeneratorTitle()
         {
             var chineseTitle = "文档生成器设置";
-            var englishTitle = "Doc Generator Selector";
+            var englishTitle = "Doc Generator Setting";
             if (docGeneratorSetting && docGeneratorSetting.GetType() == typeof(CnAPIDocGeneratorSettingSO))
             {
                 chineseTitle += " - [当前选择: 中文 API Markdown 文档]";
@@ -107,8 +108,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
         [EnumPaging]
         [Title("$GetTypeSourceEnumLabelText")]
         [HideLabel]
-        [InlineButton("ResetTypeSourceEnum", SdfIconType.ArrowClockwise, "")]
-        [CustomContextMenu("Reset To Default", "ResetTypeSourceEnum")]
+        [InlineButton("ResetTypeSource", SdfIconType.ArrowClockwise, "")]
+        [CustomContextMenu("Reset To Default", "ResetTypeSource")]
         public TypeSource typeSource;
 
         string GetTypeSourceEnumLabelText()
@@ -147,13 +148,13 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
 
         [PropertyOrder(25)]
         [ShowIf("IsSingleType")]
-        [Title("$_singleTypeData")]
+        [Title("$_singleTypeDataLabel")]
         [HideLabel]
         [InlineButton("ResetSingleType", SdfIconType.ArrowClockwise, "")]
         [CustomContextMenu("Reset To Default", "ResetSingleType")]
         public Type TargetType;
 
-        BilingualData _singleTypeData = new BilingualData("目标 Type", "Single Target Type");
+        BilingualData _singleTypeDataLabel = new BilingualData("目标 Type", "Single Target Type");
 
         #endregion
 
@@ -166,8 +167,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
             "When the TypesConfigSO asset is not empty, TemporaryTypes Config is forced to be overridden")]
         [HideLabel]
         [AssetSelector(FlattenTreeView = true)]
-        [InlineButton("ResetTypesConfigSO", SdfIconType.ArrowClockwise, "")]
-        [CustomContextMenu("Reset To Default", "ResetTypesConfigSO")]
+        [InlineButton("ResetTypesCacheSO", SdfIconType.ArrowClockwise, "")]
+        [CustomContextMenu("Reset To Default", "ResetTypesCacheSO")]
         public TypesCacheSO typesCache;
 
         [PropertyOrder(25)]
@@ -247,15 +248,15 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
         [PropertyOrder(35)]
         [ShowIf("IsSingleAssembly")]
         [BilingualTitle("目标程序集配置", "Single Assembly Config")]
-        [ValueDropdown("GetAssemblyString")]
+        [ValueDropdown("GetAssemblyNameToFullName")]
         [HideLabel]
-        [InlineButton("ResetSingleAssemblyString", SdfIconType.ArrowClockwise, "")]
-        [CustomContextMenu("Reset To Default", "ResetSingleAssemblyString")]
-        public string targetAssemblyString;
+        [InlineButton("ResetSingleAssemblyFullName", SdfIconType.ArrowClockwise, "")]
+        [CustomContextMenu("Reset To Default", "ResetSingleAssemblyFullName")]
+        public string targetAssemblyFullName;
 
         static ValueDropdownList<string> _currentDomainAssemblies;
 
-        static ValueDropdownList<string> GetAssemblyString()
+        static ValueDropdownList<string> GetAssemblyNameToFullName()
         {
             if (_currentDomainAssemblies != null &&
                 (_currentDomainAssemblies != null || _currentDomainAssemblies.Count > 0))
@@ -283,7 +284,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
         [BilingualTitle("分析按钮", "Analyze Button")]
         [BilingualButton("基于当前模式执行类型分析", "Analyze Type based on the current mode", ButtonSizes.Large, ButtonStyle.Box,
             SdfIconType.FileEarmarkPlus)]
-        public void AnalyzeButton()
+        public void AnalyzeType()
         {
             switch (typeSource)
             {
@@ -294,7 +295,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
                         return;
                     }
 
-                    SingleTypeAnalyze();
+                    AnalyzeSingleType();
                     break;
                 case TypeSource.MultipleTypes:
                     if (!typesCache && TemporaryTypes.Count <= 0)
@@ -303,39 +304,33 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
                         return;
                     }
 
-                    MultipleTypesAnalyze();
+                    AnalyzeMultipleTypes();
                     break;
                 case TypeSource.SingleAssembly:
-                    if (targetAssemblyString is null or NONE_ASSEMBLY)
+                    if (targetAssemblyFullName is null or NONE_ASSEMBLY)
                     {
                         YuumixLogger.OdinToolkitsError("请选择目标程序集，不能为 " + NONE_ASSEMBLY);
                         return;
                     }
 
-                    SingleAssemblyAnalyze();
+                    AnalyzeSingleAssembly();
                     break;
             }
 
             _hasFinishedAnalyze = true;
-            RaiseToastEvent(ToastPosition.BottomRight, SdfIconType.LightningFill,
-                "分析中，禁止连续点击！等待生成按钮显示方可进行下一步。",
+            ToastRequested?.Invoke(ToastPosition.BottomRight, SdfIconType.LightningFill,
+                "分析中，等待生成按钮显示。请勿连续点击！",
                 Color.yellow, 4f);
         }
 
-        public static event Action<ToastPosition, SdfIconType, string, Color, float> ToastEvent;
+        public static event Action<ToastPosition, SdfIconType, string, Color, float> ToastRequested;
 
-        static void RaiseToastEvent(ToastPosition position, SdfIconType icon, string msg,
-            Color color, float duration)
-        {
-            ToastEvent?.Invoke(position, icon, msg, color, duration);
-        }
-
-        void SingleTypeAnalyze()
+        void AnalyzeSingleType()
         {
             TypeData = _analysisDataFactory.CreateTypeData(TargetType, _analysisDataFactory);
         }
 
-        void MultipleTypesAnalyze()
+        void AnalyzeMultipleTypes()
         {
             TypeDataList = new List<ITypeData>();
             if (typesCache)
@@ -356,10 +351,10 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
             }
         }
 
-        void SingleAssemblyAnalyze()
+        void AnalyzeSingleAssembly()
         {
             TypeDataList = new List<ITypeData>();
-            var targetAssembly = Assembly.Load(targetAssemblyString);
+            var targetAssembly = Assembly.Load(targetAssemblyFullName);
             foreach (var type in targetAssembly.GetTypes()
                          .Where(t => t.GetCustomAttribute<CompilerGeneratedAttribute>() == null))
             {
@@ -377,33 +372,33 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
         [BilingualButton("基于解析结果和文档生成器生成 Markdown 文档",
             "Generate Markdown Document Based On Analysis Result And Doc Generator",
             ButtonSizes.Large, ButtonStyle.Box, SdfIconType.FileEarmarkPlus)]
-        public void GenerateButton()
+        public void GenerateDoc()
         {
-            if (!Directory.Exists(folderPath))
+            if (!Directory.Exists(docFolderPath))
             {
                 if (!EditorUtility.DisplayDialog("自动路径补全提示", "当前的文档导出路径不存在，是否自动生成文件夹路径？", "确认", "取消"))
                 {
                     return;
                 }
 
-                PathEditorUtility.CreateDirectoryRecursivelyInAssets(folderPath);
+                PathEditorUtility.CreateDirectoryRecursivelyInAssets(docFolderPath);
             }
 
             switch (typeSource)
             {
                 case TypeSource.SingleType:
-                    SingleTypeGenerate(TypeData, docGeneratorSetting, folderPath);
+                    GenerateSingleTypeDoc(TypeData, docGeneratorSetting, docFolderPath);
                     break;
                 case TypeSource.MultipleTypes:
                 case TypeSource.SingleAssembly:
-                    MultipleTypesGenerate(TypeDataList, docGeneratorSetting, folderPath);
+                    GenerateMultipleTypeDocs(TypeDataList, docGeneratorSetting, docFolderPath);
                     break;
             }
 
             _hasFinishedAnalyze = false;
         }
 
-        static void SingleTypeGenerate(ITypeData typeData, DocGeneratorSettingSO generatorSetting,
+        static void GenerateSingleTypeDoc(ITypeData typeData, DocGeneratorSettingSO generatorSetting,
             string targetFolderPath)
         {
             typeData.TryAsIMemberData(out var memberData);
@@ -412,7 +407,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
                 return;
             }
 
-            ReadGenerateSO(typeData, generatorSetting, targetFolderPath, memberData, out var markdownText,
+            ReadDocGeneratorSettingSO(typeData, generatorSetting, targetFolderPath, memberData, out var markdownText,
                 out var filePathWithExtensions);
             if (File.Exists(filePathWithExtensions))
             {
@@ -435,7 +430,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
                         }
 
                         var additionalDescription = additionalDescriptionStringBuilder.ToString();
-                        var userIdentifierParagraphString = UserIdentifierParagraph.ToString();
+                        var userIdentifierParagraphString = UserIdentifierDescriptionParagraph.ToString();
                         markdownText =
                             markdownText.Replace(userIdentifierParagraphString, additionalDescription);
                     }
@@ -450,7 +445,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
             EditorUtility.OpenWithDefaultApp(filePathWithExtensions);
         }
 
-        static void MultipleTypesGenerate(List<ITypeData> typeDataCollection, DocGeneratorSettingSO generatorSetting,
+        static void GenerateMultipleTypeDocs(List<ITypeData> typeDataCollection, DocGeneratorSettingSO generatorSetting,
             string targetFolderPath)
         {
             if (typeDataCollection.Count <= 0)
@@ -467,7 +462,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
                     var dataTypeName = memberData.Name;
                     EditorUtility.DisplayProgressBar("脚本文档生成", $"正在生成 {dataTypeName} 文档",
                         (float)i / typeDataCollection.Count);
-                    ReadGenerateSO(typeData, generatorSetting, targetFolderPath, memberData, out var markdownText,
+                    ReadDocGeneratorSettingSO(typeData, generatorSetting, targetFolderPath, memberData,
+                        out var markdownText,
                         out var filePathWithExtensions);
                     if (File.Exists(filePathWithExtensions))
                     {
@@ -484,7 +480,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
                                 }
 
                                 var additionalDescription = additionalDescriptionStringBuilder.ToString();
-                                var userIdentifierParagraphString = UserIdentifierParagraph.ToString();
+                                var userIdentifierParagraphString = UserIdentifierDescriptionParagraph.ToString();
                                 markdownText = markdownText
                                     .Replace(userIdentifierParagraphString,
                                         additionalDescription);
@@ -512,15 +508,16 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
             (IsMultipleType && TypeDataList is { Count: > 0 }) ||
             (IsSingleAssembly && TypeDataList is { Count: > 0 }));
 
-        static void ReadGenerateSO(ITypeData typeData, DocGeneratorSettingSO generatorSetting, string targetFolderPath,
+        static void ReadDocGeneratorSettingSO(ITypeData typeData, DocGeneratorSettingSO generatorSetting,
+            string targetFolderPath,
             IMemberData memberData, out string markdownText, out string filePathWithoutExtensions)
         {
             markdownText = generatorSetting.GetGeneratedDoc(typeData);
             if (generatorSetting.generateIdentifier)
             {
                 markdownText = markdownText.EndsWith('\n') || markdownText.EndsWith("\r\n")
-                    ? markdownText + UserIdentifierParagraph
-                    : markdownText + ("\n" + UserIdentifierParagraph);
+                    ? markdownText + UserIdentifierDescriptionParagraph
+                    : markdownText + ("\n" + UserIdentifierDescriptionParagraph);
             }
 
             var fileNameWithoutExtension = memberData.Name.Replace('<', '[').Replace('>', ']');
@@ -557,17 +554,17 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
         #region 类型解析结果
 
         [PropertyOrder(90)]
-        [TitleGroup("$_typeAnalysisResult")]
+        [TitleGroup("$_typeAnalysisResultLabel")]
         [ShowIf("$IsSingleType")]
         public ITypeData TypeData;
 
         [PropertyOrder(90)]
         [ShowIf("$IsNeedTypeAnalysisDataList")]
-        [TitleGroup("$_typeAnalysisResult")]
+        [TitleGroup("$_typeAnalysisResultLabel")]
         public List<ITypeData> TypeDataList;
 
         bool IsNeedTypeAnalysisDataList => IsMultipleType || IsSingleAssembly;
-        BilingualData _typeAnalysisResult = new BilingualData("类型分析数据结果", "Type Analysis Result");
+        BilingualData _typeAnalysisResultLabel = new BilingualData("类型分析数据结果", "Type Analysis Result");
 
         #endregion
 
@@ -576,31 +573,31 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
         public void EditorReset()
         {
             ResetDocFolderPath();
-            ResetDocGeneratorSO();
-            ResetTypeSourceEnum();
+            ResetDocGeneratorSettingSO();
+            ResetTypeSource();
             ResetSingleType();
-            ResetTypesConfigSO();
+            ResetTypesCacheSO();
             ResetTemporaryTypes();
             ResetTypesCacheSOFolderPath();
             ResetIsCustomizingSaveConfig();
-            ResetSingleAssemblyString();
-            ResetHasAnalyzed();
+            ResetSingleAssemblyFullName();
+            ResetHasFinishedAnalyzed();
             ResetTypeAnalysisData();
         }
 
-        void ResetTypeSourceEnum()
+        void ResetTypeSource()
         {
             typeSource = TypeSource.SingleType;
         }
 
         void ResetDocFolderPath()
         {
-            folderPath = DEFAULT_DOC_FOLDER_PATH;
+            docFolderPath = DEFAULT_DOC_FOLDER_PATH;
         }
 
-        void ResetDocGeneratorSO()
+        void ResetDocGeneratorSettingSO()
         {
-            docGeneratorSetting = Resources.Load<CnAPIDocGeneratorSettingSO>("DocGenerators/中文API文档生成设置");
+            docGeneratorSetting = Resources.Load<CnAPIDocGeneratorSettingSO>("DocGeneratorSettings/中文API文档生成设置");
         }
 
         void ResetSingleType()
@@ -608,7 +605,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
             TargetType = null;
         }
 
-        void ResetTypesConfigSO()
+        void ResetTypesCacheSO()
         {
             typesCache = null;
         }
@@ -628,12 +625,12 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
             _isCustomizingSaveConfig = false;
         }
 
-        void ResetSingleAssemblyString()
+        void ResetSingleAssemblyFullName()
         {
-            targetAssemblyString = string.Empty;
+            targetAssemblyFullName = string.Empty;
         }
 
-        void ResetHasAnalyzed()
+        void ResetHasFinishedAnalyzed()
         {
             _hasFinishedAnalyze = false;
         }
@@ -642,31 +639,6 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
         {
             TypeData = null;
             TypeDataList = null;
-        }
-
-        #endregion
-
-        #region 兼容域重新加载
-
-        [InitializeOnLoadMethod]
-        static void PlayModeChange()
-        {
-            EditorApplication.playModeStateChanged -= EditorApplicationOnplayModeStateChanged;
-            EditorApplication.playModeStateChanged += EditorApplicationOnplayModeStateChanged;
-        }
-
-        /// <summary>
-        /// 静态变量兼容 [禁用域重新加载] 模式
-        /// </summary>
-        static void EditorApplicationOnplayModeStateChanged(PlayModeStateChange obj)
-        {
-            if (obj != PlayModeStateChange.ExitingPlayMode)
-            {
-                return;
-            }
-
-            _currentDomainAssemblies = null;
-            ToastEvent = null;
         }
 
         #endregion

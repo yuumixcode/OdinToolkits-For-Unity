@@ -545,10 +545,10 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         #region Method
 
         /// <summary>
-        /// 获取方法的部分签名，包含名称和参数列表，不包含返回值和修饰符
+        /// 获取方法名称和参数列表，不包含返回值和修饰符
         /// </summary>
-        [Summary("获取方法的部分签名，包含名称和参数列表，不包含返回值和修饰符")]
-        public static string GetPartMethodSignatureContainsNameAndParameters(this MethodBase method)
+        [Summary("获取方法名称和参数列表，不包含返回值和修饰符")]
+        public static string GetMethodNameAndParameters(this MethodBase method)
         {
             var stringBuilder = new StringBuilder();
             if (method.IsConstructor || (method.IsStatic && method.Name == ".cctor"))
@@ -622,44 +622,6 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             }
 
             return stringBuilder.ToString();
-        }
-
-        /// <summary>
-        /// 获取方法的关键字片段字符串
-        /// </summary>
-        [Summary("获取方法的关键字片段字符串")]
-        public static string GetMethodKeywordSnippet(this MethodInfo methodInfo)
-        {
-            var keyword = "";
-            if (methodInfo.IsStatic)
-            {
-                keyword = "static ";
-            }
-            else if (methodInfo.IsAbstract)
-            {
-                keyword = "abstract ";
-            }
-            else if (methodInfo.IsVirtual && methodInfo.DeclaringType != methodInfo.GetBaseDefinition().DeclaringType)
-            {
-                keyword = "override ";
-            }
-            else if (methodInfo.DeclaringType == methodInfo.GetBaseDefinition().DeclaringType &&
-                     methodInfo.IsVirtual && methodInfo.IsFromInterfaceImplementMethod())
-            {
-                // 这是实现接口的方法
-                keyword = "";
-            }
-            else if (methodInfo.IsVirtual)
-            {
-                keyword = "virtual ";
-            }
-
-            if (methodInfo.GetCustomAttribute<AsyncStateMachineAttribute>() != null)
-            {
-                keyword += "async ";
-            }
-
-            return keyword;
         }
 
         /// <summary>

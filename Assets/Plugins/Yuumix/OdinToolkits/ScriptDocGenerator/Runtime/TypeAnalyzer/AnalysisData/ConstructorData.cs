@@ -32,7 +32,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             var signature = string.Empty;
             signature += accessModifierName + " ";
             signature += GetKeywordSnippetInSignature(constructorInfo);
-            signature += constructorInfo.GetPartMethodSignatureContainsNameAndParameters();
+            signature += constructorInfo.GetMethodNameAndParameters();
             return signature;
         }
 

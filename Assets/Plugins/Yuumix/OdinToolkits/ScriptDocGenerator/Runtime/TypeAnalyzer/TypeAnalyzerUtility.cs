@@ -140,44 +140,6 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         };
 
         /// <summary>
-        /// 获取格式化的完整特性签名字符串，返回 true 表示该特性支持格式化为完整特性签名字符串，返回 false 表示不支持。
-        /// </summary>
-        [Summary("获取格式化的完整特性签名字符串，返回 true 表示该特性支持格式化为完整特性签名字符串，返回 false 表示不支持。")]
-        public static bool TryGetFormatedAttributeWithFullParameter(object attrInstance,
-            out string attributeFullSignature)
-        {
-            var attributeFullName = GetAttributeNameWithoutSuffix(attrInstance.GetType().FullName);
-            var attributeName = GetAttributeNameWithoutSuffix(attrInstance.GetType().Name);
-            switch (attrInstance)
-            {
-                case ObsoleteAttribute obsoleteAttr:
-                    attributeFullSignature = obsoleteAttr.IsError
-                        ? $"[{attributeFullName}(\"{obsoleteAttr.Message}\", true)]"
-                        : $"[{attributeFullName}(\"{obsoleteAttr.Message}\")]";
-                    return true;
-                case TooltipAttribute tooltipAttr:
-                    attributeFullSignature = $"[{attributeFullName}(\"{tooltipAttr.tooltip}\")]";
-                    return true;
-                case RangeAttribute rangeAttr:
-                    attributeFullSignature =
-                        $"[{attributeFullName}({rangeAttr.min}, {rangeAttr.max})]";
-                    return true;
-                case ColorUsageAttribute colorUsageAttr:
-                    attributeFullSignature =
-                        $"[{attributeFullName}({colorUsageAttr.showAlpha.ToString().ToLower()}, " +
-                        $"{colorUsageAttr.hdr.ToString().ToLower()})]";
-                    return true;
-                case ReferenceLinkURLAttribute referenceLinkAttr:
-                    attributeFullSignature =
-                        $"[{attributeName}(\"{referenceLinkAttr.WebUrl}\")]";
-                    return true;
-            }
-
-            attributeFullSignature = string.Empty;
-            return false;
-        }
-
-        /// <summary>
         /// 获取没有后缀的 Attribute 名称
         /// </summary>
         [Summary("获取没有后缀的 Attribute 名称")]
@@ -189,26 +151,6 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             }
 
             return attributeName;
-        }
-
-        /// <summary>
-        /// 提供的值被视为类型的默认值，返回 true 表示被视为类型的默认值，返回 false 表示不是。
-        /// </summary>
-        [Summary("提供的值被视为类型的默认值，返回 true 表示被视为类型的默认值，返回 false 表示不是。")]
-        public static bool TreatedAsTypeDefaultValue(object value, Type type)
-        {
-            if (value is string str)
-            {
-                return string.IsNullOrEmpty(str);
-            }
-
-            if (type.IsReferenceTypeExcludeString() || type.IsAbstractOrInterface())
-            {
-                return true;
-            }
-
-            var defaultValue = Activator.CreateInstance(type);
-            return defaultValue == null || value.Equals(defaultValue);
         }
 
         /// <summary>
@@ -287,6 +229,64 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
                 sbyte sb => $"{sb}",
                 _ => value.ToString()
             };
+        }
+
+        /// <summary>
+        /// 获取格式化的完整特性签名字符串，返回 true 表示该特性支持格式化为完整特性签名字符串，返回 false 表示不支持。
+        /// </summary>
+        [Summary("获取格式化的完整特性签名字符串，返回 true 表示该特性支持格式化为完整特性签名字符串，返回 false 表示不支持。")]
+        public static bool TryGetFormatedAttributeWithFullParameter(object attrInstance,
+            out string attributeFullSignature)
+        {
+            var attributeFullName = GetAttributeNameWithoutSuffix(attrInstance.GetType().FullName);
+            var attributeName = GetAttributeNameWithoutSuffix(attrInstance.GetType().Name);
+            switch (attrInstance)
+            {
+                case ObsoleteAttribute obsoleteAttr:
+                    attributeFullSignature = obsoleteAttr.IsError
+                        ? $"[{attributeFullName}(\"{obsoleteAttr.Message}\", true)]"
+                        : $"[{attributeFullName}(\"{obsoleteAttr.Message}\")]";
+                    return true;
+                case TooltipAttribute tooltipAttr:
+                    attributeFullSignature = $"[{attributeFullName}(\"{tooltipAttr.tooltip}\")]";
+                    return true;
+                case RangeAttribute rangeAttr:
+                    attributeFullSignature =
+                        $"[{attributeFullName}({rangeAttr.min}, {rangeAttr.max})]";
+                    return true;
+                case ColorUsageAttribute colorUsageAttr:
+                    attributeFullSignature =
+                        $"[{attributeFullName}({colorUsageAttr.showAlpha.ToString().ToLower()}, " +
+                        $"{colorUsageAttr.hdr.ToString().ToLower()})]";
+                    return true;
+                case ReferenceLinkURLAttribute referenceLinkAttr:
+                    attributeFullSignature =
+                        $"[{attributeName}(\"{referenceLinkAttr.WebUrl}\")]";
+                    return true;
+            }
+
+            attributeFullSignature = string.Empty;
+            return false;
+        }
+
+        /// <summary>
+        /// 提供的值被视为类型的默认值，返回 true 表示被视为类型的默认值，返回 false 表示不是。
+        /// </summary>
+        [Summary("提供的值被视为类型的默认值，返回 true 表示被视为类型的默认值，返回 false 表示不是。")]
+        public static bool TreatedAsTypeDefaultValue(object value, Type type)
+        {
+            if (value is string str)
+            {
+                return string.IsNullOrEmpty(str);
+            }
+
+            if (type.IsReferenceTypeExcludeString() || type.IsAbstractOrInterface())
+            {
+                return true;
+            }
+
+            var defaultValue = Activator.CreateInstance(type);
+            return defaultValue == null || value.Equals(defaultValue);
         }
     }
 }

@@ -66,7 +66,7 @@ namespace Yuumix.OdinToolkits.Core
                     DestroyImmediate(gameObject);
                 }
             }
-            
+
             _odinToolkitsRuntimeConfig = LoadRuntimeConfigSO();
         }
 

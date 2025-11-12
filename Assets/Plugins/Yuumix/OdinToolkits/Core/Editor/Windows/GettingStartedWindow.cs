@@ -43,7 +43,7 @@ namespace Yuumix.OdinToolkits.Core.Editor
 
         #endregion
 
-        string ScriptDocGenButtonName => ScriptDocGeneratorVisualPanelSO.MenuName;
+        string ScriptDocGenButtonName => ScriptDocGeneratorVisualPanelSO.ModuleName;
 
         string ToolPackagesButtonName => new BilingualData("工具箱", "Tool Packages");
 
@@ -72,7 +72,7 @@ namespace Yuumix.OdinToolkits.Core.Editor
         [Button("$ScriptDocGenButtonName", ButtonSizes.Large)]
         public void OpenScriptDocGen()
         {
-            ScriptDocGeneratorWindow.Open();
+            ScriptDocGeneratorWindow.OpenWindow();
         }
 
         [PropertyOrder(-40)]
