@@ -36,7 +36,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
             {
                 sb.Append("static " + typeCategory);
             }
-            else if (typeData.IsAbstract)
+            else if (typeData.IsAbstract && typeData.TypeCategory != TypeCategory.Interface)
             {
                 sb.Append("abstract " + typeCategory);
             }
