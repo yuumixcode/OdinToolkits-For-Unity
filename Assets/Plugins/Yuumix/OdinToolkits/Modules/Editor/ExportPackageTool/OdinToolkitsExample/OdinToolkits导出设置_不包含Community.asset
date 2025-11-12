@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2bde766091ba4ca0b193ac528d9658d, type: 3}
   m_Name: "OdinToolkits\u5BFC\u51FA\u8BBE\u7F6E_\u4E0D\u5305\u542BCommunity"
   m_EditorClassIdentifier: 
-  packageName: OdinToolkits_NoCommunity
-  version: v0.5.1-alpha
+  packageName: OdinToolkits_ExcludeCommunity
+  version: v0.5.2-alpha
   exportFolderPath: Assets/OdinToolkitsData/ExportPackages
   includeDependencies: 0
   overwriteExistingPackage: 0

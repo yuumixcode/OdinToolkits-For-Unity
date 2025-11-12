@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: "OdinToolkits\u5BFC\u51FA\u8BBE\u7F6E_\u5305\u542BCommunity"
   m_EditorClassIdentifier: 
   packageName: OdinToolkits
-  version: v0.5.1-alpha
+  version: v0.5.2-alpha
   exportFolderPath: Assets/OdinToolkitsData/ExportPackages
   includeDependencies: 0
   overwriteExistingPackage: 0
