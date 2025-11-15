@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00908419e009549e4bb71b816e388607, type: 3}
-  m_Name: SwitchButtonAttributeCard
+  m_Script: {fileID: 11500000, guid: b11ab3c2097274f31bb2842b66abcec8, type: 3}
+  m_Name: MenuItemViewerVisualPanel
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,6 +21,12 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  cardWithTags:
-  - {fileID: 11400000, guid: b28e9979d62124771b5502461b486e6a, type: 2}
-  - {fileID: 11400000, guid: b8d5e98eaa7274469b10afcaa982fa4e, type: 2}
+  headerWidget: {}
+  assemblyFilter:
+    rid: -2
+  menuItemInfos: []
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }

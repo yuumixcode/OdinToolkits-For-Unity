@@ -1,8 +1,12 @@
 using Sirenix.OdinInspector;
+using Sirenix.OdinInspector.Editor;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core;
+using Yuumix.OdinToolkits.Core.Editor;
 using Yuumix.OdinToolkits.Modules.Editor;
 
 namespace Yuumix.OdinToolkits.Module.Editor
@@ -16,6 +20,13 @@ namespace Yuumix.OdinToolkits.Module.Editor
         public List<ScriptableObject> wantToResetSOList;
 
         #endregion
+
+        [PropertyOrder(-5)]
+        [Button("同步 Odin Toolkits 编辑器信息的版本")]
+        public void SyncVersion()
+        {
+            version = OdinToolkitsEditorInfo.VERSION_NUMBER;
+        }
 
         public override void BeforeExportReset()
         {
@@ -52,6 +63,18 @@ namespace Yuumix.OdinToolkits.Module.Editor
                 .Any(x => x == typeof(IOdinToolkitsEditorReset) || x == typeof(IOdinToolkitsRuntimeReset))
                 ? asset
                 : null;
+        }
+
+        public class OdinToolkitsExportSettingsSOAttributeProcessor : OdinAttributeProcessor
+        {
+            public override void ProcessChildMemberAttributes(InspectorProperty parentProperty, MemberInfo member,
+                List<Attribute> attributes)
+            {
+                if (member.Name == nameof(OdinToolkitsExportSettingsSO.version))
+                {
+                    attributes.Add(new ReadOnlyAttribute());
+                }
+            }
         }
     }
 }

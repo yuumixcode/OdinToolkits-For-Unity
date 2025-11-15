@@ -5,7 +5,6 @@ using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core.Editor;
-using YuumixEditor;
 
 namespace Yuumix.Community.Editor
 {
@@ -13,16 +12,8 @@ namespace Yuumix.Community.Editor
     {
         #region Serialized Fields
 
-        [PropertyOrder(-99)]
-        [PropertySpace(0, 10)]
-        public BilingualHeaderWidget header = new BilingualHeaderWidget(
-            "社区",
-            "Community Overview",
-            "社区资源或者优质资源推荐的总览窗口",
-            "The overview window for recommending community resources or high-quality resources");
-
         [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
-        public CommunityRepositorySO repository;
+        public CommunityRepositoryVisualPanelSO repositoryVisualPanel;
 
         #endregion
 
@@ -32,13 +23,13 @@ namespace Yuumix.Community.Editor
         {
             base.OnEnable();
             WindowPadding = new Vector4(10, 10, 10, 10);
-            if (repository)
+            if (repositoryVisualPanel)
             {
                 return;
             }
 
-            repository = CommunityRepositorySO.Instance;
-            repository.CanSelectTags = false;
+            repositoryVisualPanel = CommunityRepositoryVisualPanelSO.Instance;
+            repositoryVisualPanel.CanSelectTags = false;
         }
 
         #endregion

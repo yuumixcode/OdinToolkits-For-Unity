@@ -7,7 +7,7 @@ using System.Reflection;
 namespace Yuumix.OdinToolkits.Core.Editor
 {
     /// <summary>
-    /// OdinToolkits 的 EditorReset 的 AttributeProcessor，给给实现了这个接口的所有子成员添加 Reset 右键菜单项
+    /// OdinToolkits 的 EditorReset 的 AttributeProcessor，给实现了这个接口的所有子成员添加 Reset 右键菜单项
     /// </summary>
     public class OdinToolkitsEditorResetProcessor : OdinAttributeProcessor<IOdinToolkitsEditorReset>
     {

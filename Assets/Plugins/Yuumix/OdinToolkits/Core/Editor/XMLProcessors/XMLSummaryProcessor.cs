@@ -54,7 +54,7 @@ namespace Yuumix.OdinToolkits.Core.Editor
         /// XML 文档注释与代码块的组合列表，代码块是可能包含多个成员的
         /// </summary>
         [Summary("XML 文档注释与代码块的组合列表，代码块是可能包含多个成员的")]
-        public List<XMLCodePart> xmlCodeParts;
+        public List<XMLCodePart> xmlCodeParts = new List<XMLCodePart>();
 
         #endregion
 

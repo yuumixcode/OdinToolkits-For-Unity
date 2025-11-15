@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: "OdinToolkits\u5BFC\u51FA\u8BBE\u7F6E_\u5305\u542BCommunity"
   m_EditorClassIdentifier: 
   packageName: OdinToolkits
-  version: v0.5.2-alpha
+  version: v0.5.3-alpha
   exportFolderPath: Assets/OdinToolkitsData/ExportPackages
   includeDependencies: 0
   overwriteExistingPackage: 0
@@ -31,6 +31,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 37f2e4cd489c84a2a9b5e5661cdb09a2, type: 2}
   - {fileID: 11400000, guid: 6afd65f3c1944413cbbd2133c4616bae, type: 2}
   - {fileID: 11400000, guid: 5a3f059e31d2443e983ba3f4f83b2672, type: 2}
+  - {fileID: 11400000, guid: f0b99452e9ca74c63bc139eacf6ecd98, type: 2}
+  - {fileID: 11400000, guid: 66deb215f9bfa4121872a3ce9a2baac1, type: 2}
   references:
     version: 2
     RefIds:

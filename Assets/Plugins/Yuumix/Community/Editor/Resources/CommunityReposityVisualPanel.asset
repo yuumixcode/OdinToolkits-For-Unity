@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90283d2bf5d8540f4b480f187d42e116, type: 3}
-  m_Name: CommunityReposity
+  m_Name: CommunityReposityVisualPanel
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,6 +21,6 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+  header: {}
   showCardsWithTag:
   - {fileID: 11400000, guid: b8d5e98eaa7274469b10afcaa982fa4e, type: 2}
-  - {fileID: 11400000, guid: b28e9979d62124771b5502461b486e6a, type: 2}

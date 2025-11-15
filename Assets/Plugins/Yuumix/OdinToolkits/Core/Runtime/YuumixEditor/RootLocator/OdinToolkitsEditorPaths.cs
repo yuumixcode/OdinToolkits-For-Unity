@@ -54,6 +54,11 @@ namespace YuumixEditor
             return EditorPrefs.GetString(ODIN_TOOLKITS_ROOT_PATH_KEY);
         }
 
+        /// <summary>
+        /// 获取 Yuumix 文件夹相对路径，默认为 "Assets/Plugins/Yuumix"
+        /// </summary>
+        public static string GetYuumixRootPath() => GetRootFolderPath().Replace("/" + ROOT_FOLDER_NAME, string.Empty);
+
         static void SetFolderPath()
         {
             _lookupSOPath = ScriptableObjectEditorUtility.GetAssetPath<OdinToolkitsLookup>();

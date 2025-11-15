@@ -48,7 +48,7 @@ namespace YuumixEditor
             _chineseIntroduction = chineseIntroduction;
             _englishIntroduction = englishIntroduction ?? chineseIntroduction;
             headerIntroduction = new BilingualDisplayAsStringWidget(_chineseIntroduction, _englishIntroduction);
-            _targetUrl = targetUrl ?? OdinToolkitsWebLinks.HOME;
+            _targetUrl = targetUrl ?? OdinToolkitsWebLinks.OFFICIAL_WEBSITE;
         }
 
         InspectorBilingualismConfigSO MultiLanguageManager => InspectorBilingualismConfigSO.Instance;
@@ -84,7 +84,7 @@ namespace YuumixEditor
         [PropertySpace(3)]
         public void OpenUrl()
         {
-            var validatedUrl = UrlUtility.ValidateAndNormalizeUrl(_targetUrl, OdinToolkitsWebLinks.HOME);
+            var validatedUrl = UrlUtility.ValidateAndNormalizeUrl(_targetUrl, OdinToolkitsWebLinks.OFFICIAL_WEBSITE);
             Application.OpenURL(validatedUrl);
         }
 

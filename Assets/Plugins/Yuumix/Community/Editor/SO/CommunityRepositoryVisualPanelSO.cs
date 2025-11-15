@@ -1,5 +1,6 @@
 using Sirenix.OdinInspector;
 using Sirenix.Utilities.Editor;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEditor;
@@ -7,21 +8,36 @@ using Yuumix.Community.Schwapo.Editor;
 using Yuumix.Community.SwitchAttribute.Editor;
 using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Core.Editor;
+using YuumixEditor;
 
 namespace Yuumix.Community.Editor
 {
     /// <summary>
     /// Community 资源卡片仓库，扩展的资源卡片编写在此类中
     /// </summary>
-    [Searchable]
-    public partial class CommunityRepositorySO : OdinEditorScriptableSingleton<CommunityRepositorySO>,
+    [Searchable(FilterOptions = SearchFilterOptions.ISearchFilterableInterface)]
+    public partial class CommunityRepositoryVisualPanelSO :
+        OdinEditorScriptableSingleton<CommunityRepositoryVisualPanelSO>,
         IOdinToolkitsEditorReset
     {
+        void OnEnable()
+        {
+            header = new BilingualHeaderWidget(
+                "社区",
+                "Community Overview",
+                "社区资源或者优质资源推荐的总览窗口",
+                "The overview window for recommending community resources or high-quality resources");
+        }
+
         #region Header
+
+        [PropertyOrder(-100)]
+        [PropertySpace(0, 10)]
+        public BilingualHeaderWidget header;
 
         [PropertySpace(5)]
         [HideLabel]
-        [PropertyOrder(-100)]
+        [PropertyOrder(-99)]
         [ShowInInspector]
         [HideIf("$SelectedTagsIsZero")]
         [DisplayAsString(EnableRichText = true, FontSize = 13)]
@@ -117,7 +133,7 @@ namespace Yuumix.Community.Editor
 
     #region Order = 5 - Cards Example - Yuumix
 
-    public partial class CommunityRepositorySO
+    public partial class CommunityRepositoryVisualPanelSO
     {
         [PropertyOrder(5)]
         [ShowInInspector]
@@ -133,7 +149,7 @@ namespace Yuumix.Community.Editor
 
     #region Order = 10 - Yuumix
 
-    public partial class CommunityRepositorySO
+    public partial class CommunityRepositoryVisualPanelSO
     {
         [PropertyOrder(10)]
         [ShowInInspector]

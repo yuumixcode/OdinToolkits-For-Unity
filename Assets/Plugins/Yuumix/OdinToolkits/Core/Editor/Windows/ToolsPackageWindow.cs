@@ -4,6 +4,7 @@ using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
+using Yuumix.OdinToolkits.Module.Editor;
 using Yuumix.OdinToolkits.Modules.Editor;
 
 namespace Yuumix.OdinToolkits.Core.Editor
@@ -75,18 +76,22 @@ namespace Yuumix.OdinToolkits.Core.Editor
             var path2 = TemplateCodeGenToolSO.GenerateTemplateToolMenuPathData.GetCurrentOrFallback();
             var path3 = DirectoryTreeGenToolSO.DirectoryTreeGenToolMenuPathData.GetCurrentOrFallback();
             var path4 = ExportPackageToolVisualPanelSO.ToolMenuPathData.GetCurrentOrFallback();
+            var path5 = MenuItemViewerVisualPanelSO.ToolMenuPath.GetCurrentOrFallback();
             // 添加 Object
             tree.AddObjectAtPath(path2, TemplateCodeGenToolSO.Instance);
             tree.AddObjectAtPath(path3, DirectoryTreeGenToolSO.Instance);
             tree.AddObjectAtPath(path4, ExportPackageToolVisualPanelSO.Instance);
+            tree.AddObjectAtPath(path5, MenuItemViewerVisualPanelSO.Instance);
             // 获取 MenuItem
             var generateTemplateCodeToolMenuItem = tree.GetMenuItem(path2);
             var directoryTreeGenToolMenuItem = tree.GetMenuItem(path3);
             var exportPackageToolMenuItem = tree.GetMenuItem(path4);
+            var menuItemViewerMenuItem = tree.GetMenuItem(path5);
             // 图标
             generateTemplateCodeToolMenuItem.AddThumbnailIcon(true);
             directoryTreeGenToolMenuItem.AddThumbnailIcon(true);
             exportPackageToolMenuItem.AddThumbnailIcon(true);
+            menuItemViewerMenuItem.AddThumbnailIcon(true);
             return tree;
         }
     }

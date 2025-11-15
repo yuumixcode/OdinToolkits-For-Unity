@@ -11,7 +11,8 @@ using YuumixEditor;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
-    public class TemplateCodeGenToolSO : OdinEditorScriptableSingleton<TemplateCodeGenToolSO>
+    public class TemplateCodeGenToolSO : OdinEditorScriptableSingleton<TemplateCodeGenToolSO>, IOdinToolkitsEditorReset
+
     {
         public const string NAME_SPACE_SYMBOL = "#NAMESPACE#";
         public const string CLASS_NAME_SYMBOL = "#CLASSNAME#";
@@ -22,10 +23,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         #region Serialized Fields
 
         [PropertyOrder(-99)]
-        public BilingualHeaderWidget headerWidget = new BilingualHeaderWidget(
-            GenerateTemplateToolMenuPathData.GetChinese(),
-            GenerateTemplateToolMenuPathData.GetEnglish(),
-            "快速配置模板代码，一键生成脚本。", "Quickly configure template code and generate scripts with one click.");
+        public BilingualHeaderWidget headerWidget;
 
         [PropertyOrder(-1)]
         [BilingualTitle("脚本所在命名空间", "Namespace Config")]
@@ -78,6 +76,30 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         #endregion
 
+        #region Event Functions
+
+        void OnEnable()
+        {
+            headerWidget = new BilingualHeaderWidget(
+                GenerateTemplateToolMenuPathData.GetChinese(),
+                GenerateTemplateToolMenuPathData.GetEnglish(),
+                "快速配置模板代码，一键生成脚本。", "Quickly configure template code and generate scripts with one click.");
+        }
+
+        #endregion
+
+        #region IOdinToolkitsEditorReset Members
+
+        public void EditorReset()
+        {
+            codeClassName = string.Empty;
+            codeNamespace = string.Empty;
+            templateSelector = string.Empty;
+            codeTargetPath = OdinToolkitsEditorPaths.ODIN_TOOLKITS_ANY_DATA_ROOT_FOLDER;
+        }
+
+        #endregion
+
         public static event Action<ToastPosition, SdfIconType, string, Color, float> ToastEvent;
 
         [ButtonGroup("Btn")]
@@ -115,21 +137,20 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         void ApplyConfig()
         {
             const string msg1 = "配置已应用，重新生成模板映射";
-            OnToastEvent(ToastPosition.BottomRight, SdfIconType.InfoSquareFill, msg1, Color.white, 3);
+            PublishToastEvent(ToastPosition.BottomRight, SdfIconType.InfoSquareFill, msg1, Color.white, 3);
             templateList.Clear();
             TemplatePathMaps.Clear();
             var noTxtNumber = 0;
             foreach (var template in templatePathConfig)
             {
                 var content = template.Split('/')[^1];
-                // OdinEditorLog.Log(content);
                 if (content.EndsWith(".txt"))
                 {
                     var templateName = content.Replace(".txt", "");
                     if (!TemplatePathMaps.TryAdd(templateName, template))
                     {
                         const string msg2 = "发现重复添加模板，请修改";
-                        OnToastEvent(ToastPosition.BottomRight, SdfIconType.ExclamationLg, msg2, Color.yellow, 5);
+                        PublishToastEvent(ToastPosition.BottomRight, SdfIconType.ExclamationLg, msg2, Color.yellow, 5);
                     }
                     else
                     {
@@ -150,7 +171,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             if (noTxtNumber > 0)
             {
                 var msg3 = "存在" + noTxtNumber + "个非 .txt 类型的文件，请重新选择路径";
-                OnToastEvent(ToastPosition.BottomRight, SdfIconType.ExclamationLg, msg3, Color.yellow, 5);
+                PublishToastEvent(ToastPosition.BottomRight, SdfIconType.ExclamationLg, msg3, Color.yellow, 5);
             }
         }
 
@@ -168,21 +189,22 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 string.IsNullOrEmpty(targetPath))
             {
                 const string msg = "请填写完整工具信息！";
-                OnToastEvent(ToastPosition.BottomRight, SdfIconType.ExclamationLg, msg, Color.red, 5);
+                PublishToastEvent(ToastPosition.BottomRight, SdfIconType.ExclamationLg, msg, Color.red, 5);
                 return;
             }
 
-            if (!File.Exists(targetPath))
+            if (!Directory.Exists(targetPath))
             {
-                const string msg = "目标文件夹路径不存在，请修改！";
-                OnToastEvent(ToastPosition.BottomRight, SdfIconType.ExclamationLg, msg, Color.red, 5);
+                string msg = "目标文件夹路径不存在，已自动创建：" + targetPath;
+                Directory.CreateDirectory(targetPath);
+                PublishToastEvent(ToastPosition.BottomRight, SdfIconType.ExclamationLg, msg, Color.red, 5);
             }
 
             TemplatePathMaps.TryGetValue(targetTemplateKey, out var templatePath);
             if (templatePath == null)
             {
                 const string msg = "不存在这个模板，请修改模板路径配置后，点击应用配置按钮";
-                OnToastEvent(ToastPosition.BottomRight, SdfIconType.ExclamationLg, msg, Color.red, 5);
+                PublishToastEvent(ToastPosition.BottomRight, SdfIconType.ExclamationLg, msg, Color.red, 5);
                 return;
             }
 
@@ -192,7 +214,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             if (!templateContent.Contains(NAME_SPACE_SYMBOL) || !templateContent.Contains(CLASS_NAME_SYMBOL))
             {
                 const string msg = "模板中不存在 " + NAME_SPACE_SYMBOL + " 或 " + CLASS_NAME_SYMBOL + " 占位符";
-                OnToastEvent(ToastPosition.BottomRight, SdfIconType.ExclamationLg, msg, Color.red, 5);
+                PublishToastEvent(ToastPosition.BottomRight, SdfIconType.ExclamationLg, msg, Color.red, 5);
                 return;
             }
 
@@ -218,7 +240,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             ProjectEditorUtility.PingAndSelectAsset(codeRelativePath);
         }
 
-        static void OnToastEvent(ToastPosition position, SdfIconType icon, string msg,
+        static void PublishToastEvent(ToastPosition position, SdfIconType icon, string msg,
             Color color, float duration)
         {
             ToastEvent?.Invoke(position, icon, msg, color, duration);

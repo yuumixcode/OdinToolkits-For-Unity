@@ -4,10 +4,6 @@ using Sirenix.Utilities.Editor;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text;
 using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core;
@@ -25,21 +21,12 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
         public const string DEFAULT_DOC_FOLDER_PATH =
             OdinToolkitsEditorPaths.ODIN_TOOLKITS_ANY_DATA_ROOT_FOLDER + "/Editor/Documents/";
 
-        public const string IDENTIFIER_CN = "## 额外说明";
-        public const string IDENTIFIER_EN = "## Additional Description";
         const string NONE_ASSEMBLY = "None Assembly";
 
         public static readonly BilingualData ModuleName =
             new BilingualData("脚本文档生成工具", "Script Doc Generator");
 
-        public static StringBuilder UserIdentifierDescriptionParagraph = new StringBuilder()
-            .AppendLine(IDENTIFIER_CN)
-            .AppendLine()
-            .AppendLine("> 首个 `" + IDENTIFIER_CN + "` 是增量生成文档标识符，请勿修改标题级别和内容！" +
-                        "本文档由 [`Odin Toolkits For Unity`](" + OdinToolkitsWebLinks.GITHUB_REPOSITORY +
-                        ") 辅助生成。");
-
-        static IAnalysisDataFactory _analysisDataFactory;
+        ScriptDocGeneratorController _controller;
 
         bool IsSingleType => typeSource == TypeSource.SingleType;
         bool IsMultipleType => typeSource == TypeSource.MultipleTypes;
@@ -56,8 +43,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
                 "and generates the corresponding document with one click. By default, a Chinese API document generator is provided, " +
                 "and a custom generator suitable for the project can also be defined."
             );
-
-            _analysisDataFactory = new YuumixDefaultAnalysisDataFactory();
+            _controller ??= new ScriptDocGeneratorController();
         }
 
         #endregion
@@ -295,16 +281,19 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
                         return;
                     }
 
-                    AnalyzeSingleType();
+                    TypeData = _controller.AnalyzeSingleType(TargetType);
                     break;
                 case TypeSource.MultipleTypes:
                     if (!typesCache && TemporaryTypes.Count <= 0)
                     {
-                        YuumixLogger.OdinToolkitsError("设置有效的 Type 对象列表");
+                        YuumixLogger.OdinToolkitsError("设置有效的 Type 对象列表或者设置 TypeCacheSO 资源");
                         return;
                     }
 
-                    AnalyzeMultipleTypes();
+                    TypeDataList = typesCache
+                        ? _controller.AnalyzeMultipleTypes(typesCache)
+                        : _controller.AnalyzeMultipleTypes(TemporaryTypes);
+
                     break;
                 case TypeSource.SingleAssembly:
                     if (targetAssemblyFullName is null or NONE_ASSEMBLY)
@@ -313,7 +302,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
                         return;
                     }
 
-                    AnalyzeSingleAssembly();
+                    TypeDataList = _controller.AnalyzeSingleAssembly(targetAssemblyFullName);
                     break;
             }
 
@@ -324,43 +313,6 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
         }
 
         public static event Action<ToastPosition, SdfIconType, string, Color, float> ToastRequested;
-
-        void AnalyzeSingleType()
-        {
-            TypeData = _analysisDataFactory.CreateTypeData(TargetType, _analysisDataFactory);
-        }
-
-        void AnalyzeMultipleTypes()
-        {
-            TypeDataList = new List<ITypeData>();
-            if (typesCache)
-            {
-                typesCache.Types.RemoveAll(x => x == null);
-                foreach (var type in typesCache.Types)
-                {
-                    TypeDataList.Add(_analysisDataFactory.CreateTypeData(type, _analysisDataFactory));
-                }
-            }
-            else
-            {
-                TemporaryTypes.RemoveAll(x => x == null);
-                foreach (var type in TemporaryTypes)
-                {
-                    TypeDataList.Add(_analysisDataFactory.CreateTypeData(type, _analysisDataFactory));
-                }
-            }
-        }
-
-        void AnalyzeSingleAssembly()
-        {
-            TypeDataList = new List<ITypeData>();
-            var targetAssembly = Assembly.Load(targetAssemblyFullName);
-            foreach (var type in targetAssembly.GetTypes()
-                         .Where(t => t.GetCustomAttribute<CompilerGeneratedAttribute>() == null))
-            {
-                TypeDataList.Add(_analysisDataFactory.CreateTypeData(type, _analysisDataFactory));
-            }
-        }
 
         #endregion
 
@@ -387,167 +339,21 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
             switch (typeSource)
             {
                 case TypeSource.SingleType:
-                    GenerateSingleTypeDoc(TypeData, docGeneratorSetting, docFolderPath);
+                    _controller.GenerateSingleTypeDoc(TypeData, docGeneratorSetting, docFolderPath);
                     break;
                 case TypeSource.MultipleTypes:
                 case TypeSource.SingleAssembly:
-                    GenerateMultipleTypeDocs(TypeDataList, docGeneratorSetting, docFolderPath);
+                    _controller.GenerateMultipleTypeDocs(TypeDataList, docGeneratorSetting, docFolderPath);
                     break;
             }
 
             _hasFinishedAnalyze = false;
         }
 
-        static void GenerateSingleTypeDoc(ITypeData typeData, DocGeneratorSettingSO generatorSetting,
-            string targetFolderPath)
-        {
-            typeData.TryAsIMemberData(out var memberData);
-            if (memberData.IsObsolete && !EditorUtility.DisplayDialog("警告提示", "此类已经被标记为过时，继续生成文档吗？", "确认", "取消"))
-            {
-                return;
-            }
-
-            ReadDocGeneratorSettingSO(typeData, generatorSetting, targetFolderPath, memberData, out var markdownText,
-                out var filePathWithExtensions);
-            if (File.Exists(filePathWithExtensions))
-            {
-                if (!EditorUtility.DisplayDialog("提示",
-                        "已经存在该文档，继续生成将覆盖部分内容，保留首个 " + IDENTIFIER_CN + " 之后的内容，是否继续生成？", "确认", "取消"))
-                {
-                    return;
-                }
-
-                var readAllLines = File.ReadAllLines(filePathWithExtensions);
-                var additionalDescriptionStringBuilder = new StringBuilder();
-                if (readAllLines.Length > 0)
-                {
-                    var identifierIndex = Array.FindIndex(readAllLines, line => line.StartsWith(IDENTIFIER_CN));
-                    if (identifierIndex > 0)
-                    {
-                        for (var i = identifierIndex; i < readAllLines.Length; i++)
-                        {
-                            additionalDescriptionStringBuilder.AppendLine(readAllLines[i]);
-                        }
-
-                        var additionalDescription = additionalDescriptionStringBuilder.ToString();
-                        var userIdentifierParagraphString = UserIdentifierDescriptionParagraph.ToString();
-                        markdownText =
-                            markdownText.Replace(userIdentifierParagraphString, additionalDescription);
-                    }
-                }
-            }
-
-            var utf8WithoutBom = new UTF8Encoding(false);
-            File.WriteAllText(filePathWithExtensions,
-                markdownText,
-                utf8WithoutBom);
-            AssetDatabase.Refresh();
-            EditorUtility.OpenWithDefaultApp(filePathWithExtensions);
-        }
-
-        static void GenerateMultipleTypeDocs(List<ITypeData> typeDataCollection, DocGeneratorSettingSO generatorSetting,
-            string targetFolderPath)
-        {
-            if (typeDataCollection.Count <= 0)
-            {
-                return;
-            }
-
-            try
-            {
-                for (var i = 0; i < typeDataCollection.Count; i++)
-                {
-                    var typeData = typeDataCollection[i];
-                    typeData.TryAsIMemberData(out var memberData);
-                    var dataTypeName = memberData.Name;
-                    EditorUtility.DisplayProgressBar("脚本文档生成", $"正在生成 {dataTypeName} 文档",
-                        (float)i / typeDataCollection.Count);
-                    ReadDocGeneratorSettingSO(typeData, generatorSetting, targetFolderPath, memberData,
-                        out var markdownText,
-                        out var filePathWithExtensions);
-                    if (File.Exists(filePathWithExtensions))
-                    {
-                        var readAllLines = File.ReadAllLines(filePathWithExtensions);
-                        var additionalDescriptionStringBuilder = new StringBuilder();
-                        if (readAllLines.Length > 0)
-                        {
-                            var identifierIndex = Array.FindIndex(readAllLines, line => line.StartsWith(IDENTIFIER_CN));
-                            if (identifierIndex > 0)
-                            {
-                                for (var j = identifierIndex; j < readAllLines.Length; j++)
-                                {
-                                    additionalDescriptionStringBuilder.AppendLine(readAllLines[j]);
-                                }
-
-                                var additionalDescription = additionalDescriptionStringBuilder.ToString();
-                                var userIdentifierParagraphString = UserIdentifierDescriptionParagraph.ToString();
-                                markdownText = markdownText
-                                    .Replace(userIdentifierParagraphString,
-                                        additionalDescription);
-                            }
-                        }
-                    }
-
-                    var utf8WithoutBom = new UTF8Encoding(false);
-                    File.WriteAllText(filePathWithExtensions,
-                        markdownText,
-                        utf8WithoutBom);
-                }
-            }
-            finally
-            {
-                EditorUtility.ClearProgressBar();
-            }
-
-            AssetDatabase.Refresh();
-            EditorUtility.OpenWithDefaultApp(targetFolderPath);
-        }
-
         bool CanShowGenerateButton => _hasFinishedAnalyze && (
             (IsSingleType && TypeData != null) ||
             (IsMultipleType && TypeDataList is { Count: > 0 }) ||
             (IsSingleAssembly && TypeDataList is { Count: > 0 }));
-
-        static void ReadDocGeneratorSettingSO(ITypeData typeData, DocGeneratorSettingSO generatorSetting,
-            string targetFolderPath,
-            IMemberData memberData, out string markdownText, out string filePathWithoutExtensions)
-        {
-            markdownText = generatorSetting.GetGeneratedDoc(typeData);
-            if (generatorSetting.generateIdentifier)
-            {
-                markdownText = markdownText.EndsWith('\n') || markdownText.EndsWith("\r\n")
-                    ? markdownText + UserIdentifierDescriptionParagraph
-                    : markdownText + ("\n" + UserIdentifierDescriptionParagraph);
-            }
-
-            var fileNameWithoutExtension = memberData.Name.Replace('<', '[').Replace('>', ']');
-            if (generatorSetting.generateNamespaceFolder)
-            {
-                var namespaceString = typeData.NamespaceName;
-                if (!string.IsNullOrEmpty(namespaceString))
-                {
-                    var namespaceFolders = namespaceString.Split('.');
-                    targetFolderPath = namespaceFolders.Aggregate(targetFolderPath,
-                        Path.Combine);
-                }
-                else
-                {
-                    targetFolderPath = Path.Combine(targetFolderPath, "WithoutNamespace");
-                }
-
-                Directory.CreateDirectory(targetFolderPath);
-            }
-
-            filePathWithoutExtensions = Path.Combine(targetFolderPath, fileNameWithoutExtension);
-            if (generatorSetting.customizeDocFileExtensionName)
-            {
-                filePathWithoutExtensions += generatorSetting.docFileExtensionName.EnsureStartsWith(".");
-            }
-            else
-            {
-                filePathWithoutExtensions += ".md";
-            }
-        }
 
         #endregion
 

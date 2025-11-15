@@ -35,10 +35,10 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
         public string docFileExtensionName = ".md";
 
         /// <summary>
-        /// 是否自动生成增量标识符
+        /// 是否生成增量标识符
         /// </summary>
-        [Summary("是否自动生成增量标识符")]
-        [BilingualText("自动生成增量标识符", "Auto Generate Incremental Identifier")]
+        [Summary("是否生成增量标识符")]
+        [BilingualText("是否生成增量标识符", "Generate Identifier")]
         public bool generateIdentifier = true;
 
         #endregion
