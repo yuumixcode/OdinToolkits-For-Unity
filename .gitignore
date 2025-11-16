@@ -98,25 +98,31 @@ UserSettings/
 Packages/com.unity.asset-store-tools/
 
 Assets/OdinToolkitsData
-Assets/OdinToolkitsData.meta
 
-Assets/UniversalRenderPipelineGlobalSettings.asset.meta
-Assets/UniversalRenderPipelineGlobalSettings.asset
+Assets/OdinToolkitsData.meta
 
 Assets/Plugins/Sirenix/
 
+Assets/Plugins/Sirenix.meta
+
+OdinToolkits_Unity_2021.3.45f2c1/Library/
+
 OdinToolkits_Unity_2021.3.45f2c1/Assets/OdinToolkitsData/
 
-OdinToolkits_Tuanjie_1.6.7/Assets/OdinToolkitsData/
-
-OdinToolkits_Tuanjie_1.6.7/Assets/Plugins/Sirenix/
-
-OdinToolkits_Tuanjie_1.6.7/Assets/Plugins/Sirenix.meta
-
-OdinToolkits_Tuanjie_1.6.7/Assets/OdinToolkitsData.meta
+OdinToolkits_Unity_2021.3.45f2c1/Assets/OdinToolkitsData.meta
 
 OdinToolkits_Unity_2021.3.45f2c1/Assets/Plugins/Sirenix/
 
 OdinToolkits_Unity_2021.3.45f2c1/Assets/Plugins/Sirenix.meta
 
-OdinToolkits_Unity_2021.3.45f2c1/Assets/OdinToolkitsData.meta
+OdinToolkits_Tuanjie_1.6.7_URP/Assets/OdinToolkitsData/
+
+OdinToolkits_Tuanjie_1.6.7_URP/Assets/OdinToolkitsData.meta
+
+OdinToolkits_Tuanjie_1.6.7_URP/Assets/Plugins/Sirenix/
+
+OdinToolkits_Tuanjie_1.6.7_URP/Assets/Plugins/Sirenix.meta
+
+OdinToolkits_Tuanjie_1.6.7_URP/Library/
+
+OdinToolkits_Tuanjie_1.6.7_URP/Temp/
