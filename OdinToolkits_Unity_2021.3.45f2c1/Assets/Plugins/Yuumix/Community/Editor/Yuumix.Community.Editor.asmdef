@@ -1,0 +1,20 @@
+{
+  "name": "Yuumix.Community.Editor",
+  "rootNamespace": "Yuumix.Community.Editor",
+  "references": [
+    "GUID:00ddda371fbeb4906853f07cc7900637",
+    "GUID:345532146266e4c3182369bb0e4a1a3f",
+    "GUID:13a7f22e067974ddcbea7aac02504a47"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}
