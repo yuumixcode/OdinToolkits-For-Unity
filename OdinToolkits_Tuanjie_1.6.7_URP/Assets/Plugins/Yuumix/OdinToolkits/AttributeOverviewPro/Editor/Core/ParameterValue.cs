@@ -7,9 +7,9 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     {
         #region Serialized Fields
 
-        public string paramDescription;
-        public string paramName;
         public string returnType;
+        public string paramName;
+        public string paramDescription;
 
         #endregion
     }
