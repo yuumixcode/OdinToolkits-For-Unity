@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -14,7 +16,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "可以和其他特性配合使用，自定义字段的显示"
             };
 
-        protected override List<ParamValue> GetParamValues() => new List<ParamValue>();
+        protected override List<ParameterValue> GetParamValues() => new List<ParameterValue>();
 
         protected override string GetOriginalCode() => ReadCodeWithoutNamespace(typeof(HideLabelExample));
     }

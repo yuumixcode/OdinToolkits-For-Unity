@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -15,20 +17,20 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "也可以直接作用与一个类上，让该类默认变为 Toggle 样式"
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "ToggleMemberName",
-                    paramDescription = "成员名引用"
+                    ReturnType = "string",
+                    ParameterName = "ToggleMemberName",
+                    ParameterDescription = "成员名引用"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "CollapseOthersOnExpand",
-                    paramDescription = "展开时是否折叠其他 Toggle，默认为 true"
+                    ReturnType = "bool",
+                    ParameterName = "CollapseOthersOnExpand",
+                    ParameterDescription = "展开时是否折叠其他 Toggle，默认为 true"
                 }
             };
 

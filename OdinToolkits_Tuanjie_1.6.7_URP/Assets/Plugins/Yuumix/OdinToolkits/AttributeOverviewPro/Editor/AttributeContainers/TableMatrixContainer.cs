@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -17,82 +19,82 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "可以拖拽更换不同行或者列的值，同时 Odin 新增了表格鼠标右键的功能"
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "Transpose",
-                    paramDescription = "是否转置，默认为 false"
+                    ReturnType = "bool",
+                    ParameterName = "Transpose",
+                    ParameterDescription = "是否转置，默认为 false"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "Labels",
-                    paramDescription =
+                    ReturnType = "string",
+                    ParameterName = "Labels",
+                    ParameterDescription =
                         "自定义绘制表头的方法，返回一个元组，方法签名可选: (T, LabelDirection) GetLabel(T[,] array, TableAxis axis, int index)，" +
                         DescriptionConfigs.SupportMemberResolverLite
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "IsReadOnly",
-                    paramDescription = "是否只读，默认为 false"
+                    ReturnType = "bool",
+                    ParameterName = "IsReadOnly",
+                    ParameterDescription = "是否只读，默认为 false"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "ResizableColumns",
-                    paramDescription = "是否可以修改列宽，默认为 true"
+                    ReturnType = "bool",
+                    ParameterName = "ResizableColumns",
+                    ParameterDescription = "是否可以修改列宽，默认为 true"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "HorizontalTitle",
-                    paramDescription = "横向标题"
+                    ReturnType = "string",
+                    ParameterName = "HorizontalTitle",
+                    ParameterDescription = "横向标题"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "VerticalTitle",
-                    paramDescription = "纵向标题"
+                    ReturnType = "string",
+                    ParameterName = "VerticalTitle",
+                    ParameterDescription = "纵向标题"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "int",
-                    paramName = "RowHeight",
-                    paramDescription = "行高"
+                    ReturnType = "int",
+                    ParameterName = "RowHeight",
+                    ParameterDescription = "行高"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "SquareCells",
-                    paramDescription = "是否使单元格保持正方形，默认为 false"
+                    ReturnType = "bool",
+                    ParameterName = "SquareCells",
+                    ParameterDescription = "是否使单元格保持正方形，默认为 false"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "HideColumnIndices",
-                    paramDescription = "隐藏绘制图表的列标，但实际指的是二维数组的行标，第一列，指的是二维数组第一行的内容"
+                    ReturnType = "bool",
+                    ParameterName = "HideColumnIndices",
+                    ParameterDescription = "隐藏绘制图表的列标，但实际指的是二维数组的行标，第一列，指的是二维数组第一行的内容"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "HideRowIndices",
-                    paramDescription = "隐藏绘制图表的行标，但实际指的是二维数组的列标，第一行，指的是二维数组第一列的内容"
+                    ReturnType = "bool",
+                    ParameterName = "HideRowIndices",
+                    ParameterDescription = "隐藏绘制图表的行标，但实际指的是二维数组的列标，第一行，指的是二维数组第一列的内容"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "RespectIndentLevel",
-                    paramDescription = "绘制的表是否应遵循当前GUI缩进级别"
+                    ReturnType = "bool",
+                    ParameterName = "RespectIndentLevel",
+                    ParameterDescription = "绘制的表是否应遵循当前GUI缩进级别"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "DrawElementMethod",
-                    paramDescription = "自定义绘制二维数组中的元素样式，方法签名可选: T CustomDrawElement2(Rect rect, T[,] array, " +
+                    ReturnType = "string",
+                    ParameterName = "DrawElementMethod",
+                    ParameterDescription = "自定义绘制二维数组中的元素样式，方法签名可选: T CustomDrawElement2(Rect rect, T[,] array, " +
                                        "int x, int y, T value)，其中 array[x,y] == value，" +
                                        DescriptionConfigs.SupportMemberResolverLite
                 }

@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -14,14 +16,14 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "任意 Property 包括字段，显示的属性，绘制的方法"
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "Tooltip",
-                    paramDescription = "Tooltip 文本，" + DescriptionConfigs.SupportAllResolver
+                    ReturnType = "string",
+                    ParameterName = "Tooltip",
+                    ParameterDescription = "Tooltip 文本，" + DescriptionConfigs.SupportAllResolver
                 }
             };
 

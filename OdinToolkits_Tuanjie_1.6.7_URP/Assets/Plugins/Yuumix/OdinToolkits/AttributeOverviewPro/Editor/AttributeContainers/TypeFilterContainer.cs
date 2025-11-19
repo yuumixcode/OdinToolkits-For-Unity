@@ -1,5 +1,7 @@
 using Sirenix.OdinInspector.Editor;
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -16,27 +18,27 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "可以用作测试时使用，不必代码中修改，在 Inspector 面板上修改本次运行使用哪一个子类"
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "filterGetter",
-                    paramDescription = "填写返回值是类型集合(列表或者数组)的方法名，返回的类型数组就是可选的类型，" +
+                    ReturnType = "string",
+                    ParameterName = "filterGetter",
+                    ParameterDescription = "填写返回值是类型集合(列表或者数组)的方法名，返回的类型数组就是可选的类型，" +
                                        DescriptionConfigs.SupportAllResolver
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "DropdownTitle",
-                    paramDescription = "选择框的标题"
+                    ReturnType = "string",
+                    ParameterName = "DropdownTitle",
+                    ParameterDescription = "选择框的标题"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "DrawValueNormally",
-                    paramDescription = "是否额外多绘制一个正常的类。默认为 false"
+                    ReturnType = "bool",
+                    ParameterName = "DrawValueNormally",
+                    ParameterDescription = "是否额外多绘制一个正常的类。默认为 false"
                 }
             };
 
@@ -48,19 +50,19 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                     ParamName = "FilterGetter",
                     ReturnType = "IEnumerable<Type>",
                     ResolverType = ResolverType.ValueResolver,
-                    ParamValues = new List<ParamValue>
+                    ParamValues = new List<ParameterValue>
                     {
-                        new ParamValue
+                        new ParameterValue
                         {
-                            returnType = typeof(InspectorProperty).FullName,
-                            paramName = "$property",
-                            paramDescription = DescriptionConfigs.InspectorPropertyDesc
+                            ReturnType = typeof(InspectorProperty).FullName,
+                            ParameterName = "$property",
+                            ParameterDescription = DescriptionConfigs.InspectorPropertyDesc
                         },
-                        new ParamValue
+                        new ParameterValue
                         {
-                            returnType = "T 泛型",
-                            paramName = "$value",
-                            paramDescription = DescriptionConfigs.ValueDesc
+                            ReturnType = "T 泛型",
+                            ParameterName = "$value",
+                            ParameterDescription = DescriptionConfigs.ValueDesc
                         }
                     }
                 }

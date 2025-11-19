@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -14,7 +16,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "代码修改不会触发这个方法"
             };
 
-        protected override List<ParamValue> GetParamValues() => new List<ParamValue>();
+        protected override List<ParameterValue> GetParamValues() => new List<ParameterValue>();
 
         protected override string GetOriginalCode() => ReadCodeWithoutNamespace(typeof(OnValueChangedExample));
     }

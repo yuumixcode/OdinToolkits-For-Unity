@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -12,26 +14,26 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             new List<string>
                 { "可以和其他 Group 特性连接，共享分组路径" };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "groupName",
-                    paramDescription = "分组名称"
+                    ReturnType = "string",
+                    ParameterName = "groupName",
+                    ParameterDescription = "分组名称"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "expanded",
-                    paramDescription = "是否设置默认状态为展开"
+                    ReturnType = "bool",
+                    ParameterName = "expanded",
+                    ParameterDescription = "是否设置默认状态为展开"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "int",
-                    paramName = "order",
-                    paramDescription =
+                    ReturnType = "int",
+                    ParameterName = "order",
+                    ParameterDescription =
                         "是不同 Group 在 Inspector 面板上的排序，从 PropertyGroupAttribute 基类继承获得的变量，比 PropertyOrder 优先级更高"
                 }
             };

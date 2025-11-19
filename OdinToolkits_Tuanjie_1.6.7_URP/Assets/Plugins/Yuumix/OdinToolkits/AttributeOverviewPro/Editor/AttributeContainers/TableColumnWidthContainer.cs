@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -14,20 +16,20 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "列表必须标记 [TableList]，列表元素封装为一个类对象，在元素内部的字段上标记 [TableColumnWidth]"
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "int",
-                    paramName = "width",
-                    paramDescription = "宽度，单位为像素"
+                    ReturnType = "int",
+                    ParameterName = "width",
+                    ParameterDescription = "宽度，单位为像素"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "resizable",
-                    paramDescription = "是否允许调整宽度，默认为 true"
+                    ReturnType = "bool",
+                    ParameterName = "resizable",
+                    ParameterDescription = "是否允许调整宽度，默认为 true"
                 }
             };
 

@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -15,14 +17,14 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "被标记的 Property 可以控制其他 Property，也可以控制自身依赖其他 Property"
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "action",
-                    paramDescription = "触发函数名，方法可选参数 (InspectorProperty property, T value)，" +
+                    ReturnType = "string",
+                    ParameterName = "action",
+                    ParameterDescription = "触发函数名，方法可选参数 (InspectorProperty property, T value)，" +
                                        DescriptionConfigs.SupportAllResolver
                 }
             };

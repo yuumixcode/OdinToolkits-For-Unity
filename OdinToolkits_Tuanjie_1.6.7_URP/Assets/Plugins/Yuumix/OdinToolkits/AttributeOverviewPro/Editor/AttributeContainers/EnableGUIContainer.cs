@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -14,7 +16,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "部分 property 是灰色显示无法修改，可以使用 [EnableGUI] 来恢复正常，仅优化显示样式"
             };
 
-        protected override List<ParamValue> GetParamValues() => new List<ParamValue>();
+        protected override List<ParameterValue> GetParamValues() => new List<ParameterValue>();
 
         protected override string GetOriginalCode() => ReadCodeWithoutNamespace(typeof(EnableGUIExample));
     }

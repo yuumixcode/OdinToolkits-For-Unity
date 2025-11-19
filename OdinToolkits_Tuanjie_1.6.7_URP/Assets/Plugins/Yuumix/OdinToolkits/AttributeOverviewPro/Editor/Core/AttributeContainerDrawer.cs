@@ -174,19 +174,19 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 {
                     ColumnTitle = "返回值类型",
                     Width = 150,
-                    OnGUI = (rect, i) => { DrawTableCell(rect, _container.ParamValues[i].returnType); }
+                    OnGUI = (rect, i) => { DrawTableCell(rect, _container.ParamValues[i].ReturnType); }
                 },
                 new GUITableColumn
                 {
                     ColumnTitle = "参数名",
                     Width = 200,
-                    OnGUI = (rect, i) => { DrawTableCell(rect, _container.ParamValues[i].paramName); }
+                    OnGUI = (rect, i) => { DrawTableCell(rect, _container.ParamValues[i].ParameterName); }
                 },
                 new GUITableColumn
                 {
                     ColumnTitle = "参数描述",
                     MinWidth = 220,
-                    OnGUI = (rect, i) => { DrawTableCell(rect, _container.ParamValues[i].paramDescription); }
+                    OnGUI = (rect, i) => { DrawTableCell(rect, _container.ParamValues[i].ParameterDescription); }
                 });
         }
 
@@ -389,11 +389,11 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 for (var row = 1; row < table.RowCount; row++)
                 {
                     var returnTypeCellHeight =
-                        CalculateHeight(_container.ResolvedParams[i].ParamValues[row - 1].returnType, table, 1, row);
+                        CalculateHeight(_container.ResolvedParams[i].ParamValues[row - 1].ReturnType, table, 1, row);
                     var paramNameCellHeight =
-                        CalculateHeight(_container.ResolvedParams[i].ParamValues[row - 1].paramName, table, 2, row);
+                        CalculateHeight(_container.ResolvedParams[i].ParamValues[row - 1].ParameterName, table, 2, row);
                     var paramDescriptionCellHeight =
-                        CalculateHeight(_container.ResolvedParams[i].ParamValues[row - 1].paramDescription, table, 3,
+                        CalculateHeight(_container.ResolvedParams[i].ParamValues[row - 1].ParameterDescription, table, 3,
                             row);
                     table[1, row].Height =
                         Mathf.Max(returnTypeCellHeight, paramNameCellHeight, paramDescriptionCellHeight) + 15f;
@@ -420,11 +420,11 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             for (var row = 1; row < table.RowCount; row++)
             {
                 var returnTypeCellHeight =
-                    CalculateHeight(_container.ParamValues[row - 1].returnType, table, 1, row);
+                    CalculateHeight(_container.ParamValues[row - 1].ReturnType, table, 1, row);
                 var paramNameCellHeight =
-                    CalculateHeight(_container.ParamValues[row - 1].paramName, table, 2, row);
+                    CalculateHeight(_container.ParamValues[row - 1].ParameterName, table, 2, row);
                 var paramDescriptionCellHeight =
-                    CalculateHeight(_container.ParamValues[row - 1].paramDescription, table, 3, row);
+                    CalculateHeight(_container.ParamValues[row - 1].ParameterDescription, table, 3, row);
                 table[1, row].Height =
                     Mathf.Max(returnTypeCellHeight, paramNameCellHeight, paramDescriptionCellHeight) + 15f;
             }

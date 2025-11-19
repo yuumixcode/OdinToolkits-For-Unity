@@ -1,6 +1,8 @@
 using Sirenix.OdinInspector.Editor;
 using System.Collections.Generic;
 using UnityEngine;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -26,56 +28,56 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                     ParamName = "GetColor",
                     ReturnType = nameof(Color),
                     ResolverType = ResolverType.ValueResolver,
-                    ParamValues = new List<ParamValue>
+                    ParamValues = new List<ParameterValue>
                     {
-                        new ParamValue
+                        new ParameterValue
                         {
-                            returnType = typeof(InspectorProperty).FullName,
-                            paramName = "$property",
-                            paramDescription = DescriptionConfigs.InspectorPropertyDesc
+                            ReturnType = typeof(InspectorProperty).FullName,
+                            ParameterName = "$property",
+                            ParameterDescription = DescriptionConfigs.InspectorPropertyDesc
                         },
-                        new ParamValue
+                        new ParameterValue
                         {
-                            returnType = "T 泛型",
-                            paramName = "$value",
-                            paramDescription = DescriptionConfigs.ValueDesc
+                            ReturnType = "T 泛型",
+                            ParameterName = "$value",
+                            ParameterDescription = DescriptionConfigs.ValueDesc
                         }
                     }
                 }
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "float",
-                    paramName = "r",
-                    paramDescription = "红色通道"
+                    ReturnType = "float",
+                    ParameterName = "r",
+                    ParameterDescription = "红色通道"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "float",
-                    paramName = "g",
-                    paramDescription = "绿色通道"
+                    ReturnType = "float",
+                    ParameterName = "g",
+                    ParameterDescription = "绿色通道"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "float",
-                    paramName = "b",
-                    paramDescription = "蓝色通道"
+                    ReturnType = "float",
+                    ParameterName = "b",
+                    ParameterDescription = "蓝色通道"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "float",
-                    paramName = "a",
-                    paramDescription = "Alpha 通道"
+                    ReturnType = "float",
+                    ParameterName = "a",
+                    ParameterDescription = "Alpha 通道"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "getColor",
-                    paramDescription = DescriptionConfigs.ColorDescription
+                    ReturnType = "string",
+                    ParameterName = "getColor",
+                    ParameterDescription = DescriptionConfigs.ColorDescription
                 }
             };
 

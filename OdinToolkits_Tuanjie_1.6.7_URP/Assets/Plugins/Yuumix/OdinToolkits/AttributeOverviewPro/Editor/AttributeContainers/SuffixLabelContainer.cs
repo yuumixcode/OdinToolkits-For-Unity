@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -10,32 +12,32 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         protected override List<string> GetTips() => new List<string>();
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "Label",
-                    paramDescription = "后缀字符串，" + DescriptionConfigs.SupportAllResolver
+                    ReturnType = "string",
+                    ParameterName = "Label",
+                    ParameterDescription = "后缀字符串，" + DescriptionConfigs.SupportAllResolver
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "Overlay",
-                    paramDescription = "是否覆盖原属性，默认为 false，绘制在 Property 之后"
+                    ReturnType = "bool",
+                    ParameterName = "Overlay",
+                    ParameterDescription = "是否覆盖原属性，默认为 false，绘制在 Property 之后"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "SdfIconType",
-                    paramName = "Icon",
-                    paramDescription = "后缀图标，默认为 SdfIconType.None"
+                    ReturnType = "SdfIconType",
+                    ParameterName = "Icon",
+                    ParameterDescription = "后缀图标，默认为 SdfIconType.None"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "Color",
-                    paramName = "IconColor",
-                    paramDescription = DescriptionConfigs.ColorDescription
+                    ReturnType = "Color",
+                    ParameterName = "IconColor",
+                    ParameterDescription = DescriptionConfigs.ColorDescription
                 }
             };
 

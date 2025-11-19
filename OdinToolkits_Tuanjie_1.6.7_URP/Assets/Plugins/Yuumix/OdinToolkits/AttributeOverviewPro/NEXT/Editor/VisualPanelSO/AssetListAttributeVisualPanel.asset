@@ -1,5 +1,5 @@
 %YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
+%TAG !u! tag:yousandi.cn,2023:
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 280355139282452ba094857a8030eb75, type: 3}
-  m_Name: AssetsOnlyContainerPro
+  m_Script: {fileID: 11500000, guid: 71227ba417df4cc499cfb417d75dcb33, type: 3}
+  m_Name: AssetListAttributeVisualPanel
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,3 +21,4 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+  headerWidget: {}

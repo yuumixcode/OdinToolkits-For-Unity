@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 using YuumixEditor;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
@@ -22,7 +24,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "可以用于确保引用项目资源"
             };
 
-        protected override List<ParamValue> GetParamValues() => new List<ParamValue>();
+        protected override List<ParameterValue> GetParamValues() => new List<ParameterValue>();
 
         protected override string GetOriginalCode() => ReadCodeWithoutNamespace(typeof(AssetsOnlyExample));
     }

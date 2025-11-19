@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -16,21 +18,21 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "该示例使用了 Odin 序列化，序列化 HashSet 和 Dictionary"
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "before",
-                    paramDescription = "触发函数名，时机为修改前，方法参数为 (CollectionChangeInfo info, object value)，无返回值，" +
+                    ReturnType = "string",
+                    ParameterName = "before",
+                    ParameterDescription = "触发函数名，时机为修改前，方法参数为 (CollectionChangeInfo info, object value)，无返回值，" +
                                        DescriptionConfigs.SupportAllResolver
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "after",
-                    paramDescription = "触发函数名，时机为修改前，方法参数为 (CollectionChangeInfo info, object value)，无返回值，" +
+                    ReturnType = "string",
+                    ParameterName = "after",
+                    ParameterDescription = "触发函数名，时机为修改前，方法参数为 (CollectionChangeInfo info, object value)，无返回值，" +
                                        DescriptionConfigs.SupportAllResolver
                 }
             };

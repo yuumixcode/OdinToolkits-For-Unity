@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -17,7 +19,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "一般在 Inspector 面板中，也不会相互引用，而且就算有，Odin 使用 Box 也可以更好提醒"
             };
 
-        protected override List<ParamValue> GetParamValues() => new List<ParamValue>();
+        protected override List<ParameterValue> GetParamValues() => new List<ParameterValue>();
 
         protected override string GetOriginalCode() =>
             ReadCodeWithoutNamespace(typeof(HideDuplicateReferenceBoxExample));

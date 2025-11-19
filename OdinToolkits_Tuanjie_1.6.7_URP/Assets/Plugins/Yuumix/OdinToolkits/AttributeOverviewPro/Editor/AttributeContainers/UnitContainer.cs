@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -17,38 +19,38 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "手动提供换算比例即可自定义单位"
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "Unit",
-                    paramName = "unit",
-                    paramDescription = "单位类型，一个参数的构造函数时，此单位对应的值就是实际值"
+                    ReturnType = "Unit",
+                    ParameterName = "unit",
+                    ParameterDescription = "单位类型，一个参数的构造函数时，此单位对应的值就是实际值"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "Unit",
-                    paramName = "base",
-                    paramDescription = "单位类型，表示实际单位"
+                    ReturnType = "Unit",
+                    ParameterName = "base",
+                    ParameterDescription = "单位类型，表示实际单位"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "Unit",
-                    paramName = "display",
-                    paramDescription = "单位类型，表示显示在面板上的单位，输入时，按照显示单位和实际单位进行换算，得到最终值才是变量值"
+                    ReturnType = "Unit",
+                    ParameterName = "display",
+                    ParameterDescription = "单位类型，表示显示在面板上的单位，输入时，按照显示单位和实际单位进行换算，得到最终值才是变量值"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "DisplayAsString",
-                    paramDescription = "如果为 true，显示为字符串"
+                    ReturnType = "bool",
+                    ParameterName = "DisplayAsString",
+                    ParameterDescription = "如果为 true，显示为字符串"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "ForceDisplayUnit",
-                    paramDescription = "强制显示单位，如果为 true，将无法改变显示单位的类型"
+                    ReturnType = "bool",
+                    ParameterName = "ForceDisplayUnit",
+                    ParameterDescription = "强制显示单位，如果为 true，将无法改变显示单位的类型"
                 }
             };
 

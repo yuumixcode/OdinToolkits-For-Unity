@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -14,44 +16,44 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "ButtonGroup 可以和 Button 结合使用，Button 对于按钮的设置将覆盖 ButtonGroup"
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "group",
-                    paramDescription = "分组名，默认为 _DefaultGroup，" + DescriptionConfigs.SupportMemberResolverLite
+                    ReturnType = "string",
+                    ParameterName = "group",
+                    ParameterDescription = "分组名，默认为 _DefaultGroup，" + DescriptionConfigs.SupportMemberResolverLite
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "float",
-                    paramName = "order",
-                    paramDescription = "排序，越小越靠左，默认为 0"
+                    ReturnType = "float",
+                    ParameterName = "order",
+                    ParameterDescription = "排序，越小越靠左，默认为 0"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "int",
-                    paramName = "ButtonHeight",
-                    paramDescription = "按钮高度"
+                    ReturnType = "int",
+                    ParameterName = "ButtonHeight",
+                    ParameterDescription = "按钮高度"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "IconAlignment",
-                    paramName = "IconAlignment",
-                    paramDescription = "图标对齐方式"
+                    ReturnType = "IconAlignment",
+                    ParameterName = "IconAlignment",
+                    ParameterDescription = "图标对齐方式"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "int",
-                    paramName = "ButtonAlignment",
-                    paramDescription = "0 为向左对齐，1 为向右对齐"
+                    ReturnType = "int",
+                    ParameterName = "ButtonAlignment",
+                    ParameterDescription = "0 为向左对齐，1 为向右对齐"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "Stretch",
-                    paramDescription = "是否拉伸宽度，默认为 true"
+                    ReturnType = "bool",
+                    ParameterName = "Stretch",
+                    ParameterDescription = "是否拉伸宽度，默认为 true"
                 }
             };
 

@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -15,76 +17,76 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "当脚本所在的预制体，是某一种特定类型(PrefabKind)时，被标记的 Property 将会显示"
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "PrefabKind",
-                    paramName = "kind",
-                    paramDescription =
+                    ReturnType = "PrefabKind",
+                    ParameterName = "kind",
+                    ParameterDescription =
                         "Prefab 当前的类型，可以同时为多种类型，用 | 分隔，如: PrefabKind.InstanceInScene | PrefabKind.InstanceInPrefab"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = ">>> PrefabKind",
-                    paramName = "PrefabKind.None",
-                    paramDescription = "此时将不会显示，因为无法满足这个条件。"
+                    ReturnType = ">>> PrefabKind",
+                    ParameterName = "PrefabKind.None",
+                    ParameterDescription = "此时将不会显示，因为无法满足这个条件。"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = ">>> PrefabKind",
-                    paramName = "PrefabKind.InstanceInScene",
-                    paramDescription = "表示当前脚本挂载的物体是 Prefab，并且是场景中的实例时生效"
+                    ReturnType = ">>> PrefabKind",
+                    ParameterName = "PrefabKind.InstanceInScene",
+                    ParameterDescription = "表示当前脚本挂载的物体是 Prefab，并且是场景中的实例时生效"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = ">>> PrefabKind",
-                    paramName = "PrefabKind.InstanceInPrefab",
-                    paramDescription = "表示当前脚本挂载的物体是 Prefab，并且是嵌套在其他预制体中的物体时生效"
+                    ReturnType = ">>> PrefabKind",
+                    ParameterName = "PrefabKind.InstanceInPrefab",
+                    ParameterDescription = "表示当前脚本挂载的物体是 Prefab，并且是嵌套在其他预制体中的物体时生效"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = ">>> PrefabKind",
-                    paramName = "PrefabKind.Regular",
-                    paramDescription = "表示当前脚本挂载的物体是 Regular Prefab 时生效"
+                    ReturnType = ">>> PrefabKind",
+                    ParameterName = "PrefabKind.Regular",
+                    ParameterDescription = "表示当前脚本挂载的物体是 Regular Prefab 时生效"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = ">>> PrefabKind",
-                    paramName = "PrefabKind.Variant",
-                    paramDescription = "表示当前脚本挂载的物体是 Prefab Variant (变体) 时生效"
+                    ReturnType = ">>> PrefabKind",
+                    ParameterName = "PrefabKind.Variant",
+                    ParameterDescription = "表示当前脚本挂载的物体是 Prefab Variant (变体) 时生效"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = ">>> PrefabKind",
-                    paramName = "PrefabKind.NonPrefabInstance",
-                    paramDescription = "表示当前脚本挂载的物体是场景中的非 Prefab 实例时生效"
+                    ReturnType = ">>> PrefabKind",
+                    ParameterName = "PrefabKind.NonPrefabInstance",
+                    ParameterDescription = "表示当前脚本挂载的物体是场景中的非 Prefab 实例时生效"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = ">>> PrefabKind",
-                    paramName = "PrefabKind.PrefabInstance",
-                    paramDescription = "PrefabInstance = InstanceInPrefab | InstanceInScene"
+                    ReturnType = ">>> PrefabKind",
+                    ParameterName = "PrefabKind.PrefabInstance",
+                    ParameterDescription = "PrefabInstance = InstanceInPrefab | InstanceInScene"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = ">>> PrefabKind",
-                    paramName = "PrefabKind.PrefabAsset",
-                    paramDescription = "PrefabAsset = Variant | Regular"
+                    ReturnType = ">>> PrefabKind",
+                    ParameterName = "PrefabKind.PrefabAsset",
+                    ParameterDescription = "PrefabAsset = Variant | Regular"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = ">>> PrefabKind",
-                    paramName = "PrefabKind.PrefabInstanceAndNonPrefabInstance",
-                    paramDescription =
+                    ReturnType = ">>> PrefabKind",
+                    ParameterName = "PrefabKind.PrefabInstanceAndNonPrefabInstance",
+                    ParameterDescription =
                         "PrefabInstanceAndNonPrefabInstance = InstanceInPrefab | InstanceInScene | NonPrefabInstance"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = ">>> PrefabKind",
-                    paramName = "PrefabKind.All",
-                    paramDescription =
+                    ReturnType = ">>> PrefabKind",
+                    ParameterName = "PrefabKind.All",
+                    ParameterDescription =
                         "All = PrefabInstanceAndNonPrefabInstance | PrefabAsset"
                 }
             };

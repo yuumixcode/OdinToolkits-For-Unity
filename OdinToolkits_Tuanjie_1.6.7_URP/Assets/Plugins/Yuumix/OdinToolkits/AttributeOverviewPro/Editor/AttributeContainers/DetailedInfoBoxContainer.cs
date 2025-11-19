@@ -1,5 +1,7 @@
 using Sirenix.OdinInspector.Editor;
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -24,19 +26,19 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                     ParamName = "Message",
                     ReturnType = "string",
                     ResolverType = ResolverType.ValueResolver,
-                    ParamValues = new List<ParamValue>
+                    ParamValues = new List<ParameterValue>
                     {
-                        new ParamValue
+                        new ParameterValue
                         {
-                            returnType = typeof(InspectorProperty).FullName,
-                            paramName = "$property",
-                            paramDescription = DescriptionConfigs.InspectorPropertyDesc
+                            ReturnType = typeof(InspectorProperty).FullName,
+                            ParameterName = "$property",
+                            ParameterDescription = DescriptionConfigs.InspectorPropertyDesc
                         },
-                        new ParamValue
+                        new ParameterValue
                         {
-                            returnType = "T 泛型",
-                            paramName = "$value",
-                            paramDescription = DescriptionConfigs.ValueDesc
+                            ReturnType = "T 泛型",
+                            ParameterName = "$value",
+                            ParameterDescription = DescriptionConfigs.ValueDesc
                         }
                     }
                 },
@@ -45,19 +47,19 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                     ParamName = "Details",
                     ReturnType = "string",
                     ResolverType = ResolverType.ValueResolver,
-                    ParamValues = new List<ParamValue>
+                    ParamValues = new List<ParameterValue>
                     {
-                        new ParamValue
+                        new ParameterValue
                         {
-                            returnType = typeof(InspectorProperty).FullName,
-                            paramName = "$property",
-                            paramDescription = DescriptionConfigs.InspectorPropertyDesc
+                            ReturnType = typeof(InspectorProperty).FullName,
+                            ParameterName = "$property",
+                            ParameterDescription = DescriptionConfigs.InspectorPropertyDesc
                         },
-                        new ParamValue
+                        new ParameterValue
                         {
-                            returnType = "T 泛型",
-                            paramName = "$value",
-                            paramDescription = DescriptionConfigs.ValueDesc
+                            ReturnType = "T 泛型",
+                            ParameterName = "$value",
+                            ParameterDescription = DescriptionConfigs.ValueDesc
                         }
                     }
                 },
@@ -66,50 +68,50 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                     ParamName = "VisibleIf",
                     ReturnType = "bool",
                     ResolverType = ResolverType.ValueResolver,
-                    ParamValues = new List<ParamValue>
+                    ParamValues = new List<ParameterValue>
                     {
-                        new ParamValue
+                        new ParameterValue
                         {
-                            returnType = typeof(InspectorProperty).FullName,
-                            paramName = "$property",
-                            paramDescription = DescriptionConfigs.InspectorPropertyDesc
+                            ReturnType = typeof(InspectorProperty).FullName,
+                            ParameterName = "$property",
+                            ParameterDescription = DescriptionConfigs.InspectorPropertyDesc
                         },
-                        new ParamValue
+                        new ParameterValue
                         {
-                            returnType = "T 泛型",
-                            paramName = "$value",
-                            paramDescription = DescriptionConfigs.ValueDesc
+                            ReturnType = "T 泛型",
+                            ParameterName = "$value",
+                            ParameterDescription = DescriptionConfigs.ValueDesc
                         }
                     }
                 }
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "message",
-                    paramDescription = "折叠状态下显示的文本，" + DescriptionConfigs.SupportAllResolver
+                    ReturnType = "string",
+                    ParameterName = "message",
+                    ParameterDescription = "折叠状态下显示的文本，" + DescriptionConfigs.SupportAllResolver
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "details",
-                    paramDescription = "展开状态下显示的完整文本，" + DescriptionConfigs.SupportAllResolver
+                    ReturnType = "string",
+                    ParameterName = "details",
+                    ParameterDescription = "展开状态下显示的完整文本，" + DescriptionConfigs.SupportAllResolver
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "InfoMessageType",
-                    paramName = "infoMessageType",
-                    paramDescription = "消息的类型枚举，绘制一个图标在左侧，有 None，Info，Warning，Error"
+                    ReturnType = "InfoMessageType",
+                    ParameterName = "infoMessageType",
+                    ParameterDescription = "消息的类型枚举，绘制一个图标在左侧，有 None，Info，Warning，Error"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "visibleIf",
-                    paramDescription = "解析字段名，获取 bool 值，用于控制 DetailedInfoBox 当前是否显示，" +
+                    ReturnType = "bool",
+                    ParameterName = "visibleIf",
+                    ParameterDescription = "解析字段名，获取 bool 值，用于控制 DetailedInfoBox 当前是否显示，" +
                                        DescriptionConfigs.SupportAllResolver
                 }
             };

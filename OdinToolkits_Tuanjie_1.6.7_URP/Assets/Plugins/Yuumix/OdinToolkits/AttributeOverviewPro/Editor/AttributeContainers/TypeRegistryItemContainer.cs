@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -14,44 +16,44 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "主要是用于修改类型选择器中的样式，属于编辑器美化类型"
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "name",
-                    paramDescription = "类型名称，用于在类型选择器中显示"
+                    ReturnType = "string",
+                    ParameterName = "name",
+                    ParameterDescription = "类型名称，用于在类型选择器中显示"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "categoryPath",
-                    paramDescription = "类型在类型选择器中的路径，如 GameObject/UI "
+                    ReturnType = "string",
+                    ParameterName = "categoryPath",
+                    ParameterDescription = "类型在类型选择器中的路径，如 GameObject/UI "
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "SdfIconType 枚举",
-                    paramName = "Icon",
-                    paramDescription = "图标类型，默认为 SdfIconType.None"
+                    ReturnType = "SdfIconType 枚举",
+                    ParameterName = "Icon",
+                    ParameterDescription = "图标类型，默认为 SdfIconType.None"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "Color",
-                    paramName = "LightIconColor",
-                    paramDescription = "Light 皮肤下的颜色"
+                    ReturnType = "Color",
+                    ParameterName = "LightIconColor",
+                    ParameterDescription = "Light 皮肤下的颜色"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "Color",
-                    paramName = "DarkIconColor",
-                    paramDescription = "Dark 皮肤下的颜色"
+                    ReturnType = "Color",
+                    ParameterName = "DarkIconColor",
+                    ParameterDescription = "Dark 皮肤下的颜色"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "int",
-                    paramName = "Priority",
-                    paramDescription = "类型在类型选择器中的优先级，默认为 0"
+                    ReturnType = "int",
+                    ParameterName = "Priority",
+                    ParameterDescription = "类型在类型选择器中的优先级，默认为 0"
                 }
             };
 

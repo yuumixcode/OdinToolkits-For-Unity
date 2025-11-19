@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -15,7 +17,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     {
         GUIStyle _tableCellTextStyle;
         public string ParamName;
-        public List<ParamValue> ParamValues;
+        public List<ParameterValue> ParamValues;
         public ResolverType ResolverType;
         public string ReturnType;
 
@@ -37,19 +39,19 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 {
                     ColumnTitle = "返回值类型",
                     Width = 120,
-                    OnGUI = (rect, i) => { DrawTableCell(rect, ParamValues[i].returnType); }
+                    OnGUI = (rect, i) => { DrawTableCell(rect, ParamValues[i].ReturnType); }
                 },
                 new GUITableColumn
                 {
                     ColumnTitle = "参数名",
                     Width = 120,
-                    OnGUI = (rect, i) => { DrawTableCell(rect, ParamValues[i].paramName); }
+                    OnGUI = (rect, i) => { DrawTableCell(rect, ParamValues[i].ParameterName); }
                 },
                 new GUITableColumn
                 {
                     ColumnTitle = "参数描述",
                     MinWidth = 150,
-                    OnGUI = (rect, i) => { DrawTableCell(rect, ParamValues[i].paramDescription); }
+                    OnGUI = (rect, i) => { DrawTableCell(rect, ParamValues[i].ParameterDescription); }
                 });
             return guiTable;
         }

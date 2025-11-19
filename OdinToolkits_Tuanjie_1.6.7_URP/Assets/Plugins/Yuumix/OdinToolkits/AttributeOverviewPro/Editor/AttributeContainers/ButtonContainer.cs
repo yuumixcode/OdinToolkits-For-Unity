@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -10,50 +12,50 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         protected override List<string> GetTips() => new List<string>();
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "name",
-                    paramDescription = "自定义按钮显示的名称，" + DescriptionConfigs.SupportAllResolver
+                    ReturnType = "string",
+                    ParameterName = "name",
+                    ParameterDescription = "自定义按钮显示的名称，" + DescriptionConfigs.SupportAllResolver
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "ButtonSizes",
-                    paramName = "buttonSize",
-                    paramDescription = "按钮大小的枚举，有 Small，Medium，Large，Gigantic"
+                    ReturnType = "ButtonSizes",
+                    ParameterName = "buttonSize",
+                    ParameterDescription = "按钮大小的枚举，有 Small，Medium，Large，Gigantic"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "int",
-                    paramName = "buttonSize",
-                    paramDescription = "按钮的高度，会自动控制按钮的宽度"
+                    ReturnType = "int",
+                    ParameterName = "buttonSize",
+                    ParameterDescription = "按钮的高度，会自动控制按钮的宽度"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "ButtonStyle",
-                    paramName = "parameterBtnStyle",
-                    paramDescription = "按钮的样式枚举，有 CompactBox，FoldoutButton，Box"
+                    ReturnType = "ButtonStyle",
+                    ParameterName = "parameterBtnStyle",
+                    ParameterDescription = "按钮的样式枚举，有 CompactBox，FoldoutButton，Box"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "SdfIconType",
-                    paramName = "icon",
-                    paramDescription = "Odin 提供的图标枚举，有非常多的图标可以使用"
+                    ReturnType = "SdfIconType",
+                    ParameterName = "icon",
+                    ParameterDescription = "Odin 提供的图标枚举，有非常多的图标可以使用"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "IconAlignment",
-                    paramName = "iconAlignment",
-                    paramDescription = "图标的对齐方式，有 LeftOfText，RightOfText，LeftEdge，RightEdge"
+                    ReturnType = "IconAlignment",
+                    ParameterName = "iconAlignment",
+                    ParameterDescription = "图标的对齐方式，有 LeftOfText，RightOfText，LeftEdge，RightEdge"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "Stretch",
-                    paramDescription = "是否拉伸宽度，默认为 true，否则将依据名称的长度绘制按钮"
+                    ReturnType = "bool",
+                    ParameterName = "Stretch",
+                    ParameterDescription = "是否拉伸宽度，默认为 true，否则将依据名称的长度绘制按钮"
                 }
             };
 

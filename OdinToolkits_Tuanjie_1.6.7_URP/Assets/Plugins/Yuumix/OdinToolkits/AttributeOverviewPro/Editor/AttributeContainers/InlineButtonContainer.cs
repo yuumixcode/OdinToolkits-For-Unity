@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -14,50 +16,50 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "可以同时有多个 InlineButton"
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "action",
-                    paramDescription = "按钮点击时调用的方法名，会自动生成按钮，" + DescriptionConfigs.SupportAllResolver
+                    ReturnType = "string",
+                    ParameterName = "action",
+                    ParameterDescription = "按钮点击时调用的方法名，会自动生成按钮，" + DescriptionConfigs.SupportAllResolver
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "SdfIconType",
-                    paramName = "icon",
-                    paramDescription = "按钮图标，Odin 提供的图标枚举"
+                    ReturnType = "SdfIconType",
+                    ParameterName = "icon",
+                    ParameterDescription = "按钮图标，Odin 提供的图标枚举"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "label",
-                    paramDescription = "自定义按钮文本，默认为方法名"
+                    ReturnType = "string",
+                    ParameterName = "label",
+                    ParameterDescription = "自定义按钮文本，默认为方法名"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "IconAlignment",
-                    paramName = "iconAlignment",
-                    paramDescription = "图标对齐方式"
+                    ReturnType = "IconAlignment",
+                    ParameterName = "iconAlignment",
+                    ParameterDescription = "图标对齐方式"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "ShowIf",
-                    paramDescription = "是否显示按钮，" + DescriptionConfigs.SupportAllResolver
+                    ReturnType = "string",
+                    ParameterName = "ShowIf",
+                    ParameterDescription = "是否显示按钮，" + DescriptionConfigs.SupportAllResolver
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "ButtonColor",
-                    paramDescription = DescriptionConfigs.ColorDescription
+                    ReturnType = "string",
+                    ParameterName = "ButtonColor",
+                    ParameterDescription = DescriptionConfigs.ColorDescription
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "TextColor",
-                    paramDescription = DescriptionConfigs.ColorDescription
+                    ReturnType = "string",
+                    ParameterName = "TextColor",
+                    ParameterDescription = DescriptionConfigs.ColorDescription
                 }
             };
 

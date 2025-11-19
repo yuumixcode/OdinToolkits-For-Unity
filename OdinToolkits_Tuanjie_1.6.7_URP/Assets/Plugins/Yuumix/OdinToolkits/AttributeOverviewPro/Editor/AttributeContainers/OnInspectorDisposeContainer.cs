@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -14,14 +16,14 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "当更换 Inspector 面板选择或垃圾收集器收集 PropertyTree 时，至少触发一次，也有可能触发多次，最常见的是多态 Property 类型发生改变时，会触发 Dispose"
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "action",
-                    paramDescription = "触发函数名，方法可选 (InspectorProperty property, T value)，无返回值，" +
+                    ReturnType = "string",
+                    ParameterName = "action",
+                    ParameterDescription = "触发函数名，方法可选 (InspectorProperty property, T value)，无返回值，" +
                                        DescriptionConfigs.SupportAllResolver
                 }
             };

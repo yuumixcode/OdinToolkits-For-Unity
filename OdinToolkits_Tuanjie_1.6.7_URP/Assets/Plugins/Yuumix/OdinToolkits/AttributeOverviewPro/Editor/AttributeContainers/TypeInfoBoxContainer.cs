@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -14,14 +16,14 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "快速绘制一个顶部的 InfoBox，不需要使用 PropertyOrder 和 OnInspectorGUI 特性"
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "message",
-                    paramDescription = "顶部 InfoBox 的消息内容"
+                    ReturnType = "string",
+                    ParameterName = "message",
+                    ParameterDescription = "顶部 InfoBox 的消息内容"
                 }
             };
 

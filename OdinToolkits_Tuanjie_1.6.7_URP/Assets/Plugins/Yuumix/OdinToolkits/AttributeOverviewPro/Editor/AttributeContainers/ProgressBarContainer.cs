@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -15,80 +17,80 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "可以根据值进行颜色的变换"
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "double",
-                    paramName = "min",
-                    paramDescription = "最小值，还有一个类似的参数 minGetter，" + DescriptionConfigs.SupportAllResolver
+                    ReturnType = "double",
+                    ParameterName = "min",
+                    ParameterDescription = "最小值，还有一个类似的参数 minGetter，" + DescriptionConfigs.SupportAllResolver
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "double",
-                    paramName = "max",
-                    paramDescription = "最大值，还有一个类似的参数 maxGetter，" + DescriptionConfigs.SupportAllResolver
+                    ReturnType = "double",
+                    ParameterName = "max",
+                    ParameterDescription = "最大值，还有一个类似的参数 maxGetter，" + DescriptionConfigs.SupportAllResolver
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "float",
-                    paramName = "r",
-                    paramDescription = "RGB 的红色通道"
+                    ReturnType = "float",
+                    ParameterName = "r",
+                    ParameterDescription = "RGB 的红色通道"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "float",
-                    paramName = "g",
-                    paramDescription = "RGB 的绿色通道"
+                    ReturnType = "float",
+                    ParameterName = "g",
+                    ParameterDescription = "RGB 的绿色通道"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "float",
-                    paramName = "b",
-                    paramDescription = "RGB 的蓝色通道"
+                    ReturnType = "float",
+                    ParameterName = "b",
+                    ParameterDescription = "RGB 的蓝色通道"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "int",
-                    paramName = "Height",
-                    paramDescription = "进度条高度"
+                    ReturnType = "int",
+                    ParameterName = "Height",
+                    ParameterDescription = "进度条高度"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "ColorGetter",
-                    paramDescription = "颜色获取器，返回值类型为 Color，" + DescriptionConfigs.ColorDescription
+                    ReturnType = "string",
+                    ParameterName = "ColorGetter",
+                    ParameterDescription = "颜色获取器，返回值类型为 Color，" + DescriptionConfigs.ColorDescription
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "BackgroundColorGetter",
-                    paramDescription = "背景颜色获取器，返回值类型为 Color，" + DescriptionConfigs.ColorDescription
+                    ReturnType = "string",
+                    ParameterName = "BackgroundColorGetter",
+                    ParameterDescription = "背景颜色获取器，返回值类型为 Color，" + DescriptionConfigs.ColorDescription
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "Segmented",
-                    paramDescription = "是否像瓦片一样分块显示"
+                    ReturnType = "bool",
+                    ParameterName = "Segmented",
+                    ParameterDescription = "是否像瓦片一样分块显示"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "CustomValueStringGetter",
-                    paramDescription = "自定义 ValueLabel，返回值类型为 string，" + DescriptionConfigs.SupportAllResolver
+                    ReturnType = "string",
+                    ParameterName = "CustomValueStringGetter",
+                    ParameterDescription = "自定义 ValueLabel，返回值类型为 string，" + DescriptionConfigs.SupportAllResolver
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "DrawValueLabel",
-                    paramDescription = "是否绘制 ValueLabel"
+                    ReturnType = "bool",
+                    ParameterName = "DrawValueLabel",
+                    ParameterDescription = "是否绘制 ValueLabel"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = nameof(TextAlignment),
-                    paramName = "ValueLabelAlignment",
-                    paramDescription = "对齐样式"
+                    ReturnType = nameof(TextAlignment),
+                    ParameterName = "ValueLabelAlignment",
+                    ParameterDescription = "对齐样式"
                 }
             };
 

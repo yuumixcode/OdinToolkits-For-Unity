@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -16,57 +18,57 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "该 Example 采用了 Odin 序列化"
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "ShowBaseType",
-                    paramDescription = "是否显示基类字段，默认为 false"
+                    ReturnType = "bool",
+                    ParameterName = "ShowBaseType",
+                    ParameterDescription = "是否显示基类字段，默认为 false"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "ReadOnlyIfNotNullReference",
-                    paramDescription = "如果引用不为空，是否只读，默认为 false"
+                    ReturnType = "bool",
+                    ParameterName = "ReadOnlyIfNotNullReference",
+                    ParameterDescription = "如果引用不为空，是否只读，默认为 false"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "CreateInstanceFunction",
-                    paramDescription = "自定义创建实例的函数名，默认为 null"
+                    ReturnType = "string",
+                    ParameterName = "CreateInstanceFunction",
+                    ParameterDescription = "自定义创建实例的函数名，默认为 null"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "NonDefaultConstructorPreference 枚举",
-                    paramName = "NonDefaultConstructorPreference",
-                    paramDescription = "没有默认构造函数的处理设置"
+                    ReturnType = "NonDefaultConstructorPreference 枚举",
+                    ParameterName = "NonDefaultConstructorPreference",
+                    ParameterDescription = "没有默认构造函数的处理设置"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = ">>> NonDefaultConstructorPreference 枚举",
-                    paramName = "NonDefaultConstructorPreference.Exclude",
-                    paramDescription = "直接剔除没有默认构造函数的类，使其无法点击创建对象"
+                    ReturnType = ">>> NonDefaultConstructorPreference 枚举",
+                    ParameterName = "NonDefaultConstructorPreference.Exclude",
+                    ParameterDescription = "直接剔除没有默认构造函数的类，使其无法点击创建对象"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = ">>> NonDefaultConstructorPreference 枚举",
-                    paramName = "NonDefaultConstructorPreference.ConstructIdeal",
-                    paramDescription = "如果找不到默认构造函数，尝试使用最简单直接的一个构造函数创建对象，优先设置对应字段的默认值"
+                    ReturnType = ">>> NonDefaultConstructorPreference 枚举",
+                    ParameterName = "NonDefaultConstructorPreference.ConstructIdeal",
+                    ParameterDescription = "如果找不到默认构造函数，尝试使用最简单直接的一个构造函数创建对象，优先设置对应字段的默认值"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = ">>> NonDefaultConstructorPreference 枚举",
-                    paramName = "NonDefaultConstructorPreference.PreferUninitialized",
-                    paramDescription = "如果找不到默认构造函数，调用 C# 的 GetUninitializedObject(Type) "
+                    ReturnType = ">>> NonDefaultConstructorPreference 枚举",
+                    ParameterName = "NonDefaultConstructorPreference.PreferUninitialized",
+                    ParameterDescription = "如果找不到默认构造函数，调用 C# 的 GetUninitializedObject(Type) "
                 },
 
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = ">>> NonDefaultConstructorPreference 枚举",
-                    paramName = "NonDefaultConstructorPreference.LogWarning",
-                    paramDescription = "如果选择的类没有默认构造函数，则在点击后发出警告"
+                    ReturnType = ">>> NonDefaultConstructorPreference 枚举",
+                    ParameterName = "NonDefaultConstructorPreference.LogWarning",
+                    ParameterDescription = "如果选择的类没有默认构造函数，则在点击后发出警告"
                 }
             };
 

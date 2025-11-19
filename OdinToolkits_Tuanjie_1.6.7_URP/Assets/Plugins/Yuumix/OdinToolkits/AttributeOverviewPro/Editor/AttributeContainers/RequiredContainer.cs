@@ -1,6 +1,8 @@
 using Sirenix.OdinInspector.Editor;
 using System;
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -19,20 +21,20 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "优先使用构造函数，而不是 (ErrorMessage = )，构造函数可以在 Rider 中高亮显示被解析的字符串。"
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "errorMessage",
-                    paramDescription = "错误信息，" + DescriptionConfigs.SupportAllResolver
+                    ReturnType = "string",
+                    ParameterName = "errorMessage",
+                    ParameterDescription = "错误信息，" + DescriptionConfigs.SupportAllResolver
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "InfoMessageType",
-                    paramName = "infoMessageType",
-                    paramDescription = "消息的类型枚举，绘制一个图标在左侧，有 None，Info，Warning，Error"
+                    ReturnType = "InfoMessageType",
+                    ParameterName = "infoMessageType",
+                    ParameterDescription = "消息的类型枚举，绘制一个图标在左侧，有 None，Info，Warning，Error"
                 }
             };
 
@@ -44,19 +46,19 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                     ParamName = "Message",
                     ReturnType = nameof(String),
                     ResolverType = ResolverType.ValueResolver,
-                    ParamValues = new List<ParamValue>
+                    ParamValues = new List<ParameterValue>
                     {
-                        new ParamValue
+                        new ParameterValue
                         {
-                            returnType = typeof(InspectorProperty).FullName,
-                            paramName = "$property",
-                            paramDescription = DescriptionConfigs.InspectorPropertyDesc
+                            ReturnType = typeof(InspectorProperty).FullName,
+                            ParameterName = "$property",
+                            ParameterDescription = DescriptionConfigs.InspectorPropertyDesc
                         },
-                        new ParamValue
+                        new ParameterValue
                         {
-                            returnType = "T 泛型",
-                            paramName = "$value",
-                            paramDescription = DescriptionConfigs.ValueDesc
+                            ReturnType = "T 泛型",
+                            ParameterName = "$value",
+                            ParameterDescription = DescriptionConfigs.ValueDesc
                         }
                     }
                 }

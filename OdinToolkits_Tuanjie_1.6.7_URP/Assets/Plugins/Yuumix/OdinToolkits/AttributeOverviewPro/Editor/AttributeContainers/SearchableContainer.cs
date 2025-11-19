@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -17,62 +19,62 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "搜索要使用在代码中的字符，而不是显示在 Inspector 上的，如果希望中文搜索，代码酌情使用中文，比如一个类中引用了非常多的音频资源，超过 100 个，使用搜索可以快速获取"
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "FuzzySearch",
-                    paramDescription = "开启模糊搜索，不区分大小写，默认为 true"
+                    ReturnType = "bool",
+                    ParameterName = "FuzzySearch",
+                    ParameterDescription = "开启模糊搜索，不区分大小写，默认为 true"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "Recursive",
-                    paramDescription = "开启递归搜索，默认为 true"
+                    ReturnType = "bool",
+                    ParameterName = "Recursive",
+                    ParameterDescription = "开启递归搜索，默认为 true"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "SearchFilterOptions 枚举类型",
-                    paramName = "FilterOptions",
-                    paramDescription = "搜索过滤选项，控制搜索方式，默认为 SearchFilterOptions.All"
+                    ReturnType = "SearchFilterOptions 枚举类型",
+                    ParameterName = "FilterOptions",
+                    ParameterDescription = "搜索过滤选项，控制搜索方式，默认为 SearchFilterOptions.All"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = ">>> SearchFilterOptions",
-                    paramName = "SearchFilterOptions.PropertyName",
-                    paramDescription = "可以匹配成员名称"
+                    ReturnType = ">>> SearchFilterOptions",
+                    ParameterName = "SearchFilterOptions.PropertyName",
+                    ParameterDescription = "可以匹配成员名称"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = ">>> SearchFilterOptions",
-                    paramName = "SearchFilterOptions.PropertyNiceName",
-                    paramDescription = "可以匹配成员的 NiceName，指大写字母开头，单词分开"
+                    ReturnType = ">>> SearchFilterOptions",
+                    ParameterName = "SearchFilterOptions.PropertyNiceName",
+                    ParameterDescription = "可以匹配成员的 NiceName，指大写字母开头，单词分开"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = ">>> SearchFilterOptions",
-                    paramName = "SearchFilterOptions.TypeOfValue",
-                    paramDescription = "可以匹配值的类型"
+                    ReturnType = ">>> SearchFilterOptions",
+                    ParameterName = "SearchFilterOptions.TypeOfValue",
+                    ParameterDescription = "可以匹配值的类型"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = ">>> SearchFilterOptions",
-                    paramName = "SearchFilterOptions.ValueToString",
-                    paramDescription = "可以匹配任意值转化为 string 类型的结果"
+                    ReturnType = ">>> SearchFilterOptions",
+                    ParameterName = "SearchFilterOptions.ValueToString",
+                    ParameterDescription = "可以匹配任意值转化为 string 类型的结果"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = ">>> SearchFilterOptions",
-                    paramName = "SearchFilterOptions.ISearchFilterableInterface",
-                    paramDescription = "自定义实现搜索过滤规则，在需要被搜索的元素（自定义类）上实现 ISearchFilterable 接口"
+                    ReturnType = ">>> SearchFilterOptions",
+                    ParameterName = "SearchFilterOptions.ISearchFilterableInterface",
+                    ParameterDescription = "自定义实现搜索过滤规则，在需要被搜索的元素（自定义类）上实现 ISearchFilterable 接口"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = ">>> SearchFilterOptions",
-                    paramName = "SearchFilterOptions.All",
-                    paramDescription = "属于以上所有的合集，任何方式均可匹配"
+                    ReturnType = ">>> SearchFilterOptions",
+                    ParameterName = "SearchFilterOptions.All",
+                    ParameterDescription = "属于以上所有的合集，任何方式均可匹配"
                 }
             };
 

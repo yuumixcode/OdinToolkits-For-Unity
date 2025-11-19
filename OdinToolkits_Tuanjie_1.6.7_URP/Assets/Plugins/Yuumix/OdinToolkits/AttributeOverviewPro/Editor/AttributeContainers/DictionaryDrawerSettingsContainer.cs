@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -14,38 +16,38 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "Unity 无法序列化字典，需要 Odin 序列化，需要继承特殊的序列化基类或者自己实现序列化"
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "KeyLabel",
-                    paramDescription = "修改 Key 键的名称"
+                    ReturnType = "string",
+                    ParameterName = "KeyLabel",
+                    ParameterDescription = "修改 Key 键的名称"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "ValueLabel",
-                    paramDescription = "修改 Value 值的名称"
+                    ReturnType = "string",
+                    ParameterName = "ValueLabel",
+                    ParameterDescription = "修改 Value 值的名称"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "int",
-                    paramName = "KeyColumnWidth",
-                    paramDescription = "修改 Key 键的宽度，但是没有效果"
+                    ReturnType = "int",
+                    ParameterName = "KeyColumnWidth",
+                    ParameterDescription = "修改 Key 键的宽度，但是没有效果"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "DictionaryDisplayOptions",
-                    paramName = "DisplayMode",
-                    paramDescription = "修改字典的显示模式，默认为 OneLine 一行"
+                    ReturnType = "DictionaryDisplayOptions",
+                    ParameterName = "DisplayMode",
+                    ParameterDescription = "修改字典的显示模式，默认为 OneLine 一行"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "IsReadOnly",
-                    paramDescription = "是否只读，不能在面板上修改字典的元素数量和字典结构，可以通过代码修改，同时可以在面板上修改具体元素内部的 Property"
+                    ReturnType = "bool",
+                    ParameterName = "IsReadOnly",
+                    ParameterDescription = "是否只读，不能在面板上修改字典的元素数量和字典结构，可以通过代码修改，同时可以在面板上修改具体元素内部的 Property"
                 }
             };
 

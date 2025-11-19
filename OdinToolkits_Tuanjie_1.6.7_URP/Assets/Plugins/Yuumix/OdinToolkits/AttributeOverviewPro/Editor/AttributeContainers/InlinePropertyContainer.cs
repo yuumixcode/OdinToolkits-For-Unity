@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -14,14 +16,14 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "参数设置的是自定义类或者结构体中的子 properties 的宽度"
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "int",
-                    paramName = "LabelWidth",
-                    paramDescription = "所有子 properties 的宽度"
+                    ReturnType = "int",
+                    ParameterName = "LabelWidth",
+                    ParameterDescription = "所有子 properties 的宽度"
                 }
             };
 

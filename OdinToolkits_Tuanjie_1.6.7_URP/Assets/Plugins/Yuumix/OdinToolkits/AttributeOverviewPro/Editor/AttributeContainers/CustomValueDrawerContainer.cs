@@ -1,6 +1,8 @@
 using Sirenix.OdinInspector.Editor;
 using System.Collections.Generic;
 using UnityEngine;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 using YuumixEditor;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
@@ -36,44 +38,44 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                     ParamName = "Action",
                     ReturnType = "T 泛型",
                     ResolverType = ResolverType.ValueResolver,
-                    ParamValues = new List<ParamValue>
+                    ParamValues = new List<ParameterValue>
                     {
-                        new ParamValue
+                        new ParameterValue
                         {
-                            returnType = typeof(GUIContent).FullName,
-                            paramName = "$label",
-                            paramDescription = "Object Label 通常是指显示在 Inspector 面板上的名称"
+                            ReturnType = typeof(GUIContent).FullName,
+                            ParameterName = "$label",
+                            ParameterDescription = "Object Label 通常是指显示在 Inspector 面板上的名称"
                         },
-                        new ParamValue
+                        new ParameterValue
                         {
-                            returnType = "Func<GUIContent, bool>",
-                            paramName = "$callNextDrawer",
-                            paramDescription = "是否进入 Odin 的下一层绘制，传入 GUIContent 类型的 label"
+                            ReturnType = "Func<GUIContent, bool>",
+                            ParameterName = "$callNextDrawer",
+                            ParameterDescription = "是否进入 Odin 的下一层绘制，传入 GUIContent 类型的 label"
                         },
-                        new ParamValue
+                        new ParameterValue
                         {
-                            returnType = typeof(InspectorProperty).FullName,
-                            paramName = "$property",
-                            paramDescription = DescriptionConfigs.InspectorPropertyDesc
+                            ReturnType = typeof(InspectorProperty).FullName,
+                            ParameterName = "$property",
+                            ParameterDescription = DescriptionConfigs.InspectorPropertyDesc
                         },
-                        new ParamValue
+                        new ParameterValue
                         {
-                            returnType = "T 泛型",
-                            paramName = "$value",
-                            paramDescription = DescriptionConfigs.ValueDesc
+                            ReturnType = "T 泛型",
+                            ParameterName = "$value",
+                            ParameterDescription = DescriptionConfigs.ValueDesc
                         }
                     }
                 }
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "action",
-                    paramDescription = "自定义绘制方法的名称字符串，" + DescriptionConfigs.SupportMemberResolverLite
+                    ReturnType = "string",
+                    ParameterName = "action",
+                    ParameterDescription = "自定义绘制方法的名称字符串，" + DescriptionConfigs.SupportMemberResolverLite
                 }
             };
 

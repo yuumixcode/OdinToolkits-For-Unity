@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -10,20 +12,20 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         protected override List<string> GetTips() => new List<string>();
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "double",
-                    paramName = "minValue",
-                    paramDescription = "字段的最小值"
+                    ReturnType = "double",
+                    ParameterName = "minValue",
+                    ParameterDescription = "字段的最小值"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "expression",
-                    paramDescription = DescriptionConfigs.SupportAllResolver
+                    ReturnType = "string",
+                    ParameterName = "expression",
+                    ParameterDescription = DescriptionConfigs.SupportAllResolver
                 }
             };
 

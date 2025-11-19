@@ -1,5 +1,7 @@
 using Sirenix.OdinInspector.Editor;
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -15,38 +17,38 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "需要使用 ref，第三个为提醒等级，也需要使用 ref，代码示例中查看"
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "condition",
-                    paramDescription = "填入验证方法的方法名，返回 true 则验证通过，否则不通过，" + DescriptionConfigs.SupportAllResolver
+                    ReturnType = "string",
+                    ParameterName = "condition",
+                    ParameterDescription = "填入验证方法的方法名，返回 true 则验证通过，否则不通过，" + DescriptionConfigs.SupportAllResolver
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "defaultMessage",
-                    paramDescription = "默认的提醒信息，如果不填则使用默认的，" + DescriptionConfigs.SupportAllResolver
+                    ReturnType = "string",
+                    ParameterName = "defaultMessage",
+                    ParameterDescription = "默认的提醒信息，如果不填则使用默认的，" + DescriptionConfigs.SupportAllResolver
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "InfoMessageType",
-                    paramName = "messageType",
-                    paramDescription = "提醒等级，绘制一个图标在左侧，有 None，Info，Warning，Error"
+                    ReturnType = "InfoMessageType",
+                    ParameterName = "messageType",
+                    ParameterDescription = "提醒等级，绘制一个图标在左侧，有 None，Info，Warning，Error"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "IncludeChildren",
-                    paramDescription = "是否该值的子字段修改时也会触发验证，默认为 true"
+                    ReturnType = "bool",
+                    ParameterName = "IncludeChildren",
+                    ParameterDescription = "是否该值的子字段修改时也会触发验证，默认为 true"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "ContinuousValidationCheck",
-                    paramDescription = "是否每帧都进行验证，而不是仅在修改时"
+                    ReturnType = "bool",
+                    ParameterName = "ContinuousValidationCheck",
+                    ParameterDescription = "是否每帧都进行验证，而不是仅在修改时"
                 }
             };
 
@@ -58,31 +60,31 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                     ParamName = "Condition",
                     ReturnType = "bool",
                     ResolverType = ResolverType.ValueResolver,
-                    ParamValues = new List<ParamValue>
+                    ParamValues = new List<ParameterValue>
                     {
-                        new ParamValue
+                        new ParameterValue
                         {
-                            returnType = "message",
-                            paramName = "message",
-                            paramDescription = "提醒信息，可以关联成员变量的值"
+                            ReturnType = "message",
+                            ParameterName = "message",
+                            ParameterDescription = "提醒信息，可以关联成员变量的值"
                         },
-                        new ParamValue
+                        new ParameterValue
                         {
-                            returnType = "InfoMessageType",
-                            paramName = "messageType",
-                            paramDescription = "提醒等级，绘制一个图标在左侧，有 None，Info，Warning，Error"
+                            ReturnType = "InfoMessageType",
+                            ParameterName = "messageType",
+                            ParameterDescription = "提醒等级，绘制一个图标在左侧，有 None，Info，Warning，Error"
                         },
-                        new ParamValue
+                        new ParameterValue
                         {
-                            returnType = typeof(InspectorProperty).FullName,
-                            paramName = "$property",
-                            paramDescription = DescriptionConfigs.InspectorPropertyDesc
+                            ReturnType = typeof(InspectorProperty).FullName,
+                            ParameterName = "$property",
+                            ParameterDescription = DescriptionConfigs.InspectorPropertyDesc
                         },
-                        new ParamValue
+                        new ParameterValue
                         {
-                            returnType = "T 泛型",
-                            paramName = "$value",
-                            paramDescription = DescriptionConfigs.ValueDesc
+                            ReturnType = "T 泛型",
+                            ParameterName = "$value",
+                            ParameterDescription = DescriptionConfigs.ValueDesc
                         }
                     }
                 },
@@ -91,19 +93,19 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                     ParamName = "DefaultMessage",
                     ReturnType = "string",
                     ResolverType = ResolverType.ValueResolver,
-                    ParamValues = new List<ParamValue>
+                    ParamValues = new List<ParameterValue>
                     {
-                        new ParamValue
+                        new ParameterValue
                         {
-                            returnType = typeof(InspectorProperty).FullName,
-                            paramName = "$property",
-                            paramDescription = DescriptionConfigs.InspectorPropertyDesc
+                            ReturnType = typeof(InspectorProperty).FullName,
+                            ParameterName = "$property",
+                            ParameterDescription = DescriptionConfigs.InspectorPropertyDesc
                         },
-                        new ParamValue
+                        new ParameterValue
                         {
-                            returnType = "T 泛型",
-                            paramName = "$value",
-                            paramDescription = DescriptionConfigs.ValueDesc
+                            ReturnType = "T 泛型",
+                            ParameterName = "$value",
+                            ParameterDescription = DescriptionConfigs.ValueDesc
                         }
                     }
                 }

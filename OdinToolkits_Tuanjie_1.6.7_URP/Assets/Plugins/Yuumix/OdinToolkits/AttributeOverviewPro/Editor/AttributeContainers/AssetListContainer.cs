@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -12,44 +14,44 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         protected override List<string> GetTips() => new List<string>();
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "AutoPopulate",
-                    paramDescription = "如果为 true，所有在资产列表中找到并显示的资产，将在检查时自动添加到列表中。"
+                    ReturnType = "bool",
+                    ParameterName = "AutoPopulate",
+                    ParameterDescription = "如果为 true，所有在资产列表中找到并显示的资产，将在检查时自动添加到列表中。"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "Tags",
-                    paramDescription = "根据 Asset 的 Tag 进行筛选"
+                    ReturnType = "bool",
+                    ParameterName = "Tags",
+                    ParameterDescription = "根据 Asset 的 Tag 进行筛选"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "LayerNames",
-                    paramDescription = "根据 Asset 的 LayerName 进行筛选"
+                    ReturnType = "string",
+                    ParameterName = "LayerNames",
+                    ParameterDescription = "根据 Asset 的 LayerName 进行筛选"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "AssetNamePrefix",
-                    paramDescription = "根据 Asset 的文件名前缀筛选"
+                    ReturnType = "string",
+                    ParameterName = "AssetNamePrefix",
+                    ParameterDescription = "根据 Asset 的文件名前缀筛选"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "Path",
-                    paramDescription = "根据相对路径进行筛选"
+                    ReturnType = "string",
+                    ParameterName = "Path",
+                    ParameterDescription = "根据相对路径进行筛选"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "CustomFilterMethod",
-                    paramDescription = "自定义筛选方法，参数可选 T element,IList<T> value,InspectorProperty property"
+                    ReturnType = "string",
+                    ParameterName = "CustomFilterMethod",
+                    ParameterDescription = "自定义筛选方法，参数可选 T element,IList<T> value,InspectorProperty property"
                 }
             };
 

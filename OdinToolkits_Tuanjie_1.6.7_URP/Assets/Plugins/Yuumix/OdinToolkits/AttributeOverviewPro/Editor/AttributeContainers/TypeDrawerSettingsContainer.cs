@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -16,44 +18,44 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "该 Example 采用了 Odin 序列化"
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "Type",
-                    paramName = "BaseType",
-                    paramDescription = "基类类型"
+                    ReturnType = "Type",
+                    ParameterName = "BaseType",
+                    ParameterDescription = "基类类型"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "TypeInclusionFilter 枚举 [Flag]",
-                    paramName = "Filter",
-                    paramDescription = "过滤器，默认为 TypeInclusionFilter.IncludeAll"
+                    ReturnType = "TypeInclusionFilter 枚举 [Flag]",
+                    ParameterName = "Filter",
+                    ParameterDescription = "过滤器，默认为 TypeInclusionFilter.IncludeAll"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "TypeInclusionFilter 枚举 [Flag]",
-                    paramName = "TypeInclusionFilter.IncludeConcreteTypes",
-                    paramDescription = "只包含具体实例类型，不能是接口，抽象类，或者泛型类"
+                    ReturnType = "TypeInclusionFilter 枚举 [Flag]",
+                    ParameterName = "TypeInclusionFilter.IncludeConcreteTypes",
+                    ParameterDescription = "只包含具体实例类型，不能是接口，抽象类，或者泛型类"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "TypeInclusionFilter 枚举 [Flag]",
-                    paramName = "TypeInclusionFilter.IncludeGenerics",
-                    paramDescription = "只包含泛型类型"
+                    ReturnType = "TypeInclusionFilter 枚举 [Flag]",
+                    ParameterName = "TypeInclusionFilter.IncludeGenerics",
+                    ParameterDescription = "只包含泛型类型"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "TypeInclusionFilter 枚举 [Flag]",
-                    paramName = "TypeInclusionFilter.IncludeInterfaces",
-                    paramDescription = "只包含接口类型"
+                    ReturnType = "TypeInclusionFilter 枚举 [Flag]",
+                    ParameterName = "TypeInclusionFilter.IncludeInterfaces",
+                    ParameterDescription = "只包含接口类型"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "TypeInclusionFilter 枚举 [Flag]",
-                    paramName = "TypeInclusionFilter.IncludeAbstracts",
-                    paramDescription = "只包含抽象类"
+                    ReturnType = "TypeInclusionFilter 枚举 [Flag]",
+                    ParameterName = "TypeInclusionFilter.IncludeAbstracts",
+                    ParameterDescription = "只包含抽象类"
                 }
             };
 

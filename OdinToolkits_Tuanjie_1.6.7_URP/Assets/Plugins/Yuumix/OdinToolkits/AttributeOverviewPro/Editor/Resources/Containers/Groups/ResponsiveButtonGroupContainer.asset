@@ -1,5 +1,5 @@
 %YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
+%TAG !u! tag:yousandi.cn,2023:
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21,5 +21,5 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  example: {fileID: 11400000, guid: d475cee6c0b04405ab3d87b747faaaf4, type: 2}
+  example: {fileID: 11400000, guid: 28bc059137bb3471a9322a1b2afaa38c, type: 2}
   exampleOdin: {fileID: 0}

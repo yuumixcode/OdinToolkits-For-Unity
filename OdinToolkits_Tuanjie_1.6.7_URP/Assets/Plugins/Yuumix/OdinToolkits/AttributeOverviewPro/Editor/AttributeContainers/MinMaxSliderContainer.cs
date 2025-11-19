@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -15,26 +17,26 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "实际运用中，把 MinMaxSlider 对应的 Vector2 变量作为一个范围界定值，而不是直接参与运算的值"
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "float",
-                    paramName = "minValue",
-                    paramDescription = "最小值，" + DescriptionConfigs.SupportAllResolver
+                    ReturnType = "float",
+                    ParameterName = "minValue",
+                    ParameterDescription = "最小值，" + DescriptionConfigs.SupportAllResolver
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "float",
-                    paramName = "maxValue",
-                    paramDescription = "最大值，" + DescriptionConfigs.SupportAllResolver
+                    ReturnType = "float",
+                    ParameterName = "maxValue",
+                    ParameterDescription = "最大值，" + DescriptionConfigs.SupportAllResolver
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "showFields",
-                    paramDescription = "如果为 true，将会绘制值的范围数值"
+                    ReturnType = "bool",
+                    ParameterName = "showFields",
+                    ParameterDescription = "如果为 true，将会绘制值的范围数值"
                 }
             };
 

@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -15,33 +17,33 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "HideIfGroup 可以和其他组连接使用"
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "path",
-                    paramDescription = "路径，可以只代表组名，也可以引用成员名，" + DescriptionConfigs.SupportMemberResolverLite +
+                    ReturnType = "string",
+                    ParameterName = "path",
+                    ParameterDescription = "路径，可以只代表组名，也可以引用成员名，" + DescriptionConfigs.SupportMemberResolverLite +
                                        "特例: 不支持方法名"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "Condition",
-                    paramDescription = "条件，可以是任意字符串，但不是空字符串，" + DescriptionConfigs.SupportMemberResolverLite
+                    ReturnType = "string",
+                    ParameterName = "Condition",
+                    ParameterDescription = "条件，可以是任意字符串，但不是空字符串，" + DescriptionConfigs.SupportMemberResolverLite
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "object",
-                    paramName = "Value",
-                    paramDescription = "值，可以是任意类型，但不是 null"
+                    ReturnType = "object",
+                    ParameterName = "Value",
+                    ParameterDescription = "值，可以是任意类型，但不是 null"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "animate",
-                    paramDescription = "是否显示折叠动画，默认为 true"
+                    ReturnType = "bool",
+                    ParameterName = "animate",
+                    ParameterDescription = "是否显示折叠动画，默认为 true"
                 }
             };
 

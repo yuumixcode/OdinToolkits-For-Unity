@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -10,20 +12,20 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         protected override List<string> GetTips() => new List<string>();
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "ShowAlpha",
-                    paramDescription = "是否显示 Alpha 通道，默认为 true"
+                    ReturnType = "bool",
+                    ParameterName = "ShowAlpha",
+                    ParameterDescription = "是否显示 Alpha 通道，默认为 true"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "PaletteName",
-                    paramDescription = "调色板的名称"
+                    ReturnType = "string",
+                    ParameterName = "PaletteName",
+                    ParameterDescription = "调色板的名称"
                 }
             };
 

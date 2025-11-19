@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -14,26 +16,26 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "可以和 Button 同时使用，Button 会覆盖 ResponsiveButtonGroup 的设置"
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "group",
-                    paramDescription = "Group 的名称，同时也代表路径，" + DescriptionConfigs.SupportMemberResolverLite
+                    ReturnType = "string",
+                    ParameterName = "group",
+                    ParameterDescription = "Group 的名称，同时也代表路径，" + DescriptionConfigs.SupportMemberResolverLite
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "ButtonSizes",
-                    paramName = "DefaultButtonSize",
-                    paramDescription = "默认的按钮大小，默认为 Medium"
+                    ReturnType = "ButtonSizes",
+                    ParameterName = "DefaultButtonSize",
+                    ParameterDescription = "默认的按钮大小，默认为 Medium"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "UniformLayout",
-                    paramDescription = "如果为真，那么一行按钮的宽度将是相同的"
+                    ReturnType = "bool",
+                    ParameterName = "UniformLayout",
+                    ParameterDescription = "如果为真，那么一行按钮的宽度将是相同的"
                 }
             };
 

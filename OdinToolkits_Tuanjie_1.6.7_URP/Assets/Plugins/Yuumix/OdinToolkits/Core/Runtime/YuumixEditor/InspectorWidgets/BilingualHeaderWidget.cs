@@ -50,7 +50,7 @@ namespace YuumixEditor
             _targetUrl = targetUrl ?? OdinToolkitsWebLinks.OFFICIAL_WEBSITE;
         }
 
-        InspectorBilingualismConfigSO BilingualismConfig { get; } = InspectorBilingualismConfigSO.Instance;
+        static InspectorBilingualismConfigSO BilingualismConfig => InspectorBilingualismConfigSO.Instance;
 
         bool HideHeaderIntroduction => string.IsNullOrWhiteSpace(_chineseIntroduction) &&
                                        string.IsNullOrWhiteSpace(_englishIntroduction);
@@ -59,10 +59,7 @@ namespace YuumixEditor
         [OnInspectorGUI]
         [BoxGroup("OuterBox", ShowLabel = false)]
         [HorizontalGroup("OuterBox/HoriTop", 0.01f)]
-        void PlaceholderMethod1()
-        {
-            Debug.Log("占位方法1");
-        }
+        void PlaceholderMethod1() { }
 
         [PropertyOrder(5)]
         [BoxGroup("OuterBox")]
@@ -95,10 +92,7 @@ namespace YuumixEditor
         [BoxGroup("OuterBox")]
         [HorizontalGroup("OuterBox/HoriBottom", 0.01f)]
         [OnInspectorGUI]
-        void PlaceholderMethod2()
-        {
-            Debug.Log("占位方法2");
-        }
+        void PlaceholderMethod2() { }
 
         public BilingualHeaderWidget ModifyWidget(string chineseName, string englishName = null,
             string chineseIntroduction = null,

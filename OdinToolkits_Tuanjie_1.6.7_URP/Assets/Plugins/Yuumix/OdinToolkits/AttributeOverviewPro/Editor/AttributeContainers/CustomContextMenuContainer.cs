@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -14,20 +16,20 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "Odin Inspector 会默认覆盖 Unity 的 Context 菜单，如果使用 Unity 的 [ContextMenuItem] 特性，需要标记 [DrawWithUnity]"
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "menuItem",
-                    paramDescription = "右键菜单名称，也表示菜单路径"
+                    ReturnType = "string",
+                    ParameterName = "menuItem",
+                    ParameterDescription = "右键菜单名称，也表示菜单路径"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "action",
-                    paramDescription = "右键菜单点击事件，" + DescriptionConfigs.SupportMemberResolverLite
+                    ReturnType = "string",
+                    ParameterName = "action",
+                    ParameterDescription = "右键菜单点击事件，" + DescriptionConfigs.SupportMemberResolverLite
                 }
             };
 

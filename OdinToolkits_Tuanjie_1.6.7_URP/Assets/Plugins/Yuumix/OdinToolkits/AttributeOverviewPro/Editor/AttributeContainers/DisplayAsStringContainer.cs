@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -10,38 +12,38 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         protected override List<string> GetTips() => new List<string>();
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "fontSize",
-                    paramDescription = "字体大小"
+                    ReturnType = "bool",
+                    ParameterName = "fontSize",
+                    ParameterDescription = "字体大小"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "overflow",
-                    paramDescription = "是否溢出"
+                    ReturnType = "bool",
+                    ParameterName = "overflow",
+                    ParameterDescription = "是否溢出"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "TextAlignment",
-                    paramName = "alignment",
-                    paramDescription = "对齐方式"
+                    ReturnType = "TextAlignment",
+                    ParameterName = "alignment",
+                    ParameterDescription = "对齐方式"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "enableRichText",
-                    paramDescription = "是否开启富文本"
+                    ReturnType = "bool",
+                    ParameterName = "enableRichText",
+                    ParameterDescription = "是否开启富文本"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "Format",
-                    paramDescription = "对特殊类的值进行格式化。Type 必须实现 IFormatable 接口。"
+                    ReturnType = "string",
+                    ParameterName = "Format",
+                    ParameterDescription = "对特殊类的值进行格式化。Type 必须实现 IFormatable 接口。"
                 }
             };
 

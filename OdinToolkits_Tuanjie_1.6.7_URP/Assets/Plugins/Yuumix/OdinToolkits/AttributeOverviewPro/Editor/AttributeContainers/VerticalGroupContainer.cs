@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -10,32 +12,32 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         protected override List<string> GetTips() => new List<string>();
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "groupId",
-                    paramDescription = "分组 Id，代表名称，也代表路径"
+                    ReturnType = "string",
+                    ParameterName = "groupId",
+                    ParameterDescription = "分组 Id，代表名称，也代表路径"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "float",
-                    paramName = "order",
-                    paramDescription = "不同 Group 之间的排序，越大越靠后"
+                    ReturnType = "float",
+                    ParameterName = "order",
+                    ParameterDescription = "不同 Group 之间的排序，越大越靠后"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "float",
-                    paramName = "PaddingTop",
-                    paramDescription = "顶边距，默认为 0"
+                    ReturnType = "float",
+                    ParameterName = "PaddingTop",
+                    ParameterDescription = "顶边距，默认为 0"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "float",
-                    paramName = "PaddingBottom",
-                    paramDescription = "底边距，默认为 0"
+                    ReturnType = "float",
+                    ParameterName = "PaddingBottom",
+                    ParameterDescription = "底边距，默认为 0"
                 }
             };
 

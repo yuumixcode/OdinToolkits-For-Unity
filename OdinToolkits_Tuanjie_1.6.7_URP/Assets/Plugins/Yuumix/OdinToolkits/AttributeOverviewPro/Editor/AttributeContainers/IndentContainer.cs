@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -14,14 +16,14 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "主要用于样式不符合预期的修补，通常不需要手动控制缩进"
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "int",
-                    paramName = "indentLevel",
-                    paramDescription = "缩进值，可以为负数，默认为 1"
+                    ReturnType = "int",
+                    ParameterName = "indentLevel",
+                    ParameterDescription = "缩进值，可以为负数，默认为 1"
                 }
             };
 

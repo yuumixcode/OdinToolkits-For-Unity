@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -15,99 +17,99 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "float 类型的变量均可支持两种表示方式，如果 0 ~ 1 则表示百分比，否则表示像素"
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "group",
-                    paramDescription = "分组路径，默认为 _DefaultHorizontalGroup"
+                    ReturnType = "string",
+                    ParameterName = "group",
+                    ParameterDescription = "分组路径，默认为 _DefaultHorizontalGroup"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "float",
-                    paramName = "width",
-                    paramDescription = "宽度，默认为自动控制，如果 0 ~ 1 则表示百分比，否则表示像素"
+                    ReturnType = "float",
+                    ParameterName = "width",
+                    ParameterDescription = "宽度，默认为自动控制，如果 0 ~ 1 则表示百分比，否则表示像素"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "int",
-                    paramName = "marginLeft",
-                    paramDescription = "左边空白边界，单位是像素"
+                    ReturnType = "int",
+                    ParameterName = "marginLeft",
+                    ParameterDescription = "左边空白边界，单位是像素"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "int",
-                    paramName = "marginRight",
-                    paramDescription = "右边空白边界，单位是像素"
+                    ReturnType = "int",
+                    ParameterName = "marginRight",
+                    ParameterDescription = "右边空白边界，单位是像素"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "float",
-                    paramName = "order",
-                    paramDescription = "不同的 Group 在 Inspector 面板中的优先级"
+                    ReturnType = "float",
+                    ParameterName = "order",
+                    ParameterDescription = "不同的 Group 在 Inspector 面板中的优先级"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "float",
-                    paramName = "MarginLeft",
-                    paramDescription = "左边空白边界，和 marginLeft 类似，大写开头的表示变量，0 ~ 1 则表示百分比，否则表示像素"
+                    ReturnType = "float",
+                    ParameterName = "MarginLeft",
+                    ParameterDescription = "左边空白边界，和 marginLeft 类似，大写开头的表示变量，0 ~ 1 则表示百分比，否则表示像素"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "float",
-                    paramName = "MarginRight",
-                    paramDescription = "右边空白边界，和 marginRight 类似，大写开头的表示变量，0 ~ 1 则表示百分比，否则表示像素"
+                    ReturnType = "float",
+                    ParameterName = "MarginRight",
+                    ParameterDescription = "右边空白边界，和 marginRight 类似，大写开头的表示变量，0 ~ 1 则表示百分比，否则表示像素"
                 },
 
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "float",
-                    paramName = "PaddingLeft",
-                    paramDescription = "左侧内边距，0 ~ 1 则表示百分比，否则表示像素"
+                    ReturnType = "float",
+                    ParameterName = "PaddingLeft",
+                    ParameterDescription = "左侧内边距，0 ~ 1 则表示百分比，否则表示像素"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "float",
-                    paramName = "PaddingRight",
-                    paramDescription = "右侧内边距，0 ~ 1 则表示百分比，否则表示像素"
+                    ReturnType = "float",
+                    ParameterName = "PaddingRight",
+                    ParameterDescription = "右侧内边距，0 ~ 1 则表示百分比，否则表示像素"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "float",
-                    paramName = "MinWidth",
-                    paramDescription = "最小宽度，0 ~ 1 则表示百分比，否则表示像素"
+                    ReturnType = "float",
+                    ParameterName = "MinWidth",
+                    ParameterDescription = "最小宽度，0 ~ 1 则表示百分比，否则表示像素"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "float",
-                    paramName = "MaxWidth",
-                    paramDescription = "最大宽度，0 ~ 1 则表示百分比，否则表示像素"
+                    ReturnType = "float",
+                    ParameterName = "MaxWidth",
+                    ParameterDescription = "最大宽度，0 ~ 1 则表示百分比，否则表示像素"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "float",
-                    paramName = "Gap",
-                    paramDescription = "不同列之间的宽度，0 ~ 1 则表示百分比，否则表示像素"
+                    ReturnType = "float",
+                    ParameterName = "Gap",
+                    ParameterDescription = "不同列之间的宽度，0 ~ 1 则表示百分比，否则表示像素"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "Title",
-                    paramDescription = "设置一个标题"
+                    ReturnType = "string",
+                    ParameterName = "Title",
+                    ParameterDescription = "设置一个标题"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "DisableAutomaticLabelWidth",
-                    paramDescription = "关闭自动设置宽度，默认为 false"
+                    ReturnType = "bool",
+                    ParameterName = "DisableAutomaticLabelWidth",
+                    ParameterDescription = "关闭自动设置宽度，默认为 false"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "LabelWidth",
-                    paramName = "LabelWidth",
-                    paramDescription = "设置标签宽度"
+                    ReturnType = "LabelWidth",
+                    ParameterName = "LabelWidth",
+                    ParameterDescription = "设置标签宽度"
                 }
             };
 

@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -11,50 +13,50 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         protected override List<string> GetTips() => new List<string>();
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "title",
-                    paramDescription = "标题名，同时也是 Group 路径"
+                    ReturnType = "string",
+                    ParameterName = "title",
+                    ParameterDescription = "标题名，同时也是 Group 路径"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "subtitle",
-                    paramDescription = "子标题"
+                    ReturnType = "string",
+                    ParameterName = "subtitle",
+                    ParameterDescription = "子标题"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = nameof(TitleAlignments),
-                    paramName = "alignment",
-                    paramDescription = "对齐方式，和 Title 一样"
+                    ReturnType = nameof(TitleAlignments),
+                    ParameterName = "alignment",
+                    ParameterDescription = "对齐方式，和 Title 一样"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "horizontalLine",
-                    paramDescription = "是否绘制水平线"
+                    ReturnType = "bool",
+                    ParameterName = "horizontalLine",
+                    ParameterDescription = "是否绘制水平线"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "boldTitle",
-                    paramDescription = "是否粗体绘制"
+                    ReturnType = "bool",
+                    ParameterName = "boldTitle",
+                    ParameterDescription = "是否粗体绘制"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "indent",
-                    paramDescription = "是否缩进所有组成员，默认为 false"
+                    ReturnType = "bool",
+                    ParameterName = "indent",
+                    ParameterDescription = "是否缩进所有组成员，默认为 false"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "float",
-                    paramName = "order",
-                    paramDescription = "和其他 Group 的排序，默认为 0"
+                    ReturnType = "float",
+                    ParameterName = "order",
+                    ParameterDescription = "和其他 Group 的排序，默认为 0"
                 }
             };
 

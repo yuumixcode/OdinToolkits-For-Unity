@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -14,20 +16,20 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "默认只关闭标记的 Property 的右键菜单"
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "disableForMember",
-                    paramDescription = "是否禁用成员菜单"
+                    ReturnType = "bool",
+                    ParameterName = "disableForMember",
+                    ParameterDescription = "是否禁用成员菜单"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "disableCollectionElements",
-                    paramDescription = "是否禁用集合元素菜单"
+                    ReturnType = "bool",
+                    ParameterName = "disableCollectionElements",
+                    ParameterDescription = "是否禁用集合元素菜单"
                 }
             };
 

@@ -5,6 +5,8 @@ using System.Linq;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using UnityEditor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 using Yuumix.OdinToolkits.Core;
 using YuumixEditor;
 
@@ -38,7 +40,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         public List<string> UseTips => GetTips();
 
-        public List<ParamValue> ParamValues => GetParamValues();
+        public List<ParameterValue> ParamValues => GetParamValues();
 
         public string OriginalCode => GetOriginalCode();
 
@@ -46,7 +48,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         bool HasOdinExample() => exampleOdin && !example;
         public virtual List<ResolvedParam> GetResolvedParams() => new List<ResolvedParam>();
-        protected virtual List<ParamValue> GetParamValues() => new List<ParamValue>();
+        protected virtual List<ParameterValue> GetParamValues() => new List<ParameterValue>();
 
         protected virtual BilingualHeaderWidget GetHeaderWidget() => GlobalTempHeader;
 

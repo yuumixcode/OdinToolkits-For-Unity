@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -12,20 +14,20 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             new List<string>
                 { "对角度值可以使用" };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "double",
-                    paramName = "min",
-                    paramDescription = "最小值" + DescriptionConfigs.SupportAllResolver
+                    ReturnType = "double",
+                    ParameterName = "min",
+                    ParameterDescription = "最小值" + DescriptionConfigs.SupportAllResolver
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "double",
-                    paramName = "max",
-                    paramDescription = "最大值" + DescriptionConfigs.SupportAllResolver
+                    ReturnType = "double",
+                    ParameterName = "max",
+                    ParameterDescription = "最大值" + DescriptionConfigs.SupportAllResolver
                 }
             };
 

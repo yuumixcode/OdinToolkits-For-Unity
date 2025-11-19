@@ -1,5 +1,7 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -15,80 +17,80 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "和其他 Group 连接时，需要同时设置分组路径和 tab 参数，否则构造函数将使用默认的分组路径，不会将第一个参数识别为分组路径"
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "group",
-                    paramDescription = "分组名以及路径，可以和其他 Group 连接"
+                    ReturnType = "string",
+                    ParameterName = "group",
+                    ParameterDescription = "分组名以及路径，可以和其他 Group 连接"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "tab",
-                    paramDescription = "分组标题"
+                    ReturnType = "string",
+                    ParameterName = "tab",
+                    ParameterDescription = "分组标题"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "useFixedHeight",
-                    paramDescription = "是否使用固定高度，默认为 false"
+                    ReturnType = "bool",
+                    ParameterName = "useFixedHeight",
+                    ParameterDescription = "是否使用固定高度，默认为 false"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "SdfIconType",
-                    paramName = "icon",
-                    paramDescription = "图标样式"
+                    ReturnType = "SdfIconType",
+                    ParameterName = "icon",
+                    ParameterDescription = "图标样式"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "float",
-                    paramName = "order",
-                    paramDescription = "和其他 Group 的排序，默认为 0"
+                    ReturnType = "float",
+                    ParameterName = "order",
+                    ParameterDescription = "和其他 Group 的排序，默认为 0"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "TabName",
-                    paramDescription = "TabGroup 的名称"
+                    ReturnType = "string",
+                    ParameterName = "TabName",
+                    ParameterDescription = "TabGroup 的名称"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "TabId",
-                    paramDescription = "默认由构造函数中的参数 tab 赋值"
+                    ReturnType = "string",
+                    ParameterName = "TabId",
+                    ParameterDescription = "默认由构造函数中的参数 tab 赋值"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "Paddingless",
-                    paramDescription = "如果为 true，则每页内容都不会被包含在一个 Box 中，属于样式优化参数"
+                    ReturnType = "bool",
+                    ParameterName = "Paddingless",
+                    ParameterDescription = "如果为 true，则每页内容都不会被包含在一个 Box 中，属于样式优化参数"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "HideTabGroupIfTabGroupOnlyHasOneTab",
-                    paramDescription = "如果为 true，当只有一个 Tab 时将隐藏 Tab 样式"
+                    ReturnType = "bool",
+                    ParameterName = "HideTabGroupIfTabGroupOnlyHasOneTab",
+                    ParameterDescription = "如果为 true，当只有一个 Tab 时将隐藏 Tab 样式"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "TextColor",
-                    paramDescription = DescriptionConfigs.ColorDescription
+                    ReturnType = "string",
+                    ParameterName = "TextColor",
+                    ParameterDescription = DescriptionConfigs.ColorDescription
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = nameof(TabLayouting),
-                    paramName = "TabLayouting",
-                    paramDescription = "Tab 的布局方式，包含 MultiRow 和 Shrink"
+                    ReturnType = nameof(TabLayouting),
+                    ParameterName = "TabLayouting",
+                    ParameterDescription = "Tab 的布局方式，包含 MultiRow 和 Shrink"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "List<TabGroupAttribute>",
-                    paramName = "Tabs",
-                    paramDescription = "这个组中所有的 Tabs "
+                    ReturnType = "List<TabGroupAttribute>",
+                    ParameterName = "Tabs",
+                    ParameterDescription = "这个组中所有的 Tabs "
                 }
             };
 

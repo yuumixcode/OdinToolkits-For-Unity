@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -15,32 +17,32 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 "设定了父文件夹时，获得实际路径必须手动把填写的父文件夹加上，字段值并不会包含父文件夹"
             };
 
-        protected override List<ParamValue> GetParamValues() =>
-            new List<ParamValue>
+        protected override List<ParameterValue> GetParamValues() =>
+            new List<ParameterValue>
             {
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "AbsolutePath",
-                    paramDescription = "是否使用绝对路径，默认为 false"
+                    ReturnType = "bool",
+                    ParameterName = "AbsolutePath",
+                    ParameterDescription = "是否使用绝对路径，默认为 false"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "string",
-                    paramName = "ParentFolder",
-                    paramDescription = "父文件夹路径，默认为空"
+                    ReturnType = "string",
+                    ParameterName = "ParentFolder",
+                    ParameterDescription = "父文件夹路径，默认为空"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "RequireExistingPath",
-                    paramDescription = "是否要求文件存在，默认为 false"
+                    ReturnType = "bool",
+                    ParameterName = "RequireExistingPath",
+                    ParameterDescription = "是否要求文件存在，默认为 false"
                 },
-                new ParamValue
+                new ParameterValue
                 {
-                    returnType = "bool",
-                    paramName = "UseBackslashes",
-                    paramDescription = "是否使用反斜杠，默认为 false"
+                    ReturnType = "bool",
+                    ParameterName = "UseBackslashes",
+                    ParameterDescription = "是否使用反斜杠，默认为 false"
                 }
             };
 
