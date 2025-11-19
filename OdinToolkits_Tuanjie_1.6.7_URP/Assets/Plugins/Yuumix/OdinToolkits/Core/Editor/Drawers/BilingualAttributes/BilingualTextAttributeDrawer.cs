@@ -20,8 +20,8 @@ namespace Yuumix.OdinToolkits.Core.Editor
             _iconColorResolver =
                 ValueResolver.Get(Property, Attribute.IconColor, EditorStyles.label.normal.textColor);
             _tempLabel = new GUIContent();
-            InspectorBilingualismConfigSO.OnLanguageChange -= ReloadResolver;
-            InspectorBilingualismConfigSO.OnLanguageChange += ReloadResolver;
+            InspectorBilingualismConfigSO.OnLanguageChanged -= ReloadResolver;
+            InspectorBilingualismConfigSO.OnLanguageChanged += ReloadResolver;
         }
 
         protected override void DrawPropertyLayout(GUIContent label)

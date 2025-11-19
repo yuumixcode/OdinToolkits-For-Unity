@@ -64,7 +64,7 @@ namespace Yuumix.OdinToolkits.Core
                 }
 
                 _currentLanguage = value;
-                OnLanguageChange?.Invoke();
+                OnLanguageChanged?.Invoke();
             }
         }
 
@@ -83,7 +83,7 @@ namespace Yuumix.OdinToolkits.Core
 
         #endregion
 
-        public static event Action OnLanguageChange;
+        public static event Action OnLanguageChanged;
 #if UNITY_EDITOR
 
         #region 兼容 [禁用域重新加载]
@@ -99,7 +99,7 @@ namespace Yuumix.OdinToolkits.Core
         {
             if (state == PlayModeStateChange.EnteredPlayMode)
             {
-                OnLanguageChange = null;
+                OnLanguageChanged = null;
             }
         }
 
