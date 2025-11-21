@@ -1,8 +1,9 @@
 using Sirenix.OdinInspector;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
-    [OdinToolkitsAttributeExample]
+    [AttributeOverviewProExample]
     public class TabGroupExample : ExampleSO
     {
         [PropertyOrder(10)]

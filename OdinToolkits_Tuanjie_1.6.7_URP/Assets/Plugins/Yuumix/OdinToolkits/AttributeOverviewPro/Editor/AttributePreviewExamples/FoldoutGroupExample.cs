@@ -1,8 +1,9 @@
 using Sirenix.OdinInspector;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
-    [OdinToolkitsAttributeExample]
+    [AttributeOverviewProExample]
     public class FoldoutGroupExample : ExampleSO
     {
         #region Serialized Fields

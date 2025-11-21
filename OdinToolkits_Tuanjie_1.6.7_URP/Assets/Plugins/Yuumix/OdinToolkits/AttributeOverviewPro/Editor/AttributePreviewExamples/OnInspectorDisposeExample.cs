@@ -1,8 +1,9 @@
 using Sirenix.OdinInspector;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
-    [OdinToolkitsAttributeExample]
+    [AttributeOverviewProExample]
     public class OnInspectorDisposeExample : ExampleSO
     {
         [OnInspectorDispose("@UnityEngine.Debug.Log(\"Dispose event invoked!\")")]

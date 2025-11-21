@@ -1,9 +1,10 @@
 using Sirenix.OdinInspector;
 using System;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
-    [OdinToolkitsAttributeExample]
+    [AttributeOverviewProExample]
     public class HorizontalGroupExample : ExampleSO
     {
         #region Serialized Fields

@@ -1,10 +1,11 @@
 using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
-    [OdinToolkitsAttributeExample]
+    [AttributeOverviewProExample]
     public class HideInTablesExample : ExampleSO
     {
         #region Serialized Fields

@@ -3,10 +3,11 @@ using Sirenix.Serialization;
 using Sirenix.Utilities;
 using System;
 using UnityEngine;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
-    [OdinToolkitsAttributeExample]
+    [AttributeOverviewProExample]
     public class PolymorphicDrawerSettingsExample : ExampleOdinSO
     {
         [FoldoutGroup("CreateInstanceFunction")]

@@ -1,11 +1,12 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 using Yuumix.OdinToolkits.Core;
 using YuumixEditor;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
-    [OdinToolkitsAttributeExample]
+    [AttributeOverviewProExample]
     public class RequiredListLengthExample : ExampleSO
     {
         #region Serialized Fields

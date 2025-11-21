@@ -1,9 +1,10 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
-    [OdinToolkitsAttributeExample]
+    [AttributeOverviewProExample]
     [TypeInfoBox("Play 运行模式下隐藏字段")]
     public class HideInPlayModeExample : ExampleSO
     {

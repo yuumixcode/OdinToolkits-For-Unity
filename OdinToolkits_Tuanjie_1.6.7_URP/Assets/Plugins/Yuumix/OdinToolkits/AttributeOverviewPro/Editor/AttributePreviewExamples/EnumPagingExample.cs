@@ -1,9 +1,10 @@
 using Sirenix.OdinInspector;
 using UnityEditor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
-    [OdinToolkitsAttributeExample]
+    [AttributeOverviewProExample]
     public class EnumPagingExample : ExampleSO
     {
         #region SomeEnum enum

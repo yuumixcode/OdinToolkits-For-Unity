@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 using Yuumix.OdinToolkits.Core.Editor;
 using Yuumix.OdinToolkits.OdinAttributeOverviewPro.Editor;
 
@@ -267,9 +268,9 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             }
 
             var attribute = TypeCache
-                .GetTypesWithAttribute<OdinToolkitsAttributeExampleAttribute>()
+                .GetTypesWithAttribute<AttributeOverviewProExampleAttribute>()
                 .Where(type => type == exampleType)
-                .Select(type => type.GetAttribute<OdinToolkitsAttributeExampleAttribute>())
+                .Select(type => type.GetAttribute<AttributeOverviewProExampleAttribute>())
                 .SingleOrDefault();
             // Debug.Log("attribute: " + attribute);
             var path = attribute?.FilePath;

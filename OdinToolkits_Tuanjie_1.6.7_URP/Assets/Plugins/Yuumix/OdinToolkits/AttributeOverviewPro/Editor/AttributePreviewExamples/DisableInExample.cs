@@ -1,10 +1,11 @@
 using Sirenix.OdinInspector;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 using Yuumix.OdinToolkits.Core;
 using YuumixEditor;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
-    [OdinToolkitsAttributeExample]
+    [AttributeOverviewProExample]
     public class DisableInExample : ExampleSO
     {
         static string Path =>

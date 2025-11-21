@@ -3,10 +3,11 @@ using Sirenix.OdinInspector.Editor.Examples;
 using System;
 using UnityEditor;
 using UnityEngine;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
-    [OdinToolkitsAttributeExample]
+    [AttributeOverviewProExample]
     public class ResponsiveButtonGroupExample : ExampleSO
     {
         #region Serialized Fields

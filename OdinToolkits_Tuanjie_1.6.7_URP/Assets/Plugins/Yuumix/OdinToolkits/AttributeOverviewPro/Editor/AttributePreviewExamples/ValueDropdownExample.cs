@@ -5,11 +5,12 @@ using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 using Object = UnityEngine.Object;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
-    [OdinToolkitsAttributeExample]
+    [AttributeOverviewProExample]
     public class ValueDropdownExample : ExampleSO
     {
         static int[] _textureSizes = { 256, 512, 1024 };

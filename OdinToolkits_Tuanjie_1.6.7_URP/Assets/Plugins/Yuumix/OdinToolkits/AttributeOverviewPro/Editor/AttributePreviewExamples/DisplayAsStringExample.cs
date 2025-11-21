@@ -1,10 +1,11 @@
 using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
-    [OdinToolkitsAttributeExample]
+    [AttributeOverviewProExample]
     public class DisplayAsStringExample : ExampleSO
     {
         [FoldoutGroup("无参数使用")]

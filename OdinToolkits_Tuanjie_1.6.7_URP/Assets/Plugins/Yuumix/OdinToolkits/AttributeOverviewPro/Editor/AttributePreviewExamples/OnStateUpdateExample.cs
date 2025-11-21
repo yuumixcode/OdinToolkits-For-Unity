@@ -5,10 +5,11 @@ using Sirenix.Utilities.Editor;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
-    [OdinToolkitsAttributeExample]
+    [AttributeOverviewProExample]
     public class OnStateUpdateExample : ExampleSO
     {
         #region Serialized Fields

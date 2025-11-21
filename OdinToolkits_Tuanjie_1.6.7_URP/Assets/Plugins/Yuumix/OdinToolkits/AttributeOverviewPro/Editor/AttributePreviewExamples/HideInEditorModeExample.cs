@@ -1,9 +1,10 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
-    [OdinToolkitsAttributeExample]
+    [AttributeOverviewProExample]
     [TypeInfoBox("编辑器模式下隐藏字段")]
     public class HideInEditorModeExample : ExampleSO
     {

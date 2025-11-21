@@ -3,10 +3,11 @@ using System.Globalization;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities.Editor;
 using UnityEngine;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
-    [OdinToolkitsAttributeExample]
+    [AttributeOverviewProExample]
     public class OnInspectorInitExample : ExampleSO
     {
         [OnInspectorInit(nameof(First))]

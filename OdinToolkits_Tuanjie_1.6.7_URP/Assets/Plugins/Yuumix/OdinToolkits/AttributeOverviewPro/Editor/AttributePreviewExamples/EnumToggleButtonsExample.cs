@@ -1,9 +1,10 @@
 using System;
 using Sirenix.OdinInspector;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
-    [OdinToolkitsAttributeExample]
+    [AttributeOverviewProExample]
     public class EnumToggleButtonsExample : ExampleSO
     {
         [Flags]

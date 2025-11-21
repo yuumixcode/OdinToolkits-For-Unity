@@ -4,10 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
-    [OdinToolkitsAttributeExample]
+    [AttributeOverviewProExample]
     public class DetailedInfoBoxExample : ExampleSO
     {
         const string DetailsYoga = "YOGA 框架 == Yuumi Odin Graphic Architecture";

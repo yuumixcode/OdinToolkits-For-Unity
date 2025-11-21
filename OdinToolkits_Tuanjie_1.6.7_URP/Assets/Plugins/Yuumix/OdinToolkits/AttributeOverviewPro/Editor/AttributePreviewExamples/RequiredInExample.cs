@@ -1,8 +1,9 @@
 using Sirenix.OdinInspector;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
-    [OdinToolkitsAttributeExample]
+    [AttributeOverviewProExample]
     public class RequiredInExample : ExampleSO
     {
         // static string Path => PathEditorUtil.GetTargetFolderPath("RuntimeExamples",

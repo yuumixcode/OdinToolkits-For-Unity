@@ -61,13 +61,13 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         {
             try
             {
-                OdinToolkitsAttributeExampleAttribute exampleAttribute = TypeCache
-                    .GetTypesWithAttribute<OdinToolkitsAttributeExampleAttribute>()
+                AttributeOverviewProExampleAttribute overviewProExampleAttribute = TypeCache
+                    .GetTypesWithAttribute<AttributeOverviewProExampleAttribute>()
                     .Where(type => type == exampleType)
-                    .Select(type => type.GetAttribute<OdinToolkitsAttributeExampleAttribute>())
+                    .Select(type => type.GetAttribute<AttributeOverviewProExampleAttribute>())
                     .SingleOrDefault();
 
-                if (exampleAttribute == null)
+                if (overviewProExampleAttribute == null)
                 {
                     YuumixLogger.EditorLogError(
                         $"{exampleType.Name} 没有标注 IsChineseAttributeExampleAttribute");
@@ -76,7 +76,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
                 try
                 {
-                    IEnumerable<string> readLines = File.ReadLines(exampleAttribute.FilePath);
+                    IEnumerable<string> readLines = File.ReadLines(overviewProExampleAttribute.FilePath);
                     var final = new List<string>();
                     var isInNamespace = false;
                     foreach (string line in readLines)
@@ -137,7 +137,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 }
                 catch (FileNotFoundException)
                 {
-                    YuumixLogger.OdinToolkitsError($"文件未找到: {exampleAttribute.FilePath}");
+                    YuumixLogger.OdinToolkitsError($"文件未找到: {overviewProExampleAttribute.FilePath}");
                     return "";
                 }
                 catch (IOException ex)

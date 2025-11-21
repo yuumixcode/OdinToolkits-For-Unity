@@ -2,10 +2,11 @@ using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using System.Collections.Generic;
 using UnityEngine;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
-    [OdinToolkitsAttributeExample]
+    [AttributeOverviewProExample]
     public class OnCollectionChangedExample : ExampleOdinSO
     {
         #region Serialized Fields

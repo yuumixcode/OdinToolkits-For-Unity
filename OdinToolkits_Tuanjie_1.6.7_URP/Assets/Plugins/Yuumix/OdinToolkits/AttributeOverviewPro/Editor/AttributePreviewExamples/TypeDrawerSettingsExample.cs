@@ -2,10 +2,11 @@ using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
-    [OdinToolkitsAttributeExample]
+    [AttributeOverviewProExample]
     public class TypeDrawerSettingsExample : ExampleOdinSO
     {
         #region Serialized Fields

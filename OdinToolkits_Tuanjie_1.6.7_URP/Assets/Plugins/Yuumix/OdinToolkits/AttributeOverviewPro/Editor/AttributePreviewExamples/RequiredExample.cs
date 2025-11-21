@@ -1,10 +1,11 @@
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using UnityEngine;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
-    [OdinToolkitsAttributeExample]
+    [AttributeOverviewProExample]
     public class RequiredExample : ExampleSO
     {
         [FoldoutGroup("ErrorMessage 参数 支持多种解析字符串")]

@@ -1,10 +1,13 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 using Yuumix.OdinToolkits.Core.Editor;
+using Yuumix.OdinToolkits.Modules.Editor;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.NEXT
 {
+    [AttributeOverviewProExample]
     public class AssetListExampleSO : EditorScriptableSingleton<AssetListExampleSO>
     {
         #region Serialized Fields

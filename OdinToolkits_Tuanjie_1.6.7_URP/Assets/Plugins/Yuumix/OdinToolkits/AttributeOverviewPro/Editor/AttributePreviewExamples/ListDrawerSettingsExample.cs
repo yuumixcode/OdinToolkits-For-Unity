@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities.Editor;
 using UnityEngine;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 using ObjectFieldAlignment = Sirenix.OdinInspector.ObjectFieldAlignment;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
-    [OdinToolkitsAttributeExample]
+    [AttributeOverviewProExample]
     public class ListDrawerSettingsExample : ExampleSO
     {
         [FoldoutGroup("ListDrawerSettings 基础使用")]

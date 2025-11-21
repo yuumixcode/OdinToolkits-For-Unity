@@ -4,10 +4,11 @@ using System.Linq;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using UnityEngine;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
-    [OdinToolkitsAttributeExample]
+    [AttributeOverviewProExample]
     public class ColorPaletteExample : ExampleSO
     {
         [Title("Unity 提供的 Color 相关的特性")]

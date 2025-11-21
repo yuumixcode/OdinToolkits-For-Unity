@@ -1,10 +1,11 @@
 using Sirenix.OdinInspector;
 using Sirenix.Utilities.Editor;
 using UnityEngine;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
-    [OdinToolkitsAttributeExample]
+    [AttributeOverviewProExample]
     public class ShowDrawerChainExample : ExampleSO
     {
         [PropertyOrder(1)]

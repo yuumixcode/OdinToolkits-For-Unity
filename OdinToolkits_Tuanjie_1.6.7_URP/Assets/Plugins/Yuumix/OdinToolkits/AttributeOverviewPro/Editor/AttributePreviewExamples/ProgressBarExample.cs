@@ -1,9 +1,10 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
-    [OdinToolkitsAttributeExample]
+    [AttributeOverviewProExample]
     public class ProgressBarExample : ExampleSO
     {
         [FoldoutGroup("min 和 max")]

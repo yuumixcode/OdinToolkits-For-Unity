@@ -3,10 +3,11 @@ using Sirenix.OdinInspector.Editor.Examples;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
-    [OdinToolkitsAttributeExample]
+    [AttributeOverviewProExample]
     [Searchable]
     public class SearchableExample : ExampleSO
     {

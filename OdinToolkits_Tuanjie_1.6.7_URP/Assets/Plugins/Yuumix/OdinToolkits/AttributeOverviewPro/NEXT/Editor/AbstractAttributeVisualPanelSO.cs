@@ -2,6 +2,7 @@ using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using System;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
@@ -370,12 +371,18 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         void EndDrawUsageExampleContainer()
         {
             EndDrawContainerWithTitle(_usageExampleContentRect);
-            var headerButtonRect = _usageHeaderToolbarRect.AlignCenterY(_usageHeaderToolbarRect.height).AlignRight(200);
+            DrawUsageExampleTitleButton();
+        }
+
+        void DrawUsageExampleTitleButton()
+        {
+            var headerButtonRect = _usageHeaderToolbarRect.AlignCenterY(_usageHeaderToolbarRect.height).AlignRight(220);
             var leftButtonRect = headerButtonRect.Split(0, 2);
-            if (GUI.Button(leftButtonRect, GUIHelper.TempContent("跳转到脚本文件"),
+            if (GUI.Button(leftButtonRect, GUIHelper.TempContent("Ping 脚本文件"),
                     SirenixGUIStyles.ToolbarButton))
             {
                 Debug.Log("跳转到案例的脚本文件");
+                EditorGUIUtility.PingObject(GetCurrentExampleMonoScript());
             }
 
             var rightButtonRect = headerButtonRect.Split(1, 2);
@@ -383,6 +390,23 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
             {
                 Debug.Log("重置当前案例");
             }
+        }
+
+        UnityEngine.Object GetCurrentExampleMonoScript()
+        {
+            if (!currentSelectedExample)
+            {
+                return null;
+            }
+
+            var markExampleAttribute = TypeCache
+                .GetTypesWithAttribute<AttributeOverviewProExampleAttribute>()
+                .First(type => type == currentSelectedExample.GetType())
+                .GetCustomAttribute<AttributeOverviewProExampleAttribute>();
+            var monoScriptAbsolutePath = markExampleAttribute.FilePath;
+            var assetRelativePath =
+                "Assets/" + PathUtilities.MakeRelative(Application.dataPath, monoScriptAbsolutePath);
+            return AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetRelativePath);
         }
 
         void DrawExamplePreviewItems()

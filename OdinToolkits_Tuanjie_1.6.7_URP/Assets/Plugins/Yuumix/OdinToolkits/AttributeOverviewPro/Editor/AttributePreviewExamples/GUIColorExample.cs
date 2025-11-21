@@ -2,10 +2,11 @@ using Sirenix.OdinInspector;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
-    [OdinToolkitsAttributeExample]
+    [AttributeOverviewProExample]
     public class GUIColorExample : ExampleSO
     {
         #region Serialized Fields
