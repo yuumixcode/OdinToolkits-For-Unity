@@ -393,7 +393,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                     var paramNameCellHeight =
                         CalculateHeight(_container.ResolvedParams[i].ParamValues[row - 1].ParameterName, table, 2, row);
                     var paramDescriptionCellHeight =
-                        CalculateHeight(_container.ResolvedParams[i].ParamValues[row - 1].ParameterDescription, table, 3,
+                        CalculateHeight(_container.ResolvedParams[i].ParamValues[row - 1].ParameterDescription, table,
+                            3,
                             row);
                     table[1, row].Height =
                         Mathf.Max(returnTypeCellHeight, paramNameCellHeight, paramDescriptionCellHeight) + 15f;

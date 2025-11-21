@@ -1,6 +1,7 @@
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
+using System;
 using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
@@ -96,10 +97,10 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         [PropertySpace(0, 20)]
         void DrawUsageTips()
         {
-            _usageTipContentRect = BeginDrawContainer(_usageTipsLabel);
+            _usageTipContentRect = BeginDrawContainerWithTitle(_usageTipsLabel, out _);
             _usageTipsTable.DrawTable();
             ResizeUsageTipsTable();
-            EndDrawContainer(_usageTipContentRect);
+            EndDrawContainerWithTitle(_usageTipContentRect);
         }
 
         GUITable _usageTipsTable;
@@ -181,10 +182,10 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         [PropertySpace(0, 20)]
         void DrawAttributeParameters()
         {
-            _attributeParametersContentRect = BeginDrawContainer(_attributeParametersTitleLabel);
+            _attributeParametersContentRect = BeginDrawContainerWithTitle(_attributeParametersTitleLabel, out _);
             _attributeParametersTable.DrawTable();
             ResizeAttributeParameterTable();
-            EndDrawContainer(_attributeParametersContentRect);
+            EndDrawContainerWithTitle(_attributeParametersContentRect);
         }
 
         bool AttributeParameterIsEmpty => _attributeParameters == null || _attributeParameters.Length == 0;
@@ -304,8 +305,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         [PropertySpace(0, 20)]
         void DrawResolvedStringParameters()
         {
-            _resolvedStringParametersContentRect = BeginDrawContainer(_resolvedStringParameterLabel,
-                AttributeOverviewUtility.ContainerTitleStyle);
+            _resolvedStringParametersContentRect = BeginDrawContainerWithTitle(_resolvedStringParameterLabel, out _);
             SirenixEditorGUI.BeginVerticalList(false);
             foreach (var resolvedString in _resolvedStringParameters)
             {
@@ -331,7 +331,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
             }
 
             SirenixEditorGUI.EndVerticalList();
-            EndDrawContainer(_resolvedStringParametersContentRect);
+            EndDrawContainerWithTitle(_resolvedStringParametersContentRect);
         }
 
         #endregion
@@ -343,6 +343,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 
         AttributeExamplePreviewItem[] _examplePreviewItems;
         Rect _usageExampleContentRect;
+        Rect _usageHeaderToolbarRect;
         const int EXAMPLE_NUMBER_ONE_ROW = 3;
 
         bool UsageExampleItemsIsEmpty => _examplePreviewItems == null || _examplePreviewItems.Length == 0;
@@ -350,14 +351,11 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         [HideIf("$UsageExampleItemsIsEmpty")]
         [OnInspectorGUI]
         [PropertyOrder(-1)]
-        void DrawUsageExampleContainerHeader()
+        void DrawUsageExamplePreview()
         {
-            _usageExampleContentRect = BeginDrawContainer(_usageExampleLabel,
-                AttributeOverviewUtility.ContainerTitleStyle);
-            if (_examplePreviewItems is { Length: > 1 })
-            {
-                DrawExamplePreviewItems(_examplePreviewItems);
-            }
+            _usageExampleContentRect = BeginDrawContainerWithTitle(_usageExampleLabel, out var headerToolbarRect);
+            _usageHeaderToolbarRect = headerToolbarRect;
+            DrawExamplePreviewItems();
         }
 
         [HideIf("$UsageExampleItemsIsEmpty")]
@@ -371,18 +369,36 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         [OnInspectorGUI]
         void EndDrawUsageExampleContainer()
         {
-            EndDrawContainer(_usageExampleContentRect);
+            EndDrawContainerWithTitle(_usageExampleContentRect);
+            var headerButtonRect = _usageHeaderToolbarRect.AlignCenterY(_usageHeaderToolbarRect.height).AlignRight(200);
+            var leftButtonRect = headerButtonRect.Split(0, 2);
+            if (GUI.Button(leftButtonRect, GUIHelper.TempContent("跳转到脚本文件"),
+                    SirenixGUIStyles.ToolbarButton))
+            {
+                Debug.Log("跳转到案例的脚本文件");
+            }
+
+            var rightButtonRect = headerButtonRect.Split(1, 2);
+            if (GUI.Button(rightButtonRect, GUIHelper.TempContent("重置案例"), SirenixGUIStyles.ToolbarButton))
+            {
+                Debug.Log("重置当前案例");
+            }
         }
 
-        void DrawExamplePreviewItems(AttributeExamplePreviewItem[] examplePreviewItems)
+        void DrawExamplePreviewItems()
         {
+            if (_examplePreviewItems is not { Length: > 1 })
+            {
+                return;
+            }
+
             EditorGUILayout.BeginVertical();
-            for (var i = 0; i < examplePreviewItems.Length; i += 3)
+            for (var i = 0; i < _examplePreviewItems.Length; i += 3)
             {
                 EditorGUILayout.BeginHorizontal();
-                for (var j = 0; j < EXAMPLE_NUMBER_ONE_ROW && i + j < examplePreviewItems.Length; j++)
+                for (var j = 0; j < EXAMPLE_NUMBER_ONE_ROW && i + j < _examplePreviewItems.Length; j++)
                 {
-                    DrawExampleTabButton(examplePreviewItems[i + j]);
+                    DrawExampleTabButton(_examplePreviewItems[i + j]);
                 }
 
                 EditorGUILayout.EndHorizontal();
@@ -442,13 +458,13 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 
         #region Draw Container
 
-        static Rect BeginDrawContainer(string title, GUIStyle titleStyle = null)
+        static Rect BeginDrawContainerWithTitle(string title, out Rect headerToolBarRect)
         {
-            titleStyle ??= AttributeOverviewUtility.ContainerTitleStyle;
+            var titleStyle = AttributeOverviewUtility.ContainerTitleStyle;
             var titleWidth = titleStyle.CalcSize(GUIHelper.TempContent(title)).x;
             var titleHeight = titleStyle.CalcSize(GUIHelper.TempContent(title)).y;
-            var headerRect = SirenixEditorGUI.BeginHorizontalToolbar(titleHeight + 15f);
-            var titleRect = headerRect.AlignCenter(titleWidth);
+            headerToolBarRect = SirenixEditorGUI.BeginHorizontalToolbar(titleHeight + 12f);
+            var titleRect = headerToolBarRect.AlignCenter(titleWidth);
             EditorGUI.LabelField(titleRect, title, titleStyle);
             GUILayout.FlexibleSpace();
             SirenixEditorGUI.EndHorizontalToolbar();
@@ -456,10 +472,17 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
             return EditorGUILayout.BeginVertical(AttributeOverviewUtility.ContainerContentStyle);
         }
 
-        static void EndDrawContainer(Rect contentRect)
+        static void EndDrawContainerWithTitle(Rect contentRect)
         {
             EditorGUILayout.EndVertical();
             SirenixEditorGUI.DrawBorders(contentRect, 1);
+        }
+
+        static void DrawContainerWithTitle(string title, Action drawContent, out Rect headerToolBarRect)
+        {
+            var contentRect = BeginDrawContainerWithTitle(title, out headerToolBarRect);
+            drawContent();
+            EndDrawContainerWithTitle(contentRect);
         }
 
         #endregion
