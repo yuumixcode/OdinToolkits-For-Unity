@@ -11,6 +11,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Shared
         static GUIStyle _tableCellTextStyle;
         static GUIStyle _resolvedStringParameterValueTitleStyle;
 
+        static GUIStyle _tabButtonCellTextStyle;
+
         public static GUIStyle ContainerTitleStyle
         {
             get
@@ -46,16 +48,10 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Shared
             {
                 _tableCellTextStyle ??= new GUIStyle(SirenixGUIStyles.MultiLineCenteredLabel)
                 {
-                    padding = new RectOffset(5, 5, 10, 10),
+                    padding = new RectOffset(5, 5, 5, 5),
                     clipping = TextClipping.Overflow,
                     richText = true
                 };
-
-                //     = new GUIStyle(SirenixGUIStyles.MultiLineCenteredLabel)
-                // {
-                //     wordWrap = true,
-                //     clipping = TextClipping.Clip
-                // };
                 return _tableCellTextStyle;
             }
         }
@@ -69,6 +65,20 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Shared
                     fontSize = 14
                 };
                 return _resolvedStringParameterValueTitleStyle;
+            }
+        }
+
+        public static GUIStyle TabButtonCellTextStyle
+        {
+            get
+            {
+                _tabButtonCellTextStyle ??= new GUIStyle
+                {
+                    padding = new RectOffset(10, 10, 10, 10),
+                    alignment = TextAnchor.MiddleCenter,
+                    clipping = TextClipping.Overflow
+                };
+                return _tabButtonCellTextStyle;
             }
         }
 

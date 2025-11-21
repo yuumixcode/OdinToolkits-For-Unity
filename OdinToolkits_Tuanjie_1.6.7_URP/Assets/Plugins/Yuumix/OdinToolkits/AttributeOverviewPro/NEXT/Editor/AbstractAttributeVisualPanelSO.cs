@@ -1,8 +1,6 @@
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
-using System;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
@@ -26,34 +24,9 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         [PropertySpace(0, 10)]
         public BilingualHeaderWidget headerWidget;
 
-        #endregion
-
-        [PropertyOrder(-90)]
-        [ResponsiveButtonGroup(AnimateVisibility = false)]
-        [GUIColor("green")]
-        [ShowIf("$_selectShowResolvedStringParameters")]
-        [BilingualButton("显示状态-被解析的字符串参数", "Resolved String Parameters Shown")]
-        public void HideResolvedStringParameters()
-        {
-            _selectShowResolvedStringParameters = false;
-        }
-
-        [PropertyOrder(-90)]
-        [ResponsiveButtonGroup(AnimateVisibility = false)]
-        [ShowIf("@!_selectShowResolvedStringParameters")]
-        [BilingualButton("隐藏状态-被解析的字符串参数", "Resolved String Parameters Hidden")]
-        public void ShowResolvedStringParameters()
-        {
-            _selectShowResolvedStringParameters = true;
-        }
-
-        bool SelectResolvedStringParametersButtonDown => _selectShowResolvedStringParameters = true;
-
-        [NonSerialized]
         AbstractAttributeModel _model;
 
-        bool CanShowResolvedStringParameters =>
-            _selectShowResolvedStringParameters && _resolvedStringParameters is { Count: > 0 };
+        #endregion
 
         #region IOdinToolkitsEditorReset Members
 
@@ -98,6 +71,9 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                     InspectorBilingualismConfigSO.OnLanguageChanged += rValue.CreateNamedValueTable;
                 }
             }
+
+            _examplePreviewItems = _model.ExamplePreviewItems;
+            currentSelectedExample = _model.GetInitialExample();
         }
 
         void Test_ShowAttributeParameterTableRect(int col, int row)
@@ -110,7 +86,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 
         static BilingualData _usageTipsLabel = new BilingualData("使用提示", "Usage Tips");
         Rect _usageTipContentRect;
-        List<string> _usageTips;
+        string[] _usageTips;
 
         #region GUITable
 
@@ -182,7 +158,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
             _usageTipsTable.ReCalculateSizes();
         }
 
-        bool UsageTipIsEmpty => _usageTips == null || _usageTips.Count == 0;
+        bool UsageTipIsEmpty => _usageTips == null || _usageTips.Length == 0;
 
         #endregion
 
@@ -191,17 +167,16 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         #region Attribute Parameters
 
         static BilingualData _attributeParametersTitleLabel = new BilingualData("特性参数", "Attribute Parameters");
-
         static BilingualData _attributeParameterReturnTypeLabel = new BilingualData("返回值类型", "Return Type");
         static BilingualData _attributeParameterParamNameLabel = new BilingualData("参数名", "Parameter Name");
 
         static BilingualData _attributeParameterParamDescriptionLabel =
             new BilingualData("参数描述", "Parameter Description");
 
-        List<ParameterValue> _attributeParameters;
+        ParameterValue[] _attributeParameters;
 
         [HideIf("$AttributeParameterIsEmpty")]
-        [PropertyOrder(-10)]
+        [PropertyOrder(-20)]
         [OnInspectorGUI]
         [PropertySpace(0, 20)]
         void DrawAttributeParameters()
@@ -212,7 +187,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
             EndDrawContainer(_attributeParametersContentRect);
         }
 
-        bool AttributeParameterIsEmpty => _attributeParameters == null || _attributeParameters.Count == 0;
+        bool AttributeParameterIsEmpty => _attributeParameters == null || _attributeParameters.Length == 0;
         Rect _attributeParametersContentRect;
 
         #region GUITable
@@ -316,31 +291,38 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         static BilingualData _resolvedStringParameterLabel =
             new BilingualData("被解析的字符串参数", "Resolved String Parameters");
 
+        ResolvedStringParameterValue[] _resolvedStringParameters;
+
+        Rect _resolvedStringParametersContentRect;
+
+        bool ResolvedStringParametersIsEmpty =>
+            _resolvedStringParameters == null || _resolvedStringParameters.Length == 0;
+
         [HideIf("$ResolvedStringParametersIsEmpty")]
-        [PropertyOrder(0)]
+        [PropertyOrder(-10)]
         [OnInspectorGUI]
-        void DrawBeforeResolvedStringParameters()
+        [PropertySpace(0, 20)]
+        void DrawResolvedStringParameters()
         {
             _resolvedStringParametersContentRect = BeginDrawContainer(_resolvedStringParameterLabel,
                 AttributeOverviewUtility.ContainerTitleStyle);
             SirenixEditorGUI.BeginVerticalList(false);
-
-            for (var i = 0; i < _resolvedStringParameters.Count; i++)
+            foreach (var resolvedString in _resolvedStringParameters)
             {
                 SirenixEditorGUI.BeginListItem(false);
                 EditorGUILayout.BeginHorizontal();
                 GUILayout.Space(8);
                 EditorGUILayout.BeginVertical();
                 GUILayout.Space(5);
-                GUILayout.Label(_resolvedStringParameters[i].ParameterName,
+                GUILayout.Label(resolvedString.ParameterName,
                     AttributeOverviewUtility.ResolvedStringParameterValueTitleStyle);
                 GUILayout.Space(5);
                 SirenixEditorGUI.HorizontalLineSeparator(new Color(1, 1, 1, 0.4f));
                 GUILayout.Space(10);
-                _resolvedStringParameters[i].ResolverInfoTable.DrawTable();
+                resolvedString.ResolverInfoTable.DrawTable();
                 GUILayout.Space(10);
-                _resolvedStringParameters[i].NamedValueTable.DrawTable();
-                _resolvedStringParameters[i].ResizeTables();
+                resolvedString.NamedValueTable.DrawTable();
+                resolvedString.ResizeAllTables();
                 GUILayout.Space(8);
                 EditorGUILayout.EndVertical();
                 GUILayout.Space(5);
@@ -352,12 +334,109 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
             EndDrawContainer(_resolvedStringParametersContentRect);
         }
 
-        List<ResolvedStringParameterValue> _resolvedStringParameters;
+        #endregion
 
-        Rect _resolvedStringParametersContentRect;
+        #region Usage Example
 
-        bool ResolvedStringParametersIsEmpty =>
-            _resolvedStringParameters == null || _resolvedStringParameters.Count == 0;
+        static BilingualData _usageExampleLabel =
+            new BilingualData("使用案例", "Usage Examples");
+
+        AttributeExamplePreviewItem[] _examplePreviewItems;
+        Rect _usageExampleContentRect;
+        const int EXAMPLE_NUMBER_ONE_ROW = 3;
+
+        bool UsageExampleItemsIsEmpty => _examplePreviewItems == null || _examplePreviewItems.Length == 0;
+
+        [HideIf("$UsageExampleItemsIsEmpty")]
+        [OnInspectorGUI]
+        [PropertyOrder(-1)]
+        void DrawUsageExampleContainerHeader()
+        {
+            _usageExampleContentRect = BeginDrawContainer(_usageExampleLabel,
+                AttributeOverviewUtility.ContainerTitleStyle);
+            if (_examplePreviewItems is { Length: > 1 })
+            {
+                DrawExamplePreviewItems(_examplePreviewItems);
+            }
+        }
+
+        [HideIf("$UsageExampleItemsIsEmpty")]
+        [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
+        [PropertyOrder(0)]
+        public ScriptableObject currentSelectedExample;
+
+        [HideIf("$UsageExampleItemsIsEmpty")]
+        [PropertySpace(0, 20)]
+        [PropertyOrder(100)]
+        [OnInspectorGUI]
+        void EndDrawUsageExampleContainer()
+        {
+            EndDrawContainer(_usageExampleContentRect);
+        }
+
+        void DrawExamplePreviewItems(AttributeExamplePreviewItem[] examplePreviewItems)
+        {
+            EditorGUILayout.BeginVertical();
+            for (var i = 0; i < examplePreviewItems.Length; i += 3)
+            {
+                EditorGUILayout.BeginHorizontal();
+                for (var j = 0; j < EXAMPLE_NUMBER_ONE_ROW && i + j < examplePreviewItems.Length; j++)
+                {
+                    DrawExampleTabButton(examplePreviewItems[i + j]);
+                }
+
+                EditorGUILayout.EndHorizontal();
+            }
+
+            EditorGUILayout.EndVertical();
+            GUILayout.Space(10f);
+        }
+
+        void DrawExampleTabButton(AttributeExamplePreviewItem item)
+        {
+            var content = GUIHelper.TempContent(" " + item.ItemName,
+                GUIHelper.GetAssetThumbnail(null, typeof(MonoBehaviour), false));
+            var iconSizeBackup = EditorGUIUtility.GetIconSize();
+            EditorGUIUtility.SetIconSize(new Vector2(16f, 16f));
+            var rect3 = GUILayoutUtility.GetRect(content, AttributeOverviewUtility.TabButtonCellTextStyle,
+                GUILayoutOptions.Height(26));
+            SirenixEditorGUI.DrawBorders(rect3, 1);
+            var selectExample = item.ExampleType == AttributeExampleType.OdinSerialized
+                ? item.OdinSerializedExample
+                : item.UnitySerializedExample;
+            if (selectExample == currentSelectedExample)
+            {
+                var color = EditorGUIUtility.isProSkin
+                    ? new Color(0.25f, 0.4f, 0.6f, 1f)
+                    : new Color(0.7f, 0.8f, 0.9f, 1f);
+                var innerRect = new Rect(rect3.x + 1f, rect3.y + 1f, rect3.width - 2f, rect3.height - 2f);
+                EditorGUI.DrawRect(innerRect, color);
+            }
+
+            if (GUI.Button(rect3, GUIContent.none, GUIStyle.none))
+            {
+                currentSelectedExample = selectExample;
+            }
+
+            if (currentSelectedExample != selectExample && rect3.Contains(Event.current.mousePosition))
+            {
+                GUIHelper.PushColor(new Color(1f, 1f, 1f, 0.4f));
+                var hoverInnerRect = new Rect(
+                    rect3.x + 1f,
+                    rect3.y + 1f,
+                    rect3.width - 2f,
+                    rect3.height - 2f
+                );
+                EditorGUI.DrawRect(hoverInnerRect, SirenixGUIStyles.DarkEditorBackground);
+                GUIHelper.PopColor();
+            }
+
+            var labelStyle = EditorGUIUtility.isProSkin
+                ? SirenixGUIStyles.WhiteLabelCentered
+                : SirenixGUIStyles.LabelCentered;
+            GUI.Label(rect3, content, labelStyle);
+            EditorGUIUtility.SetIconSize(iconSizeBackup);
+        }
 
         #endregion
 
@@ -384,16 +463,33 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         }
 
         #endregion
-    }
 
-    /// <summary>
-    /// 被解析的字符串参数的 GUITable 组，包含解析器信息表和命名值表，通过 ParameterName 和 ResolvedStringParameterValue 进行关联
-    /// </summary>
-    public class ResolvedStringParameterGUITableGroup
-    {
-        public string ParameterName;
-        public GUITable ResolverInfoTable;
-        public GUITable NamedValueTable;
-        public ResolvedStringParameterGUITableGroup(string parameterName) => ParameterName = parameterName;
+        // #region Selected Button
+        //
+        // [PropertyOrder(-90)]
+        // [ResponsiveButtonGroup(AnimateVisibility = false)]
+        // [GUIColor("green")]
+        // [ShowIf("$_selectShowResolvedStringParameters")]
+        // [BilingualButton("显示状态-被解析的字符串参数", "Resolved String Parameters Shown")]
+        // public void HideResolvedStringParameters()
+        // {
+        //     _selectShowResolvedStringParameters = false;
+        // }
+        //
+        // [PropertyOrder(-90)]
+        // [ResponsiveButtonGroup(AnimateVisibility = false)]
+        // [ShowIf("@!_selectShowResolvedStringParameters")]
+        // [BilingualButton("隐藏状态-被解析的字符串参数", "Resolved String Parameters Hidden")]
+        // public void ShowResolvedStringParameters()
+        // {
+        //     _selectShowResolvedStringParameters = true;
+        // }
+        //
+        // bool SelectResolvedStringParametersButtonDown => _selectShowResolvedStringParameters = true;
+        //
+        // bool CanShowResolvedStringParameters =>
+        //     _selectShowResolvedStringParameters && _resolvedStringParameters is { Count: > 0 };
+        //
+        // #endregion
     }
 }

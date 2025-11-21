@@ -12,19 +12,13 @@ namespace Yuumix.Community.SwitchAttribute
     /// <summary>
     /// 对 bool 类型的变量使用，绘制一个开关样式，而非使用 Unity 的默认 bool 样式
     /// </summary>
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
     public class SwitchButtonAttribute : Attribute
     {
         const string DEFAULT_BACKGROUND_COLOR_ON = "@new Color(0.498f, 0.843f, 0.992f)";
         const string DEFAULT_BACKGROUND_COLOR_OFF = "@new Color(0.165f, 0.165f, 0.165f)";
         const string DEFAULT_SWITCH_COLOR_ON = DEFAULT_BACKGROUND_COLOR_OFF;
         const string DEFAULT_SWITCH_COLOR_OFF = DEFAULT_BACKGROUND_COLOR_ON;
-        const int DEFAULT_SWITCH_WIDTH = 28;
-        public readonly SwitchAlignment Alignment;
-        public readonly bool Rounded;
-        public string BackgroundColorOff;
-        public string BackgroundColorOn;
-        public string SwitchColorOff;
-        public string SwitchColorOn;
 
         public SwitchButtonAttribute(
             SwitchAlignment alignment = SwitchAlignment.Left,
@@ -38,6 +32,13 @@ namespace Yuumix.Community.SwitchAttribute
             Rounded = rounded;
             SetColors(backgroundColorOn, backgroundColorOff, switchColorOn, switchColorOff);
         }
+
+        public SwitchAlignment Alignment { get; set; }
+        public bool Rounded { get; set; }
+        public string BackgroundColorOff { get; set; }
+        public string BackgroundColorOn { get; set; }
+        public string SwitchColorOff { get; set; }
+        public string SwitchColorOn { get; set; }
 
         void SetColors(
             string backgroundColorOn,

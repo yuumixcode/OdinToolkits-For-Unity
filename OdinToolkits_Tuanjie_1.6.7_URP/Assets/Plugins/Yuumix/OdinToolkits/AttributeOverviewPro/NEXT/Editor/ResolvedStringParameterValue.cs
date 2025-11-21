@@ -20,12 +20,10 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         static readonly BilingualData FallbackValueLabel = new BilingualData("回退值", "Fallback Value");
         static readonly BilingualData NamedValuesLabel = new BilingualData("特殊命名参数值 - Named Values", "Named Values");
 
-        static readonly List<ParameterValue> DefaultExistedNamedValues = new List<ParameterValue>
-        {
-            new ParameterValue(typeof(InspectorProperty).FullName, "$property",
-                new BilingualData("InspectorProperty 代表检查器中的一个 Property，即应用此特性的成员",
-                    "The InspectorProperty representing the member that has attribute applied to it."))
-        };
+        static readonly ParameterValue DefaultExistedNamedValues = new ParameterValue(
+            typeof(InspectorProperty).FullName, "$property",
+            new BilingualData("InspectorProperty 代表检查器中的一个 Property，即应用此特性的成员",
+                "The InspectorProperty representing the member that has attribute applied to it."));
 
         public ResolvedStringParameterValue(string parameterName, ResolverType resolverType,
             string resolverTargetType, string fallbackValue, List<ParameterValue> additionalNamedValues)
@@ -34,10 +32,14 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
             ResolverType = resolverType;
             ResolverTargetType = resolverTargetType;
             FallbackValue = fallbackValue;
-            NamedValues = DefaultExistedNamedValues.Concat(additionalNamedValues).ToList();
+            NamedValues = new List<ParameterValue>()
+            {
+                DefaultExistedNamedValues
+            };
+            NamedValues.AddRange(additionalNamedValues);
             CreateResolverInfoTable();
             CreateNamedValueTable();
-            ResizeTables();
+            ResizeAllTables();
         }
 
         public string ParameterName { get; set; }
@@ -95,14 +97,13 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                 });
         }
 
-        public void ResizeTables()
+        public void ResizeAllTables()
         {
             var resolverTypeHeight = CalculateHeight(GetResolverTypeString(), ResolverInfoTable, 0, 1);
             var resolvesToHeight = CalculateHeight(ResolverTargetType, ResolverInfoTable, 1, 1);
             var fallbackValueHeight = CalculateHeight(FallbackValue, ResolverInfoTable, 2, 1);
             var maxHeight = Mathf.Max(resolverTypeHeight, resolvesToHeight, fallbackValueHeight);
             ResolverInfoTable[0, 1].Height = maxHeight + 10f;
-
             for (var row = 2; row < NamedValueTable.RowCount; row++)
             {
                 var namedValue = NamedValues[row - 2];

@@ -22,3 +22,5 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   headerWidget: {}
+  monoExample: {fileID: 0}
+  examplesComponent: {fileID: 0}

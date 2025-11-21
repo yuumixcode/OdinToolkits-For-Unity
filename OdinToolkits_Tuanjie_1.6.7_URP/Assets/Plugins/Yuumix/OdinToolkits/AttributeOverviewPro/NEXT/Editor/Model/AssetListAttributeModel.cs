@@ -1,6 +1,8 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
+using Yuumix.OdinToolkits.AttributeOverviewPro.NEXT;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Modules.Editor;
@@ -18,7 +20,11 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                 "AssetList is used on lists and arrays and single elements of unity types, and replaces the default list drawer with a list of all possible assets with the specified filter. " +
                 "Use this to both filter and include or exclude assets from a list or an array, without navigating the project window.",
                 OdinInspectorDocumentationLinks.ASSET_LIST_URL);
-            AttributeParameters = new List<ParameterValue>()
+            UsageTips = new[]
+            {
+                "AssetList 要求放在 UnityEngine.Object 的派生类上"
+            };
+            AttributeParameters = new ParameterValue[6]
             {
                 new ParameterValue(typeof(bool).FullName, "AutoPopulate",
                     new BilingualData("是否自动填充满足条件的所有资源到列表中",
@@ -39,18 +45,25 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                     new BilingualData("设置自定义筛选方法，根据此方法筛选出可选择的资源列表",
                         "Filter the asset list to only include assets for which the given filter method returns true."))
             };
-            ResolvedStringParameters = new List<ResolvedStringParameterValue>()
+            ResolvedStringParameters = new ResolvedStringParameterValue[]
             {
                 new ResolvedStringParameterValue("Custom Filter Method", ResolverType.ValueResolver,
                     typeof(bool).FullName,
                     "None",
                     new List<ParameterValue>()
                     {
-                        new ParameterValue("TList", "$value", new BilingualData("代表应用此特性的列表成员",
+                        new ParameterValue("TList", "$value", new BilingualData("代表应用此特性的列表成员，类型为列表类型",
                             "Representing the member that has attribute applied to it.")),
-                        new ParameterValue("TElement", "$asset", new BilingualData("代表列表中的一个元素",
+                        new ParameterValue("TElement", "$asset", new BilingualData("代表列表中的一个元素，类型为元素类型",
                             "Representing an element in the list."))
                     })
+            };
+            ExamplePreviewItems = new[]
+            {
+                new AttributeExamplePreviewItem().InitializeUnitySerializedExample("Asset List Basic",
+                    AssetListExampleSO.Instance),
+                new AttributeExamplePreviewItem().InitializeUnitySerializedExample("Custom Filter Method",
+                    AssetListExampleSOForCustomFilterMethod.Instance),
             };
         }
     }
