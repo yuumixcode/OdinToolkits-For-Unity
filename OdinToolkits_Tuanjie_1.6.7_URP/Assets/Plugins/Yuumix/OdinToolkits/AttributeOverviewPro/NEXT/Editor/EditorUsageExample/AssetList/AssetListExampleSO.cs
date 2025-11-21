@@ -2,13 +2,14 @@ using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
+using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Core.Editor;
 using Yuumix.OdinToolkits.Modules.Editor;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.NEXT
 {
     [AttributeOverviewProExample]
-    public class AssetListExampleSO : EditorScriptableSingleton<AssetListExampleSO>
+    public class AssetListExampleSO : EditorScriptableSingleton<AssetListExampleSO>, IOdinToolkitsEditorReset
     {
         #region Serialized Fields
 
@@ -40,5 +41,16 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.NEXT
         public List<GameObject> gameObjectsWithTag;
 
         #endregion
+
+        public void EditorReset()
+        {
+            singleObject = null;
+            assetList = null;
+            scriptableObject = null;
+            autoPopulatedWhenInspected = null;
+            allPrefabsWithLayerName = null;
+            prefabsStartingWithRock = null;
+            gameObjectsWithTag = null;
+        }
     }
 }

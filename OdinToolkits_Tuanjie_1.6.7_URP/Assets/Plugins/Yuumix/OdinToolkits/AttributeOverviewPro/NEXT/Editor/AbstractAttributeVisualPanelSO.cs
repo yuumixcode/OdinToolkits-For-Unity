@@ -381,14 +381,22 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
             if (GUI.Button(leftButtonRect, GUIHelper.TempContent("Ping 脚本文件"),
                     SirenixGUIStyles.ToolbarButton))
             {
-                Debug.Log("跳转到案例的脚本文件");
                 EditorGUIUtility.PingObject(GetCurrentExampleMonoScript());
             }
 
             var rightButtonRect = headerButtonRect.Split(1, 2);
             if (GUI.Button(rightButtonRect, GUIHelper.TempContent("重置案例"), SirenixGUIStyles.ToolbarButton))
             {
-                Debug.Log("重置当前案例");
+                if (currentSelectedExample is IOdinToolkitsEditorReset canResetExample)
+                {
+                    Debug.Log(currentSelectedExample.GetType().Name + " 重置成功！");
+                    canResetExample.EditorReset();
+                }
+                else
+                {
+                    Debug.LogWarning("当前案例脚本类为：" + currentSelectedExample.GetType().Name +
+                                     "，没有实现 IOdinToolkitsEditorReset 接口！");
+                }
             }
         }
 
