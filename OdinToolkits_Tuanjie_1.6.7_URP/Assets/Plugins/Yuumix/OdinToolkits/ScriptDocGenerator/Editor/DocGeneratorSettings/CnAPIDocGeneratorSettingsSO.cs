@@ -8,7 +8,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
     /// <summary>
     /// 中文的 API 文档生成器设置
     /// </summary>
-    public class CnAPIDocGeneratorSettingSO : DocGeneratorSettingSO
+    public class CnAPIDocGeneratorSettingsSO : DocGeneratorSettingsSO
     {
         public override string GetGeneratedDoc(ITypeData data)
         {

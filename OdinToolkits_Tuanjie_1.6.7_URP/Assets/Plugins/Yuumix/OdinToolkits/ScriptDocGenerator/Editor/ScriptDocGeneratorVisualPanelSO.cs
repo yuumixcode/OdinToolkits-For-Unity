@@ -26,7 +26,22 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
         public static readonly BilingualData ModuleName =
             new BilingualData("脚本文档生成工具", "Script Doc Generator");
 
+        #region Serialized Fields
+
         ScriptDocGeneratorController _controller;
+
+        [PropertyOrder(-5)]
+        public BilingualHeaderWidget headerWidget;
+
+        [PropertyOrder(2)]
+        [BilingualTitle("生成脚本文档的目标文件夹路径 [可拖拽]", "Folder Path For Document [Drag And Drop Allowed]")]
+        [HideLabel]
+        [FolderPath(AbsolutePath = true)]
+        [InlineButton(nameof(ResetDocFolderPath), SdfIconType.ArrowClockwise, "")]
+        [CustomContextMenu("Reset To Default", nameof(ResetDocFolderPath))]
+        public string docFolderPath;
+
+        #endregion
 
         bool IsSingleType => typeSource == TypeSource.SingleType;
         bool IsMultipleType => typeSource == TypeSource.MultipleTypes;
@@ -48,21 +63,6 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
 
         #endregion
 
-        #region Serialized Fields
-
-        [PropertyOrder(-5)]
-        public BilingualHeaderWidget headerWidget;
-
-        [PropertyOrder(2)]
-        [BilingualTitle("生成脚本文档的目标文件夹路径 [可拖拽]", "Folder Path For Document [Drag And Drop Allowed]")]
-        [HideLabel]
-        [FolderPath(AbsolutePath = true)]
-        [InlineButton(nameof(ResetDocFolderPath), SdfIconType.ArrowClockwise, "")]
-        [CustomContextMenu("Reset To Default", nameof(ResetDocFolderPath))]
-        public string docFolderPath;
-
-        #endregion
-
         #region 文档生成器选择
 
         [PropertyOrder(10)]
@@ -71,13 +71,13 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
         [InlineButton(nameof(ResetDocGeneratorSettingSO), SdfIconType.ArrowClockwise, "")]
         [CustomContextMenu("Reset To Default", nameof(ResetDocGeneratorSettingSO))]
         [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
-        public DocGeneratorSettingSO docGeneratorSetting;
+        public DocGeneratorSettingsSO docGeneratorSettings;
 
         string GetDocGeneratorTitle()
         {
             var chineseTitle = "文档生成器设置";
             var englishTitle = "Doc Generator Setting";
-            if (docGeneratorSetting && docGeneratorSetting.GetType() == typeof(CnAPIDocGeneratorSettingSO))
+            if (docGeneratorSettings && docGeneratorSettings.GetType() == typeof(CnAPIDocGeneratorSettingsSO))
             {
                 chineseTitle += " - [当前选择: 中文 API Markdown 文档]";
                 englishTitle += " - [Current Selection: Chinese API Markdown Document]";
@@ -339,11 +339,12 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
             switch (typeSource)
             {
                 case TypeSource.SingleType:
-                    _controller.GenerateSingleTypeDoc(TypeData, docGeneratorSetting, docFolderPath);
+                    ScriptDocGeneratorController.GenerateSingleTypeDoc(TypeData, docGeneratorSettings, docFolderPath);
                     break;
                 case TypeSource.MultipleTypes:
                 case TypeSource.SingleAssembly:
-                    _controller.GenerateMultipleTypeDocs(TypeDataList, docGeneratorSetting, docFolderPath);
+                    ScriptDocGeneratorController.GenerateMultipleTypeDocs(TypeDataList, docGeneratorSettings,
+                        docFolderPath);
                     break;
             }
 
@@ -403,7 +404,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
 
         void ResetDocGeneratorSettingSO()
         {
-            docGeneratorSetting = Resources.Load<CnAPIDocGeneratorSettingSO>("DocGeneratorSettings/中文API文档生成设置");
+            docGeneratorSettings = Resources.Load<CnAPIDocGeneratorSettingsSO>("DocGeneratorSettings/中文API文档生成设置");
         }
 
         void ResetSingleType()

@@ -44,20 +44,15 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
 
         #region IDerivedMemberData
 
-        [Summary("指示该字段是否为静态字段")]
-        public bool IsStatic { get; }
+        [Summary("指示该字段是否为静态字段")] public bool IsStatic { get; }
 
-        [Summary("成员类型，指示该成员的类型")]
-        public MemberTypes MemberType { get; }
+        [Summary("成员类型，指示该成员的类型")] public MemberTypes MemberType { get; }
 
-        [Summary("成员类型名称")]
-        public string MemberTypeName { get; }
+        [Summary("成员类型名称")] public string MemberTypeName { get; }
 
-        [Summary("访问修饰符类型")]
-        public AccessModifierType AccessModifier { get; }
+        [Summary("访问修饰符类型")] public AccessModifierType AccessModifier { get; }
 
-        [Summary("访问修饰符名称")]
-        public string AccessModifierName { get; }
+        [Summary("访问修饰符名称")] public string AccessModifierName { get; }
 
         [PropertyOrder(60)]
         [ShowEnableProperty]
@@ -79,23 +74,17 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
 
         #region IFieldData
 
-        [Summary("是否为只读字段")]
-        public bool IsReadOnly { get; }
+        [Summary("是否为只读字段")] public bool IsReadOnly { get; }
 
-        [Summary("是否为常量字段")]
-        public bool IsConstant { get; }
+        [Summary("是否为常量字段")] public bool IsConstant { get; }
 
-        [Summary("是否为动态类型字段")]
-        public bool IsDynamic { get; }
+        [Summary("是否为动态类型字段")] public bool IsDynamic { get; }
 
-        [Summary("字段的默认值，没有默认值返回 null")]
-        public object DefaultValue { get; }
+        [Summary("字段的默认值，没有默认值返回 null")] public object DefaultValue { get; }
 
-        [Summary("字段的类型")]
-        public Type FieldType { get; }
+        [Summary("字段的类型")] public Type FieldType { get; }
 
-        [Summary("字段类型的名称")]
-        public string FieldTypeName { get; }
+        [Summary("字段类型的名称")] public string FieldTypeName { get; }
 
         [PropertyOrder(60)]
         [ShowEnableProperty]

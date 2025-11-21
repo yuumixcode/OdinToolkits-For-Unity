@@ -1,4 +1,3 @@
-using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -85,10 +84,10 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
 
         #region 文档生成方法
 
-        public void GenerateSingleTypeDoc(ITypeData typeData, DocGeneratorSettingSO generatorSetting,
+        public static void GenerateSingleTypeDoc(ITypeData typeData, DocGeneratorSettingsSO generatorSettings,
             string targetFolderPath)
         {
-            if (typeData == null || !generatorSetting || string.IsNullOrEmpty(targetFolderPath))
+            if (typeData == null || !generatorSettings || string.IsNullOrEmpty(targetFolderPath))
             {
                 YuumixLogger.OdinToolkitsError("参数无效，无法生成文档");
                 return;
@@ -100,7 +99,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
                 return;
             }
 
-            ReadDocGeneratorSettingSO(typeData, generatorSetting, targetFolderPath, memberData, out var markdownText,
+            ReadDocGeneratorSettingSO(typeData, generatorSettings, targetFolderPath, memberData, out var markdownText,
                 out var filePathWithExtensions);
 
             if (File.Exists(filePathWithExtensions))
@@ -146,10 +145,11 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
             EditorUtility.OpenWithDefaultApp(filePathWithExtensions);
         }
 
-        public void GenerateMultipleTypeDocs(List<ITypeData> typeDataCollection, DocGeneratorSettingSO generatorSetting,
+        public static void GenerateMultipleTypeDocs(List<ITypeData> typeDataCollection,
+            DocGeneratorSettingsSO generatorSettings,
             string targetFolderPath)
         {
-            if (typeDataCollection == null || typeDataCollection.Count <= 0 || generatorSetting == null ||
+            if (typeDataCollection is not { Count: > 0 } || generatorSettings ||
                 string.IsNullOrEmpty(targetFolderPath))
             {
                 YuumixLogger.OdinToolkitsError("参数无效，无法生成文档");
@@ -167,7 +167,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
                     EditorUtility.DisplayProgressBar("脚本文档生成", $"正在生成 {dataTypeName} 文档",
                         (float)i / typeDataCollection.Count);
 
-                    ReadDocGeneratorSettingSO(typeData, generatorSetting, targetFolderPath, memberData,
+                    ReadDocGeneratorSettingSO(typeData, generatorSettings, targetFolderPath, memberData,
                         out var markdownText, out var filePathWithExtensions);
 
                     if (File.Exists(filePathWithExtensions))
@@ -240,12 +240,12 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
 
         #region 辅助方法
 
-        static void ReadDocGeneratorSettingSO(ITypeData typeData, DocGeneratorSettingSO generatorSetting,
+        static void ReadDocGeneratorSettingSO(ITypeData typeData, DocGeneratorSettingsSO generatorSettings,
             string targetFolderPath, IMemberData memberData, out string markdownText, out string filePathWithExtensions)
         {
-            markdownText = generatorSetting.GetGeneratedDoc(typeData);
+            markdownText = generatorSettings.GetGeneratedDoc(typeData);
 
-            if (generatorSetting.generateIdentifier)
+            if (generatorSettings.generateIdentifier)
             {
                 markdownText = markdownText.EndsWith('\n') || markdownText.EndsWith("\r\n")
                     ? markdownText + UserIdentifierDescriptionParagraph
@@ -254,7 +254,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
 
             var fileNameWithoutExtension = memberData.Name.Replace('<', '[').Replace('>', ']');
 
-            if (generatorSetting.generateNamespaceFolder)
+            if (generatorSettings.generateNamespaceFolder)
             {
                 var namespaceString = typeData.NamespaceName;
                 if (!string.IsNullOrEmpty(namespaceString))
@@ -272,9 +272,9 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
 
             filePathWithExtensions = Path.Combine(targetFolderPath, fileNameWithoutExtension);
 
-            if (generatorSetting.customizeDocFileExtensionName)
+            if (generatorSettings.customizeDocFileExtensionName)
             {
-                filePathWithExtensions += generatorSetting.docFileExtensionName.EnsureStartsWith(".");
+                filePathWithExtensions += generatorSettings.docFileExtensionName.EnsureStartsWith(".");
             }
             else
             {

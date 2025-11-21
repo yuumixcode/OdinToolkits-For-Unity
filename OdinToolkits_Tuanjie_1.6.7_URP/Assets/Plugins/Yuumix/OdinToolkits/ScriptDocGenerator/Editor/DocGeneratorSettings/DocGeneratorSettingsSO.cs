@@ -8,7 +8,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
     /// 文档生成器设置抽象类
     /// </summary>
     [Summary("文档生成器设置抽象类")]
-    public abstract class DocGeneratorSettingSO : ScriptableObject, IOdinToolkitsEditorReset
+    public abstract class DocGeneratorSettingsSO : ScriptableObject, IOdinToolkitsEditorReset
     {
         #region Serialized Fields
 
