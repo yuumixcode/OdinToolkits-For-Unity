@@ -4,7 +4,6 @@ using System;
 using System.Diagnostics;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core;
-using Debug = UnityEngine.Debug;
 
 namespace YuumixEditor
 {

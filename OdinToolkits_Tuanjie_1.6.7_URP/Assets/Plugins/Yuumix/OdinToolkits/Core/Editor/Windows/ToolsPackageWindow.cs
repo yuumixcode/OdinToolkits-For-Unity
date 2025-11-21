@@ -22,12 +22,12 @@ namespace Yuumix.OdinToolkits.Core.Editor
             WindowPadding = new Vector4(10, 10, 10, 10);
             MenuWidth = 230;
             DrawMenuSearchBar = true;
-            InspectorBilingualismConfigSO.OnLanguageChange -= ReBuild;
-            InspectorBilingualismConfigSO.OnLanguageChange += ReBuild;
+            InspectorBilingualismConfigSO.OnLanguageChanged -= ReBuild;
+            InspectorBilingualismConfigSO.OnLanguageChanged += ReBuild;
             OnClose -= ClearEventListener;
             OnClose += ClearEventListener;
-            TemplateCodeGenToolSO.ToastEvent -= ShowToast;
-            TemplateCodeGenToolSO.ToastEvent += ShowToast;
+            TemplateCodeGeneratorVisualPanelSO.ToastEvent -= ShowToast;
+            TemplateCodeGeneratorVisualPanelSO.ToastEvent += ShowToast;
         }
 
         #endregion
@@ -36,8 +36,8 @@ namespace Yuumix.OdinToolkits.Core.Editor
         {
             if (!_hasAddListener)
             {
-                InspectorBilingualismConfigSO.OnLanguageChange -= ReBuild;
-                InspectorBilingualismConfigSO.OnLanguageChange += ReBuild;
+                InspectorBilingualismConfigSO.OnLanguageChanged -= ReBuild;
+                InspectorBilingualismConfigSO.OnLanguageChanged += ReBuild;
                 _hasAddListener = true;
             }
 
@@ -46,7 +46,7 @@ namespace Yuumix.OdinToolkits.Core.Editor
 
         void ClearEventListener()
         {
-            TemplateCodeGenToolSO.ToastEvent -= ShowToast;
+            TemplateCodeGeneratorVisualPanelSO.ToastEvent -= ShowToast;
         }
 
         void ReBuild()
@@ -73,12 +73,12 @@ namespace Yuumix.OdinToolkits.Core.Editor
         protected override OdinMenuTree BuildMenuTree()
         {
             var tree = new OdinMenuTree(false);
-            var path2 = TemplateCodeGenToolSO.GenerateTemplateToolMenuPathData.GetCurrentOrFallback();
+            var path2 = TemplateCodeGeneratorVisualPanelSO.GenerateTemplateToolMenuPathData.GetCurrentOrFallback();
             var path3 = DirectoryTreeGenToolSO.DirectoryTreeGenToolMenuPathData.GetCurrentOrFallback();
             var path4 = ExportPackageToolVisualPanelSO.ToolMenuPathData.GetCurrentOrFallback();
             var path5 = MenuItemViewerVisualPanelSO.ToolMenuPath.GetCurrentOrFallback();
             // 添加 Object
-            tree.AddObjectAtPath(path2, TemplateCodeGenToolSO.Instance);
+            tree.AddObjectAtPath(path2, TemplateCodeGeneratorVisualPanelSO.Instance);
             tree.AddObjectAtPath(path3, DirectoryTreeGenToolSO.Instance);
             tree.AddObjectAtPath(path4, ExportPackageToolVisualPanelSO.Instance);
             tree.AddObjectAtPath(path5, MenuItemViewerVisualPanelSO.Instance);

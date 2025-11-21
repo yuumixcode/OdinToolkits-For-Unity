@@ -11,7 +11,7 @@ using YuumixEditor;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
-    public class TemplateCodeGenToolSO : OdinEditorScriptableSingleton<TemplateCodeGenToolSO>, IOdinToolkitsEditorReset
+    public class TemplateCodeGeneratorVisualPanelSO : OdinEditorScriptableSingleton<TemplateCodeGeneratorVisualPanelSO>, IOdinToolkitsEditorReset
 
     {
         public const string NAME_SPACE_SYMBOL = "#NAMESPACE#";
