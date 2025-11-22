@@ -48,9 +48,12 @@
 
         #region 10200 Attribute Overview Pro
 
-        public const string OVERVIEW_PRO = ROOT + "/Attribute Overview Pro";
-        public const int OVERVIEW_PRO_PRIORITY = 10200;
-        public const string OVERVIEW_PRO_WINDOW_NAME = "Attribute Overview Pro";
+        public const string DEPRECATED_OVERVIEW_PRO = ROOT + "/Attribute Overview Pro/Legacy";
+        public const int DEPRECATED_OVERVIEW_PRO_PRIORITY = 10200;
+        public const string DEPRECATED_OVERVIEW_PRO_WINDOW_NAME = "Attribute Overview Pro [Legacy]";
+        public const string OVERVIEW_PRO = ROOT + "/Attribute Overview Pro/Beta";
+        public const int OVERVIEW_PRO_PRIORITY = 10201;
+        public const string OVERVIEW_PRO_WINDOW_NAME = "Attribute Overview Pro [Beta]";
 
         #endregion
 

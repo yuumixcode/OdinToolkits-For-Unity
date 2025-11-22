@@ -378,6 +378,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6d4c6648155242988678842e3f085a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerName1: 
+  playerLevel1: 0
+  playerClass1: 
+  strength1: 0
+  dexterity1: 0
+  intelligence1: 0
+  hasMainQuest1: 0
+  mainQuestProgress1: 0
+  hasSideQuest1: 0
+  sideQuestProgress1: 0
 --- !u!4 &1656208726
 Transform:
   m_ObjectHideFlags: 0

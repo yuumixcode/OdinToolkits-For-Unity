@@ -4,7 +4,7 @@ using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
-using Yuumix.OdinToolkits.OdinAttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor;
 using Yuumix.OdinToolkits.ScriptDocGenerator.Editor;
 using YuumixEditor;
 
@@ -77,10 +77,10 @@ namespace Yuumix.OdinToolkits.Core.Editor
 
         [PropertyOrder(-40)]
         [PropertySpace(5)]
-        [BilingualButton("Odin 特性中文总览", "AttributeOverview Pro", ButtonSizes.Large)]
+        [BilingualButton("Odin 特性总览窗口", "AttributeOverview Pro", ButtonSizes.Large)]
         public void OpenAttributeOverviewPro()
         {
-            OdinAttributeOverviewProWindow.ShowWindow();
+            DeprecatedAttributeOverviewProWindow.ShowWindow();
         }
 
         [PropertyOrder(-40)]
