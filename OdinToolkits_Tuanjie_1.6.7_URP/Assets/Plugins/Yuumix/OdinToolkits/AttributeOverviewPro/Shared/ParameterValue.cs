@@ -4,9 +4,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Shared
 {
     public class ParameterValue
     {
-        public string ReturnType { get; set; }
-        public string ParameterName { get; set; }
-        public string ParameterDescription { get; set; }
         readonly BilingualData _parameterDescriptionData;
 
         public ParameterValue(string returnType, string parameterName, string parameterDescription)
@@ -26,12 +23,13 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Shared
         }
 
         public ParameterValue() { }
+        public string ReturnType { get; set; }
+        public string ParameterName { get; set; }
+        public string ParameterDescription { get; set; }
 
-        public string GetDescription()
-        {
-            return _parameterDescriptionData != BilingualData.Empty
+        public string GetDescription() =>
+            _parameterDescriptionData != BilingualData.Empty
                 ? _parameterDescriptionData.GetCurrentOrFallback()
                 : ParameterDescription;
-        }
     }
 }

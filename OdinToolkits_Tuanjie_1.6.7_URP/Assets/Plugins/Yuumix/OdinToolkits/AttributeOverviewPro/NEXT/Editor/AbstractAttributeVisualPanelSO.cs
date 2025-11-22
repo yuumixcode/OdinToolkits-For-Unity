@@ -2,13 +2,13 @@ using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using System;
-using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Core.Editor;
 using YuumixEditor;
+using Object = UnityEngine.Object;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 {
@@ -17,13 +17,10 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
     /// </summary>
     public abstract class AbstractAttributeVisualPanelSO : SerializedScriptableObject, IOdinToolkitsEditorReset
     {
+        const float AFTER_SPACE = 20f;
         static BilingualData _guiTableNumberLabel = new BilingualData("序号", "Number");
 
-        const float AFTER_SPACE = 20f;
-
         #region Serialized Fields
-
-        bool _selectShowResolvedStringParameters = true;
 
         [PropertyOrder(-100)]
         [PropertySpace(0, AFTER_SPACE)]
@@ -37,7 +34,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 
         public virtual void EditorReset()
         {
-            _selectShowResolvedStringParameters = true;
+            _isShowShortenCodePreview = false;
         }
 
         #endregion
@@ -79,12 +76,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 
             _examplePreviewItems = _model.ExamplePreviewItems;
             currentSelectedExample = _model.GetInitialExample();
-        }
-
-        void Test_ShowAttributeParameterTableRect(int col, int row)
-        {
-            Debug.Log($"GUITable 的 {col} 列 {row} 行的 Rect 为 {_attributeParametersTable[col, row].Rect}");
-            SirenixEditorGUI.DrawBorders(_attributeParametersTable[col, row].Rect, 1, Color.green);
         }
 
         #region Usage Tips
@@ -188,6 +179,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         {
             _attributeParametersContentRect = BeginDrawContainerWithTitle(_attributeParametersTitleLabel, out _);
             _attributeParametersTable.DrawTable();
+
             ResizeAttributeParameterTable();
             EndDrawContainerWithTitle(_attributeParametersContentRect);
         }
@@ -279,6 +271,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                                 _attributeParameters[row - 1].GetDescription(),
                                 _attributeParametersTable[col, row].Rect.width));
                     }
+
+                    SirenixEditorGUI.DrawBorders(_attributeParametersTable[col, row].Rect, 1, Color.clear);
                 }
 
                 _attributeParametersTable[0, row].Height = tableRowHeight[row] + 10f;
@@ -406,7 +400,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
             ? null
             : AttributeOverviewUtility.GetAttributeInExampleType(currentSelectedExample.GetType());
 
-        UnityEngine.Object GetCurrentExampleMonoScript()
+        Object GetCurrentExampleMonoScript()
         {
             if (!currentSelectedExample)
             {
@@ -416,7 +410,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
             var monoScriptAbsolutePath = MarkExampleAttribute.FilePath;
             var assetRelativePath =
                 "Assets/" + PathUtilities.MakeRelative(Application.dataPath, monoScriptAbsolutePath);
-            return AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetRelativePath);
+            return AssetDatabase.LoadAssetAtPath<Object>(assetRelativePath);
         }
 
         void DrawExamplePreviewItems()
@@ -493,10 +487,18 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         #region Code Preview
 
         static BilingualData _codePreviewLabel = new BilingualData("代码预览", "Code Preview");
+        static BilingualData _viewFullCodeButtonLabel = new BilingualData("查看完整代码", "View Full Code");
+        static BilingualData _viewShortenCodeButtonLabel = new BilingualData("查看简化代码", "View Shorten Code");
+        static BilingualData _copyCodeButtonLabel = new BilingualData("拷贝代码", "Copy Code");
         bool CurrentExampleIsNull => !currentSelectedExample;
+        bool _isShowShortenCodePreview;
+        Vector2 _scrollPosition;
 
         string CurrentExampleSourceCode =>
             AttributeOverviewUtility.GetExampleSourceCodeWithoutNamespace(MarkExampleAttribute);
+
+        string CurrentExampleShortenCode =>
+            AttributeOverviewUtility.GetExampleShortenCode(CurrentExampleSourceCode);
 
         const int CODE_AREA_WIDTH = 700;
 
@@ -507,11 +509,66 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         void DrawCurrentExampleCodePreview()
         {
             DrawContainerWithTitle(_codePreviewLabel, DrawCodePreview, out var headerToolBarRect);
+            SirenixEditorGUI.DrawBorders(headerToolBarRect, 1, Color.clear);
+            var showSwitchButtonRect = headerToolBarRect.AlignLeft(140f).AddXMin(1f);
+            if (_isShowShortenCodePreview)
+            {
+                if (GUI.Button(showSwitchButtonRect, _viewFullCodeButtonLabel, SirenixGUIStyles.ToolbarButton))
+                {
+                    _isShowShortenCodePreview = false;
+                }
+            }
+            else
+            {
+                if (GUI.Button(showSwitchButtonRect, _viewShortenCodeButtonLabel, SirenixGUIStyles.ToolbarButton))
+                {
+                    _isShowShortenCodePreview = true;
+                }
+            }
+
+            var copyButtonRect = headerToolBarRect.AlignRight(100f);
+            if (GUI.Button(copyButtonRect, _copyCodeButtonLabel, SirenixGUIStyles.ToolbarButton))
+            {
+                EditorGUIUtility.systemCopyBuffer = _isShowShortenCodePreview
+                    ? CurrentExampleShortenCode
+                    : CurrentExampleSourceCode;
+            }
         }
+
+        void DrawCodePreview()
+        {
+            EditorGUILayout.BeginVertical();
+            var highlighterCode = OdinSyntaxHighlighterSO.ApplyCodeHighlighting(CurrentExampleSourceCode);
+            if (_isShowShortenCodePreview)
+            {
+                highlighterCode = AttributeOverviewUtility.GetExampleShortenCode(highlighterCode);
+            }
+
+            var calcHeight =
+                CodeTextEditorStyle.CalcHeight(GUIHelper.TempContent(highlighterCode), CODE_AREA_WIDTH - 20f);
+            const float maxScrollViewHeight = 600f;
+            var actualHeight = Mathf.Min(calcHeight + 30f, maxScrollViewHeight);
+            var scrollViewRect = EditorGUILayout.GetControlRect(false, actualHeight);
+            SirenixEditorGUI.DrawSolidRect(scrollViewRect, OdinSyntaxHighlighterSO.BackgroundColor);
+            SirenixEditorGUI.DrawBorders(scrollViewRect, 1, Color.clear);
+            _scrollPosition = GUI.BeginScrollView(
+                scrollViewRect,
+                _scrollPosition,
+                new Rect(0, 0, CODE_AREA_WIDTH - 20f, calcHeight + 20f),
+                false,
+                false
+            );
+            var contentRect = new Rect(10f, 10f, CODE_AREA_WIDTH - 30f, calcHeight);
+            EditorGUI.SelectableLabel(contentRect, highlighterCode, CodeTextEditorStyle);
+            GUI.EndScrollView();
+            EditorGUILayout.EndVertical();
+        }
+
+        #region Editor GUIStyle
 
         static GUIStyle _codeTextEditorStyle;
 
-        public static GUIStyle CodeTextEditorStyle
+        static GUIStyle CodeTextEditorStyle
         {
             get
             {
@@ -536,29 +593,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
             }
         }
 
-        Vector2 _scrollPosition;
-
-        void DrawCodePreview()
-        {
-            var codeContentRect = SirenixEditorGUI.BeginBox();
-            var placeholderRect = GUILayoutUtility.GetRect(GUIHelper.TempContent("宽度卡位"), GUIStyle.none,
-                GUILayout.Width(CODE_AREA_WIDTH),
-                GUILayout.Height(10));
-            SirenixEditorGUI.DrawSolidRect(codeContentRect, OdinSyntaxHighlighterSO.BackgroundColor);
-            SirenixEditorGUI.DrawBorders(codeContentRect, 1, Color.clear);
-            SirenixEditorGUI.DrawBorders(placeholderRect, 1, Color.clear);
-            var highlighterCode = OdinSyntaxHighlighterSO.ApplyCodeHighlighting(CurrentExampleSourceCode);
-            var calcHeight = CodeTextEditorStyle.CalcHeight(GUIHelper.TempContent(highlighterCode), 1);
-            GUILayout.BeginVertical();
-            _scrollPosition = GUILayout.BeginScrollView(_scrollPosition, false, false);
-            var codeLabelRect = GUILayoutUtility.GetRect(CODE_AREA_WIDTH - 30f, calcHeight + 10).AddXMin(10f);
-            EditorGUI.SelectableLabel(codeLabelRect, highlighterCode, CodeTextEditorStyle);
-            SirenixEditorGUI.DrawBorders(codeLabelRect, 1, Color.clear);
-            GUILayout.EndScrollView();
-            GUILayout.EndVertical();
-            GUILayout.Space(10);
-            SirenixEditorGUI.EndBox();
-        }
+        #endregion
 
         #endregion
 
@@ -592,33 +627,5 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         }
 
         #endregion
-
-        // #region Selected Button
-        //
-        // [PropertyOrder(-90)]
-        // [ResponsiveButtonGroup(AnimateVisibility = false)]
-        // [GUIColor("green")]
-        // [ShowIf("$_selectShowResolvedStringParameters")]
-        // [BilingualButton("显示状态-被解析的字符串参数", "Resolved String Parameters Shown")]
-        // public void HideResolvedStringParameters()
-        // {
-        //     _selectShowResolvedStringParameters = false;
-        // }
-        //
-        // [PropertyOrder(-90)]
-        // [ResponsiveButtonGroup(AnimateVisibility = false)]
-        // [ShowIf("@!_selectShowResolvedStringParameters")]
-        // [BilingualButton("隐藏状态-被解析的字符串参数", "Resolved String Parameters Hidden")]
-        // public void ShowResolvedStringParameters()
-        // {
-        //     _selectShowResolvedStringParameters = true;
-        // }
-        //
-        // bool SelectResolvedStringParametersButtonDown => _selectShowResolvedStringParameters = true;
-        //
-        // bool CanShowResolvedStringParameters =>
-        //     _selectShowResolvedStringParameters && _resolvedStringParameters is { Count: > 0 };
-        //
-        // #endregion
     }
 }

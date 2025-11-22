@@ -1,10 +1,4 @@
 using Sirenix.OdinInspector;
-using Sirenix.Utilities.Editor;
-using System;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
-using Yuumix.OdinToolkits.AttributeOverviewPro.NEXT;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 {

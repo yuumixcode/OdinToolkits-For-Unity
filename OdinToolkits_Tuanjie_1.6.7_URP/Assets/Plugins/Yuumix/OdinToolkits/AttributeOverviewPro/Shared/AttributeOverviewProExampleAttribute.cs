@@ -9,15 +9,9 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Shared
     [AttributeUsage(AttributeTargets.Class)]
     public class AttributeOverviewProExampleAttribute : Attribute
     {
-        public AttributeOverviewProExampleAttribute(
-            [CallerFilePath] string filePath = "unknown",
-            [CallerLineNumber] int lineNumber = -1)
-        {
+        public AttributeOverviewProExampleAttribute([CallerFilePath] string filePath = "unknown") =>
             FilePath = filePath;
-            LineNumber = lineNumber;
-        }
 
         public string FilePath { get; private set; }
-        public int LineNumber { get; private set; }
     }
 }

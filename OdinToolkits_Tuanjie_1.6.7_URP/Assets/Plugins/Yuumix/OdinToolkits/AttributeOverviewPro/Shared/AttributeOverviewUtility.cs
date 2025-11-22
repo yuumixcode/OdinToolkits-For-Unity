@@ -162,18 +162,72 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Shared
             }
         }
 
-        public static string GetExampleSourceCodeWithoutNamespace(Type exampleType)
+        public static string GetExampleShortenCode(string sourceCode)
         {
-            var exampleAttribute = GetAttributeInExampleType(exampleType);
-            if (exampleAttribute == null)
+            var sourceCodeLines = sourceCode.Split('\n').ToList();
+            var shortenCodeLines = new List<string>();
+            var isInClass = false;
+            foreach (var line in sourceCodeLines)
             {
-                YuumixLogger.EditorLogError(
-                    $"{exampleType.Name} 没有标记 " + nameof(AttributeOverviewProExampleAttribute));
-                return "";
+                if (line.StartsWith("<"))
+                {
+                    continue;
+                }
+
+                if (!isInClass)
+                {
+                    if (line.StartsWith("{"))
+                    {
+                        isInClass = true;
+                    }
+
+                    continue;
+                }
+
+                if (line.StartsWith("{") || line.StartsWith("}"))
+                {
+                    continue;
+                }
+
+                if (line.StartsWith("using"))
+                {
+                    continue;
+                }
+
+                if (line.StartsWith("namespace"))
+                {
+                    continue;
+                }
+
+                if (line.StartsWith("public") || line.StartsWith("private") || line.StartsWith("protected") ||
+                    line.StartsWith("internal"))
+                {
+                    continue;
+                }
+
+                if (line.StartsWith("#"))
+                {
+                    shortenCodeLines.Add(line);
+                    continue;
+                }
+
+                if (line.StartsWith("    "))
+                {
+                    shortenCodeLines.Add(line.Length > 4 ? line[4..] : line);
+                    continue;
+                }
+
+                shortenCodeLines.Add(line);
             }
 
-            return GetExampleSourceCodeWithoutNamespace(exampleAttribute);
+            while (shortenCodeLines.Count > 0 && shortenCodeLines[0] == "")
+            {
+                shortenCodeLines.RemoveAt(0);
+            }
+
+            return string.Join("\n", shortenCodeLines);
         }
+
 #if UNITY_EDITOR
         [InitializeOnEnterPlayMode]
         static void Reset()

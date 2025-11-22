@@ -47,7 +47,7 @@ namespace Yuumix.OdinToolkits.Core.Editor
             "Culture=neutral," +
             "PublicKeyToken=null");
 
-        public static readonly MethodInfo ParseMethod =
+        public static readonly MethodInfo Parse =
             SyntaxHighlighterType.GetMethod("Parse", BindingFlags.Static | BindingFlags.Public);
 
         #region Serialized Fields
@@ -90,9 +90,9 @@ namespace Yuumix.OdinToolkits.Core.Editor
         /// <returns>包含了富文本的代码文本</returns>
         public static string ApplyCodeHighlighting(string code)
         {
-            if (ParseMethod != null)
+            if (Parse != null)
             {
-                return ParseMethod.Invoke(null, new object[] { code }) as string;
+                return Parse.Invoke(null, new object[] { code }) as string;
             }
 
             YuumixLogger.EditorLogError("无法获取 SyntaxHighlighter.Parse 方法");

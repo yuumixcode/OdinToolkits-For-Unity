@@ -11,11 +11,10 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 
     public class AttributeExamplePreviewItem
     {
-        public AttributeExampleType ExampleType { get; private set; }
-        public string ItemName { get; private set; }
-
         SerializedScriptableObject _odinSerializedExample;
         ScriptableObject _unitySerializedExample;
+        public AttributeExampleType ExampleType { get; private set; }
+        public string ItemName { get; private set; }
 
         public ScriptableObject UnitySerializedExample
         {

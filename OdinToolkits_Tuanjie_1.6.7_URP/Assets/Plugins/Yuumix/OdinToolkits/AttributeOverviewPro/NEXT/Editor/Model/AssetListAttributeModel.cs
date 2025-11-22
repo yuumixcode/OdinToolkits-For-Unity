@@ -1,7 +1,4 @@
-using Sirenix.OdinInspector;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
 using Yuumix.OdinToolkits.AttributeOverviewPro.NEXT;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 using Yuumix.OdinToolkits.Core;
@@ -45,12 +42,12 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                     new BilingualData("设置自定义筛选方法，根据此方法筛选出可选择的资源列表",
                         "Filter the asset list to only include assets for which the given filter method returns true."))
             };
-            ResolvedStringParameters = new ResolvedStringParameterValue[]
+            ResolvedStringParameters = new[]
             {
                 new ResolvedStringParameterValue("Custom Filter Method", ResolverType.ValueResolver,
                     typeof(bool).FullName,
                     "None",
-                    new List<ParameterValue>()
+                    new List<ParameterValue>
                     {
                         new ParameterValue("TList", "$value", new BilingualData("代表应用此特性的列表成员，类型为列表类型",
                             "Representing the member that has attribute applied to it.")),
@@ -63,7 +60,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                 new AttributeExamplePreviewItem().InitializeUnitySerializedExample("Asset List Basic",
                     AssetListExampleSO.Instance),
                 new AttributeExamplePreviewItem().InitializeUnitySerializedExample("Custom Filter Method",
-                    AssetListExampleSOForCustomFilterMethod.Instance),
+                    AssetListExampleSOForCustomFilterMethod.Instance)
             };
         }
     }

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using YuumixEditor;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor

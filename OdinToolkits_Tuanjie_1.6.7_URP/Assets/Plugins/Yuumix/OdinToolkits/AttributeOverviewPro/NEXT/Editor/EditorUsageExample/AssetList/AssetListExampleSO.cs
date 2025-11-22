@@ -4,7 +4,6 @@ using UnityEngine;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Core.Editor;
-using Yuumix.OdinToolkits.Modules.Editor;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.NEXT
 {
@@ -42,6 +41,9 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.NEXT
 
         #endregion
 
+        #region IOdinToolkitsEditorReset Members
+
+#if UNITY_EDITOR
         public void EditorReset()
         {
             singleObject = null;
@@ -52,5 +54,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.NEXT
             prefabsStartingWithRock = null;
             gameObjectsWithTag = null;
         }
+#endif
+
+        #endregion
     }
 }

@@ -1,7 +1,6 @@
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities.Editor;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
@@ -32,7 +31,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
             ResolverType = resolverType;
             ResolverTargetType = resolverTargetType;
             FallbackValue = fallbackValue;
-            NamedValues = new List<ParameterValue>()
+            NamedValues = new List<ParameterValue>
             {
                 DefaultExistedNamedValues
             };

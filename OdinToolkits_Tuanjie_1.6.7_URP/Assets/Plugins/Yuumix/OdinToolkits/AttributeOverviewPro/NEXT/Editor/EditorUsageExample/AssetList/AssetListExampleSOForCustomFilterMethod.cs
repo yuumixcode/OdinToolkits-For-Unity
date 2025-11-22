@@ -11,14 +11,22 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.NEXT
     public class AssetListExampleSOForCustomFilterMethod :
         EditorScriptableSingleton<AssetListExampleSOForCustomFilterMethod>, IOdinToolkitsEditorReset
     {
+        #region Serialized Fields
+
         [AssetList(CustomFilterMethod = "$HasRigidbodyComponent")]
         public List<GameObject> myRigidbodyPrefabs;
 
-        bool HasRigidbodyComponent(GameObject obj) => obj.GetComponent<Rigidbody>();
+        #endregion
+
+        #region IOdinToolkitsEditorReset Members
 
         public void EditorReset()
         {
             myRigidbodyPrefabs = null;
         }
+
+        #endregion
+
+        bool HasRigidbodyComponent(GameObject obj) => obj.GetComponent<Rigidbody>();
     }
 }
