@@ -21,7 +21,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Shared
         static GUIStyle _resolvedStringParameterValueTitleStyle;
         static GUIStyle _tabButtonCellTextStyle;
 
-      
         public static GUIStyle ContainerTitleStyle
         {
             get
@@ -126,7 +125,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Shared
                     }
 
                     if (line.TrimStart().StartsWith(
-                            "[" + nameof(AttributeOverviewProExampleAttribute).Replace("Attribute", "") +
+                            "[" + nameof(AttributeOverviewProExampleAttribute)[
+                                ..(nameof(AttributeOverviewProExampleAttribute).Length - "Attribute".Length)] +
                             "]"))
                     {
                         continue;
