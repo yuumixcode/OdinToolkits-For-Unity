@@ -7,6 +7,7 @@ using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 using Yuumix.OdinToolkits.Core;
+using Yuumix.OdinToolkits.Core.Editor;
 using YuumixEditor;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
@@ -18,12 +19,14 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
     {
         static BilingualData _guiTableNumberLabel = new BilingualData("序号", "Number");
 
+        const float AFTER_SPACE = 20f;
+
         #region Serialized Fields
 
         bool _selectShowResolvedStringParameters = true;
 
         [PropertyOrder(-100)]
-        [PropertySpace(0, 10)]
+        [PropertySpace(0, AFTER_SPACE)]
         public BilingualHeaderWidget headerWidget;
 
         AbstractAttributeModel _model;
@@ -90,12 +93,10 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         Rect _usageTipContentRect;
         string[] _usageTips;
 
-        #region GUITable
-
         [HideIf("$UsageTipIsEmpty")]
         [PropertyOrder(-60)]
         [OnInspectorGUI]
-        [PropertySpace(0, 20)]
+        [PropertySpace(0, AFTER_SPACE)]
         void DrawUsageTips()
         {
             _usageTipContentRect = BeginDrawContainerWithTitle(_usageTipsLabel, out _);
@@ -103,6 +104,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
             ResizeUsageTipsTable();
             EndDrawContainerWithTitle(_usageTipContentRect);
         }
+
+        #region GUITable
 
         GUITable _usageTipsTable;
 
@@ -180,7 +183,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         [HideIf("$AttributeParameterIsEmpty")]
         [PropertyOrder(-20)]
         [OnInspectorGUI]
-        [PropertySpace(0, 20)]
+        [PropertySpace(0, AFTER_SPACE)]
         void DrawAttributeParameters()
         {
             _attributeParametersContentRect = BeginDrawContainerWithTitle(_attributeParametersTitleLabel, out _);
@@ -303,7 +306,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         [HideIf("$ResolvedStringParametersIsEmpty")]
         [PropertyOrder(-10)]
         [OnInspectorGUI]
-        [PropertySpace(0, 20)]
+        [PropertySpace(0, AFTER_SPACE)]
         void DrawResolvedStringParameters()
         {
             _resolvedStringParametersContentRect = BeginDrawContainerWithTitle(_resolvedStringParameterLabel, out _);
@@ -339,8 +342,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 
         #region Usage Example
 
-        static BilingualData _usageExampleLabel =
-            new BilingualData("使用案例", "Usage Examples");
+        static BilingualData _usageExampleLabel = new BilingualData("使用案例预览", "Usage Examples");
 
         AttributeExamplePreviewItem[] _examplePreviewItems;
         Rect _usageExampleContentRect;
@@ -365,7 +367,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         public ScriptableObject currentSelectedExample;
 
         [HideIf("$UsageExampleItemsIsEmpty")]
-        [PropertySpace(0, 20)]
+        [PropertySpace(0, AFTER_SPACE)]
         [PropertyOrder(100)]
         [OnInspectorGUI]
         void EndDrawUsageExampleContainer()
@@ -400,6 +402,10 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
             }
         }
 
+        AttributeOverviewProExampleAttribute MarkExampleAttribute => !currentSelectedExample
+            ? null
+            : AttributeOverviewUtility.GetAttributeInExampleType(currentSelectedExample.GetType());
+
         UnityEngine.Object GetCurrentExampleMonoScript()
         {
             if (!currentSelectedExample)
@@ -407,11 +413,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                 return null;
             }
 
-            var markExampleAttribute = TypeCache
-                .GetTypesWithAttribute<AttributeOverviewProExampleAttribute>()
-                .First(type => type == currentSelectedExample.GetType())
-                .GetCustomAttribute<AttributeOverviewProExampleAttribute>();
-            var monoScriptAbsolutePath = markExampleAttribute.FilePath;
+            var monoScriptAbsolutePath = MarkExampleAttribute.FilePath;
             var assetRelativePath =
                 "Assets/" + PathUtilities.MakeRelative(Application.dataPath, monoScriptAbsolutePath);
             return AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetRelativePath);
@@ -484,6 +486,78 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                 : SirenixGUIStyles.LabelCentered;
             GUI.Label(rect3, content, labelStyle);
             EditorGUIUtility.SetIconSize(iconSizeBackup);
+        }
+
+        #endregion
+
+        #region Code Preview
+
+        static BilingualData _codePreviewLabel = new BilingualData("代码预览", "Code Preview");
+        bool CurrentExampleIsNull => !currentSelectedExample;
+
+        string CurrentExampleSourceCode =>
+            AttributeOverviewUtility.GetExampleSourceCodeWithoutNamespace(MarkExampleAttribute);
+
+        const int CODE_AREA_WIDTH = 700;
+
+        [HideIf("$CurrentExampleIsNull")]
+        [OnInspectorGUI]
+        [PropertyOrder(150)]
+        [PropertySpace(0, AFTER_SPACE)]
+        void DrawCurrentExampleCodePreview()
+        {
+            DrawContainerWithTitle(_codePreviewLabel, DrawCodePreview, out var headerToolBarRect);
+        }
+
+        static GUIStyle _codeTextEditorStyle;
+
+        public static GUIStyle CodeTextEditorStyle
+        {
+            get
+            {
+                _codeTextEditorStyle ??= new GUIStyle(SirenixGUIStyles.MultiLineLabel)
+                {
+                    normal = new GUIStyleState
+                    {
+                        textColor = OdinSyntaxHighlighterSO.TextColor
+                    },
+                    active = new GUIStyleState
+                    {
+                        textColor = OdinSyntaxHighlighterSO.TextColor
+                    },
+                    focused = new GUIStyleState
+                    {
+                        textColor = OdinSyntaxHighlighterSO.TextColor
+                    },
+                    wordWrap = false,
+                    fontSize = 12
+                };
+                return _codeTextEditorStyle;
+            }
+        }
+
+        Vector2 _scrollPosition;
+
+        void DrawCodePreview()
+        {
+            var codeContentRect = SirenixEditorGUI.BeginBox();
+            var placeholderRect = GUILayoutUtility.GetRect(GUIHelper.TempContent("宽度卡位"), GUIStyle.none,
+                GUILayout.Width(CODE_AREA_WIDTH),
+                GUILayout.Height(10));
+            SirenixEditorGUI.DrawSolidRect(codeContentRect, OdinSyntaxHighlighterSO.BackgroundColor);
+            SirenixEditorGUI.DrawBorders(codeContentRect, 1, Color.clear);
+            SirenixEditorGUI.DrawBorders(placeholderRect, 1, Color.clear);
+            var highlighterCode = OdinSyntaxHighlighterSO.ApplyCodeHighlighting(CurrentExampleSourceCode);
+            var calcHeight = CodeTextEditorStyle.CalcHeight(GUIHelper.TempContent(highlighterCode), 1);
+            GUILayout.BeginVertical();
+            _scrollPosition = GUILayout.BeginScrollView(_scrollPosition, false, false);
+            var codeLabelRect = GUILayoutUtility.GetRect(CODE_AREA_WIDTH - 30f, calcHeight + 10).AddXMin(10f);
+            EditorGUI.SelectableLabel(codeLabelRect, highlighterCode, CodeTextEditorStyle);
+            SirenixEditorGUI.DrawBorders(codeLabelRect, 1, Color.clear);
+            GUILayout.EndScrollView();
+            GUILayout.EndVertical();
+            GUILayout.Space(10);
+            SirenixEditorGUI.EndBox();
         }
 
         #endregion

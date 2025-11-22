@@ -18,8 +18,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     {
         const int Padding = 12;
         const int ContainerContentPadding = 10;
-        const int CodeDefaultHeight = 400;
-        const int CodeDefaultWidth = 600;
+        const int CODE_DEFAULT_HEIGHT = 400;
+        const int CODE_DEFAULT_WIDTH = 600;
         readonly List<GUITable> _resolvedParamGUITables = new List<GUITable>();
         GUIStyle _codeTextStyle;
         OdinAttributeContainerSO _container;
@@ -345,15 +345,15 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         void CodePreview()
         {
             var rect = SirenixEditorGUI.BeginBox();
-            GUILayoutUtility.GetRect(GUIHelper.TempContent("宽度卡位"), GUIStyle.none, GUILayout.Width(CodeDefaultWidth),
+            GUILayoutUtility.GetRect(GUIHelper.TempContent("宽度卡位"), GUIStyle.none, GUILayout.Width(CODE_DEFAULT_WIDTH),
                 GUILayout.Height(5));
             SirenixEditorGUI.DrawSolidRect(rect, OdinSyntaxHighlighterSO.BackgroundColor);
             var highlighterCode = OdinSyntaxHighlighterSO.ApplyCodeHighlighting(_container.OriginalCode);
-            var calcHeight = _codeTextStyle.CalcHeight(GUIHelper.TempContent(highlighterCode), CodeDefaultWidth);
+            var calcHeight = _codeTextStyle.CalcHeight(GUIHelper.TempContent(highlighterCode), CODE_DEFAULT_WIDTH);
             GUILayout.BeginVertical();
             _scrollPosition = GUILayout.BeginScrollView(_scrollPosition, false, false,
-                GUILayout.Height(calcHeight + 30), GUILayout.MaxHeight(CodeDefaultHeight));
-            EditorGUI.SelectableLabel(GUILayoutUtility.GetRect(CodeDefaultWidth + 50f, calcHeight + 10).AddXMin(4f),
+                GUILayout.Height(calcHeight + 30), GUILayout.MaxHeight(CODE_DEFAULT_HEIGHT));
+            EditorGUI.SelectableLabel(GUILayoutUtility.GetRect(CODE_DEFAULT_WIDTH + 50f, calcHeight + 10).AddXMin(4f),
                 highlighterCode, _codeTextStyle);
             GUILayout.EndScrollView();
             GUILayout.EndVertical();
