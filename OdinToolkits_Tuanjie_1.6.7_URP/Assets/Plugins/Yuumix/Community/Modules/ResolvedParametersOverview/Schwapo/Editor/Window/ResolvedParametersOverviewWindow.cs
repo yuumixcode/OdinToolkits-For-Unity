@@ -29,12 +29,13 @@ namespace Yuumix.Community.Schwapo.Editor
             }
         }
 
+        const string RESOLVED_PARAMETERS_OVERVIEW_WINDOW_NAME = "Resolved Parameters Overview";
+
         // [MenuItem("Tools/Odin Inspector/Resolved Parameters Overview")]
         // [MenuItem(MenuItemGlobalSettings.ResolvedParametersMenuItemName, false, MenuItemGlobalSettings.ResolvedParametersPriority)]
         public static void Open()
         {
-            _window = GetWindow<ResolvedParametersOverviewWindow>(OdinToolkitsMenuItems
-                .RESOLVED_PARAMETERS_OVERVIEW_WINDOW_NAME);
+            _window = GetWindow<ResolvedParametersOverviewWindow>(RESOLVED_PARAMETERS_OVERVIEW_WINDOW_NAME);
             _window.position = GUIHelper.GetEditorWindowRect().AlignCenter(800, 600);
             _window.minSize = new Vector2(500, 500);
             _window.ShowUtility();
