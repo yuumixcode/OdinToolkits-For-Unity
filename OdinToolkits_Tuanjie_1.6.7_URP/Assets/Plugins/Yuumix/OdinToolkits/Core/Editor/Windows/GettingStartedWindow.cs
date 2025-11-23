@@ -24,8 +24,9 @@ namespace Yuumix.OdinToolkits.Core.Editor
         [PropertyOrder(-90)]
         [BilingualDisplayAsStringWidgetConfig(fontSize: 14, enableRichText: true, alignment: TextAlignment.Center)]
         public BilingualDisplayAsStringWidget introduction = new BilingualDisplayAsStringWidget(
-            "Odin Toolkits 是 Unity 插件 Odin Inspector And Serializer 的第三方扩展工具集。探索 Odin Inspector 进阶功能、整合社区优质项目、优化游戏开发流程。",
-            "Odin Toolkits is a third-party extension toolkit that relies on the Unity plugin Odin Inspector And Serializer. It is designed in a modular way, accumulating low-intrusive solutions for the entire project and can be used as needed.");
+            "Odin Toolkits 是 Unity 插件 Odin Inspector And Serializer 的第三方扩展工具集。\n\n探索 Odin Inspector 进阶功能、整合优质资源、优化游戏开发流程。",
+            "Odin Toolkits is a third-party extension toolkit that relies on the Unity plugin Odin Inspector And Serializer. \n\n" +
+            "Explore Odin Inspector's advanced features, integrate high-quality resources, and optimize the game development process");
 
         [GUIColor("green")]
         [PropertyOrder(-50)]
