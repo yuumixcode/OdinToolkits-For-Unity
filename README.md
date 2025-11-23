@@ -111,9 +111,7 @@ Plugins/
 
 ## 贡献指南
 
-!!! note
-
-    暂不推荐，因为目前 API 可能随时改变。查看 `CONTRIBUTING.md` 文档。
+暂不推荐，因为目前 API 可能随时改变。查看 `CONTRIBUTING.md` 文档。
 
 ## 支持与反馈
 
