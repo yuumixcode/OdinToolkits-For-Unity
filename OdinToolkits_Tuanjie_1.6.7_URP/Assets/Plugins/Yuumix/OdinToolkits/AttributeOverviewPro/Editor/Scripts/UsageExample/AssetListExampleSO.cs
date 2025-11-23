@@ -12,35 +12,35 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
     {
         #region Serialized Fields
 
-        [FoldoutGroup("NoParameterTitleLabel", false)]
+        [FoldoutGroup("$NoParameterTitleLabel", false)]
         [AssetList]
         [PreviewField(70, ObjectFieldAlignment.Center)]
-        [InlineButton("LogSingleObject", "LogButtonLabel")]
+        [InlineButton("LogSingleObject", "$LogButtonLabel")]
         public Texture2D singleObject;
 
-        [FoldoutGroup("PathTitleLabel", false)]
+        [FoldoutGroup("$PathTitleLabel", false)]
         [AssetList(Path = "/Plugins/Sirenix/")]
-        [InlineButton("LogAssetList", "LogButtonLabel")]
+        [InlineButton("LogAssetList", "$LogButtonLabel")]
         public List<ScriptableObject> assetList;
 
-        [FoldoutGroup("AutoPopulateAndPathTitleLabel", false)]
+        [FoldoutGroup("$AutoPopulateAndPathTitleLabel", false)]
         [AssetList(AutoPopulate = true, Path = "Plugins/Sirenix/")]
-        [InlineButton("LogAutoPopulatedWhenInspected", "LogButtonLabel")]
+        [InlineButton("LogAutoPopulatedWhenInspected", "$LogButtonLabel")]
         public List<ScriptableObject> autoPopulatedWhenInspected;
 
-        [FoldoutGroup("TagsTitleLabel", false)]
+        [FoldoutGroup("$TagsTitleLabel", false)]
         [AssetList(Tags = "EditorOnly,Respawn")]
-        [InlineButton("LogGameObjectsWithTag", "LogButtonLabel")]
+        [InlineButton("LogGameObjectsWithTag", "$LogButtonLabel")]
         public List<GameObject> gameObjectsWithTag;
 
-        [FoldoutGroup("LayerNamesTitleLabel", false)]
+        [FoldoutGroup("$LayerNamesTitleLabel", false)]
         [AssetList(LayerNames = "Water")]
-        [InlineButton("LogGameObjectsWithLayerNames", "LogButtonLabel")]
+        [InlineButton("LogGameObjectsWithLayerNames", "$LogButtonLabel")]
         public GameObject[] gameObjectsWithLayerNames;
 
-        [FoldoutGroup("AssetNamePrefixTitleLabel", false)]
+        [FoldoutGroup("$AssetNamePrefixTitleLabel", false)]
         [AssetList(AssetNamePrefix = "OdinToolkits_")]
-        [InlineButton("LogGameObjectsWithNamePrefix", "LogButtonLabel")]
+        [InlineButton("LogGameObjectsWithNamePrefix", "$LogButtonLabel")]
         public List<GameObject> gameObjectsWithNamePrefix;
 
         #endregion
