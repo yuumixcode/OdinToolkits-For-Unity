@@ -1,20 +1,21 @@
 # README
 
 <p align="center">
-  <a href="https://www.odintoolkits.cn/"><img src="https://cdn.jsdelivr.net/gh/yuumixcode/OdinToolkitsDocumentation@main/cdn-assets/logo-color-noshadow.webp" width="240" alt="Odin Toolkits Logo"></a>
+  <a href="https://www.odintoolkits.cn/"><img src="https://cdn.jsdelivr.net/gh/yuumixcode/Zensical-For-OdinToolkits@main/odintoolkits-logo.webp" width="240" alt="Odin Toolkits Logo"></a>
 </p>
 
 <p align="center"><strong>探索 Odin Inspector 进阶功能、整合优质资源、优化游戏开发流程</strong></p>
 
 <p align="center">
+<a href="https://docs.unity.cn/cn/tuanjiemanual/1.6/Manual/"><img alt="Tuanjie Version" src="https://img.shields.io/badge/Tuanjie-1.6.7_LTS-blue"></a>
 <a href="https://docs.unity3d.com/2021.3/Documentation/Manual/index.html"><img alt="Unity Version" src="https://img.shields.io/badge/Unity-2021.3.45f2c1-blue?style=flat&logo=unity"></a>
-<a href="https://odininspector.com/"><img alt="Odin Inspector" src="https://img.shields.io/badge/Odin_Inspector-3.3%2B_-orange?style=flat"></a>
-<a href="https://github.com/yuumixcode/OdinToolkits-For-Unity?tab=MIT-1-ov-file"><img alt="License" src="https://img.shields.io/badge/License-MIT-green?style=flat"></a>
+<a href="https://odininspector.com/"><img alt="Odin Inspector" src="https://img.shields.io/badge/Odin_Inspector-4.0.1.0-orange?style=flat"></a>
 </p>
 
 <p align="center">
+<a href="https://github.com/yuumixcode/OdinToolkits-For-Unity?tab=MIT-1-ov-file"><img alt="License" src="https://img.shields.io/badge/License-MIT-green?style=flat"></a>
 <a href="https://www.odintoolkits.cn/"><img alt="Main Site GitHub Pages" src="https://img.shields.io/badge/%E4%B8%BB%E7%BD%91%E7%AB%99-www.odintoolkits.cn-green?style=flat"></a>
-<a href="https://zensical-for-odintoolkits.readthedocs.io"><img alt="Static Badge" src="https://img.shields.io/badge/%E5%A4%87%E7%94%A8%E7%BD%91%E7%AB%99-readthedocs.io-orange?style=flat"></a>
+<a href="https://zensical-for-odintoolkits.readthedocs.io"><img alt="Read The Docs" src="https://img.shields.io/badge/%E5%A4%87%E7%94%A8%E7%BD%91%E7%AB%99-readthedocs.io-orange?style=flat"></a>
 </p>
 
 ## ⚠️ 重要声明
@@ -32,16 +33,17 @@
 ## 主要模块
 
 1. `Script Doc Generator` ：脚本文档生成工具，一键生成 `API` 文档，也可以自定义文档格式。
-2. `Attribute Overview Pro` ：中文特性总览窗口，在官方的 `Attribute Overview` 内容上进行扩展。
-3. `Community` ：社区模块，收集、整理、分享使用 `Odin Inspector` 制作的工具以及其他优质资源。
-4. 原生多语言特性，在构造函数层面直接添加多语言参数。
+2. `Attribute Overview Pro` ：Odin 特性总览窗口 Pro 版，在官方的 `Attribute Overview` 内容上进行扩展。
+3. `Tool Packages` ：工具箱模块，提供一些简单的编辑器工具。
+4. `Community` ：社区模块，收集、整理、分享使用 `Odin Inspector` 制作的工具以及其他优质资源。
+5. 原生多语言特性，在构造函数层面直接添加多语言参数。
 
 ## 安装
 
 ### 前提条件
 
-- `Unity 2021.3.45f2c1 LTS` 或更高版本
-- `Odin Inspector And Serializer 3.3` 或更高版本
+- `Tuanjie 1.6.7 LTS` 或 `Unity 2021.3.45f2c1 LTS` 或对应引擎的更高版本
+- `Odin Inspector And Serializer` 最新版本。本项目最初基于 `3.3.1.14` 开发。
 
 ### 具体步骤
 
@@ -58,13 +60,13 @@
 
 导入后，您可以通过 Unity 编辑器菜单访问 `Odin Toolkits`：
 
-- `Tools/Odin Toolkits/Getting Started` - 开始使用
-- `Tools/Odin Toolkits/Editor Settings` - 配置编辑器偏好设置
+- `Tools/Odin Toolkits/Getting Started` - 开始菜单
+- `Tools/Odin Toolkits/Editor Settings` - 配置编辑器阶段设置
 - `Tools/Odin Toolkits/Runtime Config` - 配置运行时设置
+- `Tools/Odin Toolkits/Attribute Overview Pro` - Odin 特性总览窗口 Pro 版
 - `Tools/Odin Toolkits/Script Doc Generator` - 脚本文档生成工具
-- `Tools/Odin Toolkits/Attribute Overview Pro` - 中文特性总览窗口
 - `Tools/Odin Toolkits/Tool Packages` - 工具箱
-- `Tools/Odin Toolkits/Community` - 访问社区模块
+- `Tools/Odin Toolkits/Community` - 社区模块
 
 ## 项目结构
 
@@ -111,11 +113,11 @@ Plugins/
 
 !!! note
 
-​    暂不推荐，因为目前 API 可能随时改变。查看 `CONTRIBUTING.md` 文档。
+   暂不推荐，因为目前 API 可能随时改变。查看 `CONTRIBUTING.md` 文档。
 
 ## 支持与反馈
 
-[zeriying@gmail.com](mailto:zeriying@gmail.com)
+[zeriying@gmail.com](mailto:zeriying@gmail.com)，发送邮箱时，请添加 `[Odin Toolkits - xxx]` 前缀，例如 `[Odin Toolkits - BUG]`。
 
 感谢你看到这里，如果 `Odin Toolkits` 在你的 `Unity` 开发过程中切实提供了帮助，恳请为项目点亮一颗 ★ Star！
 

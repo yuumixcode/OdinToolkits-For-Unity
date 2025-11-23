@@ -1,13 +1,19 @@
+---
+icon: lucide/copyright
+tags:
+  - license
+---
+
 # Logo 图标许可证声明
 
 ## 基本信息
 
 | 项目 | 详情 |
 |------|------|
-| **项目名称** | Odin Toolkits |
-| **Logo 设计者** | YuumixCode |
+| **项目名称** | Odin Toolkits Logo |
+| **Logo 设计者** | Yuumix |
 | **创建日期** | 2025年 |
-| **版权归属** | YuumixCode |
+| **版权归属** | Yuumix |
 | **许可证** | MIT License |
 
 ## Logo 设计详情
@@ -23,24 +29,24 @@
 
 #### 图标设置
 
-| 参数 | 数值 | 说明 |
-|------|------|------|
-| **图标名称** | Webhook | 来自 Lucide Icons |
-| **尺寸** | 350px | 高清显示 |
-| **旋转角度** | 180° | 翻转显示 |
-| **边框宽度** | 2.5px | 细边框设计 |
-| **主体颜色** | `#333333` | 深灰色（非纯黑） |
+| 参数 | 数值 |
+|------|------|
+| **图标名称** | Webhook |
+| **尺寸** | 350px |
+| **旋转角度** | 180° |
+| **边框宽度** | 2.5px |
+| **主体颜色** | `#333333` |
 
 #### 背景设计
 
-| 参数 | 数值 | 说明 |
-|------|------|------|
-| **圆角** | 120px | 大圆角设计 |
-| **内边距** | 10px | 适中间距 |
-| **渐变角度** | 45° | 对角线渐变 |
-| **左下角色** | `#ff3802` | 橙红色 |
-| **中间过渡** | 纯白色 (60%位置) | 中心亮点 |
-| **右上角色** | `#0095ff` | 深蓝色 |
+| 参数 | 数值 |
+|------|------|
+| **圆角** | 120px |
+| **内边距** | 100px |
+| **渐变角度** | 45° |
+| **左下角色** | `#ff3802` |
+| **中间过渡** | 纯白色 (60%位置) |
+| **右上角色** | `#0095ff` |
 
 ### 颜色方案
 
@@ -61,7 +67,7 @@
     #0095ff 100%    /* 深蓝色 */
   );
   border-radius: 120px;
-  padding: 10px;
+  padding: 100px;
 }
 ```
 
@@ -70,7 +76,7 @@
 ### Logo 版权信息
 
 ``` markdown
-Copyright (c) 2025 YuumixCode
+Copyright (c) 2025 Yuumix
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this logo design and associated documentation files (the "Logo"), to deal
