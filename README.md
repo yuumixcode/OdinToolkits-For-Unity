@@ -107,17 +107,17 @@ Plugins/
 
 ## 更新日志
 
-详细版本历史和变更请查看项目中的 `CHANGELOG.md` 或者 [Odin Toolkits](https://www.odintoolkits.cn/) 的 `CHANGELOG` 章节。
+详细版本历史和变更请查看网站 `Information/CHANGELOG` 章节或项目中的 `CHANGELOG.md`。
 
 ## 贡献指南
 
 !!! note
 
-   暂不推荐，因为目前 API 可能随时改变。查看 `CONTRIBUTING.md` 文档。
+    暂不推荐，因为目前 API 可能随时改变。查看 `CONTRIBUTING.md` 文档。
 
 ## 支持与反馈
 
-[zeriying@gmail.com](mailto:zeriying@gmail.com)，发送邮箱时，请添加 `[Odin Toolkits - xxx]` 前缀，例如 `[Odin Toolkits - BUG]`。
+[zeriying@gmail.com](mailto:zeriying@gmail.com)，发送邮箱时，请添加 `[Odin Toolkits - xxx]` 前缀，例如 `[Odin Toolkits - BUG]`，这样更便于接收反馈，避免遗漏。
 
 感谢你看到这里，如果 `Odin Toolkits` 在你的 `Unity` 开发过程中切实提供了帮助，恳请为项目点亮一颗 ★ Star！
 
