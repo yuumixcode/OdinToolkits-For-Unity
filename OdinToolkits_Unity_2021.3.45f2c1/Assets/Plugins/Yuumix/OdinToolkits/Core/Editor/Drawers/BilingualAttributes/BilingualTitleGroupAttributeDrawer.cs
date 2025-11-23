@@ -14,8 +14,8 @@ namespace Yuumix.OdinToolkits.Core.Editor
         protected override void Initialize()
         {
             ReloadResolver();
-            InspectorBilingualismConfigSO.OnLanguageChange -= ReloadResolver;
-            InspectorBilingualismConfigSO.OnLanguageChange += ReloadResolver;
+            InspectorBilingualismConfigSO.OnLanguageChanged -= ReloadResolver;
+            InspectorBilingualismConfigSO.OnLanguageChanged += ReloadResolver;
         }
 
         protected override void DrawPropertyLayout(GUIContent label)

@@ -4,7 +4,7 @@ using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
-using Yuumix.OdinToolkits.OdinAttributeOverviewPro.Editor;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor;
 using Yuumix.OdinToolkits.ScriptDocGenerator.Editor;
 using YuumixEditor;
 
@@ -12,37 +12,6 @@ namespace Yuumix.OdinToolkits.Core.Editor
 {
     public class GettingStartedWindow : OdinEditorWindow
     {
-        #region Serialized Fields
-
-        [GUIColor("green")]
-        [PropertyOrder(-100)]
-        [PropertySpace]
-        [BilingualDisplayAsStringWidgetConfig(fontSize: 24, enableRichText: true, alignment: TextAlignment.Center)]
-        public BilingualDisplayAsStringWidget titleHeader =
-            new BilingualDisplayAsStringWidget("简介", "Introduction");
-
-        [PropertyOrder(-90)]
-        [BilingualDisplayAsStringWidgetConfig(fontSize: 14, enableRichText: true, alignment: TextAlignment.Center)]
-        public BilingualDisplayAsStringWidget introduction = new BilingualDisplayAsStringWidget(
-            "Odin Toolkits 是 Unity 插件 Odin Inspector And Serializer 的第三方扩展工具集。探索 Odin Inspector 进阶功能、整合社区优质项目、优化游戏开发流程。",
-            "Odin Toolkits is a third-party extension toolkit that relies on the Unity plugin Odin Inspector And Serializer. It is designed in a modular way, accumulating low-intrusive solutions for the entire project and can be used as needed.");
-
-        [GUIColor("green")]
-        [PropertyOrder(-50)]
-        [PropertySpace(16)]
-        [BilingualDisplayAsStringWidgetConfig(fontSize: 24, enableRichText: true, alignment: TextAlignment.Center)]
-        public BilingualDisplayAsStringWidget core =
-            new BilingualDisplayAsStringWidget("核心功能模块", "Core Module");
-
-        [GUIColor("green")]
-        [PropertyOrder(-30)]
-        [PropertySpace(16)]
-        [BilingualDisplayAsStringWidgetConfig(fontSize: 24, enableRichText: true, alignment: TextAlignment.Center)]
-        public BilingualDisplayAsStringWidget help =
-            new BilingualDisplayAsStringWidget("帮助链接", "Help Links");
-
-        #endregion
-
         string ScriptDocGenButtonName => ScriptDocGeneratorVisualPanelSO.ModuleName;
 
         string ToolPackagesButtonName => new BilingualData("工具箱", "Tool Packages");
@@ -77,10 +46,10 @@ namespace Yuumix.OdinToolkits.Core.Editor
 
         [PropertyOrder(-40)]
         [PropertySpace(5)]
-        [BilingualButton("Odin 特性中文总览", "AttributeOverview Pro", ButtonSizes.Large)]
+        [BilingualButton("Odin 特性总览窗口", "AttributeOverview Pro", ButtonSizes.Large)]
         public void OpenAttributeOverviewPro()
         {
-            OdinAttributeOverviewProWindow.ShowWindow();
+            DeprecatedAttributeOverviewProWindow.ShowWindow();
         }
 
         [PropertyOrder(-40)]
@@ -152,5 +121,37 @@ namespace Yuumix.OdinToolkits.Core.Editor
             window.titleContent = new GUIContent(OdinToolkitsMenuItems.GETTING_STARTED_WINDOW_NAME);
             window.ShowUtility();
         }
+
+        #region Serialized Fields
+
+        [GUIColor("green")]
+        [PropertyOrder(-100)]
+        [PropertySpace]
+        [BilingualDisplayAsStringWidgetConfig(fontSize: 24, enableRichText: true, alignment: TextAlignment.Center)]
+        public BilingualDisplayAsStringWidget titleHeader =
+            new BilingualDisplayAsStringWidget("简介", "Introduction");
+
+        [PropertyOrder(-90)]
+        [BilingualDisplayAsStringWidgetConfig(fontSize: 14, enableRichText: true, alignment: TextAlignment.Center)]
+        public BilingualDisplayAsStringWidget introduction = new BilingualDisplayAsStringWidget(
+            "Odin Toolkits 是 Unity 插件 Odin Inspector And Serializer 的第三方扩展工具集。\n\n探索 Odin Inspector 进阶功能、整合优质资源、优化游戏开发流程。",
+            "Odin Toolkits is a third-party extension toolkit that relies on the Unity plugin Odin Inspector And Serializer. \n\n" +
+            "Explore Odin Inspector's advanced features, integrate high-quality resources, and optimize the game development process");
+
+        [GUIColor("green")]
+        [PropertyOrder(-50)]
+        [PropertySpace(16)]
+        [BilingualDisplayAsStringWidgetConfig(fontSize: 24, enableRichText: true, alignment: TextAlignment.Center)]
+        public BilingualDisplayAsStringWidget core =
+            new BilingualDisplayAsStringWidget("核心功能模块", "Core Module");
+
+        [GUIColor("green")]
+        [PropertyOrder(-30)]
+        [PropertySpace(16)]
+        [BilingualDisplayAsStringWidgetConfig(fontSize: 24, enableRichText: true, alignment: TextAlignment.Center)]
+        public BilingualDisplayAsStringWidget help =
+            new BilingualDisplayAsStringWidget("帮助链接", "Help Links");
+
+        #endregion
     }
 }

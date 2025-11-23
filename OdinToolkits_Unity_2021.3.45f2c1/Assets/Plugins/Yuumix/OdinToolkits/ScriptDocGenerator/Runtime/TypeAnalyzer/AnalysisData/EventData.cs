@@ -42,20 +42,15 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
 
         #region IDerivedMemberData
 
-        [Summary("是否为静态事件")]
-        public bool IsStatic { get; }
+        [Summary("是否为静态事件")] public bool IsStatic { get; }
 
-        [Summary("成员类型")]
-        public MemberTypes MemberType { get; }
+        [Summary("成员类型")] public MemberTypes MemberType { get; }
 
-        [Summary("成员类型名称")]
-        public string MemberTypeName { get; }
+        [Summary("成员类型名称")] public string MemberTypeName { get; }
 
-        [Summary("访问修饰符类型")]
-        public AccessModifierType AccessModifier { get; }
+        [Summary("访问修饰符类型")] public AccessModifierType AccessModifier { get; }
 
-        [Summary("访问修饰符名称")]
-        public string AccessModifierName { get; }
+        [Summary("访问修饰符名称")] public string AccessModifierName { get; }
 
         [PropertyOrder(60)]
         [ShowEnableProperty]
@@ -77,11 +72,9 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
 
         #region IEventData
 
-        [Summary("事件类型")]
-        public Type EventType { get; }
+        [Summary("事件类型")] public Type EventType { get; }
 
-        [Summary("事件类型名称")]
-        public string EventTypeName { get; }
+        [Summary("事件类型名称")] public string EventTypeName { get; }
 
         [PropertyOrder(60)]
         [ShowEnableProperty]

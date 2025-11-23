@@ -10,11 +10,11 @@ namespace Yuumix.OdinToolkits.Core.Editor
     [Summary("右键快捷处理 Summary 特性")]
     public static class SummaryProcessorMenuItems
     {
-        const string ADD_MENU_NAME = "Assets/Sync SummaryAttribute";
-        const string REPLACE_MENU_NAME = "Assets/Replace SummaryAttribute";
-        const string REMOVE_MENU_NAME = "Assets/Remove SummaryAttribute";
+        const string ADD_MENU_NAME = "Assets/Process Summary/Sync";
+        const string REPLACE_MENU_NAME = "Assets/Process Summary/Replace";
+        const string REMOVE_MENU_NAME = "Assets/Process Summary/Remove";
 
-        [MenuItem(ADD_MENU_NAME)]
+        [MenuItem(ADD_MENU_NAME, false, 1000)]
         public static void QuickSyncSummary()
         {
             if (Selection.objects.Length == 1)
@@ -30,7 +30,7 @@ namespace Yuumix.OdinToolkits.Core.Editor
             }
         }
 
-        [MenuItem(REPLACE_MENU_NAME)]
+        [MenuItem(REPLACE_MENU_NAME, false, 1001)]
         public static void QuickReplaceSummary()
         {
             if (Selection.objects.Length == 1)
@@ -46,7 +46,7 @@ namespace Yuumix.OdinToolkits.Core.Editor
             }
         }
 
-        [MenuItem(REMOVE_MENU_NAME)]
+        [MenuItem(REMOVE_MENU_NAME, false, 1002)]
         public static void QuickRemoveSummary()
         {
             if (Selection.objects.Length == 1)

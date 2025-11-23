@@ -1,0 +1,138 @@
+using Sirenix.OdinInspector;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using UnityEditor;
+using UnityEditor.Callbacks;
+using Yuumix.OdinToolkits.Core.Editor;
+
+namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
+{
+    public class AttributeOverviewProDatabaseSO : OdinEditorScriptableSingleton<AttributeOverviewProDatabaseSO>
+    {
+        // 使用OnEnable方法而不是构造函数，因为ScriptableObject构造函数中不能访问EditorApplication
+        protected void OnEnable()
+        {
+            if (!EditorApplication.isPlayingOrWillChangePlaymode)
+            {
+                Initialize();
+            }
+        }
+
+        static AbstractAttributeVisualPanelSO[] AllVisualPanels => GetAllVisualPanels();
+
+        [Button("Initialize Database", ButtonSizes.Large)]
+        public AttributeOverviewProDatabaseSO Initialize()
+        {
+            _essentialVisualPanels = AllVisualPanels.Where(x => x.GetType()
+                .GetCustomAttribute<AttributeCategoryAttribute>().Category
+                .HasFlagFast(OdinAttributeCategory.Essentials)).ToArray();
+            _buttonVisualPanels = AllVisualPanels.Where(x => x.GetType()
+                .GetCustomAttribute<AttributeCategoryAttribute>().Category
+                .HasFlagFast(OdinAttributeCategory.Buttons)).ToArray();
+            _collectionVisualPanels = AllVisualPanels.Where(x => x.GetType()
+                .GetCustomAttribute<AttributeCategoryAttribute>().Category
+                .HasFlagFast(OdinAttributeCategory.Collections)).ToArray();
+            _groupVisualPanels = AllVisualPanels.Where(x => x.GetType()
+                .GetCustomAttribute<AttributeCategoryAttribute>().Category
+                .HasFlagFast(OdinAttributeCategory.Groups)).ToArray();
+            _conditionalVisualPanels = AllVisualPanels.Where(x => x.GetType()
+                .GetCustomAttribute<AttributeCategoryAttribute>().Category
+                .HasFlagFast(OdinAttributeCategory.Conditionals)).ToArray();
+            _numberVisualPanels = AllVisualPanels.Where(x => x.GetType()
+                .GetCustomAttribute<AttributeCategoryAttribute>().Category
+                .HasFlagFast(OdinAttributeCategory.Numbers)).ToArray();
+            _typeSpecificVisualPanels = AllVisualPanels.Where(x => x.GetType()
+                .GetCustomAttribute<AttributeCategoryAttribute>().Category
+                .HasFlagFast(OdinAttributeCategory.TypeSpecifics)).ToArray();
+            _validationVisualPanels = AllVisualPanels.Where(x => x.GetType()
+                .GetCustomAttribute<AttributeCategoryAttribute>().Category
+                .HasFlagFast(OdinAttributeCategory.Validation)).ToArray();
+            _miscVisualPanels = AllVisualPanels.Where(x => x.GetType()
+                .GetCustomAttribute<AttributeCategoryAttribute>().Category
+                .HasFlagFast(OdinAttributeCategory.Misc)).ToArray();
+            _metaVisualPanels = AllVisualPanels.Where(x => x.GetType()
+                .GetCustomAttribute<AttributeCategoryAttribute>().Category
+                .HasFlagFast(OdinAttributeCategory.Meta)).ToArray();
+            _unityVisualPanels = AllVisualPanels.Where(x => x.GetType()
+                .GetCustomAttribute<AttributeCategoryAttribute>().Category
+                .HasFlagFast(OdinAttributeCategory.Unity)).ToArray();
+            _debugVisualPanels = AllVisualPanels.Where(x => x.GetType()
+                .GetCustomAttribute<AttributeCategoryAttribute>().Category
+                .HasFlagFast(OdinAttributeCategory.Debug)).ToArray();
+            VisualPanelMap = new Dictionary<string, AbstractAttributeVisualPanelSO[]>
+            {
+                {
+                    nameof(OdinAttributeCategory.Essentials), _essentialVisualPanels
+                },
+                {
+                    nameof(OdinAttributeCategory.Buttons), _buttonVisualPanels
+                },
+                {
+                    nameof(OdinAttributeCategory.Collections), _collectionVisualPanels
+                },
+                {
+                    nameof(OdinAttributeCategory.Groups), _groupVisualPanels
+                },
+                {
+                    nameof(OdinAttributeCategory.Conditionals), _conditionalVisualPanels
+                },
+                {
+                    nameof(OdinAttributeCategory.Numbers), _numberVisualPanels
+                },
+                {
+                    nameof(OdinAttributeCategory.TypeSpecifics), _typeSpecificVisualPanels
+                },
+                {
+                    nameof(OdinAttributeCategory.Validation), _validationVisualPanels
+                },
+                {
+                    nameof(OdinAttributeCategory.Misc), _miscVisualPanels
+                },
+                {
+                    nameof(OdinAttributeCategory.Meta), _metaVisualPanels
+                },
+                {
+                    nameof(OdinAttributeCategory.Unity), _unityVisualPanels
+                },
+                {
+                    nameof(OdinAttributeCategory.Debug), _debugVisualPanels
+                }
+            };
+            return this;
+        }
+
+        static AbstractAttributeVisualPanelSO[] GetAllVisualPanels()
+        {
+            return AssetDatabase.FindAssets("t:" + typeof(AbstractAttributeVisualPanelSO))
+                .Select(x => AssetDatabase.LoadAssetAtPath<AbstractAttributeVisualPanelSO>(
+                    AssetDatabase.GUIDToAssetPath(x)))
+                .ToArray();
+        }
+
+        [DidReloadScripts]
+        static void BackendInitialize()
+        {
+            Instance.Initialize();
+        }
+
+        #region Serialized Fields
+
+        public Dictionary<string, AbstractAttributeVisualPanelSO[]> VisualPanelMap;
+
+        AbstractAttributeVisualPanelSO[] _essentialVisualPanels;
+        AbstractAttributeVisualPanelSO[] _buttonVisualPanels;
+        AbstractAttributeVisualPanelSO[] _collectionVisualPanels;
+        AbstractAttributeVisualPanelSO[] _groupVisualPanels;
+        AbstractAttributeVisualPanelSO[] _conditionalVisualPanels;
+        AbstractAttributeVisualPanelSO[] _numberVisualPanels;
+        AbstractAttributeVisualPanelSO[] _typeSpecificVisualPanels;
+        AbstractAttributeVisualPanelSO[] _validationVisualPanels;
+        AbstractAttributeVisualPanelSO[] _miscVisualPanels;
+        AbstractAttributeVisualPanelSO[] _metaVisualPanels;
+        AbstractAttributeVisualPanelSO[] _unityVisualPanels;
+        AbstractAttributeVisualPanelSO[] _debugVisualPanels;
+
+        #endregion
+    }
+}

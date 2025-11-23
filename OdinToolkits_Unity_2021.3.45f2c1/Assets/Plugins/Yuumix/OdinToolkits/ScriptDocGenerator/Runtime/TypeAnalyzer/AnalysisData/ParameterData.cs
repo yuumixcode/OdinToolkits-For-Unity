@@ -34,6 +34,35 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             IsParams = parameterInfo.IsDefined(typeof(ParamArrayAttribute), false);
         }
 
+        static string GetDefaultValueString(Type parameterType, object value)
+        {
+            if (value != null && parameterType.IsEnum)
+            {
+                var enumTypeName = parameterType.Name;
+                var enumName = Enum.GetName(parameterType, value);
+                return $"{enumTypeName}.{enumName}";
+            }
+
+            return value switch
+            {
+                null => "null",
+                string str => $"\"{str}\"",
+                bool b => b ? "true" : "false",
+                float f => $"{f}f",
+                char c => $"'{c}'",
+                double d => $"{d}d",
+                decimal m => $"{m}m",
+                uint u => $"{u}u",
+                long l => $"{l}L",
+                ulong ul => $"{ul}ul",
+                short s => $"{s}",
+                ushort us => $"{us}",
+                byte b2 => $"{b2}",
+                sbyte sb => $"{sb}",
+                _ => value.ToString()
+            };
+        }
+
         #region IParameterData Members
 
         /// <summary>
@@ -124,34 +153,5 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         }
 
         #endregion
-
-        static string GetDefaultValueString(Type parameterType, object value)
-        {
-            if (value != null && parameterType.IsEnum)
-            {
-                var enumTypeName = parameterType.Name;
-                var enumName = Enum.GetName(parameterType, value);
-                return $"{enumTypeName}.{enumName}";
-            }
-
-            return value switch
-            {
-                null => "null",
-                string str => $"\"{str}\"",
-                bool b => b ? "true" : "false",
-                float f => $"{f}f",
-                char c => $"'{c}'",
-                double d => $"{d}d",
-                decimal m => $"{m}m",
-                uint u => $"{u}u",
-                long l => $"{l}L",
-                ulong ul => $"{ul}ul",
-                short s => $"{s}",
-                ushort us => $"{us}",
-                byte b2 => $"{b2}",
-                sbyte sb => $"{sb}",
-                _ => value.ToString()
-            };
-        }
     }
 }

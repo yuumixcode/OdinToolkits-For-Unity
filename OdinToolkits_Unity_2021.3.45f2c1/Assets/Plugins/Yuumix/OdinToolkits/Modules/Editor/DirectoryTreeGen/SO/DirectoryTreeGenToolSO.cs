@@ -20,6 +20,45 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             ".asmdef"
         };
 
+        #region IOdinToolkitsEditorReset Members
+
+        public void EditorReset()
+        {
+            folderPath = null;
+            maxDepth = 1;
+            resultText = null;
+            command = null;
+            _directoryAnalysisData = null;
+        }
+
+        #endregion
+
+        [BilingualTitleGroup("TG", "操作按钮", "Operator Buttons")]
+        [HorizontalGroup("TG/B")]
+        [BilingualButton("解析路径", "Analyze Folder Path", ButtonSizes.Large)]
+        public void Analyze()
+        {
+            if (!Directory.Exists(folderPath))
+            {
+                YuumixLogger.EditorLogError("路径不存在");
+                return;
+            }
+
+            DirectoryAnalysisData.CurrentRootPath = folderPath;
+            _directoryAnalysisData = DirectoryAnalysisData.FromDirectoryInfo(new DirectoryInfo(folderPath));
+        }
+
+        [BilingualTitleGroup("TG", "操作按钮", "Operator Buttons")]
+        [HorizontalGroup("TG/B")]
+        [BilingualButton("执行生成命令", "Execute Generate Command", ButtonSizes.Large)]
+        public void GenerateProjectStructureTree()
+        {
+            if (command)
+            {
+                resultText = command.Generate(_directoryAnalysisData, maxDepth);
+            }
+        }
+
         #region Serialized Fields
 
         public BilingualHeaderWidget headerWidget =
@@ -60,44 +99,5 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         DirectoryAnalysisData _directoryAnalysisData;
 
         #endregion
-
-        #region IOdinToolkitsEditorReset Members
-
-        public void EditorReset()
-        {
-            folderPath = null;
-            maxDepth = 1;
-            resultText = null;
-            command = null;
-            _directoryAnalysisData = null;
-        }
-
-        #endregion
-
-        [BilingualTitleGroup("TG", "操作按钮", "Operator Buttons")]
-        [HorizontalGroup("TG/B")]
-        [BilingualButton("解析路径", "Analyze Folder Path", ButtonSizes.Large)]
-        public void Analyze()
-        {
-            if (!Directory.Exists(folderPath))
-            {
-                YuumixLogger.EditorLogError("路径不存在");
-                return;
-            }
-
-            DirectoryAnalysisData.CurrentRootPath = folderPath;
-            _directoryAnalysisData = DirectoryAnalysisData.FromDirectoryInfo(new DirectoryInfo(folderPath));
-        }
-
-        [BilingualTitleGroup("TG", "操作按钮", "Operator Buttons")]
-        [HorizontalGroup("TG/B")]
-        [BilingualButton("执行生成命令", "Execute Generate Command", ButtonSizes.Large)]
-        public void GenerateProjectStructureTree()
-        {
-            if (command)
-            {
-                resultText = command.Generate(_directoryAnalysisData, maxDepth);
-            }
-        }
     }
 }

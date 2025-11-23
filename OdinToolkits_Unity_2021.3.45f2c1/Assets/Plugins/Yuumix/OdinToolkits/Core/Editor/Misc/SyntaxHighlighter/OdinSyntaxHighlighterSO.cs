@@ -47,36 +47,8 @@ namespace Yuumix.OdinToolkits.Core.Editor
             "Culture=neutral," +
             "PublicKeyToken=null");
 
-        public static readonly MethodInfo ParseMethod =
+        public static readonly MethodInfo Parse =
             SyntaxHighlighterType.GetMethod("Parse", BindingFlags.Static | BindingFlags.Public);
-
-        #region Serialized Fields
-
-        [PropertyOrder(-5)]
-        [DisplayAsString(TextAlignment.Left, FontSize = 14)]
-        [HideLabel]
-        public string one = "1.进行处理的源代码中，不能包含有命名空间";
-
-        [PropertyOrder(-5)]
-        [DisplayAsString(TextAlignment.Left, FontSize = 14)]
-        [HideLabel]
-        public string two = "2.进行处理的源代码中，不能包含有 $ 内插字符串";
-
-        [PropertyOrder(-5)]
-        [DisplayAsString(TextAlignment.Left, FontSize = 14)]
-        [HideLabel]
-        public string three = "3.进行处理的源代码需要提前格式化，保证合理的空格。";
-
-        [PropertyOrder(-5)]
-        [DisplayAsString(TextAlignment.Left, FontSize = 14)]
-        [HideLabel]
-        public string four = "4.进行处理的源代码要注意富文本标签的使用，失效时检查是否有此类原因";
-
-        [HideInInspector]
-        public List<CustomSyntaxHighlighterColorGroup>
-            customColorGroups = new List<CustomSyntaxHighlighterColorGroup>();
-
-        #endregion
 
         [PropertyOrder(-10)]
         [Title("使用须知", "Odin 的语法高亮处理有一定局限性，目前仅发现以下要点", TitleAlignments.Centered)]
@@ -90,9 +62,9 @@ namespace Yuumix.OdinToolkits.Core.Editor
         /// <returns>包含了富文本的代码文本</returns>
         public static string ApplyCodeHighlighting(string code)
         {
-            if (ParseMethod != null)
+            if (Parse != null)
             {
-                return ParseMethod.Invoke(null, new object[] { code }) as string;
+                return Parse.Invoke(null, new object[] { code }) as string;
             }
 
             YuumixLogger.EditorLogError("无法获取 SyntaxHighlighter.Parse 方法");
@@ -123,5 +95,33 @@ public class Example : ScriptableObject
 }";
             YuumixLogger.OdinToolkitsLog(ApplyCodeHighlighting(code));
         }
+
+        #region Serialized Fields
+
+        [PropertyOrder(-5)]
+        [DisplayAsString(TextAlignment.Left, FontSize = 14)]
+        [HideLabel]
+        public string one = "1.进行处理的源代码中，不能包含有命名空间";
+
+        [PropertyOrder(-5)]
+        [DisplayAsString(TextAlignment.Left, FontSize = 14)]
+        [HideLabel]
+        public string two = "2.进行处理的源代码中，不能包含有 $ 内插字符串";
+
+        [PropertyOrder(-5)]
+        [DisplayAsString(TextAlignment.Left, FontSize = 14)]
+        [HideLabel]
+        public string three = "3.进行处理的源代码需要提前格式化，保证合理的空格。";
+
+        [PropertyOrder(-5)]
+        [DisplayAsString(TextAlignment.Left, FontSize = 14)]
+        [HideLabel]
+        public string four = "4.进行处理的源代码要注意富文本标签的使用，失效时检查是否有此类原因";
+
+        [HideInInspector]
+        public List<CustomSyntaxHighlighterColorGroup>
+            customColorGroups = new List<CustomSyntaxHighlighterColorGroup>();
+
+        #endregion
     }
 }

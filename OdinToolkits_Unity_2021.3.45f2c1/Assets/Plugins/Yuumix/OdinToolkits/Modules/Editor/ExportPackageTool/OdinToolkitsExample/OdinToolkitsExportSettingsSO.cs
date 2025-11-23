@@ -70,7 +70,7 @@ namespace Yuumix.OdinToolkits.Module.Editor
             public override void ProcessChildMemberAttributes(InspectorProperty parentProperty, MemberInfo member,
                 List<Attribute> attributes)
             {
-                if (member.Name == nameof(OdinToolkitsExportSettingsSO.version))
+                if (member.Name == nameof(version))
                 {
                     attributes.Add(new ReadOnlyAttribute());
                 }

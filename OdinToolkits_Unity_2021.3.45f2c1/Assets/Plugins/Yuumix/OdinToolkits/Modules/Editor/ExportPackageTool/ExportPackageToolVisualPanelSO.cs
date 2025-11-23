@@ -16,18 +16,6 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     {
         public static BilingualData ToolMenuPathData = new BilingualData("导出包工具", "Export Package Tool");
 
-        #region Serialized Fields
-
-        [PropertyOrder(-99)]
-        public BilingualHeaderWidget headerWidget;
-
-        [BilingualTitle("导出设置", "Export Setting")]
-        [HideLabel]
-        [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
-        public ExportSettingsSO exportSettings;
-
-        #endregion
-
         #region Event Functions
 
         void OnEnable()
@@ -72,9 +60,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 return;
             }
 
-            // 调用导出前的重置操作
             exportSettings.BeforeExportReset();
-            // 过滤排除的文件和文件夹
             if (exportSettings.exportPathsFilterRule != null)
             {
                 exportSettings.filePaths = exportSettings.filePaths
@@ -85,28 +71,29 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
             // 合并文件路径和文件夹路径中的所有文件
             var filePaths = new List<string>(exportSettings.filePaths);
-            var extensionFiles = new List<string>();
-            foreach (var files in exportSettings.folderPaths.Select(folderPath =>
-                         Directory.GetFiles(folderPath, "*.*", SearchOption.AllDirectories)))
+            foreach (var folderPath in exportSettings.folderPaths)
             {
-                if (exportSettings.exportPathsFilterRule == null)
+                if (exportSettings.exportPathsFilterRule != null &&
+                    exportSettings.exportPathsFilterRule.IsExcludedFolder(folderPath))
                 {
-                    extensionFiles.AddRange(files);
+                    continue;
                 }
-                else
+
+                // 分批处理或限制搜索深度
+                foreach (var filePath in Directory.GetFiles(folderPath, "*.*", SearchOption.AllDirectories))
                 {
-                    extensionFiles.AddRange(
-                        files.Where(filePath => !exportSettings.exportPathsFilterRule.IsExcludedFile(filePath)));
+                    if (exportSettings.exportPathsFilterRule == null ||
+                        !exportSettings.exportPathsFilterRule.IsExcludedFile(filePath))
+                    {
+                        filePaths.Add(filePath);
+                    }
                 }
             }
 
-            filePaths.AddRange(extensionFiles);
             var includeDependenciesCache = exportSettings.includeDependencies;
             var autoOpenFolderAfterExportCache = exportSettings.autoOpenFolderAfterExport;
-            // 构建导出包的完整路径
             var fullFileName = GeneratePackageFileName(exportSettings.overwriteExistingPackage);
             var fullExportPath = Path.Combine(exportSettings.exportFolderPath, fullFileName);
-            // 检查导出路径是否包含导出工具自身的脚本文件
             if (ExportPathsContainsSelf(filePaths))
             {
                 Debug.LogWarning("导出路径包含导出工具自身的脚本文件，导出前会重置导出设置");
@@ -115,7 +102,6 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
             try
             {
-                // 导出包
                 AssetDatabase.ExportPackage(
                     filePaths.ToArray(),
                     fullExportPath,
@@ -157,7 +143,6 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 return true;
             }
 
-            // 创建导出路径
             if (!Directory.Exists(exportSettings.exportFolderPath))
             {
                 Directory.CreateDirectory(exportSettings.exportFolderPath);
@@ -184,5 +169,17 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
             return initialFileName;
         }
+
+        #region Serialized Fields
+
+        [PropertyOrder(-99)]
+        public BilingualHeaderWidget headerWidget;
+
+        [BilingualTitle("导出设置", "Export Setting")]
+        [HideLabel]
+        [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        public ExportSettingsSO exportSettings;
+
+        #endregion
     }
 }

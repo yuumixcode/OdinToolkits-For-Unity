@@ -1,5 +1,5 @@
 %YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
+%TAG !u! tag:yousandi.cn,2023:
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44,8 +44,10 @@ MonoBehaviour:
       Data: 
   headerWidget: {}
   docFolderPath: Assets/OdinToolkitsData/Editor/Documents/
-  docGeneratorSetting: {fileID: 11400000, guid: 5a3f059e31d2443e983ba3f4f83b2672, type: 2}
+  docGeneratorSettings: {fileID: 11400000, guid: 5a3f059e31d2443e983ba3f4f83b2672, type: 2}
   typeSource: 0
+  selectedMonoScript: {fileID: 0}
   typesCache: {fileID: 0}
+  selectedMonoScriptArray: []
   typesCacheSOFolderPath: Assets/OdinToolkitsData/Editor/TypesCacheSO
   targetAssemblyFullName: 

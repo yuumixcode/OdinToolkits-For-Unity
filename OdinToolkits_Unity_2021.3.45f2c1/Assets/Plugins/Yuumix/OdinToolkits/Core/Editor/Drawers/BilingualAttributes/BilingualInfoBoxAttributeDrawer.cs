@@ -39,8 +39,8 @@ namespace Yuumix.OdinToolkits.Core.Editor
                     break;
             }
 
-            InspectorBilingualismConfigSO.OnLanguageChange -= ReloadResolver;
-            InspectorBilingualismConfigSO.OnLanguageChange += ReloadResolver;
+            InspectorBilingualismConfigSO.OnLanguageChanged -= ReloadResolver;
+            InspectorBilingualismConfigSO.OnLanguageChanged += ReloadResolver;
         }
 
         void ReloadResolver()

@@ -81,10 +81,8 @@ namespace Yuumix.OdinToolkits.Module.Editor
         /// ISearchFilterable 接口方法，自定义搜索匹配规则
         /// </summary>
         [Summary("ISearchFilterable 接口方法，自定义搜索匹配规则")]
-        public bool IsMatch(string searchString)
-        {
-            return MenuPath.ToLower().Contains(searchString.ToLower()) ||
-                   MethodName.ToLower().Contains(searchString.ToLower());
-        }
+        public bool IsMatch(string searchString) =>
+            MenuPath.ToLower().Contains(searchString.ToLower()) ||
+            MethodName.ToLower().Contains(searchString.ToLower());
     }
 }

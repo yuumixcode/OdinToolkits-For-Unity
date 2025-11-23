@@ -4,12 +4,12 @@ using Sirenix.Utilities.Editor;
 using System;
 using System.Linq;
 using UnityEngine;
-using Yuumix.OdinToolkits.Core.Editor;
 
 namespace Yuumix.Community.Schwapo.Editor
 {
     public class ResolvedParametersOverviewWindow : OdinMenuEditorWindow
     {
+        const string RESOLVED_PARAMETERS_OVERVIEW_WINDOW_NAME = "Resolved Parameters Overview";
         public static Action OnWindowResized;
         static readonly OdinMenuTreeDrawingConfig Config = new OdinMenuTreeDrawingConfig();
         static ResolvedParametersOverviewWindow _window;
@@ -33,8 +33,7 @@ namespace Yuumix.Community.Schwapo.Editor
         // [MenuItem(MenuItemGlobalSettings.ResolvedParametersMenuItemName, false, MenuItemGlobalSettings.ResolvedParametersPriority)]
         public static void Open()
         {
-            _window = GetWindow<ResolvedParametersOverviewWindow>(OdinToolkitsMenuItems
-                .RESOLVED_PARAMETERS_OVERVIEW_WINDOW_NAME);
+            _window = GetWindow<ResolvedParametersOverviewWindow>(RESOLVED_PARAMETERS_OVERVIEW_WINDOW_NAME);
             _window.position = GUIHelper.GetEditorWindowRect().AlignCenter(800, 600);
             _window.minSize = new Vector2(500, 500);
             _window.ShowUtility();

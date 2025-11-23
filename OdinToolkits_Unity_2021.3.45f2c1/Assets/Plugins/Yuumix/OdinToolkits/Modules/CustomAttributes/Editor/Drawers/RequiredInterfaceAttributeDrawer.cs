@@ -15,26 +15,23 @@ namespace Yuumix.OdinToolkits.Modules.CustomAttributes.Editor
         {
             var interfaceType = Attribute.InterfaceType;
             var referenceValue = Property.TryGetTypedValueEntry<TObject>().SmartValue;
-            if (referenceValue == null)
+            if (!referenceValue)
             {
-                SirenixEditorGUI.ErrorMessageBox($"没有实现 {interfaceType.Name} 接口的实例对象或 ScriptableObject 资产");
+                SirenixEditorGUI.ErrorMessageBox($"没有实现 {interfaceType.Name} 接口的实例对象或 ScriptableObject 资源");
             }
 
             SirenixEditorGUI.BeginHorizontalPropertyLayout(new GUIContent($"{label} [{interfaceType.Name}] "));
-            {
-                referenceValue = SirenixEditorFields.UnityObjectField(
-                    GUIContent.none,
-                    referenceValue,
-                    typeof(TObject),
-                    true) as TObject;
-                const float squareSize = 14f;
-                GUILayout.Box(new GUIContent(), SirenixGUIStyles.None,
-                    GUILayoutOptions.Height(22F).MinWidth(squareSize + 2).MaxWidth(22F));
-                var lastRect = GUILayoutUtility.GetLastRect();
-                var innerRect = lastRect.AlignCenterXY(squareSize, squareSize);
-                // SirenixEditorGUI.DrawBorders(lastRect, 1, Color.cyan);
-                ValidateAndDrawIcon(ref referenceValue, interfaceType, innerRect, squareSize);
-            }
+            referenceValue = SirenixEditorFields.UnityObjectField(
+                GUIContent.none,
+                referenceValue,
+                typeof(TObject),
+                true) as TObject;
+            const float squareSize = 14f;
+            GUILayout.Box(new GUIContent(), SirenixGUIStyles.None,
+                GUILayoutOptions.Height(22F).MinWidth(squareSize + 2).MaxWidth(22F));
+            var lastRect = GUILayoutUtility.GetLastRect();
+            var innerRect = lastRect.AlignCenterXY(squareSize, squareSize);
+            ValidateAndDrawIcon(ref referenceValue, interfaceType, innerRect, squareSize);
             SirenixEditorGUI.EndHorizontalPropertyLayout();
             Property.TryGetTypedValueEntry<TObject>().SmartValue = referenceValue;
         }

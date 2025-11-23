@@ -3,11 +3,6 @@ using System.Reflection;
 
 namespace Yuumix.OdinToolkits.Core
 {
-    public interface ISummaryAttribute
-    {
-        string GetSummary();
-    }
-
     /// <summary>
     /// 中文注释特性，取代 XML 的 Summary 注释，用于反射时获取注释。
     /// </summary>
@@ -17,17 +12,13 @@ namespace Yuumix.OdinToolkits.Core
     /// public int intVariable;</code>
     /// </example>
     [AttributeUsage(AttributeTargets.All)]
-    public class SummaryAttribute : Attribute, ISummaryAttribute
+    public class SummaryAttribute : Attribute
     {
         readonly string _chinese;
 
         public SummaryAttribute(string chinese) => _chinese = chinese;
 
-        #region ISummaryAttribute Members
-
         public string GetSummary() => _chinese;
-
-        #endregion
 
         public static string GetSummaryAttributeValue(MemberInfo memberInfo)
         {
