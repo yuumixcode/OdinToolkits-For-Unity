@@ -15,6 +15,49 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     {
         static int[] _textureSizes = { 256, 512, 1024 };
 
+        readonly int[] _customInts =
+        {
+            1, 5, 6, 3, 4, 5, 8, 76, 100
+        };
+
+        readonly IEnumerable _treeViewOfInts = new ValueDropdownList<int>
+        {
+            { "Node 1/Node 1.1", 1 },
+            { "Node 1/Node 1.2", 2 },
+            { "Node 2/Node 2.1", 3 },
+            { "Node 3/Node 3.1", 4 },
+            { "Node 3/Node 3.2", 5 },
+            { "Node 1/Node 3.1/Node 3.1.1", 6 },
+            { "Node 1/Node 3.1/Node 3.1.2", 7 }
+        };
+
+        public IEnumerable RangeVector3()
+        {
+            return Enumerable.Range(0, 10).Select(i => new Vector3(i, i, i));
+        }
+
+        static IEnumerable GetAllSceneObjects()
+        {
+            return FindObjectsByType<GameObject>(FindObjectsInactive.Include, FindObjectsSortMode.None)
+                .Select(x => new ValueDropdownItem(GetPath(x.transform), x));
+
+            string GetPath(Transform x)
+            {
+                return x ? GetPath(x.parent) + "/" + x.gameObject.name : "";
+            }
+        }
+
+        static IEnumerable GetAllSirenixAssets()
+        {
+            const string root = "Assets/Plugins/Sirenix/";
+
+            return AssetDatabase.GetAllAssetPaths()
+                .Where(x => x.StartsWith(root))
+                .Select(x => x.Substring(root.Length))
+                .Select(x =>
+                    new ValueDropdownItem(x, AssetDatabase.LoadAssetAtPath<Object>(root + x)));
+        }
+
         #region Serialized Fields
 
         #region NumberOfItemsBeforeEnablingSearch 参数
@@ -135,49 +178,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         #endregion
 
         #endregion
-
-        readonly int[] _customInts =
-        {
-            1, 5, 6, 3, 4, 5, 8, 76, 100
-        };
-
-        readonly IEnumerable _treeViewOfInts = new ValueDropdownList<int>
-        {
-            { "Node 1/Node 1.1", 1 },
-            { "Node 1/Node 1.2", 2 },
-            { "Node 2/Node 2.1", 3 },
-            { "Node 3/Node 3.1", 4 },
-            { "Node 3/Node 3.2", 5 },
-            { "Node 1/Node 3.1/Node 3.1.1", 6 },
-            { "Node 1/Node 3.1/Node 3.1.2", 7 }
-        };
-
-        public IEnumerable RangeVector3()
-        {
-            return Enumerable.Range(0, 10).Select(i => new Vector3(i, i, i));
-        }
-
-        static IEnumerable GetAllSceneObjects()
-        {
-            return FindObjectsByType<GameObject>(FindObjectsInactive.Include, FindObjectsSortMode.None)
-                .Select(x => new ValueDropdownItem(GetPath(x.transform), x));
-
-            string GetPath(Transform x)
-            {
-                return x ? GetPath(x.parent) + "/" + x.gameObject.name : "";
-            }
-        }
-
-        static IEnumerable GetAllSirenixAssets()
-        {
-            const string root = "Assets/Plugins/Sirenix/";
-
-            return AssetDatabase.GetAllAssetPaths()
-                .Where(x => x.StartsWith(root))
-                .Select(x => x.Substring(root.Length))
-                .Select(x =>
-                    new ValueDropdownItem(x, AssetDatabase.LoadAssetAtPath<Object>(root + x)));
-        }
 
         #region ValueGetter
 

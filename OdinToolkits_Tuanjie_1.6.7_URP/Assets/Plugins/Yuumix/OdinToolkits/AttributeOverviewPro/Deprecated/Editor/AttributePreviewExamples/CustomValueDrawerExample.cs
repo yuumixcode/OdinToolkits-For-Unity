@@ -11,6 +11,17 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class CustomValueDrawerExample : ExampleSO
     {
+        public override void SetDefaultValue()
+        {
+            customDrawerStatic = 0;
+            customDrawerInstance = 0;
+            customDrawerArrayNoLabel = new float[] { 0, 0, 0 };
+            appendRange = 0;
+            specialFloat = 0;
+            from = 2;
+            to = 7;
+        }
+
         #region Serialized Fields
 
         [PropertyOrder(-5)]
@@ -55,17 +66,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         public float specialFloat;
 
         #endregion
-
-        public override void SetDefaultValue()
-        {
-            customDrawerStatic = 0;
-            customDrawerInstance = 0;
-            customDrawerArrayNoLabel = new float[] { 0, 0, 0 };
-            appendRange = 0;
-            specialFloat = 0;
-            from = 2;
-            to = 7;
-        }
 
 #if UNITY_EDITOR // Editor 相关需要宏定义
         // 绘制方法可选参数有四种

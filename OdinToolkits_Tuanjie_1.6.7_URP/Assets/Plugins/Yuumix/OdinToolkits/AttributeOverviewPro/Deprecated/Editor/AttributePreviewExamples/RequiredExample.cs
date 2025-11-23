@@ -8,6 +8,31 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class RequiredExample : ExampleSO
     {
+        public string MessageProperty => useAlternativeMessage ? alternativeMessage : message;
+
+        string GetMessage() => useAlternativeMessage ? alternativeMessage : message;
+
+#if UNITY_EDITOR
+        string GetMessageSuffix(InspectorProperty property, string value) =>
+            // value 一定为 "" 空字符串，因为只有 value == 空字符串的时候才会执行
+            property.Path + "_" + property.NiceName + "_Suffix";
+#endif
+        public override void SetDefaultValue()
+        {
+            fieldNameExample = "";
+            memberInfoNameExample = "";
+            attributeExpressionExample = "";
+            methodNameExample = "";
+            methodNameExample2 = "";
+            requiredGameObject = null;
+            myRigidbody = null;
+            requireScriptableObject = null;
+            requireScriptableObject2 = null;
+            useAlternativeMessage = false;
+            message = "Peace, Love & Ducks";
+            alternativeMessage = "Peace, Love & Yuumi Zeus";
+        }
+
         #region Serialized Fields
 
         [FoldoutGroup("ErrorMessage 参数 支持多种解析字符串")]
@@ -68,30 +93,5 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         public ScriptableObject requireScriptableObject2;
 
         #endregion
-
-        public string MessageProperty => useAlternativeMessage ? alternativeMessage : message;
-
-        string GetMessage() => useAlternativeMessage ? alternativeMessage : message;
-
-#if UNITY_EDITOR
-        string GetMessageSuffix(InspectorProperty property, string value) =>
-            // value 一定为 "" 空字符串，因为只有 value == 空字符串的时候才会执行
-            property.Path + "_" + property.NiceName + "_Suffix";
-#endif
-        public override void SetDefaultValue()
-        {
-            fieldNameExample = "";
-            memberInfoNameExample = "";
-            attributeExpressionExample = "";
-            methodNameExample = "";
-            methodNameExample2 = "";
-            requiredGameObject = null;
-            myRigidbody = null;
-            requireScriptableObject = null;
-            requireScriptableObject2 = null;
-            useAlternativeMessage = false;
-            message = "Peace, Love & Ducks";
-            alternativeMessage = "Peace, Love & Yuumi Zeus";
-        }
     }
 }

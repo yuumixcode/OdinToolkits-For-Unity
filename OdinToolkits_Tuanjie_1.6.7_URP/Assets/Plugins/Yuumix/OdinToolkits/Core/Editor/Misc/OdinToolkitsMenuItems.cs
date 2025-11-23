@@ -38,15 +38,7 @@
 
         #endregion
 
-        #region 10200 Script Doc Generator
-
-        public const string SCRIPT_DOC_GEN = ROOT + "/Script Doc Generator";
-        public const int SCRIPT_DOC_GEN_PRIORITY = 10200;
-        public const string SCRIPT_DOC_GEN_WINDOW_NAME = "Script Doc Generator";
-
-        #endregion
-
-        #region 10200 Attribute Overview Pro
+        #region 10200 - 10201 Attribute Overview Pro
 
         public const string DEPRECATED_OVERVIEW_PRO = ROOT + "/Attribute Overview Pro/Legacy";
         public const int DEPRECATED_OVERVIEW_PRO_PRIORITY = 10200;
@@ -57,10 +49,18 @@
 
         #endregion
 
-        #region 10200 ToolsPackage
+        #region 10205 Script Doc Generator
+
+        public const string SCRIPT_DOC_GEN = ROOT + "/Script Doc Generator";
+        public const int SCRIPT_DOC_GEN_PRIORITY = 10205;
+        public const string SCRIPT_DOC_GEN_WINDOW_NAME = "Script Doc Generator";
+
+        #endregion
+
+        #region 10210 ToolsPackage
 
         public const string TOOLS_PACKAGE_MENU_ITEM_NAME = ROOT + "/Tools Package %&T";
-        public const int TOOLS_PACKAGE_PRIORITY = 10200;
+        public const int TOOLS_PACKAGE_PRIORITY = 10210;
         public const string TOOLS_PACKAGE_WINDOW_ENGLISH_NAME = "Tools Package";
 
         #endregion

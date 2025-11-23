@@ -8,6 +8,21 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class ShowDrawerChainExample : ExampleSO
     {
+        [PropertyOrder(-1)]
+        [ShowDrawerChain]
+        [DisplayAsString(TextAlignment.Left, EnableRichText = true, FontSize = 14)]
+        [ShowInInspector]
+        [EnableGUI]
+        [HideLabel]
+        public string Info
+        {
+            get
+            {
+                GUIHelper.RequestRepaint();
+                return "Display";
+            }
+        }
+
         #region Serialized Fields
 
         [PropertyOrder(1)]
@@ -46,20 +61,5 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         public Color color;
 
         #endregion
-
-        [PropertyOrder(-1)]
-        [ShowDrawerChain]
-        [DisplayAsString(TextAlignment.Left, EnableRichText = true, FontSize = 14)]
-        [ShowInInspector]
-        [EnableGUI]
-        [HideLabel]
-        public string Info
-        {
-            get
-            {
-                GUIHelper.RequestRepaint();
-                return "Display";
-            }
-        }
     }
 }

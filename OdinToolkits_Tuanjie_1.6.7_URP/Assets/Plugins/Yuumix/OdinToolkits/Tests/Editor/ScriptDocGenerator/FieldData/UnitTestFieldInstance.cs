@@ -10,10 +10,10 @@ namespace Yuumix.OdinToolkits.Tests.Editor
     public class UnitTestFieldInstance
     {
         static readonly FieldInfo[] FieldInfos = typeof(TestClass).GetRuntimeFields().ToArray();
-        
+
         static readonly IFieldData[] FieldDataArray =
             FieldInfos.Select(f => UnitTestAnalysisFactory.Default.CreateFieldData(f)).ToArray();
-        
+
         [Test]
         public void TestStringField()
         {
@@ -21,7 +21,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             Debug.Log(fieldData.Signature);
             Assert.AreEqual("public string StringField;", fieldData.Signature);
         }
-        
+
         [Test]
         public void TestIntField()
         {
@@ -29,7 +29,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             Debug.Log(fieldData.Signature);
             Assert.AreEqual("public int IntField;", fieldData.Signature);
         }
-        
+
         [Test]
         public void TestFloatField()
         {
@@ -37,6 +37,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             Debug.Log(fieldData.Signature);
             Assert.AreEqual("public float FloatField;", fieldData.Signature);
         }
+
         [Test]
         public void TestBooleanField()
         {
@@ -44,6 +45,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             Debug.Log(fieldData.Signature);
             Assert.AreEqual("public bool BooleanField;", fieldData.Signature);
         }
+
         [Test]
         public void TestCharField()
         {
@@ -51,7 +53,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             Debug.Log(fieldData.Signature);
             Assert.AreEqual("public char CharField;", fieldData.Signature);
         }
-        
+
         [Test]
         public void TestByteField()
         {
@@ -59,7 +61,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             Debug.Log(fieldData.Signature);
             Assert.AreEqual("public byte ByteField;", fieldData.Signature);
         }
-        
+
         [Test]
         public void TestSbyteField()
         {
@@ -67,7 +69,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             Debug.Log(fieldData.Signature);
             Assert.AreEqual("public sbyte SbyteField;", fieldData.Signature);
         }
-        
+
         [Test]
         public void TestShortField()
         {
@@ -75,7 +77,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             Debug.Log(fieldData.Signature);
             Assert.AreEqual("public short ShortField;", fieldData.Signature);
         }
-        
+
         [Test]
         public void TestUshortField()
         {
@@ -83,6 +85,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             Debug.Log(fieldData.Signature);
             Assert.AreEqual("public ushort UshortField;", fieldData.Signature);
         }
+
         [Test]
         public void TestLongField()
         {
@@ -90,6 +93,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             Debug.Log(fieldData.Signature);
             Assert.AreEqual("public long LongField;", fieldData.Signature);
         }
+
         [Test]
         public void TestUlongField()
         {
@@ -97,6 +101,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             Debug.Log(fieldData.Signature);
             Assert.AreEqual("public ulong UlongField;", fieldData.Signature);
         }
+
         [Test]
         public void TestUintField()
         {
@@ -104,7 +109,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             Debug.Log(fieldData.Signature);
             Assert.AreEqual("public uint UintField;", fieldData.Signature);
         }
-        
+
         [Test]
         public void TestDoubleField()
         {
@@ -112,7 +117,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             Debug.Log(fieldData.Signature);
             Assert.AreEqual("public double DoubleField;", fieldData.Signature);
         }
-        
+
         [Test]
         public void TestDecimalField()
         {
@@ -120,7 +125,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             Debug.Log(fieldData.Signature);
             Assert.AreEqual("public decimal DecimalField;", fieldData.Signature);
         }
-        
+
         [Test]
         public void TestEnumField()
         {
@@ -128,6 +133,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             Debug.Log(fieldData.Signature);
             Assert.AreEqual("public ScriptDocGeneratorTestEnum EnumField;", fieldData.Signature);
         }
+
         [Test]
         public void TestNestedEnumField()
         {
@@ -135,31 +141,31 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             Debug.Log(fieldData.Signature);
             Assert.AreEqual("public UnitTestFieldInstance.TestEnum NestedEnumField;", fieldData.Signature);
         }
-        
+
         class TestClass
         {
-            public string StringField;
-            public int IntField;
-            public float FloatField;
             public bool BooleanField;
-            public char CharField;
             public byte ByteField;
+            public char CharField;
+            public decimal DecimalField;
+            public double DoubleField;
+            public ScriptDocGeneratorTestEnum EnumField;
+            public float FloatField;
+            public int IntField;
+            public long LongField;
+            public TestEnum NestedEnumField;
             public sbyte SbyteField;
             public short ShortField;
-            public ushort UshortField;
-            public long LongField;
-            public ulong UlongField;
+            public string StringField;
             public uint UintField;
-            public double DoubleField;
-            public decimal DecimalField;
-            public ScriptDocGeneratorTestEnum EnumField;
-            public TestEnum NestedEnumField;
+            public ulong UlongField;
+            public ushort UshortField;
         }
 
         enum TestEnum
         {
             Value1,
-            Value2,
+            Value2
         }
     }
 }

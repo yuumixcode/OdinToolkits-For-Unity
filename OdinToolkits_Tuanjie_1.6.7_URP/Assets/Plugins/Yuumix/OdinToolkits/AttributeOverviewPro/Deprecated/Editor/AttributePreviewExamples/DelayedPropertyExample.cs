@@ -7,27 +7,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class DelayedPropertyExample : ExampleSO
     {
-        #region Serialized Fields
-
-        [PropertyOrder(0)]
-        [InfoBox("没有标记任何延迟赋值的字段，只要有修改就会触发事件")]
-        [OnValueChanged("OnValueChanged")]
-        public string normal;
-
-        [PropertyOrder(1)]
-        [InfoBox("标记 Unity 内置的 Delayed 特性")]
-        [OnValueChanged("OnValueChanged")]
-        [Delayed]
-        public string delayedField;
-
-        [PropertyOrder(10)]
-        [InfoBox("标记 Odin 的 DelayedProperty，可以作用于普通字段")]
-        [OnValueChanged("OnValueChanged")]
-        [DelayedProperty]
-        public string odinDelayedField;
-
-        #endregion
-
         [ShowInInspector]
         [PropertyOrder(20)]
         [InfoBox("标记 Odin 的 DelayedProperty，可以对属性生效，" +
@@ -48,5 +27,26 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
             odinDelayedField = "odinDelayedField";
             DelayedProperty = "DelayedProperty";
         }
+
+        #region Serialized Fields
+
+        [PropertyOrder(0)]
+        [InfoBox("没有标记任何延迟赋值的字段，只要有修改就会触发事件")]
+        [OnValueChanged("OnValueChanged")]
+        public string normal;
+
+        [PropertyOrder(1)]
+        [InfoBox("标记 Unity 内置的 Delayed 特性")]
+        [OnValueChanged("OnValueChanged")]
+        [Delayed]
+        public string delayedField;
+
+        [PropertyOrder(10)]
+        [InfoBox("标记 Odin 的 DelayedProperty，可以作用于普通字段")]
+        [OnValueChanged("OnValueChanged")]
+        [DelayedProperty]
+        public string odinDelayedField;
+
+        #endregion
     }
 }

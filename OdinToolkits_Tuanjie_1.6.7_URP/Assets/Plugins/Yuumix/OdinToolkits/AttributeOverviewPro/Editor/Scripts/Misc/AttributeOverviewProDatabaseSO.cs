@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEditor;
+using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Core.Editor;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 {
-    public class AttributeOverviewProDatabaseSO : OdinEditorScriptableSingleton<AttributeOverviewProDatabaseSO>
+    public class AttributeOverviewProDatabaseSO : OdinEditorScriptableSingleton<AttributeOverviewProDatabaseSO>,
+        IOdinToolkitsEditorReset
     {
         #region Serialized Fields
 
@@ -29,6 +31,15 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         #endregion
 
         static AbstractAttributeVisualPanelSO[] AllVisualPanels => GetAllVisualPanels();
+
+        #region IOdinToolkitsEditorReset Members
+
+        public void EditorReset()
+        {
+            Initialize();
+        }
+
+        #endregion
 
         [Button("Initialize Database", ButtonSizes.Large)]
         public AttributeOverviewProDatabaseSO Initialize()

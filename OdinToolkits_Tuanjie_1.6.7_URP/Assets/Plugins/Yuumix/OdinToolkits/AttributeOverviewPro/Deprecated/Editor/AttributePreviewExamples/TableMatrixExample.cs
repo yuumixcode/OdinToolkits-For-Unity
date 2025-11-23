@@ -8,6 +8,39 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class TableMatrixExample : ExampleOdinSO
     {
+        (string, LabelDirection) GetLabel(string[,] array, TableAxis axis, int index)
+        {
+            const string chessFileLetters = "ABCDEFGH";
+            return axis switch
+            {
+                TableAxis.Y => (chessFileLetters[chessFileLetters.Length - index - 1].ToString(),
+                    LabelDirection.BottomToTop),
+                TableAxis.X => (chessFileLetters[index].ToString(), LabelDirection.LeftToRight),
+                _ => (index.ToString(), LabelDirection.LeftToRight)
+            };
+        }
+
+        string CustomDrawElement1(Rect rect, string value)
+        {
+#if UNITY_EDITOR
+            EditorGUI.LabelField(rect, value);
+            return value;
+#endif
+        }
+
+        string CustomDrawElement2(Rect rect, string[,] array, int x,
+            int y)
+        {
+#if UNITY_EDITOR
+            var guiStyle = new GUIStyle(EditorStyles.centeredGreyMiniLabel)
+            {
+                fontSize = 14
+            };
+            array[x, y] = EditorGUI.TextField(rect, array[x, y], guiStyle);
+            return array[x, y];
+#endif
+        }
+
         #region Serialized Fields
 
         [PropertyOrder(10)]
@@ -154,38 +187,5 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         };
 
         #endregion
-
-        (string, LabelDirection) GetLabel(string[,] array, TableAxis axis, int index)
-        {
-            const string chessFileLetters = "ABCDEFGH";
-            return axis switch
-            {
-                TableAxis.Y => (chessFileLetters[chessFileLetters.Length - index - 1].ToString(),
-                    LabelDirection.BottomToTop),
-                TableAxis.X => (chessFileLetters[index].ToString(), LabelDirection.LeftToRight),
-                _ => (index.ToString(), LabelDirection.LeftToRight)
-            };
-        }
-
-        string CustomDrawElement1(Rect rect, string value)
-        {
-#if UNITY_EDITOR
-            EditorGUI.LabelField(rect, value);
-            return value;
-#endif
-        }
-
-        string CustomDrawElement2(Rect rect, string[,] array, int x,
-            int y)
-        {
-#if UNITY_EDITOR
-            var guiStyle = new GUIStyle(EditorStyles.centeredGreyMiniLabel)
-            {
-                fontSize = 14
-            };
-            array[x, y] = EditorGUI.TextField(rect, array[x, y], guiStyle);
-            return array[x, y];
-#endif
-        }
     }
 }

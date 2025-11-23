@@ -9,14 +9,6 @@ namespace Yuumix.OdinToolkits.Core.Editor
     [FilePath("ScriptableSingletonDemo/ProjectFolder.yaml", FilePathAttribute.Location.ProjectFolder)]
     public class ScriptableSingletonProjectFolder : ScriptableSingleton<ScriptableSingletonProjectFolder>
     {
-        #region Serialized Fields
-
-        public float number = 12;
-
-        public List<string> stringList = new List<string>();
-
-        #endregion
-
         public void ResetState()
         {
             number = 12;
@@ -43,5 +35,13 @@ namespace Yuumix.OdinToolkits.Core.Editor
         {
             Debug.Log("EditorCrossProjectStateFile State: " + JsonUtility.ToJson(this, true));
         }
+
+        #region Serialized Fields
+
+        public float number = 12;
+
+        public List<string> stringList = new List<string>();
+
+        #endregion
     }
 }

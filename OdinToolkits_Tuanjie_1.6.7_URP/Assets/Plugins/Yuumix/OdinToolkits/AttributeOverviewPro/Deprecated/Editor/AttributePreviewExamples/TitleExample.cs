@@ -6,6 +6,47 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class TitleExample : ExampleSO
     {
+        string TitleProperty => useAlternativeTitle ? alternativeTitle : title;
+
+        [PropertyOrder(25)]
+        [FoldoutGroup("Title 扩展")]
+        [InfoBox("属性显示需要 ShowInInspector")]
+        [ShowInInspector]
+        [Title("Title on a Property")]
+        public int S { get; set; }
+
+        [PropertyOrder(30)]
+        [FoldoutGroup("Title 扩展")]
+        [Title("Title on a Method")]
+        [Button]
+        public void DoNothing() { }
+
+        string GetTitle() => useAlternativeTitle ? alternativeTitle : title;
+
+        public override void SetDefaultValue()
+        {
+            title = "SOAP, SOAP & SOAP";
+            alternativeTitle = "YOGA, YOGA & YOGA";
+            useAlternativeTitle = false;
+            titleMain = "";
+            titleAttributeExpressionExample = "";
+            titleFieldNameExample = "";
+            titleMethodNameExample = "";
+            titlePropertyNameExample = "";
+            subtitle = "";
+            subtitleAttributeExpressionExample = "";
+            subtitleFieldNameExample = "";
+            subtitleMethodNameExample = "";
+            subtitlePropertyNameExample = "";
+            titleTitleAlignmentsLeft = "";
+            titleTitleAlignmentsCenter = "";
+            titleTitleAlignmentsRight = "";
+            titleTitleAlignmentsSplit = "";
+            titleHorizontalLineNone = "";
+            expression = 0;
+            S = 0;
+        }
+
         #region Serialized Fields
 
         [Title("共用参数")]
@@ -106,46 +147,5 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         public int expression;
 
         #endregion
-
-        string TitleProperty => useAlternativeTitle ? alternativeTitle : title;
-
-        [PropertyOrder(25)]
-        [FoldoutGroup("Title 扩展")]
-        [InfoBox("属性显示需要 ShowInInspector")]
-        [ShowInInspector]
-        [Title("Title on a Property")]
-        public int S { get; set; }
-
-        [PropertyOrder(30)]
-        [FoldoutGroup("Title 扩展")]
-        [Title("Title on a Method")]
-        [Button]
-        public void DoNothing() { }
-
-        string GetTitle() => useAlternativeTitle ? alternativeTitle : title;
-
-        public override void SetDefaultValue()
-        {
-            title = "SOAP, SOAP & SOAP";
-            alternativeTitle = "YOGA, YOGA & YOGA";
-            useAlternativeTitle = false;
-            titleMain = "";
-            titleAttributeExpressionExample = "";
-            titleFieldNameExample = "";
-            titleMethodNameExample = "";
-            titlePropertyNameExample = "";
-            subtitle = "";
-            subtitleAttributeExpressionExample = "";
-            subtitleFieldNameExample = "";
-            subtitleMethodNameExample = "";
-            subtitlePropertyNameExample = "";
-            titleTitleAlignmentsLeft = "";
-            titleTitleAlignmentsCenter = "";
-            titleTitleAlignmentsRight = "";
-            titleTitleAlignmentsSplit = "";
-            titleHorizontalLineNone = "";
-            expression = 0;
-            S = 0;
-        }
     }
 }

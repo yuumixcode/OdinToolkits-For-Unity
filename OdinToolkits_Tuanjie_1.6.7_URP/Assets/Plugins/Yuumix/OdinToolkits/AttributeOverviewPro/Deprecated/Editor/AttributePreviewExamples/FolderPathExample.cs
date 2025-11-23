@@ -7,6 +7,31 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class FolderPathExample : ExampleSO
     {
+        void Log1()
+        {
+            Debug.Log(path1);
+        }
+
+        void Log2()
+        {
+            Debug.Log(path2);
+        }
+
+        void Log4()
+        {
+            Debug.Log(path4);
+        }
+
+        void Log5()
+        {
+            Debug.Log(path5);
+        }
+
+        void Log6()
+        {
+            Debug.Log(path6);
+        }
+
         #region Serialized Fields
 
         [FoldoutGroup("无参数使用")]
@@ -40,30 +65,5 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         public string path6;
 
         #endregion
-
-        void Log1()
-        {
-            Debug.Log(path1);
-        }
-
-        void Log2()
-        {
-            Debug.Log(path2);
-        }
-
-        void Log4()
-        {
-            Debug.Log(path4);
-        }
-
-        void Log5()
-        {
-            Debug.Log(path5);
-        }
-
-        void Log6()
-        {
-            Debug.Log(path6);
-        }
     }
 }

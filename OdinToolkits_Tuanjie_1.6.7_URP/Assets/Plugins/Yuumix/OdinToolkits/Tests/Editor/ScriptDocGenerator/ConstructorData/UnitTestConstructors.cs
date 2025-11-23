@@ -21,7 +21,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             string[] strings =
             {
                 "public UnitTestConstructors.TestClass()",
-                "public UnitTestConstructors.TestClass(bool b, int a)",
+                "public UnitTestConstructors.TestClass(bool b, int a)"
             };
 
             var signatures = TestClassConstructorDataArray.Select(x => x.Signature).ToArray();

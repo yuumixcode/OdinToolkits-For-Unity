@@ -16,18 +16,6 @@ namespace Yuumix.OdinToolkits.Modules.Editor
     {
         public static BilingualData ToolMenuPathData = new BilingualData("导出包工具", "Export Package Tool");
 
-        #region Serialized Fields
-
-        [PropertyOrder(-99)]
-        public BilingualHeaderWidget headerWidget;
-
-        [BilingualTitle("导出设置", "Export Setting")]
-        [HideLabel]
-        [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
-        public ExportSettingsSO exportSettings;
-
-        #endregion
-
         #region Event Functions
 
         void OnEnable()
@@ -181,5 +169,17 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
             return initialFileName;
         }
+
+        #region Serialized Fields
+
+        [PropertyOrder(-99)]
+        public BilingualHeaderWidget headerWidget;
+
+        [BilingualTitle("导出设置", "Export Setting")]
+        [HideLabel]
+        [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        public ExportSettingsSO exportSettings;
+
+        #endregion
     }
 }

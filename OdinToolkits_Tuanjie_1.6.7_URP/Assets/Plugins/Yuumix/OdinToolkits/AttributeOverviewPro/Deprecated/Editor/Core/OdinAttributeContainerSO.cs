@@ -18,18 +18,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
                 "简介",
                 "Introduction");
 
-        #region Serialized Fields
-
-        [HideIf("HasOdinExample")]
-        [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
-        public ExampleSO example;
-
-        [HideIf("HasExample")]
-        [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
-        public ExampleOdinSO exampleOdin;
-
-        #endregion
-
         [PropertyOrder(-99)]
         [PropertySpace(0, 10)]
         [EnableGUI]
@@ -155,5 +143,17 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
                 return "";
             }
         }
+
+        #region Serialized Fields
+
+        [HideIf("HasOdinExample")]
+        [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
+        public ExampleSO example;
+
+        [HideIf("HasExample")]
+        [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
+        public ExampleOdinSO exampleOdin;
+
+        #endregion
     }
 }

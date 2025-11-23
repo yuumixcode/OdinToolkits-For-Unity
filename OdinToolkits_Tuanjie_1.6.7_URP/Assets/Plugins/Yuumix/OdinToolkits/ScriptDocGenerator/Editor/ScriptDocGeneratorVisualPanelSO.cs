@@ -27,23 +27,6 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
         public static readonly BilingualData ModuleName =
             new BilingualData("脚本文档生成工具", "Script Doc Generator");
 
-        #region Serialized Fields
-
-        ScriptDocGeneratorController _controller;
-
-        [PropertyOrder(-5)]
-        public BilingualHeaderWidget headerWidget;
-
-        [PropertyOrder(2)]
-        [BilingualTitle("生成脚本文档的目标文件夹路径 [可拖拽]", "Folder Path For Document [Drag And Drop Allowed]")]
-        [HideLabel]
-        [FolderPath(AbsolutePath = true)]
-        [InlineButton(nameof(ResetDocFolderPath), SdfIconType.ArrowClockwise, "")]
-        [CustomContextMenu("Reset To Default", nameof(ResetDocFolderPath))]
-        public string docFolderPath;
-
-        #endregion
-
         bool IsSingleType => typeSource == TypeSource.SingleType;
         bool IsMultipleType => typeSource == TypeSource.MultipleTypes;
         bool IsSingleAssembly => typeSource == TypeSource.SingleAssembly;
@@ -61,6 +44,23 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
             );
             _controller ??= new ScriptDocGeneratorController();
         }
+
+        #endregion
+
+        #region Serialized Fields
+
+        ScriptDocGeneratorController _controller;
+
+        [PropertyOrder(-5)]
+        public BilingualHeaderWidget headerWidget;
+
+        [PropertyOrder(2)]
+        [BilingualTitle("生成脚本文档的目标文件夹路径 [可拖拽]", "Folder Path For Document [Drag And Drop Allowed]")]
+        [HideLabel]
+        [FolderPath(AbsolutePath = true)]
+        [InlineButton(nameof(ResetDocFolderPath), SdfIconType.ArrowClockwise, "")]
+        [CustomContextMenu("Reset To Default", nameof(ResetDocFolderPath))]
+        public string docFolderPath;
 
         #endregion
 

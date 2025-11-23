@@ -15,25 +15,6 @@ namespace YuumixEditor
     [HideLabel]
     public class BilingualHeaderWidget
     {
-        #region Serialized Fields
-
-        [PropertyOrder(0)]
-        [PropertySpace(13)]
-        [BoxGroup("OuterBox")]
-        [HorizontalGroup("OuterBox/HoriTop", 0.75f)]
-        [BilingualDisplayAsStringWidgetConfig(false, TextAlignment.Left, 30)]
-        public BilingualDisplayAsStringWidget headerName;
-
-        [HideIf(nameof(HideHeaderIntroduction))]
-        [PropertyOrder(30)]
-        [BoxGroup("OuterBox")]
-        [HorizontalGroup("OuterBox/HoriBottom", 0.98f)]
-        [PropertySpace(10, 8)]
-        [BilingualDisplayAsStringWidgetConfig(false, TextAlignment.Left, 14, true)]
-        public BilingualDisplayAsStringWidget headerIntroduction;
-
-        #endregion
-
         string _chineseIntroduction;
         string _englishIntroduction;
         string _targetUrl;
@@ -104,6 +85,25 @@ namespace YuumixEditor
             _targetUrl = targetUrl ?? OdinToolkitsWebLinks.OFFICIAL_WEBSITE;
             return this;
         }
+
+        #region Serialized Fields
+
+        [PropertyOrder(0)]
+        [PropertySpace(13)]
+        [BoxGroup("OuterBox")]
+        [HorizontalGroup("OuterBox/HoriTop", 0.75f)]
+        [BilingualDisplayAsStringWidgetConfig(false, TextAlignment.Left, 30)]
+        public BilingualDisplayAsStringWidget headerName;
+
+        [HideIf(nameof(HideHeaderIntroduction))]
+        [PropertyOrder(30)]
+        [BoxGroup("OuterBox")]
+        [HorizontalGroup("OuterBox/HoriBottom", 0.98f)]
+        [PropertySpace(10, 8)]
+        [BilingualDisplayAsStringWidgetConfig(false, TextAlignment.Left, 14, true)]
+        public BilingualDisplayAsStringWidget headerIntroduction;
+
+        #endregion
     }
 }
 #endif

@@ -1,23 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
-using UnityEditorInternal;
 using UnityEngine;
 
 namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
 {
     public static class ScriptDocGeneratorMenuItems
     {
-        static MonoScript[] SelectionMonoScripts => Selection.GetFiltered(typeof(MonoScript), SelectionMode.Assets)
-            .Cast<MonoScript>().ToArray();
-
         const string ADD_SCRIPT_TO_TARGET_TYPE_MENU_NAME = "Assets/Script Doc Generator/Add To Target Type";
         const string ADD_AND_OPEN_MENU_NAME = "Assets/Script Doc Generator/Add To Target Type And Open Window";
         const string ADD_SCRIPTS_TO_TYPES_MENU_NAME = "Assets/Script Doc Generator/Add To Temporary Types";
 
         const string ADD_SCRIPTS_TO_TYPES_AND_OPEN_MENU_NAME =
             "Assets/Script Doc Generator/Add To Temporary Types And Open Window";
+
+        static MonoScript[] SelectionMonoScripts => Selection.GetFiltered(typeof(MonoScript), SelectionMode.Assets)
+            .Cast<MonoScript>().ToArray();
 
         [MenuItem(ADD_SCRIPT_TO_TARGET_TYPE_MENU_NAME, false, 1001)]
         public static void AddScriptToTargetType()
@@ -78,10 +75,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
         }
 
         [MenuItem(ADD_AND_OPEN_MENU_NAME, true)]
-        public static bool AddScriptToTargetTypeAndOpenWindowValidate()
-        {
-            return AddScriptToTargetTypeValidate();
-        }
+        public static bool AddScriptToTargetTypeAndOpenWindowValidate() => AddScriptToTargetTypeValidate();
 
         [MenuItem(ADD_SCRIPTS_TO_TYPES_MENU_NAME, true)]
         public static bool AddScriptsToTargetTypesValidate()
@@ -105,9 +99,6 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
         }
 
         [MenuItem(ADD_SCRIPTS_TO_TYPES_AND_OPEN_MENU_NAME, true)]
-        public static bool AddScriptsToTemporaryTypesAndOpenWindowValidate()
-        {
-            return AddScriptsToTargetTypesValidate();
-        }
+        public static bool AddScriptsToTemporaryTypesAndOpenWindowValidate() => AddScriptsToTargetTypesValidate();
     }
 }

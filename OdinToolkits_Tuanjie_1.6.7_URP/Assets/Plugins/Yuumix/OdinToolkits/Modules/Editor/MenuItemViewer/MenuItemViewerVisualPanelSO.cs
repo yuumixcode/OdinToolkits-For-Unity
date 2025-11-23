@@ -34,17 +34,17 @@ namespace Yuumix.OdinToolkits.Module.Editor
                 OdinToolkitsWebLinks.OFFICIAL_WEBSITE);
         }
 
+        public void EditorReset()
+        {
+            assemblyFilter = null;
+            menuItemInfos = null;
+        }
+
         [PropertySpace(8, 8)]
         [BilingualButton("搜集项目所有菜单项，排除筛选项", "Collect MenuItems Exclude Filter", ButtonSizes.Large)]
         public void CollectMenuItems()
         {
             menuItemInfos = MenuItemViewerController.GetAllMenuItems(assemblyFilter);
-        }
-
-        public void EditorReset()
-        {
-            assemblyFilter = null;
-            menuItemInfos = null;
         }
     }
 }

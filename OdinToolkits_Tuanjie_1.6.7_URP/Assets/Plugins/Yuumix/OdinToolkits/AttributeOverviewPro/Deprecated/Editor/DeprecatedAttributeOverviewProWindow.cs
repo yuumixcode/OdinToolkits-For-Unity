@@ -85,7 +85,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
             OnWindowResized?.Invoke();
         }
 
-        [MenuItem(OdinToolkitsMenuItems.DEPRECATED_OVERVIEW_PRO, false, OdinToolkitsMenuItems.DEPRECATED_OVERVIEW_PRO_PRIORITY)]
+        [MenuItem(OdinToolkitsMenuItems.DEPRECATED_OVERVIEW_PRO, false,
+            OdinToolkitsMenuItems.DEPRECATED_OVERVIEW_PRO_PRIORITY)]
         public static void ShowWindow()
         {
             _window = GetWindow<DeprecatedAttributeOverviewProWindow>();

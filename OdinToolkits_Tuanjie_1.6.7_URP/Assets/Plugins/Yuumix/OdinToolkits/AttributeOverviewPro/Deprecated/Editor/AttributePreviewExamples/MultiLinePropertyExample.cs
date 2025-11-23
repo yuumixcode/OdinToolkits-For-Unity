@@ -7,6 +7,20 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class MultiLinePropertyExample : ExampleSO
     {
+        [FoldoutGroup("Odin MultiLineProperty")]
+        [InfoBox("Odin 支持属性, 但是 Unity 内置的 Multiline 只能作用于字段")]
+        [ShowInInspector]
+        [MultiLineProperty(10)]
+        public string OdinMultilineProperty { get; set; }
+
+        public override void SetDefaultValue()
+        {
+            unityMultilineField = null;
+            unityTextAreaField = null;
+            wideMultilineTextField = null;
+            OdinMultilineProperty = null;
+        }
+
         #region Serialized Fields
 
         [FoldoutGroup("Unity 内置")]
@@ -28,19 +42,5 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         public string wideMultilineTextField = "";
 
         #endregion
-
-        [FoldoutGroup("Odin MultiLineProperty")]
-        [InfoBox("Odin 支持属性, 但是 Unity 内置的 Multiline 只能作用于字段")]
-        [ShowInInspector]
-        [MultiLineProperty(10)]
-        public string OdinMultilineProperty { get; set; }
-
-        public override void SetDefaultValue()
-        {
-            unityMultilineField = null;
-            unityTextAreaField = null;
-            wideMultilineTextField = null;
-            OdinMultilineProperty = null;
-        }
     }
 }

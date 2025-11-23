@@ -93,15 +93,13 @@ namespace Yuumix.Community.Editor
         public string GetOpenButtonLabel => _openEditLabel.GetCurrentOrFallback();
         public string GetFinishButtonLabel => _finishEditLabel.GetCurrentOrFallback();
 
-        public virtual bool IsMatch(string searchString)
-        {
-            return GetCardHeader().ChineseDisplay.ToLower().Contains(searchString.ToLower()) ||
-                   GetCardHeader().EnglishDisplay.ToLower().Contains(searchString.ToLower()) ||
-                   Tags.ToLower().Contains(searchString.ToLower()) ||
-                   Introduction.ChineseDisplay.ToLower().Contains(searchString.ToLower()) ||
-                   Introduction.EnglishDisplay.ToLower().Contains(searchString.ToLower()) ||
-                   AuthorInfo.Name.ToLower().Contains(searchString.ToLower());
-        }
+        public virtual bool IsMatch(string searchString) =>
+            GetCardHeader().ChineseDisplay.ToLower().Contains(searchString.ToLower()) ||
+            GetCardHeader().EnglishDisplay.ToLower().Contains(searchString.ToLower()) ||
+            Tags.ToLower().Contains(searchString.ToLower()) ||
+            Introduction.ChineseDisplay.ToLower().Contains(searchString.ToLower()) ||
+            Introduction.EnglishDisplay.ToLower().Contains(searchString.ToLower()) ||
+            AuthorInfo.Name.ToLower().Contains(searchString.ToLower());
 
         [PropertyOrder(1)]
         [HorizontalGroup("B/H1")]

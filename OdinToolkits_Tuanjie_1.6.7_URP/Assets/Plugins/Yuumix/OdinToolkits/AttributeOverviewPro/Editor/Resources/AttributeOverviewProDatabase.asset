@@ -42,7 +42,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 1
-      Data: Essential
+      Data: Essentials
     - Name: $v
       Entry: 7
       Data: 2|Yuumix.OdinToolkits.AttributeOverviewPro.Editor.AbstractAttributeVisualPanelSO[],
@@ -67,7 +67,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 1
-      Data: Button
+      Data: Buttons
     - Name: $v
       Entry: 7
       Data: 3|Yuumix.OdinToolkits.AttributeOverviewPro.Editor.AbstractAttributeVisualPanelSO[],
@@ -89,7 +89,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 1
-      Data: Collection
+      Data: Collections
     - Name: $v
       Entry: 9
       Data: 3
@@ -101,7 +101,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 1
-      Data: Group
+      Data: Groups
     - Name: $v
       Entry: 9
       Data: 3
@@ -113,7 +113,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 1
-      Data: Conditional
+      Data: Conditionals
     - Name: $v
       Entry: 9
       Data: 3
@@ -125,7 +125,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 1
-      Data: Number
+      Data: Numbers
     - Name: $v
       Entry: 9
       Data: 3
@@ -137,7 +137,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 1
-      Data: TypeSpecific
+      Data: TypeSpecifics
     - Name: $v
       Entry: 7
       Data: 4|Yuumix.OdinToolkits.AttributeOverviewPro.Editor.AbstractAttributeVisualPanelSO[],

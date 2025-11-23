@@ -7,6 +7,11 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class CustomContextMenuExample : ExampleSO
     {
+        void SayHello()
+        {
+            Debug.Log("Hello Twice");
+        }
+
         #region Serialized Fields
 
         [Title("Unity 内置的 ContextMenuItem 特性")]
@@ -22,10 +27,5 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         public int myProperty;
 
         #endregion
-
-        void SayHello()
-        {
-            Debug.Log("Hello Twice");
-        }
     }
 }

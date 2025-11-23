@@ -31,51 +31,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         GUIStyle _tableCellTextStyle;
         GUITable _tipGUITable;
 
-        #region Event Functions
-
-        protected override void OnEnable()
-        {
-            base.OnEnable();
-            _container = target as OdinAttributeContainerSO;
-            if (_container)
-            {
-                _container.hideFlags = HideFlags.None;
-
-                if (_container)
-                {
-                    CreateTipGUITable();
-                    CreateParamGUITable();
-                    CreateResolvedParamGUITables();
-                }
-            }
-
-            _darkLineColor = EditorGUIUtility.isProSkin
-                ? SirenixGUIStyles.BorderColor
-                : new Color(0f, 0f, 0f, 0.2f);
-            _lightLineColor = EditorGUIUtility.isProSkin
-                ? new Color(1f, 1f, 1f, 0.1f)
-                : new Color(1f, 1f, 1f, 1f);
-            var property =
-                Tree.RootProperty.FindChild(p => p.Name == nameof(OdinAttributeContainerSO.example), false);
-            var property2 =
-                Tree.RootProperty.FindChild(p => p.Name == nameof(OdinAttributeContainerSO.exampleOdin), false);
-            property.Children
-                .Recurse()
-                .ForEach(child => child.State.Expanded = false);
-            property2.Children
-                .Recurse()
-                .ForEach(child => child.State.Expanded = false);
-            DeprecatedAttributeOverviewProWindow.OnWindowResized = CalculateAllTableSize;
-            EditorApplication.delayCall += CalculateAllTableSize;
-        }
-
-        void OnDestroy()
-        {
-            EditorApplication.delayCall -= CalculateAllTableSize;
-        }
-
-        #endregion
-
         void CreateResolvedParamGUITables()
         {
             foreach (var resolvedParam in _container.ResolvedParams)
@@ -469,5 +424,50 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
             GUILayout.Space(spaceAfter);
             EditorGUILayout.EndVertical();
         }
+
+        #region Event Functions
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            _container = target as OdinAttributeContainerSO;
+            if (_container)
+            {
+                _container.hideFlags = HideFlags.None;
+
+                if (_container)
+                {
+                    CreateTipGUITable();
+                    CreateParamGUITable();
+                    CreateResolvedParamGUITables();
+                }
+            }
+
+            _darkLineColor = EditorGUIUtility.isProSkin
+                ? SirenixGUIStyles.BorderColor
+                : new Color(0f, 0f, 0f, 0.2f);
+            _lightLineColor = EditorGUIUtility.isProSkin
+                ? new Color(1f, 1f, 1f, 0.1f)
+                : new Color(1f, 1f, 1f, 1f);
+            var property =
+                Tree.RootProperty.FindChild(p => p.Name == nameof(OdinAttributeContainerSO.example), false);
+            var property2 =
+                Tree.RootProperty.FindChild(p => p.Name == nameof(OdinAttributeContainerSO.exampleOdin), false);
+            property.Children
+                .Recurse()
+                .ForEach(child => child.State.Expanded = false);
+            property2.Children
+                .Recurse()
+                .ForEach(child => child.State.Expanded = false);
+            DeprecatedAttributeOverviewProWindow.OnWindowResized = CalculateAllTableSize;
+            EditorApplication.delayCall += CalculateAllTableSize;
+        }
+
+        void OnDestroy()
+        {
+            EditorApplication.delayCall -= CalculateAllTableSize;
+        }
+
+        #endregion
     }
 }

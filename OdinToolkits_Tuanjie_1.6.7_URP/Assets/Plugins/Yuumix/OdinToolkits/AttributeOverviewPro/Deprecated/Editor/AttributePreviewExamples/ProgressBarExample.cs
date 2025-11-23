@@ -7,38 +7,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class ProgressBarExample : ExampleSO
     {
-        #region Serialized Fields
-
-        [FoldoutGroup("min 和 max")]
-        [ProgressBar(0f, 10f)]
-        public int progressBar1;
-
-        [FoldoutGroup("ColorGetter")]
-        [ProgressBar(-5f, 15f, ColorGetter = "lightpurple")]
-        public int progressBar2;
-
-        [FoldoutGroup("Height")]
-        [ProgressBar(-10f, 20f, Height = 30)]
-        public int progressBar3;
-
-        [FoldoutGroup("Segmented")]
-        [ProgressBar(-10f, 20f, Segmented = true)]
-        public int progressBar4;
-
-        [FoldoutGroup("DrawValueLabel 和 CustomValueStringGetter")]
-        [ProgressBar(-10f, 20f, DrawValueLabel = true, CustomValueStringGetter = nameof(progressBar5))]
-        public int progressBar5;
-
-        [FoldoutGroup("动态的生命值，颜色变换")]
-        [ProgressBar(0, 100, ColorGetter = "GetHealthBarColor")]
-        public int dynamicHealthBar;
-
-        [FoldoutGroup("堆叠生命值，多层生命值")]
-        [PropertyRange(0, 300)]
-        public int stackHeath;
-
-        #endregion
-
         [FoldoutGroup("堆叠生命值，多层生命值")]
         [HideLabel]
         [ShowInInspector]
@@ -94,5 +62,37 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
 
             return color;
         }
+
+        #region Serialized Fields
+
+        [FoldoutGroup("min 和 max")]
+        [ProgressBar(0f, 10f)]
+        public int progressBar1;
+
+        [FoldoutGroup("ColorGetter")]
+        [ProgressBar(-5f, 15f, ColorGetter = "lightpurple")]
+        public int progressBar2;
+
+        [FoldoutGroup("Height")]
+        [ProgressBar(-10f, 20f, Height = 30)]
+        public int progressBar3;
+
+        [FoldoutGroup("Segmented")]
+        [ProgressBar(-10f, 20f, Segmented = true)]
+        public int progressBar4;
+
+        [FoldoutGroup("DrawValueLabel 和 CustomValueStringGetter")]
+        [ProgressBar(-10f, 20f, DrawValueLabel = true, CustomValueStringGetter = nameof(progressBar5))]
+        public int progressBar5;
+
+        [FoldoutGroup("动态的生命值，颜色变换")]
+        [ProgressBar(0, 100, ColorGetter = "GetHealthBarColor")]
+        public int dynamicHealthBar;
+
+        [FoldoutGroup("堆叠生命值，多层生命值")]
+        [PropertyRange(0, 300)]
+        public int stackHeath;
+
+        #endregion
     }
 }
