@@ -6,17 +6,25 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
     public enum OdinAttributeCategory
     {
         None = 0,
-        Essential = 1,
-        Button = 2,
-        Collection = 4,
-        Group = 8,
-        Conditional = 16,
-        Number = 32,
-        TypeSpecific = 64,
+        Essentials = 1,
+        Buttons = 2,
+        Collections = 4,
+        Groups = 8,
+        Conditionals = 16,
+        Numbers = 32,
+        TypeSpecifics = 64,
         Validation = 128,
         Misc = 256,
         Meta = 512,
         Unity = 1024,
         Debug = 2048
+    }
+
+    public static class OdinAttributeCategoryExtensions
+    {
+        public static bool HasFlagFast(this OdinAttributeCategory value, OdinAttributeCategory flag)
+        {
+            return (value & flag) != 0;
+        }
     }
 }

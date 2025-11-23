@@ -1,164 +1,119 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
+using UnityEditor;
 using Yuumix.OdinToolkits.Core.Editor;
+using YuumixEditor;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 {
     public class AttributeOverviewProDatabaseSO : OdinEditorScriptableSingleton<AttributeOverviewProDatabaseSO>
     {
-        public Dictionary<string, SerializedScriptableObject[]> VisualPanelMap;
+        public Dictionary<string, AbstractAttributeVisualPanelSO[]> VisualPanelMap;
 
+        static AbstractAttributeVisualPanelSO[] AllVisualPanels => GetAllVisualPanels();
+
+        [Button("Initialize Database", ButtonSizes.Large)]
         public AttributeOverviewProDatabaseSO Initialize()
         {
-            VisualPanelMap = new Dictionary<string, SerializedScriptableObject[]>()
+            _essentialVisualPanels = AllVisualPanels.Where(x => x.GetType()
+                .GetCustomAttribute<AttributeCategoryAttribute>().Category
+                .HasFlagFast(OdinAttributeCategory.Essentials)).ToArray();
+            _buttonVisualPanels = AllVisualPanels.Where(x => x.GetType()
+                .GetCustomAttribute<AttributeCategoryAttribute>().Category
+                .HasFlagFast(OdinAttributeCategory.Buttons)).ToArray();
+            _collectionVisualPanels = AllVisualPanels.Where(x => x.GetType()
+                .GetCustomAttribute<AttributeCategoryAttribute>().Category
+                .HasFlagFast(OdinAttributeCategory.Collections)).ToArray();
+            _groupVisualPanels = AllVisualPanels.Where(x => x.GetType()
+                .GetCustomAttribute<AttributeCategoryAttribute>().Category
+                .HasFlagFast(OdinAttributeCategory.Groups)).ToArray();
+            _conditionalVisualPanels = AllVisualPanels.Where(x => x.GetType()
+                .GetCustomAttribute<AttributeCategoryAttribute>().Category
+                .HasFlagFast(OdinAttributeCategory.Conditionals)).ToArray();
+            _numberVisualPanels = AllVisualPanels.Where(x => x.GetType()
+                .GetCustomAttribute<AttributeCategoryAttribute>().Category
+                .HasFlagFast(OdinAttributeCategory.Numbers)).ToArray();
+            _typeSpecificVisualPanels = AllVisualPanels.Where(x => x.GetType()
+                .GetCustomAttribute<AttributeCategoryAttribute>().Category
+                .HasFlagFast(OdinAttributeCategory.TypeSpecifics)).ToArray();
+            _validationVisualPanels = AllVisualPanels.Where(x => x.GetType()
+                .GetCustomAttribute<AttributeCategoryAttribute>().Category
+                .HasFlagFast(OdinAttributeCategory.Validation)).ToArray();
+            _miscVisualPanels = AllVisualPanels.Where(x => x.GetType()
+                .GetCustomAttribute<AttributeCategoryAttribute>().Category
+                .HasFlagFast(OdinAttributeCategory.Misc)).ToArray();
+            _metaVisualPanels = AllVisualPanels.Where(x => x.GetType()
+                .GetCustomAttribute<AttributeCategoryAttribute>().Category
+                .HasFlagFast(OdinAttributeCategory.Meta)).ToArray();
+            _unityVisualPanels = AllVisualPanels.Where(x => x.GetType()
+                .GetCustomAttribute<AttributeCategoryAttribute>().Category
+                .HasFlagFast(OdinAttributeCategory.Unity)).ToArray();
+            _debugVisualPanels = AllVisualPanels.Where(x => x.GetType()
+                .GetCustomAttribute<AttributeCategoryAttribute>().Category
+                .HasFlagFast(OdinAttributeCategory.Debug)).ToArray();
+            VisualPanelMap = new Dictionary<string, AbstractAttributeVisualPanelSO[]>()
             {
                 {
-                    nameof(OdinAttributeCategory.Essential), essentialVisualPanels
+                    nameof(OdinAttributeCategory.Essentials), _essentialVisualPanels
                 },
                 {
-                    nameof(OdinAttributeCategory.Button), buttonVisualPanels
+                    nameof(OdinAttributeCategory.Buttons), _buttonVisualPanels
                 },
                 {
-                    nameof(OdinAttributeCategory.Collection), collectionVisualPanels
+                    nameof(OdinAttributeCategory.Collections), _collectionVisualPanels
                 },
                 {
-                    nameof(OdinAttributeCategory.Group), groupVisualPanels
+                    nameof(OdinAttributeCategory.Groups), _groupVisualPanels
                 },
                 {
-                    nameof(OdinAttributeCategory.Conditional), conditionalVisualPanels
+                    nameof(OdinAttributeCategory.Conditionals), _conditionalVisualPanels
                 },
                 {
-                    nameof(OdinAttributeCategory.Number), numberVisualPanels
+                    nameof(OdinAttributeCategory.Numbers), _numberVisualPanels
                 },
                 {
-                    nameof(OdinAttributeCategory.TypeSpecific), typeSpecificVisualPanels
+                    nameof(OdinAttributeCategory.TypeSpecifics), _typeSpecificVisualPanels
                 },
                 {
-                    nameof(OdinAttributeCategory.Validation), validationVisualPanels
+                    nameof(OdinAttributeCategory.Validation), _validationVisualPanels
                 },
                 {
-                    nameof(OdinAttributeCategory.Misc), miscVisualPanels
+                    nameof(OdinAttributeCategory.Misc), _miscVisualPanels
                 },
                 {
-                    nameof(OdinAttributeCategory.Meta), metaVisualPanels
+                    nameof(OdinAttributeCategory.Meta), _metaVisualPanels
                 },
                 {
-                    nameof(OdinAttributeCategory.Unity), unityVisualPanels
+                    nameof(OdinAttributeCategory.Unity), _unityVisualPanels
                 },
                 {
-                    nameof(OdinAttributeCategory.Debug), debugVisualPanels
+                    nameof(OdinAttributeCategory.Debug), _debugVisualPanels
                 },
             };
             return this;
         }
 
-        [AssetList(AutoPopulate = true, CustomFilterMethod = nameof(IsEssential))]
-        public SerializedScriptableObject[] essentialVisualPanels;
+        AbstractAttributeVisualPanelSO[] _essentialVisualPanels;
+        AbstractAttributeVisualPanelSO[] _buttonVisualPanels;
+        AbstractAttributeVisualPanelSO[] _collectionVisualPanels;
+        AbstractAttributeVisualPanelSO[] _groupVisualPanels;
+        AbstractAttributeVisualPanelSO[] _conditionalVisualPanels;
+        AbstractAttributeVisualPanelSO[] _numberVisualPanels;
+        AbstractAttributeVisualPanelSO[] _typeSpecificVisualPanels;
+        AbstractAttributeVisualPanelSO[] _validationVisualPanels;
+        AbstractAttributeVisualPanelSO[] _miscVisualPanels;
+        AbstractAttributeVisualPanelSO[] _metaVisualPanels;
+        AbstractAttributeVisualPanelSO[] _unityVisualPanels;
+        AbstractAttributeVisualPanelSO[] _debugVisualPanels;
 
-        [AssetList(AutoPopulate = true, CustomFilterMethod = nameof(IsButton))]
-        public SerializedScriptableObject[] buttonVisualPanels;
-
-        [AssetList(AutoPopulate = true, CustomFilterMethod = nameof(IsCollection))]
-        public SerializedScriptableObject[] collectionVisualPanels;
-
-        [AssetList(AutoPopulate = true, CustomFilterMethod = nameof(IsGroup))]
-        public SerializedScriptableObject[] groupVisualPanels;
-
-        [AssetList(AutoPopulate = true, CustomFilterMethod = nameof(IsConditional))]
-        public SerializedScriptableObject[] conditionalVisualPanels;
-
-        [AssetList(AutoPopulate = true, CustomFilterMethod = nameof(IsNumber))]
-        public SerializedScriptableObject[] numberVisualPanels;
-
-        [AssetList(AutoPopulate = true, CustomFilterMethod = nameof(IsTypeSpecific))]
-        public SerializedScriptableObject[] typeSpecificVisualPanels;
-
-        [AssetList(AutoPopulate = true, CustomFilterMethod = nameof(IsValidation))]
-        public SerializedScriptableObject[] validationVisualPanels;
-
-        [AssetList(AutoPopulate = true, CustomFilterMethod = nameof(IsMisc))]
-        public SerializedScriptableObject[] miscVisualPanels;
-
-        [AssetList(AutoPopulate = true, CustomFilterMethod = nameof(IsMeta))]
-        public SerializedScriptableObject[] metaVisualPanels;
-
-        [AssetList(AutoPopulate = true, CustomFilterMethod = nameof(IsUnity))]
-        public SerializedScriptableObject[] unityVisualPanels;
-
-        [AssetList(AutoPopulate = true, CustomFilterMethod = nameof(IsDebug))]
-        public SerializedScriptableObject[] debugVisualPanels;
-
-        bool IsEssential(SerializedScriptableObject panel)
+        static AbstractAttributeVisualPanelSO[] GetAllVisualPanels()
         {
-            var attribute = panel.GetType().GetCustomAttribute<AttributeCategoryAttribute>();
-            return attribute != null && attribute.Category.HasFlag(OdinAttributeCategory.Essential);
-        }
-
-        bool IsButton(SerializedScriptableObject panel)
-        {
-            var attribute = panel.GetType().GetCustomAttribute<AttributeCategoryAttribute>();
-            return attribute != null && attribute.Category.HasFlag(OdinAttributeCategory.Button);
-        }
-
-        bool IsCollection(SerializedScriptableObject panel)
-        {
-            var attribute = panel.GetType().GetCustomAttribute<AttributeCategoryAttribute>();
-            return attribute != null && attribute.Category.HasFlag(OdinAttributeCategory.Collection);
-        }
-
-        bool IsGroup(SerializedScriptableObject panel)
-        {
-            var attribute = panel.GetType().GetCustomAttribute<AttributeCategoryAttribute>();
-            return attribute != null && attribute.Category.HasFlag(OdinAttributeCategory.Group);
-        }
-
-        bool IsConditional(SerializedScriptableObject panel)
-        {
-            var attribute = panel.GetType().GetCustomAttribute<AttributeCategoryAttribute>();
-            return attribute != null && attribute.Category.HasFlag(OdinAttributeCategory.Conditional);
-        }
-
-        bool IsNumber(SerializedScriptableObject panel)
-        {
-            var attribute = panel.GetType().GetCustomAttribute<AttributeCategoryAttribute>();
-            return attribute != null && attribute.Category.HasFlag(OdinAttributeCategory.Number);
-        }
-
-        bool IsTypeSpecific(SerializedScriptableObject panel)
-        {
-            var attribute = panel.GetType().GetCustomAttribute<AttributeCategoryAttribute>();
-            return attribute != null && attribute.Category.HasFlag(OdinAttributeCategory.TypeSpecific);
-        }
-
-        bool IsValidation(SerializedScriptableObject panel)
-        {
-            var attribute = panel.GetType().GetCustomAttribute<AttributeCategoryAttribute>();
-            return attribute != null && attribute.Category.HasFlag(OdinAttributeCategory.Validation);
-        }
-
-        bool IsMisc(SerializedScriptableObject panel)
-        {
-            var attribute = panel.GetType().GetCustomAttribute<AttributeCategoryAttribute>();
-            return attribute != null && attribute.Category.HasFlag(OdinAttributeCategory.Misc);
-        }
-
-        bool IsMeta(SerializedScriptableObject panel)
-        {
-            var attribute = panel.GetType().GetCustomAttribute<AttributeCategoryAttribute>();
-            return attribute != null && attribute.Category.HasFlag(OdinAttributeCategory.Meta);
-        }
-
-        bool IsUnity(SerializedScriptableObject panel)
-        {
-            var attribute = panel.GetType().GetCustomAttribute<AttributeCategoryAttribute>();
-            return attribute != null && attribute.Category.HasFlag(OdinAttributeCategory.Unity);
-        }
-
-        bool IsDebug(SerializedScriptableObject panel)
-        {
-            var attribute = panel.GetType().GetCustomAttribute<AttributeCategoryAttribute>();
-            return attribute != null && attribute.Category.HasFlag(OdinAttributeCategory.Debug);
+            return AssetDatabase.FindAssets("t:" + typeof(AbstractAttributeVisualPanelSO))
+                .Select(x => AssetDatabase.LoadAssetAtPath<AbstractAttributeVisualPanelSO>(
+                    AssetDatabase.GUIDToAssetPath(x)))
+                .ToArray();
         }
     }
 }

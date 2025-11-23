@@ -1,7 +1,9 @@
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
+using System.Linq;
 using UnityEditor;
+using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Core.Editor;
 using Vector4 = UnityEngine.Vector4;
 
@@ -62,15 +64,10 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         {
             foreach (var pair in _databaseSO.VisualPanelMap)
             {
-                foreach (var value in pair.Value)
+                foreach (var visualPanelSO in pair.Value)
                 {
-                    var menuName = value.name;
-                    if (value is AbstractAttributeVisualPanelSO attributeVisualPanelSO)
-                    {
-                        menuName = attributeVisualPanelSO.headerWidget.headerName.ChineseDisplay;
-                    }
-
-                    _tree.AddObjectAtPath(pair.Key + "/" + menuName, value);
+                    var menuName = visualPanelSO.headerWidget.headerName.ChineseDisplay;
+                    _tree.AddObjectAtPath((pair.Key + "/" + menuName), visualPanelSO);
                 }
             }
 

@@ -25,8 +25,8 @@ MonoBehaviour:
     SerializationNodes:
     - Name: VisualPanelMap
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[Sirenix.OdinInspector.SerializedScriptableObject[],
-        Sirenix.Serialization]], mscorlib
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[Yuumix.OdinToolkits.AttributeOverviewPro.Editor.AbstractAttributeVisualPanelSO[],
+        Yuumix.OdinToolkits.Editor]], mscorlib
     - Name: comparer
       Entry: 7
       Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
@@ -45,7 +45,8 @@ MonoBehaviour:
       Data: Essential
     - Name: $v
       Entry: 7
-      Data: 2|Sirenix.OdinInspector.SerializedScriptableObject[], Sirenix.Serialization
+      Data: 2|Yuumix.OdinToolkits.AttributeOverviewPro.Editor.AbstractAttributeVisualPanelSO[],
+        Yuumix.OdinToolkits.Editor
     - Name: 
       Entry: 12
       Data: 1
@@ -69,7 +70,8 @@ MonoBehaviour:
       Data: Button
     - Name: $v
       Entry: 7
-      Data: 3|Sirenix.OdinInspector.SerializedScriptableObject[], Sirenix.Serialization
+      Data: 3|Yuumix.OdinToolkits.AttributeOverviewPro.Editor.AbstractAttributeVisualPanelSO[],
+        Yuumix.OdinToolkits.Editor
     - Name: 
       Entry: 12
       Data: 0
@@ -89,17 +91,8 @@ MonoBehaviour:
       Entry: 1
       Data: Collection
     - Name: $v
-      Entry: 7
-      Data: 4|Sirenix.OdinInspector.SerializedScriptableObject[], Sirenix.Serialization
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+      Entry: 9
+      Data: 3
     - Name: 
       Entry: 8
       Data: 
@@ -110,17 +103,8 @@ MonoBehaviour:
       Entry: 1
       Data: Group
     - Name: $v
-      Entry: 7
-      Data: 5|Sirenix.OdinInspector.SerializedScriptableObject[], Sirenix.Serialization
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+      Entry: 9
+      Data: 3
     - Name: 
       Entry: 8
       Data: 
@@ -131,17 +115,8 @@ MonoBehaviour:
       Entry: 1
       Data: Conditional
     - Name: $v
-      Entry: 7
-      Data: 6|Sirenix.OdinInspector.SerializedScriptableObject[], Sirenix.Serialization
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+      Entry: 9
+      Data: 3
     - Name: 
       Entry: 8
       Data: 
@@ -152,17 +127,8 @@ MonoBehaviour:
       Entry: 1
       Data: Number
     - Name: $v
-      Entry: 7
-      Data: 7|Sirenix.OdinInspector.SerializedScriptableObject[], Sirenix.Serialization
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+      Entry: 9
+      Data: 3
     - Name: 
       Entry: 8
       Data: 
@@ -174,7 +140,8 @@ MonoBehaviour:
       Data: TypeSpecific
     - Name: $v
       Entry: 7
-      Data: 8|Sirenix.OdinInspector.SerializedScriptableObject[], Sirenix.Serialization
+      Data: 4|Yuumix.OdinToolkits.AttributeOverviewPro.Editor.AbstractAttributeVisualPanelSO[],
+        Yuumix.OdinToolkits.Editor
     - Name: 
       Entry: 12
       Data: 1
@@ -197,17 +164,8 @@ MonoBehaviour:
       Entry: 1
       Data: Validation
     - Name: $v
-      Entry: 7
-      Data: 9|Sirenix.OdinInspector.SerializedScriptableObject[], Sirenix.Serialization
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+      Entry: 9
+      Data: 3
     - Name: 
       Entry: 8
       Data: 
@@ -218,17 +176,8 @@ MonoBehaviour:
       Entry: 1
       Data: Misc
     - Name: $v
-      Entry: 7
-      Data: 10|Sirenix.OdinInspector.SerializedScriptableObject[], Sirenix.Serialization
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+      Entry: 9
+      Data: 3
     - Name: 
       Entry: 8
       Data: 
@@ -239,17 +188,8 @@ MonoBehaviour:
       Entry: 1
       Data: Meta
     - Name: $v
-      Entry: 7
-      Data: 11|Sirenix.OdinInspector.SerializedScriptableObject[], Sirenix.Serialization
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+      Entry: 9
+      Data: 3
     - Name: 
       Entry: 8
       Data: 
@@ -260,17 +200,8 @@ MonoBehaviour:
       Entry: 1
       Data: Unity
     - Name: $v
-      Entry: 7
-      Data: 12|Sirenix.OdinInspector.SerializedScriptableObject[], Sirenix.Serialization
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+      Entry: 9
+      Data: 3
     - Name: 
       Entry: 8
       Data: 
@@ -281,17 +212,8 @@ MonoBehaviour:
       Entry: 1
       Data: Debug
     - Name: $v
-      Entry: 7
-      Data: 13|Sirenix.OdinInspector.SerializedScriptableObject[], Sirenix.Serialization
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+      Entry: 9
+      Data: 3
     - Name: 
       Entry: 8
       Data: 
@@ -301,17 +223,3 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  essentialVisualPanels:
-  - {fileID: 11400000, guid: 9de5ccd4145fc43eea863685c522f810, type: 2}
-  buttonVisualPanels: []
-  collectionVisualPanels: []
-  groupVisualPanels: []
-  conditionalVisualPanels: []
-  numberVisualPanels: []
-  typeSpecificVisualPanels:
-  - {fileID: 11400000, guid: 55f53e961da0f47ffb5551156f64162d, type: 2}
-  validationVisualPanels: []
-  miscVisualPanels: []
-  metaVisualPanels: []
-  unityVisualPanels: []
-  debugVisualPanels: []
