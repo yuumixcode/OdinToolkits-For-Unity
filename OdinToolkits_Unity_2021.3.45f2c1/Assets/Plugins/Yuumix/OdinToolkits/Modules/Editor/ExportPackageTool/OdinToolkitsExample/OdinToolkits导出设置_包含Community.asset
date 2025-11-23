@@ -37,6 +37,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 55f53e961da0f47ffb5551156f64162d, type: 2}
   - {fileID: 11400000, guid: 9de5ccd4145fc43eea863685c522f810, type: 2}
   - {fileID: 11400000, guid: 54f7526b1d8b4473f855979cb8fd4603, type: 2}
+  - {fileID: 11400000, guid: 39acb45db7473401ba13a5eee171a245, type: 2}
   references:
     version: 2
     RefIds:

@@ -33,7 +33,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 
         protected override void Initialize()
         {
-            _databaseSO = AttributeOverviewProDatabaseSO.Instance.Initialize();
+            _databaseSO = AttributeOverviewProDatabaseSO.Instance;
             WindowPadding = new Vector4(15, 15, 15, 5);
             MenuWidth = 230f;
             _tree = new OdinMenuTree

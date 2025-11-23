@@ -3,23 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEditor;
-using UnityEditor.Callbacks;
+using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Core.Editor;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 {
-    public class AttributeOverviewProDatabaseSO : OdinEditorScriptableSingleton<AttributeOverviewProDatabaseSO>
+    public class AttributeOverviewProDatabaseSO : OdinEditorScriptableSingleton<AttributeOverviewProDatabaseSO>,
+        IOdinToolkitsEditorReset
     {
-        // 使用OnEnable方法而不是构造函数，因为ScriptableObject构造函数中不能访问EditorApplication
-        protected void OnEnable()
-        {
-            if (!EditorApplication.isPlayingOrWillChangePlaymode)
-            {
-                Initialize();
-            }
-        }
+        #region Serialized Fields
+
+        public Dictionary<string, AbstractAttributeVisualPanelSO[]> VisualPanelMap;
+
+        AbstractAttributeVisualPanelSO[] _essentialVisualPanels;
+        AbstractAttributeVisualPanelSO[] _buttonVisualPanels;
+        AbstractAttributeVisualPanelSO[] _collectionVisualPanels;
+        AbstractAttributeVisualPanelSO[] _groupVisualPanels;
+        AbstractAttributeVisualPanelSO[] _conditionalVisualPanels;
+        AbstractAttributeVisualPanelSO[] _numberVisualPanels;
+        AbstractAttributeVisualPanelSO[] _typeSpecificVisualPanels;
+        AbstractAttributeVisualPanelSO[] _validationVisualPanels;
+        AbstractAttributeVisualPanelSO[] _miscVisualPanels;
+        AbstractAttributeVisualPanelSO[] _metaVisualPanels;
+        AbstractAttributeVisualPanelSO[] _unityVisualPanels;
+        AbstractAttributeVisualPanelSO[] _debugVisualPanels;
+
+        #endregion
 
         static AbstractAttributeVisualPanelSO[] AllVisualPanels => GetAllVisualPanels();
+
+        #region IOdinToolkitsEditorReset Members
+
+        public void EditorReset()
+        {
+            Initialize();
+        }
+
+        #endregion
 
         [Button("Initialize Database", ButtonSizes.Large)]
         public AttributeOverviewProDatabaseSO Initialize()
@@ -109,30 +129,5 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                     AssetDatabase.GUIDToAssetPath(x)))
                 .ToArray();
         }
-
-        [DidReloadScripts]
-        static void BackendInitialize()
-        {
-            Instance.Initialize();
-        }
-
-        #region Serialized Fields
-
-        public Dictionary<string, AbstractAttributeVisualPanelSO[]> VisualPanelMap;
-
-        AbstractAttributeVisualPanelSO[] _essentialVisualPanels;
-        AbstractAttributeVisualPanelSO[] _buttonVisualPanels;
-        AbstractAttributeVisualPanelSO[] _collectionVisualPanels;
-        AbstractAttributeVisualPanelSO[] _groupVisualPanels;
-        AbstractAttributeVisualPanelSO[] _conditionalVisualPanels;
-        AbstractAttributeVisualPanelSO[] _numberVisualPanels;
-        AbstractAttributeVisualPanelSO[] _typeSpecificVisualPanels;
-        AbstractAttributeVisualPanelSO[] _validationVisualPanels;
-        AbstractAttributeVisualPanelSO[] _miscVisualPanels;
-        AbstractAttributeVisualPanelSO[] _metaVisualPanels;
-        AbstractAttributeVisualPanelSO[] _unityVisualPanels;
-        AbstractAttributeVisualPanelSO[] _debugVisualPanels;
-
-        #endregion
     }
 }
