@@ -14,6 +14,9 @@ namespace Yuumix.OdinToolkits.Module.Editor
         IOdinToolkitsEditorReset
     {
         public static BilingualData ToolMenuPath = new BilingualData("菜单项检查器", "MenuItemViewer");
+
+        #region Serialized Fields
+
         public BilingualHeaderWidget headerWidget;
 
         [PropertySpace]
@@ -23,6 +26,10 @@ namespace Yuumix.OdinToolkits.Module.Editor
         [PropertyOrder(10)]
         [Searchable(FilterOptions = SearchFilterOptions.ISearchFilterableInterface)]
         public List<MenuItemInfo> menuItemInfos;
+
+        #endregion
+
+        #region Event Functions
 
         void OnEnable()
         {
@@ -34,11 +41,17 @@ namespace Yuumix.OdinToolkits.Module.Editor
                 OdinToolkitsWebLinks.OFFICIAL_WEBSITE);
         }
 
+        #endregion
+
+        #region IOdinToolkitsEditorReset Members
+
         public void EditorReset()
         {
             assemblyFilter = null;
             menuItemInfos = null;
         }
+
+        #endregion
 
         [PropertySpace(8, 8)]
         [BilingualButton("搜集项目所有菜单项，排除筛选项", "Collect MenuItems Exclude Filter", ButtonSizes.Large)]

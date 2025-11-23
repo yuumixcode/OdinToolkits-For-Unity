@@ -23,6 +23,16 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         const float AFTER_SPACE = 20f;
         static BilingualData _guiTableNumberLabel = new BilingualData("序号", "Number");
 
+        #region Serialized Fields
+
+        [PropertyOrder(-100)]
+        [PropertySpace(0, AFTER_SPACE)]
+        public BilingualHeaderWidget headerWidget;
+
+        AbstractAttributeModel _model;
+
+        #endregion
+
         #region Event Functions
 
         void OnDestroy()
@@ -107,16 +117,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         }
 
         public abstract void Initialize();
-
-        #region Serialized Fields
-
-        [PropertyOrder(-100)]
-        [PropertySpace(0, AFTER_SPACE)]
-        public BilingualHeaderWidget headerWidget;
-
-        AbstractAttributeModel _model;
-
-        #endregion
 
         #region Usage Tips
 

@@ -27,29 +27,6 @@ namespace Yuumix.OdinToolkits.Core
             }
         }
 
-        public static void CreateNewInstance()
-        {
-            DestroyCurrentInstance();
-            _instance = new GameObject(typeof(T).Name + " [Auto - Singleton]")
-                .AddComponent<T>();
-        }
-
-        static void DestroyCurrentInstance()
-        {
-            if (Application.isPlaying)
-            {
-                Destroy(_instance.gameObject);
-            }
-            else
-            {
-                DestroyImmediate(_instance.gameObject);
-            }
-
-            _instance = null;
-        }
-
-        protected virtual void OnSingletonInit() { }
-
         #region Event Functions
 
         protected virtual void Awake()
@@ -83,5 +60,28 @@ namespace Yuumix.OdinToolkits.Core
         }
 
         #endregion
+
+        public static void CreateNewInstance()
+        {
+            DestroyCurrentInstance();
+            _instance = new GameObject(typeof(T).Name + " [Auto - Singleton]")
+                .AddComponent<T>();
+        }
+
+        static void DestroyCurrentInstance()
+        {
+            if (Application.isPlaying)
+            {
+                Destroy(_instance.gameObject);
+            }
+            else
+            {
+                DestroyImmediate(_instance.gameObject);
+            }
+
+            _instance = null;
+        }
+
+        protected virtual void OnSingletonInit() { }
     }
 }

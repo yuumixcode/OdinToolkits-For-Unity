@@ -17,6 +17,22 @@ namespace Yuumix.Community.Editor
     public abstract class CommunityCardSO<T> : SerializedScriptableObject, ISearchFilterable
         where T : CommunityCardSO<T>
     {
+        #region Serialized Fields
+
+        BilingualData _openEditLabel = new BilingualData("编辑标签", "Edit Tags");
+        BilingualData _finishEditLabel = new BilingualData("完成编辑", "Finish Edit");
+
+        [BoxGroup("B")]
+        [HorizontalGroup("B/H1")]
+        [VerticalGroup("B/H1/V1")]
+        [PropertyOrder(10)]
+        [AssetList]
+        [BilingualText("卡片标签", "Card Tags")]
+        [ShowIf("CanEditTags")]
+        public List<CommunityTagSO> cardWithTags;
+
+        #endregion
+
         [BoxGroup("B", false)]
         [PropertySpace(5)]
         [HorizontalGroup("B/H1", PaddingLeft = 5, PaddingRight = 5)]
@@ -93,6 +109,8 @@ namespace Yuumix.Community.Editor
         public string GetOpenButtonLabel => _openEditLabel.GetCurrentOrFallback();
         public string GetFinishButtonLabel => _finishEditLabel.GetCurrentOrFallback();
 
+        #region ISearchFilterable Members
+
         public virtual bool IsMatch(string searchString) =>
             GetCardHeader().ChineseDisplay.ToLower().Contains(searchString.ToLower()) ||
             GetCardHeader().EnglishDisplay.ToLower().Contains(searchString.ToLower()) ||
@@ -100,6 +118,8 @@ namespace Yuumix.Community.Editor
             Introduction.ChineseDisplay.ToLower().Contains(searchString.ToLower()) ||
             Introduction.EnglishDisplay.ToLower().Contains(searchString.ToLower()) ||
             AuthorInfo.Name.ToLower().Contains(searchString.ToLower());
+
+        #endregion
 
         [PropertyOrder(1)]
         [HorizontalGroup("B/H1")]
@@ -162,22 +182,6 @@ namespace Yuumix.Community.Editor
         /// 打开模块相关链接，可以是任何文章，网站，文档，个人博客等
         /// </summary>
         protected abstract void OpenModuleLink();
-
-        #region Serialized Fields
-
-        BilingualData _openEditLabel = new BilingualData("编辑标签", "Edit Tags");
-        BilingualData _finishEditLabel = new BilingualData("完成编辑", "Finish Edit");
-
-        [BoxGroup("B")]
-        [HorizontalGroup("B/H1")]
-        [VerticalGroup("B/H1/V1")]
-        [PropertyOrder(10)]
-        [AssetList]
-        [BilingualText("卡片标签", "Card Tags")]
-        [ShowIf("CanEditTags")]
-        public List<CommunityTagSO> cardWithTags;
-
-        #endregion
 
         #region 单例
 

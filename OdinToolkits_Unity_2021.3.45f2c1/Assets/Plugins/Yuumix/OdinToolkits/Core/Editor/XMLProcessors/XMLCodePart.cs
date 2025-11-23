@@ -10,6 +10,22 @@ namespace Yuumix.OdinToolkits.Core.Editor
     [Serializable]
     public class XMLCodePart
     {
+        #region Serialized Fields
+
+        /// <summary>
+        /// 注释部分的源代码，以 /// 开头
+        /// </summary>
+        [Summary("注释部分的源代码，以 /// 开头")]
+        public string xml;
+
+        /// <summary>
+        /// 不以注释开头的代码块，除了注释对应的成员外，可能包含多个成员
+        /// </summary>
+        [Summary("不以注释开头的代码块，除了注释对应的成员外，可能包含多个成员")]
+        public string code;
+
+        #endregion
+
         public XMLCodePart(string xml, string code)
         {
             this.xml = xml;
@@ -153,21 +169,5 @@ namespace Yuumix.OdinToolkits.Core.Editor
         /// </summary>
         [Summary("获取删除了 SummaryAttribute 的代码")]
         public string GetReplaceAllOutput() => xml + RemoveAllSummaryAttributeCode;
-
-        #region Serialized Fields
-
-        /// <summary>
-        /// 注释部分的源代码，以 /// 开头
-        /// </summary>
-        [Summary("注释部分的源代码，以 /// 开头")]
-        public string xml;
-
-        /// <summary>
-        /// 不以注释开头的代码块，除了注释对应的成员外，可能包含多个成员
-        /// </summary>
-        [Summary("不以注释开头的代码块，除了注释对应的成员外，可能包含多个成员")]
-        public string code;
-
-        #endregion
     }
 }

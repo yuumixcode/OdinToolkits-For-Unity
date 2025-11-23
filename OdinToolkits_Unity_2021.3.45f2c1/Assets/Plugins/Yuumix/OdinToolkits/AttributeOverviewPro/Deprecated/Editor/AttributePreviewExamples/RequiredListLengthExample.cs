@@ -9,6 +9,22 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class RequiredListLengthExample : ExampleSO
     {
+        #region Serialized Fields
+
+        [FoldoutGroup("固定长度")]
+        [RequiredListLength(3)]
+        public List<int> list = new List<int>();
+
+        [FoldoutGroup("设置长度范围")]
+        [RequiredListLength(3, 5)]
+        public List<int> list2 = new List<int>();
+
+        [TitleGroup("设置长度范围/支持解析字符串")]
+        [RequiredListLength(nameof(SetMinLength), nameof(SetMaxLength))]
+        public List<int> list3 = new List<int>();
+
+        #endregion
+
         int SetMinLength => 3;
         int SetMaxLength => 5;
 
@@ -33,21 +49,5 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
             YuumixLogger.OdinToolkitsLog("RequiredListLength Runtime Example 文件夹路径为: " + Path);
             ProjectEditorUtility.PingAndSelectAsset(Path);
         }
-
-        #region Serialized Fields
-
-        [FoldoutGroup("固定长度")]
-        [RequiredListLength(3)]
-        public List<int> list = new List<int>();
-
-        [FoldoutGroup("设置长度范围")]
-        [RequiredListLength(3, 5)]
-        public List<int> list2 = new List<int>();
-
-        [TitleGroup("设置长度范围/支持解析字符串")]
-        [RequiredListLength(nameof(SetMinLength), nameof(SetMaxLength))]
-        public List<int> list3 = new List<int>();
-
-        #endregion
     }
 }

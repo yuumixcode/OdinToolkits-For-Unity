@@ -34,17 +34,6 @@ namespace Yuumix.OdinToolkits.Tests.Editor
                           strings[1] == signatures[1]);
         }
 
-        #region Nested type: TestClassAbstract
-
-        public abstract class TestClassAbstract
-        {
-            protected TestClassAbstract(int a) { }
-
-            protected TestClassAbstract() { }
-        }
-
-        #endregion
-
         #region Nested type: TestClass
 
         public class TestClass : TestClassAbstract
@@ -54,6 +43,17 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             public TestClass(bool b, int a) : base(a) { }
 
             TestClass(string s) { }
+        }
+
+        #endregion
+
+        #region Nested type: TestClassAbstract
+
+        public abstract class TestClassAbstract
+        {
+            protected TestClassAbstract(int a) { }
+
+            protected TestClassAbstract() { }
         }
 
         #endregion

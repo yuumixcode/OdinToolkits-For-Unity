@@ -5,10 +5,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated
 {
     public class RequiredInPrefabComponent : MonoBehaviour
     {
-        public string MessageProperty => useAlternativeMessage ? alternativeMessage : message;
-
-        string GetMessage() => useAlternativeMessage ? alternativeMessage : message;
-
         #region Serialized Fields
 
         public bool useAlternativeMessage;
@@ -55,5 +51,9 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated
         public GameObject prefabAll;
 
         #endregion
+
+        public string MessageProperty => useAlternativeMessage ? alternativeMessage : message;
+
+        string GetMessage() => useAlternativeMessage ? alternativeMessage : message;
     }
 }

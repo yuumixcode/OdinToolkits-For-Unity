@@ -7,6 +7,10 @@ namespace Yuumix.OdinToolkits.Module.Editor
     /// </summary>
     public class OdinToolkitsAssemblyFilter : IAssemblyFilter
     {
+        #region IAssemblyFilter Members
+
         public bool ShouldFilterOut(Assembly assembly) => assembly.FullName.StartsWith("Yuumix.OdinToolkits");
+
+        #endregion
     }
 }

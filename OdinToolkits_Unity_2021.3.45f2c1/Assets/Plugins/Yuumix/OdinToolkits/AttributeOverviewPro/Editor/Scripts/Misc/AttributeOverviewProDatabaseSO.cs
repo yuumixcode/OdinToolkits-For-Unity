@@ -13,7 +13,10 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
     {
         #region Serialized Fields
 
-        public Dictionary<string, AbstractAttributeVisualPanelSO[]> VisualPanelMap;
+        public Dictionary<string, AbstractAttributeVisualPanelSO[]> VisualPanelArrayMap;
+
+        public Dictionary<string, AbstractAttributeVisualPanelSO> VisualPanelMap =
+            new Dictionary<string, AbstractAttributeVisualPanelSO>();
 
         AbstractAttributeVisualPanelSO[] _essentialVisualPanels;
         AbstractAttributeVisualPanelSO[] _buttonVisualPanels;
@@ -80,7 +83,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
             _debugVisualPanels = AllVisualPanels.Where(x => x.GetType()
                 .GetCustomAttribute<AttributeCategoryAttribute>().Category
                 .HasFlagFast(OdinAttributeCategory.Debug)).ToArray();
-            VisualPanelMap = new Dictionary<string, AbstractAttributeVisualPanelSO[]>
+            VisualPanelArrayMap = new Dictionary<string, AbstractAttributeVisualPanelSO[]>
             {
                 {
                     nameof(OdinAttributeCategory.Essentials), _essentialVisualPanels
@@ -119,6 +122,17 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                     nameof(OdinAttributeCategory.Debug), _debugVisualPanels
                 }
             };
+            VisualPanelMap = new Dictionary<string, AbstractAttributeVisualPanelSO>();
+            foreach (var (category, visualPanelSoArray) in VisualPanelArrayMap)
+            {
+                foreach (var visualPanelSO in visualPanelSoArray)
+                {
+                    visualPanelSO.Initialize();
+                    var menuName = visualPanelSO.headerWidget.headerName.ChineseDisplay;
+                    VisualPanelMap.Add(category + "/" + menuName, visualPanelSO);
+                }
+            }
+
             return this;
         }
 

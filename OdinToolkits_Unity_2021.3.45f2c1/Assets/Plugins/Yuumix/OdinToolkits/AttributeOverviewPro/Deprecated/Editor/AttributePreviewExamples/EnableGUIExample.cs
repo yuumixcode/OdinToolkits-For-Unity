@@ -6,24 +6,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class EnableGUIExample : ExampleSO
     {
-        [PropertyOrder(10)]
-        [ShowInInspector]
-        [InfoBox("没有 set 的属性，是灰色显示的，通过 [ShowInInspector] 特性绘制，无法保存")]
-        public int EnableGUI4Property => 10;
-
-        [PropertyOrder(15)]
-        [ShowInInspector]
-        [EnableGUI]
-        [InfoBox("没有 set 的属性，通过 [ShowInInspector] 和 [EnableGUI] 特性绘制，无法保存，但可以获取焦点，在 Inspector 上修改会警告")]
-        public int EnableGUI5Property => 10;
-
-        public override void SetDefaultValue()
-        {
-            enableGUI1 = "enableGUI1";
-            enableGUI2 = "enableGUI2";
-            enableGUI3 = "enableGUI3";
-        }
-
         #region Serialized Fields
 
         [PropertyOrder(0)]
@@ -42,5 +24,23 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         public string enableGUI3 = "";
 
         #endregion
+
+        [PropertyOrder(10)]
+        [ShowInInspector]
+        [InfoBox("没有 set 的属性，是灰色显示的，通过 [ShowInInspector] 特性绘制，无法保存")]
+        public int EnableGUI4Property => 10;
+
+        [PropertyOrder(15)]
+        [ShowInInspector]
+        [EnableGUI]
+        [InfoBox("没有 set 的属性，通过 [ShowInInspector] 和 [EnableGUI] 特性绘制，无法保存，但可以获取焦点，在 Inspector 上修改会警告")]
+        public int EnableGUI5Property => 10;
+
+        public override void SetDefaultValue()
+        {
+            enableGUI1 = "enableGUI1";
+            enableGUI2 = "enableGUI2";
+            enableGUI3 = "enableGUI3";
+        }
     }
 }

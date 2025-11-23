@@ -18,17 +18,6 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
 
         #endregion
 
-        [MenuItem(OdinToolkitsMenuItems.SCRIPT_DOC_GEN,
-            false,
-            OdinToolkitsMenuItems.SCRIPT_DOC_GEN_PRIORITY)]
-        public static void OpenWindow()
-        {
-            var window = GetWindow<ScriptDocGeneratorWindow>();
-            window.titleContent = new GUIContent(OdinToolkitsMenuItems.SCRIPT_DOC_GEN_WINDOW_NAME);
-            window.position = GUIHelper.GetEditorWindowRect().AlignCenter(1100, 800);
-            window.Show();
-        }
-
         #region Event Functions
 
         protected override void OnEnable()
@@ -47,5 +36,16 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
         }
 
         #endregion
+
+        [MenuItem(OdinToolkitsMenuItems.SCRIPT_DOC_GEN,
+            false,
+            OdinToolkitsMenuItems.SCRIPT_DOC_GEN_PRIORITY)]
+        public static void OpenWindow()
+        {
+            var window = GetWindow<ScriptDocGeneratorWindow>();
+            window.titleContent = new GUIContent(OdinToolkitsMenuItems.SCRIPT_DOC_GEN_WINDOW_NAME);
+            window.position = GUIHelper.GetEditorWindowRect().AlignCenter(1100, 800);
+            window.Show();
+        }
     }
 }

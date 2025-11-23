@@ -9,17 +9,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
     [AttributeOverviewProExample]
     public class AssetsOnlyExampleSO : EditorScriptableSingleton<AssetsOnlyExampleSO>, IOdinToolkitsEditorReset
     {
-        #region IOdinToolkitsEditorReset Members
-
-        public void EditorReset()
-        {
-            somePrefab = null;
-            materialAsset = null;
-            someMeshRendererOnPrefab = null;
-        }
-
-        #endregion
-
         #region Serialized Fields
 
         [Title("No Parameters")]
@@ -31,6 +20,17 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 
         [AssetsOnly]
         public MeshRenderer someMeshRendererOnPrefab;
+
+        #endregion
+
+        #region IOdinToolkitsEditorReset Members
+
+        public void EditorReset()
+        {
+            somePrefab = null;
+            materialAsset = null;
+            someMeshRendererOnPrefab = null;
+        }
 
         #endregion
     }

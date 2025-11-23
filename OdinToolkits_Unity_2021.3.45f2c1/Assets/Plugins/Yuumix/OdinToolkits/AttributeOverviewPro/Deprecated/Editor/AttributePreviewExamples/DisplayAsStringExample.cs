@@ -8,24 +8,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class DisplayAsStringExample : ExampleSO
     {
-        #region Nested type: ${0}
-
-        [Serializable]
-        public class SpecialString : IFormattable
-        {
-            #region IFormattable Members
-
-            public string ToString(string format, IFormatProvider formatProvider)
-            {
-                var result = format.ToLower();
-                return result;
-            }
-
-            #endregion
-        }
-
-        #endregion
-
         #region Serialized Fields
 
         [FoldoutGroup("无参数使用")]
@@ -54,6 +36,24 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         [FoldoutGroup("Format")]
         [DisplayAsString(Format = "自定义格式化字符串 AAA")]
         public SpecialString string6;
+
+        #endregion
+
+        #region Nested type: ${0}
+
+        [Serializable]
+        public class SpecialString : IFormattable
+        {
+            #region IFormattable Members
+
+            public string ToString(string format, IFormatProvider formatProvider)
+            {
+                var result = format.ToLower();
+                return result;
+            }
+
+            #endregion
+        }
 
         #endregion
     }

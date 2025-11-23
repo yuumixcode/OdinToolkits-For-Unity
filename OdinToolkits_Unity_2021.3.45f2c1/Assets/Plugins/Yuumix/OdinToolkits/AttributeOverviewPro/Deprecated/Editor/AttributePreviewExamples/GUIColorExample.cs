@@ -9,31 +9,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class GUIColorExample : ExampleSO
     {
-        public Color ColorProperty => color;
-
-        Color GetColor() => useRed ? Color.red : Color.green;
-
-        public override void SetDefaultValue()
-        {
-            guiColor0 = 0;
-            guiColor1 = 0;
-            guiColor2 = 0;
-            attributeExpressionExample = "";
-            fieldNameExample = "";
-            methodNameExample = "";
-            propertyNameExample = "";
-        }
-
-        static Color GetDynamicColor()
-        {
-            // 需要一直改变的元素，需要调用重绘
-            GUIHelper.RequestRepaint();
-            // 使用余弦函数和 timeSinceStartup 计算色调值
-            // 通过添加和乘以常数来调整颜色变化的频率和范围
-            return Color.HSVToRGB(
-                Mathf.Cos((float)EditorApplication.timeSinceStartup + 1f) * 0.225f + 0.325f, 1, 1);
-        }
-
         #region Serialized Fields
 
         [FoldoutGroup("GetColor 参数 支持多种解析字符串")]
@@ -85,5 +60,30 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         public bool useRed;
 
         #endregion
+
+        public Color ColorProperty => color;
+
+        Color GetColor() => useRed ? Color.red : Color.green;
+
+        public override void SetDefaultValue()
+        {
+            guiColor0 = 0;
+            guiColor1 = 0;
+            guiColor2 = 0;
+            attributeExpressionExample = "";
+            fieldNameExample = "";
+            methodNameExample = "";
+            propertyNameExample = "";
+        }
+
+        static Color GetDynamicColor()
+        {
+            // 需要一直改变的元素，需要调用重绘
+            GUIHelper.RequestRepaint();
+            // 使用余弦函数和 timeSinceStartup 计算色调值
+            // 通过添加和乘以常数来调整颜色变化的频率和范围
+            return Color.HSVToRGB(
+                Mathf.Cos((float)EditorApplication.timeSinceStartup + 1f) * 0.225f + 0.325f, 1, 1);
+        }
     }
 }

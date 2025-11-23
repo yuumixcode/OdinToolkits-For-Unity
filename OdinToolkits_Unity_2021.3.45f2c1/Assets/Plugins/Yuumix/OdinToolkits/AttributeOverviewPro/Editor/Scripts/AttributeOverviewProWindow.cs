@@ -10,18 +10,9 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
     public class AttributeOverviewProWindow : OdinMenuEditorWindow
     {
         static AttributeOverviewProWindow _window;
+
         AttributeOverviewProDatabaseSO _databaseSO;
         OdinMenuTree _tree;
-
-        #region Event Functions
-
-        protected override void OnDestroy()
-        {
-            EditorApplication.delayCall -= EditorApplication_DelayCall;
-            base.OnDestroy();
-        }
-
-        #endregion
 
         [MenuItem(OdinToolkitsMenuItems.OVERVIEW_PRO, false, OdinToolkitsMenuItems.OVERVIEW_PRO_PRIORITY)]
         public static void OpenWindow()
@@ -54,27 +45,16 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                     Height = 24
                 }
             };
-            EditorApplication.delayCall -= EditorApplication_DelayCall;
-            EditorApplication.delayCall += EditorApplication_DelayCall;
         }
 
         protected override OdinMenuTree BuildMenuTree()
         {
-            foreach (var pair in _databaseSO.VisualPanelMap)
+            foreach (var keyValuePair in _databaseSO.VisualPanelMap)
             {
-                foreach (var visualPanelSO in pair.Value)
-                {
-                    var menuName = visualPanelSO.headerWidget.headerName.ChineseDisplay;
-                    _tree.AddObjectAtPath(pair.Key + "/" + menuName, visualPanelSO);
-                }
+                _tree.AddObjectAtPath(keyValuePair.Key, keyValuePair.Value);
             }
 
             return _tree;
-        }
-
-        static void EditorApplication_DelayCall()
-        {
-            _window?.Repaint();
         }
     }
 }

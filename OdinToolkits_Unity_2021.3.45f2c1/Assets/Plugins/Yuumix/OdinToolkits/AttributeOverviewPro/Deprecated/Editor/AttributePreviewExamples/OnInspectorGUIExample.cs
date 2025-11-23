@@ -8,6 +8,19 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class OnInspectorGUIExample : ExampleSO
     {
+        #region Serialized Fields
+
+        [OnInspectorInit("@texture = Sirenix.Utilities.Editor.EditorIcons.OdinInspectorLogo")]
+        [OnInspectorGUI("DrawPreview")]
+        public Texture2D texture;
+
+        [PropertySpace(30)]
+        [OnInspectorInit("@texture2D = Sirenix.Utilities.Editor.EditorIcons.OdinInspectorLogo")]
+        [OnInspectorGUI(nameof(DrawPreview), nameof(DrawPreview))]
+        public Texture2D texture2D;
+
+        #endregion
+
         void DrawPreview()
         {
             if (texture == null)
@@ -26,18 +39,5 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
             EditorGUILayout.HelpBox("OnInspectorGUI 能够使用在方法也可以使用在字段",
                 MessageType.Info);
         }
-
-        #region Serialized Fields
-
-        [OnInspectorInit("@texture = Sirenix.Utilities.Editor.EditorIcons.OdinInspectorLogo")]
-        [OnInspectorGUI("DrawPreview")]
-        public Texture2D texture;
-
-        [PropertySpace(30)]
-        [OnInspectorInit("@texture2D = Sirenix.Utilities.Editor.EditorIcons.OdinInspectorLogo")]
-        [OnInspectorGUI(nameof(DrawPreview), nameof(DrawPreview))]
-        public Texture2D texture2D;
-
-        #endregion
     }
 }
