@@ -7,8 +7,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class InfoBoxExample : ExampleSO
     {
-        static bool IsInEditMode() => !Application.isPlaying;
-
         #region Serialized Fields
 
         [FoldoutGroup("message 参数")]
@@ -57,5 +55,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         public int i;
 
         #endregion
+
+        static bool IsInEditMode() => !Application.isPlaying;
     }
 }

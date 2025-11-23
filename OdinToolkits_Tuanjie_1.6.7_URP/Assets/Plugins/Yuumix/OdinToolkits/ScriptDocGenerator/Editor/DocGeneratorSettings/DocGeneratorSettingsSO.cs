@@ -10,28 +10,6 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
     [Summary("文档生成器设置抽象类")]
     public abstract class DocGeneratorSettingsSO : ScriptableObject, IOdinToolkitsEditorReset
     {
-        #region IOdinToolkitsEditorReset Members
-
-        /// <summary>
-        /// 重置文档生成器设置
-        /// </summary>
-        [Summary("重置文档生成器设置")]
-        public void EditorReset()
-        {
-            generateNamespaceFolder = true;
-            customizeDocFileExtensionName = false;
-            docFileExtensionName = ".md";
-            generateIdentifier = true;
-        }
-
-        #endregion
-
-        /// <summary>
-        /// 通过 TypeData 实例对象，生成文档内容。注意：不要在此方法中添加增量生成标识符
-        /// </summary>
-        [Summary("通过 TypeData 实例对象，生成文档内容。注意：不要在此方法中添加增量生成标识符")]
-        public abstract string GetGeneratedDoc(ITypeData data);
-
         #region Serialized Fields
 
         /// <summary>
@@ -64,5 +42,27 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
         public bool generateIdentifier = true;
 
         #endregion
+
+        #region IOdinToolkitsEditorReset Members
+
+        /// <summary>
+        /// 重置文档生成器设置
+        /// </summary>
+        [Summary("重置文档生成器设置")]
+        public void EditorReset()
+        {
+            generateNamespaceFolder = true;
+            customizeDocFileExtensionName = false;
+            docFileExtensionName = ".md";
+            generateIdentifier = true;
+        }
+
+        #endregion
+
+        /// <summary>
+        /// 通过 TypeData 实例对象，生成文档内容。注意：不要在此方法中添加增量生成标识符
+        /// </summary>
+        [Summary("通过 TypeData 实例对象，生成文档内容。注意：不要在此方法中添加增量生成标识符")]
+        public abstract string GetGeneratedDoc(ITypeData data);
     }
 }

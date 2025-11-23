@@ -7,8 +7,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class ReadOnlyExample : ExampleSO
     {
-        [ShowInInspector] [ReadOnly] public string ReadOnly2 => "这个属性是只读的";
-
         #region Serialized Fields
 
         [ReadOnly]
@@ -20,5 +18,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         public List<int> readOnlyList = new List<int> { 1, 2, 3 };
 
         #endregion
+
+        [ShowInInspector] [ReadOnly] public string ReadOnly2 => "这个属性是只读的";
     }
 }

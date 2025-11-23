@@ -19,6 +19,8 @@ namespace Yuumix.Community.Editor
         OdinEditorScriptableSingleton<CommunityRepositoryVisualPanelSO>,
         IOdinToolkitsEditorReset
     {
+        #region Event Functions
+
         void OnEnable()
         {
             header = new BilingualHeaderWidget(
@@ -27,6 +29,8 @@ namespace Yuumix.Community.Editor
                 "社区资源或者优质资源推荐的总览窗口",
                 "The overview window for recommending community resources or high-quality resources");
         }
+
+        #endregion
 
         #region Header
 

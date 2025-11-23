@@ -142,6 +142,8 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             Assert.AreEqual("public UnitTestFieldInstance.TestEnum NestedEnumField;", fieldData.Signature);
         }
 
+        #region Nested type: TestClass
+
         class TestClass
         {
             public bool BooleanField;
@@ -162,10 +164,16 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             public ushort UshortField;
         }
 
+        #endregion
+
+        #region Nested type: TestEnum
+
         enum TestEnum
         {
             Value1,
             Value2
         }
+
+        #endregion
     }
 }

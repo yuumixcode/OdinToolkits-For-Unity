@@ -10,6 +10,14 @@ namespace Yuumix.OdinToolkits.Core.Editor
     [FilePath("ScriptableSingletonDemo/PreferencesFolder.yaml", FilePathAttribute.Location.PreferencesFolder)]
     public sealed class ScriptableSingletonPreferencesFolder : ScriptableSingleton<ScriptableSingletonPreferencesFolder>
     {
+        #region Serialized Fields
+
+        public float number = 12;
+
+        public List<string> stringList = new List<string>();
+
+        #endregion
+
         public void ResetState()
         {
             number = 12;
@@ -36,13 +44,5 @@ namespace Yuumix.OdinToolkits.Core.Editor
         {
             Debug.Log("EditorPreferenceFolderStateFile State: " + JsonUtility.ToJson(this, true));
         }
-
-        #region Serialized Fields
-
-        public float number = 12;
-
-        public List<string> stringList = new List<string>();
-
-        #endregion
     }
 }

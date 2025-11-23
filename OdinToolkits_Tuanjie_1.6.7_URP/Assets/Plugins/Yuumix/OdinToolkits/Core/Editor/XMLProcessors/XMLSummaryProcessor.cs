@@ -24,6 +24,40 @@ namespace Yuumix.OdinToolkits.Core.Editor
 
         #endregion
 
+        #region Serialized Fields
+
+        /// <summary>
+        /// 原始源代码内容
+        /// </summary>
+        [Summary("原始源代码内容")]
+        public string sourceScriptText;
+
+        /// <summary>
+        /// 源代码按行分割后的列表
+        /// </summary>
+        [Summary("源代码按行分割后的列表")]
+        public List<string> sourceScriptLines;
+
+        /// <summary>
+        /// 第一个 XML 文档注释之前的所有代码行
+        /// </summary>
+        [Summary("第一个 XML 文档注释之前的所有代码行")]
+        public List<string> headerLines;
+
+        /// <summary>
+        /// 第一个 XML 文档注释的行号索引，从这一行开始处理 XML 文档注释
+        /// </summary>
+        [Summary("第一个 XML 文档注释的行号索引，从这一行开始处理 XML 文档注释")]
+        public int firstXmlCommentLineIndex = -1;
+
+        /// <summary>
+        /// XML 文档注释与代码块的组合列表，代码块是可能包含多个成员的
+        /// </summary>
+        [Summary("XML 文档注释与代码块的组合列表，代码块是可能包含多个成员的")]
+        public List<XMLCodePart> xmlCodeParts = new List<XMLCodePart>();
+
+        #endregion
+
         public XMLSummaryProcessor(string sourceScript)
         {
             sourceScriptText = sourceScript ?? throw new ArgumentNullException(nameof(sourceScript));
@@ -211,39 +245,5 @@ namespace Yuumix.OdinToolkits.Core.Editor
         }
 
         static bool IsXmlDocumentationLine(string line) => line.Trim().StartsWith("///");
-
-        #region Serialized Fields
-
-        /// <summary>
-        /// 原始源代码内容
-        /// </summary>
-        [Summary("原始源代码内容")]
-        public string sourceScriptText;
-
-        /// <summary>
-        /// 源代码按行分割后的列表
-        /// </summary>
-        [Summary("源代码按行分割后的列表")]
-        public List<string> sourceScriptLines;
-
-        /// <summary>
-        /// 第一个 XML 文档注释之前的所有代码行
-        /// </summary>
-        [Summary("第一个 XML 文档注释之前的所有代码行")]
-        public List<string> headerLines;
-
-        /// <summary>
-        /// 第一个 XML 文档注释的行号索引，从这一行开始处理 XML 文档注释
-        /// </summary>
-        [Summary("第一个 XML 文档注释的行号索引，从这一行开始处理 XML 文档注释")]
-        public int firstXmlCommentLineIndex = -1;
-
-        /// <summary>
-        /// XML 文档注释与代码块的组合列表，代码块是可能包含多个成员的
-        /// </summary>
-        [Summary("XML 文档注释与代码块的组合列表，代码块是可能包含多个成员的")]
-        public List<XMLCodePart> xmlCodeParts = new List<XMLCodePart>();
-
-        #endregion
     }
 }

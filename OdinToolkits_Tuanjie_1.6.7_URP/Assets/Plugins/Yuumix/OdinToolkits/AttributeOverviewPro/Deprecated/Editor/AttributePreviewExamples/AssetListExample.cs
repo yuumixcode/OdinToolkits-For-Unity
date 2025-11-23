@@ -52,9 +52,9 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         [InlineButton("Log7", "$LogButtonLabel")]
         public List<GameObject> gameObjectsWithCustomMethod;
 
-        bool IsPrefab(GameObject asset) => PrefabUtility.GetPrefabAssetType(asset) == PrefabAssetType.Regular;
-
         #endregion
+
+        bool IsPrefab(GameObject asset) => PrefabUtility.GetPrefabAssetType(asset) == PrefabAssetType.Regular;
 
         #region Helper
 

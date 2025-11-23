@@ -65,6 +65,8 @@ namespace Yuumix.OdinToolkits.Module.Editor
                 : null;
         }
 
+        #region Nested type: ${0}
+
         public class OdinToolkitsExportSettingsSOAttributeProcessor : OdinAttributeProcessor
         {
             public override void ProcessChildMemberAttributes(InspectorProperty parentProperty, MemberInfo member,
@@ -76,5 +78,7 @@ namespace Yuumix.OdinToolkits.Module.Editor
                 }
             }
         }
+
+        #endregion
     }
 }

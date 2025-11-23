@@ -292,6 +292,36 @@ namespace Yuumix.OdinToolkits.Core.Editor
         // 静态使用 Rider 默认
         static int _sharedCount;
 
+        #region Serialized Fields
+
+        // Use [SerializeField] attribute if you want to display a private field in Inspector.
+        // 如果你想在检查器中显示私有字段，请使用 [SerializeField] 属性。
+        // Booleans ask a question that can be answered true or false.
+        // 布尔型变量表示一个可以用真或假回答的问题。
+        [SerializeField]
+        bool isPlayerDead;
+
+        // This groups data from the custom PlayerStats class in the Inspector.
+        // 这会在检查器中对自定义 PlayerStats 类的数据进行分组。
+        [SerializeField]
+        PlayerStats stats;
+
+        // Use the Range attribute to set minimum and maximum values. 
+        // 使用 Range 属性设置最小值和最大值。
+        // This limits the values to a Range and creates a slider in the Inspector.
+        // 这会将值限制在一个范围内，并在检查器中创建一个滑块。
+        [Range(0f, 1f)]
+        [SerializeField]
+        float rangedStat;
+
+        // A tooltip can replace a comment on a serialized field and do double duty.
+        // 工具提示可以替代序列化字段上的注释，起到双重作用。
+        [Tooltip("This is another statistic for the player.")]
+        [SerializeField]
+        float anotherStat;
+
+        #endregion
+
         // Some prefer to use an underscore prefix for private fields.
         // 有些人更喜欢为私有字段使用下划线前缀。
         int _elapsedTimeInDays;
@@ -447,36 +477,6 @@ namespace Yuumix.OdinToolkits.Core.Editor
         {
             // .. 
         }
-
-        #region Serialized Fields
-
-        // Use [SerializeField] attribute if you want to display a private field in Inspector.
-        // 如果你想在检查器中显示私有字段，请使用 [SerializeField] 属性。
-        // Booleans ask a question that can be answered true or false.
-        // 布尔型变量表示一个可以用真或假回答的问题。
-        [SerializeField]
-        bool isPlayerDead;
-
-        // This groups data from the custom PlayerStats class in the Inspector.
-        // 这会在检查器中对自定义 PlayerStats 类的数据进行分组。
-        [SerializeField]
-        PlayerStats stats;
-
-        // Use the Range attribute to set minimum and maximum values. 
-        // 使用 Range 属性设置最小值和最大值。
-        // This limits the values to a Range and creates a slider in the Inspector.
-        // 这会将值限制在一个范围内，并在检查器中创建一个滑块。
-        [Range(0f, 1f)]
-        [SerializeField]
-        float rangedStat;
-
-        // A tooltip can replace a comment on a serialized field and do double duty.
-        // 工具提示可以替代序列化字段上的注释，起到双重作用。
-        [Tooltip("This is another statistic for the player.")]
-        [SerializeField]
-        float anotherStat;
-
-        #endregion
 
         #region Nested type: ${0}
 

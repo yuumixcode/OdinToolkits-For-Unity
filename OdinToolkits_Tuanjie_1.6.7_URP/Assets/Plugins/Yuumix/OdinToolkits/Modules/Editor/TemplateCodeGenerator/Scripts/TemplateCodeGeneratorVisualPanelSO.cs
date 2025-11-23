@@ -21,6 +21,62 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         public static BilingualData GenerateTemplateToolMenuPathData =
             new BilingualData("模板代码生成工具", "Generate Template Tool");
 
+        #region Serialized Fields
+
+        [PropertyOrder(-99)]
+        public BilingualHeaderWidget headerWidget;
+
+        [PropertyOrder(-1)]
+        [BilingualTitle("脚本所在命名空间", "Namespace Config")]
+        [HideLabel]
+        public string codeNamespace;
+
+        [PropertyOrder(-1)]
+        [BilingualTitle("脚本类名", "Script Class Name")]
+        [HideLabel]
+        public string codeClassName;
+
+        [PropertyOrder(-1)]
+        [BilingualTitle("脚本模板选择器", "Script Template Selector")]
+        [ValueDropdown(nameof(templateList), ExcludeExistingValuesInList = true)]
+        [HideLabel]
+        public string templateSelector;
+
+        [PropertyOrder(-1)]
+        [BilingualTitle("生成脚本文件的文件夹路径", "Target Folder Path")]
+        [PropertySpace(SpaceBefore = 0, SpaceAfter = 10)]
+        [ValueDropdown(nameof(TryGetPath), IsUniqueList = true, ExcludeExistingValuesInList = true)]
+        [HideLabel]
+        public string codeTargetPath;
+
+        [PropertyOrder(50)]
+        [BilingualTitleGroup("Id", "工具配置", "Tool Config")]
+        [BilingualInfoBox("脚本模板文件必须为 .txt 文本文件，修改模板路径后需要点击应用工具配置"
+            , "The script template file must be a .txt text file. After modifying the template path, you need to click the \"Apply Config\" button to configure the tool.")]
+        [Sirenix.OdinInspector.FilePath(IncludeFileExtension = true, RequireExistingPath = true)]
+        [BilingualText("脚本模板路径配置", "Script Template Path Config")]
+        public List<string> templatePathConfig;
+
+        [PropertyOrder(50)]
+        [BilingualTitleGroup("Id", "工具配置", "Tool Config")]
+        [FolderPath]
+        [BilingualText("目标文件夹路径配置", "Target Folder Path Config")]
+        public List<string> preSavePaths;
+
+        [PropertyOrder(50)]
+        [BilingualTitleGroup("Id2", "过程数据", "Process Data")]
+        [ReadOnly]
+        [ListDrawerSettings(IsReadOnly = true)]
+        public List<string> templateList;
+
+        [PropertyOrder(50)]
+        [BilingualTitleGroup("Id2", "过程数据", "Process Data")]
+        [ReadOnly]
+        [DictionaryDrawerSettings(DisplayMode = DictionaryDisplayOptions.Foldout)]
+        public Dictionary<string, string> TemplatePathMaps = new Dictionary<string, string>();
+
+        #endregion
+
         #region Event Functions
 
         void OnEnable()
@@ -190,61 +246,5 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         {
             ToastEvent?.Invoke(position, icon, msg, color, duration);
         }
-
-        #region Serialized Fields
-
-        [PropertyOrder(-99)]
-        public BilingualHeaderWidget headerWidget;
-
-        [PropertyOrder(-1)]
-        [BilingualTitle("脚本所在命名空间", "Namespace Config")]
-        [HideLabel]
-        public string codeNamespace;
-
-        [PropertyOrder(-1)]
-        [BilingualTitle("脚本类名", "Script Class Name")]
-        [HideLabel]
-        public string codeClassName;
-
-        [PropertyOrder(-1)]
-        [BilingualTitle("脚本模板选择器", "Script Template Selector")]
-        [ValueDropdown(nameof(templateList), ExcludeExistingValuesInList = true)]
-        [HideLabel]
-        public string templateSelector;
-
-        [PropertyOrder(-1)]
-        [BilingualTitle("生成脚本文件的文件夹路径", "Target Folder Path")]
-        [PropertySpace(SpaceBefore = 0, SpaceAfter = 10)]
-        [ValueDropdown(nameof(TryGetPath), IsUniqueList = true, ExcludeExistingValuesInList = true)]
-        [HideLabel]
-        public string codeTargetPath;
-
-        [PropertyOrder(50)]
-        [BilingualTitleGroup("Id", "工具配置", "Tool Config")]
-        [BilingualInfoBox("脚本模板文件必须为 .txt 文本文件，修改模板路径后需要点击应用工具配置"
-            , "The script template file must be a .txt text file. After modifying the template path, you need to click the \"Apply Config\" button to configure the tool.")]
-        [Sirenix.OdinInspector.FilePath(IncludeFileExtension = true, RequireExistingPath = true)]
-        [BilingualText("脚本模板路径配置", "Script Template Path Config")]
-        public List<string> templatePathConfig;
-
-        [PropertyOrder(50)]
-        [BilingualTitleGroup("Id", "工具配置", "Tool Config")]
-        [FolderPath]
-        [BilingualText("目标文件夹路径配置", "Target Folder Path Config")]
-        public List<string> preSavePaths;
-
-        [PropertyOrder(50)]
-        [BilingualTitleGroup("Id2", "过程数据", "Process Data")]
-        [ReadOnly]
-        [ListDrawerSettings(IsReadOnly = true)]
-        public List<string> templateList;
-
-        [PropertyOrder(50)]
-        [BilingualTitleGroup("Id2", "过程数据", "Process Data")]
-        [ReadOnly]
-        [DictionaryDrawerSettings(DisplayMode = DictionaryDisplayOptions.Foldout)]
-        public Dictionary<string, string> TemplatePathMaps = new Dictionary<string, string>();
-
-        #endregion
     }
 }

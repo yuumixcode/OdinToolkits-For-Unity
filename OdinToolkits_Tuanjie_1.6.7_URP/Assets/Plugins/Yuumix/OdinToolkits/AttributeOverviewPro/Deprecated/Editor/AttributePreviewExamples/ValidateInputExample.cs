@@ -8,75 +8,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class ValidateInputExample : ExampleSO
     {
-        public string MessageProperty => useAlternativeMessage ? alternativeMessage : setMessage;
-
-        // 如果想要通过 Condition 方法设置 ValidateInputAttribute 的其他值的话，需要使用 ref 引用，否则无法覆盖默认值
-        bool IsValid(string value, string thisMessage, ref InfoMessageType messageType)
-        {
-            thisMessage = "Field can't be empty";
-            messageType = InfoMessageType.Error;
-
-            return !string.IsNullOrWhiteSpace(value);
-        }
-
-        string GetMessage() => useAlternativeMessage ? alternativeMessage : setMessage;
-
-        bool ChildrenIsValid(TestIncludeChildren testIncludeChildren)
-        {
-            if (!string.IsNullOrWhiteSpace(testIncludeChildren.child.name))
-            {
-                return true;
-            }
-
-            Debug.Log("TestIncludeChildren 验证一次");
-            return false;
-        }
-
-        bool IsContinuousValidation(string value)
-        {
-            Debug.Log("ContinuousValidation 验证一次");
-            return !string.IsNullOrWhiteSpace(value);
-        }
-
-        bool HasMeshRendererDynamicMessage(GameObject gameObject, ref string errorMessage)
-        {
-            if (gameObject == null)
-            {
-                return true;
-            }
-
-            if (gameObject.GetComponentInChildren<MeshRenderer>() != null)
-            {
-                return true;
-            }
-
-            // 如果 errorMessage == null，则使用默认的错误消息
-            errorMessage = "\"" + gameObject.name + "\" must have a MeshRenderer component";
-
-            return false;
-        }
-
-        bool HasMeshRendererDynamicMessageAndType(GameObject gameObject, ref string errorMessage,
-            ref InfoMessageType messageType)
-        {
-            if (gameObject == null)
-            {
-                return true;
-            }
-
-            if (gameObject.GetComponentInChildren<MeshRenderer>() == null)
-            {
-                // 如果 errorMessage == null，则使用默认的错误消息
-                errorMessage = "\"" + gameObject.name + "\" should have a MeshRenderer component";
-                // 如果 messageType == null，则使用默认的信息类型
-                messageType = messageTypeChanged;
-
-                return false;
-            }
-
-            return true;
-        }
-
         #region Serialized Fields
 
         [FoldoutGroup("Condition 参数 用于验证值")]
@@ -174,6 +105,75 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         public GameObject dynamicMessageAndType;
 
         #endregion
+
+        public string MessageProperty => useAlternativeMessage ? alternativeMessage : setMessage;
+
+        // 如果想要通过 Condition 方法设置 ValidateInputAttribute 的其他值的话，需要使用 ref 引用，否则无法覆盖默认值
+        bool IsValid(string value, string thisMessage, ref InfoMessageType messageType)
+        {
+            thisMessage = "Field can't be empty";
+            messageType = InfoMessageType.Error;
+
+            return !string.IsNullOrWhiteSpace(value);
+        }
+
+        string GetMessage() => useAlternativeMessage ? alternativeMessage : setMessage;
+
+        bool ChildrenIsValid(TestIncludeChildren testIncludeChildren)
+        {
+            if (!string.IsNullOrWhiteSpace(testIncludeChildren.child.name))
+            {
+                return true;
+            }
+
+            Debug.Log("TestIncludeChildren 验证一次");
+            return false;
+        }
+
+        bool IsContinuousValidation(string value)
+        {
+            Debug.Log("ContinuousValidation 验证一次");
+            return !string.IsNullOrWhiteSpace(value);
+        }
+
+        bool HasMeshRendererDynamicMessage(GameObject gameObject, ref string errorMessage)
+        {
+            if (gameObject == null)
+            {
+                return true;
+            }
+
+            if (gameObject.GetComponentInChildren<MeshRenderer>() != null)
+            {
+                return true;
+            }
+
+            // 如果 errorMessage == null，则使用默认的错误消息
+            errorMessage = "\"" + gameObject.name + "\" must have a MeshRenderer component";
+
+            return false;
+        }
+
+        bool HasMeshRendererDynamicMessageAndType(GameObject gameObject, ref string errorMessage,
+            ref InfoMessageType messageType)
+        {
+            if (gameObject == null)
+            {
+                return true;
+            }
+
+            if (gameObject.GetComponentInChildren<MeshRenderer>() == null)
+            {
+                // 如果 errorMessage == null，则使用默认的错误消息
+                errorMessage = "\"" + gameObject.name + "\" should have a MeshRenderer component";
+                // 如果 messageType == null，则使用默认的信息类型
+                messageType = messageTypeChanged;
+
+                return false;
+            }
+
+            return true;
+        }
 
         #region Nested type: ${0}
 

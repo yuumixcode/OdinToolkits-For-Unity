@@ -11,6 +11,40 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class ColorPaletteExample : ExampleSO
     {
+        #region Serialized Fields
+
+        [Title("Unity 提供的 Color 相关的特性")]
+        [ColorUsage(true)]
+        public Color color1;
+
+        [Title("Odin 的 ColorPalette")]
+        [ColorPalette]
+        public Color color2;
+
+        [InfoBox("PaletteName 是用于自定义 Palette 的")]
+        [ColorPalette(PaletteName = "Color3")]
+        public Color color3;
+
+        [ColorPalette(ShowAlpha = true)]
+        public Color color4;
+
+        // ------------------------------------
+        // Color palettes can be accessed and modified from code.
+        // Note that the color palettes will NOT automatically be included in your builds.
+        // But you can easily fetch all color palettes via the ColorPaletteManager 
+        // and include them in your game like so:
+        // ------------------------------------
+        // ColorPalette 这个类不会自动添加到构建中，也就是说不能在业务逻辑中获取对应的颜色，因为它属于 Editor，
+        // 但是可以自己创建一个同名的类 ColorPalette，通过 ColorPaletteManager 获取到所有的颜色，存入一个字段中，
+        // 然后在运行时可以通过代码获取对应的的颜色
+        // ------------------------------------
+        [FoldoutGroup("Color Palettes", false)]
+        [ListDrawerSettings(IsReadOnly = true)]
+        [PropertyOrder(9)]
+        public List<ColorPalette> colorPalettes;
+
+        #endregion
+
         [FoldoutGroup("Color Palettes")]
         [Button(ButtonSizes.Large)]
         [GUIColor(0, 1, 0)]
@@ -45,40 +79,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
 
             #endregion
         }
-
-        #endregion
-
-        #region Serialized Fields
-
-        [Title("Unity 提供的 Color 相关的特性")]
-        [ColorUsage(true)]
-        public Color color1;
-
-        [Title("Odin 的 ColorPalette")]
-        [ColorPalette]
-        public Color color2;
-
-        [InfoBox("PaletteName 是用于自定义 Palette 的")]
-        [ColorPalette(PaletteName = "Color3")]
-        public Color color3;
-
-        [ColorPalette(ShowAlpha = true)]
-        public Color color4;
-
-        // ------------------------------------
-        // Color palettes can be accessed and modified from code.
-        // Note that the color palettes will NOT automatically be included in your builds.
-        // But you can easily fetch all color palettes via the ColorPaletteManager 
-        // and include them in your game like so:
-        // ------------------------------------
-        // ColorPalette 这个类不会自动添加到构建中，也就是说不能在业务逻辑中获取对应的颜色，因为它属于 Editor，
-        // 但是可以自己创建一个同名的类 ColorPalette，通过 ColorPaletteManager 获取到所有的颜色，存入一个字段中，
-        // 然后在运行时可以通过代码获取对应的的颜色
-        // ------------------------------------
-        [FoldoutGroup("Color Palettes", false)]
-        [ListDrawerSettings(IsReadOnly = true)]
-        [PropertyOrder(9)]
-        public List<ColorPalette> colorPalettes;
 
         #endregion
     }

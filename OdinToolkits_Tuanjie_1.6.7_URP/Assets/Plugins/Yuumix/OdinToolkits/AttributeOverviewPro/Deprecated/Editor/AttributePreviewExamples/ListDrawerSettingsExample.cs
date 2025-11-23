@@ -11,40 +11,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class ListDrawerSettingsExample : ExampleSO
     {
-        Color GetElementColor(int index) => index % 2 == 0 ? firstColor : secondColor;
-
-        void BeginDrawListElement(int index)
-        {
-            SirenixEditorGUI.BeginBox(injectListElementGUI[index].someString);
-        }
-
-        void EndDrawListElement(int index)
-        {
-            SirenixEditorGUI.EndBox();
-        }
-
-        void DrawRefreshButton()
-        {
-            if (SirenixEditorGUI.ToolbarButton(EditorIcons.Refresh))
-            {
-                Debug.Log("执行自定义 Refresh 方法");
-            }
-        }
-
-        void CustomRemoveElementFunction(List<int> list, int element)
-        {
-            Debug.Log("移除的元素为: " + element);
-            list.Remove(element);
-        }
-
-        void CustomRemoveElementIndex(List<int> list, int index)
-        {
-            list.RemoveAt(index);
-            Debug.Log("Custom Remove Element Index Function Called");
-        }
-
-        int CustomAddFunction() => customAddBehaviour.Count;
-
         #region Serialized Fields
 
         [FoldoutGroup("ListDrawerSettings 基础使用")]
@@ -169,6 +135,40 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         public SomeStruct[] injectListElementGUI;
 
         #endregion
+
+        Color GetElementColor(int index) => index % 2 == 0 ? firstColor : secondColor;
+
+        void BeginDrawListElement(int index)
+        {
+            SirenixEditorGUI.BeginBox(injectListElementGUI[index].someString);
+        }
+
+        void EndDrawListElement(int index)
+        {
+            SirenixEditorGUI.EndBox();
+        }
+
+        void DrawRefreshButton()
+        {
+            if (SirenixEditorGUI.ToolbarButton(EditorIcons.Refresh))
+            {
+                Debug.Log("执行自定义 Refresh 方法");
+            }
+        }
+
+        void CustomRemoveElementFunction(List<int> list, int element)
+        {
+            Debug.Log("移除的元素为: " + element);
+            list.Remove(element);
+        }
+
+        void CustomRemoveElementIndex(List<int> list, int index)
+        {
+            list.RemoveAt(index);
+            Debug.Log("Custom Remove Element Index Function Called");
+        }
+
+        int CustomAddFunction() => customAddBehaviour.Count;
 
         #region Nested type: ${0}
 

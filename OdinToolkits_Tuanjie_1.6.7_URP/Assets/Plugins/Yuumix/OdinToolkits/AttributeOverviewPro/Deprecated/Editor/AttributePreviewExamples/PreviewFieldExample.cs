@@ -7,16 +7,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class PreviewFieldExample : ExampleSO
     {
-        void Log3()
-        {
-            Debug.Log("texture2D3 的值为: " + texture2D3);
-        }
-
-        void Log4()
-        {
-            Debug.Log("texture2D4 的值为: " + texture2D4);
-        }
-
         #region Serialized Fields
 
         [FoldoutGroup("无参数使用")]
@@ -49,5 +39,15 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         Texture2D texture2D4;
 
         #endregion
+
+        void Log3()
+        {
+            Debug.Log("texture2D3 的值为: " + texture2D3);
+        }
+
+        void Log4()
+        {
+            Debug.Log("texture2D4 的值为: " + texture2D4);
+        }
     }
 }
