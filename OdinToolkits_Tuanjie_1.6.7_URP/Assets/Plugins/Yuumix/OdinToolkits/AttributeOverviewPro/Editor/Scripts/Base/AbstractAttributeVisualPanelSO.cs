@@ -49,10 +49,17 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
             _isShowShortenCodePreview = false;
             _usageTipsTextHeightCache = new Dictionary<string, float>();
             _attributeParameterTextHeightCache = new Dictionary<string, float>();
-            currentSelectedExample = _model.GetInitialExample();
-            foreach (var item in _examplePreviewItems)
+            if (_model != null)
             {
-                item.Reset();
+                currentSelectedExample = _model.GetInitialExample();
+            }
+
+            if (_examplePreviewItems is { Length: > 0 })
+            {
+                foreach (var item in _examplePreviewItems)
+                {
+                    item.Reset();
+                }
             }
         }
 
