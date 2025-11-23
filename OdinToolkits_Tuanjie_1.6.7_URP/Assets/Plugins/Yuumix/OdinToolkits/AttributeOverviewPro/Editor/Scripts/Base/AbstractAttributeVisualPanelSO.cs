@@ -421,16 +421,22 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 
         void DrawUsageExampleTitleButton()
         {
-            var headerButtonRect = _usageHeaderToolbarRect.AlignCenterY(_usageHeaderToolbarRect.height).AlignRight(220);
+            var headerButtonRect = _usageHeaderToolbarRect.AlignCenterY(_usageHeaderToolbarRect.height).AlignRight(240);
             var leftButtonRect = headerButtonRect.Split(0, 2);
-            if (GUI.Button(leftButtonRect, GUIHelper.TempContent(_pingMonoScriptButtonLabel),
+            var pingTexture =
+                SdfIcons.CreateTransparentIconTexture(SdfIconType.HandIndexFill, Color.white, 20, 20,
+                    0);
+            if (GUI.Button(leftButtonRect, GUIHelper.TempContent(" " + _pingMonoScriptButtonLabel, pingTexture),
                     SirenixGUIStyles.ToolbarButton))
             {
                 EditorGUIUtility.PingObject(GetCurrentExampleMonoScript());
             }
 
             var rightButtonRect = headerButtonRect.Split(1, 2);
-            if (GUI.Button(rightButtonRect, GUIHelper.TempContent(_resetExampleButtonLabel),
+            var resetTexture =
+                SdfIcons.CreateTransparentIconTexture(SdfIconType.ArrowClockwise, Color.white, 20, 20,
+                    0);
+            if (GUI.Button(rightButtonRect, GUIHelper.TempContent(" " + _resetExampleButtonLabel, resetTexture),
                     SirenixGUIStyles.ToolbarButton))
             {
                 if (currentSelectedExample is IOdinToolkitsEditorReset canResetExample)
@@ -560,23 +566,38 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
             DrawContainerWithTitle(_codePreviewLabel, DrawCodePreview, out var headerToolBarRect);
             SirenixEditorGUI.DrawBorders(headerToolBarRect, 1, Color.clear);
             var showSwitchButtonRect = headerToolBarRect.AlignLeft(140f).AddXMin(1f);
+            var viewFullCodeTexture =
+                SdfIcons.CreateTransparentIconTexture(SdfIconType.Fullscreen, Color.white, 20, 20,
+                    0);
+            var viewShortenCodeTexture =
+                SdfIcons.CreateTransparentIconTexture(SdfIconType.FullscreenExit, Color.white, 20, 20,
+                    0);
             if (_isShowShortenCodePreview)
             {
-                if (GUI.Button(showSwitchButtonRect, _viewFullCodeButtonLabel, SirenixGUIStyles.ToolbarButton))
+                if (GUI.Button(showSwitchButtonRect,
+                        GUIHelper.TempContent(" " + _viewFullCodeButtonLabel, viewFullCodeTexture),
+                        SirenixGUIStyles.ToolbarButton))
                 {
                     _isShowShortenCodePreview = false;
                 }
             }
             else
             {
-                if (GUI.Button(showSwitchButtonRect, _viewShortenCodeButtonLabel, SirenixGUIStyles.ToolbarButton))
+                if (GUI.Button(showSwitchButtonRect,
+                        GUIHelper.TempContent(" " + _viewShortenCodeButtonLabel, viewShortenCodeTexture),
+                        SirenixGUIStyles.ToolbarButton))
                 {
                     _isShowShortenCodePreview = true;
                 }
             }
 
             var copyButtonRect = headerToolBarRect.AlignRight(100f);
-            if (GUI.Button(copyButtonRect, _copyCodeButtonLabel, SirenixGUIStyles.ToolbarButton))
+            var copyCodeTexture =
+                SdfIcons.CreateTransparentIconTexture(SdfIconType.Stack, Color.white, 20, 20,
+                    0);
+            if (GUI.Button(copyButtonRect,
+                    GUIHelper.TempContent(" " + _copyCodeButtonLabel, copyCodeTexture),
+                    SirenixGUIStyles.ToolbarButton))
             {
                 EditorGUIUtility.systemCopyBuffer = _isShowShortenCodePreview
                     ? CurrentExampleShortenCode
