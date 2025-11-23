@@ -42,7 +42,12 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
         {
             var monoScripts = SelectionMonoScripts.ToList();
             var types = monoScripts.Select(x => x.GetClass()).ToList();
-            ScriptDocGeneratorVisualPanelSO.Instance.TemporaryTypes = types;
+            var temporaryTypes = ScriptDocGeneratorVisualPanelSO.Instance.TemporaryTypes;
+            temporaryTypes.AddRange(types);
+            var distinctTypes = temporaryTypes
+                .Distinct()
+                .ToList();
+            ScriptDocGeneratorVisualPanelSO.Instance.TemporaryTypes = distinctTypes;
             ScriptDocGeneratorVisualPanelSO.Instance.typeSource =
                 ScriptDocGeneratorVisualPanelSO.TypeSource.MultipleTypes;
             foreach (var type in types)
@@ -67,7 +72,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
                 return false;
             }
 
-            var monoScript = SelectionMonoScripts.First();
+            var monoScript = SelectionMonoScripts[0];
             var targetType = monoScript.GetClass();
             return targetType != null;
         }
@@ -82,7 +87,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
         public static bool AddScriptsToTargetTypesValidate()
         {
             var length = SelectionMonoScripts.Length;
-            if (length < 2)
+            if (length < 1)
             {
                 return false;
             }

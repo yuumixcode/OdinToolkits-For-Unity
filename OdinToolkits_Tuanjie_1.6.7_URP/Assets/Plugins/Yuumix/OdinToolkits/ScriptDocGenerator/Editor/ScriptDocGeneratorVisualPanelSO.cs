@@ -4,6 +4,7 @@ using Sirenix.Utilities.Editor;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core;
@@ -132,15 +133,34 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
 
         #region 单类型模式
 
+        BilingualData _singleTypeDataLabel = new BilingualData("目标 Type", "Single Target Type");
+
         [PropertyOrder(25)]
         [ShowIf("IsSingleType")]
         [Title("$_singleTypeDataLabel")]
-        [HideLabel]
+        [LabelWidth(270)]
+        [BilingualText("拖拽 Script 文件到此处，自动识别类型: ", "Drag Script File Here to Auto Identify Type: ")]
+        [InlineButton("ResetSelectedMonoScript", SdfIconType.ArrowClockwise, "")]
+        [OnValueChanged(nameof(OnSelectedMonoScriptChanged))]
+        [CustomContextMenu("Reset To Default", "ResetSelectedMonoScript")]
+        public MonoScript selectedMonoScript;
+
+        void OnSelectedMonoScriptChanged()
+        {
+            if (selectedMonoScript)
+            {
+                TargetType = selectedMonoScript.GetClass();
+                Debug.Log("识别到 Type: " + TargetType + "，已更新 TargetType");
+            }
+        }
+
+        [PropertyOrder(25)]
+        [ShowIf("IsSingleType")]
+        [BilingualText("手动选择 Type: ", "Manually Select Type: ")]
+        [LabelWidth(130)]
         [InlineButton("ResetSingleType", SdfIconType.ArrowClockwise, "")]
         [CustomContextMenu("Reset To Default", "ResetSingleType")]
         public Type TargetType;
-
-        BilingualData _singleTypeDataLabel = new BilingualData("目标 Type", "Single Target Type");
 
         #endregion
 
@@ -158,8 +178,32 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
         public TypesCacheSO typesCache;
 
         [PropertyOrder(25)]
-        [ShowIf("CanShowTemporaryTypes")]
         [BilingualTitle("Type 列表", "TemporaryTypes Config")]
+        [ShowIf("IsMultipleType")]
+        [LabelWidth(270)]
+        [BilingualText("拖拽多个 Script 文件到此处，自动识别类型: ", "Drag Multiple Script Files Here to Auto Identify Types: ")]
+        [InlineButton("ResetSelectedMonoScriptArray", SdfIconType.ArrowClockwise, "")]
+        [OnValueChanged(nameof(OnSelectedMonoScriptArrayChanged))]
+        [CustomContextMenu("Reset To Default", "ResetSelectedMonoScriptArray")]
+        public MonoScript[] selectedMonoScriptArray;
+
+        void OnSelectedMonoScriptArrayChanged()
+        {
+            if (selectedMonoScriptArray.Length > 0)
+            {
+                var types = selectedMonoScriptArray.Distinct()
+                    .Select(x => x.GetClass())
+                    .ToList();
+                TemporaryTypes.AddRange(types);
+                var distinctTypes = TemporaryTypes
+                    .Distinct()
+                    .ToList();
+                TemporaryTypes = distinctTypes;
+            }
+        }
+
+        [PropertyOrder(25)]
+        [ShowIf("CanShowTemporaryTypes")]
         [ListDrawerSettings(OnTitleBarGUI = nameof(DrawTemporaryTypesTitleBarGUI), NumberOfItemsPerPage = 5)]
         [HideLabel]
         [InlineButton("ResetTemporaryTypes", SdfIconType.ArrowClockwise, "")]
@@ -382,8 +426,10 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
             ResetDocFolderPath();
             ResetDocGeneratorSettingSO();
             ResetTypeSource();
+            ResetSelectedMonoScript();
             ResetSingleType();
             ResetTypesCacheSO();
+            ResetSelectedMonoScriptArray();
             ResetTemporaryTypes();
             ResetTypesCacheSOFolderPath();
             ResetIsCustomizingSaveConfig();
@@ -412,6 +458,11 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
             TargetType = null;
         }
 
+        void ResetSelectedMonoScript()
+        {
+            selectedMonoScript = null;
+        }
+
         void ResetTypesCacheSO()
         {
             typesCache = null;
@@ -420,6 +471,11 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
         void ResetTemporaryTypes()
         {
             TemporaryTypes = new List<Type>();
+        }
+
+        void ResetSelectedMonoScriptArray()
+        {
+            selectedMonoScriptArray = new MonoScript[] { };
         }
 
         void ResetTypesCacheSOFolderPath()
