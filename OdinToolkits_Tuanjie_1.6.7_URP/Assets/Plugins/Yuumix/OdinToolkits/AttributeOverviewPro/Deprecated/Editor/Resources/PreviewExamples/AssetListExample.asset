@@ -1,5 +1,5 @@
 %YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
+%TAG !u! tag:yousandi.cn,2023:
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1645cdd07548d4c34881cc4f1ac00722, type: 3}
   m_Name: AssetListExample
   m_EditorClassIdentifier: 
-  example: {fileID: 11400000, guid: 32eb54400d3c547028b6a56f391142b1, type: 2}
+  example: {fileID: 11400000, guid: c9403daa3df9c456aad2aed804c0cea6, type: 2}
   odinExamples:
   - {fileID: 11400000, guid: 4a18514f3d8a241bbafad938c14c4cfb, type: 2}
   - {fileID: 11400000, guid: 36906dd1369334aec9d8716362e97182, type: 2}

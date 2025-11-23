@@ -22,3 +22,4 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   headerWidget: {}
+  currentSelectedExample: {fileID: 11400000, guid: 300cad3eba56f43f7aaca583d23a3f52, type: 2}

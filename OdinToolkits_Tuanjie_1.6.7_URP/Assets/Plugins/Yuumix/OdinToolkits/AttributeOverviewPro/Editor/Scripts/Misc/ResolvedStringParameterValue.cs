@@ -19,10 +19,15 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         static readonly BilingualData FallbackValueLabel = new BilingualData("回退值", "Fallback Value");
         static readonly BilingualData NamedValuesLabel = new BilingualData("特殊命名参数值 - Named Values", "Named Values");
 
-        static readonly ParameterValue DefaultExistedNamedValues = new ParameterValue(
-            typeof(InspectorProperty).FullName, "$property",
-            new BilingualData("InspectorProperty 代表检查器中的一个 Property，即应用此特性的成员",
-                "The InspectorProperty representing the member that has attribute applied to it."));
+        static readonly ParameterValue[] DefaultExistedNamedValues =
+        {
+            new ParameterValue(
+                typeof(InspectorProperty).FullName, "$property",
+                new BilingualData("InspectorProperty 代表检查器中的一个 Property，即应用此特性的成员。类似于 Unity 的 SerializedProperty。",
+                    "The InspectorProperty representing the member that has attribute applied to it. Similar to Unity's SerializedProperty.")),
+            new ParameterValue("TParent", "$root", new BilingualData("TParent 代表此成员所在的类。可以通过这个类访问类中的其他成员。",
+                "The TParent representing the parent type of the member that has attribute applied to it."))
+        };
 
         public ResolvedStringParameterValue(string parameterName, ResolverType resolverType,
             string resolverTargetType, string fallbackValue, List<ParameterValue> additionalNamedValues)
@@ -31,10 +36,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
             ResolverType = resolverType;
             ResolverTargetType = resolverTargetType;
             FallbackValue = fallbackValue;
-            NamedValues = new List<ParameterValue>
-            {
-                DefaultExistedNamedValues
-            };
+            NamedValues = new List<ParameterValue>(DefaultExistedNamedValues);
             NamedValues.AddRange(additionalNamedValues);
             CreateResolverInfoTable();
             CreateNamedValueTable();

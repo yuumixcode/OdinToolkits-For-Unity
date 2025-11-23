@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
+using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
 {
@@ -11,49 +12,67 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     {
         #region Serialized Fields
 
-        [FoldoutGroup("无参数使用")]
+        [FoldoutGroup("NoParameterTitleLabel")]
         [AssetList]
-        [InlineButton("Log1", "输出值信息")]
+        [InlineButton("Log1", "LogButtonLabel")]
         public ExampleSO example;
 
-        [FoldoutGroup("AutoPopulate 自动填充列表")]
+        [FoldoutGroup("AutoPopulateTitleLabel")]
         [AssetList(AutoPopulate = true)]
-        [InlineButton("Log2", "输出值信息")]
+        [InlineButton("Log2", "LogButtonLabel")]
         public List<ExampleOdinSO> odinExamples;
 
-        [FoldoutGroup("Path 文件夹相对路径")]
-        [InfoBox("文件夹路径省略 Assets/，且 Rider 中可以智能补全路径")]
-        [AssetList(Path = "Plugins/OdinToolkits")]
-        [InlineButton("Log3", "输出值信息")]
+        [FoldoutGroup("PathTitleLabel")]
+        [InfoBox("文件夹路径可以省略 Assets/。另外 Rider 提供智能补全路径")]
+        [AssetList(Path = "Plugins/Yuumix/OdinToolkits")]
+        [InlineButton("Log3", "LogButtonLabel")]
         public List<ExampleOdinSO> odinExamples2;
 
-        [FoldoutGroup("Tags 使用逗号分隔 Respawn Tag")]
-        [InfoBox("Tags = \"Respawn\"")]
+        [FoldoutGroup("TagsTitleLabel")]
+        [InfoBox("Tags = \"Respawn\"。可以使用逗号分隔多个 Tag")]
         [AssetList(Tags = "Respawn")]
-        [InlineButton("Log4", "输出值信息")]
+        [InlineButton("Log4", "LogButtonLabel")]
         public List<GameObject> gameObjectsWithTags;
 
-        [FoldoutGroup("TaLayerNames 使用逗号分隔 Layer")]
-        [InfoBox("LayerNames = \"Water\"")]
+        [FoldoutGroup("LayerNamesTitleLabel")]
+        [InfoBox("LayerNames = \"Water\"。可以使用逗号分隔多个 LayerName")]
         [AssetList(LayerNames = "Water")]
-        [InlineButton("Log5", "输出值信息")]
+        [InlineButton("Log5", "LogButtonLabel")]
         public List<GameObject> gameObjectsWithLayerName;
 
-        [FoldoutGroup("AssetNamePrefix")]
-        [InfoBox("Prefix = \"Shared\"")]
+        [FoldoutGroup("AssetNamePrefixTitleLabel")]
+        [InfoBox("AssetNamePrefix = \"Shared\"")]
         [AssetList(AssetNamePrefix = "Shared")]
-        [InlineButton("Log6", "输出值信息")]
+        [InlineButton("Log6", "LogButtonLabel")]
         public List<GameObject> gameObjectsWithPrefix;
 
         [FoldoutGroup("CustomMethod")]
         [InfoBox("CustomMethod = \"IsPrefab\"")]
         [AssetList(CustomFilterMethod = "IsPrefab")]
-        [InlineButton("Log7", "输出值信息")]
+        [InlineButton("Log7", "$LogButtonLabel")]
         public List<GameObject> gameObjectsWithCustomMethod;
+
+        bool IsPrefab(GameObject asset) => PrefabUtility.GetPrefabAssetType(asset) == PrefabAssetType.Regular;
 
         #endregion
 
-        bool IsPrefab(GameObject asset) => PrefabUtility.GetPrefabAssetType(asset) == PrefabAssetType.Regular;
+        #region Helper
+
+        static readonly BilingualData LogButtonLabel = new BilingualData("输出值信息", "Output Value");
+        static readonly BilingualData NoParameterTitleLabel = new BilingualData("无参数", "No Parameter");
+
+        static readonly BilingualData AutoPopulateTitleLabel =
+            new BilingualData("参数：AutoPopulate", "Parameter: AutoPopulate");
+
+        static readonly BilingualData PathTitleLabel = new BilingualData("参数：Path", "Parameter: Path");
+
+        static readonly BilingualData TagsTitleLabel = new BilingualData("参数：Tags", "Parameter: Tags");
+
+        static readonly BilingualData LayerNamesTitleLabel =
+            new BilingualData("参数：LayerNames", "Parameter: LayerNames");
+
+        static readonly BilingualData AssetNamePrefixTitleLabel =
+            new BilingualData("参数：AssetNamePrefix", "Parameter: AssetNamePrefix");
 
         void Log1()
         {
@@ -89,5 +108,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         {
             Debug.Log("GameObjectsWithCustomMethod 列表的长度为: " + gameObjectsWithCustomMethod.Count);
         }
+
+        #endregion
     }
 }

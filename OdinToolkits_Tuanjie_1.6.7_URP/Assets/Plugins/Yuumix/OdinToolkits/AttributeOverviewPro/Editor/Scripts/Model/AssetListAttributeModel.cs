@@ -18,21 +18,21 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                 OdinInspectorDocumentationLinks.ASSET_LIST_URL);
             AttributeParameters = new ParameterValue[6]
             {
+                new ParameterValue(typeof(string).FullName, "Path",
+                    new BilingualData("根据资源的相对路径筛选出可选择的资源列表，Rider 中可以智能补全路径",
+                        "Filter the asset list to only include assets which is located at the specified path.")),
                 new ParameterValue(typeof(bool).FullName, "AutoPopulate",
                     new BilingualData("是否自动填充满足条件的所有资源到列表中",
                         "If true, all assets found and displayed by the asset list, will automatically be added to the list when inspected.")),
                 new ParameterValue(typeof(string).FullName, "Tags",
-                    new BilingualData("根据资源的 Tag 筛选出可选择的资源列表",
+                    new BilingualData("根据资源的 Tag 筛选出可选择的资源列表，使用逗号分隔多个 Tag",
                         "Comma separated list of tags to filter the asset list.")),
                 new ParameterValue(typeof(string).FullName, "LayerNames",
-                    new BilingualData("根据资源的 LayerName 筛选出可选择的资源列表",
+                    new BilingualData("根据资源的 LayerName 筛选出可选择的资源列表，使用逗号分隔多个 LayerName",
                         "Filter the asset list to only include assets with a specified layer.")),
                 new ParameterValue(typeof(string).FullName, "AssetNamePrefix",
                     new BilingualData("根据资源的文件名前缀筛选出可选择的资源列表",
                         "Filter the asset list to only include assets which name begins with.")),
-                new ParameterValue(typeof(string).FullName, "Path",
-                    new BilingualData("根据资源的相对路径筛选出可选择的资源列表",
-                        "Filter the asset list to only include assets which is located at the specified path.")),
                 new ParameterValue(typeof(string).FullName, "CustomFilterMethod",
                     new BilingualData("设置自定义筛选方法，根据此方法筛选出可选择的资源列表",
                         "Filter the asset list to only include assets for which the given filter method returns true."))
@@ -55,7 +55,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                 new AttributeExamplePreviewItem().InitializeUnitySerializedExample("Asset List Basic",
                     AssetListExampleSO.Instance),
                 new AttributeExamplePreviewItem().InitializeUnitySerializedExample("Custom Filter Method",
-                    AssetListExampleSOForCustomFilterMethod.Instance)
+                    AssetListExampleForCustomFilterMethodSO.Instance)
             };
         }
     }

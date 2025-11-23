@@ -14,8 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   singleObject: {fileID: 0}
   assetList: []
-  scriptableObject: {fileID: 0}
-  autoPopulatedWhenInspected: []
-  allPrefabsWithLayerName: []
-  prefabsStartingWithRock: []
+  autoPopulatedWhenInspected:
+  - {fileID: 11400000, guid: 08379ccefc05200459f90a1c0711a340, type: 2}
+  - {fileID: 11400000, guid: c93a45850fecf4179ae060b84f49c98b, type: 2}
+  - {fileID: 11400000, guid: 2aab00e0d9a0f44678a1098806267432, type: 2}
+  - {fileID: 11400000, guid: ffab2d666ccf2481886a0724707f9f46, type: 2}
+  - {fileID: 11400000, guid: 937b6c812faac4006a3ec56a7b4ff0f0, type: 2}
+  - {fileID: 11400000, guid: 61b3dabbb67ee46ab9cff746335bc66c, type: 2}
+  - {fileID: 11400000, guid: 0226546944bef40a594215f2e77db8a1, type: 2}
+  gameObjectsWithLayerNames: []
+  gameObjectsWithNamePrefix: []
   gameObjectsWithTag: []
