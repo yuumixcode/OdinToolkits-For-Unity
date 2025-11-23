@@ -134,12 +134,12 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         }
 
         static float CalculateHeight(string content, GUITable table, int col, int row) =>
-            AttributeOverviewProUtility.TableCellTextStyle.CalcHeight(GUIHelper.TempContent(content),
+            AttributeOverviewProEditorUtility.TableCellTextStyle.CalcHeight(GUIHelper.TempContent(content),
                 table[col, row].Rect.width);
 
         static void DrawTableCell(Rect rect, string text)
         {
-            EditorGUI.LabelField(rect, text, AttributeOverviewProUtility.TableCellTextStyle);
+            EditorGUI.LabelField(rect, text, AttributeOverviewProEditorUtility.TableCellTextStyle);
         }
 
         string GetResolverTypeString()

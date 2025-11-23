@@ -22,9 +22,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 
     public static class OdinAttributeCategoryExtensions
     {
-        public static bool HasFlagFast(this OdinAttributeCategory value, OdinAttributeCategory flag)
-        {
-            return (value & flag) != 0;
-        }
+        public static bool HasFlagFast(this OdinAttributeCategory value, OdinAttributeCategory flag) =>
+            (value & flag) != 0;
     }
 }

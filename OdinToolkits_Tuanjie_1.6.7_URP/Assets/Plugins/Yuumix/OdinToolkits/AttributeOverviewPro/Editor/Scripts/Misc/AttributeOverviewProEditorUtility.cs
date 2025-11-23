@@ -4,15 +4,17 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 using Yuumix.OdinToolkits.Core;
+using Yuumix.OdinToolkits.Core.Editor;
 #if UNITY_EDITOR
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 #endif
 
-namespace Yuumix.OdinToolkits.AttributeOverviewPro.Shared
+namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 {
-    public static class AttributeOverviewProUtility
+    public static class AttributeOverviewProEditorUtility
     {
         const int CONTAINER_CONTENT_PADDING = 10;
         static GUIStyle _containerTitleStyle;
@@ -20,6 +22,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Shared
         static GUIStyle _tableCellTextStyle;
         static GUIStyle _resolvedStringParameterValueTitleStyle;
         static GUIStyle _tabButtonCellTextStyle;
+        static GUIStyle _codeTextEditorStyle;
 
         public static GUIStyle ContainerTitleStyle
         {
@@ -87,6 +90,31 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Shared
                     clipping = TextClipping.Overflow
                 };
                 return _tabButtonCellTextStyle;
+            }
+        }
+
+        public static GUIStyle CodeTextEditorStyle
+        {
+            get
+            {
+                _codeTextEditorStyle ??= new GUIStyle(SirenixGUIStyles.MultiLineLabel)
+                {
+                    normal = new GUIStyleState
+                    {
+                        textColor = OdinSyntaxHighlighterSO.TextColor
+                    },
+                    active = new GUIStyleState
+                    {
+                        textColor = OdinSyntaxHighlighterSO.TextColor
+                    },
+                    focused = new GUIStyleState
+                    {
+                        textColor = OdinSyntaxHighlighterSO.TextColor
+                    },
+                    wordWrap = false,
+                    fontSize = 12
+                };
+                return _codeTextEditorStyle;
             }
         }
 

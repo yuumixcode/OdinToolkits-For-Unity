@@ -1,5 +1,5 @@
 %YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
+%TAG !u! tag:yousandi.cn,2023:
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: "OdinToolkits\u5BFC\u51FA\u8BBE\u7F6E_\u4E0D\u5305\u542BCommunity"
   m_EditorClassIdentifier: 
   packageName: OdinToolkits_ExcludeCommunity
-  version: v0.5.3-alpha
+  version: v0.5.4-alpha
   exportFolderPath: Assets/OdinToolkitsData/ExportPackages
   includeDependencies: 0
   overwriteExistingPackage: 0
@@ -25,14 +25,18 @@ MonoBehaviour:
     rid: 1735697950192959488
   wantToResetSOList:
   - {fileID: 11400000, guid: 3ea4454c846624c08bfdc2dacd1d09d4, type: 2}
-  - {fileID: 11400000, guid: 9443b029d8ac84a38b92f000308aa755, type: 2}
-  - {fileID: 11400000, guid: 7684963a102a44cc48b2b1e5c9fab667, type: 2}
   - {fileID: 11400000, guid: f32a2a3d7226b4457b4d2efed9edf7e3, type: 2}
   - {fileID: 11400000, guid: 37f2e4cd489c84a2a9b5e5661cdb09a2, type: 2}
   - {fileID: 11400000, guid: 6afd65f3c1944413cbbd2133c4616bae, type: 2}
   - {fileID: 11400000, guid: 5a3f059e31d2443e983ba3f4f83b2672, type: 2}
   - {fileID: 11400000, guid: f0b99452e9ca74c63bc139eacf6ecd98, type: 2}
-  - {fileID: 11400000, guid: 66deb215f9bfa4121872a3ce9a2baac1, type: 2}
+  - {fileID: 11400000, guid: 22b97ea38a1344401a32c51b5f601f6b, type: 2}
+  - {fileID: 11400000, guid: 49ed75d77992d42389700c375b2fd22c, type: 2}
+  - {fileID: 11400000, guid: 300cad3eba56f43f7aaca583d23a3f52, type: 2}
+  - {fileID: 11400000, guid: 55f53e961da0f47ffb5551156f64162d, type: 2}
+  - {fileID: 11400000, guid: 9de5ccd4145fc43eea863685c522f810, type: 2}
+  - {fileID: 11400000, guid: 7684963a102a44cc48b2b1e5c9fab667, type: 2}
+  - {fileID: 11400000, guid: 54f7526b1d8b4473f855979cb8fd4603, type: 2}
   references:
     version: 2
     RefIds:

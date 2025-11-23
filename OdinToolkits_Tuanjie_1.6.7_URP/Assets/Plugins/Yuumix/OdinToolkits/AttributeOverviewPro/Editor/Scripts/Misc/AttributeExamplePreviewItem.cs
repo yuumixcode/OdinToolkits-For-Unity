@@ -1,6 +1,5 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
-using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
@@ -71,24 +70,24 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                 case AttributeExampleType.OdinSerialized:
                     if (_odinSerializedExample is IOdinToolkitsEditorReset canResetOdinSerializedExample)
                     {
-                        AttributeOverviewProUtility.LogEditorResetSuccess(_odinSerializedExample.GetType().Name);
+                        AttributeOverviewProEditorUtility.LogEditorResetSuccess(_odinSerializedExample.GetType().Name);
                         canResetOdinSerializedExample.EditorReset();
                     }
                     else
                     {
-                        AttributeOverviewProUtility.LogEditorResetWarning(_odinSerializedExample.GetType().Name);
+                        AttributeOverviewProEditorUtility.LogEditorResetWarning(_odinSerializedExample.GetType().Name);
                     }
 
                     break;
                 case AttributeExampleType.UnitySerialized:
                     if (_unitySerializedExample is IOdinToolkitsEditorReset canResetUnitySerializedExample)
                     {
-                        AttributeOverviewProUtility.LogEditorResetSuccess(_unitySerializedExample.GetType().Name);
+                        AttributeOverviewProEditorUtility.LogEditorResetSuccess(_unitySerializedExample.GetType().Name);
                         canResetUnitySerializedExample.EditorReset();
                     }
                     else
                     {
-                        AttributeOverviewProUtility.LogEditorResetWarning(_unitySerializedExample.GetType().Name);
+                        AttributeOverviewProEditorUtility.LogEditorResetWarning(_unitySerializedExample.GetType().Name);
                     }
 
                     break;

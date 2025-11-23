@@ -149,7 +149,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                     OnGUI = (rect, index) =>
                     {
                         EditorGUI.LabelField(rect, (index + 1).ToString(),
-                            AttributeOverviewProUtility.TableCellTextStyle);
+                            AttributeOverviewProEditorUtility.TableCellTextStyle);
                     }
                 },
                 new GUITableColumn
@@ -159,7 +159,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                     OnGUI = (rect, index) =>
                     {
                         EditorGUI.LabelField(rect, _usageTips[index],
-                            AttributeOverviewProUtility.TableCellTextStyle);
+                            AttributeOverviewProEditorUtility.TableCellTextStyle);
                     }
                 });
         }
@@ -199,7 +199,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                     return height;
                 }
 
-                height = AttributeOverviewProUtility.TableCellTextStyle.CalcHeight(text, width);
+                height = AttributeOverviewProEditorUtility.TableCellTextStyle.CalcHeight(text, width);
                 _usageTipsTextHeightCache[key] = height;
 
                 return height;
@@ -252,7 +252,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                     OnGUI = (rect, index) =>
                     {
                         EditorGUI.LabelField(rect, (index + 1).ToString(),
-                            AttributeOverviewProUtility.TableCellTextStyle);
+                            AttributeOverviewProEditorUtility.TableCellTextStyle);
                     }
                 },
                 new GUITableColumn
@@ -262,7 +262,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                     OnGUI = (rect, index) =>
                     {
                         EditorGUI.LabelField(rect, _attributeParameters[index].ReturnType,
-                            AttributeOverviewProUtility.TableCellTextStyle);
+                            AttributeOverviewProEditorUtility.TableCellTextStyle);
                     }
                 },
                 new GUITableColumn
@@ -272,7 +272,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                     OnGUI = (rect, index) =>
                     {
                         EditorGUI.LabelField(rect, _attributeParameters[index].ParameterName,
-                            AttributeOverviewProUtility.TableCellTextStyle);
+                            AttributeOverviewProEditorUtility.TableCellTextStyle);
                     }
                 },
                 new GUITableColumn
@@ -282,7 +282,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                     OnGUI = (rect, index) =>
                     {
                         EditorGUI.LabelField(rect, _attributeParameters[index].GetDescription(),
-                            AttributeOverviewProUtility.TableCellTextStyle);
+                            AttributeOverviewProEditorUtility.TableCellTextStyle);
                     }
                 });
         }
@@ -330,7 +330,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                     return height;
                 }
 
-                height = AttributeOverviewProUtility.TableCellTextStyle.CalcHeight(text, width);
+                height = AttributeOverviewProEditorUtility.TableCellTextStyle.CalcHeight(text, width);
                 _attributeParameterTextHeightCache[key] = height;
                 return height;
             }
@@ -368,7 +368,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                 EditorGUILayout.BeginVertical();
                 GUILayout.Space(5);
                 GUILayout.Label(resolvedString.ParameterName,
-                    AttributeOverviewProUtility.ResolvedStringParameterValueTitleStyle);
+                    AttributeOverviewProEditorUtility.ResolvedStringParameterValueTitleStyle);
                 GUILayout.Space(5);
                 SirenixEditorGUI.HorizontalLineSeparator(new Color(1, 1, 1, 0.4f));
                 GUILayout.Space(10);
@@ -449,18 +449,18 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                 if (currentSelectedExample is IOdinToolkitsEditorReset canResetExample)
                 {
                     canResetExample.EditorReset();
-                    AttributeOverviewProUtility.LogEditorResetSuccess(currentSelectedExample.GetType().Name);
+                    AttributeOverviewProEditorUtility.LogEditorResetSuccess(currentSelectedExample.GetType().Name);
                 }
                 else
                 {
-                    AttributeOverviewProUtility.LogEditorResetWarning(currentSelectedExample.GetType().Name);
+                    AttributeOverviewProEditorUtility.LogEditorResetWarning(currentSelectedExample.GetType().Name);
                 }
             }
         }
 
         AttributeOverviewProExampleAttribute MarkExampleAttribute => !currentSelectedExample
             ? null
-            : AttributeOverviewProUtility.GetAttributeInExampleType(currentSelectedExample.GetType());
+            : AttributeOverviewProEditorUtility.GetAttributeInExampleType(currentSelectedExample.GetType());
 
         Object GetCurrentExampleMonoScript()
         {
@@ -504,7 +504,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                 GUIHelper.GetAssetThumbnail(null, typeof(MonoBehaviour), false));
             var iconSizeBackup = EditorGUIUtility.GetIconSize();
             EditorGUIUtility.SetIconSize(new Vector2(16f, 16f));
-            var rect3 = GUILayoutUtility.GetRect(content, AttributeOverviewProUtility.TabButtonCellTextStyle,
+            var rect3 = GUILayoutUtility.GetRect(content, AttributeOverviewProEditorUtility.TabButtonCellTextStyle,
                 GUILayoutOptions.Height(26));
             SirenixEditorGUI.DrawBorders(rect3, 1);
             var selectExample = item.ExampleType == AttributeExampleType.OdinSerialized
@@ -557,10 +557,10 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         Vector2 _scrollPosition;
 
         string CurrentExampleSourceCode =>
-            AttributeOverviewProUtility.GetExampleSourceCodeWithoutNamespace(MarkExampleAttribute);
+            AttributeOverviewProEditorUtility.GetExampleSourceCodeWithoutNamespace(MarkExampleAttribute);
 
         string CurrentExampleShortenCode =>
-            AttributeOverviewProUtility.GetExampleShortenCode(CurrentExampleSourceCode);
+            AttributeOverviewProEditorUtility.GetExampleShortenCode(CurrentExampleSourceCode);
 
         const int CODE_AREA_WIDTH = 750;
 
@@ -618,11 +618,12 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
             var highlighterCode = OdinSyntaxHighlighterSO.ApplyCodeHighlighting(CurrentExampleSourceCode);
             if (_isShowShortenCodePreview)
             {
-                highlighterCode = AttributeOverviewProUtility.GetExampleShortenCode(highlighterCode);
+                highlighterCode = AttributeOverviewProEditorUtility.GetExampleShortenCode(highlighterCode);
             }
 
             var calcHeight =
-                CodeTextEditorStyle.CalcHeight(GUIHelper.TempContent(highlighterCode), CODE_AREA_WIDTH - 20f);
+                AttributeOverviewProEditorUtility.CodeTextEditorStyle.CalcHeight(GUIHelper.TempContent(highlighterCode),
+                    CODE_AREA_WIDTH - 20f);
             const float maxScrollViewHeight = 600f;
             var actualHeight = Mathf.Min(calcHeight + 30f, maxScrollViewHeight);
             var scrollViewRect = EditorGUILayout.GetControlRect(false, actualHeight);
@@ -636,41 +637,11 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                 false
             );
             var contentRect = new Rect(10f, 10f, CODE_AREA_WIDTH - 30f, calcHeight);
-            EditorGUI.SelectableLabel(contentRect, highlighterCode, CodeTextEditorStyle);
+            EditorGUI.SelectableLabel(contentRect, highlighterCode,
+                AttributeOverviewProEditorUtility.CodeTextEditorStyle);
             GUI.EndScrollView();
             EditorGUILayout.EndVertical();
         }
-
-        #region Editor GUIStyle
-
-        static GUIStyle _codeTextEditorStyle;
-
-        static GUIStyle CodeTextEditorStyle
-        {
-            get
-            {
-                _codeTextEditorStyle ??= new GUIStyle(SirenixGUIStyles.MultiLineLabel)
-                {
-                    normal = new GUIStyleState
-                    {
-                        textColor = OdinSyntaxHighlighterSO.TextColor
-                    },
-                    active = new GUIStyleState
-                    {
-                        textColor = OdinSyntaxHighlighterSO.TextColor
-                    },
-                    focused = new GUIStyleState
-                    {
-                        textColor = OdinSyntaxHighlighterSO.TextColor
-                    },
-                    wordWrap = false,
-                    fontSize = 12
-                };
-                return _codeTextEditorStyle;
-            }
-        }
-
-        #endregion
 
         #endregion
 
@@ -678,7 +649,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 
         static Rect BeginDrawContainerWithTitle(string title, out Rect headerToolBarRect)
         {
-            var titleStyle = AttributeOverviewProUtility.ContainerTitleStyle;
+            var titleStyle = AttributeOverviewProEditorUtility.ContainerTitleStyle;
             var titleWidth = titleStyle.CalcSize(GUIHelper.TempContent(title)).x;
             var titleHeight = titleStyle.CalcSize(GUIHelper.TempContent(title)).y;
             headerToolBarRect = SirenixEditorGUI.BeginHorizontalToolbar(titleHeight + 12f);
@@ -687,7 +658,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
             GUILayout.FlexibleSpace();
             SirenixEditorGUI.EndHorizontalToolbar();
             GUILayout.Space(-2);
-            return EditorGUILayout.BeginVertical(AttributeOverviewProUtility.ContainerContentStyle);
+            return EditorGUILayout.BeginVertical(AttributeOverviewProEditorUtility.ContainerContentStyle);
         }
 
         static void EndDrawContainerWithTitle(Rect contentRect)

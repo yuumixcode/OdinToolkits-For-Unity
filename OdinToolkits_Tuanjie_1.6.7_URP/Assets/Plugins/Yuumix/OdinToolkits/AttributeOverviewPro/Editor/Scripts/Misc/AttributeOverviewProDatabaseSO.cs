@@ -4,13 +4,29 @@ using System.Linq;
 using System.Reflection;
 using UnityEditor;
 using Yuumix.OdinToolkits.Core.Editor;
-using YuumixEditor;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 {
     public class AttributeOverviewProDatabaseSO : OdinEditorScriptableSingleton<AttributeOverviewProDatabaseSO>
     {
+        #region Serialized Fields
+
         public Dictionary<string, AbstractAttributeVisualPanelSO[]> VisualPanelMap;
+
+        AbstractAttributeVisualPanelSO[] _essentialVisualPanels;
+        AbstractAttributeVisualPanelSO[] _buttonVisualPanels;
+        AbstractAttributeVisualPanelSO[] _collectionVisualPanels;
+        AbstractAttributeVisualPanelSO[] _groupVisualPanels;
+        AbstractAttributeVisualPanelSO[] _conditionalVisualPanels;
+        AbstractAttributeVisualPanelSO[] _numberVisualPanels;
+        AbstractAttributeVisualPanelSO[] _typeSpecificVisualPanels;
+        AbstractAttributeVisualPanelSO[] _validationVisualPanels;
+        AbstractAttributeVisualPanelSO[] _miscVisualPanels;
+        AbstractAttributeVisualPanelSO[] _metaVisualPanels;
+        AbstractAttributeVisualPanelSO[] _unityVisualPanels;
+        AbstractAttributeVisualPanelSO[] _debugVisualPanels;
+
+        #endregion
 
         static AbstractAttributeVisualPanelSO[] AllVisualPanels => GetAllVisualPanels();
 
@@ -53,7 +69,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
             _debugVisualPanels = AllVisualPanels.Where(x => x.GetType()
                 .GetCustomAttribute<AttributeCategoryAttribute>().Category
                 .HasFlagFast(OdinAttributeCategory.Debug)).ToArray();
-            VisualPanelMap = new Dictionary<string, AbstractAttributeVisualPanelSO[]>()
+            VisualPanelMap = new Dictionary<string, AbstractAttributeVisualPanelSO[]>
             {
                 {
                     nameof(OdinAttributeCategory.Essentials), _essentialVisualPanels
@@ -90,23 +106,10 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                 },
                 {
                     nameof(OdinAttributeCategory.Debug), _debugVisualPanels
-                },
+                }
             };
             return this;
         }
-
-        AbstractAttributeVisualPanelSO[] _essentialVisualPanels;
-        AbstractAttributeVisualPanelSO[] _buttonVisualPanels;
-        AbstractAttributeVisualPanelSO[] _collectionVisualPanels;
-        AbstractAttributeVisualPanelSO[] _groupVisualPanels;
-        AbstractAttributeVisualPanelSO[] _conditionalVisualPanels;
-        AbstractAttributeVisualPanelSO[] _numberVisualPanels;
-        AbstractAttributeVisualPanelSO[] _typeSpecificVisualPanels;
-        AbstractAttributeVisualPanelSO[] _validationVisualPanels;
-        AbstractAttributeVisualPanelSO[] _miscVisualPanels;
-        AbstractAttributeVisualPanelSO[] _metaVisualPanels;
-        AbstractAttributeVisualPanelSO[] _unityVisualPanels;
-        AbstractAttributeVisualPanelSO[] _debugVisualPanels;
 
         static AbstractAttributeVisualPanelSO[] GetAllVisualPanels()
         {

@@ -44,8 +44,10 @@ MonoBehaviour:
       Data: 
   headerWidget: {}
   docFolderPath: Assets/OdinToolkitsData/Editor/Documents/
-  docGeneratorSettings: {fileID: 0}
+  docGeneratorSettings: {fileID: 11400000, guid: 5a3f059e31d2443e983ba3f4f83b2672, type: 2}
   typeSource: 0
+  selectedMonoScript: {fileID: 0}
   typesCache: {fileID: 0}
+  selectedMonoScriptArray: []
   typesCacheSOFolderPath: Assets/OdinToolkitsData/Editor/TypesCacheSO
   targetAssemblyFullName: 
