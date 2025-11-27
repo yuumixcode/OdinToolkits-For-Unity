@@ -44,7 +44,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
         {
             var window = GetWindow<ScriptDocGeneratorWindow>();
             window.titleContent = new GUIContent(OdinToolkitsMenuItems.SCRIPT_DOC_GEN_WINDOW_NAME);
-            window.position = GUIHelper.GetEditorWindowRect().AlignCenter(1100, 800);
+            window.position = GUIHelper.GetEditorWindowRect().AlignCenter(1000, 800);
             window.Show();
         }
     }

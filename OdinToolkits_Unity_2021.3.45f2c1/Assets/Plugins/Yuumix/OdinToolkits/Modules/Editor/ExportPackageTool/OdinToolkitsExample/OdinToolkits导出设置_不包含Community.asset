@@ -1,5 +1,5 @@
 %YAML 1.1
-%TAG !u! tag:yousandi.cn,2023:
+%TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: "OdinToolkits\u5BFC\u51FA\u8BBE\u7F6E_\u4E0D\u5305\u542BCommunity"
   m_EditorClassIdentifier: 
   packageName: OdinToolkits_ExcludeCommunity
-  version: v0.5.4-alpha
+  version: v0.5.5-alpha
   exportFolderPath: Assets/OdinToolkitsData/ExportPackages
   includeDependencies: 0
   overwriteExistingPackage: 0

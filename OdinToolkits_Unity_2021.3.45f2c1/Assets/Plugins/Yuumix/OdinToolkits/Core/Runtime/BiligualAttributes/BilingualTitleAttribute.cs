@@ -8,7 +8,7 @@ namespace Yuumix.OdinToolkits.Core
     /// 多语言的标题特性，默认支持中文和英语
     /// </summary>
     [DontApplyToListElements]
-    [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
+    [AttributeUsage(AttributeTargets.All)]
     [Conditional("UNITY_EDITOR")]
     public class BilingualTitleAttribute : Attribute
     {

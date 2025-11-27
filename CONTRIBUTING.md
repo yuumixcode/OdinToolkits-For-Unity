@@ -1,13 +1,14 @@
 ---
 icon: simple/contributorcovenant
 ---
+
 # CONTRIBUTING
 
 [Contributor Covenant - 贡献者公约](https://www.contributor-covenant.org/zh-cn/version/3/0/code_of_conduct/)
 
 !!! warning
 
-    在 v1.0.0 版本前，API 可能随时改变。不推荐依赖 `Odin Toolkits` API，建议仅作为编辑器工具使用。
+​    在 v1.0.0 版本前，API 可能随时改变。不推荐依赖 `Odin Toolkits` API，建议仅作为编辑器工具使用。
 
 ## 贡献准备
 
@@ -15,9 +16,9 @@ fork 项目到自己的仓库，clone 到本地。
 
 !!! warning
 
-    首次打开时报错为正常现象，因为项目本身并不包含 `Odin Inspector` 插件。请无视错误进入项目后，自行导入 `Odin Inspector` 插件。
+​    首次打开时报错为正常现象，因为项目本身并不包含 `Odin Inspector` 插件。请无视错误进入项目后，自行导入 `Odin Inspector` 插件。
 
-    如有其他问题，请邮箱联系。
+​    如有其他问题，请邮箱联系。
 
 ## `Odin Toolkits` 集成模块贡献指南
 
@@ -36,9 +37,7 @@ fork 项目到自己的仓库，clone 到本地。
 
 推荐贡献者在脚本最上方添加贡献注释，包括但不限于名称，邮箱，贡献时间，采用后将持续保留在脚本中。
 
-此模块将由 `Odin Toolkits` 核心开发者维护，将进行代码审查，保障不出现恶意代码。
-
-后续修改已贡献内容将不会告知原贡献者。
+此模块由 `Odin Toolkits` 核心开发者维护。
 
 ## `Community` 社区模块贡献指南
 
@@ -81,9 +80,6 @@ public class StaticCounterExampleFixed : MonoBehaviour
         }
     }
 }
-```
-
-``` csharp title="运行时静态事件订阅处理"
 using UnityEngine;
 
 // 使用 [RuntimeInitializeOnLoadMethod] 初始化静态事件订阅处理
