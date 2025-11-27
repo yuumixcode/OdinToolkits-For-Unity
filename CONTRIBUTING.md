@@ -52,12 +52,6 @@ fork 项目到自己的仓库，clone 到本地。
 6. 只包含 `Odin Toolkits` 集成模块和 `Community` 模块的新项目打包无警告或错误。
 7. 静态变量要求兼容 `Play Mode`，尤其是运行时的静态变量，需要手动处理初始化，避免用户在 `Play Mode` 时出错。
 
-!!! warning "免责声明"
-
-    Community 模块主要基于社区贡献，`Odin Toolkits` 核心开发者不负责维护 Community 模块的代码样式，也不对 Community 模块的代码负责。使用时请自行承担风险。
-    
-    `Odin Toolkits` 将默认提供剔除 `Community` 模块的发行版本。
-
 ## 静态变量兼容 `Play Mode` 示例
 
 [Tuanjie 关于 Play Mode 的文档](https://docs.unity.cn/cn/tuanjiemanual/1.6/Manual/ConfigurableEnterPlayMode.html)
