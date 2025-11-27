@@ -10,6 +10,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.5 - alpha] - 2025-11-27
+
+### Changed
+
+- 移除 `BilingualTitleAttribute` 同时支持多个特性的设置。
+- 优化 `ScriptDocGenerator` 窗口大小，使其更加合适。
+
 ## [0.5.4 - alpha] - 2025-11-23
 
 ### Added
