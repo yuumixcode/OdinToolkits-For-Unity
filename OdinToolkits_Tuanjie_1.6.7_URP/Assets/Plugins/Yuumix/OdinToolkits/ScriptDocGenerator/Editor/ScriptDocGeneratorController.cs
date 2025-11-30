@@ -15,17 +15,17 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
     /// </summary>
     public class ScriptDocGeneratorController
     {
-        const string IDENTIFIER_CN = "## 额外说明";
-        const string NONE_ASSEMBLY = "None Assembly";
+        private const string IDENTIFIER_CN = "## 额外说明";
+        private const string NONE_ASSEMBLY = "None Assembly";
 
-        static readonly StringBuilder UserIdentifierDescriptionParagraph = new StringBuilder()
+        private static readonly StringBuilder UserIdentifierDescriptionParagraph = new StringBuilder()
             .AppendLine(IDENTIFIER_CN)
             .AppendLine()
             .AppendLine("> 首个 `" + IDENTIFIER_CN + "` 是增量生成文档标识符，请勿修改标题级别和内容！" +
                         "本文档由 [`Odin Toolkits For Unity`](" + OdinToolkitsWebLinks.GITHUB_REPOSITORY +
                         ") 辅助生成。");
 
-        readonly IAnalysisDataFactory _analysisDataFactory = new YuumixDefaultAnalysisDataFactory();
+        private readonly IAnalysisDataFactory _analysisDataFactory = new YuumixDefaultAnalysisDataFactory();
 
         #region 类型分析方法
 
@@ -214,7 +214,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
             EditorUtility.OpenWithDefaultApp(targetFolderPath);
         }
 
-        static string GetAdditionalDescriptionFromExistingFile(string[] readAllLines)
+        private static string GetAdditionalDescriptionFromExistingFile(string[] readAllLines)
         {
             if (readAllLines.Length == 0)
             {
@@ -240,7 +240,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
 
         #region 辅助方法
 
-        static void ReadDocGeneratorSettingSO(ITypeData typeData, DocGeneratorSettingsSO generatorSettings,
+        private static void ReadDocGeneratorSettingSO(ITypeData typeData, DocGeneratorSettingsSO generatorSettings,
             string targetFolderPath, IMemberData memberData, out string markdownText, out string filePathWithExtensions)
         {
             markdownText = generatorSettings.GetGeneratedDoc(typeData);
@@ -282,7 +282,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
             }
         }
 
-        static bool TryGetFrontMatter(string[] sourceLines, out string frontMatter)
+        private static bool TryGetFrontMatter(string[] sourceLines, out string frontMatter)
         {
             var frontMatterStringBuilder = new StringBuilder();
 

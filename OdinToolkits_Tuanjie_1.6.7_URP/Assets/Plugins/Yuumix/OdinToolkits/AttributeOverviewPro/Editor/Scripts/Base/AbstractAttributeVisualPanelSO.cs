@@ -87,6 +87,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
             _resolvedStringParameters = _model.ResolvedStringParameters;
             _examplePreviewItems = _model.ExamplePreviewItems;
             currentSelectedExample = _model.GetInitialExample();
+            CurrentExampleSourceCode =
+                AttributeOverviewProEditorUtility.GetExampleSourceCodeWithoutNamespace(MarkExampleAttribute);
             InspectorBilingualismConfigSO.OnLanguageChanged -= BilingualismConfig_OnLanguageChanged;
             InspectorBilingualismConfigSO.OnLanguageChanged += BilingualismConfig_OnLanguageChanged;
         }
@@ -522,6 +524,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
             if (GUI.Button(rect3, GUIContent.none, GUIStyle.none))
             {
                 currentSelectedExample = selectExample;
+                CurrentExampleSourceCode =
+                    AttributeOverviewProEditorUtility.GetExampleSourceCodeWithoutNamespace(MarkExampleAttribute);
             }
 
             if (currentSelectedExample != selectExample && rect3.Contains(Event.current.mousePosition))
@@ -556,8 +560,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         bool _isShowShortenCodePreview;
         Vector2 _scrollPosition;
 
-        string CurrentExampleSourceCode =>
-            AttributeOverviewProEditorUtility.GetExampleSourceCodeWithoutNamespace(MarkExampleAttribute);
+        string CurrentExampleSourceCode { get; set; }
 
         string CurrentExampleShortenCode =>
             AttributeOverviewProEditorUtility.GetExampleShortenCode(CurrentExampleSourceCode);

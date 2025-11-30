@@ -133,61 +133,61 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 
         public static string GetExampleSourceCodeWithoutNamespace(AttributeOverviewProExampleAttribute attribute)
         {
-            try
+            if (attribute == null)
             {
-                var readLines = File.ReadLines(attribute.FilePath);
-                var excludeNamespaceCodeLines = new List<string>();
-                var isInNamespace = false;
-                foreach (var line in readLines)
+                const string msg = "AttributeOverviewProExampleAttribute 不能为空，" +
+                                   "可能是案例没有添加 [AttributeOverviewProExample] 特性";
+                YuumixLogger.OdinToolkitsError(msg);
+                return msg;
+            }
+
+            var readLines = File.ReadLines(attribute.FilePath);
+            var excludeNamespaceCodeLines = new List<string>();
+            var isInNamespace = false;
+            foreach (var line in readLines)
+            {
+                if ((line.StartsWith("using") && !isInNamespace) || line.StartsWith("#"))
                 {
-                    if ((line.StartsWith("using") && !isInNamespace) || line.StartsWith("#"))
-                    {
-                        excludeNamespaceCodeLines.Add(line);
-                        continue;
-                    }
-
-                    if (line.StartsWith("namespace"))
-                    {
-                        isInNamespace = true;
-                        continue;
-                    }
-
-                    if (line.TrimStart().StartsWith(
-                            "[" + nameof(AttributeOverviewProExampleAttribute)[
-                                ..(nameof(AttributeOverviewProExampleAttribute).Length - "Attribute".Length)] +
-                            "]"))
-                    {
-                        continue;
-                    }
-
-                    if (isInNamespace)
-                    {
-                        if (line.StartsWith("{"))
-                        {
-                            continue;
-                        }
-
-                        if (line.StartsWith("}"))
-                        {
-                            isInNamespace = false;
-                            continue;
-                        }
-
-                        excludeNamespaceCodeLines.Add(line.Length > 4 ? line[4..] : line);
-                    }
-                    else
-                    {
-                        excludeNamespaceCodeLines.Add(line);
-                    }
+                    excludeNamespaceCodeLines.Add(line);
+                    continue;
                 }
 
-                return string.Join("\n", excludeNamespaceCodeLines);
+                if (line.StartsWith("namespace"))
+                {
+                    isInNamespace = true;
+                    continue;
+                }
+
+                if (line.TrimStart().StartsWith(
+                        "[" + nameof(AttributeOverviewProExampleAttribute)[
+                            ..(nameof(AttributeOverviewProExampleAttribute).Length - "Attribute".Length)] +
+                        "]"))
+                {
+                    continue;
+                }
+
+                if (isInNamespace)
+                {
+                    if (line.StartsWith("{"))
+                    {
+                        continue;
+                    }
+
+                    if (line.StartsWith("}"))
+                    {
+                        isInNamespace = false;
+                        continue;
+                    }
+
+                    excludeNamespaceCodeLines.Add(line.Length > 4 ? line[4..] : line);
+                }
+                else
+                {
+                    excludeNamespaceCodeLines.Add(line);
+                }
             }
-            catch (IOException ex)
-            {
-                YuumixLogger.OdinToolkitsError($"读取文件时发生IO异常: {ex.Message}");
-                return "";
-            }
+
+            return string.Join("\n", excludeNamespaceCodeLines);
         }
 
         public static string GetExampleShortenCode(string sourceCode)
