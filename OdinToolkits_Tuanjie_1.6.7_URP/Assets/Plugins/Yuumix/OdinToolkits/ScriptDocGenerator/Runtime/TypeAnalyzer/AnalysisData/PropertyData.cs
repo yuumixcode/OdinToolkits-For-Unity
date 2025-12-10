@@ -1,7 +1,7 @@
-using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Sirenix.OdinInspector;
 using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.ScriptDocGenerator
@@ -9,7 +9,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
     [Serializable]
     public class PropertyData : MemberData, IPropertyData
     {
-        public PropertyData(PropertyInfo propertyInfo, IAttributeFilter filter = null) : base(propertyInfo, filter)
+        public PropertyData(PropertyInfo propertyInfo, IAttributeFilter filter = null) : base(
+            propertyInfo, filter)
         {
             // IDerivedMemberData 
             IsStatic = propertyInfo.IsStaticProperty();
@@ -21,7 +22,9 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             PropertyType = propertyInfo.PropertyType;
             PropertyTypeName = PropertyType.GetReadableTypeName();
             PropertyTypeFullName = PropertyType.GetReadableTypeName(true);
-            DefaultValue = propertyInfo.TryGetPropertyCustomDefaultValue(out var value) ? value : null;
+            DefaultValue = propertyInfo.TryGetPropertyCustomDefaultValue(out var value)
+                ? value
+                : null;
             Signature = GetPropertySignature(propertyInfo,
                 TypeAnalyzerUtility.GetFormattedDefaultValue(PropertyType, DefaultValue));
             FullDeclarationWithAttributes = AttributesDeclaration + Signature;
@@ -105,7 +108,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         [PropertyOrder(60)]
         [ShowEnableProperty]
         [BilingualTitle("完整属性声明 - 包含特性和签名 - 默认剔除 [Summary] 特性",
-            nameof(FullDeclarationWithAttributes) + " - Include Attributes and Signature - Default Exclude [Summary]")]
+            nameof(FullDeclarationWithAttributes) +
+            " - Include Attributes and Signature - Default Exclude [Summary]")]
         [HideLabel]
         [MultiLineProperty]
         public string FullDeclarationWithAttributes { get; }

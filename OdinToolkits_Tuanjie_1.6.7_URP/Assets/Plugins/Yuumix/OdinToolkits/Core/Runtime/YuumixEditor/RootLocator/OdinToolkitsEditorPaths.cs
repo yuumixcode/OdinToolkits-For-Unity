@@ -1,4 +1,5 @@
 ﻿#if UNITY_EDITOR
+using Yuumix.OdinToolkits.Core.SafeEditor;
 using UnityEditor;
 using Yuumix.OdinToolkits.Core;
 
@@ -61,7 +62,7 @@ namespace YuumixEditor
 
         static void SetFolderPath()
         {
-            _lookupSOPath = ScriptableObjectEditorUtility.GetAssetPath<OdinToolkitsLookup>();
+            _lookupSOPath = ScriptableObjectSafeEditorUtility.GetSingletonAssetPathAndDeleteOther<OdinToolkitsLookup>();
             if (string.IsNullOrEmpty(_lookupSOPath))
             {
                 YuumixLogger.LogWarning("没有找到 OdinToolkitsLookup Asset，无法定位 OdinToolkits 文件夹路径。");

@@ -1,10 +1,10 @@
-using Sirenix.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Sirenix.Utilities;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core;
 
@@ -16,63 +16,65 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
     [Summary("类型分析器静态扩展类，统一管理类型分析器有关的静态扩展方法")]
     public static class TypeAnalyzerStaticExtensions
     {
-        static readonly Dictionary<string, string> OperatorStringMap = new Dictionary<string, string>
-        {
-            // 算术运算符
-            { "op_Addition", "operator +" },
-            { "op_Subtraction", "operator -" },
-            { "op_Multiply", "operator *" },
-            { "op_Division", "operator /" },
-            { "op_Modulus", "operator %" },
-            { "op_Increment", "operator ++" },
-            { "op_Decrement", "operator --" },
-            // 类型转换
-            { "op_Implicit", "implicit operator" },
-            { "op_Explicit", "explicit operator" },
-            // 位运算符
-            { "op_BitwiseAnd", "operator &" },
-            { "op_BitwiseOr", "operator |" },
-            { "op_ExclusiveOr", "operator ^" },
-            { "op_LeftShift", "operator <<" },
-            { "op_RightShift", "operator >>" },
-            { "op_OnesComplement", "operator ~" },
-            // 逻辑运算符
-            { "op_LogicalNot", "operator !" },
-            { "op_True", "operator true" },
-            { "op_False", "operator false" },
-            // 比较运算符
-            { "op_Equality", "operator ==" },
-            { "op_Inequality", "operator !=" },
-            { "op_LessThan", "operator <" },
-            { "op_GreaterThan", "operator >" },
-            { "op_LessThanOrEqual", "operator <=" },
-            { "op_GreaterThanOrEqual", "operator >=" },
-            // 赋值运算符 (C# 7.3+)
-            { "op_Assign", "operator =" },
-            { "op_MultiplyAssign", "operator *=" },
-            { "op_DivideAssign", "operator /=" },
-            { "op_ModulusAssign", "operator %=" },
-            { "op_AdditionAssign", "operator +=" },
-            { "op_SubtractionAssign", "operator -=" },
-            // ---
-            { "op_LeftShiftAssign", "operator <<=" },
-            { "op_RightShiftAssign", "operator >>=" },
-            { "op_BitwiseAndAssign", "operator &=" },
-            { "op_BitwiseOrAssign", "operator |=" },
-            { "op_ExclusiveOrAssign", "operator ^=" },
-            { "op_Coalesce", "operator ??" },
-            { "op_MemberAccess", "operator ->" },
-            { "op_Index", "operator []" },
-            { "op_AddressOf", "operator &" },
-            { "op_PointerDereference", "operator * " }
-        };
+        static readonly Dictionary<string, string> OperatorStringMap =
+            new Dictionary<string, string>
+            {
+                // 算术运算符
+                { "op_Addition", "operator +" },
+                { "op_Subtraction", "operator -" },
+                { "op_Multiply", "operator *" },
+                { "op_Division", "operator /" },
+                { "op_Modulus", "operator %" },
+                { "op_Increment", "operator ++" },
+                { "op_Decrement", "operator --" },
+                // 类型转换
+                { "op_Implicit", "implicit operator" },
+                { "op_Explicit", "explicit operator" },
+                // 位运算符
+                { "op_BitwiseAnd", "operator &" },
+                { "op_BitwiseOr", "operator |" },
+                { "op_ExclusiveOr", "operator ^" },
+                { "op_LeftShift", "operator <<" },
+                { "op_RightShift", "operator >>" },
+                { "op_OnesComplement", "operator ~" },
+                // 逻辑运算符
+                { "op_LogicalNot", "operator !" },
+                { "op_True", "operator true" },
+                { "op_False", "operator false" },
+                // 比较运算符
+                { "op_Equality", "operator ==" },
+                { "op_Inequality", "operator !=" },
+                { "op_LessThan", "operator <" },
+                { "op_GreaterThan", "operator >" },
+                { "op_LessThanOrEqual", "operator <=" },
+                { "op_GreaterThanOrEqual", "operator >=" },
+                // 赋值运算符 (C# 7.3+)
+                { "op_Assign", "operator =" },
+                { "op_MultiplyAssign", "operator *=" },
+                { "op_DivideAssign", "operator /=" },
+                { "op_ModulusAssign", "operator %=" },
+                { "op_AdditionAssign", "operator +=" },
+                { "op_SubtractionAssign", "operator -=" },
+                // ---
+                { "op_LeftShiftAssign", "operator <<=" },
+                { "op_RightShiftAssign", "operator >>=" },
+                { "op_BitwiseAndAssign", "operator &=" },
+                { "op_BitwiseOrAssign", "operator |=" },
+                { "op_ExclusiveOrAssign", "operator ^=" },
+                { "op_Coalesce", "operator ??" },
+                { "op_MemberAccess", "operator ->" },
+                { "op_Index", "operator []" },
+                { "op_AddressOf", "operator &" },
+                { "op_PointerDereference", "operator * " }
+            };
 
         /// <summary>
         /// 判断是否为 API 成员，返回 true 表示是 API 成员，返回 false 表示不是。API 成员指的是公共成员或受保护成员。
         /// </summary>
         [Summary("判断是否为 API 成员，返回 true 表示是 API 成员，返回 false 表示不是。API 成员指的是公共成员或受保护成员。")]
         public static bool IsApiMember(this IDerivedMemberData derivedMemberData) =>
-            derivedMemberData.AccessModifier is AccessModifierType.Public or AccessModifierType.Protected;
+            derivedMemberData.AccessModifier is AccessModifierType.Public
+                or AccessModifierType.Protected;
 
         /// <summary>
         /// 判断成员是否从继承中获取，这里的成员不包括 Type 类型
@@ -116,13 +118,15 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
                     continue;
                 }
 
-                if (TypeAnalyzerUtility.TryGetFormatedAttributeWithFullParameter(attr, out var attributeSignature))
+                if (TypeAnalyzerUtility.TryGetFormatedAttributeWithFullParameter(attr,
+                        out var attributeSignature))
                 {
                     attributesStringBuilder.AppendLine(attributeSignature);
                     continue;
                 }
 
-                var attributeName = TypeAnalyzerUtility.GetAttributeNameWithoutSuffix(attributeType.Name);
+                var attributeName =
+                    TypeAnalyzerUtility.GetAttributeNameWithoutSuffix(attributeType.Name);
                 attributesStringBuilder.AppendLine($"[{attributeName}]");
             }
 
@@ -133,24 +137,24 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         /// 判断是否为静态属性
         /// </summary>
         [Summary("判断是否为静态属性")]
-        public static bool IsStaticProperty(this PropertyInfo propertyInfo)
-            => propertyInfo.GetGetMethod(true)?.IsStatic
-               ?? propertyInfo.GetSetMethod(true)?.IsStatic
-               ?? false;
+        public static bool IsStaticProperty(this PropertyInfo propertyInfo) =>
+            propertyInfo.GetGetMethod(true)?.IsStatic ??
+            propertyInfo.GetSetMethod(true)?.IsStatic ?? false;
 
         /// <summary>
         /// 判断是否为动态字段
         /// </summary>
         [Summary("判断是否为动态字段")]
-        public static bool IsDynamicField(this FieldInfo fieldInfo)
-            => fieldInfo.FieldType == typeof(object) &&
-               fieldInfo.GetCustomAttributes(typeof(DynamicAttribute), false).Length > 0;
+        public static bool IsDynamicField(this FieldInfo fieldInfo) =>
+            fieldInfo.FieldType == typeof(object) &&
+            fieldInfo.GetCustomAttributes(typeof(DynamicAttribute), false).Length > 0;
 
         /// <summary>
         /// 将 IDerivedMemberData 转换为 IMemberData，转换成功返回 true，转换失败返回 false
         /// </summary>
         [Summary("将 IDerivedMemberData 转换为 IMemberData，转换成功返回 true，转换失败返回 false")]
-        public static bool TryAsIMemberData(this IDerivedMemberData derivedMemberData, out IMemberData memberData)
+        public static bool TryAsIMemberData(this IDerivedMemberData derivedMemberData,
+            out IMemberData memberData)
         {
             if (derivedMemberData is not MemberData)
             {
@@ -165,7 +169,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         /// 获取属性的自定义默认值，不能获取到值则返回 null，只获取静态属性的默认值。
         /// </summary>
         [Summary("获取属性的自定义默认值，不能获取到值则返回 null，只获取静态属性的默认值。")]
-        public static bool TryGetPropertyCustomDefaultValue(this PropertyInfo propertyInfo, out object defaultValue)
+        public static bool TryGetPropertyCustomDefaultValue(this PropertyInfo propertyInfo,
+            out object defaultValue)
         {
             var propertyType = propertyInfo.PropertyType;
             if (propertyType.IsReferenceTypeExcludeString() || propertyType.IsAbstractOrInterface())
@@ -179,7 +184,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             {
                 var staticValue = propertyInfo.GetMemberValue(null);
                 if (staticValue == null ||
-                    TypeAnalyzerUtility.TreatedAsTypeDefaultValue(staticValue, propertyInfo.PropertyType))
+                    TypeAnalyzerUtility.TreatedAsTypeDefaultValue(staticValue,
+                        propertyInfo.PropertyType))
                 {
                     defaultValue = null;
                     return false;
@@ -197,7 +203,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         /// 获取字段的自定义默认值，不能获取到值则返回 null。只获取静态字段和常量字段的默认值。
         /// </summary>
         [Summary("获取字段的自定义默认值，不能获取到值则返回 null。只获取静态字段和常量字段的默认值。")]
-        public static bool TryGetFieldCustomDefaultValue(this FieldInfo fieldInfo, out object defaultValue)
+        public static bool TryGetFieldCustomDefaultValue(this FieldInfo fieldInfo,
+            out object defaultValue)
         {
             var fieldType = fieldInfo.FieldType;
             if (fieldType.IsReferenceTypeExcludeString() || fieldType.IsAbstractOrInterface())
@@ -383,8 +390,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
                 }
 
                 // 添加实现的接口，忽略编译时生成的接口，包含所有从基类继承的接口
-                var interfaces = type.GetInterfaces()
-                    .Where(i => !i.IsDefined(typeof(CompilerGeneratedAttribute), false));
+                var interfaces = type.GetInterfaces().Where(i =>
+                    !i.IsDefined(typeof(CompilerGeneratedAttribute), false));
 
                 inheritTypes.AddRange(interfaces.Select(x => x.GetReadableTypeName(true)));
 
@@ -448,11 +455,9 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         [Summary("获取开发者声明的字段，剔除自动属性生成的字段")]
         public static FieldInfo[] GetUserDefinedFields(this Type type)
         {
-            return type.GetRuntimeFields()
-                .Where(f => !f.IsSpecialName
-                            && !(f.Name.Contains("k__BackingField") ||
-                                 f.Name.Contains("__BackingField")))
-                .ToArray();
+            return type.GetRuntimeFields().Where(f =>
+                !f.IsSpecialName && !(f.Name.Contains("k__BackingField") ||
+                                      f.Name.Contains("__BackingField"))).ToArray();
         }
 
         /// <summary>
@@ -471,10 +476,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         [Summary("获取一个类型的继承链，不包括接口")]
         public static string[] GetInheritanceChain(this Type type)
         {
-            return type.GetBaseTypes()
-                .Where(t => !t.IsInterface)
-                .Select(baseType => baseType.GetReadableTypeName(true).Replace("object", "System.Object"))
-                .ToArray();
+            return type.GetBaseTypes().Where(t => !t.IsInterface).Select(baseType =>
+                baseType.GetReadableTypeName(true).Replace("object", "System.Object")).ToArray();
         }
 
         /// <summary>
@@ -497,7 +500,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         /// 判断一个类型是否为抽象类或接口
         /// </summary>
         [Summary("判断一个类型是否为抽象类或接口")]
-        public static bool IsAbstractOrInterface(this Type type) => type.IsAbstract || type.IsInterface;
+        public static bool IsAbstractOrInterface(this Type type) =>
+            type.IsAbstract || type.IsInterface;
 
         /// <summary>
         /// 判断指定类型是否为委托类型
@@ -557,7 +561,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             }
             else
             {
-                if (method.IsSpecialName && OperatorStringMap.TryGetValue(method.Name, out var value))
+                if (method.IsSpecialName &&
+                    OperatorStringMap.TryGetValue(method.Name, out var value))
                 {
                     stringBuilder.Append(value);
                 }
@@ -643,7 +648,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             }
 
             var interfaceTypeList = declaringType.GetInterfaces();
-            return interfaceTypeList.Select(interfaceType => declaringType.GetInterfaceMap(interfaceType))
+            return interfaceTypeList
+                .Select(interfaceType => declaringType.GetInterfaceMap(interfaceType))
                 .Select(interfaceMapping => interfaceMapping.TargetMethods)
                 .Any(targetMethods => targetMethods.Contains(method));
         }
@@ -678,10 +684,10 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         /// </summary>
         [Summary("方法是否具有 override 的特性")]
         public static bool IsOverrideMethod(this MethodInfo methodInfo) =>
-            (methodInfo.IsVirtual &&
-             methodInfo.DeclaringType != methodInfo.GetBaseDefinition().DeclaringType)
-            || (methodInfo.DeclaringType == methodInfo.GetBaseDefinition().DeclaringType &&
-                methodInfo.IsVirtual && methodInfo.IsFromInterfaceImplementMethod());
+            (methodInfo.IsVirtual && methodInfo.DeclaringType !=
+                methodInfo.GetBaseDefinition().DeclaringType) ||
+            (methodInfo.DeclaringType == methodInfo.GetBaseDefinition().DeclaringType &&
+             methodInfo.IsVirtual && methodInfo.IsFromInterfaceImplementMethod());
 
         /// <summary>
         /// 判断方法是否是异步方法
@@ -753,7 +759,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             var invokeMethod = eventInfo.GetRaiseMethod(true);
             if (addMethod != null && removeMethod != null)
             {
-                return ((int)addMethod.GetMethodAccessModifierType() <= (int)removeMethod.GetMethodAccessModifierType()
+                return ((int)addMethod.GetMethodAccessModifierType() <=
+                        (int)removeMethod.GetMethodAccessModifierType()
                     ? addMethod
                     : removeMethod).GetMethodAccessModifierType();
             }
@@ -768,7 +775,9 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
                 return removeMethod.GetMethodAccessModifierType();
             }
 
-            return invokeMethod != null ? invokeMethod.GetMethodAccessModifierType() : AccessModifierType.None;
+            return invokeMethod != null
+                ? invokeMethod.GetMethodAccessModifierType()
+                : AccessModifierType.None;
         }
 
         /// <summary>
@@ -802,20 +811,25 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
                 return AccessModifierType.ProtectedInternal;
             }
 
-            return method.IsFamilyAndAssembly ? AccessModifierType.PrivateProtected : AccessModifierType.None;
+            return method.IsFamilyAndAssembly
+                ? AccessModifierType.PrivateProtected
+                : AccessModifierType.None;
         }
 
         /// <summary>
         /// 获取属性的访问修饰符类型
         /// </summary>
         [Summary("获取属性的访问修饰符类型")]
-        public static AccessModifierType GetPropertyAccessModifierType(this PropertyInfo propertyInfo)
+        public static AccessModifierType GetPropertyAccessModifierType(
+            this PropertyInfo propertyInfo)
         {
             var getMethod = propertyInfo.GetGetMethod(true);
             var setMethod = propertyInfo.GetSetMethod(true);
 
-            AccessModifierType? getAccess = getMethod != null ? getMethod.GetMethodAccessModifierType() : null;
-            AccessModifierType? setAccess = setMethod != null ? setMethod.GetMethodAccessModifierType() : null;
+            AccessModifierType? getAccess =
+                getMethod != null ? getMethod.GetMethodAccessModifierType() : null;
+            AccessModifierType? setAccess =
+                setMethod != null ? setMethod.GetMethodAccessModifierType() : null;
 
             if (!getAccess.HasValue && !setAccess.HasValue)
             {
@@ -832,9 +846,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
                 return setAccess.Value;
             }
 
-            return (int)getAccess.Value <= (int)setAccess.Value
-                ? getAccess.Value
-                : setAccess.Value;
+            return (int)getAccess.Value <= (int)setAccess.Value ? getAccess.Value : setAccess.Value;
         }
 
         /// <summary>
@@ -874,7 +886,9 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
                 return AccessModifierType.ProtectedInternal;
             }
 
-            return fieldInfo.IsFamilyAndAssembly ? AccessModifierType.PrivateProtected : AccessModifierType.None;
+            return fieldInfo.IsFamilyAndAssembly
+                ? AccessModifierType.PrivateProtected
+                : AccessModifierType.None;
         }
 
         #endregion

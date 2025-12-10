@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Yuumix.OdinToolkits.Core.SafeEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core;
 using YuumixEditor;
@@ -196,7 +197,7 @@ namespace Yuumix.Community.Editor
                     return _instance;
                 }
 
-                _instance = ScriptableObjectEditorUtility.GetAssetAndDeleteExtra<T>();
+                _instance = ScriptableObjectSafeEditorUtility.GetSingletonAssetAndDeleteOther<T>();
                 return _instance;
             }
         }

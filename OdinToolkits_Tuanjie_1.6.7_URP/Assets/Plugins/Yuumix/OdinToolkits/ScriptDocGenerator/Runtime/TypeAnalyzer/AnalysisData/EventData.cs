@@ -1,6 +1,6 @@
-using Sirenix.OdinInspector;
 using System;
 using System.Reflection;
+using Sirenix.OdinInspector;
 using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.ScriptDocGenerator
@@ -12,7 +12,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
     [Serializable]
     public class EventData : MemberData, IEventData
     {
-        public EventData(EventInfo eventInfo, IAttributeFilter filter = null) : base(eventInfo, filter)
+        public EventData(EventInfo eventInfo, IAttributeFilter filter = null) : base(eventInfo,
+            filter)
         {
             // IEventData
             EventType = eventInfo.EventHandlerType;
@@ -28,7 +29,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             FullDeclarationWithAttributes = AttributesDeclaration + Signature;
         }
 
-        static string GetEventSignature(string accessModifier, bool isStatic, string eventType, string eventName)
+        static string GetEventSignature(string accessModifier, bool isStatic, string eventType,
+            string eventName)
         {
             var signature = accessModifier + " ";
             if (isStatic)
@@ -42,15 +44,20 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
 
         #region IDerivedMemberData
 
-        [Summary("是否为静态事件")] public bool IsStatic { get; }
+        [Summary("是否为静态事件")]
+        public bool IsStatic { get; }
 
-        [Summary("成员类型")] public MemberTypes MemberType { get; }
+        [Summary("成员类型")]
+        public MemberTypes MemberType { get; }
 
-        [Summary("成员类型名称")] public string MemberTypeName { get; }
+        [Summary("成员类型名称")]
+        public string MemberTypeName { get; }
 
-        [Summary("访问修饰符类型")] public AccessModifierType AccessModifier { get; }
+        [Summary("访问修饰符类型")]
+        public AccessModifierType AccessModifier { get; }
 
-        [Summary("访问修饰符名称")] public string AccessModifierName { get; }
+        [Summary("访问修饰符名称")]
+        public string AccessModifierName { get; }
 
         [PropertyOrder(60)]
         [ShowEnableProperty]
@@ -62,7 +69,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         [PropertyOrder(60)]
         [ShowEnableProperty]
         [BilingualTitle("完整事件声明 - 包含特性和签名 - 默认剔除 [Summary] 特性",
-            nameof(FullDeclarationWithAttributes) + " - Include Attributes and Signature - Default Exclude [Summary]")]
+            nameof(FullDeclarationWithAttributes) +
+            " - Include Attributes and Signature - Default Exclude [Summary]")]
         [HideLabel]
         [MultiLineProperty]
         [Summary("包含特性和签名的完整事件声明")]
@@ -72,9 +80,11 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
 
         #region IEventData
 
-        [Summary("事件类型")] public Type EventType { get; }
+        [Summary("事件类型")]
+        public Type EventType { get; }
 
-        [Summary("事件类型名称")] public string EventTypeName { get; }
+        [Summary("事件类型名称")]
+        public string EventTypeName { get; }
 
         [PropertyOrder(60)]
         [ShowEnableProperty]

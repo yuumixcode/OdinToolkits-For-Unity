@@ -178,7 +178,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
                         continue;
                     }
 
-                    sb.AppendLine($"| `{eventData.Signature}` | {memberData.SummaryAttributeValue} |");
+                    sb.AppendLine(
+                        $"| `{eventData.Signature}` | {memberData.SummaryAttributeValue} |");
                 }
 
                 sb.AppendLine();
@@ -224,8 +225,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
             var hasNoInheritAndNoOperatorAndApiMethod = false;
             foreach (var methodData in methodDataArray)
             {
-                if (hasApiMember && hasNoInheritAndNoOperatorAndApiMethod && hasInheritAndNoOperatorAndApiMethod &&
-                    hasOperatorAndApiMethod)
+                if (hasApiMember && hasNoInheritAndNoOperatorAndApiMethod &&
+                    hasInheritAndNoOperatorAndApiMethod && hasOperatorAndApiMethod)
                 {
                     break;
                 }
@@ -335,8 +336,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
             sb.AppendLine();
             sb.AppendLine("| 方法签名 | 注释 | 声明方法的类 |");
             sb.AppendLine("| :--- | :--- | :--- |");
-            var filteredOperators = methodDataArray.Where(m =>
-                m.IsApiMember() && m.IsOperator);
+            var filteredOperators = methodDataArray.Where(m => m.IsApiMember() && m.IsOperator);
             foreach (var methodData in filteredOperators)
             {
                 methodData.TryAsIMemberData(out var memberData);
@@ -409,7 +409,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
                         continue;
                     }
 
-                    sb.AppendLine($"| `{propertyData.Signature}` | {memberData.SummaryAttributeValue} |");
+                    sb.AppendLine(
+                        $"| `{propertyData.Signature}` | {memberData.SummaryAttributeValue} |");
                 }
 
                 sb.AppendLine();
@@ -535,12 +536,14 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
                 foreach (var fieldData in fieldDataArray)
                 {
                     fieldData.TryAsIMemberData(out var memberData);
-                    if (!fieldData.IsApiMember() || memberData.IsFromInheritance || fieldData.IsConstant)
+                    if (!fieldData.IsApiMember() || memberData.IsFromInheritance ||
+                        fieldData.IsConstant)
                     {
                         continue;
                     }
 
-                    sb.AppendLine($"| `{fieldData.Signature}` | {memberData.SummaryAttributeValue} |");
+                    sb.AppendLine(
+                        $"| `{fieldData.Signature}` | {memberData.SummaryAttributeValue} |");
                 }
 
                 sb.AppendLine();
@@ -555,7 +558,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
                 foreach (var fieldData in fieldDataArray)
                 {
                     fieldData.TryAsIMemberData(out var memberData);
-                    if (!fieldData.IsApiMember() || !memberData.IsFromInheritance || fieldData.IsConstant)
+                    if (!fieldData.IsApiMember() || !memberData.IsFromInheritance ||
+                        fieldData.IsConstant)
                     {
                         continue;
                     }

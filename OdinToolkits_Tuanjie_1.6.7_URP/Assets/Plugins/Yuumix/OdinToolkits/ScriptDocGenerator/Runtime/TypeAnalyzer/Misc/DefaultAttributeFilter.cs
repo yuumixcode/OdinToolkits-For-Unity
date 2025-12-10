@@ -17,7 +17,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
 
         #region IAttributeFilter Members
 
-        [Summary("排除的特性类型")] public Type[] ExcludeTypes { get; }
+        [Summary("排除的特性类型")]
+        public Type[] ExcludeTypes { get; }
 
         [Summary("判断传入的特性类型是否应该被过滤掉")]
         public bool ShouldFilterOut(Type type) => ExcludeTypes.Contains(type);

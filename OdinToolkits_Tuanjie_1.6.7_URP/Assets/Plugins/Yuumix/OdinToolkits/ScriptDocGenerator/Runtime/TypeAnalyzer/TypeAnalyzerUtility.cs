@@ -15,129 +15,130 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         /// 将系统类型名称映射到其 C# 别名的字典
         /// </summary>
         [Summary("将系统类型名称映射到其 C# 别名的字典")]
-        public static readonly IReadOnlyDictionary<Type, string> TypeAliasMap = new Dictionary<Type, string>
-        {
+        public static readonly IReadOnlyDictionary<Type, string> TypeAliasMap =
+            new Dictionary<Type, string>
             {
-                typeof(void),
-                "void"
-            },
-            {
-                typeof(float),
-                "float"
-            },
-            {
-                typeof(double),
-                "double"
-            },
-            {
-                typeof(sbyte),
-                "sbyte"
-            },
-            {
-                typeof(short),
-                "short"
-            },
-            {
-                typeof(int),
-                "int"
-            },
-            {
-                typeof(long),
-                "long"
-            },
-            {
-                typeof(byte),
-                "byte"
-            },
-            {
-                typeof(ushort),
-                "ushort"
-            },
-            {
-                typeof(uint),
-                "uint"
-            },
-            {
-                typeof(ulong),
-                "ulong"
-            },
-            {
-                typeof(decimal),
-                "decimal"
-            },
-            {
-                typeof(string),
-                "string"
-            },
-            {
-                typeof(char),
-                "char"
-            },
-            {
-                typeof(bool),
-                "bool"
-            },
-            {
-                typeof(float[]),
-                "float[]"
-            },
-            {
-                typeof(double[]),
-                "double[]"
-            },
-            {
-                typeof(sbyte[]),
-                "sbyte[]"
-            },
-            {
-                typeof(short[]),
-                "short[]"
-            },
-            {
-                typeof(int[]),
-                "int[]"
-            },
-            {
-                typeof(long[]),
-                "long[]"
-            },
-            {
-                typeof(byte[]),
-                "byte[]"
-            },
-            {
-                typeof(ushort[]),
-                "ushort[]"
-            },
-            {
-                typeof(uint[]),
-                "uint[]"
-            },
-            {
-                typeof(ulong[]),
-                "ulong[]"
-            },
-            {
-                typeof(decimal[]),
-                "decimal[]"
-            },
-            {
-                typeof(string[]),
-                "string[]"
-            },
-            {
-                typeof(char[]),
-                "char[]"
-            },
-            {
-                typeof(bool[]),
-                "bool[]"
-            },
-            {
-                typeof(object),
-                "object"
-            }
-        };
+                {
+                    typeof(void),
+                    "void"
+                },
+                {
+                    typeof(float),
+                    "float"
+                },
+                {
+                    typeof(double),
+                    "double"
+                },
+                {
+                    typeof(sbyte),
+                    "sbyte"
+                },
+                {
+                    typeof(short),
+                    "short"
+                },
+                {
+                    typeof(int),
+                    "int"
+                },
+                {
+                    typeof(long),
+                    "long"
+                },
+                {
+                    typeof(byte),
+                    "byte"
+                },
+                {
+                    typeof(ushort),
+                    "ushort"
+                },
+                {
+                    typeof(uint),
+                    "uint"
+                },
+                {
+                    typeof(ulong),
+                    "ulong"
+                },
+                {
+                    typeof(decimal),
+                    "decimal"
+                },
+                {
+                    typeof(string),
+                    "string"
+                },
+                {
+                    typeof(char),
+                    "char"
+                },
+                {
+                    typeof(bool),
+                    "bool"
+                },
+                {
+                    typeof(float[]),
+                    "float[]"
+                },
+                {
+                    typeof(double[]),
+                    "double[]"
+                },
+                {
+                    typeof(sbyte[]),
+                    "sbyte[]"
+                },
+                {
+                    typeof(short[]),
+                    "short[]"
+                },
+                {
+                    typeof(int[]),
+                    "int[]"
+                },
+                {
+                    typeof(long[]),
+                    "long[]"
+                },
+                {
+                    typeof(byte[]),
+                    "byte[]"
+                },
+                {
+                    typeof(ushort[]),
+                    "ushort[]"
+                },
+                {
+                    typeof(uint[]),
+                    "uint[]"
+                },
+                {
+                    typeof(ulong[]),
+                    "ulong[]"
+                },
+                {
+                    typeof(decimal[]),
+                    "decimal[]"
+                },
+                {
+                    typeof(string[]),
+                    "string[]"
+                },
+                {
+                    typeof(char[]),
+                    "char[]"
+                },
+                {
+                    typeof(bool[]),
+                    "bool[]"
+                },
+                {
+                    typeof(object),
+                    "object"
+                }
+            };
 
         /// <summary>
         /// 获取没有后缀的 Attribute 名称
@@ -194,10 +195,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         [Summary("获取格式化的默认值字符串，用于生成签名")]
         public static string GetFormattedDefaultValue(Type memberType, object value)
         {
-            if (memberType == typeof(Quaternion) ||
-                memberType == typeof(Vector3) ||
-                memberType == typeof(Vector2) ||
-                memberType == typeof(Vector4))
+            if (memberType == typeof(Quaternion) || memberType == typeof(Vector3) ||
+                memberType == typeof(Vector2) || memberType == typeof(Vector4))
             {
                 var typeName = memberType.Name;
                 var formattedValue = "new " + typeName + value;
@@ -260,8 +259,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
                         $"{colorUsageAttr.hdr.ToString().ToLower()})]";
                     return true;
                 case ReferenceLinkURLAttribute referenceLinkAttr:
-                    attributeFullSignature =
-                        $"[{attributeName}(\"{referenceLinkAttr.WebUrl}\")]";
+                    attributeFullSignature = $"[{attributeName}(\"{referenceLinkAttr.WebUrl}\")]";
                     return true;
             }
 

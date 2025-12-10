@@ -1,11 +1,11 @@
-using Sirenix.OdinInspector;
-using Sirenix.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core;
 
@@ -18,8 +18,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
     [Serializable]
     public class TypeData : MemberData, ITypeData
     {
-        public TypeData(Type type, IAttributeFilter filter = null, IAnalysisDataFactory factory = null)
-            : base(type, filter)
+        public TypeData(Type type, IAttributeFilter filter = null,
+            IAnalysisDataFactory factory = null) : base(type, filter)
         {
             IsStatic = type.IsStatic();
             MemberType = type.MemberType;
@@ -44,37 +44,32 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             // ---
             RuntimeReflectedConstructorsData = type.GetConstructors()
                 .Select(c => DataFactory.CreateConstructorData(c))
-                .OrderBy(data => data, new DerivedMemberDataComparer())
-                .ToArray();
+                .OrderBy(data => data, new DerivedMemberDataComparer()).ToArray();
             RuntimeReflectedMethodsData = type.GetRuntimeMethods()
-                .Where(x => x != null
-                            && !x.Name.Contains("add_") && !x.Name.Contains("remove_")
-                            && !x.Name.Contains("get_") && !x.Name.Contains("set_"))
+                .Where(x =>
+                    x != null && !x.Name.Contains("add_") && !x.Name.Contains("remove_") &&
+                    !x.Name.Contains("get_") && !x.Name.Contains("set_"))
                 .Select(m => DataFactory.CreateMethodData(m))
-                .OrderBy(data => data, new DerivedMemberDataComparer())
-                .ToArray();
+                .OrderBy(data => data, new DerivedMemberDataComparer()).ToArray();
             RuntimeReflectedEventsData = type.GetRuntimeEvents()
                 .Select(e => DataFactory.CreateEventData(e))
-                .OrderBy(data => data, new DerivedMemberDataComparer())
-                .ToArray();
+                .OrderBy(data => data, new DerivedMemberDataComparer()).ToArray();
             RuntimeReflectedPropertiesData = type.GetRuntimeProperties()
                 .Select(p => DataFactory.CreatePropertyData(p))
-                .OrderBy(data => data, new DerivedMemberDataComparer())
-                .ToArray();
+                .OrderBy(data => data, new DerivedMemberDataComparer()).ToArray();
             RuntimeReflectedFieldsData = type.GetUserDefinedFields()
-                .Where(f => f != null
-                            && !f.IsSpecialName
-                            && !f.Name.Contains("k__BackingField") && !f.Name.Contains("__BackingField"))
-                .Select(f => DataFactory.CreateFieldData(f))
-                .OrderBy(data => data, new DerivedMemberDataComparer())
-                .ToArray();
+                .Where(f =>
+                    f != null && !f.IsSpecialName && !f.Name.Contains("k__BackingField") &&
+                    !f.Name.Contains("__BackingField")).Select(f => DataFactory.CreateFieldData(f))
+                .OrderBy(data => data, new DerivedMemberDataComparer()).ToArray();
             // --- Post Process
             RuntimeReflectedMethodsData = MarkOverloadMethod(RuntimeReflectedMethodsData);
         }
 
         TypeInfo TypeInfo { get; }
 
-        static string GetTypeFullSignature(Type type, string accessModifierName, TypeCategory category)
+        static string GetTypeFullSignature(Type type, string accessModifierName,
+            TypeCategory category)
         {
             var sb = new StringBuilder();
             sb.Append(accessModifierName).Append(" ");
@@ -126,8 +121,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
                 }
 
                 // 添加实现的接口，忽略编译时生成的接口，包含所有从基类继承的接口
-                var interfaces = type.GetInterfaces()
-                    .Where(i => !i.IsDefined(typeof(CompilerGeneratedAttribute), false));
+                var interfaces = type.GetInterfaces().Where(i =>
+                    !i.IsDefined(typeof(CompilerGeneratedAttribute), false));
                 inheritTypes.AddRange(interfaces.Select(x => x.GetReadableTypeName(true)));
                 if (inheritTypes.Count > 0)
                 {
@@ -361,7 +356,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         [PropertyOrder(90)]
         [ShowEnableProperty]
         [BilingualTitle("完整类型声明 - 包含特性和签名 - 默认剔除 [Summary] 特性",
-            nameof(FullDeclarationWithAttributes) + " - Include Attributes and Signature - Default Exclude [Summary]")]
+            nameof(FullDeclarationWithAttributes) +
+            " - Include Attributes and Signature - Default Exclude [Summary]")]
         [HideLabel]
         [MultiLineProperty]
         public string FullDeclarationWithAttributes { get; }

@@ -8,9 +8,9 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
-  m_EditorHideFlags: 0
+  m_EditorHideFlags: 1
   m_Script: {fileID: 11500000, guid: 87099f4752f549929de028f6533526d7, type: 3}
-  m_Name: ScriptDocGeneratorVisualPanel
+  m_Name: ScriptDocGeneratorPanel
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,12 +21,19 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: TargetType
-      Entry: 6
-      Data: 
-    - Name: TemporaryTypes
+    - Name: _targetType
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[System.Type, mscorlib]], mscorlib
+      Data: 0|System.RuntimeType, mscorlib
+    - Name: 
+      Entry: 1
+      Data: Yuumix.OdinToolkits.ScriptDocGenerator.Editor.ScriptDocGeneratorController,
+        Yuumix.OdinToolkits.Editor
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _temporaryTypes
+      Entry: 7
+      Data: 1|System.Collections.Generic.List`1[[System.Type, mscorlib]], mscorlib
     - Name: 
       Entry: 12
       Data: 0
@@ -36,17 +43,33 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: TypeData
+    - Name: typeData
+      Entry: 7
+      Data: 2|Yuumix.OdinToolkits.ScriptDocGenerator.TypeData, Yuumix.OdinToolkits.Runtime
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _typeDataList
+      Entry: 7
+      Data: 3|System.Collections.Generic.List`1[[Yuumix.OdinToolkits.ScriptDocGenerator.ITypeData,
+        Yuumix.OdinToolkits.Runtime]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
       Entry: 6
       Data: 
-    - Name: TypeDataList
-      Entry: 6
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
       Data: 
   headerWidget: {}
   docFolderPath: Assets/OdinToolkitsData/Editor/Documents/
   docGeneratorSettings: {fileID: 11400000, guid: 5a3f059e31d2443e983ba3f4f83b2672, type: 2}
   typeSource: 0
-  selectedMonoScript: {fileID: 0}
+  selectedMonoScript: {fileID: 11500000, guid: c51751edb574428abc422d43a5be03a3, type: 3}
   typesCache: {fileID: 0}
   selectedMonoScriptArray: []
   typesCacheSOFolderPath: Assets/OdinToolkitsData/Editor/TypesCacheSO

@@ -13,34 +13,33 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
     /// <summary>
     /// 脚本文档生成器逻辑控制类，负责处理文档生成的核心逻辑
     /// </summary>
-    public class ScriptDocGeneratorController
+    public static class ScriptDocGeneratorController
     {
-        private const string IDENTIFIER_CN = "## 额外说明";
-        private const string NONE_ASSEMBLY = "None Assembly";
+        const string IDENTIFIER_CN = "## 额外说明";
+        const string NONE_ASSEMBLY = "None Assembly";
 
-        private static readonly StringBuilder UserIdentifierDescriptionParagraph = new StringBuilder()
-            .AppendLine(IDENTIFIER_CN)
-            .AppendLine()
-            .AppendLine("> 首个 `" + IDENTIFIER_CN + "` 是增量生成文档标识符，请勿修改标题级别和内容！" +
-                        "本文档由 [`Odin Toolkits For Unity`](" + OdinToolkitsWebLinks.GITHUB_REPOSITORY +
-                        ") 辅助生成。");
+        static readonly StringBuilder UserIdentifierDescriptionParagraph = new StringBuilder()
+            .AppendLine(IDENTIFIER_CN).AppendLine().AppendLine("> 首个 `" + IDENTIFIER_CN +
+                                                               "` 是增量生成文档标识符，请勿修改标题级别和内容！" +
+                                                               "本文档由 [`Odin Toolkits For Unity`](" +
+                                                               OdinToolkitsWebLinks
+                                                                   .GITHUB_REPOSITORY + ") 辅助生成。");
 
-        private readonly IAnalysisDataFactory _analysisDataFactory = new YuumixDefaultAnalysisDataFactory();
+        static readonly IAnalysisDataFactory AnalysisDataFactory =
+            new YuumixDefaultAnalysisDataFactory();
 
-        #region 类型分析方法
-
-        public ITypeData AnalyzeSingleType(Type targetType)
+        public static ITypeData AnalyzeSingleType(Type targetType)
         {
             if (targetType != null)
             {
-                return _analysisDataFactory.CreateTypeData(targetType, _analysisDataFactory);
+                return AnalysisDataFactory.CreateTypeData(targetType, AnalysisDataFactory);
             }
 
             YuumixLogger.OdinToolkitsError("请选择有效的目标类型");
             return null;
         }
 
-        public List<ITypeData> AnalyzeMultipleTypes(List<Type> types)
+        public static List<ITypeData> AnalyzeMultipleTypes(List<Type> types)
         {
             if (types is not { Count: > 0 })
             {
@@ -49,11 +48,11 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
             }
 
             types.RemoveAll(x => x == null);
-            return types.Select(type => _analysisDataFactory.CreateTypeData(type, _analysisDataFactory))
-                .ToList();
+            return types.Select(type =>
+                AnalysisDataFactory.CreateTypeData(type, AnalysisDataFactory)).ToList();
         }
 
-        public List<ITypeData> AnalyzeMultipleTypes(TypesCacheSO typesCache)
+        public static List<ITypeData> AnalyzeMultipleTypes(TypesCacheSO typesCache)
         {
             if (typesCache && typesCache.Types.Count > 0)
             {
@@ -64,7 +63,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
             return null;
         }
 
-        public List<ITypeData> AnalyzeSingleAssembly(string assemblyFullName)
+        public static List<ITypeData> AnalyzeSingleAssembly(string assemblyFullName)
         {
             if (string.IsNullOrEmpty(assemblyFullName) || assemblyFullName == NONE_ASSEMBLY)
             {
@@ -76,16 +75,12 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
 
             return targetAssembly.GetTypes()
                 .Where(t => t.GetCustomAttribute<CompilerGeneratedAttribute>() == null)
-                .Select(type => _analysisDataFactory.CreateTypeData(type, _analysisDataFactory))
+                .Select(type => AnalysisDataFactory.CreateTypeData(type, AnalysisDataFactory))
                 .ToList();
         }
 
-        #endregion
-
-        #region 文档生成方法
-
-        public static void GenerateSingleTypeDoc(ITypeData typeData, DocGeneratorSettingsSO generatorSettings,
-            string targetFolderPath)
+        public static void GenerateSingleTypeDoc(ITypeData typeData,
+            DocGeneratorSettingsSO generatorSettings, string targetFolderPath)
         {
             if (typeData == null || !generatorSettings || string.IsNullOrEmpty(targetFolderPath))
             {
@@ -94,13 +89,14 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
             }
 
             typeData.TryAsIMemberData(out var memberData);
-            if (memberData.IsObsolete && !EditorUtility.DisplayDialog("警告提示", "此类已经被标记为过时，继续生成文档吗？", "确认", "取消"))
+            if (memberData.IsObsolete &&
+                !EditorUtility.DisplayDialog("警告提示", "此类已经被标记为过时，继续生成文档吗？", "确认", "取消"))
             {
                 return;
             }
 
-            ReadDocGeneratorSettingSO(typeData, generatorSettings, targetFolderPath, memberData, out var markdownText,
-                out var filePathWithExtensions);
+            ReadDocGeneratorSettingSO(typeData, generatorSettings, targetFolderPath, memberData,
+                out var markdownText, out var filePathWithExtensions);
 
             if (File.Exists(filePathWithExtensions))
             {
@@ -119,7 +115,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
                 var additionalDescription = GetAdditionalDescriptionFromExistingFile(readAllLines);
                 if (!string.IsNullOrEmpty(additionalDescription))
                 {
-                    var userIdentifierParagraphString = UserIdentifierDescriptionParagraph.ToString();
+                    var userIdentifierParagraphString =
+                        UserIdentifierDescriptionParagraph.ToString();
                     if (markdownText.Contains(userIdentifierParagraphString))
                     {
                         markdownText = markdownText.Replace(userIdentifierParagraphString,
@@ -146,8 +143,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
         }
 
         public static void GenerateMultipleTypeDocs(List<ITypeData> typeDataCollection,
-            DocGeneratorSettingsSO generatorSettings,
-            string targetFolderPath)
+            DocGeneratorSettingsSO generatorSettings, string targetFolderPath)
         {
             if (typeDataCollection is not { Count: > 0 } || generatorSettings ||
                 string.IsNullOrEmpty(targetFolderPath))
@@ -167,8 +163,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
                     EditorUtility.DisplayProgressBar("脚本文档生成", $"正在生成 {dataTypeName} 文档",
                         (float)i / typeDataCollection.Count);
 
-                    ReadDocGeneratorSettingSO(typeData, generatorSettings, targetFolderPath, memberData,
-                        out var markdownText, out var filePathWithExtensions);
+                    ReadDocGeneratorSettingSO(typeData, generatorSettings, targetFolderPath,
+                        memberData, out var markdownText, out var filePathWithExtensions);
 
                     if (File.Exists(filePathWithExtensions))
                     {
@@ -178,10 +174,12 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
                             markdownText = frontMatter + markdownText;
                         }
 
-                        var additionalDescription = GetAdditionalDescriptionFromExistingFile(readAllLines);
+                        var additionalDescription =
+                            GetAdditionalDescriptionFromExistingFile(readAllLines);
                         if (!string.IsNullOrEmpty(additionalDescription))
                         {
-                            var userIdentifierParagraphString = UserIdentifierDescriptionParagraph.ToString();
+                            var userIdentifierParagraphString =
+                                UserIdentifierDescriptionParagraph.ToString();
                             if (markdownText.Contains(userIdentifierParagraphString))
                             {
                                 markdownText = markdownText.Replace(userIdentifierParagraphString,
@@ -194,7 +192,6 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
                         }
                     }
 
-                    // 确保目录存在
                     var directoryPath = Path.GetDirectoryName(filePathWithExtensions);
                     if (!string.IsNullOrEmpty(directoryPath) && !Directory.Exists(directoryPath))
                     {
@@ -214,14 +211,15 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
             EditorUtility.OpenWithDefaultApp(targetFolderPath);
         }
 
-        private static string GetAdditionalDescriptionFromExistingFile(string[] readAllLines)
+        static string GetAdditionalDescriptionFromExistingFile(string[] readAllLines)
         {
             if (readAllLines.Length == 0)
             {
                 return string.Empty;
             }
 
-            var identifierIndex = Array.FindIndex(readAllLines, line => line.StartsWith(IDENTIFIER_CN));
+            var identifierIndex =
+                Array.FindIndex(readAllLines, line => line.StartsWith(IDENTIFIER_CN));
             if (identifierIndex <= 0)
             {
                 return string.Empty;
@@ -236,12 +234,9 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
             return additionalDescriptionStringBuilder.ToString();
         }
 
-        #endregion
-
-        #region 辅助方法
-
-        private static void ReadDocGeneratorSettingSO(ITypeData typeData, DocGeneratorSettingsSO generatorSettings,
-            string targetFolderPath, IMemberData memberData, out string markdownText, out string filePathWithExtensions)
+        static void ReadDocGeneratorSettingSO(ITypeData typeData,
+            DocGeneratorSettingsSO generatorSettings, string targetFolderPath,
+            IMemberData memberData, out string markdownText, out string filePathWithExtensions)
         {
             markdownText = generatorSettings.GetGeneratedDoc(typeData);
 
@@ -274,7 +269,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
 
             if (generatorSettings.customizeDocFileExtensionName)
             {
-                filePathWithExtensions += generatorSettings.docFileExtensionName.EnsureStartsWith(".");
+                filePathWithExtensions +=
+                    generatorSettings.docFileExtensionName.EnsureStartsWith(".");
             }
             else
             {
@@ -282,7 +278,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
             }
         }
 
-        private static bool TryGetFrontMatter(string[] sourceLines, out string frontMatter)
+        static bool TryGetFrontMatter(string[] sourceLines, out string frontMatter)
         {
             var frontMatterStringBuilder = new StringBuilder();
 
@@ -309,7 +305,5 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
             frontMatter = frontMatterStringBuilder.ToString();
             return true;
         }
-
-        #endregion
     }
 }

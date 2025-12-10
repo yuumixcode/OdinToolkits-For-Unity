@@ -14,7 +14,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
 
         [SerializeField]
         [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
-        ScriptDocGeneratorVisualPanelSO visualPanel;
+        ScriptDocGeneratorPanelSO panel;
 
         #endregion
 
@@ -24,21 +24,20 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
         {
             base.OnEnable();
             WindowPadding = new Vector4(10, 10, 10, 10);
-            visualPanel = ScriptDocGeneratorVisualPanelSO.Instance;
-            ScriptDocGeneratorVisualPanelSO.ToastRequested -= ShowToast;
-            ScriptDocGeneratorVisualPanelSO.ToastRequested += ShowToast;
+            panel = ScriptDocGeneratorPanelSO.Instance;
+            ScriptDocGeneratorPanelSO.ToastRequested -= ShowToast;
+            ScriptDocGeneratorPanelSO.ToastRequested += ShowToast;
         }
 
         protected override void OnDestroy()
         {
+            ScriptDocGeneratorPanelSO.ToastRequested -= ShowToast;
             base.OnDestroy();
-            ScriptDocGeneratorVisualPanelSO.ToastRequested -= ShowToast;
         }
 
         #endregion
 
-        [MenuItem(OdinToolkitsMenuItems.SCRIPT_DOC_GEN,
-            false,
+        [MenuItem(OdinToolkitsMenuItems.SCRIPT_DOC_GEN, false,
             OdinToolkitsMenuItems.SCRIPT_DOC_GEN_PRIORITY)]
         public static void OpenWindow()
         {

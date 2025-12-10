@@ -14,13 +14,15 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         /// 创建类型数据
         /// </summary>
         [Summary("创建类型数据")]
-        public ITypeData CreateTypeData(Type type, IAnalysisDataFactory factory = null, IAttributeFilter filter = null);
+        public ITypeData CreateTypeData(Type type, IAnalysisDataFactory factory = null,
+            IAttributeFilter filter = null);
 
         /// <summary>
         /// 创建构造函数数据
         /// </summary>
         [Summary("创建构造函数数据")]
-        public IConstructorData CreateConstructorData(ConstructorInfo constructorInfo, IAttributeFilter filter = null);
+        public IConstructorData CreateConstructorData(ConstructorInfo constructorInfo,
+            IAttributeFilter filter = null);
 
         /// <summary>
         /// 创建事件数据
@@ -38,7 +40,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         /// 创建属性数据
         /// </summary>
         [Summary("创建属性数据")]
-        public IPropertyData CreatePropertyData(PropertyInfo propertyInfo, IAttributeFilter filter = null);
+        public IPropertyData CreatePropertyData(PropertyInfo propertyInfo,
+            IAttributeFilter filter = null);
 
         /// <summary>
         /// 创建字段数据

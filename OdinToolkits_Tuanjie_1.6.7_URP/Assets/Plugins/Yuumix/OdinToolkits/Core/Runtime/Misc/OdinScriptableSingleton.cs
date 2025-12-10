@@ -1,3 +1,4 @@
+using Yuumix.OdinToolkits.Core.SafeEditor;
 using Sirenix.OdinInspector;
 #if UNITY_EDITOR
 using YuumixEditor;
@@ -19,7 +20,7 @@ namespace Yuumix.OdinToolkits.Core
                 }
 
 #if UNITY_EDITOR
-                _instance = ScriptableObjectEditorUtility.GetAssetAndDeleteExtra<T>(
+                _instance = ScriptableObjectSafeEditorUtility.GetSingletonAssetAndDeleteOther<T>(
                     OdinToolkitsEditorPaths.ODIN_TOOLKITS_ANY_DATA_ROOT_FOLDER + "/SO");
 #endif
                 return _instance;

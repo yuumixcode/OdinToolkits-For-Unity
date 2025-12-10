@@ -1,8 +1,8 @@
-using Sirenix.OdinInspector;
-using Sirenix.Utilities;
 using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.ScriptDocGenerator
@@ -14,7 +14,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
     [Serializable]
     public class MethodData : MemberData, IMethodData
     {
-        public MethodData(MethodInfo memberInfo, IAttributeFilter filter = null) : base(memberInfo, filter)
+        public MethodData(MethodInfo memberInfo, IAttributeFilter filter = null) : base(memberInfo,
+            filter)
         {
             IsStatic = memberInfo.IsStatic;
             MemberType = memberInfo.MemberType;
@@ -52,7 +53,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
 
             signature += accessModifierName + " ";
             signature += GetMethodKeywordSnippet(methodInfo);
-            if (!methodInfo.Name.Contains("op_Implicit") && !methodInfo.Name.Contains("op_Explicit"))
+            if (!methodInfo.Name.Contains("op_Implicit") &&
+                !methodInfo.Name.Contains("op_Explicit"))
             {
                 signature += methodInfo.ReturnType.GetReadableTypeName() + " ";
             }
@@ -76,7 +78,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             {
                 keyword = "abstract ";
             }
-            else if (methodInfo.IsVirtual && methodInfo.DeclaringType != methodInfo.GetBaseDefinition().DeclaringType)
+            else if (methodInfo.IsVirtual && methodInfo.DeclaringType !=
+                     methodInfo.GetBaseDefinition().DeclaringType)
             {
                 keyword = "override ";
             }
@@ -243,7 +246,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         [PropertyOrder(60)]
         [ShowEnableProperty]
         [BilingualTitle("完整方法声明 - 包含特性和签名 - 默认剔除 [Summary] 特性",
-            nameof(FullDeclarationWithAttributes) + " - Include Attributes and Signature - Default Exclude [Summary]")]
+            nameof(FullDeclarationWithAttributes) +
+            " - Include Attributes and Signature - Default Exclude [Summary]")]
         [HideLabel]
         [MultiLineProperty]
         public string FullDeclarationWithAttributes { get; }

@@ -1,6 +1,6 @@
-using Sirenix.OdinInspector;
 using System;
 using System.Reflection;
+using Sirenix.OdinInspector;
 using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.ScriptDocGenerator
@@ -10,10 +10,11 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
     public abstract class MemberData : IMemberData
     {
         [Summary("默认特性过滤器，被过滤的特性不会包含在 AttributesDeclaration 中")]
-        public static readonly DefaultAttributeFilter DefaultAttributeFilter = new DefaultAttributeFilter(new[]
-        {
-            typeof(SummaryAttribute)
-        });
+        public static readonly DefaultAttributeFilter DefaultAttributeFilter =
+            new DefaultAttributeFilter(new[]
+            {
+                typeof(SummaryAttribute)
+            });
 
         bool _implementIsConstructor;
         bool _implementIsMethod;
@@ -29,7 +30,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             ReflectedType = memberInfo.ReflectedType;
             ReflectedTypeName = ReflectedType?.GetReadableTypeName();
             ReflectedTypeFullName = ReflectedType?.GetReadableTypeName(true);
-            AttributesDeclaration = memberInfo.GetAttributesDeclarationWithMultiLine(filter ?? DefaultAttributeFilter);
+            AttributesDeclaration =
+                memberInfo.GetAttributesDeclarationWithMultiLine(filter ?? DefaultAttributeFilter);
             SummaryAttributeValue = memberInfo.GetCustomAttribute<SummaryAttribute>()?.GetSummary();
             IsFromInheritance = memberInfo.IsFromInheritance();
             // PostProcess
@@ -55,9 +57,11 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         [Summary("是否已过时")]
         public bool IsObsolete { get; }
 
-        [Summary("声明此成员的类型")] public Type DeclaringType { get; }
+        [Summary("声明此成员的类型")]
+        public Type DeclaringType { get; }
 
-        [Summary("声明类型的名称")] public string DeclaringTypeName { get; }
+        [Summary("声明类型的名称")]
+        public string DeclaringTypeName { get; }
 
         [ShowEnableProperty]
         [BilingualText("声明成员的类的完整名称", nameof(DeclaringTypeFullName))]
@@ -65,13 +69,17 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         [Summary("声明类型的完整名称，包括命名空间")]
         public string DeclaringTypeFullName { get; }
 
-        [Summary("通过反射获取该成员的类型")] public Type ReflectedType { get; }
+        [Summary("通过反射获取该成员的类型")]
+        public Type ReflectedType { get; }
 
-        [Summary("通过反射获取该成员的类型名称")] public string ReflectedTypeName { get; }
+        [Summary("通过反射获取该成员的类型名称")]
+        public string ReflectedTypeName { get; }
 
-        [Summary("通过反射获取该成员的类型的完整名称，包括命名空间")] public string ReflectedTypeFullName { get; }
+        [Summary("通过反射获取该成员的类型的完整名称，包括命名空间")]
+        public string ReflectedTypeFullName { get; }
 
-        [Summary("特性声明字符串")] public string AttributesDeclaration { get; }
+        [Summary("特性声明字符串")]
+        public string AttributesDeclaration { get; }
 
         [PropertyOrder(100)]
         [ShowEnableProperty]

@@ -15,7 +15,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         #region IAnalysisDataFactory Members
 
         [Summary("创建类型数据")]
-        public ITypeData CreateTypeData(Type type, IAnalysisDataFactory factory = null, IAttributeFilter filter = null)
+        public ITypeData CreateTypeData(Type type, IAnalysisDataFactory factory = null,
+            IAttributeFilter filter = null)
         {
             if (type != null)
             {
@@ -65,7 +66,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
         }
 
         [Summary("创建属性数据")]
-        public IPropertyData CreatePropertyData(PropertyInfo propertyInfo, IAttributeFilter filter = null)
+        public IPropertyData CreatePropertyData(PropertyInfo propertyInfo,
+            IAttributeFilter filter = null)
         {
             if (propertyInfo != null)
             {

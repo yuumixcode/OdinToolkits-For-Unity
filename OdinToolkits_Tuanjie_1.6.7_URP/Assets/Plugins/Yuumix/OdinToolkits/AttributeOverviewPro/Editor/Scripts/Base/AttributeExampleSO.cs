@@ -1,3 +1,4 @@
+using Yuumix.OdinToolkits.Core.SafeEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core;
 using YuumixEditor;
@@ -20,7 +21,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                     return _instance;
                 }
 
-                _instance = ScriptableObjectEditorUtility.GetAssetAndDeleteExtra<T>(
+                _instance = ScriptableObjectSafeEditorUtility.GetSingletonAssetAndDeleteOther<T>(
                     OdinToolkitsEditorPaths.ODIN_TOOLKITS_ANY_DATA_ROOT_FOLDER + "/Editor/SO");
                 return _instance;
             }

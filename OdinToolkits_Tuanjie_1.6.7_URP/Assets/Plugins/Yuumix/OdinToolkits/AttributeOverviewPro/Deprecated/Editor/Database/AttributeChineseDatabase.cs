@@ -1,5 +1,6 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.Core.SafeEditor;
 using YuumixEditor;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
@@ -18,6 +19,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         #endregion
 
         public static AttributeChineseDatabase Instance =>
-            ScriptableObjectEditorUtility.GetAssetAndDeleteExtra<AttributeChineseDatabase>();
+            ScriptableObjectSafeEditorUtility.GetSingletonAssetAndDeleteOther<AttributeChineseDatabase>();
     }
 }
