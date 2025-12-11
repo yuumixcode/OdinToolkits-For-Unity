@@ -15,11 +15,8 @@ using Object = UnityEngine.Object;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 {
-    /// <summary>
-    /// Attribute 介绍可视化面板
-    /// </summary>
-    public abstract class AbstractAttributeVisualPanelSO : SerializedScriptableObject,
-        IOdinToolkitsEditorReset
+    [Summary("Attribute 介绍面板抽象基类")]
+    public abstract class AbstractAttributePanelSO : ObjectPanelSO<AbstractAttributePanelSO>
     {
         const float AFTER_SPACE = 20f;
         static BilingualData _guiTableNumberLabel = new BilingualData("序号", "Number");
@@ -29,7 +26,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         [SerializeField]
         BilingualHeaderWidget headerWidget;
 
-        AbstractAttributeModel _model;
+        AbstractAttributeData _data;
 
         public BilingualHeaderWidget HeaderWidget => headerWidget;
 
@@ -44,14 +41,14 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 
         #region IOdinToolkitsEditorReset Members
 
-        public virtual void EditorReset()
+        public override void EditorReset()
         {
             _isShowShortenCodePreview = false;
             _usageTipsTextHeightCache = new Dictionary<string, float>();
             _attributeParameterTextHeightCache = new Dictionary<string, float>();
-            if (_model != null)
+            if (_data != null)
             {
-                currentSelectedExample = _model.GetInitialExample();
+                currentSelectedExample = _data.GetInitialExample();
             }
 
             if (_examplePreviewItems is { Length: > 0 })
@@ -65,29 +62,28 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 
         #endregion
 
-        protected void SetModel(AbstractAttributeModel attributeModel)
+        protected void SetData(AbstractAttributeData attributeData)
         {
-            _model = attributeModel;
-            _model.Initialize();
-            headerWidget = _model.HeaderWidget;
-            _usageTips = _model.UsageTips;
+            _data = attributeData;
+            headerWidget = _data.HeaderWidget;
+            _usageTips = _data.UsageTips;
             if (_usageTips != null)
             {
                 CreateUsageTipsTable();
                 ResizeUsageTipsTable();
             }
 
-            _attributeParameters = _model.AttributeParameters;
+            _attributeParameters = _data.AttributeParameters;
             if (_attributeParameters != null)
             {
                 CreateAttributeParametersGUITable();
                 ResizeAttributeParameterTable();
             }
 
-            _resolvedStringParameters = _model.ResolvedStringParameters;
-            _examplePreviewItems = _model.ExamplePreviewItems;
-            currentSelectedExample = _model.GetInitialExample();
-            CurrentExampleSourceCode =
+            _resolvedStringParameters = _data.ResolvedStringParameters;
+            _examplePreviewItems = _data.ExamplePreviewItems;
+            currentSelectedExample = _data.GetInitialExample();
+            _currentExampleSourceCode =
                 AttributeOverviewProEditorUtility.GetExampleSourceCodeWithoutNamespace(MarkExampleAttribute);
             InspectorBilingualismConfigSO.OnLanguageChanged -= BilingualismConfig_OnLanguageChanged;
             InspectorBilingualismConfigSO.OnLanguageChanged += BilingualismConfig_OnLanguageChanged;
@@ -528,9 +524,11 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
             if (GUI.Button(rect3, GUIContent.none, GUIStyle.none))
             {
                 currentSelectedExample = selectExample;
-                CurrentExampleSourceCode =
+                _currentExampleSourceCode =
                     AttributeOverviewProEditorUtility.GetExampleSourceCodeWithoutNamespace(
                         MarkExampleAttribute);
+                _currentExampleShortenCode =
+                    AttributeOverviewProEditorUtility.GetExampleShortenCode(_currentExampleSourceCode);
             }
 
             if (currentSelectedExample != selectExample && rect3.Contains(Event.current.mousePosition))
@@ -560,11 +558,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         bool CurrentExampleIsNull => !currentSelectedExample;
         bool _isShowShortenCodePreview;
         Vector2 _scrollPosition;
-
-        string CurrentExampleSourceCode { get; set; }
-
-        string CurrentExampleShortenCode =>
-            AttributeOverviewProEditorUtility.GetExampleShortenCode(CurrentExampleSourceCode);
+        string _currentExampleSourceCode;
+        string _currentExampleShortenCode;
 
         const int CODE_AREA_WIDTH = 750;
 
@@ -608,15 +603,15 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                     SirenixGUIStyles.ToolbarButton))
             {
                 EditorGUIUtility.systemCopyBuffer = _isShowShortenCodePreview
-                    ? CurrentExampleShortenCode
-                    : CurrentExampleSourceCode;
+                    ? _currentExampleShortenCode
+                    : _currentExampleSourceCode;
             }
         }
 
         void DrawCodePreview()
         {
             EditorGUILayout.BeginVertical();
-            var highlighterCode = OdinSyntaxHighlighterSO.ApplyCodeHighlighting(CurrentExampleSourceCode);
+            var highlighterCode = OdinSyntaxHighlighterSO.ApplyCodeHighlighting(_currentExampleSourceCode);
             if (_isShowShortenCodePreview)
             {
                 highlighterCode = AttributeOverviewProEditorUtility.GetExampleShortenCode(highlighterCode);
@@ -680,48 +675,14 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         Dictionary<string, float> _attributeParameterTextHeightCache = new Dictionary<string, float>();
 
         #endregion
-
-        #region Test
-
-        static void Test_Log(string msg, bool isLog)
-        {
-            if (isLog)
-            {
-                Debug.Log(msg);
-            }
-        }
-
-        void Test_ResizeUsageTipsTable(bool isExecute)
-        {
-            if (!isExecute)
-            {
-                return;
-            }
-
-            Test_Log("Test_ResizeUsageTipsTable", true);
-            ResizeUsageTipsTable();
-        }
-
-        void Test_ResizeAttributeParameterTable(bool isExecute)
-        {
-            if (!isExecute)
-            {
-                return;
-            }
-
-            Test_Log("Test_ResizeAttributeParameterTable", true);
-            ResizeAttributeParameterTable();
-        }
-
-        #endregion
     }
 
-    public class VisualPanelProcessor<T> : OdinAttributeProcessor<T> where T : AbstractAttributeVisualPanelSO
+    public class VisualPanelProcessor<T> : OdinAttributeProcessor<T> where T : AbstractAttributePanelSO
     {
         public override void ProcessChildMemberAttributes(InspectorProperty parentProperty, MemberInfo member,
             List<Attribute> attributes)
         {
-            if (member.Name != nameof(AbstractAttributeVisualPanelSO.Initialize))
+            if (member.Name != nameof(AbstractAttributePanelSO.Initialize))
             {
                 return;
             }

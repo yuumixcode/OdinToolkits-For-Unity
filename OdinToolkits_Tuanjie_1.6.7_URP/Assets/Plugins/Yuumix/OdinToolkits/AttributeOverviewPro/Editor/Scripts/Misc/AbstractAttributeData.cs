@@ -6,19 +6,19 @@ using Yuumix.OdinToolkits.Core.SafeEditor;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 {
-    public abstract class AbstractAttributeModel
+    [Summary("Attribute 信息数据抽象类，用于存储特性的介绍信息。")]
+    public abstract class AbstractAttributeData
     {
-        public BilingualHeaderWidget HeaderWidget { get; protected set; }
+        public abstract BilingualHeaderWidget HeaderWidget { get; set; }
 
-        public BilingualData[] UsageTips { get; protected set; }
+        public abstract BilingualData[] UsageTips { get; set; }
 
-        public ParameterValue[] AttributeParameters { get; protected set; }
+        public abstract ParameterValue[] AttributeParameters { get; set; }
 
-        public ResolvedStringParameterValue[] ResolvedStringParameters { get; protected set; }
+        public abstract ResolvedStringParameterValue[] ResolvedStringParameters { get; set; }
 
-        public AttributeExamplePreviewItem[] ExamplePreviewItems { get; protected set; }
-
-        public abstract void Initialize();
+        public abstract AttributeExamplePreviewItem[] ExamplePreviewItems { get; set; }
+        
 
         public ScriptableObject GetInitialExample()
         {

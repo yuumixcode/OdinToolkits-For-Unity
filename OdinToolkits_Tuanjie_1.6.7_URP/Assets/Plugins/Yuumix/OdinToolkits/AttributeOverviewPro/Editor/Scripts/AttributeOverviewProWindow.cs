@@ -36,12 +36,9 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                     SearchTerm = "",
                     SearchFunction = menuItem =>
                     {
-                        var str = menuItem.Name
-                            .ToLower()
+                        var str = menuItem.Name.ToLower()
                             .Replace(" ", "");
-                        var searchStr = _tree.Config
-                            .SearchTerm
-                            .ToLower()
+                        var searchStr = _tree.Config.SearchTerm.ToLower()
                             .Replace(" ", "");
                         return str.Contains(searchStr);
                     }
@@ -55,7 +52,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 
         protected override OdinMenuTree BuildMenuTree()
         {
-            foreach (var keyValuePair in _databaseSO.VisualPanelMap)
+            foreach (var keyValuePair in _databaseSO.AttributePanelMap)
             {
                 _tree.AddObjectAtPath(keyValuePair.Key, keyValuePair.Value);
             }

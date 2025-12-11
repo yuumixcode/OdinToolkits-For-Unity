@@ -1,11 +1,11 @@
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 {
     [AttributeCategory(OdinAttributeCategory.Essentials)]
-    public class AssetsOnlyAttributeVisualPanelSO : AbstractAttributeVisualPanelSO
+    public class AssetsOnlyAttributePanelSO : AbstractAttributePanelSO
     {
         public override void Initialize()
         {
-            SetModel(new AssetsOnlyAttributeModel());
+            SetData(new AssetsOnlyAttributeData());
         }
     }
 }

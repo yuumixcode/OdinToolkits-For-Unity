@@ -4,9 +4,7 @@ using Yuumix.OdinToolkits.Core.SafeEditor;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 {
-    /// <summary>
-    /// Attribute Overview 案例的 ScriptableObject 基类，继承 IOdinToolkitsEditorReset
-    /// </summary>
+    [Summary("Attribute Overview 案例的 ScriptableObject 基类，继承 IOdinToolkitsEditorReset")]
     public abstract class AttributeExampleSO<T> : ScriptableObject
         where T : ScriptableObject, IOdinToolkitsEditorReset
     {
@@ -22,7 +20,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                 }
 
                 _instance = ScriptableObjectSafeEditorUtility.GetSingletonAssetAndDeleteOther<T>(
-                    OdinToolkitsEditorPaths.ALL_DATA_ROOT_FOLDER + "/Editor/SO");
+                    OdinToolkitsEditorPaths.ALL_DATA_ROOT_FOLDER + "/Editor/AttributeExampleSO");
                 return _instance;
             }
         }

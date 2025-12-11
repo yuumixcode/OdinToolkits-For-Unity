@@ -9,9 +9,7 @@ using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 {
-    /// <summary>
-    /// 被解析的字符串参数
-    /// </summary>
+    [Summary("被解析的字符串参数")]
     public class ResolvedStringParameterValue
     {
         static readonly BilingualData ResolverTypeLabel = new BilingualData("解析器类型", "Resolver Type");
@@ -141,17 +139,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
             NamedValueTable.ReCalculateSizes();
         }
 
-        public void Test_ResizeTables(bool isExecute)
-        {
-            if (!isExecute)
-            {
-                return;
-            }
-
-            Test_Log("Test_ResizeTables", true);
-            ResizeAllTables();
-        }
-
         static float CalculateHeight(string content, GUITable table, int col, int row) =>
             AttributeOverviewProEditorUtility.TableCellTextStyle.CalcHeight(GUIHelper.TempContent(content),
                 table[col, row].Rect.width);
@@ -169,14 +156,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                 ResolverType.ActionResolver => "Action Resolver",
                 _ => ResolverType.ToString()
             };
-        }
-
-        static void Test_Log(string msg, bool isLog)
-        {
-            if (isLog)
-            {
-                Debug.Log(msg);
-            }
         }
     }
 }
