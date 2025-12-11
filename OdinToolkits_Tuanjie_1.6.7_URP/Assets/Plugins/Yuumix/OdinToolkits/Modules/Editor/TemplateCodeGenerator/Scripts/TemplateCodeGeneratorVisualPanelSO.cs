@@ -3,6 +3,7 @@ using Sirenix.OdinInspector.Editor;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Yuumix.OdinToolkits.Core.SafeEditor;
 using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core;
@@ -238,7 +239,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             AssetDatabase.ImportAsset(codeRelativePath);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
-            ProjectEditorUtility.PingAndSelectAsset(codeRelativePath);
+            ProjectSafeEditorUtility.PingAndSelectAsset(codeRelativePath);
         }
 
         static void PublishToastEvent(ToastPosition position, SdfIconType icon, string msg,

@@ -1,7 +1,7 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using NUnit.Framework;
 using Yuumix.OdinToolkits.ScriptDocGenerator;
 
 namespace Yuumix.OdinToolkits.Tests.Editor
@@ -15,7 +15,8 @@ namespace Yuumix.OdinToolkits.Tests.Editor
 
         static readonly FieldInfo[] TestFields = typeof(TestClass).GetRuntimeFields().ToArray();
 
-        static readonly IFieldData[] TestFieldData = TestFields.Select(f => TargetFactory.CreateFieldData(f)).ToArray();
+        static readonly IFieldData[] TestFieldData =
+            TestFields.Select(f => TargetFactory.CreateFieldData(f)).ToArray();
 
         static readonly Dictionary<string, string> FieldExpectedSignatureMaps = new Dictionary<string, string>
         {
@@ -79,14 +80,13 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             },
             {
                 nameof(TestClass.ENUM_CONST_FIELD),
-                "public const " + nameof(ScriptDocGeneratorTestEnum) + " " + nameof(TestClass.ENUM_CONST_FIELD) +
-                " = " + nameof(ScriptDocGeneratorTestEnum) + ".Value1;"
+                "public const " + nameof(ScriptDocGeneratorTestEnum) + " " +
+                nameof(TestClass.ENUM_CONST_FIELD) + " = " + nameof(ScriptDocGeneratorTestEnum) + ".Value1;"
             },
             {
                 nameof(TestClass.NESTED_ENUM_CONST_FIELD),
-                "public const " + nameof(UnitTestFieldsIsConstantWithDefaultValue) + "." + nameof(TestEnum) + " " +
-                nameof(TestClass.NESTED_ENUM_CONST_FIELD) +
-                " = " + nameof(TestEnum) + ".Value3;"
+                "public const " + nameof(UnitTestFieldsIsConstantWithDefaultValue) + "." + nameof(TestEnum) +
+                " " + nameof(TestClass.NESTED_ENUM_CONST_FIELD) + " = " + nameof(TestEnum) + ".Value3;"
             }
         };
 

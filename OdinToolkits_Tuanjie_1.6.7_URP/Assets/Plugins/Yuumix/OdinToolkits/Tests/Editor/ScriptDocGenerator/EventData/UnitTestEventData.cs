@@ -1,9 +1,9 @@
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
+using NUnit.Framework;
 using UnityEngine;
 using Yuumix.OdinToolkits.ScriptDocGenerator;
 
@@ -25,8 +25,14 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         static readonly Dictionary<string, string> ExpectedSignatureMaps = new Dictionary<string, string>
         {
             { nameof(TestClass.ActionEvent), "public event Action ActionEvent;" },
-            { nameof(TestClass.ActionWithParamsEvent), "public event Action<int, string> ActionWithParamsEvent;" },
-            { nameof(TestClass.FuncWithParamsEvent), "public event Func<int, string, bool> FuncWithParamsEvent;" },
+            {
+                nameof(TestClass.ActionWithParamsEvent),
+                "public event Action<int, string> ActionWithParamsEvent;"
+            },
+            {
+                nameof(TestClass.FuncWithParamsEvent),
+                "public event Func<int, string, bool> FuncWithParamsEvent;"
+            },
             { nameof(TestClass.PredicateEvent), "public event Predicate<int> PredicateEvent;" },
             { nameof(TestClass.ComparisonEvent), "public event Comparison<string> ComparisonEvent;" },
             { nameof(TestClass.StaticActionEvent), "public static event Action<bool> StaticActionEvent;" }
@@ -45,7 +51,8 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         {
             var fieldData = EventDataArray.First(f => ((MemberData)f).Name == "ActionWithParamsEvent");
             Debug.Log(fieldData.Signature);
-            Assert.AreEqual(ExpectedSignatureMaps[nameof(TestClass.ActionWithParamsEvent)], fieldData.Signature);
+            Assert.AreEqual(ExpectedSignatureMaps[nameof(TestClass.ActionWithParamsEvent)],
+                fieldData.Signature);
         }
 
         [Test]
@@ -53,7 +60,8 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         {
             var fieldData = EventDataArray.First(f => ((MemberData)f).Name == "FuncWithParamsEvent");
             Debug.Log(fieldData.Signature);
-            Assert.AreEqual(ExpectedSignatureMaps[nameof(TestClass.FuncWithParamsEvent)], fieldData.Signature);
+            Assert.AreEqual(ExpectedSignatureMaps[nameof(TestClass.FuncWithParamsEvent)],
+                fieldData.Signature);
         }
 
         [Test]

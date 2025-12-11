@@ -1,5 +1,5 @@
-using Sirenix.OdinInspector;
 using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -11,15 +11,12 @@ namespace Yuumix.OdinToolkits.Core
     /// Odin Toolkits 面板双语配置，对外提供一个语言切换事件，
     /// 主要用于设置 BilingualData 的返回语言，Runtime 和 Editor 脚本均可访问
     /// </summary>
-    [Summary("Odin Toolkits 面板双语配置，对外提供一个语言切换事件， 主要用于设置 BilingualData 的返回语言，Runtime 和 Editor 脚本均可访问")]
+    [Summary("Odin Toolkits 面板双语配置，对外提供一个语言切换事件。" + "主要用于设置 BilingualData 的返回语言，Runtime 和 Editor 脚本均可访问")]
     [Serializable]
     public class InspectorBilingualismConfigSO : ScriptableObject, IOdinToolkitsRuntimeReset
     {
         #region LanguageType enum
 
-        /// <summary>
-        /// Odin Toolkits 编辑器语言类型
-        /// </summary>
         [Summary("Odin Toolkits 编辑器语言类型")]
         [Serializable]
         public enum LanguageType

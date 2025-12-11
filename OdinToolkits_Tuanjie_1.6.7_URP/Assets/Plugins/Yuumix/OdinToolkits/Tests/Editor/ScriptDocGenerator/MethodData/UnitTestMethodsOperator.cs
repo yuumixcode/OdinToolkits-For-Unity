@@ -1,6 +1,6 @@
-using NUnit.Framework;
 using System.Linq;
 using System.Reflection;
+using NUnit.Framework;
 using UnityEngine;
 using Yuumix.OdinToolkits.ScriptDocGenerator;
 
@@ -8,8 +8,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
 {
     public class UnitTestMethodsOperator
     {
-        static readonly MethodInfo[] TestClassMethodInfos =
-            typeof(TestClass).GetRuntimeMethods().ToArray();
+        static readonly MethodInfo[] TestClassMethodInfos = typeof(TestClass).GetRuntimeMethods().ToArray();
 
         static readonly IMethodData[] TestClassMethodDataArray = TestClassMethodInfos
             .Select(x => UnitTestAnalysisFactory.Default.CreateMethodData(x)).ToArray();
@@ -32,9 +31,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         [Test]
         public void TestOperatorAdd()
         {
-            var methodData =
-                TestClassMethodDataArray.First(m =>
-                    ((IMemberData)m).Name == "op_Addition");
+            var methodData = TestClassMethodDataArray.First(m => ((IMemberData)m).Name == "op_Addition");
             Debug.Log(methodData.Signature);
             Assert.AreEqual(
                 "public static UnitTestMethodsOperator.TestClass operator +(UnitTestMethodsOperator.TestClass a, UnitTestMethodsOperator.TestClass b)",
@@ -44,9 +41,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         [Test]
         public void TestOperatorSub()
         {
-            var methodData =
-                TestClassMethodDataArray.First(m =>
-                    ((IMemberData)m).Name == "op_Subtraction");
+            var methodData = TestClassMethodDataArray.First(m => ((IMemberData)m).Name == "op_Subtraction");
             Debug.Log(methodData.Signature);
             Assert.AreEqual(
                 "public static UnitTestMethodsOperator.TestClass operator -(UnitTestMethodsOperator.TestClass a, UnitTestMethodsOperator.TestClass b)",
@@ -56,9 +51,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         [Test]
         public void TestOperatorMul()
         {
-            var methodData =
-                TestClassMethodDataArray.First(m =>
-                    ((IMemberData)m).Name == "op_Multiply");
+            var methodData = TestClassMethodDataArray.First(m => ((IMemberData)m).Name == "op_Multiply");
             Debug.Log(methodData.Signature);
             Assert.AreEqual(
                 "public static UnitTestMethodsOperator.TestClass operator *(UnitTestMethodsOperator.TestClass a, UnitTestMethodsOperator.TestClass b)",
@@ -68,9 +61,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         [Test]
         public void TestOperatorDiv()
         {
-            var methodData =
-                TestClassMethodDataArray.First(m =>
-                    ((IMemberData)m).Name == "op_Division");
+            var methodData = TestClassMethodDataArray.First(m => ((IMemberData)m).Name == "op_Division");
             Debug.Log(methodData.Signature);
             Assert.AreEqual(
                 "public static UnitTestMethodsOperator.TestClass operator /(UnitTestMethodsOperator.TestClass a, UnitTestMethodsOperator.TestClass b)",
@@ -80,9 +71,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         [Test]
         public void TestOperatorMod()
         {
-            var methodData =
-                TestClassMethodDataArray.First(m =>
-                    ((IMemberData)m).Name == "op_Modulus");
+            var methodData = TestClassMethodDataArray.First(m => ((IMemberData)m).Name == "op_Modulus");
             Debug.Log(methodData.Signature);
             Assert.AreEqual(
                 "public static UnitTestMethodsOperator.TestClass operator %(UnitTestMethodsOperator.TestClass a, UnitTestMethodsOperator.TestClass b)",
@@ -92,24 +81,18 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         [Test]
         public void TestOperatorImplicit()
         {
-            var methodData =
-                TestClassMethodDataArray.First(m =>
-                    ((IMemberData)m).Name == "op_Implicit");
+            var methodData = TestClassMethodDataArray.First(m => ((IMemberData)m).Name == "op_Implicit");
             Debug.Log(methodData.Signature);
-            Assert.AreEqual(
-                "public static implicit operator UnitTestMethodsOperator.TestClass(int a)",
+            Assert.AreEqual("public static implicit operator UnitTestMethodsOperator.TestClass(int a)",
                 methodData.Signature);
         }
 
         [Test]
         public void TestOperatorExplicit()
         {
-            var methodData =
-                TestClassMethodDataArray.First(m =>
-                    ((IMemberData)m).Name == "op_Explicit");
+            var methodData = TestClassMethodDataArray.First(m => ((IMemberData)m).Name == "op_Explicit");
             Debug.Log(methodData.Signature);
-            Assert.AreEqual(
-                "public static explicit operator float(UnitTestMethodsOperator.TestClass a)",
+            Assert.AreEqual("public static explicit operator float(UnitTestMethodsOperator.TestClass a)",
                 methodData.Signature);
         }
 

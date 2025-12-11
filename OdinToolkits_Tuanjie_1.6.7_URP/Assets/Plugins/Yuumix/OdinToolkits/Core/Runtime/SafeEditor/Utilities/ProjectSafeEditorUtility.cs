@@ -1,19 +1,18 @@
 ﻿#if UNITY_EDITOR
 using UnityEditor;
-using Yuumix.OdinToolkits.Core;
+#endif
+using System.Diagnostics;
 using Object = UnityEngine.Object;
 
-namespace YuumixEditor
+namespace Yuumix.OdinToolkits.Core.SafeEditor
 {
-    public static class ProjectEditorUtility
+    [Summary("关于 Project 操作的工具类。仅在编辑器阶段可用。")]
+    public static class ProjectSafeEditorUtility
     {
-        /// <summary>
-        /// Ping 项目中的任何资源，可以是文件夹路径，需要相对路径
-        /// </summary>
-        /// <param name="relativePath">相对路径</param>
+        [Summary("Ping 项目中的任何资源，可以是文件夹路径。传入相对路径。仅在编辑器阶段可用，打包后自动剔除。")]
+        [Conditional("UNITY_EDITOR")]
         public static void PingAndSelectAsset(string relativePath)
         {
-            // Debug.Assert(path.StartsWith("Assets"), "PingFolder 中传入的相对路径必须以 Assets 开头");
             if (!relativePath.StartsWith("Assets"))
             {
                 YuumixLogger.LogError("相对路径必须以 Assets 开头");
@@ -26,4 +25,3 @@ namespace YuumixEditor
         }
     }
 }
-#endif

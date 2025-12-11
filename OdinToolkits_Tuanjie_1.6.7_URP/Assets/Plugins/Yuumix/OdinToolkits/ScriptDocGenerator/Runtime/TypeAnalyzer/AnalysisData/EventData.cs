@@ -12,15 +12,15 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
     [Serializable]
     public class EventData : MemberData, IEventData
     {
-        public EventData(EventInfo eventInfo, IAttributeFilter filter = null) : base(eventInfo,
-            filter)
+        public EventData(EventInfo eventInfo, IAttributeFilter filter = null) : base(eventInfo, filter)
         {
             // IEventData
             EventType = eventInfo.EventHandlerType;
             EventTypeName = EventType.GetReadableTypeName();
             EventTypeFullName = EventType.GetReadableTypeName(true);
             // IDerivedMemberData 
-            IsStatic = eventInfo.GetAddMethod(true).IsStatic;
+            IsStatic = eventInfo.GetAddMethod(true)
+                .IsStatic;
             MemberType = eventInfo.MemberType;
             MemberTypeName = MemberType.ToString();
             AccessModifier = eventInfo.GetEventAccessModifierType();

@@ -1,8 +1,8 @@
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using NUnit.Framework;
 using UnityEngine;
 using Yuumix.OdinToolkits.ScriptDocGenerator;
 
@@ -37,7 +37,8 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         {
             var fieldData = TestFieldData.First(f => ((MemberData)f).Name == "ActionWithParamsField");
             Debug.Log(fieldData.Signature);
-            Assert.AreEqual(FieldExpectedSignatureMaps[typeof(Action<int, string>).Name], fieldData.Signature);
+            Assert.AreEqual(FieldExpectedSignatureMaps[typeof(Action<int, string>).Name],
+                fieldData.Signature);
         }
 
         [Test]
@@ -45,7 +46,8 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         {
             var fieldData = TestFieldData.First(f => ((MemberData)f).Name == "FuncWithParamsField");
             Debug.Log(fieldData.Signature);
-            Assert.AreEqual(FieldExpectedSignatureMaps[typeof(Func<int, string, bool>).Name], fieldData.Signature);
+            Assert.AreEqual(FieldExpectedSignatureMaps[typeof(Func<int, string, bool>).Name],
+                fieldData.Signature);
         }
 
         [Test]

@@ -1,9 +1,9 @@
-using NUnit.Framework;
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using NUnit.Framework;
 using Yuumix.OdinToolkits.ScriptDocGenerator;
 
 namespace Yuumix.OdinToolkits.Tests.Editor
@@ -26,7 +26,10 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             { nameof(TestClass.ListField), "public List<string> ListField;" },
             { nameof(TestClass.DictionaryField), "public Dictionary<string, int> DictionaryField;" },
             { nameof(TestClass.HashSetField), "public HashSet<string> HashSetField;" },
-            { nameof(TestClass.SortedDictionaryField), "public SortedDictionary<string, int> SortedDictionaryField;" },
+            {
+                nameof(TestClass.SortedDictionaryField),
+                "public SortedDictionary<string, int> SortedDictionaryField;"
+            },
             { nameof(TestClass.SortedListField), "public SortedList<string, int> SortedListField;" },
             { nameof(TestClass.StackField), "public Stack<string> StackField;" },
             { nameof(TestClass.QueueField), "public Queue<int> QueueField;" },
@@ -54,15 +57,19 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         [Test]
         public void TestMultiArrayField()
         {
-            var fieldData = FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.MultiArrayField));
-            Assert.AreEqual(FieldExpectedSignatureMaps[nameof(TestClass.MultiArrayField)], fieldData.Signature);
+            var fieldData =
+                FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.MultiArrayField));
+            Assert.AreEqual(FieldExpectedSignatureMaps[nameof(TestClass.MultiArrayField)],
+                fieldData.Signature);
         }
 
         [Test]
         public void TestJaggedArrayField()
         {
-            var fieldData = FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.JaggedArrayField));
-            Assert.AreEqual(FieldExpectedSignatureMaps[nameof(TestClass.JaggedArrayField)], fieldData.Signature);
+            var fieldData =
+                FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.JaggedArrayField));
+            Assert.AreEqual(FieldExpectedSignatureMaps[nameof(TestClass.JaggedArrayField)],
+                fieldData.Signature);
         }
 
         [Test]
@@ -75,8 +82,10 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         [Test]
         public void TestDictionaryField()
         {
-            var fieldData = FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.DictionaryField));
-            Assert.AreEqual(FieldExpectedSignatureMaps[nameof(TestClass.DictionaryField)], fieldData.Signature);
+            var fieldData =
+                FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.DictionaryField));
+            Assert.AreEqual(FieldExpectedSignatureMaps[nameof(TestClass.DictionaryField)],
+                fieldData.Signature);
         }
 
         [Test]
@@ -89,15 +98,19 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         [Test]
         public void TestSortedDictionaryField()
         {
-            var fieldData = FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.SortedDictionaryField));
-            Assert.AreEqual(FieldExpectedSignatureMaps[nameof(TestClass.SortedDictionaryField)], fieldData.Signature);
+            var fieldData = FieldDataArray.First(f =>
+                ((MemberData)f).Name == nameof(TestClass.SortedDictionaryField));
+            Assert.AreEqual(FieldExpectedSignatureMaps[nameof(TestClass.SortedDictionaryField)],
+                fieldData.Signature);
         }
 
         [Test]
         public void TestSortedListField()
         {
-            var fieldData = FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.SortedListField));
-            Assert.AreEqual(FieldExpectedSignatureMaps[nameof(TestClass.SortedListField)], fieldData.Signature);
+            var fieldData =
+                FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.SortedListField));
+            Assert.AreEqual(FieldExpectedSignatureMaps[nameof(TestClass.SortedListField)],
+                fieldData.Signature);
         }
 
         [Test]
@@ -117,44 +130,53 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         [Test]
         public void TestLinkedListField()
         {
-            var fieldData = FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.LinkedListField));
-            Assert.AreEqual(FieldExpectedSignatureMaps[nameof(TestClass.LinkedListField)], fieldData.Signature);
+            var fieldData =
+                FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.LinkedListField));
+            Assert.AreEqual(FieldExpectedSignatureMaps[nameof(TestClass.LinkedListField)],
+                fieldData.Signature);
         }
 
         [Test]
         public void TestArrayListField()
         {
-            var fieldData = FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.ArrayListField));
-            Assert.AreEqual(FieldExpectedSignatureMaps[nameof(TestClass.ArrayListField)], fieldData.Signature);
+            var fieldData =
+                FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.ArrayListField));
+            Assert.AreEqual(FieldExpectedSignatureMaps[nameof(TestClass.ArrayListField)],
+                fieldData.Signature);
         }
 
         [Test]
         public void TestHashtableField()
         {
-            var fieldData = FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.HashtableField));
-            Assert.AreEqual(FieldExpectedSignatureMaps[nameof(TestClass.HashtableField)], fieldData.Signature);
+            var fieldData =
+                FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.HashtableField));
+            Assert.AreEqual(FieldExpectedSignatureMaps[nameof(TestClass.HashtableField)],
+                fieldData.Signature);
         }
 
         [Test]
         public void TestReadOnlyListField()
         {
-            var fieldData = FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.ReadOnlyListField));
-            Assert.AreEqual(FieldExpectedSignatureMaps[nameof(TestClass.ReadOnlyListField)], fieldData.Signature);
+            var fieldData =
+                FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.ReadOnlyListField));
+            Assert.AreEqual(FieldExpectedSignatureMaps[nameof(TestClass.ReadOnlyListField)],
+                fieldData.Signature);
         }
 
         [Test]
         public void TestReadOnlyDictionaryField()
         {
-            var fieldData =
-                FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.ReadOnlyDictionaryField));
-            Assert.AreEqual(FieldExpectedSignatureMaps[nameof(TestClass.ReadOnlyDictionaryField)], fieldData.Signature);
+            var fieldData = FieldDataArray.First(f =>
+                ((MemberData)f).Name == nameof(TestClass.ReadOnlyDictionaryField));
+            Assert.AreEqual(FieldExpectedSignatureMaps[nameof(TestClass.ReadOnlyDictionaryField)],
+                fieldData.Signature);
         }
 
         [Test]
         public void TestConcurrentDictionaryField()
         {
-            var fieldData =
-                FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.ConcurrentDictionaryField));
+            var fieldData = FieldDataArray.First(f =>
+                ((MemberData)f).Name == nameof(TestClass.ConcurrentDictionaryField));
             Assert.AreEqual(FieldExpectedSignatureMaps[nameof(TestClass.ConcurrentDictionaryField)],
                 fieldData.Signature);
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Yuumix.OdinToolkits.Core.SafeEditor;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Serialization;
@@ -20,16 +21,12 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
     /// </summary>
     public class ScriptDocGeneratorPanelSO : ObjectPanelSO<ScriptDocGeneratorPanelSO>
     {
-        #region TypeSource enum
-
         public enum TypeSource
         {
             SingleType,
             MultipleTypes,
             SingleAssembly
         }
-
-        #endregion
 
         public const string DEFAULT_DOC_FOLDER_PATH =
             OdinToolkitsEditorPaths.ODIN_TOOLKITS_ANY_DATA_ROOT_FOLDER + "/Editor/Documents/";
@@ -38,11 +35,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
             OdinToolkitsEditorPaths.ODIN_TOOLKITS_ANY_DATA_ROOT_FOLDER + "/Editor/TypesCacheSO";
 
         const string NONE_ASSEMBLY = "None Assembly";
-
         static ValueDropdownList<string> _currentDomainAssemblies;
-
-        #region Serialized Fields
-
         bool _hasFinishedAnalyze;
         bool _isCustomizingSaveConfig;
 
@@ -97,8 +90,6 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
         [PropertyOrder(90)]
         [OdinSerialize]
         List<ITypeData> _typeDataList;
-
-        #endregion
 
         public Type TargetType
         {
@@ -234,9 +225,12 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
         {
             if (selectedMonoScriptArray.Length > 0)
             {
-                var types = selectedMonoScriptArray.Distinct().Select(x => x.GetClass()).ToList();
+                var types = selectedMonoScriptArray.Distinct()
+                    .Select(x => x.GetClass())
+                    .ToList();
                 _temporaryTypes.AddRange(types);
-                var distinctTypes = _temporaryTypes.Distinct().ToList();
+                var distinctTypes = _temporaryTypes.Distinct()
+                    .ToList();
                 _temporaryTypes = distinctTypes;
             }
         }
@@ -251,10 +245,10 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
             if (_temporaryTypes.Count > 0 && SirenixEditorGUI.ToolbarButton(content))
             {
                 var so = CreateInstance<TypesCacheSO>();
-                PathEditorUtility.CreateDirectoryRecursivelyInAssets(typesCacheSOFolderPath);
+                PathSafeEditorUtility.CreateDirectoryRecursivelyInAssets(typesCacheSOFolderPath);
                 so.Types = _temporaryTypes;
                 ProjectWindowUtil.CreateAsset(so, filePathWithExtension);
-                ProjectEditorUtility.PingAndSelectAsset(filePathWithExtension);
+                ProjectSafeEditorUtility.PingAndSelectAsset(filePathWithExtension);
                 YuumixLogger.OdinToolkitsLog("请更改资源名称，避免下次生成时覆盖内容");
             }
 
@@ -279,8 +273,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
 
         static ValueDropdownList<string> GetAssemblyNameToFullName()
         {
-            if (_currentDomainAssemblies != null && (_currentDomainAssemblies != null ||
-                                                     _currentDomainAssemblies.Count > 0))
+            if (_currentDomainAssemblies is { Count: > 0 })
             {
                 return _currentDomainAssemblies;
             }
@@ -289,7 +282,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
             foreach (var assembly in assemblies)
             {
-                _currentDomainAssemblies.Add(assembly.GetName().Name, assembly.FullName);
+                _currentDomainAssemblies.Add(assembly.GetName()
+                    .Name, assembly.FullName);
             }
 
             return _currentDomainAssemblies;
@@ -346,7 +340,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
                     return;
                 }
 
-                PathEditorUtility.CreateDirectoryRecursivelyInAssets(docFolderPath);
+                PathSafeEditorUtility.CreateDirectoryRecursivelyInAssets(docFolderPath);
             }
 
             switch (typeSource)
@@ -364,8 +358,6 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
 
             _hasFinishedAnalyze = false;
         }
-
-        #region Nested type: ${0}
 
         class ScriptDocGeneratorPanelAttributeProcessor : OdinAttributeProcessor<ScriptDocGeneratorPanelSO>
         {
@@ -519,8 +511,6 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
                 }
             }
         }
-
-        #endregion
 
         #region Reset Default Values
 

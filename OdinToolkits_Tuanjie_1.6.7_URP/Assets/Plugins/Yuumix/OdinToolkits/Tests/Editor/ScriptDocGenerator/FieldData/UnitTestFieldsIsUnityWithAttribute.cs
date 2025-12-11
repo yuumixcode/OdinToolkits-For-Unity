@@ -1,8 +1,8 @@
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using NUnit.Framework;
 using UnityEngine;
 using Yuumix.OdinToolkits.ScriptDocGenerator;
 
@@ -61,7 +61,8 @@ public LayerMask layerMaskField;"
         [Test]
         public void TestGameObjectField()
         {
-            var fieldData = FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.gameObjectField));
+            var fieldData =
+                FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.gameObjectField));
             Assert.AreEqual(FieldExpectedFullDeclarationWithAttributesMaps[nameof(TestClass.gameObjectField)],
                 fieldData.FullDeclarationWithAttributes);
         }
@@ -69,7 +70,8 @@ public LayerMask layerMaskField;"
         [Test]
         public void TestTransformField()
         {
-            var fieldData = FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.transformField));
+            var fieldData =
+                FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.transformField));
             Assert.AreEqual(FieldExpectedFullDeclarationWithAttributesMaps[nameof(TestClass.transformField)],
                 fieldData.FullDeclarationWithAttributes);
         }
@@ -77,7 +79,8 @@ public LayerMask layerMaskField;"
         [Test]
         public void TestRigidbodyField()
         {
-            var fieldData = FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.rigidbodyField));
+            var fieldData =
+                FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.rigidbodyField));
             Assert.AreEqual(FieldExpectedFullDeclarationWithAttributesMaps[nameof(TestClass.rigidbodyField)],
                 fieldData.FullDeclarationWithAttributes);
         }
@@ -94,7 +97,8 @@ public LayerMask layerMaskField;"
         [Test]
         public void TestQuaternionField()
         {
-            var fieldData = FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.quaternionField));
+            var fieldData =
+                FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.quaternionField));
             Debug.Log(fieldData.FullDeclarationWithAttributes);
             Assert.AreEqual(FieldExpectedFullDeclarationWithAttributesMaps[nameof(TestClass.quaternionField)],
                 fieldData.FullDeclarationWithAttributes);
@@ -112,7 +116,8 @@ public LayerMask layerMaskField;"
         [Test]
         public void TestLayerMaskField()
         {
-            var fieldData = FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.layerMaskField));
+            var fieldData =
+                FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.layerMaskField));
             Debug.Log(fieldData.FullDeclarationWithAttributes);
             Assert.IsTrue(fieldData.FullDeclarationWithAttributes.Contains(
                 FieldExpectedFullDeclarationWithAttributesMaps[nameof(TestClass.layerMaskField)]));

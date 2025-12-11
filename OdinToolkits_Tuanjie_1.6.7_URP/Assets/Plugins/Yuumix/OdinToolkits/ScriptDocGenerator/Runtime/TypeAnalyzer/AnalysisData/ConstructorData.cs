@@ -12,8 +12,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
     [Serializable]
     public class ConstructorData : MemberData, IConstructorData
     {
-        public ConstructorData(ConstructorInfo constructorInfo, IAttributeFilter filter = null) :
-            base(constructorInfo, filter)
+        public ConstructorData(ConstructorInfo constructorInfo, IAttributeFilter filter = null) : base(
+            constructorInfo, filter)
         {
             IsStatic = constructorInfo.IsStatic;
             MemberType = constructorInfo.MemberType;
@@ -27,8 +27,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             FullDeclarationWithAttributes = AttributesDeclaration + Signature;
         }
 
-        static string GetConstructorFullSignature(string accessModifierName,
-            ConstructorInfo constructorInfo)
+        static string GetConstructorFullSignature(string accessModifierName, ConstructorInfo constructorInfo)
         {
             var signature = string.Empty;
             signature += accessModifierName + " ";

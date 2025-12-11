@@ -1,6 +1,6 @@
-using NUnit.Framework;
 using System.Linq;
 using System.Reflection;
+using NUnit.Framework;
 using UnityEngine;
 using Yuumix.OdinToolkits.ScriptDocGenerator;
 
@@ -23,81 +23,71 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         [Test]
         public void TestVirtualMethod()
         {
-            var methodData =
-                TestClassAbstractMethodDataArray.First(m =>
-                    ((IMemberData)m).Name == nameof(TestClassAbstract.OverrideVirtualMethod));
+            var methodData = TestClassAbstractMethodDataArray.First(m =>
+                ((IMemberData)m).Name == nameof(TestClassAbstract.OverrideVirtualMethod));
             if (methodData.TryAsIMemberData(out var memberData))
             {
                 Debug.Log(memberData.IsFromInheritance);
             }
 
             Debug.Log(methodData.Signature);
-            Assert.AreEqual("public virtual void OverrideVirtualMethod()",
-                methodData.Signature);
+            Assert.AreEqual("public virtual void OverrideVirtualMethod()", methodData.Signature);
         }
 
         [Test]
         public void TestAbstractMethod()
         {
-            var methodData =
-                TestClassAbstractMethodDataArray.First(m =>
-                    ((IMemberData)m).Name == nameof(TestClassAbstract.OverrideAbstractMethod));
+            var methodData = TestClassAbstractMethodDataArray.First(m =>
+                ((IMemberData)m).Name == nameof(TestClassAbstract.OverrideAbstractMethod));
             if (methodData.TryAsIMemberData(out var memberData))
             {
                 Debug.Log(memberData.IsFromInheritance);
             }
 
             Debug.Log(methodData.Signature);
-            Assert.AreEqual("public abstract void OverrideAbstractMethod()",
-                methodData.Signature);
+            Assert.AreEqual("public abstract void OverrideAbstractMethod()", methodData.Signature);
         }
 
         [Test]
         public void TestOverrideAbstractMethod()
         {
-            var methodData =
-                TestClassImplementMethodDataArray.First(m =>
-                    ((IMemberData)m).Name == nameof(TestClassImplement.OverrideAbstractMethod));
+            var methodData = TestClassImplementMethodDataArray.First(m =>
+                ((IMemberData)m).Name == nameof(TestClassImplement.OverrideAbstractMethod));
             if (methodData.TryAsIMemberData(out var memberData))
             {
                 Debug.Log(memberData.IsFromInheritance);
             }
 
             Debug.Log(methodData.Signature);
-            Assert.AreEqual("public override void OverrideAbstractMethod()",
-                methodData.Signature);
+            Assert.AreEqual("public override void OverrideAbstractMethod()", methodData.Signature);
         }
 
         [Test]
         public void TestOverrideVirtualMethod()
         {
-            var methodData =
-                TestClassImplementMethodDataArray.First(m =>
-                    ((IMemberData)m).Name == nameof(TestClassImplement.OverrideVirtualMethod));
+            var methodData = TestClassImplementMethodDataArray.First(m =>
+                ((IMemberData)m).Name == nameof(TestClassImplement.OverrideVirtualMethod));
             if (methodData.TryAsIMemberData(out var memberData))
             {
                 Debug.Log(memberData.IsFromInheritance);
             }
 
             Debug.Log(methodData.Signature);
-            Assert.AreEqual("public override void OverrideVirtualMethod()",
-                methodData.Signature);
+            Assert.AreEqual("public override void OverrideVirtualMethod()", methodData.Signature);
         }
 
         [Test]
         public void TestInterfaceMethod()
         {
-            var methodData =
-                TestClassImplementMethodDataArray.First(m =>
-                    ((IMemberData)m).Name == nameof(TestClassImplement.InterfaceMethod));
+            var methodData = TestClassImplementMethodDataArray.First(m =>
+                ((IMemberData)m).Name == nameof(TestClassImplement.InterfaceMethod));
             if (methodData.TryAsIMemberData(out var memberData))
             {
                 Debug.Log(memberData.IsFromInheritance);
             }
 
             Debug.Log(methodData.Signature);
-            Assert.AreEqual("public void InterfaceMethod()",
-                methodData.Signature);
+            Assert.AreEqual("public void InterfaceMethod()", methodData.Signature);
         }
 
         #region Nested type: IInterface

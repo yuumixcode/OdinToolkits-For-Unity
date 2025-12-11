@@ -1,6 +1,6 @@
-using NUnit.Framework;
 using System.Linq;
 using System.Reflection;
+using NUnit.Framework;
 using UnityEngine;
 using Yuumix.OdinToolkits.ScriptDocGenerator;
 
@@ -16,7 +16,8 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         [Test]
         public void TestAbstractField()
         {
-            var fieldData = FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.AbstractField));
+            var fieldData =
+                FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.AbstractField));
             Debug.Log(fieldData.Signature);
             Assert.AreEqual("public UnitTestFieldsIsSpecialType.TestAbstractClass AbstractField;",
                 fieldData.Signature);
@@ -33,7 +34,8 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         [Test]
         public void TestInterfaceField()
         {
-            var fieldData = FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.InterfaceField));
+            var fieldData =
+                FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.InterfaceField));
             Debug.Log(fieldData.Signature);
             Assert.AreEqual("public UnitTestFieldsIsSpecialType.ITestInterface InterfaceField;",
                 fieldData.Signature);
@@ -42,7 +44,8 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         [Test]
         public void TestNullableField()
         {
-            var fieldData = FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.NullableField));
+            var fieldData =
+                FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.NullableField));
             Debug.Log(fieldData.Signature);
             Assert.AreEqual("public int? NullableField;", fieldData.Signature);
         }

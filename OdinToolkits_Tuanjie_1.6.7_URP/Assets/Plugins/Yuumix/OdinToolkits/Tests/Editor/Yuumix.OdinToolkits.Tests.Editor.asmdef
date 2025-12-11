@@ -1,25 +1,25 @@
 {
-    "name": "Yuumix.OdinToolkits.Tests.Editor",
-    "rootNamespace": "Yuumix.OdinToolkits.Tests.Editor",
-    "references": [
-        "GUID:27619889b8ba8c24980f49ee34dbb44a",
-        "GUID:0acc523941302664db1f4e527237feb3",
-        "GUID:13a7f22e067974ddcbea7aac02504a47",
-        "GUID:345532146266e4c3182369bb0e4a1a3f"
-    ],
-    "includePlatforms": [
-        "Editor"
-    ],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false,
-    "overrideReferences": true,
-    "precompiledReferences": [
-        "nunit.framework.dll"
-    ],
-    "autoReferenced": false,
-    "defineConstraints": [
-        "UNITY_INCLUDE_TESTS"
-    ],
-    "versionDefines": [],
-    "noEngineReferences": false
+  "name": "Yuumix.OdinToolkits.Tests.Editor",
+  "rootNamespace": "Yuumix.OdinToolkits.Tests.Editor",
+  "references": [
+    "GUID:27619889b8ba8c24980f49ee34dbb44a",
+    "GUID:0acc523941302664db1f4e527237feb3",
+    "GUID:13a7f22e067974ddcbea7aac02504a47",
+    "GUID:345532146266e4c3182369bb0e4a1a3f"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": true,
+  "precompiledReferences": [
+    "nunit.framework.dll"
+  ],
+  "autoReferenced": false,
+  "defineConstraints": [
+    "UNITY_INCLUDE_TESTS"
+  ],
+  "versionDefines": [],
+  "noEngineReferences": false
 }

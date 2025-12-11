@@ -43,7 +43,7 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: typeData
+    - Name: _typeData
       Entry: 7
       Data: 2|Yuumix.OdinToolkits.ScriptDocGenerator.TypeData, Yuumix.OdinToolkits.Runtime
     - Name: 
@@ -68,7 +68,7 @@ MonoBehaviour:
   headerWidget: {}
   docFolderPath: Assets/OdinToolkitsData/Editor/Documents/
   docGeneratorSettings: {fileID: 11400000, guid: 5a3f059e31d2443e983ba3f4f83b2672, type: 2}
-  typeSource: 0
+  typeSource: 1
   selectedMonoScript: {fileID: 11500000, guid: c51751edb574428abc422d43a5be03a3, type: 3}
   typesCache: {fileID: 0}
   selectedMonoScriptArray: []

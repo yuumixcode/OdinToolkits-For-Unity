@@ -1,6 +1,6 @@
-using NUnit.Framework;
 using System.Linq;
 using System.Reflection;
+using NUnit.Framework;
 using UnityEngine;
 using Yuumix.OdinToolkits.ScriptDocGenerator;
 
@@ -8,12 +8,10 @@ namespace Yuumix.OdinToolkits.Tests.Editor
 {
     public class UnitTestConstructors
     {
-        static readonly ConstructorInfo[] TestClassConstructorInfos =
-            typeof(TestClass).GetConstructors();
+        static readonly ConstructorInfo[] TestClassConstructorInfos = typeof(TestClass).GetConstructors();
 
         static readonly IConstructorData[] TestClassConstructorDataArray = TestClassConstructorInfos
-            .Select(x => UnitTestAnalysisFactory.Default.CreateConstructorData(x))
-            .ToArray();
+            .Select(x => UnitTestAnalysisFactory.Default.CreateConstructorData(x)).ToArray();
 
         [Test]
         public void TestConstructor()
@@ -30,8 +28,7 @@ namespace Yuumix.OdinToolkits.Tests.Editor
                 Debug.Log(s);
             }
 
-            Assert.IsTrue(strings[0] == signatures[0] &&
-                          strings[1] == signatures[1]);
+            Assert.IsTrue(strings[0] == signatures[0] && strings[1] == signatures[1]);
         }
 
         #region Nested type: TestClass

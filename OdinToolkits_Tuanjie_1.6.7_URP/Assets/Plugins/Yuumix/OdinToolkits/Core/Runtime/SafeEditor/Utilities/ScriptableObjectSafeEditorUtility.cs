@@ -1,4 +1,5 @@
 using System.Linq;
+using Yuumix.OdinToolkits.Core.SafeEditor;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -7,6 +8,7 @@ using YuumixEditor;
 
 namespace Yuumix.OdinToolkits.Core.SafeEditor
 {
+    [Summary("关于 ScriptableObject 的工具类。仅在编辑器阶段可用。")]
     public static class ScriptableObjectSafeEditorUtility
     {
         [Summary("获取对应类型的 SO 资源单例的相对路径。如果项目中不存在该类型的实例，则生成一个 SO 资源并保存，返回相对路径。" +
@@ -21,8 +23,10 @@ namespace Yuumix.OdinToolkits.Core.SafeEditor
 #endif
         }
 
-        [Summary("获取对应类型的 SO 资源单例。如果项目中不存在该类型的实例，则生成一个 SO 资源并保存。如果有多个 SO 资源，则只返回第一个，并删除其他 SO 资源。打包后此方法将失效，返回 null。")]
-        public static T GetSingletonAssetAndDeleteOther<T>(string relativeFolderPath = "") where T : ScriptableObject
+        [Summary("获取对应类型的 SO 资源单例。如果项目中不存在该类型的实例，则生成一个 SO 资源并保存。" +
+                 "如果有多个 SO 资源，则只返回第一个，并删除其他 SO 资源。打包后此方法将失效，返回 null。")]
+        public static T GetSingletonAssetAndDeleteOther<T>(string relativeFolderPath = "")
+            where T : ScriptableObject
         {
 #if UNITY_EDITOR
             return Internal_GetSingletonAssetAndDeleteOther<T>(relativeFolderPath);
@@ -69,7 +73,7 @@ namespace Yuumix.OdinToolkits.Core.SafeEditor
                 relativeFolderPath = RELATIVE_FOLDER_PATH;
             }
 
-            PathEditorUtility.CreateDirectoryRecursivelyInAssets(relativeFolderPath);
+            PathSafeEditorUtility.CreateDirectoryRecursivelyInAssets(relativeFolderPath);
             singletonAsset = ScriptableObject.CreateInstance<T>();
             var fileNameWithoutExtension = typeof(T).Name.EndsWith("SO")
                 ? typeof(T).Name.Remove(typeof(T).Name.Length - 2)
@@ -82,7 +86,8 @@ namespace Yuumix.OdinToolkits.Core.SafeEditor
             return filePath;
         }
 
-        static T Internal_GetSingletonAssetAndDeleteOther<T>(string relativeFolderPath = "") where T : ScriptableObject
+        static T Internal_GetSingletonAssetAndDeleteOther<T>(string relativeFolderPath = "")
+            where T : ScriptableObject
         {
             T singletonAsset = null;
             var guids = AssetDatabase.FindAssets("t:" + typeof(T));
@@ -110,7 +115,7 @@ namespace Yuumix.OdinToolkits.Core.SafeEditor
                 relativeFolderPath = RELATIVE_FOLDER_PATH;
             }
 
-            PathEditorUtility.CreateDirectoryRecursivelyInAssets(relativeFolderPath);
+            PathSafeEditorUtility.CreateDirectoryRecursivelyInAssets(relativeFolderPath);
             singletonAsset = ScriptableObject.CreateInstance<T>();
             var fileNameWithoutExtension = typeof(T).Name.EndsWith("SO")
                 ? typeof(T).Name.Remove(typeof(T).Name.Length - 2)
@@ -120,7 +125,7 @@ namespace Yuumix.OdinToolkits.Core.SafeEditor
             AssetDatabase.ImportAsset(filePath);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
-            ProjectEditorUtility.PingAndSelectAsset(filePath);
+            ProjectSafeEditorUtility.PingAndSelectAsset(filePath);
             return singletonAsset;
         }
 #endif

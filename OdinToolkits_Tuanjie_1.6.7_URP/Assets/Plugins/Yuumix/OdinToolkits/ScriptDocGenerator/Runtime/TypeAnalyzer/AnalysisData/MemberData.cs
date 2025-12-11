@@ -10,8 +10,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
     public abstract class MemberData : IMemberData
     {
         [Summary("默认特性过滤器，被过滤的特性不会包含在 AttributesDeclaration 中")]
-        public static readonly DefaultAttributeFilter DefaultAttributeFilter =
-            new DefaultAttributeFilter(new[]
+        public static readonly DefaultAttributeFilter DefaultAttributeFilter = new DefaultAttributeFilter(
+            new[]
             {
                 typeof(SummaryAttribute)
             });
@@ -32,7 +32,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             ReflectedTypeFullName = ReflectedType?.GetReadableTypeName(true);
             AttributesDeclaration =
                 memberInfo.GetAttributesDeclarationWithMultiLine(filter ?? DefaultAttributeFilter);
-            SummaryAttributeValue = memberInfo.GetCustomAttribute<SummaryAttribute>()?.GetSummary();
+            SummaryAttributeValue = memberInfo.GetCustomAttribute<SummaryAttribute>()
+                ?.GetSummary();
             IsFromInheritance = memberInfo.IsFromInheritance();
             // PostProcess
             if (memberInfo is Type type)

@@ -11,6 +11,7 @@ namespace Yuumix.OdinToolkits.Core
     /// [ChineseSummary("int 类型变量")]
     /// public int intVariable;</code>
     /// </example>
+    [Summary("中文注释特性，取代 XML 的 Summary 注释，用于反射时获取注释。")]
     [AttributeUsage(AttributeTargets.All)]
     public class SummaryAttribute : Attribute
     {

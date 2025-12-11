@@ -9,8 +9,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
     [Serializable]
     public class FieldData : MemberData, IFieldData
     {
-        public FieldData(FieldInfo fieldInfo, IAttributeFilter filter = null) : base(fieldInfo,
-            filter)
+        public FieldData(FieldInfo fieldInfo, IAttributeFilter filter = null) : base(fieldInfo, filter)
         {
             IsStatic = fieldInfo.IsStatic;
             MemberType = fieldInfo.MemberType;

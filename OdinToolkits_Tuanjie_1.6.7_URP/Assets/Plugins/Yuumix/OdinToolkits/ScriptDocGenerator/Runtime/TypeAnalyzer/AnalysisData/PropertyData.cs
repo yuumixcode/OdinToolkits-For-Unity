@@ -9,8 +9,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
     [Serializable]
     public class PropertyData : MemberData, IPropertyData
     {
-        public PropertyData(PropertyInfo propertyInfo, IAttributeFilter filter = null) : base(
-            propertyInfo, filter)
+        public PropertyData(PropertyInfo propertyInfo, IAttributeFilter filter = null) : base(propertyInfo,
+            filter)
         {
             // IDerivedMemberData 
             IsStatic = propertyInfo.IsStaticProperty();
@@ -22,9 +22,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             PropertyType = propertyInfo.PropertyType;
             PropertyTypeName = PropertyType.GetReadableTypeName();
             PropertyTypeFullName = PropertyType.GetReadableTypeName(true);
-            DefaultValue = propertyInfo.TryGetPropertyCustomDefaultValue(out var value)
-                ? value
-                : null;
+            DefaultValue = propertyInfo.TryGetPropertyCustomDefaultValue(out var value) ? value : null;
             Signature = GetPropertySignature(propertyInfo,
                 TypeAnalyzerUtility.GetFormattedDefaultValue(PropertyType, DefaultValue));
             FullDeclarationWithAttributes = AttributesDeclaration + Signature;
@@ -39,7 +37,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             {
                 getSetPart += getMethod.GetMethodAccessModifierType() == AccessModifierType.Public
                     ? "get; "
-                    : getMethod.GetMethodAccessModifierType().ConvertToString() + " get; ";
+                    : getMethod.GetMethodAccessModifierType()
+                        .ConvertToString() + " get; ";
             }
 
             var setMethod = propertyInfo.GetSetMethod(true);
@@ -47,7 +46,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             {
                 getSetPart += setMethod.GetMethodAccessModifierType() == AccessModifierType.Public
                     ? "set; "
-                    : setMethod.GetMethodAccessModifierType().ConvertToString() + " set; ";
+                    : setMethod.GetMethodAccessModifierType()
+                        .ConvertToString() + " set; ";
             }
 
             getSetPart += "}";

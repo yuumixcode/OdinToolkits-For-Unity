@@ -1,6 +1,6 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using System.Reflection;
+using NUnit.Framework;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.ScriptDocGenerator;
@@ -53,7 +53,8 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             Debug.Log(typeData.MemberType);
             Assert.IsTrue(typeData.MemberType == MemberTypes.TypeInfo);
             Debug.Log(typeData.FullDeclarationWithAttributes);
-            Assert.AreEqual("public abstract class TestAbstractClass", typeData.FullDeclarationWithAttributes);
+            Assert.AreEqual("public abstract class TestAbstractClass",
+                typeData.FullDeclarationWithAttributes);
         }
 
         [Test]
@@ -82,8 +83,8 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             var typeData = new TypeData(typeof(UnitTestTypes));
             Debug.Log(typeData.MemberType);
             Debug.Log(typeData.FullDeclarationWithAttributes);
-            Assert.IsTrue(typeData.MemberType == MemberTypes.TypeInfo
-                          && "public class UnitTestTypes : Yuumix.OdinToolkits.Tests.Editor.TestAbstractClass" ==
+            Assert.IsTrue(typeData.MemberType == MemberTypes.TypeInfo &&
+                          "public class UnitTestTypes : Yuumix.OdinToolkits.Tests.Editor.TestAbstractClass" ==
                           typeData.FullDeclarationWithAttributes);
         }
 
@@ -94,7 +95,8 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             Debug.Log(typeData.MemberType);
             Assert.IsTrue(typeData.MemberType == MemberTypes.TypeInfo);
             Debug.Log(typeData.FullDeclarationWithAttributes);
-            Assert.AreEqual("public class TestGenericClass<T> where T : class", typeData.FullDeclarationWithAttributes);
+            Assert.AreEqual("public class TestGenericClass<T> where T : class",
+                typeData.FullDeclarationWithAttributes);
         }
 
         [Test]
@@ -126,8 +128,7 @@ public class TestClassWithAttribute", typeData.FullDeclarationWithAttributes);
             Debug.Log(typeData.MemberType);
             Assert.IsTrue(typeData.MemberType == MemberTypes.TypeInfo);
             Debug.Log(typeData.FullDeclarationWithAttributes);
-            Assert.AreEqual(
-                "public delegate void TestDelegateHasParameters(int a, List<string> b)",
+            Assert.AreEqual("public delegate void TestDelegateHasParameters(int a, List<string> b)",
                 typeData.FullDeclarationWithAttributes);
         }
 
@@ -138,8 +139,7 @@ public class TestClassWithAttribute", typeData.FullDeclarationWithAttributes);
             Debug.Log(typeData.MemberType);
             Assert.IsTrue(typeData.MemberType == MemberTypes.TypeInfo);
             Debug.Log(typeData.FullDeclarationWithAttributes);
-            Assert.AreEqual(
-                "public delegate bool TestDelegateHasReturnType(float a, int[] b)",
+            Assert.AreEqual("public delegate bool TestDelegateHasReturnType(float a, int[] b)",
                 typeData.FullDeclarationWithAttributes);
         }
 
@@ -162,7 +162,8 @@ public record TestRecord : System.IEquatable<TestRecord>", typeData.FullDeclarat
             Debug.Log(typeData.MemberType);
             Assert.IsTrue(typeData.MemberType == MemberTypes.TypeInfo);
             Debug.Log(typeData.FullDeclarationWithAttributes);
-            Assert.AreEqual("public struct TestStruct : System.ValueType", typeData.FullDeclarationWithAttributes);
+            Assert.AreEqual("public struct TestStruct : System.ValueType",
+                typeData.FullDeclarationWithAttributes);
         }
 
         [Test]
@@ -172,12 +173,10 @@ public record TestRecord : System.IEquatable<TestRecord>", typeData.FullDeclarat
             Debug.Log(typeData.MemberType);
             Assert.IsTrue(typeData.MemberType == MemberTypes.TypeInfo);
             Debug.Log(typeData.FullDeclarationWithAttributes);
-            Assert.AreEqual(
-                @"public enum ScriptDocGeneratorTestEnum : System.Enum, 
+            Assert.AreEqual(@"public enum ScriptDocGeneratorTestEnum : System.Enum, 
 System.IFormattable, 
 System.IComparable, 
-System.IConvertible",
-                typeData.FullDeclarationWithAttributes);
+System.IConvertible", typeData.FullDeclarationWithAttributes);
         }
 
         [Test]
@@ -187,7 +186,8 @@ System.IConvertible",
             Debug.Log(typeData.MemberType);
             Assert.IsTrue(typeData.MemberType == MemberTypes.NestedType);
             Debug.Log(typeData.FullDeclarationWithAttributes);
-            Assert.AreEqual("private class UnitTestTypes.NestedClass", typeData.FullDeclarationWithAttributes);
+            Assert.AreEqual("private class UnitTestTypes.NestedClass",
+                typeData.FullDeclarationWithAttributes);
         }
 
         #region Nested type: NestedClass

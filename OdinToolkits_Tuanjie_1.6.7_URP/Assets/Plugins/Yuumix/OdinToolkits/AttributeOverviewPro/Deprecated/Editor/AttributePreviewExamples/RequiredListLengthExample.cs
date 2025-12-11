@@ -1,5 +1,6 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using Yuumix.OdinToolkits.Core.SafeEditor;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 using Yuumix.OdinToolkits.Core;
 using YuumixEditor;
@@ -28,7 +29,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         int SetMinLength => 3;
         int SetMaxLength => 5;
 
-        static string Path => PathEditorUtility.GetTargetFolderPath("RuntimeExamples",
+        static string Path => PathSafeEditorUtility.GetTargetFolderPath("RuntimeExamples",
             "OdinToolkits") + "/RequiredListLength";
 
         [DisplayAsString(fontSize: 12, overflow: false)]
@@ -47,7 +48,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         public void SelectionFolder()
         {
             YuumixLogger.OdinToolkitsLog("RequiredListLength Runtime Example 文件夹路径为: " + Path);
-            ProjectEditorUtility.PingAndSelectAsset(Path);
+            ProjectSafeEditorUtility.PingAndSelectAsset(Path);
         }
     }
 }

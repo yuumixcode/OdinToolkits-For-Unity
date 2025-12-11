@@ -1,3 +1,4 @@
+using Yuumix.OdinToolkits.Core.SafeEditor;
 using Sirenix.OdinInspector;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 using Yuumix.OdinToolkits.Core;
@@ -8,7 +9,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class EnableInExample : ExampleSO
     {
-        static string Path => PathEditorUtility.GetTargetFolderPath("RuntimeExamples",
+        static string Path => PathSafeEditorUtility.GetTargetFolderPath("RuntimeExamples",
             "OdinToolkits") + "/EnableIn";
 
         [DisplayAsString(fontSize: 12, overflow: false)]
@@ -27,7 +28,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         public void SelectionFolder()
         {
             YuumixLogger.OdinToolkitsLog("EnableIn Runtime Example 文件夹路径为: " + Path);
-            ProjectEditorUtility.PingAndSelectAsset(Path);
+            ProjectSafeEditorUtility.PingAndSelectAsset(Path);
         }
     }
 }

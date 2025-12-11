@@ -1,7 +1,7 @@
-using NUnit.Framework;
 using System;
 using System.Linq;
 using System.Reflection;
+using NUnit.Framework;
 using UnityEngine;
 using Yuumix.OdinToolkits.ScriptDocGenerator;
 
@@ -14,9 +14,8 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         [Test]
         public void TestSystemObjectMethodIsInheritance()
         {
-            var methodInfo =
-                typeof(UnitTestMethodsInherit).GetRuntimeMethods().First(m =>
-                    m.Name == "GetHashCode");
+            var methodInfo = typeof(UnitTestMethodsInherit).GetRuntimeMethods()
+                .First(m => m.Name == "GetHashCode");
             Debug.Log(methodInfo.DeclaringType);
             Debug.Log(methodInfo.ReflectedType);
             Debug.Log(methodInfo.GetBaseDefinition().DeclaringType);

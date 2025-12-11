@@ -1,7 +1,7 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using NUnit.Framework;
 using Yuumix.OdinToolkits.ScriptDocGenerator;
 
 namespace Yuumix.OdinToolkits.Tests.Editor
@@ -15,7 +15,8 @@ namespace Yuumix.OdinToolkits.Tests.Editor
 
         static readonly FieldInfo[] TestFields = typeof(TestClass).GetRuntimeFields().ToArray();
 
-        static readonly IFieldData[] TestFieldData = TestFields.Select(f => TargetFactory.CreateFieldData(f)).ToArray();
+        static readonly IFieldData[] TestFieldData =
+            TestFields.Select(f => TargetFactory.CreateFieldData(f)).ToArray();
 
         static readonly Dictionary<string, string> FieldExpectedSignatureMaps = new Dictionary<string, string>
         {

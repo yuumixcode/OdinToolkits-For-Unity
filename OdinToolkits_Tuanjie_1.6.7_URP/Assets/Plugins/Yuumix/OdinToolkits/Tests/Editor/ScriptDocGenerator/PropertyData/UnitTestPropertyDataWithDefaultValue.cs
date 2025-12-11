@@ -1,7 +1,7 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using NUnit.Framework;
 using UnityEngine;
 using Yuumix.OdinToolkits.ScriptDocGenerator;
 
@@ -9,11 +9,10 @@ namespace Yuumix.OdinToolkits.Tests.Editor
 {
     public class UnitTestPropertyDataWithDefaultValue
     {
-        static readonly PropertyInfo[] PropertyInfos =
-            typeof(TestClass).GetRuntimeProperties().ToArray();
+        static readonly PropertyInfo[] PropertyInfos = typeof(TestClass).GetRuntimeProperties().ToArray();
 
-        static readonly IPropertyData[] PropertyDataArray =
-            PropertyInfos.Select(p => UnitTestAnalysisFactory.Default.CreatePropertyData(p)).ToArray();
+        static readonly IPropertyData[] PropertyDataArray = PropertyInfos
+            .Select(p => UnitTestAnalysisFactory.Default.CreatePropertyData(p)).ToArray();
 
         static readonly Dictionary<string, string> ExpectedSignatureMaps = new Dictionary<string, string>
         {
@@ -52,9 +51,8 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         [Test]
         public void TestStaticFloatPropertyWithDefaultValue()
         {
-            var propertyData =
-                PropertyDataArray.First(f =>
-                    ((MemberData)f).Name == nameof(TestClass.StaticFloatPropertyWithDefaultValue));
+            var propertyData = PropertyDataArray.First(f =>
+                ((MemberData)f).Name == nameof(TestClass.StaticFloatPropertyWithDefaultValue));
             Debug.Log(propertyData.Signature);
             Assert.AreEqual(ExpectedSignatureMaps[nameof(TestClass.StaticFloatPropertyWithDefaultValue)],
                 propertyData.Signature);
@@ -63,9 +61,8 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         [Test]
         public void TestStaticBoolPropertyWithDefaultValue()
         {
-            var propertyData =
-                PropertyDataArray.First(f =>
-                    ((MemberData)f).Name == nameof(TestClass.StaticBoolPropertyWithDefaultValue));
+            var propertyData = PropertyDataArray.First(f =>
+                ((MemberData)f).Name == nameof(TestClass.StaticBoolPropertyWithDefaultValue));
             Debug.Log(propertyData.Signature);
             Assert.AreEqual(ExpectedSignatureMaps[nameof(TestClass.StaticBoolPropertyWithDefaultValue)],
                 propertyData.Signature);
@@ -74,9 +71,8 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         [Test]
         public void TestStaticStringPropertyWithDefaultValue()
         {
-            var propertyData =
-                PropertyDataArray.First(f =>
-                    ((MemberData)f).Name == nameof(TestClass.StaticStringPropertyWithDefaultValue));
+            var propertyData = PropertyDataArray.First(f =>
+                ((MemberData)f).Name == nameof(TestClass.StaticStringPropertyWithDefaultValue));
             Debug.Log(propertyData.Signature);
             Assert.AreEqual(ExpectedSignatureMaps[nameof(TestClass.StaticStringPropertyWithDefaultValue)],
                 propertyData.Signature);

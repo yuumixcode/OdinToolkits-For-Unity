@@ -1,3 +1,4 @@
+using Yuumix.OdinToolkits.Core.SafeEditor;
 using Sirenix.OdinInspector;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 using Yuumix.OdinToolkits.Core;
@@ -28,7 +29,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         public void SelectionFolder()
         {
             YuumixLogger.OdinToolkitsLog("HideIn Runtime Example 文件夹路径为: " + Path);
-            ProjectEditorUtility.PingAndSelectAsset(Path);
+            ProjectSafeEditorUtility.PingAndSelectAsset(Path);
         }
     }
 }

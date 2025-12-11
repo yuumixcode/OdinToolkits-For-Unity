@@ -1,6 +1,6 @@
-using NUnit.Framework;
 using System.Linq;
 using System.Reflection;
+using NUnit.Framework;
 using UnityEngine;
 using Yuumix.OdinToolkits.ScriptDocGenerator;
 using Assert = UnityEngine.Assertions.Assert;
@@ -137,7 +137,8 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         [Test]
         public void TestNestedEnumField()
         {
-            var fieldData = FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.NestedEnumField));
+            var fieldData =
+                FieldDataArray.First(f => ((MemberData)f).Name == nameof(TestClass.NestedEnumField));
             Debug.Log(fieldData.Signature);
             Assert.AreEqual("public UnitTestFieldInstance.TestEnum NestedEnumField;", fieldData.Signature);
         }

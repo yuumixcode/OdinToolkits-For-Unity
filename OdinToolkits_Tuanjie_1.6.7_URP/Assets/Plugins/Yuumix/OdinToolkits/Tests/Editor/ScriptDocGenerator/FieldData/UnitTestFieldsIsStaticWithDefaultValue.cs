@@ -1,7 +1,7 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using NUnit.Framework;
 using Yuumix.OdinToolkits.ScriptDocGenerator;
 
 namespace Yuumix.OdinToolkits.Tests.Editor
@@ -78,14 +78,13 @@ namespace Yuumix.OdinToolkits.Tests.Editor
             },
             {
                 nameof(TestClass.EnumStaticField),
-                "public static " + nameof(ScriptDocGeneratorTestEnum) + " " + nameof(TestClass.EnumStaticField) +
-                " = " + nameof(ScriptDocGeneratorTestEnum) + ".Value2;"
+                "public static " + nameof(ScriptDocGeneratorTestEnum) + " " +
+                nameof(TestClass.EnumStaticField) + " = " + nameof(ScriptDocGeneratorTestEnum) + ".Value2;"
             },
             {
                 nameof(TestClass.NestedEnumStaticField),
-                "public static " + nameof(UnitTestFieldsIsStaticWithDefaultValue) + "." + nameof(TestEnum) + " " +
-                nameof(TestClass.NestedEnumStaticField) +
-                " = " + nameof(TestEnum) + ".Value3;"
+                "public static " + nameof(UnitTestFieldsIsStaticWithDefaultValue) + "." + nameof(TestEnum) +
+                " " + nameof(TestClass.NestedEnumStaticField) + " = " + nameof(TestEnum) + ".Value3;"
             }
         };
 

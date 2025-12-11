@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using Yuumix.OdinToolkits.Core.SafeEditor;
+using Sirenix.OdinInspector;
 using UnityEditor;
 using YuumixEditor;
 
@@ -29,7 +30,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         protected void PingScript()
         {
 #if UNITY_EDITOR
-            EditorGUIUtility.PingObject(MonoScriptEditorUtility.GetMonoScript(typeof(T).Name));
+            EditorGUIUtility.PingObject(MonoScriptSafeEditorUtility.GetMonoScript(typeof(T).Name));
 #endif
         }
     }

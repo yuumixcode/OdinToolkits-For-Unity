@@ -14,8 +14,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
     [Serializable]
     public class MethodData : MemberData, IMethodData
     {
-        public MethodData(MethodInfo memberInfo, IAttributeFilter filter = null) : base(memberInfo,
-            filter)
+        public MethodData(MethodInfo memberInfo, IAttributeFilter filter = null) : base(memberInfo, filter)
         {
             IsStatic = memberInfo.IsStatic;
             MemberType = memberInfo.MemberType;
@@ -53,8 +52,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
 
             signature += accessModifierName + " ";
             signature += GetMethodKeywordSnippet(methodInfo);
-            if (!methodInfo.Name.Contains("op_Implicit") &&
-                !methodInfo.Name.Contains("op_Explicit"))
+            if (!methodInfo.Name.Contains("op_Implicit") && !methodInfo.Name.Contains("op_Explicit"))
             {
                 signature += methodInfo.ReturnType.GetReadableTypeName() + " ";
             }
@@ -78,13 +76,14 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             {
                 keyword = "abstract ";
             }
-            else if (methodInfo.IsVirtual && methodInfo.DeclaringType !=
-                     methodInfo.GetBaseDefinition().DeclaringType)
+            else if (methodInfo.IsVirtual && methodInfo.DeclaringType != methodInfo.GetBaseDefinition()
+                         .DeclaringType)
             {
                 keyword = "override ";
             }
-            else if (methodInfo.DeclaringType == methodInfo.GetBaseDefinition().DeclaringType &&
-                     methodInfo.IsVirtual && methodInfo.IsFromInterfaceImplementMethod())
+            else if (methodInfo.DeclaringType == methodInfo.GetBaseDefinition()
+                         .DeclaringType && methodInfo.IsVirtual &&
+                     methodInfo.IsFromInterfaceImplementMethod())
             {
                 // 这是实现接口的方法
                 keyword = "";

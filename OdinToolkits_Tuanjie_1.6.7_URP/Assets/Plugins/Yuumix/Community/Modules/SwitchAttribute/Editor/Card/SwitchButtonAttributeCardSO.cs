@@ -1,3 +1,4 @@
+using Yuumix.OdinToolkits.Core.SafeEditor;
 using UnityEngine;
 using Yuumix.Community.Editor;
 using YuumixEditor;
@@ -18,7 +19,7 @@ namespace Yuumix.Community.SwitchAttribute.Editor
 
         protected override void OpenWindowOrPingFolder()
         {
-            ProjectEditorUtility.PingAndSelectAsset(OdinToolkitsEditorPaths.GetYuumixRootPath() +
+            ProjectSafeEditorUtility.PingAndSelectAsset(OdinToolkitsEditorPaths.GetYuumixRootPath() +
                                                     "/Community/Modules/SwitchAttribute");
         }
 

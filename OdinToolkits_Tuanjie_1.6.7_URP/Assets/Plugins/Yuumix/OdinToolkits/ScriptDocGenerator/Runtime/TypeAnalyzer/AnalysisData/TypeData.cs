@@ -18,8 +18,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
     [Serializable]
     public class TypeData : MemberData, ITypeData
     {
-        public TypeData(Type type, IAttributeFilter filter = null,
-            IAnalysisDataFactory factory = null) : base(type, filter)
+        public TypeData(Type type, IAttributeFilter filter = null, IAnalysisDataFactory factory = null) :
+            base(type, filter)
         {
             IsStatic = type.IsStatic();
             MemberType = type.MemberType;
@@ -31,7 +31,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             TypeInfo = type.GetTypeInfo();
             TypeCategory = type.GetTypeCategory();
             Assembly = type.Assembly;
-            AssemblyName = Assembly.GetName().Name;
+            AssemblyName = Assembly.GetName()
+                .Name;
             NamespaceName = type.Namespace;
             IsGenericType = type.IsGenericType;
             IsSealed = type.IsSealed;
@@ -44,35 +45,41 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
             // ---
             RuntimeReflectedConstructorsData = type.GetConstructors()
                 .Select(c => DataFactory.CreateConstructorData(c))
-                .OrderBy(data => data, new DerivedMemberDataComparer()).ToArray();
+                .OrderBy(data => data, new DerivedMemberDataComparer())
+                .ToArray();
             RuntimeReflectedMethodsData = type.GetRuntimeMethods()
                 .Where(x =>
                     x != null && !x.Name.Contains("add_") && !x.Name.Contains("remove_") &&
                     !x.Name.Contains("get_") && !x.Name.Contains("set_"))
                 .Select(m => DataFactory.CreateMethodData(m))
-                .OrderBy(data => data, new DerivedMemberDataComparer()).ToArray();
+                .OrderBy(data => data, new DerivedMemberDataComparer())
+                .ToArray();
             RuntimeReflectedEventsData = type.GetRuntimeEvents()
                 .Select(e => DataFactory.CreateEventData(e))
-                .OrderBy(data => data, new DerivedMemberDataComparer()).ToArray();
+                .OrderBy(data => data, new DerivedMemberDataComparer())
+                .ToArray();
             RuntimeReflectedPropertiesData = type.GetRuntimeProperties()
                 .Select(p => DataFactory.CreatePropertyData(p))
-                .OrderBy(data => data, new DerivedMemberDataComparer()).ToArray();
+                .OrderBy(data => data, new DerivedMemberDataComparer())
+                .ToArray();
             RuntimeReflectedFieldsData = type.GetUserDefinedFields()
                 .Where(f =>
                     f != null && !f.IsSpecialName && !f.Name.Contains("k__BackingField") &&
-                    !f.Name.Contains("__BackingField")).Select(f => DataFactory.CreateFieldData(f))
-                .OrderBy(data => data, new DerivedMemberDataComparer()).ToArray();
+                    !f.Name.Contains("__BackingField"))
+                .Select(f => DataFactory.CreateFieldData(f))
+                .OrderBy(data => data, new DerivedMemberDataComparer())
+                .ToArray();
             // --- Post Process
             RuntimeReflectedMethodsData = MarkOverloadMethod(RuntimeReflectedMethodsData);
         }
 
         TypeInfo TypeInfo { get; }
 
-        static string GetTypeFullSignature(Type type, string accessModifierName,
-            TypeCategory category)
+        static string GetTypeFullSignature(Type type, string accessModifierName, TypeCategory category)
         {
             var sb = new StringBuilder();
-            sb.Append(accessModifierName).Append(" ");
+            sb.Append(accessModifierName)
+                .Append(" ");
             if (type.IsStatic())
             {
                 sb.Append("static ");
@@ -87,7 +94,9 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
                 sb.Append("sealed ");
             }
 
-            sb.Append(category.ToString().ToLower()).Append(" ");
+            sb.Append(category.ToString()
+                    .ToLower())
+                .Append(" ");
             if (category == TypeCategory.Delegate)
             {
                 var invokeMethod = type.GetMethod("Invoke");
@@ -96,7 +105,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
                     Debug.LogError("无法获取委托的 Invoke 方法");
                 }
 
-                sb.Append(invokeMethod.GetReturnType().GetReadableTypeName());
+                sb.Append(invokeMethod.GetReturnType()
+                    .GetReadableTypeName());
                 sb.Append(" ");
                 sb.Append(type.GetReadableTypeName());
                 sb.Append("(");
@@ -121,8 +131,8 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
                 }
 
                 // 添加实现的接口，忽略编译时生成的接口，包含所有从基类继承的接口
-                var interfaces = type.GetInterfaces().Where(i =>
-                    !i.IsDefined(typeof(CompilerGeneratedAttribute), false));
+                var interfaces = type.GetInterfaces()
+                    .Where(i => !i.IsDefined(typeof(CompilerGeneratedAttribute), false));
                 inheritTypes.AddRange(interfaces.Select(x => x.GetReadableTypeName(true)));
                 if (inheritTypes.Count > 0)
                 {
@@ -166,8 +176,10 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator
                     {
                         methodAnalysisDataArray[i].IsOverloadMethodInDeclaringType = true;
                         methodAnalysisDataArray[j].IsOverloadMethodInDeclaringType = true;
-                        methodAnalysisDataArray[i].AddOverloadPrefix();
-                        methodAnalysisDataArray[j].AddOverloadPrefix();
+                        methodAnalysisDataArray[i]
+                            .AddOverloadPrefix();
+                        methodAnalysisDataArray[j]
+                            .AddOverloadPrefix();
                     }
                 }
             }

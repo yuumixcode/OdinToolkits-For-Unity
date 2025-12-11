@@ -1,17 +1,18 @@
-#if UNITY_EDITOR
-using Sirenix.Utilities;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using Sirenix.Utilities;
+#if UNITY_EDITOR
 using UnityEditor;
-using Yuumix.OdinToolkits.Core;
+#endif
 
-namespace YuumixEditor
+namespace Yuumix.OdinToolkits.Core.SafeEditor
 {
-    public static class PathEditorUtility
+    [Summary("关于 Path 路径的工具类。仅在编辑器阶段可用。")]
+    public static class PathSafeEditorUtility
     {
-        /// <summary>
-        /// 递归创建 Assets 下的文件夹路径
-        /// </summary>
+        [Summary("根据相对路径，递归创建 Assets 下的文件夹。仅在编辑器阶段可用，打包自动剔除。")]
+        [Conditional("UNITY_EDITOR")]
         public static void CreateDirectoryRecursivelyInAssets(string relativePath)
         {
             // 移除 Assets 前缀，获取实际的文件夹路径
@@ -29,15 +30,13 @@ namespace YuumixEditor
                 }
             }
 
-            // 刷新 AssetDatabase 使创建的文件夹在 Unity 编辑器中可见
             AssetDatabase.Refresh();
         }
 
-        /// <summary>
-        /// 获取目标文件夹路径
-        /// </summary>
+        [Summary("获取以目标文件夹名称结尾且路径中包含所有指定的文件夹名称的相对路径。仅在编辑器阶段可用，打包后返回 string.Empty")]
         public static string GetTargetFolderPath(string targetFolderName, params string[] containFolderName)
         {
+#if UNITY_EDITOR
             var paths = AssetDatabase.GetAllAssetPaths();
             foreach (var path in paths)
             {
@@ -51,8 +50,10 @@ namespace YuumixEditor
             }
 
             YuumixLogger.LogWarning("在项目中没有找到 " + targetFolderName + " 文件夹，请检查是否改名，或者条件不满足");
-            return null;
+            return string.Empty;
+#else
+            return string.Empty;
+#endif
         }
     }
 }
-#endif
