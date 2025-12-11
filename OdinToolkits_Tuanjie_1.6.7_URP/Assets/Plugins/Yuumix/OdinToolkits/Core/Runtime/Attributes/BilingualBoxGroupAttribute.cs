@@ -1,6 +1,6 @@
-using Sirenix.OdinInspector;
 using System;
 using System.Diagnostics;
+using Sirenix.OdinInspector;
 
 namespace Yuumix.OdinToolkits.Core
 {
@@ -8,22 +8,19 @@ namespace Yuumix.OdinToolkits.Core
     [Conditional("UNITY_EDITOR")]
     public class BilingualBoxGroupAttribute : PropertyGroupAttribute
     {
-        public BilingualBoxGroupAttribute(string groupId,
-            string chinese, string english,
-            bool showLabel,
-            bool centerLabel = false,
-            float order = 0.0f) : base(groupId, order)
+        public BilingualBoxGroupAttribute(string groupId, string chinese, string english, bool showLabel,
+            bool centerLabel = false, float order = 0.0f) : base(groupId, order)
         {
             LanguageData = new BilingualData(chinese, english);
             ShowLabel = showLabel;
             CenterLabel = centerLabel;
         }
 
-        public BilingualBoxGroupAttribute(string groupId, string chinese, string english = null) : base(groupId) =>
+        public BilingualBoxGroupAttribute(string groupId, string chinese, string english = null) :
+            base(groupId) =>
             LanguageData = new BilingualData(chinese, english);
 
-        public BilingualBoxGroupAttribute()
-            : this("_DefaultMultiLanguageBoxGroup", "Null", "Null", false) { }
+        public BilingualBoxGroupAttribute() : this("_DefaultMultiLanguageBoxGroup", "Null", "Null", false) { }
 
         public BilingualData LanguageData { get; set; }
         public bool ShowLabel { get; set; }

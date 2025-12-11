@@ -18,7 +18,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
                 {
                     ReturnType = "bool",
                     ParameterName = "IsUniqueList",
-                    ParameterDescription = "如果为 true，则列表中不允许有重复的元素，默认为 true，此时下拉选择框是正常的，而 ValueDropdown 的此参数显示有问题"
+                    ParameterDescription =
+                        "如果为 true，则列表中不允许有重复的元素，默认为 true，此时下拉选择框是正常的，而 ValueDropdown 的此参数显示有问题"
                 },
                 new ParameterValue
                 {
@@ -36,8 +37,9 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
                 {
                     ReturnType = "bool",
                     ParameterName = "ExcludeExistingValuesInList",
-                    ParameterDescription = "当 IsUniqueList 为 true，ExcludeExistingValuesInList 也为 true，则列表中不允许有重复的元素，" +
-                                           "更换显示的样式，直接剔除已经存在的，不会出现勾选框"
+                    ParameterDescription =
+                        "当 IsUniqueList 为 true，ExcludeExistingValuesInList 也为 true，则列表中不允许有重复的元素，" +
+                        "更换显示的样式，直接剔除已经存在的，不会出现勾选框"
                 },
                 new ParameterValue
                 {

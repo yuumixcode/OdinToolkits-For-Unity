@@ -1,5 +1,5 @@
-using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 using Yuumix.OdinToolkits.Core;
@@ -10,6 +10,20 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
     [AttributeOverviewProExample]
     public class AssetListExampleSO : EditorScriptableSingleton<AssetListExampleSO>, IOdinToolkitsEditorReset
     {
+        #region IOdinToolkitsEditorReset Members
+
+        public void EditorReset()
+        {
+            singleObject = null;
+            assetList = null;
+            autoPopulatedWhenInspected = null;
+            gameObjectsWithTag = null;
+            gameObjectsWithLayerNames = null;
+            gameObjectsWithNamePrefix = null;
+        }
+
+        #endregion
+
         #region Serialized Fields
 
         [FoldoutGroup("$NoParameterTitleLabel", false)]
@@ -42,20 +56,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         [AssetList(AssetNamePrefix = "OdinToolkits_")]
         [InlineButton("LogGameObjectsWithNamePrefix", "$LogButtonLabel")]
         public List<GameObject> gameObjectsWithNamePrefix;
-
-        #endregion
-
-        #region IOdinToolkitsEditorReset Members
-
-        public void EditorReset()
-        {
-            singleObject = null;
-            assetList = null;
-            autoPopulatedWhenInspected = null;
-            gameObjectsWithTag = null;
-            gameObjectsWithLayerNames = null;
-            gameObjectsWithNamePrefix = null;
-        }
 
         #endregion
 

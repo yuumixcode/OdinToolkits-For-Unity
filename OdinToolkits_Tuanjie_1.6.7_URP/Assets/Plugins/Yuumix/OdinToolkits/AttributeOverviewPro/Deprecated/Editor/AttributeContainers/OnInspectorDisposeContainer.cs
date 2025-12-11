@@ -27,6 +27,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
                 }
             };
 
-        protected override string GetOriginalCode() => ReadCodeWithoutNamespace(typeof(OnInspectorDisposeExample));
+        protected override string GetOriginalCode() =>
+            ReadCodeWithoutNamespace(typeof(OnInspectorDisposeExample));
     }
 }

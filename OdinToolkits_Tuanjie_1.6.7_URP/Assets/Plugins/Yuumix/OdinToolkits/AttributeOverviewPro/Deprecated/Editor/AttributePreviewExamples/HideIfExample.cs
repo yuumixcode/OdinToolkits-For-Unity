@@ -7,6 +7,9 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class HideIfExample : ExampleSO
     {
+        bool Method() =>
+            (isToggled && someObject != null) || someEnum == InfoMessageType.Error;
+
         #region Serialized Fields
 
         [PropertyOrder(10)]
@@ -52,14 +55,9 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
 
         [PropertyOrder(10)]
         [FoldoutGroup("基础使用")]
-        [HideIf("@this.isToggled && this.someObject != null || " +
-                "this.someEnum == InfoMessageType.Error")]
+        [HideIf("@this.isToggled && this.someObject != null || " + "this.someEnum == InfoMessageType.Error")]
         public int hideWithExpression;
 
         #endregion
-
-        bool Method() =>
-            (isToggled && someObject != null) ||
-            someEnum == InfoMessageType.Error;
     }
 }

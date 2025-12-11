@@ -1,8 +1,8 @@
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
@@ -65,10 +65,10 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
             DoPropertyLabel("Odin 绘制系统的路径", property.Path, border);
             DoPropertyLabel("Unity 系统的路径", property.UnityPropertyPath, border);
             DoPropertyLabel("InspectorProperty Index", property.Index.ToString(), border);
-            DoPropertyLabel("InspectorProperty 内部的 InspectorPropertyInfo 实例对象",
-                property.Info.PropertyName, border);
-            DoPropertyLabel("InspectorPropertyInfo 实例对象是否有任何后备成员",
-                property.Info.HasBackingMembers.ToString(), border);
+            DoPropertyLabel("InspectorProperty 内部的 InspectorPropertyInfo 实例对象", property.Info.PropertyName,
+                border);
+            DoPropertyLabel("InspectorPropertyInfo 实例对象是否有任何后备成员", property.Info.HasBackingMembers.ToString(),
+                border);
             DoPropertyLabel("InspectorPropertyInfo 实例对象是否仅有一个后备成员",
                 property.Info.HasSingleBackingMember.ToString(), border);
             DoAttributes(property, border);
@@ -89,8 +89,9 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
             var rect = SirenixEditorGUI.BeginLegendBox(GUIHelper.TempContent(property.Label.text + " 特性列表"));
             for (var i = 0; i < property.Attributes.Count; i++)
             {
-                EditorGUILayout.SelectableLabel(i + ": " + property.Attributes[i].GetType().Name,
-                    GUILayoutOptions.Height(20));
+                EditorGUILayout.SelectableLabel(i + ": " + property.Attributes[i]
+                    .GetType()
+                    .Name, GUILayoutOptions.Height(20));
             }
 
             SirenixEditorGUI.EndLegendBox();

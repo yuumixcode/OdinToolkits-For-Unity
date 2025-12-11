@@ -1,5 +1,5 @@
-using Sirenix.OdinInspector;
 using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 

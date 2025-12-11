@@ -7,21 +7,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class OnValueChangedExample : ExampleSO
     {
-        #region Serialized Fields
-
-        [OnValueChanged("CreateMaterial")]
-        public Shader shader;
-
-        [ReadOnly]
-        [InlineEditor(InlineEditorModes.LargePreview)]
-        public Material material;
-
-        [OnValueChanged("ValueChange")]
-        [InlineButton("ChangeValue", "代码修改值")]
-        public int value;
-
-        #endregion
-
         void CreateMaterial()
         {
             if (material != null)
@@ -44,5 +29,20 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         {
             Debug.Log("Value changed to " + value);
         }
+
+        #region Serialized Fields
+
+        [OnValueChanged("CreateMaterial")]
+        public Shader shader;
+
+        [ReadOnly]
+        [InlineEditor(InlineEditorModes.LargePreview)]
+        public Material material;
+
+        [OnValueChanged("ValueChange")]
+        [InlineButton("ChangeValue", "代码修改值")]
+        public int value;
+
+        #endregion
     }
 }

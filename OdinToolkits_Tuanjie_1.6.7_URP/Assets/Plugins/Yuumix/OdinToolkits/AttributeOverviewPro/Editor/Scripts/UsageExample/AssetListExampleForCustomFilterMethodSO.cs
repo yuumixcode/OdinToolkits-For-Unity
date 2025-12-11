@@ -1,5 +1,5 @@
-using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 using Yuumix.OdinToolkits.Core;
@@ -34,8 +34,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         #region Helper
 
         static readonly BilingualData CustomFilterMethodTitleLabel = new BilingualData(
-            "参数: Custom Filter Method",
-            "Parameter: Custom Filter Method");
+            "参数: Custom Filter Method", "Parameter: Custom Filter Method");
 
         static readonly BilingualData LogButtonLabel = new BilingualData("输出信息", "Output Info");
 

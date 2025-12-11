@@ -10,8 +10,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         #region Serialized Fields
 
         [Title("默认只关闭标记的 Property 的右键菜单")]
-        [InfoBox("DisableContextMenu 只能禁用 Odin 提供的 ContextMenu，并不会关闭 Unity 原生部分",
-            InfoMessageType.Warning)]
+        [InfoBox("DisableContextMenu 只能禁用 Odin 提供的 ContextMenu，并不会关闭 Unity 原生部分", InfoMessageType.Warning)]
         [DisableContextMenu]
         public int[] noRightClickList = { 2, 3, 5 };
 

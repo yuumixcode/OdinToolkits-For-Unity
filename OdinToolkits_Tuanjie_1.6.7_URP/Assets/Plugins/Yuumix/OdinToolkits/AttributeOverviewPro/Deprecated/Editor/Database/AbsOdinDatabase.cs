@@ -1,7 +1,6 @@
-﻿using Yuumix.OdinToolkits.Core.SafeEditor;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
 using UnityEditor;
-using YuumixEditor;
+using Yuumix.OdinToolkits.Core.SafeEditor;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
 {
@@ -10,16 +9,14 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         [PropertyOrder(980)]
         [TitleGroup("工具数据库通用操作")]
         [ButtonGroup("工具数据库通用操作/Split")]
-        [Button("清空工具数据库",
-            ButtonSizes.Medium, Icon = SdfIconType.ArrowCounterclockwise,
+        [Button("清空工具数据库", ButtonSizes.Medium, Icon = SdfIconType.ArrowCounterclockwise,
             IconAlignment = IconAlignment.LeftOfText)]
         protected virtual void ClearDatabase() { }
 
         [PropertyOrder(990)]
         [TitleGroup("工具数据库通用操作")]
         [ButtonGroup("工具数据库通用操作/Split")]
-        [Button("初始化数据库",
-            ButtonSizes.Medium, Icon = SdfIconType.App,
+        [Button("初始化数据库", ButtonSizes.Medium, Icon = SdfIconType.App,
             IconAlignment = IconAlignment.LeftOfText)]
         protected virtual void InitializeData() { }
 

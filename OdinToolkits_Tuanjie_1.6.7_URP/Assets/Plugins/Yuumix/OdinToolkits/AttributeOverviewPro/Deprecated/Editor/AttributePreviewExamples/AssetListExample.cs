@@ -1,5 +1,5 @@
-using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
@@ -10,6 +10,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class AssetListExample : ExampleSO
     {
+        bool IsPrefab(GameObject asset) => PrefabUtility.GetPrefabAssetType(asset) == PrefabAssetType.Regular;
+
         #region Serialized Fields
 
         [FoldoutGroup("NoParameterTitleLabel")]
@@ -53,8 +55,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         public List<GameObject> gameObjectsWithCustomMethod;
 
         #endregion
-
-        bool IsPrefab(GameObject asset) => PrefabUtility.GetPrefabAssetType(asset) == PrefabAssetType.Regular;
 
         #region Helper
 

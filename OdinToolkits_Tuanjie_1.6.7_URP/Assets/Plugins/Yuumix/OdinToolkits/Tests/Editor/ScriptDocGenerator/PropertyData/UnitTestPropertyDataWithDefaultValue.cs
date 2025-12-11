@@ -9,10 +9,12 @@ namespace Yuumix.OdinToolkits.Tests.Editor
 {
     public class UnitTestPropertyDataWithDefaultValue
     {
-        static readonly PropertyInfo[] PropertyInfos = typeof(TestClass).GetRuntimeProperties().ToArray();
+        static readonly PropertyInfo[] PropertyInfos = typeof(TestClass).GetRuntimeProperties()
+            .ToArray();
 
         static readonly IPropertyData[] PropertyDataArray = PropertyInfos
-            .Select(p => UnitTestAnalysisFactory.Default.CreatePropertyData(p)).ToArray();
+            .Select(p => UnitTestAnalysisFactory.Default.CreatePropertyData(p))
+            .ToArray();
 
         static readonly Dictionary<string, string> ExpectedSignatureMaps = new Dictionary<string, string>
         {

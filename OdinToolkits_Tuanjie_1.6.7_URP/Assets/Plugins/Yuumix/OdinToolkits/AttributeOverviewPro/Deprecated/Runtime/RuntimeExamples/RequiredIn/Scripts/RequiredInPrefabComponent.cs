@@ -5,6 +5,10 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated
 {
     public class RequiredInPrefabComponent : MonoBehaviour
     {
+        public string MessageProperty => useAlternativeMessage ? alternativeMessage : message;
+
+        string GetMessage() => useAlternativeMessage ? alternativeMessage : message;
+
         #region Serialized Fields
 
         public bool useAlternativeMessage;
@@ -23,7 +27,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated
 
         [Title("序号 3 PrefabKind.Regular")]
         [InfoBox("该物体是常规预制体资产，不是场景中的物体时，判断是否为空，ErrorMessage 可以解析表达式，但是在 Rider 中没有高亮显示")]
-        [RequiredIn(PrefabKind.Regular, ErrorMessage = "@useAlternativeMessage ? alternativeMessage : message")]
+        [RequiredIn(PrefabKind.Regular,
+            ErrorMessage = "@useAlternativeMessage ? alternativeMessage : message")]
         public GameObject regular;
 
         [Title("序号 4 PrefabKind.Variant")]
@@ -51,9 +56,5 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated
         public GameObject prefabAll;
 
         #endregion
-
-        public string MessageProperty => useAlternativeMessage ? alternativeMessage : message;
-
-        string GetMessage() => useAlternativeMessage ? alternativeMessage : message;
     }
 }

@@ -1,5 +1,5 @@
-using Sirenix.OdinInspector.Editor;
 using System.Collections.Generic;
+using Sirenix.OdinInspector.Editor;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor

@@ -26,7 +26,8 @@ namespace Yuumix.OdinToolkits.Core
         {
             for (var i = 0; i < _autoUnregisters.Count; i++)
             {
-                _autoUnregisters[i].Unregister();
+                _autoUnregisters[i]
+                    .Unregister();
             }
         }
     }

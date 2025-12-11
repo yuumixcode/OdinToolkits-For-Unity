@@ -11,8 +11,6 @@ namespace Yuumix.OdinToolkits.Core.SafeEditor
     [Summary("双语顶部说明控件，用于模块的简单介绍")]
     public class BilingualHeaderWidget
     {
-        public BilingualDisplayAsStringWidget HeaderName => headerName;
-
         [PropertyOrder(0)]
         [PropertySpace(13)]
         [BoxGroup("OuterBox")]
@@ -44,6 +42,8 @@ namespace Yuumix.OdinToolkits.Core.SafeEditor
                 new BilingualDisplayAsStringWidget(_chineseIntroduction, _englishIntroduction);
             _targetUrl = targetUrl ?? OdinToolkitsWebLinks.OFFICIAL_WEBSITE;
         }
+
+        public BilingualDisplayAsStringWidget HeaderName => headerName;
 
         static InspectorBilingualismConfigSO BilingualismConfig => InspectorBilingualismConfigSO.Instance;
 

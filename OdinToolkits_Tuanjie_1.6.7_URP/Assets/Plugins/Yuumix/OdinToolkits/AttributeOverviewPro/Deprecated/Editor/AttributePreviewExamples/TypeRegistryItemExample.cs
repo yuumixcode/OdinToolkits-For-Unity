@@ -46,27 +46,27 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
             Priority = int.MinValue)]
         public abstract class Base { }
 
-        [TypeRegistryItem(darkIconColorR: 0.8f, darkIconColorG: 0.3f,
-            lightIconColorR: 0.3f, lightIconColorG: 0.1f,
-            Name = "Brush", CategoryPath = PATH, Icon = SdfIconType.BrushFill, Priority = int.MinValue)]
+        [TypeRegistryItem(darkIconColorR: 0.8f, darkIconColorG: 0.3f, lightIconColorR: 0.3f,
+            lightIconColorG: 0.1f, Name = "Brush", CategoryPath = PATH, Icon = SdfIconType.BrushFill,
+            Priority = int.MinValue)]
         public class InheritorA : Base
         {
             public Color Color = Color.red;
             public float PaintRemaining = 0.4f;
         }
 
-        [TypeRegistryItem(darkIconColorG: 0.8f, darkIconColorB: 0.3f,
-            lightIconColorG: 0.3f, lightIconColorB: 0.1f,
-            Name = "Paint Bucket", CategoryPath = PATH, Icon = SdfIconType.PaintBucket, Priority = int.MinValue)]
+        [TypeRegistryItem(darkIconColorG: 0.8f, darkIconColorB: 0.3f, lightIconColorG: 0.3f,
+            lightIconColorB: 0.1f, Name = "Paint Bucket", CategoryPath = PATH, Icon = SdfIconType.PaintBucket,
+            Priority = int.MinValue)]
         public class InheritorB : Base
         {
             public Color Color = Color.green;
             public float PaintRemaining = 0.8f;
         }
 
-        [TypeRegistryItem(darkIconColorB: 0.8f, darkIconColorG: 0.3f,
-            lightIconColorB: 0.3f, lightIconColorG: 0.1f,
-            Name = "Palette", CategoryPath = PATH, Icon = SdfIconType.PaletteFill, Priority = int.MinValue)]
+        [TypeRegistryItem(darkIconColorB: 0.8f, darkIconColorG: 0.3f, lightIconColorB: 0.3f,
+            lightIconColorG: 0.1f, Name = "Palette", CategoryPath = PATH, Icon = SdfIconType.PaletteFill,
+            Priority = int.MinValue)]
         public class InheritorC : Base
         {
             public ColorPaletteItem[] Colors =

@@ -1,11 +1,10 @@
+using System.IO;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
-using System.IO;
-using Yuumix.OdinToolkits.Core.SafeEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Core.Editor;
-using YuumixEditor;
+using Yuumix.OdinToolkits.Core.SafeEditor;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
@@ -20,47 +19,6 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             ".meta",
             ".asmdef"
         };
-
-        #region Serialized Fields
-
-        public BilingualHeaderWidget headerWidget =
-            new BilingualHeaderWidget(DirectoryTreeGenToolMenuPathData.GetChinese(),
-                DirectoryTreeGenToolMenuPathData.GetEnglish(),
-                "根据文件夹路径，解析其子路径文件夹及文件，生成不同种类的目录树",
-                "Based on the folder path, parse the sub-path folders and files within it, " +
-                "and generate different types of directory trees.");
-
-        [FolderPath(RequireExistingPath = true, AbsolutePath = true)]
-        [BilingualTitle("选择的文件夹路径", "Folder Path")]
-        [HideLabel]
-        [CustomContextMenu("Odin Toolkits Reset", "EditorReset")]
-        public string folderPath;
-
-        [BilingualTitle("结果显示的最大深度", "Result Max Depth")]
-        [HideLabel]
-        [MinValue(1)]
-        [CustomContextMenu("OdinToolkitsReset", "EditorReset")]
-        public int maxDepth;
-
-        [BilingualTitle("生成命令选择", "Generate Command Selector")]
-        [HideLabel]
-        public GenerateCommandSO command;
-
-        BilingualData _operatorButtonsTitleGroupData = new BilingualData("操作按钮", "Operator Buttons");
-
-        [PropertyOrder(50)]
-        [TextArea(3, 15)]
-        [BilingualTitle("结果", "Result")]
-        [HideLabel]
-        public string resultText;
-
-        [PropertyOrder(100)]
-        [BilingualTitle("过程数据", "Process Data")]
-        [ReadOnly]
-        [OdinSerialize]
-        DirectoryAnalysisData _directoryAnalysisData;
-
-        #endregion
 
         #region IOdinToolkitsEditorReset Members
 
@@ -100,5 +58,45 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 resultText = command.Generate(_directoryAnalysisData, maxDepth);
             }
         }
+
+        #region Serialized Fields
+
+        public BilingualHeaderWidget headerWidget = new BilingualHeaderWidget(
+            DirectoryTreeGenToolMenuPathData.GetChinese(), DirectoryTreeGenToolMenuPathData.GetEnglish(),
+            "根据文件夹路径，解析其子路径文件夹及文件，生成不同种类的目录树",
+            "Based on the folder path, parse the sub-path folders and files within it, " +
+            "and generate different types of directory trees.");
+
+        [FolderPath(RequireExistingPath = true, AbsolutePath = true)]
+        [BilingualTitle("选择的文件夹路径", "Folder Path")]
+        [HideLabel]
+        [CustomContextMenu("Odin Toolkits Reset", "EditorReset")]
+        public string folderPath;
+
+        [BilingualTitle("结果显示的最大深度", "Result Max Depth")]
+        [HideLabel]
+        [MinValue(1)]
+        [CustomContextMenu("OdinToolkitsReset", "EditorReset")]
+        public int maxDepth;
+
+        [BilingualTitle("生成命令选择", "Generate Command Selector")]
+        [HideLabel]
+        public GenerateCommandSO command;
+
+        BilingualData _operatorButtonsTitleGroupData = new BilingualData("操作按钮", "Operator Buttons");
+
+        [PropertyOrder(50)]
+        [TextArea(3, 15)]
+        [BilingualTitle("结果", "Result")]
+        [HideLabel]
+        public string resultText;
+
+        [PropertyOrder(100)]
+        [BilingualTitle("过程数据", "Process Data")]
+        [ReadOnly]
+        [OdinSerialize]
+        DirectoryAnalysisData _directoryAnalysisData;
+
+        #endregion
     }
 }

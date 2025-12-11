@@ -7,6 +7,26 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class DelayedPropertyExample : ExampleSO
     {
+        [ShowInInspector]
+        [PropertyOrder(20)]
+        [InfoBox("标记 Odin 的 DelayedProperty，可以对属性生效，" + "需要注意使用 [ShowInspector] 显示属性时，并没有序列化")]
+        [DelayedProperty]
+        [OnValueChanged("OnValueChanged")]
+        public string DelayedProperty { get; set; }
+
+        void OnValueChanged()
+        {
+            Debug.Log("Value changed!");
+        }
+
+        public override void SetDefaultValue()
+        {
+            normal = "normal";
+            delayedField = "delayedField";
+            odinDelayedField = "odinDelayedField";
+            DelayedProperty = "DelayedProperty";
+        }
+
         #region Serialized Fields
 
         [PropertyOrder(0)]
@@ -27,26 +47,5 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         public string odinDelayedField;
 
         #endregion
-
-        [ShowInInspector]
-        [PropertyOrder(20)]
-        [InfoBox("标记 Odin 的 DelayedProperty，可以对属性生效，" +
-                 "需要注意使用 [ShowInspector] 显示属性时，并没有序列化")]
-        [DelayedProperty]
-        [OnValueChanged("OnValueChanged")]
-        public string DelayedProperty { get; set; }
-
-        void OnValueChanged()
-        {
-            Debug.Log("Value changed!");
-        }
-
-        public override void SetDefaultValue()
-        {
-            normal = "normal";
-            delayedField = "delayedField";
-            odinDelayedField = "odinDelayedField";
-            DelayedProperty = "DelayedProperty";
-        }
     }
 }

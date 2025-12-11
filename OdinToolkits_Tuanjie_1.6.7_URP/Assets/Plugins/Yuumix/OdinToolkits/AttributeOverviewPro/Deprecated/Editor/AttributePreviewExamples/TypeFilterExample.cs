@@ -1,8 +1,8 @@
-using Sirenix.OdinInspector;
-using Sirenix.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using UnityEngine;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
@@ -43,7 +43,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
 
         public IEnumerable<Type> GetFilteredTypeList()
         {
-            var q = typeof(BaseClass).Assembly.GetTypes()
+            var q = typeof(BaseClass).Assembly
+                .GetTypes()
                 .Where(x => !x.IsAbstract)              // Excludes BaseClass
                 .Where(x => !x.IsGenericTypeDefinition) // Excludes C1<>
                 .Where(x => typeof(BaseClass)

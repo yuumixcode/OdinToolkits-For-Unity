@@ -1,6 +1,6 @@
+using System.Collections.Generic;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities.Editor;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor;
@@ -15,18 +15,24 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
     public class ResolvedStringParameterValue
     {
         static readonly BilingualData ResolverTypeLabel = new BilingualData("解析器类型", "Resolver Type");
-        static readonly BilingualData ResolverTargetTypeLabel = new BilingualData("解析器目标类型", "Resolver Target Type");
+
+        static readonly BilingualData ResolverTargetTypeLabel =
+            new BilingualData("解析器目标类型", "Resolver Target Type");
+
         static readonly BilingualData FallbackValueLabel = new BilingualData("回退值", "Fallback Value");
-        static readonly BilingualData NamedValuesLabel = new BilingualData("特殊命名参数值 - Named Values", "Named Values");
+
+        static readonly BilingualData NamedValuesLabel =
+            new BilingualData("特殊命名参数值 - Named Values", "Named Values");
 
         static readonly ParameterValue[] DefaultExistedNamedValues =
         {
-            new ParameterValue(
-                typeof(InspectorProperty).FullName, "$property",
-                new BilingualData("InspectorProperty 代表检查器中的一个 Property，即应用此特性的成员。类似于 Unity 的 SerializedProperty。",
+            new ParameterValue(typeof(InspectorProperty).FullName, "$property",
+                new BilingualData(
+                    "InspectorProperty 代表检查器中的一个 Property，即应用此特性的成员。类似于 Unity 的 SerializedProperty。",
                     "The InspectorProperty representing the member that has attribute applied to it. Similar to Unity's SerializedProperty.")),
-            new ParameterValue("TParent", "$root", new BilingualData("TParent 代表此成员所在的类。可以通过这个类访问类中的其他成员。",
-                "The TParent representing the parent type of the member that has attribute applied to it."))
+            new ParameterValue("TParent", "$root",
+                new BilingualData("TParent 代表此成员所在的类。可以通过这个类访问类中的其他成员。",
+                    "The TParent representing the parent type of the member that has attribute applied to it."))
         };
 
         public ResolvedStringParameterValue(string parameterName, ResolverType resolverType,
@@ -53,48 +59,61 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 
         public void CreateResolverInfoTable()
         {
-            ResolverInfoTable = GUITable.Create(1, null,
-                new GUITableColumn
+            ResolverInfoTable = GUITable.Create(1, null, new GUITableColumn
+            {
+                ColumnTitle = ResolverTypeLabel,
+                MinWidth = 100f,
+                OnGUI = (rect, _) =>
                 {
-                    ColumnTitle = ResolverTypeLabel,
-                    MinWidth = 100f,
-                    OnGUI = (rect, _) => { DrawTableCell(rect, GetResolverTypeString()); }
-                },
-                new GUITableColumn
+                    DrawTableCell(rect, GetResolverTypeString());
+                }
+            }, new GUITableColumn
+            {
+                ColumnTitle = ResolverTargetTypeLabel,
+                MinWidth = 140f,
+                OnGUI = (rect, _) =>
                 {
-                    ColumnTitle = ResolverTargetTypeLabel,
-                    MinWidth = 140f,
-                    OnGUI = (rect, _) => { DrawTableCell(rect, ResolverTargetType); }
-                },
-                new GUITableColumn
+                    DrawTableCell(rect, ResolverTargetType);
+                }
+            }, new GUITableColumn
+            {
+                ColumnTitle = FallbackValueLabel,
+                MinWidth = 100f,
+                OnGUI = (rect, _) =>
                 {
-                    ColumnTitle = FallbackValueLabel,
-                    MinWidth = 100f,
-                    OnGUI = (rect, _) => { DrawTableCell(rect, FallbackValue); }
-                });
+                    DrawTableCell(rect, FallbackValue);
+                }
+            });
         }
 
         public void CreateNamedValueTable()
         {
-            NamedValueTable = GUITable.Create(NamedValues, NamedValuesLabel,
-                new GUITableColumn
+            NamedValueTable = GUITable.Create(NamedValues, NamedValuesLabel, new GUITableColumn
+            {
+                ColumnTitle = new BilingualData("参数类型", "Parameter Type"),
+                MinWidth = 140f,
+                OnGUI = (rect, index) =>
                 {
-                    ColumnTitle = new BilingualData("参数类型", "Parameter Type"),
-                    MinWidth = 140f,
-                    OnGUI = (rect, index) => { DrawTableCell(rect, NamedValues[index].ReturnType); }
-                },
-                new GUITableColumn
+                    DrawTableCell(rect, NamedValues[index].ReturnType);
+                }
+            }, new GUITableColumn
+            {
+                ColumnTitle = new BilingualData("参数名", "Parameter Name"),
+                MinWidth = 140f,
+                OnGUI = (rect, index) =>
                 {
-                    ColumnTitle = new BilingualData("参数名", "Parameter Name"),
-                    MinWidth = 140f,
-                    OnGUI = (rect, index) => { DrawTableCell(rect, NamedValues[index].ParameterName); }
-                },
-                new GUITableColumn
+                    DrawTableCell(rect, NamedValues[index].ParameterName);
+                }
+            }, new GUITableColumn
+            {
+                ColumnTitle = new BilingualData("参数描述", "Parameter Description"),
+                MinWidth = 200f,
+                OnGUI = (rect, index) =>
                 {
-                    ColumnTitle = new BilingualData("参数描述", "Parameter Description"),
-                    MinWidth = 200f,
-                    OnGUI = (rect, index) => { DrawTableCell(rect, NamedValues[index].GetDescription()); }
-                });
+                    DrawTableCell(rect, NamedValues[index]
+                        .GetDescription());
+                }
+            });
         }
 
         public void ResizeAllTables()

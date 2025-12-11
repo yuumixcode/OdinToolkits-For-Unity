@@ -11,7 +11,8 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         static readonly ConstructorInfo[] TestClassConstructorInfos = typeof(TestClass).GetConstructors();
 
         static readonly IConstructorData[] TestClassConstructorDataArray = TestClassConstructorInfos
-            .Select(x => UnitTestAnalysisFactory.Default.CreateConstructorData(x)).ToArray();
+            .Select(x => UnitTestAnalysisFactory.Default.CreateConstructorData(x))
+            .ToArray();
 
         [Test]
         public void TestConstructor()
@@ -22,7 +23,8 @@ namespace Yuumix.OdinToolkits.Tests.Editor
                 "public UnitTestConstructors.TestClass(bool b, int a)"
             };
 
-            var signatures = TestClassConstructorDataArray.Select(x => x.Signature).ToArray();
+            var signatures = TestClassConstructorDataArray.Select(x => x.Signature)
+                .ToArray();
             foreach (var s in signatures)
             {
                 Debug.Log(s);

@@ -110,11 +110,11 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
                 {
                     ReturnType = ">>> PrefabKind",
                     ParameterName = "PrefabKind.All",
-                    ParameterDescription =
-                        "All = PrefabInstanceAndNonPrefabInstance | PrefabAsset"
+                    ParameterDescription = "All = PrefabInstanceAndNonPrefabInstance | PrefabAsset"
                 }
             };
 
-        protected override string GetOriginalCode() => ReadCodeWithoutNamespace(typeof(RequiredListLengthExample));
+        protected override string GetOriginalCode() =>
+            ReadCodeWithoutNamespace(typeof(RequiredListLengthExample));
     }
 }

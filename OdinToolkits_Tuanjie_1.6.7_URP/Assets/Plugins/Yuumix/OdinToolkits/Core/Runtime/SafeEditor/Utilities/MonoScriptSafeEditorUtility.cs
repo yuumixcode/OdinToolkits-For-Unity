@@ -13,13 +13,14 @@ namespace Yuumix.OdinToolkits.Core.SafeEditor
         [Summary("在项目中根据脚本文件名称查找脚本文件，并在编辑器中选择。仅在编辑器阶段可用。")]
         public static void SelectMonoScript(string scriptName)
         {
+#if UNITY_EDITOR
             Selection.activeObject = GetMonoScript(scriptName);
+#endif
         }
-
-        [Summary("在项目中根据脚本文件名称查找脚本文件，返回找到的 MonoScript。仅在编辑器阶段可用，打包后直接返回 null")]
+#if UNITY_EDITOR
+        [Summary("在项目中根据脚本文件名称查找脚本文件，返回找到的 MonoScript。仅在编辑器阶段可用，打包自动剔除。")]
         public static MonoScript GetMonoScript(string scriptName)
         {
-#if UNITY_EDITOR
             MonoScript foundMonoScript = null;
             var scriptAssetPath = FindScriptPath(scriptName);
             if (!string.IsNullOrWhiteSpace(scriptAssetPath))
@@ -28,10 +29,8 @@ namespace Yuumix.OdinToolkits.Core.SafeEditor
             }
 
             return foundMonoScript;
-#else
-            return null;
-#endif
         }
+#endif
 
         [Summary("在项目中根据脚本文件名称查找脚本文件，返回脚本文件路径。仅在编辑器阶段可用，打包后直接返回 string.Empty")]
         public static string FindScriptPath(string scriptName)

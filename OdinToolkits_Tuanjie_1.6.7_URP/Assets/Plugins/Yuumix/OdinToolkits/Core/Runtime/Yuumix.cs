@@ -27,8 +27,7 @@ namespace Yuumix.OdinToolkits.Core
                     return _instance;
                 }
 
-                _instance = new GameObject("[Yuumix]")
-                    .AddComponent<Yuumix>();
+                _instance = new GameObject("[Yuumix]").AddComponent<Yuumix>();
                 return _instance;
             }
         }

@@ -1,6 +1,6 @@
-using Sirenix.OdinInspector;
 using System;
 using System.Reflection;
+using Sirenix.OdinInspector;
 using UnityEditor;
 using Yuumix.OdinToolkits.Core;
 
@@ -84,8 +84,9 @@ namespace Yuumix.OdinToolkits.Module.Editor
         /// </summary>
         [Summary("ISearchFilterable 接口方法，自定义搜索匹配规则")]
         public bool IsMatch(string searchString) =>
-            MenuPath.ToLower().Contains(searchString.ToLower()) ||
-            MethodName.ToLower().Contains(searchString.ToLower());
+            MenuPath.ToLower()
+                .Contains(searchString.ToLower()) || MethodName.ToLower()
+                .Contains(searchString.ToLower());
 
         #endregion
     }

@@ -1,5 +1,5 @@
-using Sirenix.OdinInspector.Editor;
 using System.Collections.Generic;
+using Sirenix.OdinInspector.Editor;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
@@ -23,7 +23,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
                 {
                     ReturnType = "string",
                     ParameterName = "condition",
-                    ParameterDescription = "填入验证方法的方法名，返回 true 则验证通过，否则不通过，" + DescriptionConfigs.SupportAllResolver
+                    ParameterDescription = "填入验证方法的方法名，返回 true 则验证通过，否则不通过，" +
+                                           DescriptionConfigs.SupportAllResolver
                 },
                 new ParameterValue
                 {

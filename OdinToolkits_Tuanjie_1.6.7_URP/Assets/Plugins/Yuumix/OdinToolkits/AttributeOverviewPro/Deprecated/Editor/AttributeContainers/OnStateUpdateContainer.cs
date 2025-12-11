@@ -7,7 +7,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     {
         protected override string GetHeader() => "OnStateUpdate";
 
-        protected override string GetIntroduction() => "当 Property 更新时触发的方法，Property 的更新基于 Unity 设置的 Inspector 的更新时机";
+        protected override string GetIntroduction() =>
+            "当 Property 更新时触发的方法，Property 的更新基于 Unity 设置的 Inspector 的更新时机";
 
         protected override List<string> GetTips() =>
             new List<string>

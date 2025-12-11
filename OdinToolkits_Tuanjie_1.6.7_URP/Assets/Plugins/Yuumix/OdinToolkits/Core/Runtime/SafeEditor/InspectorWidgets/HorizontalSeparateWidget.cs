@@ -51,6 +51,8 @@ namespace Yuumix.OdinToolkits.Core.SafeEditor
             _spaceBefore = spaceBefore;
         }
 
+#if UNITY_EDITOR
+
         Color DarkLineColor => EditorGUIUtility.isProSkin
             ? SirenixGUIStyles.BorderColor
             : new Color(0f, 0f, 0f, 0.2f);
@@ -59,7 +61,6 @@ namespace Yuumix.OdinToolkits.Core.SafeEditor
             ? new Color(1f, 1f, 1f, 0.1f)
             : new Color(1f, 1f, 1f, 1f);
 
-#if UNITY_EDITOR
         [OnInspectorGUI]
         public void Separate()
         {

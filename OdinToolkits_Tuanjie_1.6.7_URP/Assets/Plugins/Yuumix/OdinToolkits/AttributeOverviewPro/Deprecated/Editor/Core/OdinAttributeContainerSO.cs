@@ -1,35 +1,20 @@
-using Sirenix.OdinInspector;
-using Sirenix.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Yuumix.OdinToolkits.Core.SafeEditor;
+using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using UnityEditor;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 using Yuumix.OdinToolkits.Core;
-using YuumixEditor;
+using Yuumix.OdinToolkits.Core.SafeEditor;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
 {
     public abstract class OdinAttributeContainerSO : SerializedScriptableObject
     {
         public static BilingualHeaderWidget GlobalTempHeader =
-            new BilingualHeaderWidget("全局通用 Header 实例", "Global Header Instance",
-                "简介",
-                "Introduction");
-
-        #region Serialized Fields
-
-        [HideIf("HasOdinExample")]
-        [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
-        public ExampleSO example;
-
-        [HideIf("HasExample")]
-        [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
-        public ExampleOdinSO exampleOdin;
-
-        #endregion
+            new BilingualHeaderWidget("全局通用 Header 实例", "Global Header Instance", "简介", "Introduction");
 
         [PropertyOrder(-99)]
         [PropertySpace(0, 10)]
@@ -156,5 +141,17 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
                 return "";
             }
         }
+
+        #region Serialized Fields
+
+        [HideIf("HasOdinExample")]
+        [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
+        public ExampleSO example;
+
+        [HideIf("HasExample")]
+        [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
+        public ExampleOdinSO exampleOdin;
+
+        #endregion
     }
 }

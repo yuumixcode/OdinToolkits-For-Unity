@@ -1,16 +1,15 @@
-using Yuumix.OdinToolkits.Core.SafeEditor;
 using Sirenix.OdinInspector;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 using Yuumix.OdinToolkits.Core;
-using YuumixEditor;
+using Yuumix.OdinToolkits.Core.SafeEditor;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
 {
     [AttributeOverviewProExample]
     public class ShowInInspectorExample : ExampleSO
     {
-        static string Path => PathSafeEditorUtility.GetTargetFolderPath("RuntimeExamples",
-            "OdinToolkits") + "/ShowInInspector";
+        static string Path => PathSafeEditorUtility.GetTargetFolderPath("RuntimeExamples", "OdinToolkits") +
+                              "/ShowInInspector";
 
         [DisplayAsString(fontSize: 12, overflow: false)]
         [HideLabel]

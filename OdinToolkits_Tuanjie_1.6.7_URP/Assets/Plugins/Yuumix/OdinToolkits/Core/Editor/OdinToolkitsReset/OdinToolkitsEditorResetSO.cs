@@ -1,6 +1,6 @@
-using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 
@@ -21,10 +21,7 @@ namespace Yuumix.OdinToolkits.Core.Editor
         [Button("重置选中的 SO 文件", ButtonSizes.Large)]
         public void Reset()
         {
-            if (!EditorUtility.DisplayDialog("重置资源",
-                    "准备重置选中的 ScriptableObject 资源，无法撤回，确定重置吗？",
-                    "确认",
-                    "取消"))
+            if (!EditorUtility.DisplayDialog("重置资源", "准备重置选中的 ScriptableObject 资源，无法撤回，确定重置吗？", "确认", "取消"))
             {
                 return;
             }

@@ -1,7 +1,6 @@
 using Yuumix.OdinToolkits.Core.SafeEditor;
 using UnityEngine;
 using Yuumix.Community.Editor;
-using YuumixEditor;
 
 namespace Yuumix.Community.Schwapo.Editor
 {

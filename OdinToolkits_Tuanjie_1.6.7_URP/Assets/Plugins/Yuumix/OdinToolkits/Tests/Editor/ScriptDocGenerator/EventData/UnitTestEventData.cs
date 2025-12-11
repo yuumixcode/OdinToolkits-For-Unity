@@ -17,10 +17,12 @@ namespace Yuumix.OdinToolkits.Tests.Editor
     [SuppressMessage("ReSharper", "EventNeverSubscribedTo.Local")]
     public class UnitTestEventData
     {
-        static readonly EventInfo[] EventInfos = typeof(TestClass).GetRuntimeEvents().ToArray();
+        static readonly EventInfo[] EventInfos = typeof(TestClass).GetRuntimeEvents()
+            .ToArray();
 
-        static readonly IEventData[] EventDataArray =
-            EventInfos.Select(e => UnitTestAnalysisFactory.Default.CreateEventData(e)).ToArray();
+        static readonly IEventData[] EventDataArray = EventInfos
+            .Select(e => UnitTestAnalysisFactory.Default.CreateEventData(e))
+            .ToArray();
 
         static readonly Dictionary<string, string> ExpectedSignatureMaps = new Dictionary<string, string>
         {

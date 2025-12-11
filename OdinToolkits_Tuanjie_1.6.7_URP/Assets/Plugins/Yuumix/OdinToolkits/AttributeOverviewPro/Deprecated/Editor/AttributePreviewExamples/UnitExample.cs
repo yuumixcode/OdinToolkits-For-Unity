@@ -9,6 +9,34 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class UnitExample : ExampleSO
     {
+        [FoldoutGroup("两个参数，一个实际单位，一个显示单位")]
+        [ShowInInspector]
+        [Unit(Units.MetersPerSecond, Units.MilesPerHour, DisplayAsString = true, ForceDisplayUnit = true)]
+        public float SpeedMilesPerHour => speed;
+
+        void Log1()
+        {
+            Debug.Log(nameof(speed) + ": " + speed + "米每秒");
+        }
+
+        void Log2()
+        {
+            Debug.Log(nameof(distance) + ": " + distance + "厘米");
+        }
+
+        void Log3()
+        {
+            Debug.Log(nameof(odin) + ": " + odin + "米");
+        }
+
+        // Add custom units. (Disabled to not add custom units to your project)
+        [InitializeOnLoadMethod]
+        public static void AddCustomUnit()
+        {
+            UnitNumberUtility.AddCustomUnit("Odin Toolkits Custom Unit",
+                new[] { "Odin Toolkits Custom Unit" }, UnitCategory.Distance, 1m / 77m);
+        }
+
         #region Serialized Fields
 
         // Try entering '6 lb'.
@@ -36,37 +64,5 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         public float odin;
 
         #endregion
-
-        [FoldoutGroup("两个参数，一个实际单位，一个显示单位")]
-        [ShowInInspector]
-        [Unit(Units.MetersPerSecond, Units.MilesPerHour,
-            DisplayAsString = true, ForceDisplayUnit = true)]
-        public float SpeedMilesPerHour => speed;
-
-        void Log1()
-        {
-            Debug.Log(nameof(speed) + ": " + speed + "米每秒");
-        }
-
-        void Log2()
-        {
-            Debug.Log(nameof(distance) + ": " + distance + "厘米");
-        }
-
-        void Log3()
-        {
-            Debug.Log(nameof(odin) + ": " + odin + "米");
-        }
-
-        // Add custom units. (Disabled to not add custom units to your project)
-        [InitializeOnLoadMethod]
-        public static void AddCustomUnit()
-        {
-            UnitNumberUtility.AddCustomUnit(
-                "Odin Toolkits Custom Unit",
-                new[] { "Odin Toolkits Custom Unit" },
-                UnitCategory.Distance,
-                1m / 77m);
-        }
     }
 }

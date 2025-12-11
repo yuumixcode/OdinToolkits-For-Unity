@@ -13,10 +13,11 @@ namespace Yuumix.OdinToolkits.Tests.Editor
     {
         static readonly IAnalysisDataFactory TargetFactory = UnitTestAnalysisFactory.Default;
 
-        static readonly FieldInfo[] TestFields = typeof(TestClass).GetRuntimeFields().ToArray();
+        static readonly FieldInfo[] TestFields = typeof(TestClass).GetRuntimeFields()
+            .ToArray();
 
-        static readonly IFieldData[] TestFieldData =
-            TestFields.Select(f => TargetFactory.CreateFieldData(f)).ToArray();
+        static readonly IFieldData[] TestFieldData = TestFields.Select(f => TargetFactory.CreateFieldData(f))
+            .ToArray();
 
         static readonly Dictionary<string, string> FieldExpectedSignatureMaps = new Dictionary<string, string>
         {

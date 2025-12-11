@@ -1,7 +1,7 @@
+using System;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities.Editor;
-using System;
 using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
@@ -11,6 +11,17 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class CustomValueDrawerExample : ExampleSO
     {
+        public override void SetDefaultValue()
+        {
+            customDrawerStatic = 0;
+            customDrawerInstance = 0;
+            customDrawerArrayNoLabel = new float[] { 0, 0, 0 };
+            appendRange = 0;
+            specialFloat = 0;
+            from = 2;
+            to = 7;
+        }
+
         #region Serialized Fields
 
         [PropertyOrder(-5)]
@@ -56,24 +67,14 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
 
         #endregion
 
-        public override void SetDefaultValue()
-        {
-            customDrawerStatic = 0;
-            customDrawerInstance = 0;
-            customDrawerArrayNoLabel = new float[] { 0, 0, 0 };
-            appendRange = 0;
-            specialFloat = 0;
-            from = 2;
-            to = 7;
-        }
-
 #if UNITY_EDITOR // Editor 相关需要宏定义
         // 绘制方法可选参数有四种
         // 1. float value字段值
         float MyCustomDrawerStatic(float value) => EditorGUILayout.Slider(value, 0, 10);
 
         // 2. GUIContent label 用于设置 label 样式
-        float MyCustomDrawerInstance(float value, GUIContent label) => EditorGUILayout.Slider(label, value, from, to);
+        float MyCustomDrawerInstance(float value, GUIContent label) =>
+            EditorGUILayout.Slider(label, value, from, to);
 
         float MyCustomDrawerArrayNoLabel(float value) => EditorGUILayout.Slider(value, from, to);
 
@@ -104,7 +105,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
             var list = property.Attributes;
             foreach (var item in list)
             {
-                EditorGUILayout.LabelField(item.GetType().Name);
+                EditorGUILayout.LabelField(item.GetType()
+                    .Name);
             }
 
             SirenixEditorGUI.EndBox();

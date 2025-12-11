@@ -41,7 +41,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated
         [Title("PrefabKind.PrefabAsset")]
         [InfoBox("该物体是场景中的预制体或者嵌套预制体或者非预制体时，可以选择")]
         [EnableIn(PrefabKind.PrefabInstanceAndNonPrefabInstance)]
-        public string prefabInstanceAndNonPrefabInstance = "Prefab Instances, as well as non-prefab instances";
+        public string prefabInstanceAndNonPrefabInstance =
+            "Prefab Instances, as well as non-prefab instances";
 
         #endregion
     }

@@ -1,8 +1,8 @@
-using Sirenix.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Sirenix.Utilities;
 using UnityEngine;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 using Yuumix.OdinToolkits.Core;
@@ -43,11 +43,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                 _containerContentStyle ??= new GUIStyle(SirenixGUIStyles.ToolbarBackground)
                 {
                     stretchHeight = false,
-                    padding = new RectOffset(
-                        CONTAINER_CONTENT_PADDING,
-                        CONTAINER_CONTENT_PADDING,
-                        CONTAINER_CONTENT_PADDING,
-                        CONTAINER_CONTENT_PADDING)
+                    padding = new RectOffset(CONTAINER_CONTENT_PADDING, CONTAINER_CONTENT_PADDING,
+                        CONTAINER_CONTENT_PADDING, CONTAINER_CONTENT_PADDING)
                 };
                 return _containerContentStyle;
             }
@@ -131,7 +128,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
             return null;
         }
 
-        public static string GetExampleSourceCodeWithoutNamespace(AttributeOverviewProExampleAttribute attribute)
+        public static string GetExampleSourceCodeWithoutNamespace(
+            AttributeOverviewProExampleAttribute attribute)
         {
             if (attribute == null)
             {
@@ -158,10 +156,10 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                     continue;
                 }
 
-                if (line.TrimStart().StartsWith(
-                        "[" + nameof(AttributeOverviewProExampleAttribute)[
-                            ..(nameof(AttributeOverviewProExampleAttribute).Length - "Attribute".Length)] +
-                        "]"))
+                if (line.TrimStart()
+                    .StartsWith("[" + nameof(AttributeOverviewProExampleAttribute)[
+                        ..(nameof(AttributeOverviewProExampleAttribute)
+                            .Length - "Attribute".Length)] + "]"))
                 {
                     continue;
                 }
@@ -192,7 +190,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 
         public static string GetExampleShortenCode(string sourceCode)
         {
-            var sourceCodeLines = sourceCode.Split('\n').ToList();
+            var sourceCodeLines = sourceCode.Split('\n')
+                .ToList();
             var shortenCodeLines = new List<string>();
             var isInClass = false;
             foreach (var line in sourceCodeLines)

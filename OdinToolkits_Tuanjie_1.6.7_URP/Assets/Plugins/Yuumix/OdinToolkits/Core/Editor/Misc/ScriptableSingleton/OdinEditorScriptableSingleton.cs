@@ -1,6 +1,5 @@
-using Yuumix.OdinToolkits.Core.SafeEditor;
 using Sirenix.OdinInspector;
-using YuumixEditor;
+using Yuumix.OdinToolkits.Core.SafeEditor;
 
 namespace Yuumix.OdinToolkits.Core.Editor
 {
@@ -22,7 +21,7 @@ namespace Yuumix.OdinToolkits.Core.Editor
                 }
 
                 _instance = ScriptableObjectSafeEditorUtility.GetSingletonAssetAndDeleteOther<T>(
-                    OdinToolkitsEditorPaths.ODIN_TOOLKITS_ANY_DATA_ROOT_FOLDER + "/Editor/SO");
+                    OdinToolkitsEditorPaths.ALL_DATA_ROOT_FOLDER + "/Editor/SO");
                 return _instance;
             }
         }

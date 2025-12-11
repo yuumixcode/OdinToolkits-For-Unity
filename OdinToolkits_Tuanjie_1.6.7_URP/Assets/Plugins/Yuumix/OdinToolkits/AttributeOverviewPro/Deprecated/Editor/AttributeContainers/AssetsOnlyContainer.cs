@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using Yuumix.OdinToolkits.Core.SafeEditor;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
-using YuumixEditor;
+using Yuumix.OdinToolkits.Core.SafeEditor;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
 {
@@ -10,9 +9,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         protected override string GetHeader() => "AssetsOnly";
 
         protected override BilingualHeaderWidget GetHeaderWidget() => GlobalTempHeader.ModifyWidget(
-            "AssetsOnly",
-            "AssetsOnly",
-            "AssetsOnly 用于 Object 对象，确保被标记的字段或者属性引用项目中的资源，而不是场景中的物体。",
+            "AssetsOnly", "AssetsOnly", "AssetsOnly 用于 Object 对象，确保被标记的字段或者属性引用项目中的资源，而不是场景中的物体。",
             "AssetsOnly is used on object properties, and restricts the property to project assets, and not scene objects." +
             "\nUse this when you want to ensure an object is from the project, and not from the scene.");
 

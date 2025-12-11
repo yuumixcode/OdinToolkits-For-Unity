@@ -6,20 +6,20 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
 {
     public static class ScriptDocGeneratorMenuItems
     {
-        const string ADD_SCRIPT_TO_TARGET_TYPE_MENU_NAME =
-            "Assets/Script Doc Generator/Add To Target Type";
+        const string ADD_SCRIPT_TO_TARGET_TYPE_MENU_NAME = "Assets/Script Doc Generator/Add To Target Type";
 
         const string ADD_AND_OPEN_MENU_NAME =
             "Assets/Script Doc Generator/Add To Target Type And Open Window";
 
-        const string ADD_SCRIPTS_TO_TYPES_MENU_NAME =
-            "Assets/Script Doc Generator/Add To Temporary Types";
+        const string ADD_SCRIPTS_TO_TYPES_MENU_NAME = "Assets/Script Doc Generator/Add To Temporary Types";
 
         const string ADD_SCRIPTS_TO_TYPES_AND_OPEN_MENU_NAME =
             "Assets/Script Doc Generator/Add To Temporary Types And Open Window";
 
         static MonoScript[] SelectionMonoScripts => Selection
-            .GetFiltered(typeof(MonoScript), SelectionMode.Assets).Cast<MonoScript>().ToArray();
+            .GetFiltered(typeof(MonoScript), SelectionMode.Assets)
+            .Cast<MonoScript>()
+            .ToArray();
 
         [MenuItem(ADD_SCRIPT_TO_TARGET_TYPE_MENU_NAME, false, 1001)]
         public static void AddScriptToTargetType()
@@ -43,10 +43,12 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
         public static void AddScriptsToTargetTypes()
         {
             var monoScripts = SelectionMonoScripts.ToList();
-            var types = monoScripts.Select(x => x.GetClass()).ToList();
+            var types = monoScripts.Select(x => x.GetClass())
+                .ToList();
             var temporaryTypes = ScriptDocGeneratorPanelSO.Instance.TemporaryTypes;
             temporaryTypes.AddRange(types);
-            var distinctTypes = temporaryTypes.Distinct().ToList();
+            var distinctTypes = temporaryTypes.Distinct()
+                .ToList();
             ScriptDocGeneratorPanelSO.Instance.TemporaryTypes = distinctTypes;
             ScriptDocGeneratorPanelSO.Instance.TypeSourceProperty =
                 ScriptDocGeneratorPanelSO.TypeSource.MultipleTypes;

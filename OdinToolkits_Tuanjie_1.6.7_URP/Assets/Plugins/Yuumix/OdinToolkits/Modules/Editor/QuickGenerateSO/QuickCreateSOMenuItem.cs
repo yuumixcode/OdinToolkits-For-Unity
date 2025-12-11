@@ -36,8 +36,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                     continue;
                 }
 
-                if (!scriptClass.IsAbstract &&
-                    scriptClass.IsSubclassOf(typeof(ScriptableObject)))
+                if (!scriptClass.IsAbstract && scriptClass.IsSubclassOf(typeof(ScriptableObject)))
                 {
                     return true;
                 }

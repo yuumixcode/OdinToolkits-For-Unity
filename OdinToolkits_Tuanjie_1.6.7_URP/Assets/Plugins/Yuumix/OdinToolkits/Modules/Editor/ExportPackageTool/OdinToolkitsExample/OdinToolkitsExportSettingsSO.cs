@@ -1,9 +1,9 @@
-using Sirenix.OdinInspector;
-using Sirenix.OdinInspector.Editor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Sirenix.OdinInspector;
+using Sirenix.OdinInspector.Editor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Core.Editor;
@@ -69,8 +69,8 @@ namespace Yuumix.OdinToolkits.Module.Editor
 
         public class OdinToolkitsExportSettingsSOAttributeProcessor : OdinAttributeProcessor
         {
-            public override void ProcessChildMemberAttributes(InspectorProperty parentProperty, MemberInfo member,
-                List<Attribute> attributes)
+            public override void ProcessChildMemberAttributes(InspectorProperty parentProperty,
+                MemberInfo member, List<Attribute> attributes)
             {
                 if (member.Name == nameof(version))
                 {

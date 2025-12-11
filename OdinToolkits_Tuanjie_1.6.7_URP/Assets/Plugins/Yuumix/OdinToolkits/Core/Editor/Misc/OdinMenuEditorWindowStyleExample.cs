@@ -11,7 +11,8 @@ namespace Yuumix.OdinToolkits.Core.Editor
         {
             var window = GetWindow<OdinMenuEditorWindowStyleExample>();
             window.titleContent = new GUIContent("#CLASSNAME#");
-            window.position = GUIHelper.GetEditorWindowRect().AlignCenter(800, 600);
+            window.position = GUIHelper.GetEditorWindowRect()
+                .AlignCenter(800, 600);
             window.Show();
         }
 
@@ -73,7 +74,8 @@ namespace Yuumix.OdinToolkits.Core.Editor
                 SelectedColorDarkSkin = SirenixGUIStyles.DefaultSelectedMenuTreeColorDarkSkin,
                 SelectedInactiveColorDarkSkin = SirenixGUIStyles.DefaultSelectedInactiveMenuTreeColorDarkSkin,
                 SelectedColorLightSkin = SirenixGUIStyles.DefaultSelectedMenuTreeColorLightSkin,
-                SelectedInactiveColorLightSkin = SirenixGUIStyles.DefaultSelectedInactiveMenuTreeColorLightSkin,
+                SelectedInactiveColorLightSkin =
+                    SirenixGUIStyles.DefaultSelectedInactiveMenuTreeColorLightSkin,
                 // GUIStyles
                 DefaultLabelStyle = SirenixGUIStyles.Label,
                 SelectedLabelStyle = SirenixGUIStyles.WhiteLabel

@@ -1,7 +1,7 @@
-using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Sirenix.OdinInspector;
 using UnityEditor;
 using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Core.Editor;
@@ -11,28 +11,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
     public class AttributeOverviewProDatabaseSO :
         OdinEditorScriptableSingleton<AttributeOverviewProDatabaseSO>, IOdinToolkitsEditorReset
     {
-        #region Serialized Fields
-
-        public Dictionary<string, AbstractAttributeVisualPanelSO[]> VisualPanelArrayMap;
-
-        public Dictionary<string, AbstractAttributeVisualPanelSO> VisualPanelMap =
-            new Dictionary<string, AbstractAttributeVisualPanelSO>();
-
-        AbstractAttributeVisualPanelSO[] _essentialVisualPanels;
-        AbstractAttributeVisualPanelSO[] _buttonVisualPanels;
-        AbstractAttributeVisualPanelSO[] _collectionVisualPanels;
-        AbstractAttributeVisualPanelSO[] _groupVisualPanels;
-        AbstractAttributeVisualPanelSO[] _conditionalVisualPanels;
-        AbstractAttributeVisualPanelSO[] _numberVisualPanels;
-        AbstractAttributeVisualPanelSO[] _typeSpecificVisualPanels;
-        AbstractAttributeVisualPanelSO[] _validationVisualPanels;
-        AbstractAttributeVisualPanelSO[] _miscVisualPanels;
-        AbstractAttributeVisualPanelSO[] _metaVisualPanels;
-        AbstractAttributeVisualPanelSO[] _unityVisualPanels;
-        AbstractAttributeVisualPanelSO[] _debugVisualPanels;
-
-        #endregion
-
         static AbstractAttributeVisualPanelSO[] AllVisualPanels => GetAllVisualPanels();
 
         #region IOdinToolkitsEditorReset Members
@@ -168,5 +146,27 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                         AssetDatabase.GUIDToAssetPath(x)))
                 .ToArray();
         }
+
+        #region Serialized Fields
+
+        public Dictionary<string, AbstractAttributeVisualPanelSO[]> VisualPanelArrayMap;
+
+        public Dictionary<string, AbstractAttributeVisualPanelSO> VisualPanelMap =
+            new Dictionary<string, AbstractAttributeVisualPanelSO>();
+
+        AbstractAttributeVisualPanelSO[] _essentialVisualPanels;
+        AbstractAttributeVisualPanelSO[] _buttonVisualPanels;
+        AbstractAttributeVisualPanelSO[] _collectionVisualPanels;
+        AbstractAttributeVisualPanelSO[] _groupVisualPanels;
+        AbstractAttributeVisualPanelSO[] _conditionalVisualPanels;
+        AbstractAttributeVisualPanelSO[] _numberVisualPanels;
+        AbstractAttributeVisualPanelSO[] _typeSpecificVisualPanels;
+        AbstractAttributeVisualPanelSO[] _validationVisualPanels;
+        AbstractAttributeVisualPanelSO[] _miscVisualPanels;
+        AbstractAttributeVisualPanelSO[] _metaVisualPanels;
+        AbstractAttributeVisualPanelSO[] _unityVisualPanels;
+        AbstractAttributeVisualPanelSO[] _debugVisualPanels;
+
+        #endregion
     }
 }

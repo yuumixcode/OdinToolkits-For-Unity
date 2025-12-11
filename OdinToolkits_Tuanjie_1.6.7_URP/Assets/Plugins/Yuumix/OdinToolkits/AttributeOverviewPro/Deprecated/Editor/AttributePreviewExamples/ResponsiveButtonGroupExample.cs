@@ -1,6 +1,6 @@
+using System;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor.Examples;
-using System;
 using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
@@ -10,6 +10,24 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class ResponsiveButtonGroupExample : ExampleSO
     {
+        [PropertyOrder(40)]
+        [FoldoutGroup("ResponsiveButtonGroup 进阶使用-与其他 Group 结合")]
+        [TitleGroup("ResponsiveButtonGroup 进阶使用-与其他 Group 结合/Title1")]
+        [ResponsiveButtonGroup("ResponsiveButtonGroup 进阶使用-与其他 Group 结合/Title1/SomeBtnGroup")]
+        public void Baz1() { }
+
+        [PropertyOrder(50)]
+        [FoldoutGroup("ResponsiveButtonGroup 进阶使用-与其他 Group 结合")]
+        [TitleGroup("ResponsiveButtonGroup 进阶使用-与其他 Group 结合/Title1")]
+        [ResponsiveButtonGroup("ResponsiveButtonGroup 进阶使用-与其他 Group 结合/Title1/SomeBtnGroup")]
+        public void Baz2() { }
+
+        [PropertyOrder(60)]
+        [FoldoutGroup("ResponsiveButtonGroup 进阶使用-与其他 Group 结合")]
+        [TitleGroup("ResponsiveButtonGroup 进阶使用-与其他 Group 结合/Title2")]
+        [ResponsiveButtonGroup("ResponsiveButtonGroup 进阶使用-与其他 Group 结合/Title2/SomeBtnGroup")]
+        public void Baz3() { }
+
         #region Serialized Fields
 
         [PropertyOrder(10)]
@@ -31,24 +49,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         public ButtonSizeExample buttonSizeExample;
 
         #endregion
-
-        [PropertyOrder(40)]
-        [FoldoutGroup("ResponsiveButtonGroup 进阶使用-与其他 Group 结合")]
-        [TitleGroup("ResponsiveButtonGroup 进阶使用-与其他 Group 结合/Title1")]
-        [ResponsiveButtonGroup("ResponsiveButtonGroup 进阶使用-与其他 Group 结合/Title1/SomeBtnGroup")]
-        public void Baz1() { }
-
-        [PropertyOrder(50)]
-        [FoldoutGroup("ResponsiveButtonGroup 进阶使用-与其他 Group 结合")]
-        [TitleGroup("ResponsiveButtonGroup 进阶使用-与其他 Group 结合/Title1")]
-        [ResponsiveButtonGroup("ResponsiveButtonGroup 进阶使用-与其他 Group 结合/Title1/SomeBtnGroup")]
-        public void Baz2() { }
-
-        [PropertyOrder(60)]
-        [FoldoutGroup("ResponsiveButtonGroup 进阶使用-与其他 Group 结合")]
-        [TitleGroup("ResponsiveButtonGroup 进阶使用-与其他 Group 结合/Title2")]
-        [ResponsiveButtonGroup("ResponsiveButtonGroup 进阶使用-与其他 Group 结合/Title2/SomeBtnGroup")]
-        public void Baz3() { }
 
         #region Nested type: ${0}
 

@@ -1,8 +1,8 @@
-using Sirenix.OdinInspector;
-using Sirenix.OdinInspector.Editor.Examples;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
+using Sirenix.OdinInspector.Editor.Examples;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
@@ -162,7 +162,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         #region Searchable 枚举参数
 
         [TabGroup("SearchableGroup", "Searchable 枚举参数", TextColor = "orange")]
-        [Title("FilterOptions = SearchFilterOptions.PropertyName", "筛选 Name，effects 这样的字段名，通常用于类搜索字段，列表中的元素都是一样的")]
+        [Title("FilterOptions = SearchFilterOptions.PropertyName",
+            "筛选 Name，effects 这样的字段名，通常用于类搜索字段，列表中的元素都是一样的")]
         [Searchable(FilterOptions = SearchFilterOptions.PropertyName)]
         public List<Perk> perks5 = new List<Perk>
         {
@@ -302,8 +303,9 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         [Searchable(FilterOptions = SearchFilterOptions.ISearchFilterableInterface)]
         [Title("FilterOptions = SearchFilterOptions.ISearchFilterableInterface",
             "列表元素实现 ISearchFilterable 接口，自定义筛选条件，匹配 Square 平方值")]
-        public List<FilterableBySquareStruct> customFiltering =
-            new List<FilterableBySquareStruct>(Enumerable.Range(1, 10).Select(i => new FilterableBySquareStruct(i)));
+        public List<FilterableBySquareStruct> customFiltering = new List<FilterableBySquareStruct>(Enumerable
+            .Range(1, 10)
+            .Select(i => new FilterableBySquareStruct(i)));
 
         #endregion
 
@@ -336,8 +338,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
 
             public string Name;
 
-            public List<ExampleStruct> data =
-                new List<ExampleStruct>(Enumerable.Range(1, 10).Select(i => new ExampleStruct(i)));
+            public List<ExampleStruct> data = new List<ExampleStruct>(Enumerable.Range(1, 10)
+                .Select(i => new ExampleStruct(i)));
 
             #endregion
         }

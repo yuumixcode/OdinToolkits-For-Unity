@@ -8,10 +8,12 @@ namespace Yuumix.OdinToolkits.Tests.Editor
 {
     public class UnitTestMethodsOperator
     {
-        static readonly MethodInfo[] TestClassMethodInfos = typeof(TestClass).GetRuntimeMethods().ToArray();
+        static readonly MethodInfo[] TestClassMethodInfos = typeof(TestClass).GetRuntimeMethods()
+            .ToArray();
 
         static readonly IMethodData[] TestClassMethodDataArray = TestClassMethodInfos
-            .Select(x => UnitTestAnalysisFactory.Default.CreateMethodData(x)).ToArray();
+            .Select(x => UnitTestAnalysisFactory.Default.CreateMethodData(x))
+            .ToArray();
 
         [Test]
         public void OutputInfoAndData()

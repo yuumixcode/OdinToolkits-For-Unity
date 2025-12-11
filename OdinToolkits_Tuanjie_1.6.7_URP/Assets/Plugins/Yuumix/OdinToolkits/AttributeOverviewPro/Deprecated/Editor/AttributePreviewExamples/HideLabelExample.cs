@@ -7,6 +7,16 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class HideLabelExample : ExampleSO
     {
+        public override void SetDefaultValue()
+        {
+            hideLabel1 = 0;
+            hideLabel2 = "";
+            wideColor1 = Color.white;
+            wideVector1 = Vector3.zero;
+            wideVector2 = Vector4.zero;
+            wideMultilineTextField = "";
+        }
+
         #region Serialized Fields
 
         [InfoBox("Unity 默认情况，一个完整的 Property 由字段名标签和值组成")]
@@ -47,15 +57,5 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         public string wideMultilineTextField = "";
 
         #endregion
-
-        public override void SetDefaultValue()
-        {
-            hideLabel1 = 0;
-            hideLabel2 = "";
-            wideColor1 = Color.white;
-            wideVector1 = Vector3.zero;
-            wideVector2 = Vector4.zero;
-            wideMultilineTextField = "";
-        }
     }
 }

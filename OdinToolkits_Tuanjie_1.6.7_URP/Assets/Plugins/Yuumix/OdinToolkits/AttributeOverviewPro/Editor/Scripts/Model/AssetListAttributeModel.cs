@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using Yuumix.OdinToolkits.Core.SafeEditor;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 using Yuumix.OdinToolkits.Core;
-using YuumixEditor;
+using Yuumix.OdinToolkits.Core.SafeEditor;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 {
@@ -41,14 +40,13 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
             ResolvedStringParameters = new[]
             {
                 new ResolvedStringParameterValue("Custom Filter Method", ResolverType.ValueResolver,
-                    typeof(bool).FullName,
-                    "None",
-                    new List<ParameterValue>
+                    typeof(bool).FullName, "None", new List<ParameterValue>
                     {
-                        new ParameterValue("TList", "$value", new BilingualData("代表应用此特性的列表成员，类型为列表类型",
-                            "Representing the member that has attribute applied to it.")),
-                        new ParameterValue("TElement", "$asset", new BilingualData("代表列表中的一个元素，类型为元素类型",
-                            "Representing an element in the list."))
+                        new ParameterValue("TList", "$value",
+                            new BilingualData("代表应用此特性的列表成员，类型为列表类型",
+                                "Representing the member that has attribute applied to it.")),
+                        new ParameterValue("TElement", "$asset",
+                            new BilingualData("代表列表中的一个元素，类型为元素类型", "Representing an element in the list."))
                     })
             };
             ExamplePreviewItems = new[]

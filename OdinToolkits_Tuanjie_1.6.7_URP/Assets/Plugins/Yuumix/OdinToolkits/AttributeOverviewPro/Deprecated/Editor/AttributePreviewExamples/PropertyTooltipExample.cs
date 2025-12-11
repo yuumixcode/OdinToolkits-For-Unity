@@ -6,6 +6,13 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class PropertyTooltipExample : ExampleSO
     {
+        [Button]
+        [PropertyTooltip("Button Tooltip")]
+        void ButtonWithTooltip()
+        {
+            // ...
+        }
+
         #region Serialized Fields
 
         [PropertyTooltip("This is tooltip on an int property.")]
@@ -16,12 +23,5 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         public string tooltip = "Dynamic tooltip.";
 
         #endregion
-
-        [Button]
-        [PropertyTooltip("Button Tooltip")]
-        void ButtonWithTooltip()
-        {
-            // ...
-        }
     }
 }

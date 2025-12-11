@@ -1,5 +1,5 @@
-using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
@@ -8,6 +8,14 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class AssetsOnlyExample : ExampleSO
     {
+        public override void SetDefaultValue()
+        {
+            normal = null;
+            onlyPrefabAsset = null;
+            materialAsset = null;
+            prefabs = new List<GameObject>();
+        }
+
         #region Serialized Fields
 
         // PropertyOrder 默认为 0
@@ -30,13 +38,5 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         public List<GameObject> prefabs;
 
         #endregion
-
-        public override void SetDefaultValue()
-        {
-            normal = null;
-            onlyPrefabAsset = null;
-            materialAsset = null;
-            prefabs = new List<GameObject>();
-        }
     }
 }

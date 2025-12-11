@@ -1,6 +1,6 @@
-using Sirenix.OdinInspector;
 using System;
 using System.Diagnostics;
+using Sirenix.OdinInspector;
 
 namespace Yuumix.OdinToolkits.Core
 {
@@ -8,17 +8,10 @@ namespace Yuumix.OdinToolkits.Core
     [Conditional("UNITY_EDITOR")]
     public class BilingualTitleGroupAttribute : PropertyGroupAttribute
     {
-        public BilingualTitleGroupAttribute(string groupId,
-            string chineseTitle,
-            string englishTitle = null,
-            string chineseSubtitle = null,
-            string englishSubtitle = null,
-            TitleAlignments titleAlignment = TitleAlignments.Left,
-            bool horizontalLine = true,
-            bool boldTitle = true,
-            bool indent = false,
-            float order = 0) :
-            base(groupId, order)
+        public BilingualTitleGroupAttribute(string groupId, string chineseTitle, string englishTitle = null,
+            string chineseSubtitle = null, string englishSubtitle = null,
+            TitleAlignments titleAlignment = TitleAlignments.Left, bool horizontalLine = true,
+            bool boldTitle = true, bool indent = false, float order = 0) : base(groupId, order)
         {
             TitleData = new BilingualData(chineseTitle, englishTitle);
             chineseSubtitle ??= string.Empty;

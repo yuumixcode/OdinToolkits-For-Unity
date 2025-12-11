@@ -70,24 +70,32 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                 case AttributeExampleType.OdinSerialized:
                     if (_odinSerializedExample is IOdinToolkitsEditorReset canResetOdinSerializedExample)
                     {
-                        AttributeOverviewProEditorUtility.LogEditorResetSuccess(_odinSerializedExample.GetType().Name);
+                        AttributeOverviewProEditorUtility.LogEditorResetSuccess(_odinSerializedExample
+                            .GetType()
+                            .Name);
                         canResetOdinSerializedExample.EditorReset();
                     }
                     else
                     {
-                        AttributeOverviewProEditorUtility.LogEditorResetWarning(_odinSerializedExample.GetType().Name);
+                        AttributeOverviewProEditorUtility.LogEditorResetWarning(_odinSerializedExample
+                            .GetType()
+                            .Name);
                     }
 
                     break;
                 case AttributeExampleType.UnitySerialized:
                     if (_unitySerializedExample is IOdinToolkitsEditorReset canResetUnitySerializedExample)
                     {
-                        AttributeOverviewProEditorUtility.LogEditorResetSuccess(_unitySerializedExample.GetType().Name);
+                        AttributeOverviewProEditorUtility.LogEditorResetSuccess(_unitySerializedExample
+                            .GetType()
+                            .Name);
                         canResetUnitySerializedExample.EditorReset();
                     }
                     else
                     {
-                        AttributeOverviewProEditorUtility.LogEditorResetWarning(_unitySerializedExample.GetType().Name);
+                        AttributeOverviewProEditorUtility.LogEditorResetWarning(_unitySerializedExample
+                            .GetType()
+                            .Name);
                     }
 
                     break;

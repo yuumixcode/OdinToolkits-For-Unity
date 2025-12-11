@@ -1,19 +1,18 @@
-using Sirenix.OdinInspector;
-using Sirenix.OdinInspector.Editor;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Yuumix.OdinToolkits.Core.SafeEditor;
+using Sirenix.OdinInspector;
+using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Core.Editor;
-using YuumixEditor;
+using Yuumix.OdinToolkits.Core.SafeEditor;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
-    public class TemplateCodeGeneratorVisualPanelSO : OdinEditorScriptableSingleton<TemplateCodeGeneratorVisualPanelSO>,
-        IOdinToolkitsEditorReset
+    public class TemplateCodeGeneratorVisualPanelSO :
+        OdinEditorScriptableSingleton<TemplateCodeGeneratorVisualPanelSO>, IOdinToolkitsEditorReset
 
     {
         public const string NAME_SPACE_SYMBOL = "#NAMESPACE#";
@@ -22,70 +21,13 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         public static BilingualData GenerateTemplateToolMenuPathData =
             new BilingualData("模板代码生成工具", "Generate Template Tool");
 
-        #region Serialized Fields
-
-        [PropertyOrder(-99)]
-        public BilingualHeaderWidget headerWidget;
-
-        [PropertyOrder(-1)]
-        [BilingualTitle("脚本所在命名空间", "Namespace Config")]
-        [HideLabel]
-        public string codeNamespace;
-
-        [PropertyOrder(-1)]
-        [BilingualTitle("脚本类名", "Script Class Name")]
-        [HideLabel]
-        public string codeClassName;
-
-        [PropertyOrder(-1)]
-        [BilingualTitle("脚本模板选择器", "Script Template Selector")]
-        [ValueDropdown(nameof(templateList), ExcludeExistingValuesInList = true)]
-        [HideLabel]
-        public string templateSelector;
-
-        [PropertyOrder(-1)]
-        [BilingualTitle("生成脚本文件的文件夹路径", "Target Folder Path")]
-        [PropertySpace(SpaceBefore = 0, SpaceAfter = 10)]
-        [ValueDropdown(nameof(TryGetPath), IsUniqueList = true, ExcludeExistingValuesInList = true)]
-        [HideLabel]
-        public string codeTargetPath;
-
-        [PropertyOrder(50)]
-        [BilingualTitleGroup("Id", "工具配置", "Tool Config")]
-        [BilingualInfoBox("脚本模板文件必须为 .txt 文本文件，修改模板路径后需要点击应用工具配置"
-            , "The script template file must be a .txt text file. After modifying the template path, you need to click the \"Apply Config\" button to configure the tool.")]
-        [Sirenix.OdinInspector.FilePath(IncludeFileExtension = true, RequireExistingPath = true)]
-        [BilingualText("脚本模板路径配置", "Script Template Path Config")]
-        public List<string> templatePathConfig;
-
-        [PropertyOrder(50)]
-        [BilingualTitleGroup("Id", "工具配置", "Tool Config")]
-        [FolderPath]
-        [BilingualText("目标文件夹路径配置", "Target Folder Path Config")]
-        public List<string> preSavePaths;
-
-        [PropertyOrder(50)]
-        [BilingualTitleGroup("Id2", "过程数据", "Process Data")]
-        [ReadOnly]
-        [ListDrawerSettings(IsReadOnly = true)]
-        public List<string> templateList;
-
-        [PropertyOrder(50)]
-        [BilingualTitleGroup("Id2", "过程数据", "Process Data")]
-        [ReadOnly]
-        [DictionaryDrawerSettings(DisplayMode = DictionaryDisplayOptions.Foldout)]
-        public Dictionary<string, string> TemplatePathMaps = new Dictionary<string, string>();
-
-        #endregion
-
         #region Event Functions
 
         void OnEnable()
         {
-            headerWidget = new BilingualHeaderWidget(
-                GenerateTemplateToolMenuPathData.GetChinese(),
-                GenerateTemplateToolMenuPathData.GetEnglish(),
-                "快速配置模板代码，一键生成脚本。", "Quickly configure template code and generate scripts with one click.");
+            headerWidget = new BilingualHeaderWidget(GenerateTemplateToolMenuPathData.GetChinese(),
+                GenerateTemplateToolMenuPathData.GetEnglish(), "快速配置模板代码，一键生成脚本。",
+                "Quickly configure template code and generate scripts with one click.");
         }
 
         #endregion
@@ -97,7 +39,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             codeClassName = string.Empty;
             codeNamespace = string.Empty;
             templateSelector = string.Empty;
-            codeTargetPath = OdinToolkitsEditorPaths.ODIN_TOOLKITS_ANY_DATA_ROOT_FOLDER;
+            codeTargetPath = OdinToolkitsEditorPaths.ALL_DATA_ROOT_FOLDER;
         }
 
         #endregion
@@ -152,7 +94,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                     if (!TemplatePathMaps.TryAdd(templateName, template))
                     {
                         const string msg2 = "发现重复添加模板，请修改";
-                        PublishToastEvent(ToastPosition.BottomRight, SdfIconType.ExclamationLg, msg2, Color.yellow, 5);
+                        PublishToastEvent(ToastPosition.BottomRight, SdfIconType.ExclamationLg, msg2,
+                            Color.yellow, 5);
                     }
                     else
                     {
@@ -173,7 +116,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             if (noTxtNumber > 0)
             {
                 var msg3 = "存在" + noTxtNumber + "个非 .txt 类型的文件，请重新选择路径";
-                PublishToastEvent(ToastPosition.BottomRight, SdfIconType.ExclamationLg, msg3, Color.yellow, 5);
+                PublishToastEvent(ToastPosition.BottomRight, SdfIconType.ExclamationLg, msg3, Color.yellow,
+                    5);
             }
         }
 
@@ -187,8 +131,7 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 targetNamespace = "Default";
             }
 
-            if (string.IsNullOrEmpty(targetClassName) ||
-                string.IsNullOrEmpty(targetPath))
+            if (string.IsNullOrEmpty(targetClassName) || string.IsNullOrEmpty(targetPath))
             {
                 const string msg = "请填写完整工具信息！";
                 PublishToastEvent(ToastPosition.BottomRight, SdfIconType.ExclamationLg, msg, Color.red, 5);
@@ -228,8 +171,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             // Debug.Log("目标文件的绝对路径为: " + codePath);
             if (File.Exists(codeAbsolutePath))
             {
-                if (!EditorUtility.DisplayDialog("生成脚本冲突", "目标文件夹内已经存在相同名称的脚本，此操作无法撤回，是否确定覆盖原脚本?",
-                        "确认覆盖", "取消"))
+                if (!EditorUtility.DisplayDialog("生成脚本冲突", "目标文件夹内已经存在相同名称的脚本，此操作无法撤回，是否确定覆盖原脚本?", "确认覆盖",
+                        "取消"))
                 {
                     return;
                 }
@@ -242,10 +185,66 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             ProjectSafeEditorUtility.PingAndSelectAsset(codeRelativePath);
         }
 
-        static void PublishToastEvent(ToastPosition position, SdfIconType icon, string msg,
-            Color color, float duration)
+        static void PublishToastEvent(ToastPosition position, SdfIconType icon, string msg, Color color,
+            float duration)
         {
             ToastEvent?.Invoke(position, icon, msg, color, duration);
         }
+
+        #region Serialized Fields
+
+        [PropertyOrder(-99)]
+        public BilingualHeaderWidget headerWidget;
+
+        [PropertyOrder(-1)]
+        [BilingualTitle("脚本所在命名空间", "Namespace Config")]
+        [HideLabel]
+        public string codeNamespace;
+
+        [PropertyOrder(-1)]
+        [BilingualTitle("脚本类名", "Script Class Name")]
+        [HideLabel]
+        public string codeClassName;
+
+        [PropertyOrder(-1)]
+        [BilingualTitle("脚本模板选择器", "Script Template Selector")]
+        [ValueDropdown(nameof(templateList), ExcludeExistingValuesInList = true)]
+        [HideLabel]
+        public string templateSelector;
+
+        [PropertyOrder(-1)]
+        [BilingualTitle("生成脚本文件的文件夹路径", "Target Folder Path")]
+        [PropertySpace(SpaceBefore = 0, SpaceAfter = 10)]
+        [ValueDropdown(nameof(TryGetPath), IsUniqueList = true, ExcludeExistingValuesInList = true)]
+        [HideLabel]
+        public string codeTargetPath;
+
+        [PropertyOrder(50)]
+        [BilingualTitleGroup("Id", "工具配置", "Tool Config")]
+        [BilingualInfoBox("脚本模板文件必须为 .txt 文本文件，修改模板路径后需要点击应用工具配置",
+            "The script template file must be a .txt text file. After modifying the template path, you need to click the \"Apply Config\" button to configure the tool.")]
+        [Sirenix.OdinInspector.FilePath(IncludeFileExtension = true, RequireExistingPath = true)]
+        [BilingualText("脚本模板路径配置", "Script Template Path Config")]
+        public List<string> templatePathConfig;
+
+        [PropertyOrder(50)]
+        [BilingualTitleGroup("Id", "工具配置", "Tool Config")]
+        [FolderPath]
+        [BilingualText("目标文件夹路径配置", "Target Folder Path Config")]
+        public List<string> preSavePaths;
+
+        [PropertyOrder(50)]
+        [BilingualTitleGroup("Id2", "过程数据", "Process Data")]
+        [ReadOnly]
+        [ListDrawerSettings(IsReadOnly = true)]
+        public List<string> templateList;
+
+        [PropertyOrder(50)]
+        [BilingualTitleGroup("Id2", "过程数据", "Process Data")]
+        [ReadOnly]
+        [DictionaryDrawerSettings(DisplayMode = DictionaryDisplayOptions.Foldout)]
+        public Dictionary<string, string> TemplatePathMaps = new Dictionary<string, string>();
+
+        #endregion
     }
 }

@@ -17,7 +17,8 @@ namespace Yuumix.OdinToolkits.Core
             var parentPathArray = parentPath.Split('/');
             var childPathArray = childPath.Split('/');
             var targetPathList = new List<string>();
-            if (parentPathArray.Where((path, i) => childPathArray[i] != path).Any())
+            if (parentPathArray.Where((path, i) => childPathArray[i] != path)
+                .Any())
             {
                 Debug.LogError("路径错误，并不是子物体");
                 return null;

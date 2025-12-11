@@ -1,6 +1,5 @@
 using Sirenix.OdinInspector;
 using Yuumix.OdinToolkits.Core.SafeEditor;
-using YuumixEditor;
 
 namespace Yuumix.OdinToolkits.Core.Editor
 {
@@ -20,7 +19,7 @@ namespace Yuumix.OdinToolkits.Core.Editor
                 }
 
                 _panelSO = ScriptableObjectSafeEditorUtility.GetSingletonAssetAndDeleteOther<T>(
-                    OdinToolkitsEditorPaths.ODIN_TOOLKITS_ANY_DATA_ROOT_FOLDER + "/Editor/PanelSO");
+                    OdinToolkitsEditorPaths.ALL_DATA_ROOT_FOLDER + "/Editor/PanelSO");
                 return _panelSO;
             }
         }

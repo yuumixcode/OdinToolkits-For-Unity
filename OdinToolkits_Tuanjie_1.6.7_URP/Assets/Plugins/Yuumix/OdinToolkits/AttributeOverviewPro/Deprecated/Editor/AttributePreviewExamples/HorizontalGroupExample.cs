@@ -1,5 +1,5 @@
-using Sirenix.OdinInspector;
 using System;
+using Sirenix.OdinInspector;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
@@ -7,6 +7,24 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class HorizontalGroupExample : ExampleSO
     {
+        [Title("LabelWidth", "没有发现实际生效的方法")]
+        [OnInspectorGUI]
+        [PropertyOrder(5)]
+        void OnGUI1() { }
+
+        #region Nested type: ${0}
+
+        [HideLabel]
+        [Serializable]
+        public struct SomeFieldType
+        {
+            [LabelText("@$property.Parent.NiceName")]
+            [ListDrawerSettings(ShowIndexLabels = true)]
+            public float[] x;
+        }
+
+        #endregion
+
         #region Serialized Fields
 
         [TitleGroup("Width", "自定义宽度，0 ~ 1 表示百分比，> 1 表示具体像素")]
@@ -88,24 +106,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         [TitleGroup("order")]
         [HorizontalGroup("order/row2", order: 10)]
         public SomeFieldType rightCustom2;
-
-        #endregion
-
-        [Title("LabelWidth", "没有发现实际生效的方法")]
-        [OnInspectorGUI]
-        [PropertyOrder(5)]
-        void OnGUI1() { }
-
-        #region Nested type: ${0}
-
-        [HideLabel]
-        [Serializable]
-        public struct SomeFieldType
-        {
-            [LabelText("@$property.Parent.NiceName")]
-            [ListDrawerSettings(ShowIndexLabels = true)]
-            public float[] x;
-        }
 
         #endregion
     }

@@ -8,17 +8,21 @@ namespace Yuumix.OdinToolkits.Tests.Editor
 {
     public class UnitTestMethodsInherit
     {
-        static readonly MethodInfo[] TestClassImplementMethodInfos =
-            typeof(TestClassImplement).GetRuntimeMethods().ToArray();
+        static readonly MethodInfo[] TestClassImplementMethodInfos = typeof(TestClassImplement)
+            .GetRuntimeMethods()
+            .ToArray();
 
         static readonly IMethodData[] TestClassImplementMethodDataArray = TestClassImplementMethodInfos
-            .Select(x => UnitTestAnalysisFactory.Default.CreateMethodData(x)).ToArray();
+            .Select(x => UnitTestAnalysisFactory.Default.CreateMethodData(x))
+            .ToArray();
 
-        static readonly MethodInfo[] TestClassAbstractMethodInfos =
-            typeof(TestClassAbstract).GetRuntimeMethods().ToArray();
+        static readonly MethodInfo[] TestClassAbstractMethodInfos = typeof(TestClassAbstract)
+            .GetRuntimeMethods()
+            .ToArray();
 
         static readonly IMethodData[] TestClassAbstractMethodDataArray = TestClassAbstractMethodInfos
-            .Select(x => UnitTestAnalysisFactory.Default.CreateMethodData(x)).ToArray();
+            .Select(x => UnitTestAnalysisFactory.Default.CreateMethodData(x))
+            .ToArray();
 
         [Test]
         public void TestVirtualMethod()

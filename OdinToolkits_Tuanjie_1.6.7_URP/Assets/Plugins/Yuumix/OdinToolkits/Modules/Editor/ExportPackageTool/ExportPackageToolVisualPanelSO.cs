@@ -1,41 +1,27 @@
-using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Yuumix.OdinToolkits.Core.SafeEditor;
+using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Core.Editor;
-using YuumixEditor;
+using Yuumix.OdinToolkits.Core.SafeEditor;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
-    public class ExportPackageToolVisualPanelSO : OdinEditorScriptableSingleton<ExportPackageToolVisualPanelSO>,
-        IOdinToolkitsEditorReset
+    public class ExportPackageToolVisualPanelSO :
+        OdinEditorScriptableSingleton<ExportPackageToolVisualPanelSO>, IOdinToolkitsEditorReset
     {
         public static BilingualData ToolMenuPathData = new BilingualData("导出包工具", "Export Package Tool");
-
-        #region Serialized Fields
-
-        [PropertyOrder(-99)]
-        public BilingualHeaderWidget headerWidget;
-
-        [BilingualTitle("导出设置", "Export Setting")]
-        [HideLabel]
-        [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
-        public ExportSettingsSO exportSettings;
-
-        #endregion
 
         #region Event Functions
 
         void OnEnable()
         {
             headerWidget = new BilingualHeaderWidget(ToolMenuPathData.GetChinese(),
-                ToolMenuPathData.GetEnglish(),
-                "根据导出设置，导出指定文件夹和文件到指定路径",
+                ToolMenuPathData.GetEnglish(), "根据导出设置，导出指定文件夹和文件到指定路径",
                 "Based on the export settings, export the specified folders and files to the specified path.");
         }
 
@@ -77,9 +63,11 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             if (exportSettings.exportPathsFilterRule != null)
             {
                 exportSettings.filePaths = exportSettings.filePaths
-                    .Where(filePath => !exportSettings.exportPathsFilterRule.IsExcludedFile(filePath)).ToList();
+                    .Where(filePath => !exportSettings.exportPathsFilterRule.IsExcludedFile(filePath))
+                    .ToList();
                 exportSettings.folderPaths = exportSettings.folderPaths
-                    .Where(folderPath => !exportSettings.exportPathsFilterRule.IsExcludedFolder(folderPath)).ToList();
+                    .Where(folderPath => !exportSettings.exportPathsFilterRule.IsExcludedFolder(folderPath))
+                    .ToList();
             }
 
             // 合并文件路径和文件夹路径中的所有文件
@@ -115,13 +103,10 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
             try
             {
-                AssetDatabase.ExportPackage(
-                    filePaths.ToArray(),
-                    fullExportPath,
+                AssetDatabase.ExportPackage(filePaths.ToArray(), fullExportPath,
                     includeDependenciesCache
                         ? ExportPackageOptions.IncludeDependencies
-                        : ExportPackageOptions.Recurse
-                );
+                        : ExportPackageOptions.Recurse);
 
                 Debug.Log("成功导出文件列表到: " + fullExportPath);
                 AssetDatabase.Refresh();
@@ -182,5 +167,17 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
             return initialFileName;
         }
+
+        #region Serialized Fields
+
+        [PropertyOrder(-99)]
+        public BilingualHeaderWidget headerWidget;
+
+        [BilingualTitle("导出设置", "Export Setting")]
+        [HideLabel]
+        [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        public ExportSettingsSO exportSettings;
+
+        #endregion
     }
 }

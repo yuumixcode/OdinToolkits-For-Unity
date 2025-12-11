@@ -1,5 +1,5 @@
-using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
@@ -9,6 +9,15 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class AssetSelectorExample : ExampleSO
     {
+        [FoldoutGroup("AssetDatabase")]
+        [TitleGroup("AssetDatabase/Button")]
+        [Button("跳转到 AssetDatabase.FindAssets 文档", ButtonSizes.Large)]
+        void Browse()
+        {
+            Help.BrowseURL(
+                "https://docs.unity3d.com/6000.0/Documentation/ScriptReference/AssetDatabase.FindAssets.html");
+        }
+
         #region Serialized Fields
 
         [FoldoutGroup("无参数使用")]
@@ -21,7 +30,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
 
         [FoldoutGroup("Path")]
         [InfoBox("相对路径，Rider 中支持自动补全，| 表示分隔多条路径")]
-        [AssetSelector(Paths = "Assets/Plugins/OdinToolkits/ChineseManual/ChineseAttributesOverview/RuntimeExamples")]
+        [AssetSelector(Paths =
+            "Assets/Plugins/OdinToolkits/ChineseManual/ChineseAttributesOverview/RuntimeExamples")]
         public GameObject gameObject;
 
         [FoldoutGroup("IsUniqueList == false")]
@@ -64,14 +74,5 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         public List<MonoScript> gameObjects8;
 
         #endregion
-
-        [FoldoutGroup("AssetDatabase")]
-        [TitleGroup("AssetDatabase/Button")]
-        [Button("跳转到 AssetDatabase.FindAssets 文档", ButtonSizes.Large)]
-        void Browse()
-        {
-            Help.BrowseURL(
-                "https://docs.unity3d.com/6000.0/Documentation/ScriptReference/AssetDatabase.FindAssets.html");
-        }
     }
 }

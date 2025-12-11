@@ -93,9 +93,10 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
                 {
                     ReturnType = "string",
                     ParameterName = "DrawElementMethod",
-                    ParameterDescription = "自定义绘制二维数组中的元素样式，方法签名可选: T CustomDrawElement2(Rect rect, T[,] array, " +
-                                           "int x, int y, T value)，其中 array[x,y] == value，" +
-                                           DescriptionConfigs.SupportMemberResolverLite
+                    ParameterDescription =
+                        "自定义绘制二维数组中的元素样式，方法签名可选: T CustomDrawElement2(Rect rect, T[,] array, " +
+                        "int x, int y, T value)，其中 array[x,y] == value，" +
+                        DescriptionConfigs.SupportMemberResolverLite
                 }
             };
 

@@ -49,7 +49,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated
             "Instances of regular prefabs, and prefab variants in scenes or nested in other prefabs";
 
         [HideIn(PrefabKind.PrefabInstanceAndNonPrefabInstance)]
-        public string prefabInstanceAndNonPrefabInstance = "Prefab Instances, as well as non-prefab instances";
+        public string prefabInstanceAndNonPrefabInstance =
+            "Prefab Instances, as well as non-prefab instances";
 
         [HideIn(PrefabKind.Regular)]
         public string regular = "Regular prefab assets";

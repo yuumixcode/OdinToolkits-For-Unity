@@ -1,20 +1,13 @@
 using System;
-using System.Security.Cryptography;
 using System.Text;
 using UnityEngine;
 
 namespace Yuumix.OdinToolkits.Core
 {
-    /// <summary>
-    /// 字符串静态扩展类，提供丰富的字符串处理功能
-    /// </summary>
-    /// <remarks></remarks>
+    [Summary("String 类型静态扩展类")]
     public static class StringExtensions
     {
-        /// <summary>
-        /// 将字符串记录到调试控制台窗口
-        /// </summary>
-        /// <param name="message">要记录的消息</param>
+        [Summary("快捷输出带时间戳的信息")]
         public static void QuickLog(this string message)
         {
             Debug.Log(new StringBuilder().Append("[")
@@ -37,27 +30,6 @@ namespace Yuumix.OdinToolkits.Core
         /// <param name="source">要检查的字符串</param>
         /// <returns>如果字符串为空或null，则返回true；否则返回false</returns>
         public static bool IsNullOrEmpty(this string source) => string.IsNullOrEmpty(source);
-
-        /// <summary>
-        /// 计算字符串的MD5哈希值
-        /// </summary>
-        /// <param name="source">源字符串</param>
-        /// <returns>MD5哈希值的十六进制字符串表示</returns>
-        public static string ToMd5Hash(this string source)
-        {
-            if (string.IsNullOrEmpty(source))
-            {
-                return string.Empty;
-            }
-
-            using (var md5 = MD5.Create())
-            {
-                var inputBytes = Encoding.UTF8.GetBytes(source);
-                var hashBytes = md5.ComputeHash(inputBytes);
-
-                return BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
-            }
-        }
 
         /// <summary>
         /// 确保字符串以指定的后缀结尾
@@ -113,7 +85,9 @@ namespace Yuumix.OdinToolkits.Core
                 return string.Empty;
             }
 
-            return source.Replace("\r\n", "<br />").Replace("\n", "<br />").Replace("\r", "<br />");
+            return source.Replace("\r\n", "<br />")
+                .Replace("\n", "<br />")
+                .Replace("\r", "<br />");
         }
     }
 }

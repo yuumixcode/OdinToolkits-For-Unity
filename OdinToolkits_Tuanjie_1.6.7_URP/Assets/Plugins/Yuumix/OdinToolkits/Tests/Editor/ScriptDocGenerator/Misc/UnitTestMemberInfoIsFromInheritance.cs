@@ -18,7 +18,8 @@ namespace Yuumix.OdinToolkits.Tests.Editor
                 .First(m => m.Name == "GetHashCode");
             Debug.Log(methodInfo.DeclaringType);
             Debug.Log(methodInfo.ReflectedType);
-            Debug.Log(methodInfo.GetBaseDefinition().DeclaringType);
+            Debug.Log(methodInfo.GetBaseDefinition()
+                .DeclaringType);
             Assert.IsTrue(methodInfo.IsFromInheritance());
         }
 

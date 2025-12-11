@@ -70,7 +70,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         [TabGroup("TabLayouting/multi row", "Character", SdfIconType.PersonFill, TextColor = "orange")]
         [TabGroup("TabLayouting/multi row", "Wand", SdfIconType.Magic, TextColor = "red")]
         [TabGroup("TabLayouting/multi row", "Abilities", TextColor = "green")]
-        [TabGroup("TabLayouting/multi row", "Missions", SdfIconType.ExclamationSquareFill, TextColor = "yellow")]
+        [TabGroup("TabLayouting/multi row", "Missions", SdfIconType.ExclamationSquareFill,
+            TextColor = "yellow")]
         [TabGroup("TabLayouting/multi row", "Collection 1", TextColor = "blue")]
         [TabGroup("TabLayouting/multi row", "Collection 2", TextColor = "blue")]
         [TabGroup("TabLayouting/multi row", "Collection 3", TextColor = "blue")]
@@ -85,7 +86,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         [TabGroup("TabLayouting/shrink tabs", "Character", SdfIconType.PersonFill, TextColor = "orange")]
         [TabGroup("TabLayouting/shrink tabs", "Wand", SdfIconType.Magic, TextColor = "red")]
         [TabGroup("TabLayouting/shrink tabs", "Abilities", TextColor = "green")]
-        [TabGroup("TabLayouting/shrink tabs", "Missions", SdfIconType.ExclamationSquareFill, TextColor = "yellow")]
+        [TabGroup("TabLayouting/shrink tabs", "Missions", SdfIconType.ExclamationSquareFill,
+            TextColor = "yellow")]
         [TabGroup("TabLayouting/shrink tabs", "Collection 1", TextColor = "blue")]
         [TabGroup("TabLayouting/shrink tabs", "Collection 2", TextColor = "blue")]
         [TabGroup("TabLayouting/shrink tabs", "Collection 3", TextColor = "blue")]

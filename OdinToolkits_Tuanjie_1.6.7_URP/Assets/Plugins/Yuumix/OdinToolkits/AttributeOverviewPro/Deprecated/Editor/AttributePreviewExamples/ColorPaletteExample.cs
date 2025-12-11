@@ -1,8 +1,8 @@
-using Sirenix.OdinInspector;
-using Sirenix.OdinInspector.Editor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
+using Sirenix.OdinInspector.Editor;
 using UnityEngine;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
@@ -11,6 +11,44 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class ColorPaletteExample : ExampleSO
     {
+        [FoldoutGroup("Color Palettes")]
+        [Button(ButtonSizes.Large)]
+        [GUIColor(0, 1, 0)]
+        [PropertyOrder(8)]
+        void FetchColorPalettes()
+        {
+            // Sirenix.OdinInspector.Editor.ColorPaletteManager.Instance.ColorPalettes 这个字段默认是编辑器状态才可以使用
+            // 运行时获取不到，不能在业务逻辑中使用，但是可以创造一个同样的类（但是属于 Assembly - CSharp 程序集），
+            // 然后在编辑器状态拉取存入一个字段中
+            colorPalettes = ColorPaletteManager.Instance
+                .ColorPalettes
+                .Select(x => new ColorPalette
+                {
+                    paletteName = x.Name,
+                    colors = x.Colors.ToArray()
+                })
+                .ToList();
+        }
+
+        #region Nested type: ${0}
+
+        [Serializable]
+        public class ColorPalette
+        {
+            #region Serialized Fields
+
+            [HideInInspector]
+            public string paletteName;
+
+            [LabelText("$paletteName")]
+            [ListDrawerSettings(ShowFoldout = false)]
+            public Color[] colors;
+
+            #endregion
+        }
+
+        #endregion
+
         #region Serialized Fields
 
         [Title("Unity 提供的 Color 相关的特性")]
@@ -42,43 +80,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         [ListDrawerSettings(IsReadOnly = true)]
         [PropertyOrder(9)]
         public List<ColorPalette> colorPalettes;
-
-        #endregion
-
-        [FoldoutGroup("Color Palettes")]
-        [Button(ButtonSizes.Large)]
-        [GUIColor(0, 1, 0)]
-        [PropertyOrder(8)]
-        void FetchColorPalettes()
-        {
-            // Sirenix.OdinInspector.Editor.ColorPaletteManager.Instance.ColorPalettes 这个字段默认是编辑器状态才可以使用
-            // 运行时获取不到，不能在业务逻辑中使用，但是可以创造一个同样的类（但是属于 Assembly - CSharp 程序集），
-            // 然后在编辑器状态拉取存入一个字段中
-            colorPalettes = ColorPaletteManager.Instance.ColorPalettes
-                .Select(x => new ColorPalette
-                {
-                    paletteName = x.Name,
-                    colors = x.Colors.ToArray()
-                })
-                .ToList();
-        }
-
-        #region Nested type: ${0}
-
-        [Serializable]
-        public class ColorPalette
-        {
-            #region Serialized Fields
-
-            [HideInInspector]
-            public string paletteName;
-
-            [LabelText("$paletteName")]
-            [ListDrawerSettings(ShowFoldout = false)]
-            public Color[] colors;
-
-            #endregion
-        }
 
         #endregion
     }

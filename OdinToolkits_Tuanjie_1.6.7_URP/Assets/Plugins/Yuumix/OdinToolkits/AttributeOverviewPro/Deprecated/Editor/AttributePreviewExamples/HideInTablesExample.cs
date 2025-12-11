@@ -1,6 +1,6 @@
-using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
@@ -8,21 +8,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class HideInTablesExample : ExampleSO
     {
-        #region Serialized Fields
-
-        [Indent]
-        public MyItem item = new MyItem();
-
-        [TableList]
-        public List<MyItem> table = new List<MyItem>
-        {
-            new MyItem(),
-            new MyItem(),
-            new MyItem()
-        };
-
-        #endregion
-
         #region Nested type: ${0}
 
         [Serializable]
@@ -39,6 +24,21 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
 
             #endregion
         }
+
+        #endregion
+
+        #region Serialized Fields
+
+        [Indent]
+        public MyItem item = new MyItem();
+
+        [TableList]
+        public List<MyItem> table = new List<MyItem>
+        {
+            new MyItem(),
+            new MyItem(),
+            new MyItem()
+        };
 
         #endregion
     }

@@ -29,12 +29,14 @@ namespace Yuumix.OdinToolkits.Core.Editor
 
         #endregion
 
-        [MenuItem(OdinToolkitsMenuItems.EDITOR_SETTINGS, priority = OdinToolkitsMenuItems.EDITOR_SETTINGS_PRIORITY)]
+        [MenuItem(OdinToolkitsMenuItems.EDITOR_SETTINGS,
+            priority = OdinToolkitsMenuItems.EDITOR_SETTINGS_PRIORITY)]
         public static void ShowWindow()
         {
             var window = GetWindow<OdinToolkitEditorSettingsWindow>();
             window.titleContent = new GUIContent(OdinToolkitsMenuItems.EDITOR_SETTINGS_WINDOW_NAME);
-            window.position = GUIHelper.GetEditorWindowRect().AlignCenter(700, 600);
+            window.position = GUIHelper.GetEditorWindowRect()
+                .AlignCenter(700, 600);
         }
     }
 }

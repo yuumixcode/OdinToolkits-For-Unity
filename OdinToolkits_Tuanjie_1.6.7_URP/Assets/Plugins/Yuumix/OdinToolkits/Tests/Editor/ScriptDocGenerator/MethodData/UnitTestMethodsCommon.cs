@@ -10,10 +10,12 @@ namespace Yuumix.OdinToolkits.Tests.Editor
 {
     public class UnitTestMethodsCommon
     {
-        static readonly MethodInfo[] MethodInfos = typeof(TestClass).GetRuntimeMethods().ToArray();
+        static readonly MethodInfo[] MethodInfos = typeof(TestClass).GetRuntimeMethods()
+            .ToArray();
 
-        static readonly IMethodData[] MethodDataArray =
-            MethodInfos.Select(m => UnitTestAnalysisFactory.Default.CreateMethodData(m)).ToArray();
+        static readonly IMethodData[] MethodDataArray = MethodInfos
+            .Select(m => UnitTestAnalysisFactory.Default.CreateMethodData(m))
+            .ToArray();
 
         static readonly Dictionary<string, List<string>> ExpectedMethodSignature =
             new Dictionary<string, List<string>>

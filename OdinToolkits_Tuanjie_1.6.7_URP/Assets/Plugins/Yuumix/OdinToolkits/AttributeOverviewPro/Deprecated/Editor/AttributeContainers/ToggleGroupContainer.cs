@@ -11,8 +11,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
             "将任意 Property 以类似 FoldoutGroup 可折叠的形式分组绘制，同时有一个 Toggle 值可以控制 Enable 或者 Disable";
 
         protected override List<string> GetTips() =>
-            new List<string>
-                { "bool 类型控制变量要包含在 ToggleGroup 内部" };
+            new List<string> { "bool 类型控制变量要包含在 ToggleGroup 内部" };
 
         protected override List<ParameterValue> GetParamValues() =>
             new List<ParameterValue>
@@ -21,7 +20,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
                 {
                     ReturnType = "string",
                     ParameterName = "toggleMemberName",
-                    ParameterDescription = "bool 类型的成员名，用于控制开启焦点获取和关闭，" + DescriptionConfigs.SupportAllResolver
+                    ParameterDescription =
+                        "bool 类型的成员名，用于控制开启焦点获取和关闭，" + DescriptionConfigs.SupportAllResolver
                 },
                 new ParameterValue
                 {

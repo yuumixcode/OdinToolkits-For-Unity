@@ -10,8 +10,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         protected override string GetIntroduction() => "可以对大部分的基础变量使用，让它在达到某个值时，开始循环";
 
         protected override List<string> GetTips() =>
-            new List<string>
-                { "对角度值可以使用" };
+            new List<string> { "对角度值可以使用" };
 
         protected override List<ParameterValue> GetParamValues() =>
             new List<ParameterValue>

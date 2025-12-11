@@ -55,7 +55,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated
         public string info7 = "该物体是场景中的预制体或者嵌套预制体或者非预制体时，才能看到 prefabInstanceAndNonPrefabInstance 字段";
 
         [ShowIn(PrefabKind.PrefabInstanceAndNonPrefabInstance)]
-        public string prefabInstanceAndNonPrefabInstance = "Prefab Instances, as well as non-prefab instances";
+        public string prefabInstanceAndNonPrefabInstance =
+            "Prefab Instances, as well as non-prefab instances";
 
         #endregion
     }

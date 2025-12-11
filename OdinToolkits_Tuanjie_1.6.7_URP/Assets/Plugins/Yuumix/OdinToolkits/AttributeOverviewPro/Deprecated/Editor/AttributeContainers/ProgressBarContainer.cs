@@ -77,7 +77,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
                 {
                     ReturnType = "string",
                     ParameterName = "CustomValueStringGetter",
-                    ParameterDescription = "自定义 ValueLabel，返回值类型为 string，" + DescriptionConfigs.SupportAllResolver
+                    ParameterDescription =
+                        "自定义 ValueLabel，返回值类型为 string，" + DescriptionConfigs.SupportAllResolver
                 },
                 new ParameterValue
                 {

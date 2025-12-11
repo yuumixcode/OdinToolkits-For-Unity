@@ -1,5 +1,5 @@
-using Sirenix.OdinInspector;
 using System;
+using Sirenix.OdinInspector;
 
 namespace Yuumix.OdinToolkits.Core
 {
@@ -23,7 +23,8 @@ namespace Yuumix.OdinToolkits.Core
 
         #region IEventBinding<T> Members
 
-        [ShowInInspector] public int Order { get; }
+        [ShowInInspector]
+        public int Order { get; }
 
         public void Add(Action methodNoArgs)
         {

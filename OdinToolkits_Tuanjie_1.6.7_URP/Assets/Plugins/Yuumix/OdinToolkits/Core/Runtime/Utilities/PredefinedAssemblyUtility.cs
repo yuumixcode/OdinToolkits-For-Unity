@@ -75,10 +75,13 @@ namespace Yuumix.OdinToolkits.Core
             var assemblyTypes = new Dictionary<PredefinedAssemblyType, Type[]>();
             for (var i = 0; i < assemblies.Length; ++i)
             {
-                var assemblyType = GetAssemblyType(assemblies[i].GetName().Name);
+                var assemblyType = GetAssemblyType(assemblies[i]
+                    .GetName()
+                    .Name);
                 if (assemblyType != null)
                 {
-                    assemblyTypes.Add((PredefinedAssemblyType)assemblyType, assemblies[i].GetTypes());
+                    assemblyTypes.Add((PredefinedAssemblyType)assemblyType, assemblies[i]
+                        .GetTypes());
                 }
             }
 

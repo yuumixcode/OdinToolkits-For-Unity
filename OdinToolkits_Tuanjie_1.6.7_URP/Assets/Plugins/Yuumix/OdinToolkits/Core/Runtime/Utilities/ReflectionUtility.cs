@@ -19,23 +19,25 @@ namespace Yuumix.OdinToolkits.Core
 
     public static class ReflectionUtility
     {
-        public static readonly Dictionary<MemberTypes, int> CustomMemberTypesMap = new Dictionary<MemberTypes, int>
-        {
-            { MemberTypes.Method, 0 },
-            { MemberTypes.Event, 1 },
-            { MemberTypes.Property, 2 },
-            { MemberTypes.Field, 3 },
-            { MemberTypes.Constructor, 4 },
-            { MemberTypes.TypeInfo, 5 },
-            { MemberTypes.NestedType, 6 },
-            { MemberTypes.Custom, 7 }
-        };
+        public static readonly Dictionary<MemberTypes, int> CustomMemberTypesMap =
+            new Dictionary<MemberTypes, int>
+            {
+                { MemberTypes.Method, 0 },
+                { MemberTypes.Event, 1 },
+                { MemberTypes.Property, 2 },
+                { MemberTypes.Field, 3 },
+                { MemberTypes.Constructor, 4 },
+                { MemberTypes.TypeInfo, 5 },
+                { MemberTypes.NestedType, 6 },
+                { MemberTypes.Custom, 7 }
+            };
 
         public static Assembly[] GetAssembliesOfNameContainString(string partOfAssemblyName)
         {
             try
             {
-                var assemblies = AppDomain.CurrentDomain.GetAssemblies()
+                var assemblies = AppDomain.CurrentDomain
+                    .GetAssemblies()
                     .Where(assembly => assembly.FullName.Contains(partOfAssemblyName))
                     .ToArray();
                 return assemblies.Length > 0 ? assemblies : Array.Empty<Assembly>();

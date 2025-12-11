@@ -1,20 +1,15 @@
-using Sirenix.OdinInspector.Editor;
 using System.Collections.Generic;
-using Yuumix.OdinToolkits.Core.SafeEditor;
+using Sirenix.OdinInspector.Editor;
 using UnityEngine;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
-using YuumixEditor;
+using Yuumix.OdinToolkits.Core.SafeEditor;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
 {
     public class CustomValueDrawerContainer : OdinAttributeContainerSO
     {
         protected override BilingualHeaderWidget GetHeaderWidget() => GlobalTempHeader.ModifyWidget(
-            "CustomValueDrawer",
-            "CustomValueDrawer",
-            "对特殊的字段进行自定义绘制",
-            "CustomValueDrawer"
-        );
+            "CustomValueDrawer", "CustomValueDrawer", "对特殊的字段进行自定义绘制", "CustomValueDrawer");
 
         protected override string GetHeader() => "CustomValueDrawer";
 
@@ -79,6 +74,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
                 }
             };
 
-        protected override string GetOriginalCode() => ReadCodeWithoutNamespace(typeof(CustomValueDrawerExample));
+        protected override string GetOriginalCode() =>
+            ReadCodeWithoutNamespace(typeof(CustomValueDrawerExample));
     }
 }

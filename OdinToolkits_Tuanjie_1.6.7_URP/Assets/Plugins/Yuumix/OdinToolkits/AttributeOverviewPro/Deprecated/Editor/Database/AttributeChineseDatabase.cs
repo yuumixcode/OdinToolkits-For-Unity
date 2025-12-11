@@ -1,7 +1,6 @@
-using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using Yuumix.OdinToolkits.Core.SafeEditor;
-using YuumixEditor;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
 {

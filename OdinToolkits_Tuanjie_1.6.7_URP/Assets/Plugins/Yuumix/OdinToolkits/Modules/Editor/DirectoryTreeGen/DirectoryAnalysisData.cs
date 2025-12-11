@@ -1,7 +1,7 @@
-using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Sirenix.OdinInspector;
 using Yuumix.OdinToolkits.Core;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
@@ -17,7 +17,11 @@ namespace Yuumix.OdinToolkits.Modules.Editor
 
         public List<DirectoryAnalysisData> SubDirectoryData;
 
-        [ShowInInspector] public int Depth => !RelativePath.IsNullOrWhiteSpace() ? RelativePath.Split('/').Length : 0;
+        [ShowInInspector]
+        public int Depth => !RelativePath.IsNullOrWhiteSpace()
+            ? RelativePath.Split('/')
+                .Length
+            : 0;
 
         public static DirectoryAnalysisData FromDirectoryInfo(DirectoryInfo directoryInfo)
         {

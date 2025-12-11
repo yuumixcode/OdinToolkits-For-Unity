@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Yuumix.OdinToolkits.Core.SafeEditor;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Serialization;
@@ -12,7 +11,7 @@ using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Core.Editor;
-using YuumixEditor;
+using Yuumix.OdinToolkits.Core.SafeEditor;
 
 namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
 {
@@ -29,10 +28,10 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
         }
 
         public const string DEFAULT_DOC_FOLDER_PATH =
-            OdinToolkitsEditorPaths.ODIN_TOOLKITS_ANY_DATA_ROOT_FOLDER + "/Editor/Documents/";
+            OdinToolkitsEditorPaths.ALL_DATA_ROOT_FOLDER + "/Editor/Documents/";
 
         const string DEFAULT_TYPES_CACHE_SO_FOLDER_PATH =
-            OdinToolkitsEditorPaths.ODIN_TOOLKITS_ANY_DATA_ROOT_FOLDER + "/Editor/TypesCacheSO";
+            OdinToolkitsEditorPaths.ALL_DATA_ROOT_FOLDER + "/Editor/TypesCacheSO";
 
         const string NONE_ASSEMBLY = "None Assembly";
         static ValueDropdownList<string> _currentDomainAssemblies;

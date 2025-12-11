@@ -16,7 +16,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
 
         public abstract class BaseClass
         {
-            public override string ToString() => GetType().Name;
+            public override string ToString() => GetType()
+                .Name;
         }
 
         public class A : BaseClass { }

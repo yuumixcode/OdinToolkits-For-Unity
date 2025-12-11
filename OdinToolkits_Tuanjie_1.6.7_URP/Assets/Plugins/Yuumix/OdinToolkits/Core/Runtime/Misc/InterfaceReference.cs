@@ -16,27 +16,18 @@ namespace Yuumix.OdinToolkits.Core
     /// 即 UnityEngine.Object 的派生类
     /// </typeparam>
     [Serializable]
-    public class InterfaceReference<TInterface, TObject>
-        where TInterface : class where TObject : Object
+    public class InterfaceReference<TInterface, TObject> where TInterface : class where TObject : Object
     {
-        #region Serialized Fields
-
         /// <summary>
         /// 基础对象，用于存储可以被分配为 TInterface 类型字段的，继承自 UnityEngine.Object 的对象
         /// </summary>
         [SerializeField]
         TObject underlyingObject;
 
-        #endregion
-
-        // 构造函数
         public InterfaceReference() { }
         public InterfaceReference(TInterface interfaceValue) => underlyingObject = interfaceValue as TObject;
         public InterfaceReference(TObject target) => underlyingObject = target;
 
-        /// <summary>
-        /// 基础对象
-        /// </summary>
         public TObject UnderlyingObject
         {
             get => underlyingObject;
@@ -46,7 +37,6 @@ namespace Yuumix.OdinToolkits.Core
         /// <summary>
         /// 接口类型对象
         /// </summary>
-        /// <exception cref="InvalidCastException"></exception>
         public TInterface InterfaceValue
         {
             get

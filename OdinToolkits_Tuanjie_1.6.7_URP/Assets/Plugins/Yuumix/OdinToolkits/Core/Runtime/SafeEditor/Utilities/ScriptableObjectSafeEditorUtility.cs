@@ -1,9 +1,7 @@
 using System.Linq;
-using Yuumix.OdinToolkits.Core.SafeEditor;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
-using YuumixEditor;
 #endif
 
 namespace Yuumix.OdinToolkits.Core.SafeEditor
@@ -37,7 +35,7 @@ namespace Yuumix.OdinToolkits.Core.SafeEditor
 
 #if UNITY_EDITOR
         const string RELATIVE_FOLDER_PATH =
-            OdinToolkitsEditorPaths.ODIN_TOOLKITS_ANY_DATA_ROOT_FOLDER + "/Editor/SingletonSO";
+            OdinToolkitsEditorPaths.ALL_DATA_ROOT_FOLDER + "/Editor/SingletonSO";
 
         static string Internal_GetSingletonAssetPathAndDeleteOther<T>(string relativeFolderPath = "")
             where T : ScriptableObject

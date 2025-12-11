@@ -1,7 +1,7 @@
-using Sirenix.OdinInspector;
-using Sirenix.Utilities.Editor;
 using System;
 using System.Globalization;
+using Sirenix.OdinInspector;
+using Sirenix.Utilities.Editor;
 using UnityEngine;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
@@ -10,6 +10,28 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class OnInspectorInitExample : ExampleSO
     {
+        [ShowInInspector]
+        [DisplayAsString]
+        [PropertyOrder(-1)]
+        public string CurrentTime
+        {
+            get
+            {
+                GUIHelper.RequestRepaint();
+                return DateTime.Now.ToString(CultureInfo.CurrentCulture);
+            }
+        }
+
+        void First()
+        {
+            Debug.Log("first 字段进行初始化");
+        }
+
+        void Second()
+        {
+            Debug.Log("second 字段进行初始化");
+        }
+
         #region Serialized Fields
 
         [OnInspectorInit(nameof(First))]
@@ -33,27 +55,5 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         public string timeFoldoutWasOpened;
 
         #endregion
-
-        [ShowInInspector]
-        [DisplayAsString]
-        [PropertyOrder(-1)]
-        public string CurrentTime
-        {
-            get
-            {
-                GUIHelper.RequestRepaint();
-                return DateTime.Now.ToString(CultureInfo.CurrentCulture);
-            }
-        }
-
-        void First()
-        {
-            Debug.Log("first 字段进行初始化");
-        }
-
-        void Second()
-        {
-            Debug.Log("second 字段进行初始化");
-        }
     }
 }

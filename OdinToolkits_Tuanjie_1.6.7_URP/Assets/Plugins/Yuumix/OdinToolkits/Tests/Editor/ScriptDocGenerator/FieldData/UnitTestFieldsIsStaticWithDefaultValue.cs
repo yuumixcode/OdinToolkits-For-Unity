@@ -11,10 +11,12 @@ namespace Yuumix.OdinToolkits.Tests.Editor
     /// </summary>
     public class UnitTestFieldsIsStaticWithDefaultValue
     {
-        static readonly FieldInfo[] TestFields = typeof(TestClass).GetRuntimeFields().ToArray();
+        static readonly FieldInfo[] TestFields = typeof(TestClass).GetRuntimeFields()
+            .ToArray();
 
-        static readonly IFieldData[] TestFieldData =
-            TestFields.Select(f => UnitTestAnalysisFactory.Default.CreateFieldData(f)).ToArray();
+        static readonly IFieldData[] TestFieldData = TestFields
+            .Select(f => UnitTestAnalysisFactory.Default.CreateFieldData(f))
+            .ToArray();
 
         static readonly Dictionary<string, string> FieldExpectedSignatureMaps = new Dictionary<string, string>
         {
@@ -94,32 +96,36 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         public void TestStringStaticField()
         {
             const string fieldName = nameof(TestClass.StringStaticField);
-            Assert.AreEqual(FieldExpectedSignatureMaps[fieldName],
-                TestFieldData.First(f => ((MemberData)f).Name == fieldName).Signature);
+            Assert.AreEqual(FieldExpectedSignatureMaps[fieldName], TestFieldData
+                .First(f => ((MemberData)f).Name == fieldName)
+                .Signature);
         }
 
         [Test]
         public void TestIntStaticField()
         {
             const string fieldName = nameof(TestClass.INTStaticField);
-            Assert.AreEqual(FieldExpectedSignatureMaps[fieldName],
-                TestFieldData.First(f => ((MemberData)f).Name == fieldName).Signature);
+            Assert.AreEqual(FieldExpectedSignatureMaps[fieldName], TestFieldData
+                .First(f => ((MemberData)f).Name == fieldName)
+                .Signature);
         }
 
         [Test]
         public void TestFloatStaticField()
         {
             const string fieldName = nameof(TestClass.FloatStaticField);
-            Assert.AreEqual(FieldExpectedSignatureMaps[fieldName],
-                TestFieldData.First(f => ((MemberData)f).Name == fieldName).Signature);
+            Assert.AreEqual(FieldExpectedSignatureMaps[fieldName], TestFieldData
+                .First(f => ((MemberData)f).Name == fieldName)
+                .Signature);
         }
 
         [Test]
         public void TestBooleanStaticField()
         {
             const string fieldName = nameof(TestClass.BooleanStaticField);
-            Assert.AreEqual(FieldExpectedSignatureMaps[fieldName],
-                TestFieldData.First(f => ((MemberData)f).Name == fieldName).Signature);
+            Assert.AreEqual(FieldExpectedSignatureMaps[fieldName], TestFieldData
+                .First(f => ((MemberData)f).Name == fieldName)
+                .Signature);
         }
 
         #endregion
@@ -133,8 +139,9 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         public void TestCharStaticField()
         {
             const string fieldName = nameof(TestClass.CharStaticField);
-            Assert.AreEqual(FieldExpectedSignatureMaps[fieldName],
-                TestFieldData.First(f => ((MemberData)f).Name == fieldName).Signature);
+            Assert.AreEqual(FieldExpectedSignatureMaps[fieldName], TestFieldData
+                .First(f => ((MemberData)f).Name == fieldName)
+                .Signature);
         }
 
         /// <summary>
@@ -144,8 +151,9 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         public void TestByteStaticField()
         {
             const string fieldName = nameof(TestClass.ByteStaticField);
-            Assert.AreEqual(FieldExpectedSignatureMaps[fieldName],
-                TestFieldData.First(f => ((MemberData)f).Name == fieldName).Signature);
+            Assert.AreEqual(FieldExpectedSignatureMaps[fieldName], TestFieldData
+                .First(f => ((MemberData)f).Name == fieldName)
+                .Signature);
         }
 
         /// <summary>
@@ -155,8 +163,9 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         public void TestSbyteStaticField()
         {
             const string fieldName = nameof(TestClass.SbyteStaticField);
-            Assert.AreEqual(FieldExpectedSignatureMaps[fieldName],
-                TestFieldData.First(f => ((MemberData)f).Name == fieldName).Signature);
+            Assert.AreEqual(FieldExpectedSignatureMaps[fieldName], TestFieldData
+                .First(f => ((MemberData)f).Name == fieldName)
+                .Signature);
         }
 
         /// <summary>
@@ -166,8 +175,9 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         public void TestShortStaticField()
         {
             const string fieldName = nameof(TestClass.ShortStaticField);
-            Assert.AreEqual(FieldExpectedSignatureMaps[fieldName],
-                TestFieldData.First(f => ((MemberData)f).Name == fieldName).Signature);
+            Assert.AreEqual(FieldExpectedSignatureMaps[fieldName], TestFieldData
+                .First(f => ((MemberData)f).Name == fieldName)
+                .Signature);
         }
 
         /// <summary>
@@ -177,8 +187,9 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         public void TestUshortStaticField()
         {
             const string fieldName = nameof(TestClass.UshortStaticField);
-            Assert.AreEqual(FieldExpectedSignatureMaps[fieldName],
-                TestFieldData.First(f => ((MemberData)f).Name == fieldName).Signature);
+            Assert.AreEqual(FieldExpectedSignatureMaps[fieldName], TestFieldData
+                .First(f => ((MemberData)f).Name == fieldName)
+                .Signature);
         }
 
         /// <summary>
@@ -188,8 +199,9 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         public void TestLongStaticField()
         {
             const string fieldName = nameof(TestClass.LongStaticField);
-            Assert.AreEqual(FieldExpectedSignatureMaps[fieldName],
-                TestFieldData.First(f => ((MemberData)f).Name == fieldName).Signature);
+            Assert.AreEqual(FieldExpectedSignatureMaps[fieldName], TestFieldData
+                .First(f => ((MemberData)f).Name == fieldName)
+                .Signature);
         }
 
         /// <summary>
@@ -199,8 +211,9 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         public void TestUlongStaticField()
         {
             const string fieldName = nameof(TestClass.UlongStaticField);
-            Assert.AreEqual(FieldExpectedSignatureMaps[fieldName],
-                TestFieldData.First(f => ((MemberData)f).Name == fieldName).Signature);
+            Assert.AreEqual(FieldExpectedSignatureMaps[fieldName], TestFieldData
+                .First(f => ((MemberData)f).Name == fieldName)
+                .Signature);
         }
 
         /// <summary>
@@ -210,8 +223,9 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         public void TestUintStaticField()
         {
             const string fieldName = nameof(TestClass.UintStaticField);
-            Assert.AreEqual(FieldExpectedSignatureMaps[fieldName],
-                TestFieldData.First(f => ((MemberData)f).Name == fieldName).Signature);
+            Assert.AreEqual(FieldExpectedSignatureMaps[fieldName], TestFieldData
+                .First(f => ((MemberData)f).Name == fieldName)
+                .Signature);
         }
 
         #endregion
@@ -225,8 +239,9 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         public void TestDoubleStaticField_Max15()
         {
             const string fieldName = nameof(TestClass.DoubleStaticField);
-            Assert.AreEqual(FieldExpectedSignatureMaps[fieldName],
-                TestFieldData.First(f => ((MemberData)f).Name == fieldName).Signature);
+            Assert.AreEqual(FieldExpectedSignatureMaps[fieldName], TestFieldData
+                .First(f => ((MemberData)f).Name == fieldName)
+                .Signature);
         }
 
         /// <summary>
@@ -236,8 +251,9 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         public void TestDecimalStaticField()
         {
             const string fieldName = nameof(TestClass.DecimalStaticField);
-            Assert.AreEqual(FieldExpectedSignatureMaps[fieldName],
-                TestFieldData.First(f => ((MemberData)f).Name == fieldName).Signature);
+            Assert.AreEqual(FieldExpectedSignatureMaps[fieldName], TestFieldData
+                .First(f => ((MemberData)f).Name == fieldName)
+                .Signature);
         }
 
         /// <summary>
@@ -247,8 +263,9 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         public void TestEnumStaticField()
         {
             const string fieldName = nameof(TestClass.EnumStaticField);
-            Assert.AreEqual(FieldExpectedSignatureMaps[fieldName],
-                TestFieldData.First(f => ((MemberData)f).Name == fieldName).Signature);
+            Assert.AreEqual(FieldExpectedSignatureMaps[fieldName], TestFieldData
+                .First(f => ((MemberData)f).Name == fieldName)
+                .Signature);
         }
 
         /// <summary>
@@ -258,8 +275,9 @@ namespace Yuumix.OdinToolkits.Tests.Editor
         public void TestNestedEnumStaticField()
         {
             const string fieldName = nameof(TestClass.NestedEnumStaticField);
-            Assert.AreEqual(FieldExpectedSignatureMaps[fieldName],
-                TestFieldData.First(f => ((MemberData)f).Name == fieldName).Signature);
+            Assert.AreEqual(FieldExpectedSignatureMaps[fieldName], TestFieldData
+                .First(f => ((MemberData)f).Name == fieldName)
+                .Signature);
         }
 
         #endregion

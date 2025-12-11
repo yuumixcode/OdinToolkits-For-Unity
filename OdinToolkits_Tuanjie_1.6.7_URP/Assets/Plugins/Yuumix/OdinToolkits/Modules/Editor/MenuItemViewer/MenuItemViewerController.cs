@@ -22,8 +22,9 @@ namespace Yuumix.OdinToolkits.Module.Editor
         {
             var menuItems = new List<MenuItemInfo>();
             var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies();
-            var allAssemblies = loadedAssemblies
-                .Where(assembly => assemblyFilter == null || !assemblyFilter.ShouldFilterOut(assembly)).ToList();
+            var allAssemblies = loadedAssemblies.Where(assembly =>
+                    assemblyFilter == null || !assemblyFilter.ShouldFilterOut(assembly))
+                .ToList();
             Debug.Log($"收集 {allAssemblies.Count} 个程序集中的 MenuItem");
             foreach (var assembly in allAssemblies)
             {
@@ -53,7 +54,8 @@ namespace Yuumix.OdinToolkits.Module.Editor
                             Length: > 0
                         } menuItemAttributes)
                     {
-                        menuItems.AddRange(menuItemAttributes.Select(menuItem => new MenuItemInfo(menuItem, method)));
+                        menuItems.AddRange(menuItemAttributes.Select(menuItem =>
+                            new MenuItemInfo(menuItem, method)));
                     }
                 }
             }

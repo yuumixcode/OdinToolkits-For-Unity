@@ -1,6 +1,6 @@
-using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -20,7 +20,8 @@ namespace Yuumix.OdinToolkits.Core
         /// </summary>
         /// <remarks>在向 BetterEvent 中注册 EventBinding 时缓存</remarks>
         [ShowInInspector]
-        static readonly Dictionary<Type, List<object>> BetterEventCache = new Dictionary<Type, List<object>>();
+        static readonly Dictionary<Type, List<object>>
+            BetterEventCache = new Dictionary<Type, List<object>>();
 
         EventsDebugger() { }
         public static EventsDebugger Instance => _lazyInstance.Value;

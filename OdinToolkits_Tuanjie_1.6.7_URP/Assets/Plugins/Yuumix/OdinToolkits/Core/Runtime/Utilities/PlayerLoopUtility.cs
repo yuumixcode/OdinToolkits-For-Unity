@@ -29,7 +29,8 @@ namespace Yuumix.OdinToolkits.Core
             HandleSubSystemLoopForRemoval<T>(ref loop, systemToRemove);
         }
 
-        static void HandleSubSystemLoopForRemoval<T>(ref PlayerLoopSystem loop, PlayerLoopSystem systemToRemove)
+        static void HandleSubSystemLoopForRemoval<T>(ref PlayerLoopSystem loop,
+            PlayerLoopSystem systemToRemove)
         {
             if (loop.subSystemList == null || loop.subSystemList.Length == 0)
             {
@@ -42,7 +43,8 @@ namespace Yuumix.OdinToolkits.Core
             }
         }
 
-        public static bool InsertSystem<T>(ref PlayerLoopSystem loop, PlayerLoopSystem systemToInsert, int index)
+        public static bool InsertSystem<T>(ref PlayerLoopSystem loop, PlayerLoopSystem systemToInsert,
+            int index)
         {
             if (loop.type != typeof(T))
             {
@@ -60,7 +62,8 @@ namespace Yuumix.OdinToolkits.Core
             return true;
         }
 
-        static bool HandleSubSystemLoop<T>(ref PlayerLoopSystem loop, PlayerLoopSystem systemToInsert, int index)
+        static bool HandleSubSystemLoop<T>(ref PlayerLoopSystem loop, PlayerLoopSystem systemToInsert,
+            int index)
         {
             if (loop.subSystemList == null || loop.subSystemList.Length == 0)
             {
@@ -101,7 +104,8 @@ namespace Yuumix.OdinToolkits.Core
         static void PrintSubSystem(PlayerLoopSystem system, StringBuilder sb, int depth)
         {
             // 在字符串构建器中添加当前子系统的类型信息，并换行
-            sb.Append(' ', depth * 2).AppendLine(system.type.ToString());
+            sb.Append(' ', depth * 2)
+                .AppendLine(system.type.ToString());
             if (system.subSystemList == null || system.subSystemList.Length == 0)
             {
                 return;
@@ -114,8 +118,8 @@ namespace Yuumix.OdinToolkits.Core
             }
         }
 
-        public static PlayerLoopSystem GetNewCustomPlayerLoopSystem(
-            Type target, PlayerLoopSystem.UpdateFunction update = null, IntPtr loopCondition = default,
+        public static PlayerLoopSystem GetNewCustomPlayerLoopSystem(Type target,
+            PlayerLoopSystem.UpdateFunction update = null, IntPtr loopCondition = default,
             PlayerLoopSystem[] subSystems = null) =>
             new PlayerLoopSystem
             {

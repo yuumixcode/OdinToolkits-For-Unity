@@ -1,5 +1,5 @@
-using Sirenix.OdinInspector;
 using System;
+using Sirenix.OdinInspector;
 
 namespace Yuumix.OdinToolkits.Core
 {

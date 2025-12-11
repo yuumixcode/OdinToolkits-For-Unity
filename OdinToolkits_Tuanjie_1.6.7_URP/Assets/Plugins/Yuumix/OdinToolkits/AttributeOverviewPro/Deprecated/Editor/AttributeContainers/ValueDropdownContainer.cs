@@ -1,5 +1,5 @@
-using Sirenix.OdinInspector.Editor;
 using System.Collections.Generic;
+using Sirenix.OdinInspector.Editor;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
@@ -43,7 +43,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
                 {
                     ReturnType = "bool",
                     ParameterName = "DrawDropdownForListElements",
-                    ParameterDescription = "当 ValueDropdown 作用于列表上时，是否让元素修改时以下拉选择框的样式修改，而不是仅仅在添加时可以从列表中选择，默认为 true"
+                    ParameterDescription =
+                        "当 ValueDropdown 作用于列表上时，是否让元素修改时以下拉选择框的样式修改，而不是仅仅在添加时可以从列表中选择，默认为 true"
                 },
                 new ParameterValue
                 {
@@ -61,7 +62,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
                 {
                     ReturnType = "bool",
                     ParameterName = "ExpandAllMenuItems",
-                    ParameterDescription = "如果返回列表是 Odin 特制的 ValueDropdownList<T>，则可以支持树状显示，如果为 true，则全部展开，默认为 false"
+                    ParameterDescription =
+                        "如果返回列表是 Odin 特制的 ValueDropdownList<T>，则可以支持树状显示，如果为 true，则全部展开，默认为 false"
                 },
                 new ParameterValue
                 {
@@ -73,7 +75,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
                 {
                     ReturnType = "bool",
                     ParameterName = "DisableGUIInAppendedDrawer",
-                    ParameterDescription = "在 AppendNextDrawer == true 的情况下，让原本的值的绘制变成无法交互，避免两个方式都可以修改值，默认为 false"
+                    ParameterDescription =
+                        "在 AppendNextDrawer == true 的情况下，让原本的值的绘制变成无法交互，避免两个方式都可以修改值，默认为 false"
                 },
                 new ParameterValue
                 {
@@ -91,7 +94,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
                 {
                     ReturnType = "bool",
                     ParameterName = "FlattenTreeView",
-                    ParameterDescription = "如果返回列表是 Odin 特制的 ValueDropdownList<T>，则可以支持树状显示，如果为 true，则放弃树状显示，取消缩进"
+                    ParameterDescription =
+                        "如果返回列表是 Odin 特制的 ValueDropdownList<T>，则可以支持树状显示，如果为 true，则放弃树状显示，取消缩进"
                 },
                 new ParameterValue
                 {

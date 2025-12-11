@@ -31,7 +31,9 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
             sb.AppendLine("## 介绍");
             sb.AppendLine();
             sb.Append("- 种类: `");
-            var typeCategory = typeData.TypeCategory.ToString().ToLower(CultureInfo.CurrentCulture);
+            var typeCategory = typeData.TypeCategory
+                .ToString()
+                .ToLower(CultureInfo.CurrentCulture);
             if (typeData.IsStatic)
             {
                 sb.Append("static " + typeCategory);
@@ -178,8 +180,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
                         continue;
                     }
 
-                    sb.AppendLine(
-                        $"| `{eventData.Signature}` | {memberData.SummaryAttributeValue} |");
+                    sb.AppendLine($"| `{eventData.Signature}` | {memberData.SummaryAttributeValue} |");
                 }
 
                 sb.AppendLine();
@@ -409,8 +410,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
                         continue;
                     }
 
-                    sb.AppendLine(
-                        $"| `{propertyData.Signature}` | {memberData.SummaryAttributeValue} |");
+                    sb.AppendLine($"| `{propertyData.Signature}` | {memberData.SummaryAttributeValue} |");
                 }
 
                 sb.AppendLine();
@@ -520,8 +520,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
                         continue;
                     }
 
-                    sb.AppendLine(
-                        $"| `{fieldData.Signature}` | {memberData.SummaryAttributeValue} |");
+                    sb.AppendLine($"| `{fieldData.Signature}` | {memberData.SummaryAttributeValue} |");
                 }
 
                 sb.AppendLine();
@@ -536,14 +535,12 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
                 foreach (var fieldData in fieldDataArray)
                 {
                     fieldData.TryAsIMemberData(out var memberData);
-                    if (!fieldData.IsApiMember() || memberData.IsFromInheritance ||
-                        fieldData.IsConstant)
+                    if (!fieldData.IsApiMember() || memberData.IsFromInheritance || fieldData.IsConstant)
                     {
                         continue;
                     }
 
-                    sb.AppendLine(
-                        $"| `{fieldData.Signature}` | {memberData.SummaryAttributeValue} |");
+                    sb.AppendLine($"| `{fieldData.Signature}` | {memberData.SummaryAttributeValue} |");
                 }
 
                 sb.AppendLine();
@@ -558,8 +555,7 @@ namespace Yuumix.OdinToolkits.ScriptDocGenerator.Editor
                 foreach (var fieldData in fieldDataArray)
                 {
                     fieldData.TryAsIMemberData(out var memberData);
-                    if (!fieldData.IsApiMember() || !memberData.IsFromInheritance ||
-                        fieldData.IsConstant)
+                    if (!fieldData.IsApiMember() || !memberData.IsFromInheritance || fieldData.IsConstant)
                     {
                         continue;
                     }

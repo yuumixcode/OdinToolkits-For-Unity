@@ -7,6 +7,9 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class EnableIfExample : ExampleSO
     {
+        bool Method() =>
+            (isToggled && someObject != null) || someEnum == InfoMessageType.Error;
+
         #region Serialized Fields
 
         [PropertyOrder(10)]
@@ -57,9 +60,5 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         public int enableWithExpression;
 
         #endregion
-
-        bool Method() =>
-            (isToggled && someObject != null) ||
-            someEnum == InfoMessageType.Error;
     }
 }

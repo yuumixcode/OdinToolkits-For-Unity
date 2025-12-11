@@ -63,9 +63,8 @@ namespace Yuumix.OdinToolkits.Core.Editor
                     {
                         var color = _iconColorResolver.GetValue();
                         Debug.Log("Color: " + color);
-                        nextLabel.image =
-                            SdfIcons.CreateTransparentIconTexture(Attribute.Icon, color, 16 /*0x10*/, 16 /*0x10*/,
-                                0);
+                        nextLabel.image = SdfIcons.CreateTransparentIconTexture(Attribute.Icon, color,
+                            16 /*0x10*/, 16 /*0x10*/, 0);
                     }
                 }
 

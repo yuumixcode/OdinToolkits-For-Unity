@@ -1,5 +1,5 @@
-using Sirenix.OdinInspector;
 using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Yuumix.OdinToolkits.Core
@@ -8,8 +8,8 @@ namespace Yuumix.OdinToolkits.Core
     public class BilingualDisplayAsStringWidgetConfigAttribute : Attribute
     {
         public BilingualDisplayAsStringWidgetConfigAttribute(bool overflow = false,
-            TextAlignment alignment = TextAlignment.Left,
-            int fontSize = 13, bool enableRichText = false, string format = null)
+            TextAlignment alignment = TextAlignment.Left, int fontSize = 13, bool enableRichText = false,
+            string format = null)
         {
             Overflow = overflow;
             Alignment = alignment;
@@ -28,7 +28,8 @@ namespace Yuumix.OdinToolkits.Core
         public string Format { get; set; }
 
         /// <summary>
-        /// If <c>true</c>, the string will overflow past the drawn space and be clipped when there's not enough space for the
+        /// If <c>true</c>, the string will overflow past the drawn space and be clipped when there's not enough space
+        /// for the
         /// text.
         /// If <c>false</c> the string will expand to multiple lines, if there's not enough space when drawn.
         /// </summary>

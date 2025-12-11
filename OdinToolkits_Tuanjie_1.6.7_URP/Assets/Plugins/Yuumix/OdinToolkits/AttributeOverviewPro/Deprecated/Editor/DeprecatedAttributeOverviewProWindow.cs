@@ -1,7 +1,7 @@
+using System;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
-using System;
 using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core.Editor;
@@ -38,8 +38,13 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
                     SearchTerm = "",
                     SearchFunction = menuItem =>
                     {
-                        var str = menuItem.Name.ToLower().Replace(" ", "");
-                        var searchStr = _tree.Config.SearchTerm.ToLower().Replace(" ", "");
+                        var str = menuItem.Name
+                            .ToLower()
+                            .Replace(" ", "");
+                        var searchStr = _tree.Config
+                            .SearchTerm
+                            .ToLower()
+                            .Replace(" ", "");
                         return str.Contains(searchStr);
                     }
                 },
@@ -54,11 +59,12 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
 
         protected override OdinMenuTree BuildMenuTree()
         {
-            foreach (var map in AttributeChineseDatabase
-                         .Instance.ContainerMaps)
+            foreach (var map in AttributeChineseDatabase.Instance.ContainerMaps)
             foreach (var container in map.Value)
             {
-                _tree.AddObjectAtPath(map.Key + "/" + container.GetType().Name.Replace("Container", ""), container);
+                _tree.AddObjectAtPath(map.Key + "/" + container.GetType()
+                    .Name
+                    .Replace("Container", ""), container);
             }
 
             return _tree;
@@ -91,7 +97,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         {
             _window = GetWindow<DeprecatedAttributeOverviewProWindow>();
             _window.titleContent = new GUIContent(OdinToolkitsMenuItems.DEPRECATED_OVERVIEW_PRO_WINDOW_NAME);
-            _window.position = GUIHelper.GetEditorWindowRect().AlignCenter(1000, 750);
+            _window.position = GUIHelper.GetEditorWindowRect()
+                .AlignCenter(1000, 750);
             _window.Show();
         }
 

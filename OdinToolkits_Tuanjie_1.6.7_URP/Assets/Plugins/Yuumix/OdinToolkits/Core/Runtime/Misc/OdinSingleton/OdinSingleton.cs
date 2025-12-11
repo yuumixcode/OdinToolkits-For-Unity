@@ -28,11 +28,32 @@ namespace Yuumix.OdinToolkits.Core
                     return _instance;
                 }
 
-                _instance = new GameObject(typeof(T).Name + " [Auto - Singleton]")
-                    .AddComponent<T>();
+                _instance = new GameObject(typeof(T).Name + " [Auto - Singleton]").AddComponent<T>();
                 return _instance;
             }
         }
+
+        public static void CreateNewInstance()
+        {
+            DestroyCurrentInstance();
+            _instance = Instance;
+        }
+
+        static void DestroyCurrentInstance()
+        {
+            if (Application.isPlaying)
+            {
+                Destroy(_instance.gameObject);
+            }
+            else
+            {
+                DestroyImmediate(_instance.gameObject);
+            }
+
+            _instance = null;
+        }
+
+        protected virtual void OnSingletonInit() { }
 
         #region Event Functions
 
@@ -71,27 +92,5 @@ namespace Yuumix.OdinToolkits.Core
         }
 
         #endregion
-
-        public static void CreateNewInstance()
-        {
-            DestroyCurrentInstance();
-            _instance = Instance;
-        }
-
-        static void DestroyCurrentInstance()
-        {
-            if (Application.isPlaying)
-            {
-                Destroy(_instance.gameObject);
-            }
-            else
-            {
-                DestroyImmediate(_instance.gameObject);
-            }
-
-            _instance = null;
-        }
-
-        protected virtual void OnSingletonInit() { }
     }
 }

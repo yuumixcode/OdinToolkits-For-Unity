@@ -1,7 +1,7 @@
+using System;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using Sirenix.Utilities;
-using System;
 using UnityEngine;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
@@ -19,7 +19,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
 
         [FoldoutGroup("NonDefaultConstructorPreference")]
         [LabelText("Construct Ideal")]
-        [PolymorphicDrawerSettings(NonDefaultConstructorPreference = NonDefaultConstructorPreference.ConstructIdeal)]
+        [PolymorphicDrawerSettings(NonDefaultConstructorPreference =
+            NonDefaultConstructorPreference.ConstructIdeal)]
         public IVector2<int> NonDefaultConstructorPreference_ConstructIdeal;
 
         [FoldoutGroup("NonDefaultConstructorPreference")]
@@ -29,7 +30,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
 
         [FoldoutGroup("NonDefaultConstructorPreference")]
         [LabelText("Log Warning")]
-        [PolymorphicDrawerSettings(NonDefaultConstructorPreference = NonDefaultConstructorPreference.LogWarning)]
+        [PolymorphicDrawerSettings(NonDefaultConstructorPreference =
+            NonDefaultConstructorPreference.LogWarning)]
         public IVector2<int> NonDefaultConstructorPreference_LogWarning;
 
         [FoldoutGroup("NonDefaultConstructorPreference")]
@@ -77,7 +79,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         {
             #region IDemo<T> Members
 
-            [OdinSerialize] public T Value { get; set; }
+            [OdinSerialize]
+            public T Value { get; set; }
 
             #endregion
         }
@@ -89,7 +92,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         {
             #region IDemo<int> Members
 
-            [OdinSerialize] public int Value { get; set; }
+            [OdinSerialize]
+            public int Value { get; set; }
 
             #endregion
         }
@@ -99,7 +103,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         {
             #region IDemo<float> Members
 
-            [OdinSerialize] public float Value { get; set; }
+            [OdinSerialize]
+            public float Value { get; set; }
 
             #endregion
         }
@@ -110,7 +115,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         {
             #region IDemo<int> Members
 
-            [OdinSerialize] public int Value { get; set; }
+            [OdinSerialize]
+            public int Value { get; set; }
 
             #endregion
         }
@@ -126,14 +132,16 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
 
             #region IDemo<int> Members
 
-            [OdinSerialize] public int Value { get; set; }
+            [OdinSerialize]
+            public int Value { get; set; }
 
             #endregion
         }
 
         public struct DemoStructInt32 : IDemo<int>
         {
-            [OdinSerialize] public int Value { get; set; }
+            [OdinSerialize]
+            public int Value { get; set; }
         }
 
         public interface IDemo<T>
@@ -158,9 +166,11 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
 
             #region IVector2<int> Members
 
-            [OdinSerialize] public int X { get; set; }
+            [OdinSerialize]
+            public int X { get; set; }
 
-            [OdinSerialize] public int Y { get; set; }
+            [OdinSerialize]
+            public int Y { get; set; }
 
             #endregion
         }

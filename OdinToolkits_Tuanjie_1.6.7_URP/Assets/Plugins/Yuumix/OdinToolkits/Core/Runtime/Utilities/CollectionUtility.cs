@@ -5,7 +5,8 @@ namespace Yuumix.OdinToolkits.Core
 {
     public static class CollectionUtility
     {
-        public static string[] MergeAndRemoveDuplicates(IEnumerable<string> array1, IEnumerable<string> array2)
+        public static string[] MergeAndRemoveDuplicates(IEnumerable<string> array1,
+            IEnumerable<string> array2)
         {
             // 使用HashSet<string>来快速合并和去重
             var uniqueStrings = new HashSet<string>(array1);
@@ -17,7 +18,8 @@ namespace Yuumix.OdinToolkits.Core
             }
 
             // 将去重后的集合转换为数组并排序
-            return uniqueStrings.OrderBy(s => s).ToArray();
+            return uniqueStrings.OrderBy(s => s)
+                .ToArray();
         }
     }
 }

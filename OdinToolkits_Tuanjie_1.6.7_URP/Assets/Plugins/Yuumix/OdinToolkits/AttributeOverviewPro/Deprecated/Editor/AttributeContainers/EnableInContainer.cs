@@ -85,8 +85,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
                 {
                     ReturnType = ">>> PrefabKind",
                     ParameterName = "PrefabKind.All",
-                    ParameterDescription =
-                        "All = PrefabInstanceAndNonPrefabInstance | PrefabAsset"
+                    ParameterDescription = "All = PrefabInstanceAndNonPrefabInstance | PrefabAsset"
                 }
             };
 

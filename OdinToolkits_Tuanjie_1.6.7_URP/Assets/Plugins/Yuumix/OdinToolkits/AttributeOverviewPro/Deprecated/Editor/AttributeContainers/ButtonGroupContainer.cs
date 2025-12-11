@@ -22,7 +22,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
                 {
                     ReturnType = "string",
                     ParameterName = "group",
-                    ParameterDescription = "分组名，默认为 _DefaultGroup，" + DescriptionConfigs.SupportMemberResolverLite
+                    ParameterDescription =
+                        "分组名，默认为 _DefaultGroup，" + DescriptionConfigs.SupportMemberResolverLite
                 },
                 new ParameterValue
                 {

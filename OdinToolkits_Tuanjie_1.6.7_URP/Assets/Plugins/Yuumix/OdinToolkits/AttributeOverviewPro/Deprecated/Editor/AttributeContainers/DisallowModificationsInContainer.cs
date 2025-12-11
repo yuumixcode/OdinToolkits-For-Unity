@@ -17,6 +17,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
 
         protected override List<ParameterValue> GetParamValues() => new List<ParameterValue>();
 
-        protected override string GetOriginalCode() => ReadCodeWithoutNamespace(typeof(DisallowModificationsInExample));
+        protected override string GetOriginalCode() =>
+            ReadCodeWithoutNamespace(typeof(DisallowModificationsInExample));
     }
 }

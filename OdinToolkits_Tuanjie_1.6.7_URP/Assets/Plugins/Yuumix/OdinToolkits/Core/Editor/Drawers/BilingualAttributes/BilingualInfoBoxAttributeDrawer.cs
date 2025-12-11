@@ -19,7 +19,8 @@ namespace Yuumix.OdinToolkits.Core.Editor
         protected override void Initialize()
         {
             _visibleIfResolver = ValueResolver.Get(Property, Attribute.VisibleIf, true);
-            _messageResolver = ValueResolver.GetForString(Property, Attribute.BilingualData.GetCurrentOrFallback());
+            _messageResolver =
+                ValueResolver.GetForString(Property, Attribute.BilingualData.GetCurrentOrFallback());
             _iconColorResolver = ValueResolver.Get(Property, Attribute.IconColor,
                 EditorStyles.label.normal.textColor);
             _drawMessageBox = _visibleIfResolver.GetValue();
@@ -45,7 +46,8 @@ namespace Yuumix.OdinToolkits.Core.Editor
 
         void ReloadResolver()
         {
-            _messageResolver = ValueResolver.GetForString(Property, Attribute.BilingualData.GetCurrentOrFallback());
+            _messageResolver =
+                ValueResolver.GetForString(Property, Attribute.BilingualData.GetCurrentOrFallback());
         }
 
         protected override void DrawPropertyLayout(GUIContent label)

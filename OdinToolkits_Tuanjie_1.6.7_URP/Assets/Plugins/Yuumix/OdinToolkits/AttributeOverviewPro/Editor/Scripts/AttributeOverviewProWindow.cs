@@ -18,7 +18,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         public static void OpenWindow()
         {
             _window = GetWindow<AttributeOverviewProWindow>(OdinToolkitsMenuItems.OVERVIEW_PRO_WINDOW_NAME);
-            _window.position = GUIHelper.GetEditorWindowRect().AlignCenter(1050, 750);
+            _window.position = GUIHelper.GetEditorWindowRect()
+                .AlignCenter(1050, 750);
             _window.Show();
         }
 
@@ -35,8 +36,13 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                     SearchTerm = "",
                     SearchFunction = menuItem =>
                     {
-                        var str = menuItem.Name.ToLower().Replace(" ", "");
-                        var searchStr = _tree.Config.SearchTerm.ToLower().Replace(" ", "");
+                        var str = menuItem.Name
+                            .ToLower()
+                            .Replace(" ", "");
+                        var searchStr = _tree.Config
+                            .SearchTerm
+                            .ToLower()
+                            .Replace(" ", "");
                         return str.Contains(searchStr);
                     }
                 },

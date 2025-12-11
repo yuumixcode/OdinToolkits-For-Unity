@@ -1,6 +1,6 @@
-using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
@@ -9,6 +9,29 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class TableListExample : ExampleSO
     {
+        #region Nested type: ${0}
+
+        [Serializable]
+        public class CustomClass
+        {
+            #region Serialized Fields
+
+            [TableColumnWidth(40, false)]
+            public int 序号;
+
+            [PreviewField(Height = 50)]
+            [TableColumnWidth(60, false)]
+            public Texture2D icon;
+
+            public string name;
+
+            public GameObject obj;
+
+            #endregion
+        }
+
+        #endregion
+
         #region Serialized Fields
 
         [PropertyOrder(10)]
@@ -120,29 +143,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
                 name = "OdinToolkits"
             }
         };
-
-        #endregion
-
-        #region Nested type: ${0}
-
-        [Serializable]
-        public class CustomClass
-        {
-            #region Serialized Fields
-
-            [TableColumnWidth(40, false)]
-            public int 序号;
-
-            [PreviewField(Height = 50)]
-            [TableColumnWidth(60, false)]
-            public Texture2D icon;
-
-            public string name;
-
-            public GameObject obj;
-
-            #endregion
-        }
 
         #endregion
     }

@@ -1,16 +1,15 @@
-using Yuumix.OdinToolkits.Core.SafeEditor;
 using Sirenix.OdinInspector;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 using Yuumix.OdinToolkits.Core;
-using YuumixEditor;
+using Yuumix.OdinToolkits.Core.SafeEditor;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
 {
     [AttributeOverviewProExample]
     public class ChildGameObjectOnlyExample : ExampleSO
     {
-        static string Path => PathSafeEditorUtility.GetTargetFolderPath("RuntimeExamples",
-            "OdinToolkits") + "/ChildGameObjectOnly";
+        static string Path => PathSafeEditorUtility.GetTargetFolderPath("RuntimeExamples", "OdinToolkits") +
+                              "/ChildGameObjectOnly";
 
         [DisplayAsString(fontSize: 12, overflow: false)]
         [HideLabel]

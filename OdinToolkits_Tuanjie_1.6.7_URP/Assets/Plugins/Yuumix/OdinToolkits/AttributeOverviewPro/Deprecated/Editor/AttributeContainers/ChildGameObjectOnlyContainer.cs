@@ -7,7 +7,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     {
         protected override string GetHeader() => "ChildGameObjectOnly";
 
-        protected override string GetIntroduction() => "作用于继承 Component 或者 GameObject 的字段上，在面板上绘制一个小按钮，用于选择当前物体的子物体";
+        protected override string GetIntroduction() =>
+            "作用于继承 Component 或者 GameObject 的字段上，在面板上绘制一个小按钮，用于选择当前物体的子物体";
 
         protected override List<string> GetTips() => new List<string>();
 
@@ -28,6 +29,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
                 }
             };
 
-        protected override string GetOriginalCode() => ReadCodeWithoutNamespace(typeof(ChildGameObjectOnlyExample));
+        protected override string GetOriginalCode() =>
+            ReadCodeWithoutNamespace(typeof(ChildGameObjectOnlyExample));
     }
 }

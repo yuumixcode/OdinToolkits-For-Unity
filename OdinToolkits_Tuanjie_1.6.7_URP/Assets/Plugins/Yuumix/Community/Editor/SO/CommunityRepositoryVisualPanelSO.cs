@@ -8,7 +8,6 @@ using Yuumix.Community.Schwapo.Editor;
 using Yuumix.Community.SwitchAttribute.Editor;
 using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Core.Editor;
-using YuumixEditor;
 
 namespace Yuumix.Community.Editor
 {

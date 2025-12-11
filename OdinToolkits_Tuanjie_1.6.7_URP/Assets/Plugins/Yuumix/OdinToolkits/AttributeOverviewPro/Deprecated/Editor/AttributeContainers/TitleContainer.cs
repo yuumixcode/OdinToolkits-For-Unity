@@ -1,5 +1,5 @@
-using Sirenix.OdinInspector.Editor;
 using System.Collections.Generic;
+using Sirenix.OdinInspector.Editor;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
@@ -35,8 +35,9 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
                 {
                     ReturnType = "TitleAlignments",
                     ParameterName = "titleAlignment",
-                    ParameterDescription = "标题对齐方式，默认为左对齐，共有四个枚举，TitleAlignments.Left，TitleAlignments.Centered，" +
-                                           "TitleAlignments.Right，以及 TitleAlignments.Split，Split 表示左边为标题，右边为子标题"
+                    ParameterDescription =
+                        "标题对齐方式，默认为左对齐，共有四个枚举，TitleAlignments.Left，TitleAlignments.Centered，" +
+                        "TitleAlignments.Right，以及 TitleAlignments.Split，Split 表示左边为标题，右边为子标题"
                 },
                 new ParameterValue
                 {

@@ -6,8 +6,8 @@ namespace Yuumix.OdinToolkits.Core
     /// 参考链接，URL 链接
     /// </summary>
     [Summary("参考链接，URL 链接")]
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Enum | AttributeTargets.Struct, AllowMultiple = true,
-        Inherited = false)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Enum | AttributeTargets.Struct,
+        AllowMultiple = true, Inherited = false)]
     public class ReferenceLinkURLAttribute : Attribute
     {
         public readonly string WebUrl;

@@ -1,6 +1,5 @@
-using Yuumix.OdinToolkits.Core.SafeEditor;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
-using YuumixEditor;
+using Yuumix.OdinToolkits.Core.SafeEditor;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 {

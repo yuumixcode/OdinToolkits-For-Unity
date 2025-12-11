@@ -8,13 +8,45 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class TableMatrixExample : ExampleOdinSO
     {
+        (string, LabelDirection) GetLabel(string[,] array, TableAxis axis, int index)
+        {
+            const string chessFileLetters = "ABCDEFGH";
+            return axis switch
+            {
+                TableAxis.Y => (chessFileLetters[chessFileLetters.Length - index - 1]
+                    .ToString(), LabelDirection.BottomToTop),
+                TableAxis.X => (chessFileLetters[index]
+                    .ToString(), LabelDirection.LeftToRight),
+                _ => (index.ToString(), LabelDirection.LeftToRight)
+            };
+        }
+
+        string CustomDrawElement1(Rect rect, string value)
+        {
+#if UNITY_EDITOR
+            EditorGUI.LabelField(rect, value);
+            return value;
+#endif
+        }
+
+        string CustomDrawElement2(Rect rect, string[,] array, int x, int y)
+        {
+#if UNITY_EDITOR
+            var guiStyle = new GUIStyle(EditorStyles.centeredGreyMiniLabel)
+            {
+                fontSize = 14
+            };
+            array[x, y] = EditorGUI.TextField(rect, array[x, y], guiStyle);
+            return array[x, y];
+#endif
+        }
+
         #region Serialized Fields
 
         [PropertyOrder(10)]
         [Title("默认 [TableMatrix]")]
         [DetailedInfoBox("默认规则解释...",
-            "默认文字方向为从左至右 - LabelDirection.LeftToRight，" +
-            "二维数组的 X，默认为列，Y 默认为行，和二维数组的xy相反")]
+            "默认文字方向为从左至右 - LabelDirection.LeftToRight，" + "二维数组的 X，默认为列，Y 默认为行，和二维数组的xy相反")]
         [TableMatrix]
         public string[,] Matrix0 = new string[2, 3]
         {
@@ -154,38 +186,5 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         };
 
         #endregion
-
-        (string, LabelDirection) GetLabel(string[,] array, TableAxis axis, int index)
-        {
-            const string chessFileLetters = "ABCDEFGH";
-            return axis switch
-            {
-                TableAxis.Y => (chessFileLetters[chessFileLetters.Length - index - 1].ToString(),
-                    LabelDirection.BottomToTop),
-                TableAxis.X => (chessFileLetters[index].ToString(), LabelDirection.LeftToRight),
-                _ => (index.ToString(), LabelDirection.LeftToRight)
-            };
-        }
-
-        string CustomDrawElement1(Rect rect, string value)
-        {
-#if UNITY_EDITOR
-            EditorGUI.LabelField(rect, value);
-            return value;
-#endif
-        }
-
-        string CustomDrawElement2(Rect rect, string[,] array, int x,
-            int y)
-        {
-#if UNITY_EDITOR
-            var guiStyle = new GUIStyle(EditorStyles.centeredGreyMiniLabel)
-            {
-                fontSize = 14
-            };
-            array[x, y] = EditorGUI.TextField(rect, array[x, y], guiStyle);
-            return array[x, y];
-#endif
-        }
     }
 }

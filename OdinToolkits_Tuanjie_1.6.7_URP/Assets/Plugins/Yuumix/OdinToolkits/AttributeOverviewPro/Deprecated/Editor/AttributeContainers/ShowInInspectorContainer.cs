@@ -18,6 +18,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
                 "通常用于游戏运行时的观察数据，而且可以在游戏过程中实时修改"
             };
 
-        protected override string GetOriginalCode() => ReadCodeWithoutNamespace(typeof(ShowInInspectorExample));
+        protected override string GetOriginalCode() =>
+            ReadCodeWithoutNamespace(typeof(ShowInInspectorExample));
     }
 }

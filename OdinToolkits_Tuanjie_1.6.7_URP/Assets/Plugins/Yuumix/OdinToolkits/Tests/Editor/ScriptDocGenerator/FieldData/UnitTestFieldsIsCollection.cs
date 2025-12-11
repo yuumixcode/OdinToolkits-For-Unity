@@ -13,10 +13,12 @@ namespace Yuumix.OdinToolkits.Tests.Editor
     /// </summary>
     public class UnitTestFieldsIsCollection
     {
-        static readonly FieldInfo[] FieldInfos = typeof(TestClass).GetRuntimeFields().ToArray();
+        static readonly FieldInfo[] FieldInfos = typeof(TestClass).GetRuntimeFields()
+            .ToArray();
 
-        static readonly IFieldData[] FieldDataArray =
-            FieldInfos.Select(f => UnitTestAnalysisFactory.Default.CreateFieldData(f)).ToArray();
+        static readonly IFieldData[] FieldDataArray = FieldInfos
+            .Select(f => UnitTestAnalysisFactory.Default.CreateFieldData(f))
+            .ToArray();
 
         static readonly Dictionary<string, string> FieldExpectedSignatureMaps = new Dictionary<string, string>
         {

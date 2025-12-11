@@ -12,7 +12,8 @@ namespace Yuumix.OdinToolkits.Core
             new Regex(@"(\s*///\s*<summary>(.*?)</summary>\s*)(.*?)((?=;|\{))",
                 RegexOptions.Singleline | RegexOptions.Multiline);
 
-        public static readonly Regex InvalidNamespaceRegex = new Regex(@"([^a-zA-Z0-9._]|[\s]|::|\b(using)\b|\.{2,})");
+        public static readonly Regex InvalidNamespaceRegex =
+            new Regex(@"([^a-zA-Z0-9._]|[\s]|::|\b(using)\b|\.{2,})");
 
         public static string CanonicalNamespace(string input)
         {

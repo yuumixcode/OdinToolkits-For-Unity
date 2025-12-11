@@ -1,15 +1,38 @@
-using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core;
-using YuumixEditor;
+using Yuumix.OdinToolkits.Core.SafeEditor;
 
 namespace Yuumix.OdinToolkits.Modules.Editor
 {
     public class ExportSettingsSO : ScriptableObject, IOdinToolkitsEditorReset
     {
         const string DEFAULT_EXPORT_FOLDER_NAME =
-            OdinToolkitsEditorPaths.ODIN_TOOLKITS_ANY_DATA_ROOT_FOLDER + "/ExportPackages";
+            OdinToolkitsEditorPaths.ALL_DATA_ROOT_FOLDER + "/ExportPackages";
+
+        #region IOdinToolkitsEditorReset Members
+
+        public virtual void EditorReset()
+        {
+            packageName = string.Empty;
+            version = string.Empty;
+            exportFolderPath = DEFAULT_EXPORT_FOLDER_NAME;
+            includeDependencies = false;
+            overwriteExistingPackage = false;
+            autoOpenFolderAfterExport = true;
+            filePaths?.Clear();
+            folderPaths?.Clear();
+            exportPathsFilterRule = null;
+        }
+
+        #endregion
+
+        /// <summary>
+        /// 在导出前的重置操作接口，用于自定义导出前的操作
+        /// </summary>
+        [Summary("在导出前的重置操作接口，用于自定义导出前的操作")]
+        public virtual void BeforeExportReset() { }
 
         #region Serialized Fields
 
@@ -54,28 +77,5 @@ namespace Yuumix.OdinToolkits.Modules.Editor
         public ExportPathsFilterRule exportPathsFilterRule;
 
         #endregion
-
-        #region IOdinToolkitsEditorReset Members
-
-        public virtual void EditorReset()
-        {
-            packageName = string.Empty;
-            version = string.Empty;
-            exportFolderPath = DEFAULT_EXPORT_FOLDER_NAME;
-            includeDependencies = false;
-            overwriteExistingPackage = false;
-            autoOpenFolderAfterExport = true;
-            filePaths?.Clear();
-            folderPaths?.Clear();
-            exportPathsFilterRule = null;
-        }
-
-        #endregion
-
-        /// <summary>
-        /// 在导出前的重置操作接口，用于自定义导出前的操作
-        /// </summary>
-        [Summary("在导出前的重置操作接口，用于自定义导出前的操作")]
-        public virtual void BeforeExportReset() { }
     }
 }

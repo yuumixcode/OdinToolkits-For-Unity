@@ -1,7 +1,7 @@
-using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Sirenix.OdinInspector;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
@@ -50,31 +50,27 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         [FoldoutGroup(nameof(TypeDrawerSettingsAttribute.Filter))]
         [LabelText("具体实例类型, 抽象类 && 泛型")]
         [TypeDrawerSettings(BaseType = typeof(IBaseGeneric<>),
-            Filter = TypeInclusionFilter.IncludeConcreteTypes |
-                     TypeInclusionFilter.IncludeAbstracts |
+            Filter = TypeInclusionFilter.IncludeConcreteTypes | TypeInclusionFilter.IncludeAbstracts |
                      TypeInclusionFilter.IncludeGenerics)]
         public Type Filter_Abstracts_Generics;
 
         [FoldoutGroup(nameof(TypeDrawerSettingsAttribute.Filter))]
         [LabelText("具体实例类型, 接口类型 && 泛型")]
         [TypeDrawerSettings(BaseType = typeof(IBaseGeneric<>),
-            Filter = TypeInclusionFilter.IncludeConcreteTypes |
-                     TypeInclusionFilter.IncludeInterfaces |
+            Filter = TypeInclusionFilter.IncludeConcreteTypes | TypeInclusionFilter.IncludeInterfaces |
                      TypeInclusionFilter.IncludeGenerics)]
         public Type Filter_Interfaces_Generics;
 
         [FoldoutGroup(nameof(TypeDrawerSettingsAttribute.Filter))]
         [LabelText("具体实例类型, 接口类型 && 抽象类")]
         [TypeDrawerSettings(BaseType = typeof(IBaseGeneric<>),
-            Filter = TypeInclusionFilter.IncludeConcreteTypes |
-                     TypeInclusionFilter.IncludeInterfaces |
+            Filter = TypeInclusionFilter.IncludeConcreteTypes | TypeInclusionFilter.IncludeInterfaces |
                      TypeInclusionFilter.IncludeAbstracts)]
         public Type Filter_Interfaces_Abstracts;
 
         [FoldoutGroup(nameof(TypeDrawerSettingsAttribute.Filter))]
         [LabelText("All")]
-        [TypeDrawerSettings(BaseType = typeof(IBaseGeneric<>),
-            Filter = TypeInclusionFilter.IncludeAll)]
+        [TypeDrawerSettings(BaseType = typeof(IBaseGeneric<>), Filter = TypeInclusionFilter.IncludeAll)]
         public Type Filter_All;
 
         #endregion

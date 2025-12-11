@@ -10,10 +10,12 @@ namespace Yuumix.OdinToolkits.Tests.Editor
 {
     public class UnitTestFieldsIsDelegate
     {
-        static readonly FieldInfo[] TestFields = typeof(TestClass).GetRuntimeFields().ToArray();
+        static readonly FieldInfo[] TestFields = typeof(TestClass).GetRuntimeFields()
+            .ToArray();
 
-        static readonly IFieldData[] TestFieldData =
-            TestFields.Select(f => UnitTestAnalysisFactory.Default.CreateFieldData(f)).ToArray();
+        static readonly IFieldData[] TestFieldData = TestFields
+            .Select(f => UnitTestAnalysisFactory.Default.CreateFieldData(f))
+            .ToArray();
 
         static readonly Dictionary<string, string> FieldExpectedSignatureMaps = new Dictionary<string, string>
         {

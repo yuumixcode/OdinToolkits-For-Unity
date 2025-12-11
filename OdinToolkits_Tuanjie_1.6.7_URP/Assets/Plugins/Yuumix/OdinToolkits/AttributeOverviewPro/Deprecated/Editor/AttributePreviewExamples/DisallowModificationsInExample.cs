@@ -1,8 +1,7 @@
-using Yuumix.OdinToolkits.Core.SafeEditor;
 using Sirenix.OdinInspector;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 using Yuumix.OdinToolkits.Core;
-using YuumixEditor;
+using Yuumix.OdinToolkits.Core.SafeEditor;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
 {
@@ -10,8 +9,8 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     public class DisallowModificationsInExample : ExampleSO
     {
         static string Path =>
-            PathSafeEditorUtility.GetTargetFolderPath("RuntimeExamples",
-                "OdinToolkits") + "/DisallowModificationsIn";
+            PathSafeEditorUtility.GetTargetFolderPath("RuntimeExamples", "OdinToolkits") +
+            "/DisallowModificationsIn";
 
         [DisplayAsString(fontSize: 12, overflow: false)]
         [HideLabel]

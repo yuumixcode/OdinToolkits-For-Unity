@@ -11,11 +11,11 @@ namespace Yuumix.OdinToolkits.Core.SafeEditor
     [Summary("关于 Path 路径的工具类。仅在编辑器阶段可用。")]
     public static class PathSafeEditorUtility
     {
+#if UNITY_EDITOR
         [Summary("根据相对路径，递归创建 Assets 下的文件夹。仅在编辑器阶段可用，打包自动剔除。")]
         [Conditional("UNITY_EDITOR")]
         public static void CreateDirectoryRecursivelyInAssets(string relativePath)
         {
-            // 移除 Assets 前缀，获取实际的文件夹路径
             var pathWithoutAssets = relativePath.Replace("Assets/", "");
             var folders = pathWithoutAssets.Split('/');
             var currentPath = "Assets";
@@ -32,6 +32,7 @@ namespace Yuumix.OdinToolkits.Core.SafeEditor
 
             AssetDatabase.Refresh();
         }
+#endif
 
         [Summary("获取以目标文件夹名称结尾且路径中包含所有指定的文件夹名称的相对路径。仅在编辑器阶段可用，打包后返回 string.Empty")]
         public static string GetTargetFolderPath(string targetFolderName, params string[] containFolderName)

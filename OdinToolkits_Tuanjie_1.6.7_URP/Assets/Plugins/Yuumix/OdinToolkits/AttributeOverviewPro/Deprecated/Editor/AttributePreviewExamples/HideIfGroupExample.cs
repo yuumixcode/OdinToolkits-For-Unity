@@ -5,8 +5,7 @@ using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
 {
     [AttributeOverviewProExample]
-    [TypeInfoBox("如果 HideIfGroup 没有设置 Condition，那么路径既发挥组名作用，也是条件判断的值，引用成员名" +
-                 "如果设置 Condition，则路径将只表示组名")]
+    [TypeInfoBox("如果 HideIfGroup 没有设置 Condition，那么路径既发挥组名作用，也是条件判断的值，引用成员名" + "如果设置 Condition，则路径将只表示组名")]
     public class HideIfGroupExample : ExampleSO
     {
         #region Serialized Fields

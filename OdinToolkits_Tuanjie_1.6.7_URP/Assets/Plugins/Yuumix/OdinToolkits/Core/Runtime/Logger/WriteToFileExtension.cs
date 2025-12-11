@@ -123,16 +123,20 @@ namespace Yuumix.OdinToolkits.Core
                 switch (logType)
                 {
                     case LogType.Log:
-                        sb.Append("[INFO] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                        sb.Append(
+                            "[INFO] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                         break;
                     case LogType.Warning:
-                        sb.Append("[WARNING] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                        sb.Append(
+                            "[WARNING] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                         break;
                     case LogType.Error:
-                        sb.Append("[ERROR] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                        sb.Append(
+                            "[ERROR] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                         break;
                     case LogType.Assert:
-                        sb.Append("[ASSERT] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                        sb.Append(
+                            "[ASSERT] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                         break;
                     case LogType.Exception:
                         sb.Append(
@@ -143,7 +147,8 @@ namespace Yuumix.OdinToolkits.Core
                 sb.AppendLine();
                 sb.AppendLine(message);
                 var stackTrace = new StackTrace(true);
-                sb.AppendLine().AppendLine("========================== Stack Trace Start ==========================");
+                sb.AppendLine()
+                    .AppendLine("========================== Stack Trace Start ==========================");
                 sb.Append(stackTrace);
                 sb.AppendLine();
                 sb.AppendLine("========================== End ==========================");
@@ -207,7 +212,8 @@ namespace Yuumix.OdinToolkits.Core
             }
             catch (Exception ex)
             {
-                YuumixLogger.LogError($"Failed to flush log buffer: {ex}", prefix: "YuumixLogger WriteToFile Error");
+                YuumixLogger.LogError($"Failed to flush log buffer: {ex}",
+                    prefix: "YuumixLogger WriteToFile Error");
                 LogBuffer.Clear();
             }
 

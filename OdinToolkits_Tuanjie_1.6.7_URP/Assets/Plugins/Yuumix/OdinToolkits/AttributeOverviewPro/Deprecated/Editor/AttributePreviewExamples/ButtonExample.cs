@@ -7,18 +7,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class ButtonExample : ExampleSO
     {
-        #region Serialized Fields
-
-        [PropertyOrder(1)]
-        [FoldoutGroup("Button 基础使用")]
-        public bool toggle;
-
-        [PropertyOrder(10)]
-        [FoldoutGroup("Button 基础使用")]
-        public string buttonName = "Dynamic button name";
-
-        #endregion
-
         [PropertyOrder(1)]
         [FoldoutGroup("Button 基础使用")]
         [InfoBox("基础使用，将特性直接置于方法上，用字符串命名按钮，即可快速创建可以执行方法的按钮")]
@@ -115,8 +103,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
 
         [PropertyOrder(110)]
         [FoldoutGroup("Button 进阶使用 - 图标")]
-        [InfoBox("当 Stretch == false 时，ButtonAlignment 控制按钮的位置，" +
-                 "范围 0 - 1，0 表示最左侧，1 表示最右侧")]
+        [InfoBox("当 Stretch == false 时，ButtonAlignment 控制按钮的位置，" + "范围 0 - 1，0 表示最左侧，1 表示最右侧")]
         [Button(SdfIconType.Dice5Fill, IconAlignment.RightEdge, Stretch = false, ButtonAlignment = 1f)]
         void DontStretchAndAlign() { }
 
@@ -146,5 +133,17 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         {
             Debug.Log("参数为: " + floatArg);
         }
+
+        #region Serialized Fields
+
+        [PropertyOrder(1)]
+        [FoldoutGroup("Button 基础使用")]
+        public bool toggle;
+
+        [PropertyOrder(10)]
+        [FoldoutGroup("Button 基础使用")]
+        public string buttonName = "Dynamic button name";
+
+        #endregion
     }
 }

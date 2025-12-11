@@ -1,12 +1,9 @@
-using Sirenix.OdinInspector;
 using System;
+using Sirenix.OdinInspector;
 
 namespace Yuumix.OdinToolkits.Core
 {
-    /// <summary>
-    /// 作用于 Property 的特性，显示属性，同时关闭灰度显示
-    /// </summary>
-    [Summary("显示属性 Property，同时关闭灰度显示")]
+    [Summary("显示属性在 Inspector 中，同时关闭灰度显示")]
     [IncludeMyAttributes]
     [ShowInInspector]
     [EnableGUI]

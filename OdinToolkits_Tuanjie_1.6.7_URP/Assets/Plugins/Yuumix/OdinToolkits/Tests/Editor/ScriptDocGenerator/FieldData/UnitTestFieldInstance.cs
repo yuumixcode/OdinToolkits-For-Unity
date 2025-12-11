@@ -9,10 +9,12 @@ namespace Yuumix.OdinToolkits.Tests.Editor
 {
     public class UnitTestFieldInstance
     {
-        static readonly FieldInfo[] FieldInfos = typeof(TestClass).GetRuntimeFields().ToArray();
+        static readonly FieldInfo[] FieldInfos = typeof(TestClass).GetRuntimeFields()
+            .ToArray();
 
-        static readonly IFieldData[] FieldDataArray =
-            FieldInfos.Select(f => UnitTestAnalysisFactory.Default.CreateFieldData(f)).ToArray();
+        static readonly IFieldData[] FieldDataArray = FieldInfos
+            .Select(f => UnitTestAnalysisFactory.Default.CreateFieldData(f))
+            .ToArray();
 
         [Test]
         public void TestStringField()

@@ -23,14 +23,15 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
                 {
                     ReturnType = "string",
                     ParameterName = "path",
-                    ParameterDescription = "路径，可以只代表组名，也可以引用成员名，" + DescriptionConfigs.SupportMemberResolverLite +
-                                           "特例: 不支持方法名"
+                    ParameterDescription = "路径，可以只代表组名，也可以引用成员名，" +
+                                           DescriptionConfigs.SupportMemberResolverLite + "特例: 不支持方法名"
                 },
                 new ParameterValue
                 {
                     ReturnType = "string",
                     ParameterName = "Condition",
-                    ParameterDescription = "条件，可以是任意字符串，但不是空字符串，" + DescriptionConfigs.SupportMemberResolverLite
+                    ParameterDescription =
+                        "条件，可以是任意字符串，但不是空字符串，" + DescriptionConfigs.SupportMemberResolverLite
                 },
                 new ParameterValue
                 {

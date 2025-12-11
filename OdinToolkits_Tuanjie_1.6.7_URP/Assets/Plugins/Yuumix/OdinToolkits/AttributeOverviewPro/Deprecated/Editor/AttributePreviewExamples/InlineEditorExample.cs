@@ -9,6 +9,12 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class InlineEditorExample : ExampleSO
     {
+        [OnInspectorInit]
+        void CreateData()
+        {
+            inlineComponent6 = ExampleHelper.GetScriptableObject<CommonInlineObject>("inlineComponent6");
+        }
+
         #region Serialized Fields
 
         [FoldoutGroup("InlineEditor 无参数使用")]
@@ -68,12 +74,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         public CommonInlineObject inlineComponent6;
 
         #endregion
-
-        [OnInspectorInit]
-        void CreateData()
-        {
-            inlineComponent6 = ExampleHelper.GetScriptableObject<CommonInlineObject>("inlineComponent6");
-        }
 
         // 可以直接标记类，不用标记单个字段
         // [InlineEditor]

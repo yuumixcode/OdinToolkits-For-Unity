@@ -17,13 +17,12 @@ namespace Yuumix.OdinToolkits.Core
             // 获取指定类型的实例
             var type = typeof(T);
             // 获取私有无参构造函数
-            var constructor = type.GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic,
-                null, Type.EmptyTypes, null);
+            var constructor = type.GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic, null,
+                Type.EmptyTypes, null);
             // 如果没有找到私有无参构造函数，则抛出异常
             if (constructor == null)
             {
-                throw new InvalidOperationException(
-                    $" {typeof(T)} class 没有 private 无参构造函数，请声明准确的构造函数");
+                throw new InvalidOperationException($" {typeof(T)} class 没有 private 无参构造函数，请声明准确的构造函数");
             }
 
             // 调用构造函数创建实例，并将其强制转换为T类型

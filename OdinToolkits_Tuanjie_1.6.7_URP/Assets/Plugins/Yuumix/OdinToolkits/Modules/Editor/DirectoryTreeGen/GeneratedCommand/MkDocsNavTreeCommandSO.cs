@@ -22,7 +22,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
             sb.AppendLine("nav:");
             GenerateFirstLevelFileLine(data, sb);
             foreach (var subData in data.SubDirectoryData.Where(s =>
-                         s.Depth == 1 && s.AnalysisType == DirectoryAnalysisData.DirectoryAnalysisType.Folder))
+                         s.Depth == 1 &&
+                         s.AnalysisType == DirectoryAnalysisData.DirectoryAnalysisType.Folder))
             {
                 RecursiveGenerate(subData, sb, maxDepth);
             }
@@ -43,8 +44,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                          s.AnalysisType == DirectoryAnalysisData.DirectoryAnalysisType.File &&
                          !_fileFilterArray.Contains(s.Name)))
             {
-                sb.AppendLine(GetIndentation(directoryAnalysisData.Depth) + directoryAnalysisData.Name.Split('.')[0] +
-                              ":");
+                sb.AppendLine(GetIndentation(directoryAnalysisData.Depth) + directoryAnalysisData.Name
+                    .Split('.')[0] + ":");
                 sb.AppendLine(GetIndentation(directoryAnalysisData.Depth + 1) + directoryAnalysisData.Name);
             }
         }
@@ -76,7 +77,8 @@ namespace Yuumix.OdinToolkits.Modules.Editor
                 var finalLine = indentString + subData.Name + ":";
                 if (subData.AnalysisType == DirectoryAnalysisData.DirectoryAnalysisType.File)
                 {
-                    finalLine = indentString + subData.Name.Split('.')[0] + ": " + subData.RelativePath;
+                    finalLine = indentString + subData.Name
+                        .Split('.')[0] + ": " + subData.RelativePath;
                 }
 
                 sb.AppendLine(finalLine);

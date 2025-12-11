@@ -24,18 +24,21 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
                 {
                     ReturnType = "string",
                     ParameterName = "before",
-                    ParameterDescription = "触发函数名，时机为修改前，方法参数为 (CollectionChangeInfo info, object value)，无返回值，" +
-                                           DescriptionConfigs.SupportAllResolver
+                    ParameterDescription =
+                        "触发函数名，时机为修改前，方法参数为 (CollectionChangeInfo info, object value)，无返回值，" +
+                        DescriptionConfigs.SupportAllResolver
                 },
                 new ParameterValue
                 {
                     ReturnType = "string",
                     ParameterName = "after",
-                    ParameterDescription = "触发函数名，时机为修改前，方法参数为 (CollectionChangeInfo info, object value)，无返回值，" +
-                                           DescriptionConfigs.SupportAllResolver
+                    ParameterDescription =
+                        "触发函数名，时机为修改前，方法参数为 (CollectionChangeInfo info, object value)，无返回值，" +
+                        DescriptionConfigs.SupportAllResolver
                 }
             };
 
-        protected override string GetOriginalCode() => ReadCodeWithoutNamespace(typeof(OnCollectionChangedExample));
+        protected override string GetOriginalCode() =>
+            ReadCodeWithoutNamespace(typeof(OnCollectionChangedExample));
     }
 }

@@ -1,5 +1,5 @@
-using Sirenix.OdinInspector.Editor;
 using System.Collections.Generic;
+using Sirenix.OdinInspector.Editor;
 using UnityEngine;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 

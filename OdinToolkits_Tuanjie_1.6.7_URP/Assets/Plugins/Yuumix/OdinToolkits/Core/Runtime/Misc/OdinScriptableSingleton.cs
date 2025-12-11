@@ -1,12 +1,10 @@
-using Yuumix.OdinToolkits.Core.SafeEditor;
 using Sirenix.OdinInspector;
-#if UNITY_EDITOR
-using YuumixEditor;
-#endif
+using Yuumix.OdinToolkits.Core.SafeEditor;
 
 namespace Yuumix.OdinToolkits.Core
 {
-    public abstract class OdinScriptableSingleton<T> : SerializedScriptableObject where T : OdinScriptableSingleton<T>
+    public abstract class OdinScriptableSingleton<T> : SerializedScriptableObject
+        where T : OdinScriptableSingleton<T>
     {
         static T _instance;
 
@@ -19,10 +17,8 @@ namespace Yuumix.OdinToolkits.Core
                     return _instance;
                 }
 
-#if UNITY_EDITOR
                 _instance = ScriptableObjectSafeEditorUtility.GetSingletonAssetAndDeleteOther<T>(
-                    OdinToolkitsEditorPaths.ODIN_TOOLKITS_ANY_DATA_ROOT_FOLDER + "/SO");
-#endif
+                    OdinToolkitsEditorPaths.ALL_DATA_ROOT_FOLDER + "/SO");
                 return _instance;
             }
         }

@@ -1,8 +1,8 @@
-using Sirenix.OdinInspector;
-using Sirenix.OdinInspector.Editor;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Sirenix.OdinInspector;
+using Sirenix.OdinInspector.Editor;
 using UnityEngine;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
@@ -14,6 +14,41 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         const string DetailsYoga = "YOGA 框架 == Yuumi Odin Graphic Architecture";
 
         const string MessageYoga = "YOGA 框架 ...";
+
+        string MessageProperty => message;
+
+        public string DetailsProperty => details;
+
+        public bool IsVisibleProperty => isVisible;
+
+        [PropertyOrder(30)]
+        [ShowInInspector]
+        [FoldoutGroup("DetailedInfoBox 扩展")]
+        [DetailedInfoBox("DetailedInfoBox 可以用于属性...", "DetailedInfoBox 完整部分，可以用于属性")]
+        public string Property { get; set; }
+
+        string GetMessage() => message;
+
+        string GetDetails() => details;
+
+        bool GetVisibility() => isVisible;
+
+        [PropertyOrder(40)]
+        [FoldoutGroup("DetailedInfoBox 扩展")]
+        [DetailedInfoBox("DetailedInfoBox 可以用在绘制方法上...", "DetailedInfoBox 完整部分，用于标记绘制的方法")]
+        [OnInspectorGUI]
+        public void OnGUI()
+        {
+            GUILayout.Label("绘制方法");
+        }
+
+        public override void SetDefaultValue()
+        {
+            message = "YOGA 框架 ...";
+            details = "YOGA 框架 == Yuumi Odin Graphic Architecture";
+            isVisible = true;
+            Property = "";
+        }
 
         #region Serialized Fields
 
@@ -91,43 +126,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         public string infoMessageTypeDetailedInfoBox4;
 
         #endregion
-
-        string MessageProperty => message;
-
-        public string DetailsProperty => details;
-
-        public bool IsVisibleProperty => isVisible;
-
-        [PropertyOrder(30)]
-        [ShowInInspector]
-        [FoldoutGroup("DetailedInfoBox 扩展")]
-        [DetailedInfoBox("DetailedInfoBox 可以用于属性...",
-            "DetailedInfoBox 完整部分，可以用于属性")]
-        public string Property { get; set; }
-
-        string GetMessage() => message;
-
-        string GetDetails() => details;
-
-        bool GetVisibility() => isVisible;
-
-        [PropertyOrder(40)]
-        [FoldoutGroup("DetailedInfoBox 扩展")]
-        [DetailedInfoBox("DetailedInfoBox 可以用在绘制方法上...",
-            "DetailedInfoBox 完整部分，用于标记绘制的方法")]
-        [OnInspectorGUI]
-        public void OnGUI()
-        {
-            GUILayout.Label("绘制方法");
-        }
-
-        public override void SetDefaultValue()
-        {
-            message = "YOGA 框架 ...";
-            details = "YOGA 框架 == Yuumi Odin Graphic Architecture";
-            isVisible = true;
-            Property = "";
-        }
     }
 
 #if UNITY_EDITOR // Processor 方法需要在编辑器下才能使用，此时位于 Editor 文件夹可以不需要

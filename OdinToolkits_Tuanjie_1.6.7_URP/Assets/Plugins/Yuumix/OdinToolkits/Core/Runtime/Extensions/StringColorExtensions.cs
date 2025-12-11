@@ -13,7 +13,8 @@ namespace Yuumix.OdinToolkits.Core
         /// <returns>带有颜色标记的 Unity 富文本字符串</returns>
         public static string Colorize(this string source, string target, string hexColor)
         {
-            if (string.IsNullOrEmpty(source) || string.IsNullOrEmpty(target) || string.IsNullOrEmpty(hexColor))
+            if (string.IsNullOrEmpty(source) || string.IsNullOrEmpty(target) ||
+                string.IsNullOrEmpty(hexColor))
             {
                 return source;
             }
@@ -25,8 +26,7 @@ namespace Yuumix.OdinToolkits.Core
             }
 
             return Regex.Replace(source, Regex.Escape(target),
-                match => $"<color={hexColor}>{match.Value}</color>",
-                RegexOptions.IgnoreCase);
+                match => $"<color={hexColor}>{match.Value}</color>", RegexOptions.IgnoreCase);
         }
 
         /// <summary>

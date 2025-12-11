@@ -10,8 +10,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         protected override string GetIntroduction() => "将 Property 以 Foldout 的形式分组，可以折叠";
 
         protected override List<string> GetTips() =>
-            new List<string>
-                { "可以和其他 Group 特性连接，共享分组路径" };
+            new List<string> { "可以和其他 Group 特性连接，共享分组路径" };
 
         protected override List<ParameterValue> GetParamValues() =>
             new List<ParameterValue>

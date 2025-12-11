@@ -1,8 +1,8 @@
-using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
@@ -15,13 +15,55 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     {
         static int[] _textureSizes = { 256, 512, 1024 };
 
+        readonly int[] _customInts =
+        {
+            1, 5, 6, 3, 4, 5, 8, 76, 100
+        };
+
+        readonly IEnumerable _treeViewOfInts = new ValueDropdownList<int>
+        {
+            { "Node 1/Node 1.1", 1 },
+            { "Node 1/Node 1.2", 2 },
+            { "Node 2/Node 2.1", 3 },
+            { "Node 3/Node 3.1", 4 },
+            { "Node 3/Node 3.2", 5 },
+            { "Node 1/Node 3.1/Node 3.1.1", 6 },
+            { "Node 1/Node 3.1/Node 3.1.2", 7 }
+        };
+
+        public IEnumerable RangeVector3()
+        {
+            return Enumerable.Range(0, 10)
+                .Select(i => new Vector3(i, i, i));
+        }
+
+        static IEnumerable GetAllSceneObjects()
+        {
+            return FindObjectsByType<GameObject>(FindObjectsInactive.Include, FindObjectsSortMode.None)
+                .Select(x => new ValueDropdownItem(GetPath(x.transform), x));
+
+            string GetPath(Transform x)
+            {
+                return x ? GetPath(x.parent) + "/" + x.gameObject.name : "";
+            }
+        }
+
+        static IEnumerable GetAllSirenixAssets()
+        {
+            const string root = "Assets/Plugins/Sirenix/";
+
+            return AssetDatabase.GetAllAssetPaths()
+                .Where(x => x.StartsWith(root))
+                .Select(x => x.Substring(root.Length))
+                .Select(x => new ValueDropdownItem(x, AssetDatabase.LoadAssetAtPath<Object>(root + x)));
+        }
+
         #region Serialized Fields
 
         #region NumberOfItemsBeforeEnablingSearch 参数
 
         [FoldoutGroup("NumberOfItemsBeforeEnablingSearch 参数 下拉列表的搜索框")]
-        [InfoBox("设置 NumberOfItemsBeforeEnablingSearch = 7，下拉列表中的元素数量达到 7 个出现搜索框，" +
-                 "搜索框不是列表的搜索框")]
+        [InfoBox("设置 NumberOfItemsBeforeEnablingSearch = 7，下拉列表中的元素数量达到 7 个出现搜索框，" + "搜索框不是列表的搜索框")]
         [ValueDropdown("_treeViewOfInts", NumberOfItemsBeforeEnablingSearch = 7)]
         public List<int> intTreeviewMode2 = new List<int> { 1, 2, 7 };
 
@@ -70,8 +112,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
 
         [PropertySpace(0, 10)]
         [FoldoutGroup("ExpandAllMenuItems 参数 是否展开树状图")]
-        [InfoBox("ValueDropdown 作用在列表上时，默认修改的是其中元素的赋值，可以实现树状选择框，" +
-                 "使用 ValueDropdownList 即可，" +
+        [InfoBox("ValueDropdown 作用在列表上时，默认修改的是其中元素的赋值，可以实现树状选择框，" + "使用 ValueDropdownList 即可，" +
                  "根据列表的第一个参数来绘制 TreeView，ExpandAllMenuItems == true 默认情况展开树状图")]
         [ValueDropdown("_treeViewOfInts", ExpandAllMenuItems = true)]
         public List<int> intTreeview = new List<int> { 1, 2, 7 };
@@ -82,8 +123,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
 
         [FoldoutGroup("ExcludeExistingValuesInList 参数")]
         [InfoBox("列表类型为 GameObject，在满足 IsUniqueList == true 的条件下，" +
-                 "才能设置 ExcludeExistingValuesInList = true or false，" +
-                 "如果为 true，将会直接剔除重复的，不需要手动勾选")]
+                 "才能设置 ExcludeExistingValuesInList = true or false，" + "如果为 true，将会直接剔除重复的，不需要手动勾选")]
         [ValueDropdown("GetAllSceneObjects", IsUniqueList = true, DropdownTitle = "标题: 选择场景物体",
             ExcludeExistingValuesInList = true)]
         public List<GameObject> uniqueGameObjectsIsUniqueListMode2;
@@ -93,8 +133,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         #region DrawDropdownForListElements 参数
 
         [FoldoutGroup("DrawDropdownForListElements 参数 关闭对列表中元素绘制的修改")]
-        [InfoBox("列表类型为 GameObject，DrawDropdownForListElements = false，" +
-                 "表示下拉选择框只在列表 + 号绘制，不为其中元素绘制")]
+        [InfoBox("列表类型为 GameObject，DrawDropdownForListElements = false，" + "表示下拉选择框只在列表 + 号绘制，不为其中元素绘制")]
         [ValueDropdown("GetAllSceneObjects", IsUniqueList = true, DropdownTitle = "标题: 选择场景物体",
             ExcludeExistingValuesInList = true, DrawDropdownForListElements = false)]
         public List<GameObject> uniqueGameObjectsIsUniqueListMode3;
@@ -135,49 +174,6 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         #endregion
 
         #endregion
-
-        readonly int[] _customInts =
-        {
-            1, 5, 6, 3, 4, 5, 8, 76, 100
-        };
-
-        readonly IEnumerable _treeViewOfInts = new ValueDropdownList<int>
-        {
-            { "Node 1/Node 1.1", 1 },
-            { "Node 1/Node 1.2", 2 },
-            { "Node 2/Node 2.1", 3 },
-            { "Node 3/Node 3.1", 4 },
-            { "Node 3/Node 3.2", 5 },
-            { "Node 1/Node 3.1/Node 3.1.1", 6 },
-            { "Node 1/Node 3.1/Node 3.1.2", 7 }
-        };
-
-        public IEnumerable RangeVector3()
-        {
-            return Enumerable.Range(0, 10).Select(i => new Vector3(i, i, i));
-        }
-
-        static IEnumerable GetAllSceneObjects()
-        {
-            return FindObjectsByType<GameObject>(FindObjectsInactive.Include, FindObjectsSortMode.None)
-                .Select(x => new ValueDropdownItem(GetPath(x.transform), x));
-
-            string GetPath(Transform x)
-            {
-                return x ? GetPath(x.parent) + "/" + x.gameObject.name : "";
-            }
-        }
-
-        static IEnumerable GetAllSirenixAssets()
-        {
-            const string root = "Assets/Plugins/Sirenix/";
-
-            return AssetDatabase.GetAllAssetPaths()
-                .Where(x => x.StartsWith(root))
-                .Select(x => x.Substring(root.Length))
-                .Select(x =>
-                    new ValueDropdownItem(x, AssetDatabase.LoadAssetAtPath<Object>(root + x)));
-        }
 
         #region ValueGetter
 
@@ -242,10 +238,9 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         public List<GameObject> uniqueGameObjectsNoUniqueList;
 
         [FoldoutGroup("IsUniqueList 参数")]
-        [InfoBox("列表类型为 GameObject，此时 IsUniqueList == true，表示内容是唯一的，" +
-                 "再次选择同一个物体，点击 CheckBox，将会是移除操作")]
-        [InfoBox("这个参数实现有问题，实际上应该是要绘制一个 CheckBox 在前面，然后选择是否勾选，" +
-                 "Odin 问题，当前版本 3.3.1.11", InfoMessageType.Warning)]
+        [InfoBox("列表类型为 GameObject，此时 IsUniqueList == true，表示内容是唯一的，" + "再次选择同一个物体，点击 CheckBox，将会是移除操作")]
+        [InfoBox("这个参数实现有问题，实际上应该是要绘制一个 CheckBox 在前面，然后选择是否勾选，" + "Odin 问题，当前版本 3.3.1.11",
+            InfoMessageType.Warning)]
         [ValueDropdown("GetAllSceneObjects", IsUniqueList = true)]
         public List<GameObject> uniqueGameObjectsIsUniqueList;
 
@@ -254,20 +249,17 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         #region OnlyChangeValueOnConfirm
 
         [FoldoutGroup("OnlyChangeValueOnConfirm 参数")]
-        [InfoBox("设置 OnlyChangeValueOnConfirm = true，如果设置为 true，当完全确认下拉框中的选择时，" +
-                 "实际属性值将只更改一次")]
+        [InfoBox("设置 OnlyChangeValueOnConfirm = true，如果设置为 true，当完全确认下拉框中的选择时，" + "实际属性值将只更改一次")]
         [ValueDropdown("GetAllSirenixAssets", OnlyChangeValueOnConfirm = true, DoubleClickToConfirm = true)]
         [OnValueChanged("@Debug.Log(\" sirenixAsset 的值改变了\")")]
-        [InlineButton("@Debug.Log(\" sirenixAsset 的值为: \" + sirenixAssetMode2.ToString())"
-            , "输出值")]
+        [InlineButton("@Debug.Log(\" sirenixAsset 的值为: \" + sirenixAssetMode2.ToString())", "输出值")]
         public Object sirenixAssetMode;
 
         [FoldoutGroup("OnlyChangeValueOnConfirm 参数")]
         [InfoBox("默认 OnlyChangeValueOnConfirm = false，双击才能确认")]
         [ValueDropdown("GetAllSirenixAssets", DoubleClickToConfirm = true)]
         [OnValueChanged("@Debug.Log(\" sirenixAsset 的值改变了\")")]
-        [InlineButton("@Debug.Log(\" sirenixAsset 的值为: \" + sirenixAssetMode2.ToString())"
-            , "输出值")]
+        [InlineButton("@Debug.Log(\" sirenixAsset 的值为: \" + sirenixAssetMode2.ToString())", "输出值")]
         public Object sirenixAssetMode2;
 
         [PropertyOrder(4)]
@@ -301,8 +293,10 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
         ValueDropdownList<MyComplexType> GetOptions() =>
             new ValueDropdownList<MyComplexType>
             {
-                new ValueDropdownItem<MyComplexType>("Option 0", new MyComplexType { Name = "Option 0", value = 0 }),
-                new ValueDropdownItem<MyComplexType>("Option 1", new MyComplexType { Name = "Option 1", value = 1 })
+                new ValueDropdownItem<MyComplexType>("Option 0",
+                    new MyComplexType { Name = "Option 0", value = 0 }),
+                new ValueDropdownItem<MyComplexType>("Option 1",
+                    new MyComplexType { Name = "Option 1", value = 1 })
             };
 
         [Serializable]

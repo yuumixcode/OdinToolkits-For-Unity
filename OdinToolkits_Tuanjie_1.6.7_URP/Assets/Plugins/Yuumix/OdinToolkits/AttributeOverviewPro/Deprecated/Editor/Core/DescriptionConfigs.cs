@@ -17,11 +17,9 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
 
         public const string SupportAllResolver = SupportMemberResolverLite + SupportOdinExpressions;
 
-        public const string SupportMemberResolverLite =
-            "支持解析成员名(包括字段，属性，成员方法)，特性构造函数的参数在 Rider 支持高亮显示。";
+        public const string SupportMemberResolverLite = "支持解析成员名(包括字段，属性，成员方法)，特性构造函数的参数在 Rider 支持高亮显示。";
 
-        public const string SupportOdinExpressions =
-            "支持表达式返回值，如: @Debug.Log(xxx)，不会在 Rider 中高亮显示。";
+        public const string SupportOdinExpressions = "支持表达式返回值，如: @Debug.Log(xxx)，不会在 Rider 中高亮显示。";
 
         public const string InspectorPropertyDesc = "Odin 提供的 InspectorProperty 类型的对象，类似于 SerializedProperty";
 

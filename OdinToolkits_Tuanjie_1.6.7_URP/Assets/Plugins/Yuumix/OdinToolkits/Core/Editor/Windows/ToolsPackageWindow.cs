@@ -52,8 +52,8 @@ namespace Yuumix.OdinToolkits.Core.Editor
         void ReBuild()
         {
             _selectionInstance = MenuTree.Selection.SelectedValue;
-            ShowToast(ToastPosition.BottomRight, SdfIconType.InfoSquareFill,
-                "请勿连续点击！稍等，正在重建面板！", Color.white, 3f);
+            ShowToast(ToastPosition.BottomRight, SdfIconType.InfoSquareFill, "请勿连续点击！稍等，正在重建面板！", Color.white,
+                3f);
             BuildMenuTree();
             ForceMenuTreeRebuild();
             TrySelectMenuItemWithObject(_selectionInstance);
@@ -65,7 +65,8 @@ namespace Yuumix.OdinToolkits.Core.Editor
         {
             var window = GetWindow<ToolsPackageWindow>();
             window.titleContent = new GUIContent(OdinToolkitsMenuItems.TOOLS_PACKAGE_WINDOW_ENGLISH_NAME);
-            window.position = GUIHelper.GetEditorWindowRect().AlignCenter(1050, 750);
+            window.position = GUIHelper.GetEditorWindowRect()
+                .AlignCenter(1050, 750);
             window.minSize = new Vector2(500, 500);
             window.Show();
         }
@@ -73,7 +74,8 @@ namespace Yuumix.OdinToolkits.Core.Editor
         protected override OdinMenuTree BuildMenuTree()
         {
             var tree = new OdinMenuTree(false);
-            var path2 = TemplateCodeGeneratorVisualPanelSO.GenerateTemplateToolMenuPathData.GetCurrentOrFallback();
+            var path2 = TemplateCodeGeneratorVisualPanelSO.GenerateTemplateToolMenuPathData
+                .GetCurrentOrFallback();
             var path3 = DirectoryTreeGenToolSO.DirectoryTreeGenToolMenuPathData.GetCurrentOrFallback();
             var path4 = ExportPackageToolVisualPanelSO.ToolMenuPathData.GetCurrentOrFallback();
             var path5 = MenuItemViewerVisualPanelSO.ToolMenuPath.GetCurrentOrFallback();

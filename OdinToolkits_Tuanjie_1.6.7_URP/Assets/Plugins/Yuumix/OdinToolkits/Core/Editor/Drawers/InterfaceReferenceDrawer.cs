@@ -1,7 +1,7 @@
-﻿using Sirenix.OdinInspector.Editor;
+﻿using System;
+using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
-using System;
 using UnityEngine;
 using GUIContent = UnityEngine.GUIContent;
 using Object = UnityEngine.Object;
@@ -16,8 +16,7 @@ namespace Yuumix.OdinToolkits.Core.Editor
     /// <typeparam name="TReference">要进行绘制的基础类型，使其子类也按这个方法绘制</typeparam>
     /// <typeparam name="TInterface">接口约束</typeparam>
     /// <typeparam name="TObject">具体实例对象类型</typeparam>
-    public class InterfaceReferenceDrawer<TReference, TInterface, TObject>
-        : OdinValueDrawer<TReference>
+    public class InterfaceReferenceDrawer<TReference, TInterface, TObject> : OdinValueDrawer<TReference>
         where TReference : InterfaceReference<TInterface, TObject>
         where TInterface : class
         where TObject : Object
@@ -39,8 +38,7 @@ namespace Yuumix.OdinToolkits.Core.Editor
             // 此时绘制一个 ErrorMessageBox，进行提示
             if (!interfaceReference.UnderlyingObject)
             {
-                SirenixEditorGUI.ErrorMessageBox(
-                    $"请选择实现了 {interfaceType.Name} 接口的实例对象或 ScriptableObject 资产");
+                SirenixEditorGUI.ErrorMessageBox($"请选择实现了 {interfaceType.Name} 接口的实例对象或 ScriptableObject 资产");
             }
 
             // 布局的关键 API
@@ -50,7 +48,8 @@ namespace Yuumix.OdinToolkits.Core.Editor
             // 开启一行布局，可以返回一个 Rect（通常不需要使用），直接开始接下来的绘制。
             // 内部封装了一个 GUILayout.BeginHorizontal(); 和 EditorGUILayout.PrefixLabel(label);
             // 这一步直接完成了 字段名标签 和 接口类型提示标签
-            SirenixEditorGUI.BeginHorizontalPropertyLayout(new GUIContent($"{label} [{typeof(TInterface).Name}] "));
+            SirenixEditorGUI.BeginHorizontalPropertyLayout(
+                new GUIContent($"{label} [{typeof(TInterface).Name}] "));
             {
                 /*Rect rect = GUILayoutUtility.GetLastRect();
                 OdinEditorDrawUtil.Debug.DrawRectWithBorder(rect, Color.yellow);
@@ -80,17 +79,15 @@ namespace Yuumix.OdinToolkits.Core.Editor
                 // 引用选择框
                 // SirenixEditorFields.UnityObjectField
                 interfaceReference.UnderlyingObject = (TObject)SirenixEditorFields.UnityObjectField(
-                    new GUIContent(),
-                    interfaceReference.UnderlyingObject,
-                    typeof(TObject),
-                    true);
+                    new GUIContent(), interfaceReference.UnderlyingObject, typeof(TObject), true);
                 // 提示标签(图标)
                 // 目标是绘制一个圆点
                 // 此时的思路是使用自动布局的 Box 开辟一个 Rect
                 // 然后获取这个 Rect，再绘制纯色圆点，覆盖这个 Box
                 const float squareSize = 14f;
-                GUILayout.Box(new GUIContent(), SirenixGUIStyles.None,
-                    GUILayoutOptions.Height(22F).MinWidth(squareSize + 2).MaxWidth(22F));
+                GUILayout.Box(new GUIContent(), SirenixGUIStyles.None, GUILayoutOptions.Height(22F)
+                    .MinWidth(squareSize + 2)
+                    .MaxWidth(22F));
                 var lastRect = GUILayoutUtility.GetLastRect();
                 var innerRect = lastRect.AlignCenterXY(squareSize, squareSize);
                 var targetObject = interfaceReference.UnderlyingObject;

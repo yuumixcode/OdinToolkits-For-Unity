@@ -1,12 +1,12 @@
-using Sirenix.OdinInspector;
 using System;
 using System.Diagnostics;
+using Sirenix.OdinInspector;
 
 namespace Yuumix.OdinToolkits.Core
 {
     [IncludeMyAttributes]
-    [ShowIf("@" + nameof(InspectorBilingualismConfigSO) + "." +
-            nameof(InspectorBilingualismConfigSO.IsChinese),
+    [ShowIf(
+        "@" + nameof(InspectorBilingualismConfigSO) + "." + nameof(InspectorBilingualismConfigSO.IsChinese),
         false)]
     [DontApplyToListElements]
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]

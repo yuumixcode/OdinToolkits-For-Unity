@@ -1,5 +1,5 @@
-using Sirenix.OdinInspector;
 using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Yuumix.OdinToolkits.AttributeOverviewPro.Shared;
 
@@ -28,8 +28,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
 
         [PropertyOrder(100)]
         [FoldoutGroup("特殊情况")]
-        [InfoBox("官方表示作用于任何实例方法（非静态），" +
-                 "但是这个静态方法依旧有效，可能在某些情况下静态方法会失效")]
+        [InfoBox("官方表示作用于任何实例方法（非静态），" + "但是这个静态方法依旧有效，可能在某些情况下静态方法会失效")]
         public StaticFunctionExample staticExample;
 
         #endregion

@@ -34,7 +34,8 @@ namespace Yuumix.OdinToolkits.Core.Editor
         {
             var window = GetWindow<OdinToolkitsRuntimeConfigWindow>();
             window.titleContent = new GUIContent(OdinToolkitsMenuItems.RUNTIME_CONFIG_WINDOW_NAME);
-            window.position = GUIHelper.GetEditorWindowRect().AlignCenter(700, 600);
+            window.position = GUIHelper.GetEditorWindowRect()
+                .AlignCenter(700, 600);
         }
     }
 }

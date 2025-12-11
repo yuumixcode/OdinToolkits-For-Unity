@@ -7,6 +7,9 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
     [AttributeOverviewProExample]
     public class DisableIfExample : ExampleSO
     {
+        bool Method() =>
+            (isToggled && someObject != null) || someEnum == InfoMessageType.Error;
+
         #region Serialized Fields
 
         [PropertyOrder(10)]
@@ -52,14 +55,10 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Deprecated.Editor
 
         [PropertyOrder(10)]
         [FoldoutGroup("基础使用")]
-        [DisableIf("@this.isToggled && this.someObject != null || " +
-                   "this.someEnum == InfoMessageType.Error")]
+        [DisableIf(
+            "@this.isToggled && this.someObject != null || " + "this.someEnum == InfoMessageType.Error")]
         public int disableWithExpression;
 
         #endregion
-
-        bool Method() =>
-            (isToggled && someObject != null) ||
-            someEnum == InfoMessageType.Error;
     }
 }
