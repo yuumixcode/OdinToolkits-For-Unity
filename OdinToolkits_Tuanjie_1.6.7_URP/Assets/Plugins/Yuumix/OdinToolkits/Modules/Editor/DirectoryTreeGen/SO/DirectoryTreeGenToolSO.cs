@@ -1,6 +1,7 @@
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using System.IO;
+using Yuumix.OdinToolkits.Core.SafeEditor;
 using UnityEngine;
 using Yuumix.OdinToolkits.Core;
 using Yuumix.OdinToolkits.Core.Editor;

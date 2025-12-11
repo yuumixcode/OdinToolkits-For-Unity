@@ -1,14 +1,9 @@
-#if UNITY_EDITOR
-
-using Sirenix.OdinInspector;
 using System;
-using Yuumix.OdinToolkits.Core;
+using Sirenix.OdinInspector;
 
-namespace YuumixEditor
+namespace Yuumix.OdinToolkits.Core.SafeEditor
 {
-    /// <summary>
-    /// 双语字符串显示控件，以字段的形式支持多语言
-    /// </summary>
+    [Summary("双语字符串显示控件，以字段的形式支持多语言")]
     [Serializable]
     [HideLabel]
     [InlineProperty]
@@ -33,4 +28,3 @@ namespace YuumixEditor
         public string EnglishDisplay { get; set; }
     }
 }
-#endif

@@ -8,8 +8,8 @@ using Yuumix.OdinToolkits.Core.Editor;
 
 namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
 {
-    public class AttributeOverviewProDatabaseSO : OdinEditorScriptableSingleton<AttributeOverviewProDatabaseSO>,
-        IOdinToolkitsEditorReset
+    public class AttributeOverviewProDatabaseSO :
+        OdinEditorScriptableSingleton<AttributeOverviewProDatabaseSO>, IOdinToolkitsEditorReset
     {
         #region Serialized Fields
 
@@ -48,41 +48,65 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         public AttributeOverviewProDatabaseSO Initialize()
         {
             _essentialVisualPanels = AllVisualPanels.Where(x => x.GetType()
-                .GetCustomAttribute<AttributeCategoryAttribute>().Category
-                .HasFlagFast(OdinAttributeCategory.Essentials)).ToArray();
+                    .GetCustomAttribute<AttributeCategoryAttribute>()
+                    .Category
+                    .HasFlagFast(OdinAttributeCategory.Essentials))
+                .ToArray();
             _buttonVisualPanels = AllVisualPanels.Where(x => x.GetType()
-                .GetCustomAttribute<AttributeCategoryAttribute>().Category
-                .HasFlagFast(OdinAttributeCategory.Buttons)).ToArray();
+                    .GetCustomAttribute<AttributeCategoryAttribute>()
+                    .Category
+                    .HasFlagFast(OdinAttributeCategory.Buttons))
+                .ToArray();
             _collectionVisualPanels = AllVisualPanels.Where(x => x.GetType()
-                .GetCustomAttribute<AttributeCategoryAttribute>().Category
-                .HasFlagFast(OdinAttributeCategory.Collections)).ToArray();
+                    .GetCustomAttribute<AttributeCategoryAttribute>()
+                    .Category
+                    .HasFlagFast(OdinAttributeCategory.Collections))
+                .ToArray();
             _groupVisualPanels = AllVisualPanels.Where(x => x.GetType()
-                .GetCustomAttribute<AttributeCategoryAttribute>().Category
-                .HasFlagFast(OdinAttributeCategory.Groups)).ToArray();
+                    .GetCustomAttribute<AttributeCategoryAttribute>()
+                    .Category
+                    .HasFlagFast(OdinAttributeCategory.Groups))
+                .ToArray();
             _conditionalVisualPanels = AllVisualPanels.Where(x => x.GetType()
-                .GetCustomAttribute<AttributeCategoryAttribute>().Category
-                .HasFlagFast(OdinAttributeCategory.Conditionals)).ToArray();
+                    .GetCustomAttribute<AttributeCategoryAttribute>()
+                    .Category
+                    .HasFlagFast(OdinAttributeCategory.Conditionals))
+                .ToArray();
             _numberVisualPanels = AllVisualPanels.Where(x => x.GetType()
-                .GetCustomAttribute<AttributeCategoryAttribute>().Category
-                .HasFlagFast(OdinAttributeCategory.Numbers)).ToArray();
+                    .GetCustomAttribute<AttributeCategoryAttribute>()
+                    .Category
+                    .HasFlagFast(OdinAttributeCategory.Numbers))
+                .ToArray();
             _typeSpecificVisualPanels = AllVisualPanels.Where(x => x.GetType()
-                .GetCustomAttribute<AttributeCategoryAttribute>().Category
-                .HasFlagFast(OdinAttributeCategory.TypeSpecifics)).ToArray();
+                    .GetCustomAttribute<AttributeCategoryAttribute>()
+                    .Category
+                    .HasFlagFast(OdinAttributeCategory.TypeSpecifics))
+                .ToArray();
             _validationVisualPanels = AllVisualPanels.Where(x => x.GetType()
-                .GetCustomAttribute<AttributeCategoryAttribute>().Category
-                .HasFlagFast(OdinAttributeCategory.Validation)).ToArray();
+                    .GetCustomAttribute<AttributeCategoryAttribute>()
+                    .Category
+                    .HasFlagFast(OdinAttributeCategory.Validation))
+                .ToArray();
             _miscVisualPanels = AllVisualPanels.Where(x => x.GetType()
-                .GetCustomAttribute<AttributeCategoryAttribute>().Category
-                .HasFlagFast(OdinAttributeCategory.Misc)).ToArray();
+                    .GetCustomAttribute<AttributeCategoryAttribute>()
+                    .Category
+                    .HasFlagFast(OdinAttributeCategory.Misc))
+                .ToArray();
             _metaVisualPanels = AllVisualPanels.Where(x => x.GetType()
-                .GetCustomAttribute<AttributeCategoryAttribute>().Category
-                .HasFlagFast(OdinAttributeCategory.Meta)).ToArray();
+                    .GetCustomAttribute<AttributeCategoryAttribute>()
+                    .Category
+                    .HasFlagFast(OdinAttributeCategory.Meta))
+                .ToArray();
             _unityVisualPanels = AllVisualPanels.Where(x => x.GetType()
-                .GetCustomAttribute<AttributeCategoryAttribute>().Category
-                .HasFlagFast(OdinAttributeCategory.Unity)).ToArray();
+                    .GetCustomAttribute<AttributeCategoryAttribute>()
+                    .Category
+                    .HasFlagFast(OdinAttributeCategory.Unity))
+                .ToArray();
             _debugVisualPanels = AllVisualPanels.Where(x => x.GetType()
-                .GetCustomAttribute<AttributeCategoryAttribute>().Category
-                .HasFlagFast(OdinAttributeCategory.Debug)).ToArray();
+                    .GetCustomAttribute<AttributeCategoryAttribute>()
+                    .Category
+                    .HasFlagFast(OdinAttributeCategory.Debug))
+                .ToArray();
             VisualPanelArrayMap = new Dictionary<string, AbstractAttributeVisualPanelSO[]>
             {
                 {
@@ -128,7 +152,7 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
                 foreach (var visualPanelSO in visualPanelSoArray)
                 {
                     visualPanelSO.Initialize();
-                    var menuName = visualPanelSO.headerWidget.headerName.ChineseDisplay;
+                    var menuName = visualPanelSO.HeaderWidget.HeaderName.ChineseDisplay;
                     VisualPanelMap.Add(category + "/" + menuName, visualPanelSO);
                 }
             }
@@ -139,8 +163,9 @@ namespace Yuumix.OdinToolkits.AttributeOverviewPro.Editor
         static AbstractAttributeVisualPanelSO[] GetAllVisualPanels()
         {
             return AssetDatabase.FindAssets("t:" + typeof(AbstractAttributeVisualPanelSO))
-                .Select(x => AssetDatabase.LoadAssetAtPath<AbstractAttributeVisualPanelSO>(
-                    AssetDatabase.GUIDToAssetPath(x)))
+                .Select(x =>
+                    AssetDatabase.LoadAssetAtPath<AbstractAttributeVisualPanelSO>(
+                        AssetDatabase.GUIDToAssetPath(x)))
                 .ToArray();
         }
     }

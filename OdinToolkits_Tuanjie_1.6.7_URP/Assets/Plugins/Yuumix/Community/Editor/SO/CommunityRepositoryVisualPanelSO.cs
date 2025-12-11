@@ -2,6 +2,7 @@ using Sirenix.OdinInspector;
 using Sirenix.Utilities.Editor;
 using System.Collections.Generic;
 using System.Text;
+using Yuumix.OdinToolkits.Core.SafeEditor;
 using UnityEditor;
 using Yuumix.Community.Schwapo.Editor;
 using Yuumix.Community.SwitchAttribute.Editor;

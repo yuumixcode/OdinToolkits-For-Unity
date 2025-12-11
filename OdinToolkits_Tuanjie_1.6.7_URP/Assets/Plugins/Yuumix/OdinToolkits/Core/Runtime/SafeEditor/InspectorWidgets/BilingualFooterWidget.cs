@@ -1,15 +1,13 @@
-#if UNITY_EDITOR
-
-using Sirenix.OdinInspector;
-using Sirenix.Utilities.Editor;
 using System;
-using Yuumix.OdinToolkits.Core;
+using Sirenix.OdinInspector;
+using UnityEngine;
+#if UNITY_EDITOR
+using Sirenix.Utilities.Editor;
+#endif
 
-namespace YuumixEditor
+namespace Yuumix.OdinToolkits.Core.SafeEditor
 {
-    /// <summary>
-    /// 双语页脚控件，为模块补充一些信息
-    /// </summary>
+    [Summary("双语页脚控件，用于补充信息")]
     [Serializable]
     [InlineProperty]
     [HideLabel]
@@ -17,8 +15,7 @@ namespace YuumixEditor
     {
         string _lastUpdate;
 
-        public BilingualFooterWidget(string lastUpdate = null,
-            ChangeLogData[] additionalDesc = null)
+        public BilingualFooterWidget(string lastUpdate = null, ChangeLogData[] additionalDesc = null)
         {
             _lastUpdate = lastUpdate;
             AdditionalDesc = additionalDesc;
@@ -52,4 +49,3 @@ namespace YuumixEditor
         bool AdditionIsNull() => AdditionalDesc == null || AdditionalDesc.Length == 0;
     }
 }
-#endif

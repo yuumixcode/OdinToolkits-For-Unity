@@ -1,28 +1,25 @@
-#if UNITY_EDITOR
-using Sirenix.OdinInspector;
 using System;
 using System.Diagnostics;
+using Sirenix.OdinInspector;
 using UnityEngine;
-using Yuumix.OdinToolkits.Core;
 
-namespace YuumixEditor
+namespace Yuumix.OdinToolkits.Core.SafeEditor
 {
-    /// <summary>
-    /// 双语顶部说明控件，用于模块的简单介绍
-    /// </summary>
     [Serializable]
     [InlineProperty]
     [HideLabel]
+    [Summary("双语顶部说明控件，用于模块的简单介绍")]
     public class BilingualHeaderWidget
     {
-        #region Serialized Fields
+        public BilingualDisplayAsStringWidget HeaderName => headerName;
 
         [PropertyOrder(0)]
         [PropertySpace(13)]
         [BoxGroup("OuterBox")]
         [HorizontalGroup("OuterBox/HoriTop", 0.75f)]
         [BilingualDisplayAsStringWidgetConfig(false, TextAlignment.Left, 30)]
-        public BilingualDisplayAsStringWidget headerName;
+        [SerializeField]
+        BilingualDisplayAsStringWidget headerName;
 
         [HideIf(nameof(HideHeaderIntroduction))]
         [PropertyOrder(30)]
@@ -30,22 +27,21 @@ namespace YuumixEditor
         [HorizontalGroup("OuterBox/HoriBottom", 0.98f)]
         [PropertySpace(10, 8)]
         [BilingualDisplayAsStringWidgetConfig(false, TextAlignment.Left, 14, true)]
-        public BilingualDisplayAsStringWidget headerIntroduction;
-
-        #endregion
+        [SerializeField]
+        BilingualDisplayAsStringWidget headerIntroduction;
 
         string _chineseIntroduction;
         string _englishIntroduction;
         string _targetUrl;
 
         public BilingualHeaderWidget(string chineseName, string englishName = null,
-            string chineseIntroduction = null,
-            string englishIntroduction = null, string targetUrl = null)
+            string chineseIntroduction = null, string englishIntroduction = null, string targetUrl = null)
         {
             headerName = new BilingualDisplayAsStringWidget(chineseName, englishName);
             _chineseIntroduction = chineseIntroduction;
             _englishIntroduction = englishIntroduction ?? chineseIntroduction;
-            headerIntroduction = new BilingualDisplayAsStringWidget(_chineseIntroduction, _englishIntroduction);
+            headerIntroduction =
+                new BilingualDisplayAsStringWidget(_chineseIntroduction, _englishIntroduction);
             _targetUrl = targetUrl ?? OdinToolkitsWebLinks.OFFICIAL_WEBSITE;
         }
 
@@ -65,26 +61,24 @@ namespace YuumixEditor
         [PropertySpace(8, 5)]
         [HorizontalGroup("OuterBox/HoriTop", 0.22f)]
         [VerticalGroup("OuterBox/HoriTop/VerRight")]
-        [BilingualButton("中文", "English", buttonHeight: 24,
-            icon: SdfIconType.Translate)]
+        [BilingualButton("中文", "English", buttonHeight: 24, icon: SdfIconType.Translate)]
         [Conditional("UNITY_EDITOR")]
         void SwitchLanguage()
         {
-            BilingualismConfig.CurrentLanguage =
-                InspectorBilingualismConfigSO.IsChinese
-                    ? InspectorBilingualismConfigSO.LanguageType.English
-                    : InspectorBilingualismConfigSO.LanguageType.Chinese;
+            BilingualismConfig.CurrentLanguage = InspectorBilingualismConfigSO.IsChinese
+                ? InspectorBilingualismConfigSO.LanguageType.English
+                : InspectorBilingualismConfigSO.LanguageType.Chinese;
         }
 
         [PropertyOrder(10)]
         [BoxGroup("OuterBox")]
         [HorizontalGroup("OuterBox/HoriTop", 0.22f)]
         [VerticalGroup("OuterBox/HoriTop/VerRight")]
-        [BilingualButton("文档", "Documentation", buttonHeight: 24,
-            icon: SdfIconType.Link45deg)]
+        [BilingualButton("文档", "Documentation", buttonHeight: 24, icon: SdfIconType.Link45deg)]
         public void OpenUrl()
         {
-            var validatedUrl = UrlUtility.ValidateAndNormalizeUrl(_targetUrl, OdinToolkitsWebLinks.OFFICIAL_WEBSITE);
+            var validatedUrl =
+                UrlUtility.ValidateAndNormalizeUrl(_targetUrl, OdinToolkitsWebLinks.OFFICIAL_WEBSITE);
             Application.OpenURL(validatedUrl);
         }
 
@@ -94,8 +88,7 @@ namespace YuumixEditor
         void PlaceholderMethod2() { }
 
         public BilingualHeaderWidget ModifyWidget(string chineseName, string englishName = null,
-            string chineseIntroduction = null,
-            string englishIntroduction = null, string targetUrl = null)
+            string chineseIntroduction = null, string englishIntroduction = null, string targetUrl = null)
         {
             headerName.ChineseDisplay = chineseName;
             headerName.EnglishDisplay = englishName ?? chineseName;
@@ -106,4 +99,3 @@ namespace YuumixEditor
         }
     }
 }
-#endif

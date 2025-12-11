@@ -1,43 +1,28 @@
-#if UNITY_EDITOR
-using Sirenix.OdinInspector;
-using Sirenix.Utilities.Editor;
 using System;
-using UnityEditor;
+using Sirenix.OdinInspector;
 using UnityEngine;
-using Yuumix.OdinToolkits.Core;
+#if UNITY_EDITOR
+using Sirenix.Utilities.Editor;
+using UnityEditor;
+#endif
 
-namespace YuumixEditor
+namespace Yuumix.OdinToolkits.Core.SafeEditor
 {
-    /// <summary>
-    /// 水平横向分割线组件
-    /// </summary>
-    [Summary("水平横向分割线组件")]
+    [Summary("水平横向分割线控件")]
     [Serializable]
     [HideLabel]
     [InlineProperty]
     public class HorizontalSeparateWidget
     {
-        /// <summary>
-        /// 深色横线高度
-        /// </summary>
         [Summary("深色横线高度")]
         int _darkLineHeight;
 
-        /// <summary>
-        /// 浅色横线高度，构造函数中未设置则默认为深色横线高度 - 1
-        /// </summary>
         [Summary("浅色横线高度，构造函数中未设置则默认为深色横线高度 - 1")]
         int _lightLineHeight;
 
-        /// <summary>
-        /// 分割线下方高度
-        /// </summary>
         [Summary("分割线下方高度")]
         float _spaceAfter;
 
-        /// <summary>
-        /// 分割线上方高度
-        /// </summary>
         [Summary("分割线上方高度")]
         float _spaceBefore;
 
@@ -74,6 +59,7 @@ namespace YuumixEditor
             ? new Color(1f, 1f, 1f, 0.1f)
             : new Color(1f, 1f, 1f, 1f);
 
+#if UNITY_EDITOR
         [OnInspectorGUI]
         public void Separate()
         {
@@ -84,6 +70,6 @@ namespace YuumixEditor
             GUILayout.Space(_spaceAfter);
             EditorGUILayout.EndVertical();
         }
+#endif
     }
 }
-#endif
